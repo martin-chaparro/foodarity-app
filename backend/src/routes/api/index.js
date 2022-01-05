@@ -7,6 +7,6 @@ const router = new Router();
 
 router.use('/home', homeRoutes);
 router.use('/states', statesRoutes);
-router.use('/states', citiesRoutes);
+router.use('/cities', citiesRoutes);
 
 module.exports = router;

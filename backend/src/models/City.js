@@ -13,7 +13,15 @@ class City extends Model {
           type: DataTypes.STRING,
           allowNull: false,
         },
-        code: {
+        lat: {
+          type: DataTypes.DOUBLE,
+          allowNull: false,
+        },
+        lon: {
+          type: DataTypes.DOUBLE,
+          allowNull: false,
+        },
+        state: {
           type: DataTypes.INTEGER,
           allowNull: false,
         },
@@ -22,6 +30,11 @@ class City extends Model {
         sequelize,
       }
     );
+  }
+
+  static associate(models) {
+    this.hasMany(models.Address);
+    this.belongsTo(models.State); // TODO relacionar a travez el atributo STATE(id)
   }
 }
 

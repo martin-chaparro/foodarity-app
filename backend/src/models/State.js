@@ -13,8 +13,12 @@ class State extends Model {
           type: DataTypes.STRING,
           allowNull: false,
         },
-        code: {
-          type: DataTypes.INTEGER,
+        lat: {
+          type: DataTypes.DOUBLE,
+          allowNull: false,
+        },
+        lon: {
+          type: DataTypes.DOUBLE,
           allowNull: false,
         },
       },
@@ -22,6 +26,11 @@ class State extends Model {
         sequelize,
       }
     );
+  }
+
+  static associate(models) {
+    this.hasMany(models.Address);
+    this.hasMany(models.City);
   }
 }
 

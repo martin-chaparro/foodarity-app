@@ -15,5 +15,8 @@ City.init(connection);
 State.init(connection);
 
 // Associate
+Address.associate(connection.models);
+City.associate(connection.models);
+State.associate(connection.models);
 
 module.exports = connection;
