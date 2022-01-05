@@ -8,7 +8,8 @@
     "dev": "nodemon",
     "lint": "eslint .",
     "format": "prettier ./src/** --check",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "cd .. && husky install backend/.husky"
   },
   "keywords": [],
   "author": "",
@@ -27,8 +28,15 @@
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.25.4",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.1.5",
     "nodemon": "^2.0.15",
     "prettier": "^2.5.1",
     "sequelize-cli": "^6.3.0"
+  },
+  "lint-staged": {
+    "*.js": "eslint --cache --fix",
+    "*.{js,md}": "prettier --write",
+    "*.--check": "prettier --write"
   }
 }
