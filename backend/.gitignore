@@ -1,0 +1,14 @@
+# dotenv environment variables file
+.env
+
+# Dependency directories
+node_modules/
+
+
+# lockfile
+yarn.lock
+package-lock.json
+
+#docker
+docker-compose.yaml
+docker/database/posgres/data
