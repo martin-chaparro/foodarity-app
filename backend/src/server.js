@@ -11,7 +11,7 @@ class Server {
     this.environment = process.env.NODE_ENV;
 
     this.paths = {
-      apiv1: '/api/v1',
+      apiv1: "/api/v1",
     };
 
     // middlewares
