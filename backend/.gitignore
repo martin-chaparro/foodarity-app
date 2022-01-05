@@ -1,6 +1,8 @@
 # dotenv environment variables file
 .env
 
+docker
+
 # Dependency directories
 node_modules/
 
