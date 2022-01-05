@@ -8,6 +8,7 @@
     "dev": "nodemon",
     "lint": "eslint .",
     "format": "prettier ./src/** --check",
+    "format:write": "prettier ./src/** --write",
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepare": "cd .. && husky install backend/.husky"
   },
