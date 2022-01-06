@@ -1,0 +1,16 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.landing {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.btncontent {
+  display: flex;
+  justify-content: space-around;
+}
