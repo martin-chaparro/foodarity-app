@@ -26,6 +26,7 @@ class Address extends Model {
   static associate(models) {
     this.belongsTo(models.State);
     this.belongsTo(models.City);
+    // this.hasOne(models.Companies, {foreignKey: 'company'})
   }
 }
 

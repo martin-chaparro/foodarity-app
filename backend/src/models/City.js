@@ -21,7 +21,7 @@ class City extends Model {
           type: DataTypes.DOUBLE,
           allowNull: false,
         },
-        state: {
+        state_id: {
           type: DataTypes.INTEGER,
           allowNull: false,
         },
@@ -34,7 +34,7 @@ class City extends Model {
 
   static associate(models) {
     this.hasMany(models.Address);
-    this.belongsTo(models.State); // TODO relacionar a travez el atributo STATE(id)
+    this.belongsTo(models.State, { foreignKey: 'state_id', as: 'state' });
   }
 }
 

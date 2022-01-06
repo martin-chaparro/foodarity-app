@@ -87,7 +87,7 @@ class Server {
           name: muni.nombre,
           lat: muni.centroide.lat,
           lon: muni.centroide.lon,
-          state: muni.provincia.id,
+          state_id: muni.provincia.id,
         });
       });
     } catch (error) {

@@ -30,7 +30,7 @@ class State extends Model {
 
   static associate(models) {
     this.hasMany(models.Address);
-    this.hasMany(models.City);
+    this.hasMany(models.City, { foreignKey: 'state_id', as: 'state' });
   }
 }
 
