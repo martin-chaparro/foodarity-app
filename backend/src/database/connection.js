@@ -15,14 +15,15 @@ const State = require('../models/State');
 
 CompanyType.init(connection);
 Companies.init(connection);
+Role.init(connection);
 User.init(connection);
 Address.init(connection);
 City.init(connection);
 State.init(connection);
 
 // Associate
-Companies.associate(connection.models)
-CompanyType.associate(connection.models)
+Companies.associate(connection.models);
+CompanyType.associate(connection.models);
 Role.associate(connection.models);
 User.associate(connection.models);
 Address.associate(connection.models);

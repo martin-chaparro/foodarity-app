@@ -9,7 +9,7 @@ class Address extends Model {
           allowNull: false,
         },
         number: {
-          type: DataTypes.INTEGER(4),
+          type: DataTypes.INTEGER,
           allowNull: false,
         },
         zipcode: {

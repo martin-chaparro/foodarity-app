@@ -14,16 +14,16 @@ class CompanyType extends Model {
       }
     );
   }
+
   static associate(models) {
-    this.hasMany(models.Companies, 
-    //   {
-    //   as: 'companies',
-    //   foreignKey: 'type_id',
-    // }
+    this.hasMany(
+      models.Companies
+      //   {
+      //   as: 'companies',
+      //   foreignKey: 'type_id',
+      // }
     );
-  
-}
+  }
 }
 
 module.exports = CompanyType;
-
