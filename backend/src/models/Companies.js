@@ -32,11 +32,12 @@ class Companies extends Model {
           type: DataTypes.STRING,
           allowNull: true,
         },
-        status: { //cuenta habilitada o no
+        status: {
+          // cuenta habilitada o no
           type: DataTypes.BOOLEAN,
           allowNull: false,
-          defaultValue: false
-        }
+          defaultValue: false,
+        },
       },
       {
         sequelize,
@@ -44,16 +45,15 @@ class Companies extends Model {
     );
   }
 
-
   static associate(models) {
-    this.belongsTo(models.CompanyType,
+    this.belongsTo(
+      models.CompanyType
       // {
       //   as: 'company_type',
       //   foreignKey: 'id',
       // }
     );
   }
-
 }
 
 module.exports = Companies;
