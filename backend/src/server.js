@@ -2,6 +2,10 @@ const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
 const connection = require('./database/connection');
+const State = require('./models/State');
+const provincias = require('./database/seeders/data/provincias.json');
+const City = require('./models/City');
+const municipios = require('./database/seeders/data/municipios.json');
 
 class Server {
   constructor() {
@@ -65,10 +69,37 @@ class Server {
     }
   }
 
+  // eslint-disable-next-line class-methods-use-this
+  async seed() {
+    console.log('||--> Seed database...: <--||');
+    try {
+      provincias.provincias.forEach((prov) => {
+        State.create({
+          id: prov.id,
+          name: prov.nombre,
+          lat: prov.centroide.lat,
+          lon: prov.centroide.lon,
+        });
+      });
+      municipios.municipios.forEach((muni) => {
+        City.create({
+          id: muni.id,
+          name: muni.nombre,
+          lat: muni.centroide.lat,
+          lon: muni.centroide.lon,
+          state_id: muni.provincia.id,
+        });
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   start() {
     this.app.listen(this.port, async () => {
       console.log(`||--> Http server running in port:${this.port} <--||`);
       await this.connectDb();
+      await this.seed();
     });
   }
 }
