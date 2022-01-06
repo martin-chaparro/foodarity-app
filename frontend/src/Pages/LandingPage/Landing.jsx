@@ -2,7 +2,7 @@ import React from 'react';
 import Header from './Header';
 import Footer from './Footer';
 import styles from './Landing.module.css';
-import logoLanding from '../../assets/Mobil background landing.png';
+import logoLanding from '../../assets/Mobil-background-landing.png';
 
 export default function Landing() {
   return (
