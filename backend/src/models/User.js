@@ -1,4 +1,5 @@
 const { Model, DataTypes } = require('sequelize');
+const { hashPasswordSync } = require('../helpers/passwordHash');
 
 class User extends Model {
   static init(sequelize) {
@@ -15,6 +16,10 @@ class User extends Model {
         password: {
           type: DataTypes.STRING,
           allowNull: false,
+          set(value) {
+            const passwordHash = hashPasswordSync(value);
+            this.setDataValue('password', passwordHash);
+          },
         },
         phone: {
           type: DataTypes.STRING,
