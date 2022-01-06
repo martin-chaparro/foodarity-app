@@ -9,7 +9,7 @@ class Address extends Model {
           allowNull: false,
         },
         number: {
-          type: DataTypes.INTEGER(4),
+          type: DataTypes.INTEGER,
           allowNull: false,
         },
         zipcode: {
@@ -26,7 +26,7 @@ class Address extends Model {
   static associate(models) {
     this.belongsTo(models.State);
     this.belongsTo(models.City);
-    // this.hasOne(models.Companies, {foreignKey: 'company'})
+    this.belongsTo(models.Companies);
   }
 }
 

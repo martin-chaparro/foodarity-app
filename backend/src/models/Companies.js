@@ -46,13 +46,9 @@ class Companies extends Model {
   }
 
   static associate(models) {
-    this.belongsTo(
-      models.CompanyType
-      // {
-      //   as: 'company_type',
-      //   foreignKey: 'id',
-      // }
-    );
+    this.belongsTo(models.CompanyType);
+    this.belongsTo(models.User);
+    this.hasOne(models.Address);
   }
 }
 
