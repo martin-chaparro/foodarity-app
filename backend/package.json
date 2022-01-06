@@ -16,6 +16,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.2",
@@ -36,7 +37,10 @@
     "sequelize-cli": "^6.3.0"
   },
   "lint-staged": {
-    "*.js": ["eslint --cache --fix","prettier --write"],
+    "*.js": [
+      "eslint --cache --fix",
+      "prettier --write"
+    ],
     "*.--check": "prettier --write"
   }
 }
