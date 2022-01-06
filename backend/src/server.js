@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
 const connection = require('./database/connection');
+const CompanyType = require('./models/CompanyType');
 
 class Server {
   constructor() {
@@ -55,7 +56,7 @@ class Server {
         case 'development':
         default:
           console.log('||--> Development mode setting in: force = true<--||');
-          await connection.sync({ force: true });
+          await connection.sync({ force: false });
           break;
       }
       console.log('||--> Database connection established..: <--||');
@@ -65,10 +66,20 @@ class Server {
     }
   }
 
+ async seedTypes() {
+  try {
+    console.log('||--> Seed database...: <--||');
+    await CompanyType.bulkCreate([{type: 'Comercio'}, {type: 'ONG'}]);
+  } catch (error) {
+    console.log('||--> Seed not completed...: <--||');
+  }
+}
+
   start() {
     this.app.listen(this.port, async () => {
       console.log(`||--> Http server running in port:${this.port} <--||`);
       await this.connectDb();
+      await this.seedTypes();
     });
   }
 }
