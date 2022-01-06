@@ -43,7 +43,7 @@ class User extends Model {
 
   static associate(models) {
     this.belongsTo(models.Role);
-    this.hasOne(models.Company);
+    this.hasOne(models.Companies);
   }
 }
 

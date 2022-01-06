@@ -47,7 +47,7 @@ class Companies extends Model {
 
   static associate(models) {
     this.belongsTo(models.CompanyType);
-    this.hasOne(models.User);
+    this.belongsTo(models.User);
     this.hasOne(models.Address);
   }
 }
