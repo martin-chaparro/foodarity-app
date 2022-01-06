@@ -6,9 +6,7 @@ const CompanyType = require('./models/CompanyType');
 const Role = require('./models/Role');
 const User = require('./models/User');
 const State = require('./models/State');
-const provincias = require('./database/seeders/data/provincias.json');
 const City = require('./models/City');
-const municipios = require('./database/seeders/data/municipios.json');
 
 class Server {
   constructor() {
@@ -30,6 +28,8 @@ class Server {
     // Datos seeders
     this.roles = require('./database/seeders/data/roles');
     this.users = require('./database/seeders/data/users');
+    this.provincias = require('./database/seeders/data/provincias.json');
+    this.municipios = require('./database/seeders/data/municipios.json');
   }
 
   // express instance
@@ -76,34 +76,27 @@ class Server {
     }
   }
 
-  // eslint-disable-next-line class-methods-use-this
-  async seedTypes() {
+  async seed() {
+    console.log('||--> Seed database...: <--||');
     try {
-      console.log('||--> Seed database...: <--||');
+      console.log('||--> Seed types database...: <--||');
       await CompanyType.bulkCreate([{ type: 'Comercio' }, { type: 'ONG' }]);
     } catch (error) {
-      console.log('||--> Seed not completed...: <--||');
+      console.log('||--> Seed types not completed...: <--||');
     }
-  }
-
-  async seedDB() {
     try {
-      console.log('||--> Seed database...: <--||');
+      console.log('||--> Seed users database...: <--||');
       await Role.bulkCreate(this.roles);
       const usersCreated = await User.bulkCreate(this.users);
       usersCreated.forEach((user) => {
         user.setRole(1);
       });
     } catch (error) {
-      console.log('||--> Seed not completed...: <--||');
+      console.log('||--> Seed users not completed...: <--||');
     }
-  }
-
-  // eslint-disable-next-line class-methods-use-this
-  async seed() {
-    console.log('||--> Seed database...: <--||');
     try {
-      provincias.provincias.forEach((prov) => {
+      console.log('||--> Seed location database...: <--||');
+      this.provincias.provincias.forEach((prov) => {
         State.create({
           id: prov.id,
           name: prov.nombre,
@@ -111,7 +104,7 @@ class Server {
           lon: prov.centroide.lon,
         });
       });
-      municipios.municipios.forEach((muni) => {
+      this.municipios.municipios.forEach((muni) => {
         City.create({
           id: muni.id,
           name: muni.nombre,
@@ -121,7 +114,7 @@ class Server {
         });
       });
     } catch (error) {
-      console.log(error);
+      console.log('||--> Seed locations not completed...: <--||');
     }
   }
 
@@ -129,8 +122,6 @@ class Server {
     this.app.listen(this.port, async () => {
       console.log(`||--> Http server running in port:${this.port} <--||`);
       await this.connectDb();
-      await this.seedTypes();
-      await this.seedDB();
       await this.seed();
     });
   }
