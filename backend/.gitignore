@@ -13,4 +13,3 @@ package-lock.json
 #docker
 docker-compose.yaml
 docker/database/postgres/data
-docker/database/postgres/data/pg_stat_tmp
