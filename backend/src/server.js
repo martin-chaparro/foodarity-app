@@ -10,7 +10,6 @@ const provincias = require('./database/seeders/data/provincias.json');
 const City = require('./models/City');
 const municipios = require('./database/seeders/data/municipios.json');
 
-
 class Server {
   constructor() {
     this.app = express();
@@ -77,14 +76,16 @@ class Server {
     }
   }
 
- async seedTypes() {
-  try {
-    console.log('||--> Seed database...: <--||');
-    await CompanyType.bulkCreate([{type: 'Comercio'}, {type: 'ONG'}]);
-  } catch (error) {
-    console.log('||--> Seed not completed...: <--||');
+  // eslint-disable-next-line class-methods-use-this
+  async seedTypes() {
+    try {
+      console.log('||--> Seed database...: <--||');
+      await CompanyType.bulkCreate([{ type: 'Comercio' }, { type: 'ONG' }]);
+    } catch (error) {
+      console.log('||--> Seed not completed...: <--||');
+    }
   }
-}
+
   async seedDB() {
     try {
       console.log('||--> Seed database...: <--||');
@@ -123,7 +124,6 @@ class Server {
       console.log(error);
     }
   }
-
 
   start() {
     this.app.listen(this.port, async () => {
