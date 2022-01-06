@@ -2,6 +2,8 @@ const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
 const connection = require('./database/connection');
+const Role = require('./models/Role');
+const User = require('./models/User');
 const State = require('./models/State');
 const provincias = require('./database/seeders/data/provincias.json');
 const City = require('./models/City');
@@ -23,6 +25,10 @@ class Server {
 
     // Rutas de Aplicacion
     this.routes();
+
+    // Datos seeders
+    this.roles = require('./database/seeders/data/roles');
+    this.users = require('./database/seeders/data/users');
   }
 
   // express instance
@@ -69,6 +75,19 @@ class Server {
     }
   }
 
+  async seedDB() {
+    try {
+      console.log('||--> Seed database...: <--||');
+      await Role.bulkCreate(this.roles);
+      const usersCreated = await User.bulkCreate(this.users);
+      usersCreated.forEach((user) => {
+        user.setRole(1);
+      });
+    } catch (error) {
+      console.log('||--> Seed not completed...: <--||');
+    }
+  }
+
   // eslint-disable-next-line class-methods-use-this
   async seed() {
     console.log('||--> Seed database...: <--||');
@@ -99,6 +118,7 @@ class Server {
     this.app.listen(this.port, async () => {
       console.log(`||--> Http server running in port:${this.port} <--||`);
       await this.connectDb();
+      await this.seedDB();
       await this.seed();
     });
   }
