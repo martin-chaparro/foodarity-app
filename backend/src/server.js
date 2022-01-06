@@ -2,12 +2,14 @@ const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
 const connection = require('./database/connection');
+const CompanyType = require('./models/CompanyType');
 const Role = require('./models/Role');
 const User = require('./models/User');
 const State = require('./models/State');
 const provincias = require('./database/seeders/data/provincias.json');
 const City = require('./models/City');
 const municipios = require('./database/seeders/data/municipios.json');
+
 
 class Server {
   constructor() {
@@ -75,6 +77,14 @@ class Server {
     }
   }
 
+ async seedTypes() {
+  try {
+    console.log('||--> Seed database...: <--||');
+    await CompanyType.bulkCreate([{type: 'Comercio'}, {type: 'ONG'}]);
+  } catch (error) {
+    console.log('||--> Seed not completed...: <--||');
+  }
+}
   async seedDB() {
     try {
       console.log('||--> Seed database...: <--||');
@@ -114,10 +124,12 @@ class Server {
     }
   }
 
+
   start() {
     this.app.listen(this.port, async () => {
       console.log(`||--> Http server running in port:${this.port} <--||`);
       await this.connectDb();
+      await this.seedTypes();
       await this.seedDB();
       await this.seed();
     });
