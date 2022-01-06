@@ -67,7 +67,7 @@ class Server {
         case 'development':
         default:
           console.log('||--> Development mode setting in: force = true<--||');
-          await connection.sync({ force: false });
+          await connection.sync({ force: true });
           break;
       }
       console.log('||--> Database connection established..: <--||');
