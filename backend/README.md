@@ -92,4 +92,23 @@ GET: /companies : Ruta para traer todas las compañias creadas
  
 GET: /companies/:id : Ruta para buscar compañias por id
 
-    
+### Rutas Products
+---
+
+GET: /products : Ruta para traer todos los productos
+
+POST: /products :  
+```
+ejemplo:
+{
+    *"name":"Leche agria vencida",
+    "photo": "url",
+    *"price":12.50,
+    *"expirationDate":"11/12/1994",
+    *"category":1
+}
+
+(*) requeridos
+(**) category: 1=Almacen 2=Restorant/Rotiseria 3=Verduleria
+
+```
