@@ -12,6 +12,10 @@ class Companies extends Model {
           type: DataTypes.STRING,
           allowNull: false,
         },
+        areaCode: {
+          type: DataTypes.STRING,
+          allowNull: false,
+        },
         phone: {
           type: DataTypes.STRING,
           allowNull: false,
@@ -38,6 +42,10 @@ class Companies extends Model {
           allowNull: false,
           defaultValue: false,
         },
+        ownerId: {
+          type: DataTypes.INTEGER,
+          allowNull: false,
+        },
       },
       {
         sequelize,
@@ -48,7 +56,7 @@ class Companies extends Model {
   static associate(models) {
     this.belongsTo(models.CompanyType, { foreignKey: 'type_id', as: 'type' });
     this.hasMany(models.User);
-    this.hasOne(models.Address);
+    this.belongsTo(models.Address);
   }
 }
 

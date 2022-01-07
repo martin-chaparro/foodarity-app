@@ -13,7 +13,7 @@ class Address extends Model {
           allowNull: false,
         },
         zipcode: {
-          type: DataTypes.STRING,
+          type: DataTypes.INTEGER,
           allowNull: false,
         },
       },
@@ -26,7 +26,7 @@ class Address extends Model {
   static associate(models) {
     this.belongsTo(models.State);
     this.belongsTo(models.City);
-    this.belongsTo(models.Companies);
+    this.hasOne(models.Companies);
   }
 }
 
