@@ -13,9 +13,11 @@ export default function Landing() {
       <div className={styles.content}>
         <div className={styles.btncontent}>
           <div>
-            <button className={styles.btnreg} type="submit">
-              Registrarse
-            </button>
+            <Link to="/register">
+              <button className={styles.btnreg} type="submit">
+                Registrarse
+              </button>
+            </Link>
           </div>
           <div>
             <Link to="/login">
