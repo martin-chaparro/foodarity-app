@@ -1,3 +1,5 @@
+// const { Op } = require('sequelize');
+const { validationResult } = require('express-validator');
 const Companies = require('../models/Companies');
 const CompanyType = require('../models/CompanyType');
 
@@ -15,6 +17,12 @@ const createCompany = async (req, res) => {
       status,
       type,
     } = req.body;
+
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
     const newCompany = await Companies.create({
       name,
       description,
@@ -28,7 +36,11 @@ const createCompany = async (req, res) => {
     await newCompany.setCompanyType(type);
     return res.status(200).json(newCompany);
   } catch (error) {
-    return res.status(500).json({ msg: 'Error al crear la empresa' });
+    return res
+      .status(500)
+      .json({
+        msg: 'Error al crear la empresa. Revise que los tipos de datos ingresados sean correctos',
+      });
   }
 };
 

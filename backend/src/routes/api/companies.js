@@ -2,13 +2,15 @@ const { Router } = require('express');
 
 const router = new Router();
 
- const { getCompanies, createCompany, searchCompany } = require('../../controllers/companiesController')
+const ValidationCompany = require('../../middlewares/validations/validationCompany');
+const {
+  getCompanies,
+  createCompany,
+  searchCompany,
+} = require('../../controllers/companiesController');
 
-
-router.get('/', getCompanies );
-router.get('/:id', searchCompany );
-router.post('/', createCompany );
-
-
+router.get('/', getCompanies);
+router.get('/:id', searchCompany);
+router.post('/', ValidationCompany.create, createCompany);
 
 module.exports = router;
