@@ -1,11 +1,12 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import estilos from './Login.module.css';
 import logo from '../../assets/Mobil-Full-Header-Logo.png';
 
 export default function Login() {
   return (
-    <div>
+    <div backgroundColor="transparent">
       <header className={estilos.header}>
         <div className={estilos.logo}>
           <img src={logo} alt="logo" />
@@ -57,6 +58,21 @@ export default function Login() {
         >
           Ingresar con Google
         </Button>
+        <Link to="/">
+          <Button
+            variant="contained"
+            sx={{
+              backgroundColor: '#533c74',
+              height: '2.5em',
+              color: '#fffff',
+              fontStyle: 'bold',
+              margin: '10em 2em 2em',
+              hover: false,
+            }}
+          >
+            Regresar
+          </Button>
+        </Link>
       </div>
     </div>
   );
