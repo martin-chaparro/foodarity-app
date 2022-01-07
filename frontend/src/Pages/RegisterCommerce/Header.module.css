@@ -1,0 +1,10 @@
+.header {
+  text-align: center;
+  background-color: #5b457a;
+  height: 95px;
+}
+
+img {
+  position: relative;
+  top: 23px;
+}
