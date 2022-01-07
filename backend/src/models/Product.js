@@ -8,12 +8,20 @@ class Product extends Model {
           type: DataTypes.STRING,
           allowNull: false,
         },
+        description: {
+          type: DataTypes.STRING,
+          allowNull: false,
+        },
         photo: {
           type: DataTypes.STRING,
           allowNull: true,
         },
         price: {
           type: DataTypes.DOUBLE,
+          allowNull: false,
+        },
+        publicationDate: {
+          type: DataTypes.DATEONLY,
           allowNull: false,
         },
         expirationDate: {
@@ -23,6 +31,7 @@ class Product extends Model {
         status: {
           type: DataTypes.ENUM('published', 'reserved', 'sold', 'expired'),
           allowNull: false,
+          defaultValue: 'published',
         },
       },
       {
