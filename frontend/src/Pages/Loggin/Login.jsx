@@ -8,7 +8,7 @@ export default function Login() {
   return (
     <div backgroundColor="transparent">
       <header className={estilos.header}>
-        <div className={estilos.logo}>
+        <div>
           <img src={logo} alt="logo" />
         </div>
       </header>
@@ -48,11 +48,12 @@ export default function Login() {
         <Button
           variant="contained"
           sx={{
+            // backgroundColor: '#533c74',
             backgroundColor: '#533c74',
             height: '2.51em',
             color: '#fffff',
             fontStyle: 'bold',
-            margin: '10em 2em 2em',
+            margin: '1em 2em 2em',
             hover: false,
           }}
         >
@@ -62,11 +63,12 @@ export default function Login() {
           <Button
             variant="contained"
             sx={{
+              // backgroundColor: '#533c74',
               backgroundColor: '#533c74',
               height: '2.5em',
               color: '#fffff',
               fontStyle: 'bold',
-              margin: '10em 2em 2em',
+              margin: '.5em 2em 2em',
               hover: false,
             }}
           >
