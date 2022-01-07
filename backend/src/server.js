@@ -7,6 +7,7 @@ const Role = require('./models/Role');
 const User = require('./models/User');
 const State = require('./models/State');
 const City = require('./models/City');
+const Category = require('./models/Category');
 
 class Server {
   constructor() {
@@ -83,6 +84,16 @@ class Server {
       await CompanyType.bulkCreate([{ type: 'Comercio' }, { type: 'ONG' }]);
     } catch (error) {
       console.log('||--> Seed types not completed...: <--||');
+    }
+    try {
+      console.log('||--> Seed categories database...: <--||');
+      await Category.bulkCreate([
+        { name: 'Almacen' },
+        { name: 'Restorant/Rotiseria' },
+        { name: 'Verduleria' },
+      ]);
+    } catch (error) {
+      console.log('||--> Seed categories not completed...: <--||');
     }
     try {
       console.log('||--> Seed users database...: <--||');
