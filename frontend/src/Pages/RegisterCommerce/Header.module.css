@@ -1,9 +1,10 @@
 .header {
   text-align: center;
   background-color: #5b457a;
+  height: 95px;
 }
 
 img {
-  display: block;
-  margin: auto;
+  position: relative;
+  top: 23px;
 }
