@@ -2,8 +2,10 @@ import './App.css';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import { React } from 'react';
 import Login from './Pages/Loggin/Login';
+
 import Landing from './Pages/LandingPage/Landing';
 import Register from './Pages/Register/RegisterFormUser';
+import RollSelector from './Pages/Rollselector/RollSelector.';
 
 function App() {
   return (
@@ -12,6 +14,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Landing />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/rollselector" element={<RollSelector />} />
       </Routes>
     </BrowserRouter>
   );

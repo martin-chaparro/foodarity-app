@@ -44,9 +44,12 @@ const createUser = async (request, response) => {
 
 const getAllUsers = async (request, response) => {
   const users = await User.findAll({
-    attributes: { exclude: ['password', 'createdAt', 'updatedAt', 'RoleId'] },
+    attributes: {
+      exclude: ['password', 'createdAt', 'updatedAt', 'RoleId', 'role_id'],
+    },
     include: {
       model: Role,
+      as: 'role',
       attributes: ['id', 'role'],
     },
   });

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Header from './Header';
 import Footer from './Footer';
 import styles from './Landing.module.css';
@@ -12,17 +13,25 @@ export default function Landing() {
       <div className={styles.content}>
         <div className={styles.btncontent}>
           <div>
-            <button type="submit">Registrarse</button>
+            <button className={styles.btnreg} type="submit">
+              Registrarse
+            </button>
           </div>
           <div>
-            <button type="submit">Ingresar</button>
+            <Link to="/login">
+              <button className={styles.btningresar} type="submit">
+                Ingresar
+              </button>
+            </Link>
           </div>
         </div>
         <div>
-          <img src={logoLanding} alt="logo" />
+          <img className={styles.imglogolanding} src={logoLanding} alt="logo" />
         </div>
         <div>
-          <button type="submit">Continuar</button>
+          <button className={styles.btncontinuar} type="submit">
+            Continuar
+          </button>
         </div>
       </div>
       <Footer />

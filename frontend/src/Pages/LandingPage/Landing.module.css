@@ -8,9 +8,45 @@
   display: flex;
   flex-direction: column;
   height: 100vh;
+  background-color: #3e2463;
 }
 
 .btncontent {
   display: flex;
   justify-content: space-around;
+}
+
+.btningresar {
+  background-color: #fdffb6;
+  width: 95px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 25px;
+  margin-top: 40px;
+}
+
+.btnreg {
+  background-color: #d68584;
+  width: 95px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  border-radius: 5px;
+  margin-top: 40px;
+  cursor: pointer;
+}
+
+.btncontinuar {
+  /* background-color: #ffffff; */
+  width: 95px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.imglogolanding {
+  max-height: 350px;
 }
