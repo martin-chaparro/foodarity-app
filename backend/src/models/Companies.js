@@ -56,7 +56,7 @@ class Companies extends Model {
   static associate(models) {
     this.belongsTo(models.CompanyType, { foreignKey: 'type_id', as: 'type' });
     this.hasMany(models.User);
-    this.belongsTo(models.Address);
+    this.hasOne(models.Address);
   }
 }
 
