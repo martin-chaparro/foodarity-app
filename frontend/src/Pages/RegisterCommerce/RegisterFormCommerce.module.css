@@ -10,49 +10,24 @@
 
 .imgLogo {
   position: relative;
-  top: 20px;
-  width: 50px;
-  height: 50px;
-  left: 20px;
+  top: 25px;
+  width: 70px;
+  height: 70px;
+  left: 0px;
 }
 
 .commerceLogo {
   position: relative;
-  top: 25px;
+  top: 10px;
   background: #d68584;
   border-radius: 9999px;
-  width: 90px;
-  height: 90px;
-  left: 15px;
+  width: 120px;
+  height: 120px;
+  left: 120px;
+  margin-bottom: 20px;
+  margin-right: 0px;
 }
 
-.inputText {
-  position: relative;
-  top: 30px;
-  font-size: 12px;
-}
-
-.divPhoto {
-  position: relative;
-  background: white;
-  font-weight: 700;
-  text-align: center;
-  width: 233px;
-  left: 115px;
-  bottom: 70px;
-  height: 80px;
-  border-radius: 10px;
-  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
-}
-
-.addPhoto {
-  position: relative;
-  border-radius: 10px;
-  height: 85px;
-  bottom: 35px;
-  width: 230px;
-  opacity: 0%;
-}
 .addNewPhoto {
   position: relative;
   color: black;
@@ -78,8 +53,10 @@
 }
 
 .labelNombre {
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 700;
+  font-family: Franklin Gothic Medium, Franklin Gothic, ITC Franklin Gothic,
+    Arial, sans-serif;
   position: relative;
   left: 15px;
   margin-bottom: 5px;
@@ -94,8 +71,10 @@
 
 .labelDescripcion {
   width: 210px;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 700;
+  font-family: Franklin Gothic Medium, Franklin Gothic, ITC Franklin Gothic,
+    Arial, sans-serif;
   position: relative;
   left: 15px;
   margin-top: 10px;
@@ -117,7 +96,7 @@
 
 .inputDescripcion {
   width: 325px;
-  height: 100px;
+  height: 50px;
   border-radius: 4px;
   border-color: transparent;
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
@@ -125,19 +104,148 @@
 
 .divButton {
   position: relative;
-  top: 120px;
+  top: 30px;
   left: 15px;
-  width: 180px;
+  width: 175px;
 }
 
 .button {
   font-weight: 700;
   font-size: 16px;
   color: #ffffff;
-  width: 335px;
+  width: 330px;
   height: 40px;
   border-radius: 10px;
   border: none;
   background: #3e2463;
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
+}
+
+.phoneDivs {
+  display: flex;
+  width: 350px;
+}
+
+.areacod {
+  position: relative;
+  left: 15px;
+  width: 65px;
+  margin-right: 5px;
+}
+
+.phonenumber {
+  position: relative;
+  left: 15px;
+  width: 255px;
+}
+.divlabelPhone {
+  margin-bottom: 5px;
+  margin-top: 5px;
+  width: 200px;
+}
+
+.labelPhone {
+  width: 210px;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: Franklin Gothic Medium, Franklin Gothic, ITC Franklin Gothic,
+    Arial, sans-serif;
+  position: relative;
+  left: 15px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.divlabelDir {
+  margin-bottom: 5px;
+  margin-top: 5px;
+  width: 200px;
+}
+
+.labelDir {
+  width: 210px;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: Franklin Gothic Medium, Franklin Gothic, ITC Franklin Gothic,
+    Arial, sans-serif;
+  position: relative;
+  left: 15px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.divInputsCalleyNum {
+  display: flex;
+  width: 350px;
+}
+
+.calle {
+  position: relative;
+  left: 15px;
+  width: 210px;
+  margin-right: 5px;
+}
+
+.numCalle {
+  position: relative;
+  left: 15px;
+  width: 110px;
+  margin-right: 5px;
+}
+
+.divCodPostal {
+  margin-top: 10px;
+  width: 100px;
+}
+.inputCodPostal {
+  position: relative;
+  left: 233px;
+  width: 110px;
+  margin-right: 5px;
+}
+
+.divCiudadyProv {
+  display: flex;
+  margin-top: 10px;
+  width: 350px;
+}
+
+.inputCiudad {
+  position: relative;
+  left: 15px;
+  width: 155px;
+  margin-right: 5px;
+}
+
+.inputProv {
+  position: relative;
+  left: 15px;
+  width: 165px;
+  margin-right: 5px;
+}
+
+.divSelects {
+  display: flex;
+  margin-top: 10px;
+  width: 350px;
+}
+
+.selectCiudad {
+  position: relative;
+  left: 15px;
+  width: 160px;
+  margin-right: 5px;
+  border: transparent;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
+  border-radius: 4px;
+}
+
+.selectProvincia {
+  position: relative;
+  left: 15px;
+  width: 168px;
+  border: transparent;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
+  border-radius: 4px;
+  height: 25px;
 }

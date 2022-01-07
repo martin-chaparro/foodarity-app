@@ -5,34 +5,33 @@
   width: 100%;
 }
 
-
 .inputs {
-    width: 69%;
-    padding: 9px;
-    margin-left: 43px;
-    margin-top: 30px;
-    border: 1px solid ;
+  width: 69%;
+  padding: 9px;
+  margin-left: 43px;
+  margin-top: 30px;
+  border: 1px solid;
 }
 
 .header {
-    text-align: center;
-    background-color: #5B457A;
-  }
-  
-  img {
-    display: block;
-    margin: auto;
-  }
+  text-align: center;
+  background-color: #5b457a;
+}
 
-  .title {
-    margin-left: 100px;
-  }
+img {
+  display: block;
+  margin: auto;
+}
 
-  .btn {
-      margin-left: 150px;
-      width: 90px;
-  }
+.title {
+  margin-left: 100px;
+}
 
-  .google {
-    margin-left: 90px;
-  } 
+.btn {
+  margin-left: 150px;
+  width: 90px;
+}
+
+.google {
+  margin-left: 90px;
+}

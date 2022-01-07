@@ -11,32 +11,86 @@ export default function RegisterFormCommerce() {
         <div className={styles.commerceLogo}>
           <img className={styles.imgLogo} src={CommerceLogo} alt="CommerLogo" />
         </div>
-        <div className={styles.divPhoto}>
-          <p className={styles.inputText}>Presione para importar una imagen</p>
-          <input className={styles.addPhoto} type="file" accept="image/*" />
-        </div>
         <div className={styles.divsInputs}>
           <div className={styles.labelNombre}>
             <label>Nombre del comercio</label>
           </div>
           <div className={styles.divInputNombre}>
-            <input className={styles.inputNombre} type="text" name="name" />
+            <input className={styles.inputNombre} type="text" name="name" autoComplete='off'/>
+          </div>
+          <div className={styles.labelNombre}>
+            <label>Url de sitio web</label>
+          </div>
+          <div className={styles.divInputNombre}>
+            <input className={styles.inputNombre} type="text" name="name" autoComplete='off'/>
           </div>
           <div className={styles.labelDescripcion}>
             <label>Descripción</label>
           </div>
           <div className={styles.divInputDescripcion}>
-            <input
+            <textarea
               className={styles.inputDescripcion}
               type="text"
-              name="name"
             />
+          </div>
+          <div className={styles.divlabelPhone}>
+            <label className={styles.labelPhone}>Teléfono</label>
+          </div>
+          <div className={styles.phoneDivs}>
+            <input
+              className={styles.areacod}
+              type="number"
+              placeholder="Cód. Área"
+            />
+            <input
+              className={styles.phonenumber}
+              type="number"
+              placeholder="Número"
+            />
+          </div>
+          <div className={styles.divlabelDir}>
+            <label className={styles.labelDir}>Dirección</label>
+          </div>
+          <div className={styles.divInputsCalleyNum}>
+            <input 
+            className={styles.calle} 
+            type="text" 
+            placeholder="Calle" />
+            <input
+              className={styles.numCalle}
+              type="number"
+              placeholder="Número de calle"
+            />
+          </div>
+          <div className={styles.divCodPostal}>
+              <input 
+              className={styles.inputCodPostal}
+              type="number" 
+              placeholder='Cód. Postal'/>
+          </div>
+          <div className={styles.divCiudadyProv}>
+            <input 
+            className={styles.inputCiudad}
+            type="text" 
+            placeholder="Ciudad" />
+            <input 
+                className={styles.inputProv}
+            type="text" 
+            placeholder="Provincia" />
+          </div>
+          <div className={styles.divSelects}>
+          <select className={styles.selectCiudad}>
+              <option value="City">Ciudad</option>
+          </select>
+           <select className={styles.selectProvincia}> 
+            <option value="Prov">Provincia</option>
+           </select>
           </div>
         </div>
         <div className={styles.divButton}>
-          <button className={styles.button} type="submit">
-            Enviar solicitud de registro
-          </button>
+          <button 
+          className={styles.button} 
+          type="submit">Enviar solicitud de registro</button>
         </div>
       </form>
     </div>
