@@ -91,7 +91,10 @@ const searchCompany = async (req, res) => {
   try {
     const { id } = req.params;
     const listCompanies = await Companies.findAll({
-      include: [{ model: CompanyType, as: 'type', attributes: ['type'] }],
+      include: [
+        { model: CompanyType, as: 'type', attributes: ['type'] },
+        { model: Address, include: [{ model: City }, { model: State }] },
+      ],
       attributes: {
         exclude: ['createdAt', 'updatedAt'],
       },
