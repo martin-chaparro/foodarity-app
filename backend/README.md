@@ -114,8 +114,10 @@ POST: /products :
 ejemplo:
 {
     *"name":"Leche agria vencida",
+		*"description:"2 saches"
     "photo": "url",
     *"price":12.50,
+		*"publicationDate": "10/06/1822"
     *"expirationDate":"11/12/1994",
     *"category":1
 }
