@@ -12,4 +12,4 @@ package-lock.json
 
 #docker
 docker-compose.yaml
-docker/database/posgres/data
+docker/database/postgres/data

@@ -2,6 +2,11 @@ const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
 const connection = require('./database/connection');
+const CompanyType = require('./models/CompanyType');
+const Role = require('./models/Role');
+const User = require('./models/User');
+const State = require('./models/State');
+const City = require('./models/City');
 
 class Server {
   constructor() {
@@ -19,6 +24,12 @@ class Server {
 
     // Rutas de Aplicacion
     this.routes();
+
+    // Datos seeders
+    this.roles = require('./database/seeders/data/roles');
+    this.users = require('./database/seeders/data/users');
+    this.provincias = require('./database/seeders/data/provincias.json');
+    this.municipios = require('./database/seeders/data/municipios.json');
   }
 
   // express instance
@@ -65,10 +76,53 @@ class Server {
     }
   }
 
+  async seed() {
+    console.log('||--> Seed database...: <--||');
+    try {
+      console.log('||--> Seed types database...: <--||');
+      await CompanyType.bulkCreate([{ type: 'Comercio' }, { type: 'ONG' }]);
+    } catch (error) {
+      console.log('||--> Seed types not completed...: <--||');
+    }
+    try {
+      console.log('||--> Seed users database...: <--||');
+      await Role.bulkCreate(this.roles);
+      const usersCreated = await User.bulkCreate(this.users);
+      usersCreated.forEach((user) => {
+        user.setRole(1);
+      });
+    } catch (error) {
+      console.log('||--> Seed users not completed...: <--||');
+    }
+    try {
+      console.log('||--> Seed location database...: <--||');
+      this.provincias.provincias.forEach((prov) => {
+        State.create({
+          id: prov.id,
+          name: prov.nombre,
+          lat: prov.centroide.lat,
+          lon: prov.centroide.lon,
+        });
+      });
+      this.municipios.municipios.forEach((muni) => {
+        City.create({
+          id: muni.id,
+          name: muni.nombre,
+          lat: muni.centroide.lat,
+          lon: muni.centroide.lon,
+          state_id: muni.provincia.id,
+        });
+      });
+    } catch (error) {
+      console.log('||--> Seed locations not completed...: <--||');
+    }
+  }
+
   start() {
     this.app.listen(this.port, async () => {
       console.log(`||--> Http server running in port:${this.port} <--||`);
       await this.connectDb();
+      await this.seed();
     });
   }
 }

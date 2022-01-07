@@ -1,7 +1,6 @@
 const { Model, DataTypes } = require('sequelize');
-const { hashPasswordSync } = require('../helpers/passwordHash');
 
-class User extends Model {
+class Companies extends Model {
   static init(sequelize) {
     super.init(
       {
@@ -9,30 +8,35 @@ class User extends Model {
           type: DataTypes.STRING,
           allowNull: false,
         },
+        description: {
+          type: DataTypes.STRING,
+          allowNull: false,
+        },
+        phone: {
+          type: DataTypes.STRING,
+          allowNull: false,
+        },
         email: {
           type: DataTypes.STRING,
           allowNull: false,
         },
-        password: {
-          type: DataTypes.STRING,
-          allowNull: false,
-          set(value) {
-            const passwordHash = hashPasswordSync(value);
-            this.setDataValue('password', passwordHash);
-          },
-        },
-        phone: {
+        website: {
           type: DataTypes.STRING,
           allowNull: true,
         },
-        photo: {
+        logo: {
+          type: DataTypes.STRING,
+          allowNull: false,
+        },
+        banner: {
           type: DataTypes.STRING,
           allowNull: true,
         },
         status: {
+          // cuenta habilitada o no
           type: DataTypes.BOOLEAN,
           allowNull: false,
-          defaultValue: true,
+          defaultValue: false,
         },
       },
       {
@@ -42,9 +46,10 @@ class User extends Model {
   }
 
   static associate(models) {
-    this.belongsTo(models.Role);
-    this.hasOne(models.Companies);
+    this.belongsTo(models.CompanyType);
+    this.belongsTo(models.User);
+    this.hasOne(models.Address);
   }
 }
 
-module.exports = User;
+module.exports = Companies;
