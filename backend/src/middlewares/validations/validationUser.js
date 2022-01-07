@@ -8,6 +8,11 @@ const ValidationsUser = {
       min: 6,
     }),
   ],
+  withoutPassword: [
+    check('name', 'Ingrese su nombre completo').not().isEmpty(),
+    check('email', 'Agrega un email válido').isEmail(),
+   
+  ],
 };
 
 module.exports = ValidationsUser;
