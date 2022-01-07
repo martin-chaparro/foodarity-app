@@ -1,6 +1,7 @@
 /* eslint-disable react/button-has-type */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import style from './RegisterFormUser.module.css';
 import img from '../../assets/Mobil-header.png';
@@ -8,7 +9,7 @@ import img2 from '../../assets/Mobil-header1.png';
 import { registerLocal } from '../../actions';
 
 function Register() {
-   const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const [errors, setErrors] = useState({});
   const [input, setInput] = useState({
     name: '',
@@ -105,14 +106,14 @@ function Register() {
   };
 
   const handleSubmit = () => {
-    dispatch(registerLocal(input))
+    dispatch(registerLocal(input));
     setInput({
       name: '',
       email: '',
       password: '',
       validatePassword: '',
-    })
-  }
+    });
+  };
 
   return (
     <div className={style.register}>
@@ -123,7 +124,7 @@ function Register() {
         </header>
         <div>
           <div className={style.title}>
-          <label>Ingrese Su Nombre</label>
+            <label>Ingrese Su Nombre</label>
           </div>
           <input
             className={style.inputs}
@@ -183,8 +184,12 @@ function Register() {
           />
           <p>{errors.validatePassword}</p>
         </div>
-        <button className={style.btn} type="submit">Registrarme</button>
-        <button className={style.google} >Registrarse con Google</button>
+        <Link to="/rollselector">
+          <button className={style.btn} type="submit">
+            Registrarme
+          </button>
+        </Link>
+        <button className={style.google}>Registrarse con Google</button>
       </form>
     </div>
   );
