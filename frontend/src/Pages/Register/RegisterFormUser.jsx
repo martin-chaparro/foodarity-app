@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import Button from '@mui/material/Button';
 import Header from '../Component/Header/Header';
 import style from './RegisterFormUser.module.css';
 
@@ -185,11 +186,34 @@ function Register() {
           <p>{errors.validatePassword}</p>
         </div>
 
-        <button className={style.btn} type="submit">
-          Registrarme
-        </button>
+        <Button className={style.btn}
+        type='submit'
+          variant="contained"
+          sx={{
+            backgroundColor: '#FDFFB6',
+            height: '2.5em',
+            color: '#3e2463',
+            fontStyle: 'bold',
+            margin: '5em 2em 2em',
+            hover: false,
+          }}
+        >
+          Ingresar
+        </Button>
 
-        <button className={style.google}>Registrarse con Google</button>
+        <Button className={style.google}
+          variant="contained"
+          sx={{
+            backgroundColor: '#533c74',
+            height: '2.5em',
+            color: '#fffff',
+            fontStyle: 'bold',
+            margin: '10em 2em 2em',
+            hover: false,
+          }}
+        >
+          Ingresar con Google
+        </Button>
       </form>
     </div>
   );

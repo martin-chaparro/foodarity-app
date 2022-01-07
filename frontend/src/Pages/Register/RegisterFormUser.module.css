@@ -1,6 +1,8 @@
 .register {
-    width: 360px;
-    height: 640px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 }
 
 
@@ -27,11 +29,10 @@
   }
 
   .btn {
-      margin-left: 120px;
+      margin-left: 150px;
       width: 90px;
-      background-color: #D68584;
   }
 
   .google {
-    margin-left: 88px;
-  }
+    margin-left: 90px;
+  } 
