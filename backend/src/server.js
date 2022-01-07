@@ -7,6 +7,8 @@ const Role = require('./models/Role');
 const User = require('./models/User');
 const State = require('./models/State');
 const City = require('./models/City');
+const Category = require('./models/Category');
+const Product = require('./models/Product');
 
 class Server {
   constructor() {
@@ -30,6 +32,7 @@ class Server {
     this.users = require('./database/seeders/data/users');
     this.provincias = require('./database/seeders/data/provincias.json');
     this.municipios = require('./database/seeders/data/municipios.json');
+    this.products = require('./database/seeders/data-hardcode/products.json');
   }
 
   // express instance
@@ -83,6 +86,41 @@ class Server {
       await CompanyType.bulkCreate([{ type: 'Comercio' }, { type: 'ONG' }]);
     } catch (error) {
       console.log('||--> Seed types not completed...: <--||');
+    }
+    try {
+      console.log('||--> Seed categories database...: <--||');
+      await Category.bulkCreate([
+        { name: 'Almacen' },
+        { name: 'Restorant/Rotiseria' },
+        { name: 'Verduleria' },
+      ]);
+    } catch (error) {
+      console.log('||--> Seed categories not completed...: <--||');
+    }
+    try {
+      console.log('||--> Seed products(HARDCODE) database...: <--||');
+      this.products.forEach(async (product) => {
+        const {
+          name,
+          description,
+          photo,
+          price,
+          publicationDate,
+          expirationDate,
+          category,
+        } = product;
+        const newProduct = await Product.create({
+          name,
+          description,
+          photo,
+          price,
+          publicationDate,
+          expirationDate,
+        });
+        await newProduct.setCategory(category);
+      });
+    } catch (error) {
+      console.log('||--> Seed products(HARDCODE) not completed...: <--||');
     }
     try {
       console.log('||--> Seed users database...: <--||');

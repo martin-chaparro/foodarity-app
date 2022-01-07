@@ -1,5 +1,10 @@
+// const { Op } = require('sequelize');
+const { validationResult } = require('express-validator');
 const Companies = require('../models/Companies');
 const CompanyType = require('../models/CompanyType');
+const Address = require('../models/Address');
+const City = require('../models/City');
+const State = require('../models/State');
 
 // crear una empresa
 const createCompany = async (req, res) => {
@@ -7,28 +12,55 @@ const createCompany = async (req, res) => {
     const {
       name,
       description,
+      areaCode,
       phone,
       email,
       website,
       logo,
       banner,
       status,
+      ownerId,
       type,
+      street,
+      number,
+      zipcode,
+      cityId,
+      stateId,
     } = req.body;
+
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
     const newCompany = await Companies.create({
       name,
       description,
+      areaCode,
       phone,
       email,
       website,
       logo,
       banner,
       status,
+      ownerId,
     });
+
+    const newAddress = await Address.create({
+      street,
+      number,
+      zipcode,
+    });
+
     await newCompany.setType(type);
+    await newAddress.setCompany(newCompany);
+    await newAddress.setCity(cityId);
+    await newAddress.setState(stateId);
     return res.status(200).json(newCompany);
   } catch (error) {
-    return res.status(500).json({ msg: 'Error al crear la empresa' });
+    return res.status(500).json({
+      msg: 'Error al crear la empresa. Revise que los tipos de datos ingresados sean correctos',
+    });
   }
 };
 
@@ -36,7 +68,10 @@ const createCompany = async (req, res) => {
 const getCompanies = async (req, res) => {
   try {
     const listCompanies = await Companies.findAll({
-      include: [{ model: CompanyType, as: 'type', attributes: ['type'] }],
+      include: [
+        { model: CompanyType, as: 'type', attributes: ['type'] },
+        { model: Address, include: [{ model: City }, { model: State }] },
+      ],
       attributes: {
         exclude: ['createdAt', 'updatedAt'],
       },
@@ -56,7 +91,10 @@ const searchCompany = async (req, res) => {
   try {
     const { id } = req.params;
     const listCompanies = await Companies.findAll({
-      include: [{ model: CompanyType, as: 'type', attributes: ['type'] }],
+      include: [
+        { model: CompanyType, as: 'type', attributes: ['type'] },
+        { model: Address, include: [{ model: City }, { model: State }] },
+      ],
       attributes: {
         exclude: ['createdAt', 'updatedAt'],
       },

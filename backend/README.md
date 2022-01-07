@@ -67,15 +67,22 @@ POST: /companies : Ruta para crear un comercio o ONG
 {
 		* "name": "Mayorista Mackro",
 		* "description": "supermercado",
-		* "phone": "3764-202020",
+		* "areaCode": "123", (solo numeros)
+		* "phone": "3764202020", (solo numeros)
 		* "email": "mackros@gmail.com",
 		"website": "www.mackro.com",
-		*"logo": "img",
+		* "logo": "img",
 		"banner": "algo",
-		* "status": true
-    * "type" : 1
-	
+		* "status": true,
+		* "ownerId": 1,
+		* "type" : 1,
+		* "street": "rodriguez peña",
+		* "number": "123",
+		* "zipcode": "1640",
+		* "cityId": "60854",
+		* "stateId" : "6" 
 }
+
 ```
 (*) requeridos
 (**) type: 1 = Comercio / 2 = ONG
@@ -85,4 +92,25 @@ GET: /companies : Ruta para traer todas las compañias creadas
  
 GET: /companies/:id : Ruta para buscar compañias por id
 
-    
+### Rutas Products
+---
+
+GET: /products : Ruta para traer todos los productos
+
+POST: /products :  
+```
+ejemplo:
+{
+    *"name":"Leche agria vencida",
+		*"description:"2 saches"
+    "photo": "url",
+    *"price":12.50,
+		*"publicationDate": "10/06/1822"
+    *"expirationDate":"11/12/1994",
+    *"category":1
+}
+
+(*) requeridos
+(**) category: 1=Almacen 2=Restorant/Rotiseria 3=Verduleria
+
+```

@@ -1,15 +1,16 @@
 /* eslint-disable react/button-has-type */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import Header from '../Component/Header/Header';
 import style from './RegisterFormUser.module.css';
-import img from '../../assets/Mobil-header.png';
-import img2 from '../../assets/Mobil-header1.png';
+
 import { registerLocal } from '../../actions';
 
 function Register() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [errors, setErrors] = useState({});
   const [input, setInput] = useState({
     name: '',
@@ -105,7 +106,8 @@ function Register() {
     });
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     dispatch(registerLocal(input));
     setInput({
       name: '',
@@ -113,15 +115,13 @@ function Register() {
       password: '',
       validatePassword: '',
     });
+    navigate('/rollselector');
   };
 
   return (
     <div className={style.register}>
       <form className={style.form} onSubmit={handleSubmit}>
-        <header className={style.header}>
-          <img src={img} alt="" />
-          <img src={img2} alt="" />
-        </header>
+        <Header />
         <div>
           <div className={style.title}>
             <label>Ingrese Su Nombre</label>
@@ -184,11 +184,11 @@ function Register() {
           />
           <p>{errors.validatePassword}</p>
         </div>
-        <Link to="/rollselector">
-          <button className={style.btn} type="submit">
-            Registrarme
-          </button>
-        </Link>
+
+        <button className={style.btn} type="submit">
+          Registrarme
+        </button>
+
         <button className={style.google}>Registrarse con Google</button>
       </form>
     </div>

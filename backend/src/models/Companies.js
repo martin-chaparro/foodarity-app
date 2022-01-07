@@ -12,6 +12,10 @@ class Companies extends Model {
           type: DataTypes.STRING,
           allowNull: false,
         },
+        areaCode: {
+          type: DataTypes.STRING,
+          allowNull: false,
+        },
         phone: {
           type: DataTypes.STRING,
           allowNull: false,
@@ -37,6 +41,10 @@ class Companies extends Model {
           type: DataTypes.BOOLEAN,
           allowNull: false,
           defaultValue: false,
+        },
+        ownerId: {
+          type: DataTypes.INTEGER,
+          allowNull: false,
         },
       },
       {
