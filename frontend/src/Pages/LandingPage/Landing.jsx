@@ -13,19 +13,26 @@ export default function Landing() {
       <div className={styles.content}>
         <div className={styles.btncontent}>
           <div>
-            <button type="submit">Registrarse</button>
+            <button className={styles.btnreg} type="submit">
+              Registrarse
+            </button>
           </div>
           <div>
+            <button className={styles.btningresar} type="submit">
+              Ingresar
+            </button>
             <Link to="/login">
               <button type="submit">Ingresar</button>
             </Link>
           </div>
         </div>
         <div>
-          <img src={logoLanding} alt="logo" />
+          <img className={styles.imglogolanding} src={logoLanding} alt="logo" />
         </div>
         <div>
-          <button type="submit">Continuar</button>
+          <button className={styles.btncontinuar} type="submit">
+            Continuar
+          </button>
         </div>
       </div>
       <Footer />
