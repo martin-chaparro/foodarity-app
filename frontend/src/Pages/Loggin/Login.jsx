@@ -1,17 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
+import Header from '../Component/Header/Header';
 import estilos from './Login.module.css';
-import logo from '../../assets/Mobil-Full-Header-Logo.png';
 
 export default function Login() {
   return (
     <div backgroundColor="transparent">
-      <header className={estilos.header}>
-        <div className={estilos.logo}>
-          <img src={logo} alt="logo" />
-        </div>
-      </header>
+      <Header />
       <div className={estilos.contener}>
         <h3>Ingrese su Email</h3>
         <input
