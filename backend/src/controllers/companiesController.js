@@ -25,7 +25,7 @@ const createCompany = async (req, res) => {
       banner,
       status,
     });
-    await newCompany.setCompanyType(type);
+    await newCompany.setType(type);
     return res.status(200).json(newCompany);
   } catch (error) {
     return res.status(500).json({ msg: 'Error al crear la empresa' });
@@ -36,7 +36,7 @@ const createCompany = async (req, res) => {
 const getCompanies = async (req, res) => {
   try {
     const listCompanies = await Companies.findAll({
-      include: [{ model: CompanyType, attributes: ['type'] }],
+      include: [{ model: CompanyType, as: 'type', attributes: ['type'] }],
       attributes: {
         exclude: ['createdAt', 'updatedAt'],
       },
@@ -56,7 +56,7 @@ const searchCompany = async (req, res) => {
   try {
     const { id } = req.params;
     const listCompanies = await Companies.findAll({
-      include: [{ model: CompanyType, attributes: ['type'] }],
+      include: [{ model: CompanyType, as: 'type', attributes: ['type'] }],
       attributes: {
         exclude: ['createdAt', 'updatedAt'],
       },
