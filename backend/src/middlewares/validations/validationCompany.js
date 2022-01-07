@@ -4,15 +4,15 @@ const ValidationCompany = {
   create: [
     check('name', 'Ingrese el nombre completo').not().isEmpty(),
     check('email', 'Agrega un email válido').isEmail(),
-    check('description', '').not().isEmpty(),
-    check('areaCode', '').isNumeric(),
-    check('phone', '').isNumeric(),
+    check('description', 'Ingrese una descripcion').not().isEmpty(),
+    check('areaCode', 'Ingrese un codigo de area valido').isNumeric(),
+    check('phone', 'Ingrese un numero').isNumeric(), // TODO como validar bien numeros de telefono
     // check('logo', ''), // TODO definir como guardar imagenes
-    check('street', '').not().isEmpty(),
-    check('number', '').isNumeric(),
-    check('zipcode', '').isNumeric(),
-    check('cityId', '').isNumeric(),
-    check('stateId', '').isNumeric(),
+    check('street', 'Ingrese una direccion').not().isEmpty(),
+    check('number', 'Ingrese una altura').isNumeric(),
+    check('zipcode', 'Ingrese un codigo postal valido').isNumeric(),
+    check('cityId', 'ingrese ID de city').isNumeric(),
+    check('stateId', 'Ingrese ID de state').isNumeric(),
   ],
 };
 
