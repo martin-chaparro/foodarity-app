@@ -1,9 +1,6 @@
 .header {
   text-align: center;
   background-color: #5b457a;
-}
-
-img {
-  display: block;
-  margin: auto;
+  padding-top: 23px;
+  padding-bottom: 21px;
 }
