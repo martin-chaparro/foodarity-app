@@ -49,7 +49,7 @@ export default function Login() {
           variant="contained"
           sx={{
             backgroundColor: '#533c74',
-            height: '2.5em',
+            height: '2.51em',
             color: '#fffff',
             fontStyle: 'bold',
             margin: '10em 2em 2em',
