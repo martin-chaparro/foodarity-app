@@ -13,7 +13,7 @@ class Address extends Model {
           allowNull: false,
         },
         zipcode: {
-          type: DataTypes.INTEGER,
+          type: DataTypes.STRING,
           allowNull: false,
         },
       },
