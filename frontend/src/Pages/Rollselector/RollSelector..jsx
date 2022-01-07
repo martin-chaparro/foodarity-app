@@ -12,7 +12,6 @@ export default function RollSelector() {
       <div className={styles.content}>
         <div className={styles.commercecontent}>
           <button className={styles.btncomerce} type="submit">
-            {' '}
             <img src={imgcomercio} width="74px" height="74" alt="comercio" />
           </button>
 
