@@ -1,0 +1,143 @@
+.RegisterFormCommerce {
+  height: 100vh;
+  background: #ececec;
+}
+
+.form {
+  background: #ececec;
+  height: 100vh;
+}
+
+.imgLogo {
+  position: relative;
+  top: 20px;
+  width: 50px;
+  height: 50px;
+  left: 20px;
+}
+
+.commerceLogo {
+  position: relative;
+  top: 25px;
+  background: #d68584;
+  border-radius: 9999px;
+  width: 90px;
+  height: 90px;
+  left: 15px;
+}
+
+.inputText {
+  position: relative;
+  top: 30px;
+  font-size: 12px;
+}
+
+.divPhoto {
+  position: relative;
+  background: white;
+  font-weight: 700;
+  text-align: center;
+  width: 233px;
+  left: 115px;
+  bottom: 70px;
+  height: 80px;
+  border-radius: 10px;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
+}
+
+.addPhoto {
+  position: relative;
+  border-radius: 10px;
+  height: 85px;
+  bottom: 35px;
+  width: 230px;
+  opacity: 0%;
+}
+.addNewPhoto {
+  position: relative;
+  color: black;
+  border-radius: 10px;
+  left: 100px;
+  background: #ffffff;
+  width: 250px;
+  height: 80px;
+  margin: 0px;
+}
+
+.placeholder {
+  position: relative;
+  width: 230px;
+  margin-top: 0px;
+  top: 30px;
+  left: 12px;
+}
+
+.divsInputs {
+  display: flex;
+  flex-direction: column;
+}
+
+.labelNombre {
+  font-size: 12px;
+  font-weight: 700;
+  position: relative;
+  left: 15px;
+  margin-bottom: 5px;
+  width: 200px;
+}
+
+.divInputNombre {
+  position: relative;
+  left: 15px;
+  width: 200px;
+}
+
+.labelDescripcion {
+  width: 210px;
+  font-size: 12px;
+  font-weight: 700;
+  position: relative;
+  left: 15px;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.divInputDescripcion {
+  position: relative;
+  left: 15px;
+  width: 200px;
+}
+
+.inputNombre {
+  width: 325px;
+  border-radius: 4px;
+  border-color: transparent;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
+}
+
+.inputDescripcion {
+  width: 325px;
+  height: 100px;
+  border-radius: 4px;
+  border-color: transparent;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
+}
+
+.divButton {
+  position: relative;
+  top: 120px;
+  left: 15px;
+  width: 180px;
+}
+
+.button {
+  font-weight: 700;
+  font-size: 16px;
+  color: #ffffff;
+  width: 335px;
+  height: 40px;
+  border-radius: 10px;
+  border: none;
+  background: #3e2463;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
+}
