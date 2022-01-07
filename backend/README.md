@@ -60,6 +60,18 @@ body:
 
 GET: /users : Ruta para obtener todos los usuarios. Ruta Protegida. Se va a utilizar para la administracion
 
+DELETE: /users/: Ruta para eliminar (deshabilitar el usuario). Hay que estar autenticado
+
+PUT: /users/ : Ruta para Actualizar usuario() Hay que estar autenticado
+```
+body:
+{
+    "name":"Nombre del Usuario",
+    "email":"email@email.com"
+
+}
+```
+
 ### Rutas Companies
 ---
 POST: /companies : Ruta para crear un comercio o ONG

@@ -32,7 +32,11 @@ const createUser = async (request, response) => {
   await user.setRole(1);
 
   // Generar JWT
-  const token = await generateJWT(user.id, user.name);
+  const token = await generateJWT({
+    id: user.id,
+    name: user.name,
+    roleId: user.role_id,
+  });
 
   return response.status(201).json({
     id: user.id,
@@ -47,6 +51,7 @@ const getAllUsers = async (request, response) => {
     attributes: {
       exclude: ['password', 'createdAt', 'updatedAt', 'RoleId', 'role_id'],
     },
+    where: { status: true },
     include: {
       model: Role,
       as: 'role',
@@ -57,7 +62,69 @@ const getAllUsers = async (request, response) => {
   return response.status(200).json(users);
 };
 
+const deleteUser = async (request, response) => {
+  let id = null;
+
+  if (request.userRoleId === 2) {
+    id = request.params.id;
+    if (!id)
+      return response.status(400).json({ message: 'El id es requerido' });
+  } else {
+    id = request.userId;
+  }
+
+  try {
+    await User.update(
+      {
+        status: false,
+      },
+      {
+        where: { id },
+      }
+    );
+
+    return response.status(200).json({ message: 'Eliminado correctamente' });
+  } catch (error) {
+    console.log(error);
+    return response.status(500).json({ message: 'Error al eliminar' });
+  }
+};
+
+const updateUser = async (request, response) => {
+  
+  let id = null;
+
+  if (request.userRoleId === 2) {
+    id = request.params.id;
+    if (!id)
+      return response.status(400).json({ message: 'El id es requerido' });
+  } else {
+    id = request.userId;
+  }
+
+  const { name, email } = request.body;
+
+  try {
+    await User.update(
+      {
+        name,
+        email,
+      },
+      {
+        where: { id },
+      }
+    );
+
+    return response.status(200).json({ message: 'Actualizado correctamente' });
+  } catch (error) {
+    console.log(error);
+    return response.status(500).json({ message: 'Error al actualizar' });
+  }
+};
+
 module.exports = {
   createUser,
   getAllUsers,
+  deleteUser,
+  updateUser,
 };
