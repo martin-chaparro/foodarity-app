@@ -1,35 +1,103 @@
-import React from 'react';
+/* eslint-disable no-unused-vars */
+import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
+import Header from '../Component/Header/Header';
 import estilos from './Login.module.css';
-import logo from '../../assets/Mobil-Full-Header-Logo.png';
 
 export default function Login() {
+ const [errors, setErrors]  = useState({})
+ const [input, setInput] = useState({
+   email: '',
+   password: '',
+ })
+
+ const validateEmail = (e) => {
+  const { name, value } = e.target;
+  const expresion =
+    // eslint-disable-next-line no-useless-escape
+    /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+  setInput({
+    ...input,
+    [name]: value,
+  });
+  if (!expresion.test(value)) {
+    setErrors({
+      ...errors,
+      [name]: 'No es un email valido!',
+    });
+  } else {
+    setErrors({
+      ...errors,
+      [name]: '',
+    });
+  }
+};
+
+const validatePassword = (e) => {
+  const { name, value } = e.target;
+  setInput({
+    ...input,
+    [name]: value,
+  });
+  if (!/^.{4,12}$/.test(value)) {
+    setErrors({
+      ...errors,
+      [name]: 'Debe contener entre 4 y 12 caracteres',
+    });
+  } else {
+    setErrors({
+      ...errors,
+      [name]: '',
+    });
+  }
+};
+
+const handleOnChange = (e) => {
+  e.preventDefault();
+  setInput({
+    ...input,
+    [e.target.name]: e.target.value,
+  });
+};
+
+
+
   return (
     <div backgroundColor="transparent">
-      <header className={estilos.header}>
-        <div className={estilos.logo}>
-          <img src={logo} alt="logo" />
-        </div>
-      </header>
+      <Header />
       <div className={estilos.contener}>
         <h3>Ingrese su Email</h3>
         <input
           type="text"
           name="email"
+          value={input.email}
           title="Email requerido"
           pattern="[a-zA-Z ]{2,254}"
           required
           placeholder="Email..."
+          onChange={(e) => {
+            handleOnChange(e);
+            validateEmail(e);
+          }}
         />
+        <p>{errors.email}</p>
+
         <h3>Ingrese su Contraseña</h3>
         <input
           type="password"
           name="password"
+          value={input.password}
           title="Contraseña requerida"
           required
           placeholder="Contraseña..."
+          onChange={(e) => {
+            handleOnChange(e);
+            validatePassword(e);
+          }}
+          
         />
+        <p>{errors.password}</p>
         <Button
           variant="contained"
           sx={{

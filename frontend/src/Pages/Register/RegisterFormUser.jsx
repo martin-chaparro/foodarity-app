@@ -1,16 +1,17 @@
 /* eslint-disable react/button-has-type */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
-import {  useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import Button from '@mui/material/Button';
+import Header from '../Component/Header/Header';
 import style from './RegisterFormUser.module.css';
-import img from '../../assets/Mobil-header.png';
-import img2 from '../../assets/Mobil-header1.png';
+
 import { registerLocal } from '../../actions';
 
 function Register() {
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [errors, setErrors] = useState({});
   const [input, setInput] = useState({
     name: '',
@@ -115,16 +116,13 @@ function Register() {
       password: '',
       validatePassword: '',
     });
-    navigate('/rollselector')
+    navigate('/rollselector');
   };
 
   return (
     <div className={style.register}>
       <form className={style.form} onSubmit={handleSubmit}>
-        <header className={style.header}>
-          <img src={img} alt="" />
-          <img src={img2} alt="" />
-        </header>
+        <Header />
         <div>
           <div className={style.title}>
             <label>Ingrese Su Nombre</label>
@@ -188,11 +186,34 @@ function Register() {
           <p>{errors.validatePassword}</p>
         </div>
 
-        <button className={style.btn} type="submit">
-          Registrarme
-        </button>
+        <Button className={style.btn}
+        type='submit'
+          variant="contained"
+          sx={{
+            backgroundColor: '#FDFFB6',
+            height: '2.5em',
+            color: '#3e2463',
+            fontStyle: 'bold',
+            margin: '5em 2em 2em',
+            hover: false,
+          }}
+        >
+          Ingresar
+        </Button>
 
-        <button className={style.google}>Registrarse con Google</button>
+        <Button className={style.google}
+          variant="contained"
+          sx={{
+            backgroundColor: '#533c74',
+            height: '2.5em',
+            color: '#fffff',
+            fontStyle: 'bold',
+            margin: '10em 2em 2em',
+            hover: false,
+          }}
+        >
+          Ingresar con Google
+        </Button>
       </form>
     </div>
   );

@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import Header from './Header';
+import Header from '../Component/Header/Header';
 import styles from './RegisterFormCommerce.module.css';
 import CommerceLogo from '../../assets/Mask-Group.png';
 
