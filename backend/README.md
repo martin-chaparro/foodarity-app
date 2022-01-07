@@ -60,3 +60,29 @@ body:
 
 GET: /users : Ruta para obtener todos los usuarios. Ruta Protegida. Se va a utilizar para la administracion
 
+### Rutas Companies
+---
+POST: /companies : Ruta para crear un comercio o ONG
+```
+{
+		* "name": "Mayorista Mackro",
+		* "description": "supermercado",
+		* "phone": "3764-202020",
+		* "email": "mackros@gmail.com",
+		"website": "www.mackro.com",
+		*"logo": "img",
+		"banner": "algo",
+		* "status": true
+    * "type" : 1
+	
+}
+```
+(*) requeridos
+(**) type: 1 = Comercio / 2 = ONG
+ 
+
+GET: /companies : Ruta para traer todas las compañias creadas
+ 
+GET: /companies/:id : Ruta para buscar compañias por id
+
+    

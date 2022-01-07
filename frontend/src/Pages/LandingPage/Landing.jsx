@@ -18,11 +18,10 @@ export default function Landing() {
             </button>
           </div>
           <div>
-            <button className={styles.btningresar} type="submit">
-              Ingresar
-            </button>
             <Link to="/login">
-              <button type="submit">Ingresar</button>
+              <button className={styles.btningresar} type="submit">
+                Ingresar
+              </button>
             </Link>
           </div>
         </div>

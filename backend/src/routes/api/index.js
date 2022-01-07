@@ -14,5 +14,4 @@ router.use('/auth', authRoutes);
 router.use('/states', statesRoutes);
 router.use('/cities', citiesRoutes);
 
-
 module.exports = router;

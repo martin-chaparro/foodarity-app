@@ -4,6 +4,8 @@ import { React } from 'react';
 import Login from './Pages/Loggin/Login';
 
 import Landing from './Pages/LandingPage/Landing';
+import Register from './Pages/Register/RegisterFormUser';
+import RegisterFormCommerce from './Pages/RegisterCommerce/RegisterFormCommerce';
 import RollSelector from './Pages/Rollselector/RollSelector.';
 
 function App() {
@@ -12,6 +14,11 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Landing />} />
+        <Route path="/register" element={<Register />} />
+        <Route
+          path="/registerformcommerce"
+          element={<RegisterFormCommerce />}
+        />
         <Route path="/rollselector" element={<RollSelector />} />
       </Routes>
     </BrowserRouter>
