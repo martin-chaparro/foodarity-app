@@ -1,0 +1,37 @@
+.register {
+    width: 360px;
+    height: 640px;
+}
+
+
+.inputs {
+    width: 69%;
+    padding: 9px;
+    margin-left: 43px;
+    margin-top: 30px;
+    border: 1px solid ;
+}
+
+.header {
+    text-align: center;
+    background-color: #5B457A;
+  }
+  
+  img {
+    display: block;
+    margin: auto;
+  }
+
+  .title {
+    margin-left: 100px;
+  }
+
+  .btn {
+      margin-left: 120px;
+      width: 90px;
+      background-color: #D68584;
+  }
+
+  .google {
+    margin-left: 88px;
+  }
