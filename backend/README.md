@@ -67,15 +67,22 @@ POST: /companies : Ruta para crear un comercio o ONG
 {
 		* "name": "Mayorista Mackro",
 		* "description": "supermercado",
-		* "phone": "3764-202020",
+		* "areaCode": "123", (solo numeros)
+		* "phone": "3764202020", (solo numeros)
 		* "email": "mackros@gmail.com",
 		"website": "www.mackro.com",
-		*"logo": "img",
+		* "logo": "img",
 		"banner": "algo",
-		* "status": true
-    * "type" : 1
-	
+		* "status": true,
+		* "ownerId": 1,
+		* "type" : 1,
+		* "street": "rodriguez peña",
+		* "number": "123",
+		* "zipcode": "1640",
+		* "cityId": "60854",
+		* "stateId" : "6" 
 }
+
 ```
 (*) requeridos
 (**) type: 1 = Comercio / 2 = ONG
