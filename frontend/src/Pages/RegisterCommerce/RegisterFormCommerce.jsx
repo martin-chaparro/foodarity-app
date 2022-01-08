@@ -120,7 +120,7 @@ export default function RegisterFormCommerce() {
           <div className={styles.divInputNombre}>
             <input
               className={styles.inputNombre}
-              type="text"
+              type="text" 
               name="name"
               autoComplete="off"
             />
@@ -129,7 +129,7 @@ export default function RegisterFormCommerce() {
             <label>Descripción</label>
           </div>
           <div className={styles.divInputDescripcion}>
-            <textarea className={styles.inputDescripcion} type="text" />
+            <textarea className={styles.inputDescripcion} type="text"/>
           </div>
           <div className={styles.divlabelPhone}>
             <label className={styles.labelPhone}>Teléfono</label>
