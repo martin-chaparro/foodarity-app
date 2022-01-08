@@ -5,26 +5,30 @@
 
 .form {
   background: #ececec;
-  height: 100vh;
 }
 
 .imgLogo {
   position: relative;
-  top: 25px;
   width: 70px;
   height: 70px;
-  left: 0px;
+}
+.containerLogo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .commerceLogo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
-  top: 10px;
   background: #d68584;
   border-radius: 9999px;
   width: 120px;
   height: 120px;
-  left: 120px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+  margin-top: 10px;
   margin-right: 0px;
 }
 
@@ -53,38 +57,90 @@
 }
 
 .labelNombre {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
   font-size: 14px;
   font-weight: 700;
   font-family: Franklin Gothic Medium, Franklin Gothic, ITC Franklin Gothic,
     Arial, sans-serif;
   position: relative;
-  left: 15px;
+  right: 100px;
   margin-bottom: 5px;
-  width: 200px;
+  margin-top: 5px;
+
+}
+
+.labelEmail {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: Franklin Gothic Medium, Franklin Gothic, ITC Franklin Gothic,
+    Arial, sans-serif;
+  position: relative;
+  right: 100px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+.divInputEmail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+.inputEmail {
+  width: 325px;
+  border-radius: 4px;
+  border-color: transparent;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
+}
+
+.labelUrl {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: Franklin Gothic Medium, Franklin Gothic, ITC Franklin Gothic,
+    Arial, sans-serif;
+  position: relative;
+  right: 118px;
+  margin-bottom: 5px;
+  margin-top: 5px;
 }
 
 .divInputNombre {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   position: relative;
-  left: 15px;
-  width: 200px;
 }
 
 .labelDescripcion {
-  width: 210px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
   font-size: 14px;
   font-weight: 700;
   font-family: Franklin Gothic Medium, Franklin Gothic, ITC Franklin Gothic,
     Arial, sans-serif;
   position: relative;
-  left: 15px;
+  right: 130px;
   margin-top: 10px;
   margin-bottom: 5px;
 }
 
 .divInputDescripcion {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: relative;
-  left: 15px;
-  width: 200px;
 }
 
 .inputNombre {
@@ -100,16 +156,20 @@
   border-radius: 4px;
   border-color: transparent;
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
+  resize: none;
 }
 
 .divButton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   position: relative;
-  top: 30px;
-  left: 15px;
-  width: 175px;
+  margin-top: 40px;
+  margin-bottom: 10px;
 }
 
 .button {
+  margin-bottom: 20px;
   font-weight: 700;
   font-size: 16px;
   color: #ffffff;
@@ -122,8 +182,12 @@
 }
 
 .phoneDivs {
+  position: relative;
+  right: 15px;
   display: flex;
-  width: 350px;
+  justify-content: center;
+  align-items: center;
+  position: relative;
 }
 
 .areacod {
@@ -131,17 +195,26 @@
   left: 15px;
   width: 65px;
   margin-right: 5px;
+  border: transparent;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
 }
 
 .phonenumber {
   position: relative;
   left: 15px;
-  width: 255px;
+  width: 252px;
+  border: transparent;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
 }
 .divlabelPhone {
+  position: relative;
+  right: 60px;
   margin-bottom: 5px;
   margin-top: 5px;
-  width: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
 }
 
 .labelPhone {
@@ -151,15 +224,19 @@
   font-family: Franklin Gothic Medium, Franklin Gothic, ITC Franklin Gothic,
     Arial, sans-serif;
   position: relative;
-  left: 15px;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 .divlabelDir {
+  position: relative;
+  right: 60px;
   margin-bottom: 5px;
   margin-top: 5px;
-  width: 200px;
+    display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
 }
 
 .labelDir {
@@ -169,58 +246,79 @@
   font-family: Franklin Gothic Medium, Franklin Gothic, ITC Franklin Gothic,
     Arial, sans-serif;
   position: relative;
-  left: 15px;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 .divInputsCalleyNum {
+  position: relative;
+  right: 15px;
   display: flex;
-  width: 350px;
+ justify-content: center;
+  align-items: center;
+  position: relative;
 }
 
 .calle {
   position: relative;
   left: 15px;
   width: 210px;
+  border: transparent;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
   margin-right: 5px;
 }
 
 .numCalle {
   position: relative;
   left: 15px;
-  width: 110px;
+  width: 107px;
   margin-right: 5px;
+  border: transparent;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
 }
 
 .divCodPostal {
   margin-top: 10px;
-  width: 100px;
+  position: relative;
+  right: 123px;
+  display: flex;
+  justify-content: center;
+   align-items: center;
+   position: relative;
 }
 .inputCodPostal {
   position: relative;
   left: 233px;
-  width: 110px;
+  width: 107px;
   margin-right: 5px;
+  border: transparent;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
 }
 
 .divCiudadyProv {
-  display: flex;
   margin-top: 10px;
-  width: 350px;
+  position: relative;
+  right: 15px;
+  display: flex;
+  justify-content: center;
+   align-items: center;
 }
 
 .inputCiudad {
   position: relative;
   left: 15px;
-  width: 155px;
+  width: 152px;
   margin-right: 5px;
+  border: transparent;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
 }
 
 .inputProv {
   position: relative;
   left: 15px;
   width: 165px;
+  border: transparent;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
   margin-right: 5px;
 }
 

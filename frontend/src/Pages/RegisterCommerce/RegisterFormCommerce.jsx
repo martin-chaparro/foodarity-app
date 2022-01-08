@@ -99,8 +99,10 @@ export default function RegisterFormCommerce() {
     <div className={styles.RegisterFormCommerce}>
       <Header />
       <form className={styles.form}>
+        <div className={styles.containerLogo}>
         <div className={styles.commerceLogo}>
           <img className={styles.imgLogo} src={CommerceLogo} alt="CommerLogo" />
+        </div>
         </div>
         <div className={styles.divsInputs}>
           <div className={styles.labelNombre}>
@@ -110,17 +112,26 @@ export default function RegisterFormCommerce() {
             <input
               className={styles.inputNombre}
               type="text"
-              name="name"
               autoComplete="off"
             />
           </div>
-          <div className={styles.labelNombre}>
+          <div className={styles.labelEmail}>
+            <label>Email de la empresa</label>
+          </div>
+          <div className={styles.divInputEmail}>
+            <input
+              className={styles.inputEmail}
+              type="texto"
+              autoComplete="off"
+            />
+          </div>
+          <div className={styles.labelUrl}>
             <label>Url de sitio web</label>
           </div>
           <div className={styles.divInputNombre}>
             <input
               className={styles.inputNombre}
-              type="text"
+              type="text" 
               name="name"
               autoComplete="off"
             />
@@ -129,7 +140,7 @@ export default function RegisterFormCommerce() {
             <label>Descripción</label>
           </div>
           <div className={styles.divInputDescripcion}>
-            <textarea className={styles.inputDescripcion} type="text" />
+            <textarea className={styles.inputDescripcion} type="text"/>
           </div>
           <div className={styles.divlabelPhone}>
             <label className={styles.labelPhone}>Teléfono</label>
