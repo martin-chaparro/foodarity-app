@@ -14,7 +14,13 @@ export default function RollSelector() {
         <div className={styles.commercecontent}>
           <Link to="registerformcommerce">
             <button className={styles.btncomerce} type="submit">
-              <img src={imgcomercio} width="74px" height="74" alt="comercio" />
+              <img
+                className={styles.imgcomerce}
+                src={imgcomercio}
+                width="74px"
+                height="74"
+                alt="comercio"
+              />
             </button>
           </Link>
 
@@ -23,7 +29,13 @@ export default function RollSelector() {
         <div className={styles.ongcontent}>
           <Link to="registerongcommerce">
             <button className={styles.btnong} type="submit">
-              <img src={imgong} width="74px" height="74" alt="ong" />
+              <img
+                className={styles.imgong}
+                src={imgong}
+                width="74px"
+                height="74"
+                alt="ong"
+              />
             </button>
           </Link>
           <h3>ONG</h3>
