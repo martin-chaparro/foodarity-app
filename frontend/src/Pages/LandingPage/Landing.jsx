@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Header1 from '../Component/Header/Header1';
-import Footer from '../Component/Footer/Footer';
+import Header1 from '../../Components/Header/Header1';
+import Footer from '../../Components/Footer/Footer';
 import styles from './Landing.module.css';
 import logoLanding from '../../assets/Mobil-background-landing.png';
 

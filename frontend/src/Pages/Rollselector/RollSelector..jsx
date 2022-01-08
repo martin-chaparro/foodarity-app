@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Header from '../Component/Header/Header';
+import Header from '../../Components/Header/Header';
 import imgcomercio from '../../assets/Mask-Group.png';
 import imgong from '../../assets/caridad-1.png';
 import styles from './RollSelector.module.css';

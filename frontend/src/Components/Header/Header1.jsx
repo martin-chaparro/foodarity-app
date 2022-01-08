@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Header1.module.css';
-import logo from '../../../assets/Mobil-Full-Header-Logo.png';
-import logo1 from '../../../assets/WEB-Full-Header-Logo.png';
+import logo from '../../assets/Mobil-Full-Header-Logo.png';
+import logo1 from '../../assets/WEB-Logo-Combinado.png';
 
 export default function Header1() {
   return (
