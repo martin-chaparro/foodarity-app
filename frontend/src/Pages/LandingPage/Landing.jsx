@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Header from '../Component/Header/Header';
+import Header1 from '../Component/Header/Header1';
 import Footer from '../Component/Footer/Footer';
 import styles from './Landing.module.css';
 import logoLanding from '../../assets/Mobil-background-landing.png';
@@ -8,8 +8,7 @@ import logoLanding from '../../assets/Mobil-background-landing.png';
 export default function Landing() {
   return (
     <div className={styles.landing}>
-      <Header />
-
+      <Header1 />
       <div className={styles.content}>
         <div className={styles.btncontent}>
           <div>

@@ -5,7 +5,7 @@ import logo from '../../../assets/Mobil-Full-Header-Logo.png';
 export default function Header() {
   return (
     <header className={styles.header}>
-      <img src={logo} alt="" />
+      <img className={styles.logo} src={logo} alt="" />
     </header>
   );
 }
