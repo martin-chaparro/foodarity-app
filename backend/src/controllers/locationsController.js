@@ -28,6 +28,40 @@ const getCities = async (req, res) => {
   }
 };
 
+const getCitiesByState = async (req, res) => {
+  const { stateId } = req.params;
+  const { name } = req.query;
+
+  if (!stateId) {
+    return res.status(400).json({ message: 'Missing stateId' });
+  }
+
+  if (!name) {
+    try {
+      const cities = await City.findAll({
+        where: { state_id: stateId },
+        include: [{ model: State, as: 'state' }],
+        order: [['name', 'ASC']],
+      });
+      return res.json(cities);
+    } catch (error) {
+      return res.send(error);
+    }
+  } else {
+    try {
+      const cities = await City.findAll({
+        where: {[Op.and]: [{ name: {[Op.iLike]: `%${name}%`} }, { state_id: stateId }] },
+        include: [{ model: State, as: 'state' }],
+        order: [['name', 'ASC']],
+      });
+      return res.json(cities);
+    } catch (error) {
+      return res.send(error);
+    }
+  }
+  
+};
+
 const getStates = async (req, res) => {
   const { name } = req.query;
   if (!name) {
@@ -44,6 +78,7 @@ const getStates = async (req, res) => {
       const states = await State.findAll({
         where: { name: { [Op.iLike]: `%${name}%` } },
         order: [['name', 'ASC']],
+        attributes: ['id', 'name', 'lat', 'lon'],
       });
       res.json(states);
     } catch (error) {
@@ -55,4 +90,5 @@ const getStates = async (req, res) => {
 module.exports = {
   getStates,
   getCities,
+  getCitiesByState,
 };
