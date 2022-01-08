@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
-import Header from '../Component/Header/Header';
+import Header from '../../Components/Header/Header';
 import estilos from './Login.module.css';
 
 export default function Login() {
@@ -15,10 +15,9 @@ export default function Login() {
     password: '',
   });
 
-// Inicio
+  // Inicio
 
-
-// Fin
+  // Fin
 
   const validateEmail = (e) => {
     const { name, value } = e.target;
