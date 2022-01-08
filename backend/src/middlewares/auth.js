@@ -16,10 +16,12 @@ module.exports = (request, response, next) => {
     return response.status(401).send({ error: 'Token mal formateado' });
 
   try {
-    const { uid, name } = jwt.verify(token, process.env.SECRET_JWT_SEED);
+    const { uid } = jwt.verify(token, process.env.SECRET_JWT_SEED);
 
-    request.userId = uid;
-    request.userName = name;
+    request.userId = uid.id;
+    request.userName = uid.name;
+    request.userRoleId = uid.roleId;
+
   } catch (error) {
     return response.status(401).json({
       error: 'Token no válido',

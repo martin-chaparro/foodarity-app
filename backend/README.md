@@ -60,6 +60,18 @@ body:
 
 GET: /users : Ruta para obtener todos los usuarios. Ruta Protegida. Se va a utilizar para la administracion
 
+DELETE: /users/: Ruta para eliminar (deshabilitar el usuario). Hay que estar autenticado
+
+PUT: /users/ : Ruta para Actualizar usuario() Hay que estar autenticado
+```
+body:
+{
+    "name":"Nombre del Usuario",
+    "email":"email@email.com"
+
+}
+```
+
 ### Rutas Companies
 ---
 POST: /companies : Ruta para crear un comercio o ONG
@@ -92,4 +104,25 @@ GET: /companies : Ruta para traer todas las compañias creadas
  
 GET: /companies/:id : Ruta para buscar compañias por id
 
-    
+### Rutas Products
+---
+
+GET: /products : Ruta para traer todos los productos
+
+POST: /products :  
+```
+ejemplo:
+{
+    *"name":"Leche agria vencida",
+		*"description:"2 saches"
+    "photo": "url",
+    *"price":12.50,
+		*"publicationDate": "10/06/1822"
+    *"expirationDate":"11/12/1994",
+    *"category":1
+}
+
+(*) requeridos
+(**) category: 1=Almacen 2=Restorant/Rotiseria 3=Verduleria
+
+```

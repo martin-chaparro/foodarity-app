@@ -1,3 +1,4 @@
+const { Op } = require('sequelize');
 const { validationResult } = require('express-validator');
 const User = require('../models/User');
 
@@ -13,7 +14,9 @@ const userLogin = async (request, response) => {
   }
 
   try {
-    const user = await User.findOne({ where: { email } });
+    const user = await User.findOne({ 
+      where: {[Op.and]: [{ email }, { status: true }] } 
+    });
 
     if (!user) {
       return response.status(400).json({
@@ -29,13 +32,13 @@ const userLogin = async (request, response) => {
         message: 'Verifique sus credenciales',
       });
     }
-
     // Generar JWT
-    const token = await generateJWT(user.id, user.name);
+    const token = await generateJWT({id:user.id, name:user.name,roleId:user.role_id});
 
     return response.json({
       id: user.id,
       name: user.name,
+      roleId:user.role_id,
       token,
     });
   } catch (error) {
@@ -47,9 +50,9 @@ const userLogin = async (request, response) => {
 };
 
 const renewToken = async (request, response) => {
-  const { userId, userName } = request;
+  const { userId, userName, userRoleId } = request;
   // Generar JWT
-  const token = await generateJWT(userId, userName);
+  const token = await generateJWT({id:userId, name:userName,roleId:userRoleId});
 
   return response.json({
     id: userId,
