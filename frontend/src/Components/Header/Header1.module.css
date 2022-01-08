@@ -3,11 +3,17 @@
   background-color: #5b457a;
   height: 95px;
 }
-
+.logo{
+  position: relative;
+  top: 23px;
+}
 .logo1 {
+  position: relative;
+  top: 10px;
   margin-top: -15px;
   float: left;
   position: fixed;
+  height: 95px;
 }
 
 .btncont {

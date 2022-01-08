@@ -99,8 +99,10 @@ export default function RegisterFormCommerce() {
     <div className={styles.RegisterFormCommerce}>
       <Header />
       <form className={styles.form}>
+        <div className={styles.containerLogo}>
         <div className={styles.commerceLogo}>
           <img className={styles.imgLogo} src={CommerceLogo} alt="CommerLogo" />
+        </div>
         </div>
         <div className={styles.divsInputs}>
           <div className={styles.labelNombre}>
