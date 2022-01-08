@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import Header from '../../Components/Header/Header';
 import styles from './RegisterFormCommerce.module.css';
 import CommerceLogo from '../../assets/Mask-Group.png';
-import api from '../../services/api';
+import {api} from '../../services/api';
 
 let time = null;
 let time2 = null;
@@ -176,8 +176,10 @@ export default function RegisterFormCommerce() {
     <div className={styles.RegisterFormCommerce}>
       <Header />
       <form className={styles.form}>
+        <div className={styles.containerLogo}>
         <div className={styles.commerceLogo}>
           <img className={styles.imgLogo} src={CommerceLogo} alt="CommerLogo" />
+        </div>
         </div>
         <div className={styles.divsInputs}>
           <div className={styles.labelNombre}>
@@ -198,7 +200,17 @@ export default function RegisterFormCommerce() {
             />
             <p>{errors.name}</p>
           </div>
-          <div className={styles.labelNombre}>
+          <div className={styles.labelEmail}>
+            <label>Email de la empresa</label>
+          </div>
+          <div className={styles.divInputEmail}>
+            <input
+              className={styles.inputEmail}
+              type="texto"
+              autoComplete="off"
+            />
+          </div>
+          <div className={styles.labelUrl}>
             <label>Url de sitio web</label>
           </div>
           <div className={styles.divInputNombre}>
