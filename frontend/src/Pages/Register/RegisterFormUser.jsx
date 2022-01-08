@@ -26,7 +26,7 @@ function Register() {
       ...input,
       [name]: value,
     });
-    if (!/^[A-Z]+$/i.test(value)) {
+    if (!/[a-zA-Z ]+$/.test(value)) {
       setErrors({
         ...errors,
         [name]: 'Solo letras',
@@ -109,6 +109,12 @@ function Register() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if(
+      !errors.name &&
+      !errors.email &&
+      !errors.password &&
+      !errors.validatePassword
+    ){ 
     dispatch(registerLocal(input));
     setInput({
       name: '',
@@ -117,6 +123,9 @@ function Register() {
       validatePassword: '',
     });
     navigate('/rollselector');
+  } else {
+    alert("Complete el formulario")
+  }
   };
 
   return (

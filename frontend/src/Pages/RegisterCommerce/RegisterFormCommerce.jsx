@@ -15,11 +15,23 @@ export default function RegisterFormCommerce() {
   const [ciudad, setCiudad] = useState([]);
   const [termProvincia, setTermProvincia] = useState('');
   const [termCiudad, setTermCiudad] = useState('');
+  const [errors, setErrors] = useState({});
   const initialFormValues = {
     stateId: null,
     cityId: null,
   };
   const [formValues, setFormValues] = useState(initialFormValues);
+  const [input, setInput] = useState({
+    name: '',
+    url: '',
+    descripcion: '',
+    codigoArea: '',
+    telefono: '',
+    direccion: '',
+    numeroCalle: '',
+    codigoPostal: '',
+
+  })
 
   const searchProvincia = (term) => {
     api.get(`/states?name=${term}`).then((response) => {
@@ -95,6 +107,71 @@ export default function RegisterFormCommerce() {
     setTermCiudad(target.value);
   };
 
+  const validateLetters = (e) => {
+    const { name, value } = e.target;
+    setInput({
+      ...input,
+      [name]: value,
+    });
+    if (!/[a-zA-Z ]+$/.test(value)) {
+      setErrors({
+        ...errors,
+        [name]: 'Solo letras',
+      });
+    } else {
+      setErrors({
+        ...errors,
+        [name]: '',
+      });
+    }
+  };
+
+  const validateUrl = (e) => {
+    const { name, value } = e.target;
+    setInput({
+      ...input,
+      [name]: value,
+    });
+    if (!/^(ftp|http|https):\/\/[^ "]+$/.test(value)) {
+      setErrors({
+        ...errors,
+        [name]: 'La URL no es valida!',
+      });
+    } else {
+      setErrors({
+        ...errors,
+        [name]: '',
+      });
+    }
+  };
+
+  const validateNum = (e) => {
+    const { name, value } = e.target;
+    setInput({
+      ...input,
+      [name]: value,
+    });
+    // eslint-disable-next-line no-useless-escape
+    if (!/^[+]?([0-9]+(?:[\.][0-9]*)?|\.[0-9]+)$/.test(value)) {
+      setErrors({
+        ...errors,
+        [name]: 'Solo numeros',
+      });
+    } else {
+      setErrors({
+        ...errors,
+        [name]: '',
+      });
+    }
+  }
+
+  const handleOnChange = (e) => {
+    e.preventDefault();
+    setInput({
+      ...input,
+      [e.target.name]: e.target.value,
+    });
+  };
   return (
     <div className={styles.RegisterFormCommerce}>
       <Header />
@@ -111,8 +188,15 @@ export default function RegisterFormCommerce() {
               className={styles.inputNombre}
               type="text"
               name="name"
+              value={input.name}
               autoComplete="off"
+              onChange={(e) => {
+                handleOnChange(e);
+                validateLetters(e);
+              }}
+
             />
+            <p>{errors.name}</p>
           </div>
           <div className={styles.labelNombre}>
             <label>Url de sitio web</label>
@@ -121,15 +205,26 @@ export default function RegisterFormCommerce() {
             <input
               className={styles.inputNombre}
               type="text"
-              name="name"
+              name="url"
+              value={input.url}
               autoComplete="off"
+              onChange={(e) => {
+                handleOnChange(e);
+                validateUrl(e);
+              }}
             />
+            <p>{errors.url}</p>
           </div>
           <div className={styles.labelDescripcion}>
             <label>Descripción</label>
           </div>
           <div className={styles.divInputDescripcion}>
-            <textarea className={styles.inputDescripcion} type="text" />
+            <textarea className={styles.inputDescripcion}
+             type="text"
+             name="descripcion"
+             value={input.descripcion}
+             onChange={handleOnChange}
+             />
           </div>
           <div className={styles.divlabelPhone}>
             <label className={styles.labelPhone}>Teléfono</label>
@@ -137,32 +232,70 @@ export default function RegisterFormCommerce() {
           <div className={styles.phoneDivs}>
             <input
               className={styles.areacod}
-              type="number"
+              type="text"
+              name='codigoArea'
+              value={input.codigoArea}
               placeholder="Cód. Área"
+              onChange={(e) => {
+                handleOnChange(e);
+                validateNum(e);
+              }}
             />
+            <p>{errors.codigoArea}</p>
             <input
               className={styles.phonenumber}
-              type="number"
+              type="text"
+              name='telefono'
+              value={input.telefono}
               placeholder="Número"
-            />
+              onChange={(e) => {
+                handleOnChange(e);
+                validateNum(e);
+              }}
+              />
+              <p>{errors.telefono}</p>
           </div>
           <div className={styles.divlabelDir}>
             <label className={styles.labelDir}>Dirección</label>
           </div>
           <div className={styles.divInputsCalleyNum}>
-            <input className={styles.calle} type="text" placeholder="Calle" />
+            <input className={styles.calle}
+             type="text"
+             name='direccion'
+             value={input.direccion}
+             placeholder="Calle"
+             onChange={(e) => {
+              handleOnChange(e);
+              validateLetters(e);
+            }}
+             />
+             <p>{errors.direccion}</p>
             <input
               className={styles.numCalle}
-              type="number"
+              type="text"
+              name='numeroCalle'
+              value={input.numeroCalle}
               placeholder="Número de calle"
+              onChange={(e) => {
+                handleOnChange(e);
+                validateNum(e);
+              }}
             />
+            <p>{errors.numeroCalle}</p>
           </div>
           <div className={styles.divCodPostal}>
             <input
               className={styles.inputCodPostal}
-              type="number"
+              type="text"
+              name='codigoPostal'
+              value={input.codigoPostal}
               placeholder="Cód. Postal"
+              onChange={(e) => {
+                handleOnChange(e);
+                validateNum(e);
+              }}
             />
+            <p>{errors.codigoPostal}</p>
           </div>
           <div className={styles.divCiudadyProv}>
             <div>
