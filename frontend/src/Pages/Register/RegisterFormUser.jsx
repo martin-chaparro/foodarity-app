@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import Button from '@mui/material/Button';
-import Header from '../Component/Header/Header';
+import Header from '../../Components/Header/Header';
 import style from './RegisterFormUser.module.css';
 
 import { registerLocal } from '../../actions';
@@ -186,8 +186,9 @@ function Register() {
           <p>{errors.validatePassword}</p>
         </div>
 
-        <Button className={style.btn}
-        type='submit'
+        <Button
+          className={style.btn}
+          type="submit"
           variant="contained"
           sx={{
             backgroundColor: '#FDFFB6',
@@ -201,7 +202,8 @@ function Register() {
           Ingresar
         </Button>
 
-        <Button className={style.google}
+        <Button
+          className={style.google}
           variant="contained"
           sx={{
             backgroundColor: '#533c74',
