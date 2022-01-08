@@ -50,7 +50,12 @@ const getCitiesByState = async (req, res) => {
   } else {
     try {
       const cities = await City.findAll({
-        where: {[Op.and]: [{ name: {[Op.iLike]: `%${name}%`} }, { state_id: stateId }] },
+        where: {
+          [Op.and]: [
+            { name: { [Op.iLike]: `%${name}%` } },
+            { state_id: stateId },
+          ],
+        },
         include: [{ model: State, as: 'state' }],
         order: [['name', 'ASC']],
       });
@@ -59,7 +64,6 @@ const getCitiesByState = async (req, res) => {
       return res.send(error);
     }
   }
-  
 };
 
 const getStates = async (req, res) => {

@@ -1,8 +1,8 @@
 import React from 'react';
-import Header from '../Component/Header/Header';
+import Header from '../../Components/Header/Header';
 import styles from './RegisterFormONG.module.css';
 import imgong from '../../assets/caridad-1.png';
-import Terminos from '../Component/Terminos y Condiciones/Terminos';
+import Terminos from '../../Components/Term&Conditions/Terminos';
 
 export default function RegisterFormONG() {
   return (
