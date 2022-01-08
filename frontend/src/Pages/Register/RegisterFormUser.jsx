@@ -7,7 +7,8 @@ import Button from '@mui/material/Button';
 import Header from '../../Components/Header/Header';
 import style from './RegisterFormUser.module.css';
 
-import { registerLocal } from '../../actions';
+// import { registerLocal } from '../../redux/actions/usersActions';
+import { startCheking, startRegister } from '../../redux/actions/authActions';
 
 function Register() {
   const dispatch = useDispatch();
@@ -109,14 +110,16 @@ function Register() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(registerLocal(input));
+    // dispatch(registerLocal(input));
+    dispatch(startRegister(input))
+    dispatch(startCheking())
+    navigate('/rollselector');
     setInput({
       name: '',
       email: '',
       password: '',
       validatePassword: '',
     });
-    navigate('/rollselector');
   };
 
   return (

@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import Header from '../../Components/Header/Header';
 import styles from './RegisterFormCommerce.module.css';
 import CommerceLogo from '../../assets/Mask-Group.png';
-import api from '../../services/api';
+import {api} from '../../services/api';
 
 let time = null;
 let time2 = null;
