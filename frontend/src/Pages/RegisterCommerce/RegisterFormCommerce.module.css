@@ -60,6 +60,18 @@
   position: relative;
   left: 15px;
   margin-bottom: 5px;
+  margin-top: 5px;
+  width: 200px;
+}
+.labelUrl {
+  font-size: 14px;
+  font-weight: 700;
+  font-family: Franklin Gothic Medium, Franklin Gothic, ITC Franklin Gothic,
+    Arial, sans-serif;
+  position: relative;
+  left: 15px;
+  margin-bottom: 5px;
+  margin-top: 5px;
   width: 200px;
 }
 
@@ -131,12 +143,16 @@
   left: 15px;
   width: 65px;
   margin-right: 5px;
+  border: transparent;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
 }
 
 .phonenumber {
   position: relative;
   left: 15px;
-  width: 255px;
+  width: 252px;
+  border: transparent;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
 }
 .divlabelPhone {
   margin-bottom: 5px;
@@ -183,14 +199,18 @@
   position: relative;
   left: 15px;
   width: 210px;
+  border: transparent;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
   margin-right: 5px;
 }
 
 .numCalle {
   position: relative;
   left: 15px;
-  width: 110px;
+  width: 107px;
   margin-right: 5px;
+  border: transparent;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
 }
 
 .divCodPostal {
@@ -200,8 +220,10 @@
 .inputCodPostal {
   position: relative;
   left: 233px;
-  width: 110px;
+  width: 107px;
   margin-right: 5px;
+  border: transparent;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
 }
 
 .divCiudadyProv {
@@ -213,14 +235,18 @@
 .inputCiudad {
   position: relative;
   left: 15px;
-  width: 155px;
+  width: 152px;
   margin-right: 5px;
+  border: transparent;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
 }
 
 .inputProv {
   position: relative;
   left: 15px;
   width: 165px;
+  border: transparent;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
   margin-right: 5px;
 }
 

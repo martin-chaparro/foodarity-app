@@ -114,7 +114,7 @@ export default function RegisterFormCommerce() {
               autoComplete="off"
             />
           </div>
-          <div className={styles.labelNombre}>
+          <div className={styles.labelUrl}>
             <label>Url de sitio web</label>
           </div>
           <div className={styles.divInputNombre}>
