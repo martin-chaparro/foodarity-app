@@ -27,7 +27,7 @@ function Register() {
       ...input,
       [name]: value,
     });
-    if (!/^[A-Z]+$/i.test(value)) {
+    if (!/[a-zA-Z ]+$/.test(value)) {
       setErrors({
         ...errors,
         [name]: 'Solo letras',
@@ -110,6 +110,12 @@ function Register() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if(
+      !errors.name &&
+      !errors.email &&
+      !errors.password &&
+      !errors.validatePassword
+    ){ 
     // dispatch(registerLocal(input));
     dispatch(startRegister(input))
     dispatch(startCheking())
@@ -120,6 +126,11 @@ function Register() {
       password: '',
       validatePassword: '',
     });
+    navigate('/rollselector');
+  } else {
+    // eslint-disable-next-line no-alert
+    alert("Complete el formulario")
+  }
   };
 
   return (
