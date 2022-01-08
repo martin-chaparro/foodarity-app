@@ -16,3 +16,4 @@ export const registerLocal = (input) => async (dispatch) => {
     console.log(err);
   }
 };
+

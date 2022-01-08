@@ -1,20 +1,22 @@
 /* eslint-disable default-param-last */
 const initialState = {
-    user: []
+  user: [],
 };
 
+function rootReducer(state = initialState, action) {
+  switch (action.type) {
+    case 'REGISTER_LOCAL':
+      return {
+        user: action.payload,
+      };
 
- function rootReducer (state = initialState, action) {
-    switch(action.type){
-        case "REGISTER_LOCAL":
-            return {
-                user: action.payload,
-            }
-        default:
-        return state;
-
-    }
+    case 'LOGIN_USER_LOCAL':
+      return {
+        user: action.payload,
+      };
+    default:
+      return state;
+  }
 }
-
 
 export default rootReducer;

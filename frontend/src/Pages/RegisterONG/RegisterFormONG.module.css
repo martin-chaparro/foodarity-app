@@ -1,0 +1,258 @@
+.general {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.RegisterFormCommerce {
+  height: 100vh;
+  background: #ececec;
+}
+
+.form {
+  background: #ececec;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.imgLogo {
+  position: relative;
+  top: 25px;
+  width: 70px;
+  height: 70px;
+  left: 0px;
+}
+
+.commerceLogo {
+  position: relative;
+  top: 10px;
+  background: #d68584;
+  border-radius: 9999px;
+  width: 120px;
+  height: 120px;
+  left: 120px;
+  margin-bottom: 20px;
+  margin-right: 0px;
+}
+
+.addNewPhoto {
+  position: relative;
+  color: black;
+  border-radius: 10px;
+  left: 100px;
+  background: #ffffff;
+  width: 250px;
+  height: 80px;
+  margin: 0px;
+}
+
+.placeholder {
+  position: relative;
+  width: 230px;
+  margin-top: 0px;
+  top: 30px;
+  left: 12px;
+}
+
+.divsInputs {
+  display: flex;
+  flex-direction: column;
+}
+
+.labelNombre {
+  font-size: 14px;
+  font-weight: 700;
+  font-family: Franklin Gothic Medium, Franklin Gothic, ITC Franklin Gothic,
+    Arial, sans-serif;
+  position: relative;
+  left: 15px;
+  margin-bottom: 5px;
+  width: 200px;
+}
+
+.divInputNombre {
+  position: relative;
+  left: 15px;
+  width: 200px;
+}
+
+.labelDescripcion {
+  width: 210px;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: Franklin Gothic Medium, Franklin Gothic, ITC Franklin Gothic,
+    Arial, sans-serif;
+  position: relative;
+  left: 15px;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.divInputDescripcion {
+  position: relative;
+  left: 15px;
+  width: 200px;
+}
+
+.inputNombre {
+  width: 325px;
+  border-radius: 4px;
+  border-color: transparent;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
+}
+
+.inputDescripcion {
+  width: 325px;
+  height: 50px;
+  border-radius: 4px;
+  border-color: transparent;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
+  resize: none;
+}
+
+.button {
+  margin-top: 0;
+  font-weight: 700;
+  font-size: 16px;
+  color: #ffffff;
+  width: 330px;
+  height: 40px;
+  border-radius: 10px;
+  border: none;
+  background: #533c74;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
+}
+
+.phoneDivs {
+  display: flex;
+  width: 350px;
+}
+
+.areacod {
+  position: relative;
+  left: 15px;
+  width: 65px;
+  margin-right: 5px;
+}
+
+.phonenumber {
+  position: relative;
+  left: 15px;
+  width: 255px;
+}
+.divlabelPhone {
+  margin-bottom: 5px;
+  margin-top: 5px;
+  width: 200px;
+}
+
+.labelPhone {
+  width: 210px;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: Franklin Gothic Medium, Franklin Gothic, ITC Franklin Gothic,
+    Arial, sans-serif;
+  position: relative;
+  left: 15px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.divlabelDir {
+  margin-bottom: 5px;
+  margin-top: 5px;
+  width: 200px;
+}
+
+.labelDir {
+  width: 210px;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: Franklin Gothic Medium, Franklin Gothic, ITC Franklin Gothic,
+    Arial, sans-serif;
+  position: relative;
+  left: 15px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.divInputsCalleyNum {
+  display: flex;
+  width: 350px;
+}
+
+.calle {
+  position: relative;
+  left: 15px;
+  width: 210px;
+  margin-right: 5px;
+}
+
+.numCalle {
+  position: relative;
+  left: 15px;
+  width: 110px;
+  margin-right: 5px;
+}
+
+.divCodPostal {
+  margin-top: 10px;
+  width: 100px;
+}
+.inputCodPostal {
+  position: relative;
+  left: 233px;
+  width: 110px;
+  margin-right: 5px;
+}
+
+.divCiudadyProv {
+  display: flex;
+  margin-top: 10px;
+  width: 350px;
+}
+
+.inputCiudad {
+  position: relative;
+  left: 15px;
+  width: 155px;
+  margin-right: 5px;
+}
+
+.inputProv {
+  position: relative;
+  left: 15px;
+  width: 165px;
+  margin-right: 5px;
+}
+
+.divSelects {
+  display: flex;
+  margin-top: 10px;
+  width: 350px;
+}
+
+.selectCiudad {
+  position: relative;
+  left: 15px;
+  width: 160px;
+  margin-right: 5px;
+  border: transparent;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
+  border-radius: 4px;
+}
+
+.selectProvincia {
+  position: relative;
+  left: 15px;
+  width: 168px;
+  border: transparent;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
+  border-radius: 4px;
+  height: 25px;
+}
