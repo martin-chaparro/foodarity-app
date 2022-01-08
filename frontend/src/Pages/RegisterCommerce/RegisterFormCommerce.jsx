@@ -112,7 +112,16 @@ export default function RegisterFormCommerce() {
             <input
               className={styles.inputNombre}
               type="text"
-              name="name"
+              autoComplete="off"
+            />
+          </div>
+          <div className={styles.labelEmail}>
+            <label>Email de la empresa</label>
+          </div>
+          <div className={styles.divInputEmail}>
+            <input
+              className={styles.inputEmail}
+              type="texto"
               autoComplete="off"
             />
           </div>
