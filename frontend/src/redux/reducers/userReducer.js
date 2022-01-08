@@ -1,11 +1,12 @@
-/* eslint-disable default-param-last */
+import types from '../types/userTypes';
+
 const initialState = {
   user: [],
 };
 
-function rootReducer(state = initialState, action) {
+export default (state = initialState, action) => {
   switch (action.type) {
-    case 'REGISTER_LOCAL':
+    case types.registerLocal:
       return {
         user: action.payload,
       };
@@ -17,6 +18,4 @@ function rootReducer(state = initialState, action) {
     default:
       return state;
   }
-}
-
-export default rootReducer;
+};

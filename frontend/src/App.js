@@ -1,27 +1,15 @@
-import './App.css';
-import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import { React } from 'react';
-import Login from './Pages/Loggin/Login';
+import { Provider } from 'react-redux';
+import store from './redux/store';
 
-import Landing from './Pages/LandingPage/Landing';
-import Register from './Pages/Register/RegisterFormUser';
-import RegisterFormCommerce from './Pages/RegisterCommerce/RegisterFormCommerce';
-import RollSelector from './Pages/Rollselector/RollSelector.';
+import './App.css';
+import { AppRouter } from './routers/AppRouter';
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/" element={<Landing />} />
-        <Route path="/register" element={<Register />} />
-        <Route
-          path="/registerformcommerce"
-          element={<RegisterFormCommerce />}
-        />
-        <Route path="/rollselector" element={<RollSelector />} />
-      </Routes>
-    </BrowserRouter>
+    <Provider store={store}>
+      <AppRouter />
+    </Provider>
   );
 }
 

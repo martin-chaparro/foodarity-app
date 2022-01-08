@@ -25,6 +25,12 @@
   cursor: pointer;
   margin-left: 25px;
   margin-top: 40px;
+
+  letter-spacing: 0.5px;
+
+  font-family: 'Baloo Bhaijaan 2', cursive;
+  font-family: 'Changa', sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 .btnreg {
@@ -35,18 +41,39 @@
   border-radius: 5px;
   margin-top: 40px;
   cursor: pointer;
+
+  letter-spacing: 0.5px;
+
+  font-family: 'Baloo Bhaijaan 2', cursive;
+  font-family: 'Changa', sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 .btncontinuar {
-  /* background-color: #ffffff; */
+  background-color: #ffffff;
   width: 95px;
   padding-top: 3px;
   padding-bottom: 3px;
   border-radius: 5px;
   cursor: pointer;
   margin-bottom: 20px;
+  letter-spacing: 0.5px;
+
+  font-family: 'Baloo Bhaijaan 2', cursive;
+  font-family: 'Changa', sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 .imglogolanding {
-  max-height: 350px;
+  width: 340px;
+}
+
+@media screen and (min-width: 576px) {
+  .btningresar {
+    display: none;
+  }
+
+  .btnreg {
+    display: none;
+  }
 }
