@@ -12,14 +12,14 @@ export default function RollSelector() {
       <div className={styles.content}>
         <div className={styles.commercecontent}>
           <button className={styles.btncomerce} type="submit">
-            <img src={imgcomercio} width="74px" height="74" alt="comercio" />
+            <img className={styles.imgong} src={imgcomercio} width="74px" height="74" alt="comercio" />
           </button>
 
           <h3>Comercio</h3>
         </div>
         <div className={styles.ongcontent}>
           <button className={styles.btnong} type="submit">
-            <img src={imgong} width="74px" height="74" alt="ong" />
+            <img className={styles.imgong} src={imgong} width="74px" height="74" alt="ong" />
           </button>
           <h3>ONG</h3>
         </div>
