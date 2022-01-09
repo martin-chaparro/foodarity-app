@@ -10,7 +10,6 @@ export default function ProductCard() {
       </div>
       <div className={styles.content}>
         <h3 className={styles.name}>NOMBRE</h3>
-
         <p className={styles.description}>Descripcion del producto</p> 
         <div className={styles.btnContainer}>
         <div className={styles.btnresdiv}>
