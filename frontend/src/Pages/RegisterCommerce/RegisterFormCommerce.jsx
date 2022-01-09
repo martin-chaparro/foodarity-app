@@ -2,6 +2,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Header from '../../Components/Header/Header';
 import styles from './RegisterFormCommerce.module.css';
 import CommerceLogo from '../../assets/Mask-Group.png';
@@ -21,6 +22,7 @@ export default function RegisterFormCommerce() {
     cityId: null,
   };
   const [formValues, setFormValues] = useState(initialFormValues);
+  const navigate = useNavigate()
   const [input, setInput] = useState({
     name: '',
     url: '',
@@ -172,10 +174,32 @@ export default function RegisterFormCommerce() {
       [e.target.name]: e.target.value,
     });
   };
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if(
+      !errors.name &&
+      !errors.url &&
+      !errors.descripcion &&
+      !errors.codigoArea && 
+      !errors.telefono &&
+      !errors.direccion &&
+      !errors.numeroCalle &&
+      !errors.codigoArea
+     
+    // eslint-disable-next-line no-empty
+    ){
+      navigate('/home')
+    } else {
+      // eslint-disable-next-line no-alert
+      alert("Complete el formulario")
+    }
+  }
   return (
     <div className={styles.RegisterFormCommerce}>
       <Header />
-      <form className={styles.form}>
+      <form className={styles.form} onSubmit={handleSubmit}>
         <div className={styles.containerLogo}>
         <div className={styles.commerceLogo}>
           <img className={styles.imgLogo} src={CommerceLogo} alt="CommerLogo" />
