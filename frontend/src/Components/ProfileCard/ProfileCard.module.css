@@ -2,8 +2,7 @@
   border: 1px solid black;
   display: flex;
   border-radius: 5px;
-  background-color: #3e2463;
-  background-color: #5b457a;
+  background-color: rgb(62, 36, 99);
 }
 
 .content {
@@ -25,9 +24,23 @@
 
 .nombre {
   text-align: center;
+  color: white;
 }
-
+.profileimg{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 100px;
+  border-radius: 9999px;
+  background: white;
+  margin-left: 35px;
+  margin-right: 20px;
+  margin-top:10px;
+}
 .imguser {
-  width: 80px;
-  height: 80px;
+  position: relative;
+  bottom: 2px;
+  width: 105px;
+  height: 105px;
 }
