@@ -26,6 +26,7 @@ export default function RegisterFormCommerce() {
   const [input, setInput] = useState({
     name: '',
     url: '',
+    email: '',
     descripcion: '',
     codigoArea: '',
     telefono: '',
@@ -109,6 +110,28 @@ export default function RegisterFormCommerce() {
     setTermCiudad(target.value);
   };
 
+  const validateEmail = (e) => {
+    const { name, value } = e.target;
+    const expresion =
+      // eslint-disable-next-line no-useless-escape
+      /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+    setInput({
+      ...input,
+      [name]: value,
+    });
+    if (!expresion.test(value)) {
+      setErrors({
+        ...errors,
+        [name]: 'No es un email valido!',
+      });
+    } else {
+      setErrors({
+        ...errors,
+        [name]: '',
+      });
+    }
+  };
+
   const validateLetters = (e) => {
     const { name, value } = e.target;
     setInput({
@@ -137,7 +160,7 @@ export default function RegisterFormCommerce() {
     if (!/^(ftp|http|https):\/\/[^ "]+$/.test(value)) {
       setErrors({
         ...errors,
-        [name]: 'La URL no es valida!',
+        [name]: 'La URL no es valida! - Debe contener https://www',
       });
     } else {
       setErrors({
@@ -222,7 +245,9 @@ export default function RegisterFormCommerce() {
               }}
 
             />
-            <p>{errors.name}</p>
+            <div className={styles.divErrorName}>
+            <p className={styles.errors}>{errors.name}</p>
+            </div>
           </div>
           <div className={styles.labelEmail}>
             <label>Email de la empresa</label>
@@ -232,7 +257,16 @@ export default function RegisterFormCommerce() {
               className={styles.inputEmail}
               type="texto"
               autoComplete="off"
+              name="email"
+              value={input.email}
+              onChange={(e) => {
+                handleOnChange(e);
+                validateEmail(e);
+              }}
             />
+             <div className={styles.divErrorEmail}>
+            <p className={styles.errors}>{errors.email}</p>
+            </div>
           </div>
           <div className={styles.labelUrl}>
             <label>Url de sitio web</label>
@@ -249,7 +283,9 @@ export default function RegisterFormCommerce() {
                 validateUrl(e);
               }}
             />
-            <p>{errors.url}</p>
+            <div className={styles.divErrorUrl}>
+            <p className={styles.errors}>{errors.url}</p>
+            </div>
           </div>
           <div className={styles.labelDescripcion}>
             <label>Descripción</label>
@@ -266,6 +302,7 @@ export default function RegisterFormCommerce() {
             <label className={styles.labelPhone}>Teléfono</label>
           </div>
           <div className={styles.phoneDivs}>
+            <div className={styles.divInputAndErrorAreaCod}>
             <input
               className={styles.areacod}
               type="text"
@@ -277,8 +314,12 @@ export default function RegisterFormCommerce() {
                 validateNum(e);
               }}
             />
-            <p>{errors.codigoArea}</p>
-            <input
+            <div className={styles.divErrorAreaCod}>
+            <p className={styles.errors}>{errors.codigoArea}</p>
+            </div>
+            </div>
+            <div  className={styles.divInputAndErrorTelefono}>
+            <input 
               className={styles.phonenumber}
               type="text"
               name='telefono'
@@ -289,12 +330,16 @@ export default function RegisterFormCommerce() {
                 validateNum(e);
               }}
               />
-              <p>{errors.telefono}</p>
+              <div className={styles.divErrorTelefono}>
+              <p className={styles.errors}>{errors.telefono}</p>
+              </div>
+              </div>
           </div>
           <div className={styles.divlabelDir}>
             <label className={styles.labelDir}>Dirección</label>
           </div>
           <div className={styles.divInputsCalleyNum}>
+          <div className={styles.divInputAndErrorCalle}>
             <input className={styles.calle}
              type="text"
              name='direccion'
@@ -305,7 +350,11 @@ export default function RegisterFormCommerce() {
               validateLetters(e);
             }}
              />
-             <p>{errors.direccion}</p>
+             <div className={styles.divErrorDireccion}>
+             <p className={styles.errors}>{errors.direccion}</p>
+             </div>
+             </div>
+             <div className={styles.divInputAndErrorNumCalle}>
             <input
               className={styles.numCalle}
               type="text"
@@ -317,9 +366,13 @@ export default function RegisterFormCommerce() {
                 validateNum(e);
               }}
             />
-            <p>{errors.numeroCalle}</p>
+            <div className={styles.divErrorCalle}>
+            <p className={styles.errors}>{errors.numeroCalle}</p>
+            </div>
+            </div>
           </div>
           <div className={styles.divCodPostal}>
+            <div className={styles.divInputAndErrorCodPostal}>
             <input
               className={styles.inputCodPostal}
               type="text"
@@ -331,7 +384,10 @@ export default function RegisterFormCommerce() {
                 validateNum(e);
               }}
             />
-            <p>{errors.codigoPostal}</p>
+            <div className={styles.divErrorPostalCod}>
+            <p className={styles.errors}>{errors.codigoPostal}</p>
+            </div>
+          </div>
           </div>
           <div className={styles.divCiudadyProv}>
             <div>

@@ -7,7 +7,6 @@ const ValidationCompany = {
     check('description', 'Ingrese una descripcion').not().isEmpty(),
     check('areaCode', 'Ingrese un codigo de area valido').isNumeric(),
     check('phone', 'Ingrese un numero').isNumeric(), // TODO como validar bien numeros de telefono
-    // check('logo', ''), // TODO definir como guardar imagenes
     check('street', 'Ingrese una direccion').not().isEmpty(),
     check('number', 'Ingrese una altura').isNumeric(),
     check('zipcode', 'Ingrese un codigo postal valido').isNumeric(),
