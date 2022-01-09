@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
+const fileUpload = require('express-fileupload');
 const connection = require('./database/connection');
 const CompanyType = require('./models/CompanyType');
 const Role = require('./models/Role');
@@ -48,6 +49,13 @@ class Server {
     this.app.use(express.json());
 
     this.app.use(morgan('dev'));
+
+    // Fileupload - Carga de archivos
+    this.app.use( fileUpload({
+      useTempFiles : true,
+      tempFileDir : "/tmp/",
+      createParentPath: true
+  }));
   }
 
   routes() {
