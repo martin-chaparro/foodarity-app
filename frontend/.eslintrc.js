@@ -25,7 +25,6 @@ module.exports = {
     'default-param-last': RULES.OFF,
     'no-console': RULES.OFF,
     'import/prefer-default-export': RULES.OFF,
-    'react/prop-types': RULES.OFF,
     'arrow-body-style': RULES.OFF,
   },
 };

@@ -62,41 +62,44 @@ export default function Terminos() {
           >
             {[...new Array(1)]
               .map(
-                () => `Términos y condiciones
-                Última actualización: 8 de enero de 2022
-                Lea estos términos y condiciones detenidamente antes de utilizar Nuestro Servicio.
-                Reconocimiento
-                Estos son los Términos y Condiciones que rigen el uso de este Servicio y el acuerdo que opera entre Usted y la Compañía. Estos Términos y Condiciones establecen los derechos y obligaciones de todos los usuarios con respecto al uso del Servicio.
-                Su acceso y uso del Servicio está condicionado a su aceptación y cumplimiento de estos Términos y Condiciones. Estos Términos y Condiciones se aplican a todos los visitantes, usuarios y otras personas que acceden o utilizan el Servicio.
-                Al acceder o utilizar el Servicio, usted acepta estar sujeto a estos Términos y Condiciones. Si no está de acuerdo con alguna parte de estos Términos y condiciones, no podrá acceder al Servicio.
-                Usted declara que es mayor de 18 años. La Compañía no permite que menores de 18 años utilicen el Servicio.
-                Su acceso y uso del Servicio también está condicionado a Su aceptación y cumplimiento de la Política de Privacidad de la Compañía. Nuestra Política de privacidad describe Nuestras políticas y procedimientos sobre la recopilación, uso y divulgación de Su información personal cuando usa la Aplicación o el Sitio web y le informa sobre Sus derechos de privacidad y cómo la ley lo protege. Lea nuestra Política de privacidad detenidamente antes de utilizar nuestro servicio.
-                Enlaces a otros sitios web
-                Nuestro Servicio puede contener enlaces a sitios web o servicios de terceros que no son propiedad ni están controlados por la Compañía.
-                La Compañía no tiene control ni asume responsabilidad por el contenido, las políticas de privacidad o las prácticas de los sitios web o servicios de terceros. Además, reconoce y acepta que la Compañía no será responsable, directa o indirectamente, por ningún daño o pérdida causados o presuntamente causados por o en conexión con el uso o la confianza en dicho contenido, bienes o servicios disponibles en oa través de dichos sitios web o servicios.
-                Le recomendamos encarecidamente que lea los términos y condiciones y las políticas de privacidad de los sitios web o servicios de terceros que visite.
-                Terminación
-                Podemos rescindir o suspender Su acceso de inmediato, sin previo aviso ni responsabilidad, por cualquier motivo, incluido, entre otros, si incumple estos Términos y condiciones.
-                Tras la rescisión, su derecho a utilizar el Servicio cesará de inmediato.
-                Limitación de responsabilidad
-                Sin perjuicio de los daños en los que pueda incurrir, la responsabilidad total de la Compañía y cualquiera de sus proveedores bajo cualquier disposición de estos Términos y Su recurso exclusivo para todo lo anterior se limitará al monto realmente pagado por Usted a través del Servicio o 100 USD. si no ha comprado nada a través del Servicio.
-                En la máxima medida permitida por la ley aplicable, en ningún caso la Compañía o sus proveedores serán responsables de ningún daño especial, incidental, indirecto o consecuente (incluidos, entre otros, daños por lucro cesante, pérdida de datos o otra información, por interrupción del negocio, por lesiones personales, pérdida de privacidad que surja de o de alguna manera relacionada con el uso o la imposibilidad de usar el Servicio, software de terceros y / o hardware de terceros utilizado con el Servicio, o de lo contrario en relación con cualquier disposición de estos Términos), incluso si la Compañía o cualquier proveedor han sido informados de la posibilidad de tales daños e incluso si el recurso no cumple con su propósito esencial.
-                Algunos estados no permiten la exclusión de garantías implícitas o la limitación de responsabilidad por daños incidentales o consecuentes, lo que significa que algunas de las limitaciones anteriores pueden no aplicarse. En estos estados, la responsabilidad de cada parte estará limitada en la mayor medida permitida por la ley.
-                Descargo de responsabilidad "TAL CUAL" y "SEGÚN DISPONIBILIDAD"
-                El Servicio se le proporciona "TAL CUAL" y "SEGÚN DISPONIBILIDAD" y con todas las fallas y defectos sin garantía de ningún tipo. En la medida máxima permitida por la ley aplicable, la Compañía, en su propio nombre y en nombre de sus Afiliadas y sus respectivos licenciantes y proveedores de servicios, renuncia expresamente a todas las garantías, ya sean expresas, implícitas, estatutarias o de otro tipo, con respecto a la Servicio, incluidas todas las garantías implícitas de comerciabilidad, idoneidad para un propósito particular, título y no infracción, y garantías que puedan surgir del curso del trato, el curso del desempeño, el uso o la práctica comercial. Sin limitación a lo anterior, la Compañía no ofrece garantía ni compromiso, y no hace ninguna representación de ningún tipo de que el Servicio cumplirá con Sus requisitos, logrará los resultados previstos,
-                Sin perjuicio de lo anterior, ni la Compañía ni ninguno de los proveedores de la compañía hacen ninguna representación o garantía de ningún tipo, expresa o implícita: (i) en cuanto al funcionamiento o disponibilidad del Servicio, o la información, contenido y materiales o productos. incluido en el mismo; (ii) que el Servicio será ininterrumpido o libre de errores; (iii) en cuanto a la precisión, confiabilidad o vigencia de cualquier información o contenido proporcionado a través del Servicio; o (iv) que el Servicio, sus servidores, el contenido o los correos electrónicos enviados desde o en nombre de la Compañía están libres de virus, scripts, troyanos, gusanos, malware, bombas de tiempo u otros componentes dañinos.
-                Algunas jurisdicciones no permiten la exclusión de ciertos tipos de garantías o limitaciones sobre los derechos legales aplicables de un consumidor, por lo que algunas o todas las exclusiones y limitaciones anteriores pueden no aplicarse a usted. Pero en tal caso, las exclusiones y limitaciones establecidas en esta sección se aplicarán en la mayor medida exigible según la ley aplicable.
+                () => `Este contrato describe los términos y condiciones generales (los "Términos y Condiciones Generales") aplicables al uso de los servicios ofrecidos por Foodarity. ("los Servicios") dentro del sitio web. Cualquier persona que desee acceder y/o usar el sitio o los servicios podrá hacerlo sujetándose a los Términos y Condiciones Generales, junto con todas las demás políticas y principios que rigen Foodarity.
 
-                Salvo lo dispuesto en el presente, el hecho de no ejercer un derecho o exigir el cumplimiento de una obligación en virtud de estos Términos no afectará la capacidad de una parte para ejercer dicho derecho o requerir dicho cumplimiento en cualquier momento posterior, ni la renuncia a un incumplimiento constituirá una renuncia a cualquier incumplimiento posterior.
-                Interpretación de traducción
-                Estos Términos y Condiciones pueden haberse traducido si los hemos puesto a su disposición en nuestro Servicio. Usted acepta que el texto original en inglés prevalecerá en caso de disputa.
-                Cambios a estos términos y condiciones
-                Nos reservamos el derecho, a Nuestro exclusivo criterio, de modificar o reemplazar estos Términos en cualquier momento. Si una revisión es importante, haremos los esfuerzos razonables para proporcionar un aviso de al menos 30 días antes de que entren en vigencia los nuevos términos. Lo que constituye un cambio material se determinará a Nuestro exclusivo criterio.
-                Al continuar accediendo o utilizando Nuestro Servicio después de que esas revisiones entren en vigencia, usted acepta estar sujeto a los términos revisados. Si no está de acuerdo con los nuevos términos, en su totalidad o en parte, deje de utilizar el sitio web y el Servicio.
-                Contáctenos
-                Si tiene alguna pregunta sobre estos Términos y condiciones, puede contactarnos:
-                •	Por correo electrónico: customer@foodarity.com
-                •	Por número de teléfono: +541136675960`
+CUALQUIER PERSONA QUE NO ACEPTE ESTOS TÉRMINOS Y CONDICIONES GENERALES, LOS CUALES TIENEN UN CARÁCTER OBLIGATORIO Y VINCULANTE, DEBERÁ ABSTENERSE DE UTILIZAR EL SITIO Y/O LOS SERVICIOS.
+
+El Usuario debe leer, entender y aceptar todas las condiciones establecidas en los Términos y Condiciones Generales y en las Políticas de Privacidad así como en los demás documentos incorporados a los mismos por referencia, previo a su inscripción como Usuario de Foodarity.
+
+01 - Capacidad
+Los Servicios sólo están disponibles para personas que tengan capacidad legal para contratar. No podrán utilizar los servicios las personas que no tengan esa capacidad, los menores de edad o Usuarios de Foodarity que hayan sido suspendidos temporalmente o inhabilitados definitivamente. Si estás inscribiendo un Usuario como Comercio u ONG, debes tener capacidad para contratar a nombre de tal entidad y de obligar a la misma en los términos de este Acuerdo.
+
+02 - Inscripción
+Es obligatorio completar el formulario de inscripción en todos sus campos con datos válidos para poder utilizar los servicios que brinda Foodarity. El futuro Usuario deberá completarlo con su información personal de manera exacta, precisa y verdadera ("Datos Personales") y asume el compromiso de actualizar los Datos Personales conforme resulte necesario. Foodarity podrá utilizar diversos medios para identificar a sus Usuarios, pero Foodarity NO se responsabiliza por la certeza de los Datos Personales provistos por sus Usuarios. Los Usuarios garantizan y responden, en cualquier caso, de la veracidad, exactitud, vigencia y autenticidad de los Datos Personales ingresados.
+
+
+Foodarity se reserva el derecho de solicitar algún comprobante y/o dato adicional a efectos de corroborar los Datos Personales, así como de suspender temporal o definitivamente a aquellos Usuarios cuyos datos no hayan podido ser confirmados. En estos casos de inhabilitación, se dará de baja todos los artículos publicados, así como las ofertas realizadas, sin que ello genere algún derecho a resarcimiento.
+Por lo tanto, el usuario declara de manera expresa que:
+Los usuarios declaran y garantizan, a su vez, que ni ellos ni sus subsidiarias y/o afiliadas ofrecerán o realizarán publicaciones de productos cuya fecha de caducidad sea inferior a una semana (7 días), y bajo ningún concepto publicarán algún producto en malas condiciones. 
+Al adherir a estos Términos y Condiciones, los Usuarios vendedores se comprometen a cumplir con la normatividad fiscal vigente, así como evitar cualquier maniobra que pudiera importar el lavado de activos proveniente de los delitos de evasión tributaria, contrabando o cualquier otro delito previsto en la legislación que implique una defraudación fiscal. 
+
+03 - Modificaciones del Acuerdo
+Foodarity podrá modificar los Términos y Condiciones Generales en cualquier momento haciendo públicos en el Sitio los términos modificados. Todos los términos modificados entrarán en vigor a los 15 (quince) días de su publicación Todo usuario que no esté de acuerdo con las modificaciones efectuadas por Foodarity Libre podrá solicitar la baja de la cuenta.
+
+El uso del sitio y/o sus servicios implica la aceptación de estos Términos y Condiciones generales de uso de Foodarity.
+
+04 - Listado de Bienes
+Foodarity no será responsable por la retención de dinero o cualquier clase de activo de valor al momento de realizar una compra. Cualquier transacción en la plataforma es exclusiva responsabilidad de los usuarios (comprador y vendedor), así como cualquier producto, entrega o medio de pago que utilicen.
+
+05 - Privacidad de la Información
+Para utilizar los Servicios ofrecidos por Foodarity, los Usuarios deberán facilitar determinados datos de carácter personal. Su información personal se procesa y almacena en que mantienen altos estándares de seguridad y protección tanto física como tecnológica.
+
+06 - Obligaciones de los Usuarios
+6.1 Obligaciones del Comprador. Durante el plazo fijado por el Usuario Vendedor, los Usuarios interesados realizarán ofertas de compra para los bienes y ofertas de contratación para los servicios. La oferta de venta concluye una vez que vence el plazo de la publicación del producto o se acaban las cantidades estipuladas por el Vendedor, y la oferta de contratación del servicio culmina con el vencimiento del plazo de la publicación.
+
+El Comprador está obligado a intentar comunicarse con el vendedor y completar la operación si ha realizado una oferta por un artículo publicado, independientemente de la categoría o sección, salvo que la operación esté prohibida por la ley o los Términos y Condiciones Generales y demás políticas de Foodarity, en cuyo caso no estará obligado a concretar la operación.
+
+6.2. Obligaciones del Vendedor. El Usuario Vendedor debe tener capacidad legal para vender el bien objeto de su oferta. Asimismo, debe cumplir con todas las obligaciones regulatorias pertinentes y contar con los registros, habilitaciones, permisos y/o autorizaciones exigidos por la normativa aplicable para la venta de los bienes y servicios ofrecidos. El usuario vendedor deberá cumplir con la normatividad vigente en materia de protección al consumidor, tales como, entregar información veraz, clara y suficiente, indicar el precio por unidad de medida en los productos que le sea aplicable, evitar publicidad engañosa en promociones, ofertas o descuentos que le otorgue al usuario comprador y cualquier otra obligación derivada de su publicación.
+
+Dado que Foodarity es un punto de encuentro entre comprador y vendedor y no participa de las operaciones que se realizan entre ellos, el Vendedor será responsable por todas las obligaciones y cargas impositivas que correspondan por la venta de sus artículos, sin que pudiera imputársele a Foodarity algún tipo de responsabilidad por incumplimientos en tal sentido.
+`
               )
               .join('\n')}
           </DialogContentText>

@@ -29,11 +29,11 @@ class Companies extends Model {
           allowNull: true,
         },
         logo: {
-          type: DataTypes.STRING,
-          allowNull: false,
+          type: DataTypes.JSON,
+          allowNull: true,
         },
         banner: {
-          type: DataTypes.STRING,
+          type: DataTypes.JSON,
           allowNull: true,
         },
         status: {

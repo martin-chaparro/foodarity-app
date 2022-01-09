@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
+import { startLogin } from '../../redux/actions/authActions';
 import Header from '../../Components/Header/Header';
 import estilos from './Login.module.css';
 
@@ -10,14 +11,11 @@ export default function Login() {
   const dispatch = useDispatch();
 
   const [errors, setErrors] = useState({});
+
   const [input, setInput] = useState({
     email: '',
     password: '',
   });
-
-  // Inicio
-
-  // Fin
 
   const validateEmail = (e) => {
     const { name, value } = e.target;
@@ -31,7 +29,7 @@ export default function Login() {
     if (!expresion.test(value)) {
       setErrors({
         ...errors,
-        [name]: 'No es un email válido!',
+        [name]: 'No es un email válido!!',
       });
     } else {
       setErrors({
@@ -67,6 +65,15 @@ export default function Login() {
       [e.target.name]: e.target.value,
     });
   };
+
+  // Inicio
+
+  const handleSubmit = (e) => {
+    e.preventDefault(e);
+    dispatch(startLogin(input.email, input.password));
+  };
+
+  // Fin
 
   return (
     <div backgroundColor="transparent">
@@ -113,6 +120,7 @@ export default function Login() {
               margin: '3em 2em 2em',
               hover: false,
             }}
+            onClick={(e) => handleSubmit(e)}
           >
             Ingresar
           </Button>

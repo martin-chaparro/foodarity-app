@@ -1,14 +1,20 @@
 // const { Op } = require('sequelize');
 const { validationResult } = require('express-validator');
+// eslint-disable-next-line import/no-unresolved
+const cloudinary = require('cloudinary').v2;
 const Companies = require('../models/Companies');
 const CompanyType = require('../models/CompanyType');
 const Address = require('../models/Address');
 const City = require('../models/City');
 const State = require('../models/State');
 
+cloudinary.config(process.env.CLOUDINARY_URL);
+
 // crear una empresa
 const createCompany = async (req, res) => {
   try {
+    const ownerId = req.userId;
+
     const {
       name,
       description,
@@ -16,10 +22,7 @@ const createCompany = async (req, res) => {
       phone,
       email,
       website,
-      logo,
-      banner,
       status,
-      ownerId,
       type,
       street,
       number,
@@ -40,8 +43,6 @@ const createCompany = async (req, res) => {
       phone,
       email,
       website,
-      logo,
-      banner,
       status,
       ownerId,
     });
@@ -58,6 +59,7 @@ const createCompany = async (req, res) => {
     await newAddress.setState(stateId);
     return res.status(200).json(newCompany);
   } catch (error) {
+    console.log(error);
     return res.status(500).json({
       msg: 'Error al crear la empresa. Revise que los tipos de datos ingresados sean correctos',
     });
@@ -90,7 +92,7 @@ const getCompanies = async (req, res) => {
 const searchCompany = async (req, res) => {
   try {
     const { id } = req.params;
-    const listCompanies = await Companies.findAll({
+    const company = await Companies.findByPk(id, {
       include: [
         { model: CompanyType, as: 'type', attributes: ['type'] },
         { model: Address, include: [{ model: City }, { model: State }] },
@@ -99,21 +101,78 @@ const searchCompany = async (req, res) => {
         exclude: ['createdAt', 'updatedAt'],
       },
     });
-
-    if (listCompanies.length > 0) {
-      const companyId = await listCompanies.filter(
-        (company) => company.id === id
-      );
-      // eslint-disable-next-line no-unused-expressions
-      companyId.length
-        ? res.status(200).json(companyId)
-        : res.status(404).send(' Company Id not existing');
+    if (company) {
+      res.status(200).json(company);
     } else {
-      res.status(404).send('Not found');
+      res.status(404).json({ msg: 'Not found' });
     }
   } catch (error) {
-    res.status(500).send(error);
+    res.status(500).send({ msg: error });
   }
 };
 
-module.exports = { getCompanies, createCompany, searchCompany };
+const uploadImageCompany = async (request, response) => {
+  const { id, field } = request.params;
+
+  const { userId: ownerId } = request;
+
+  try {
+    const company = await Companies.findByPk(id);
+    if (!company) {
+      return response.status(400).json({
+        message: 'Company not found',
+      });
+    }
+
+    if (ownerId !== company.ownerId) {
+      return response.status(401).json({ message: 'Not owner' });
+    }
+
+    const { tempFilePath } = request.files.file;
+
+    switch (field) {
+      case 'logo': {
+        if (company.logo) {
+          cloudinary.uploader.destroy(company.logo.public_id);
+        }
+
+        const { secure_url: secureUrl, public_id: publicId } =
+          await cloudinary.uploader.upload(tempFilePath);
+
+        await company.update({ logo: { public_id: publicId, url: secureUrl } });
+
+        return response.status(200).json(company);
+      }
+
+      case 'banner': {
+        if (company.banner) {
+          cloudinary.uploader.destroy(company.banner.public_id);
+        }
+        const { secure_url: secureUrl, public_id: publicId } =
+          await cloudinary.uploader.upload(tempFilePath);
+
+        await company.update({
+          banner: { public_id: publicId, url: secureUrl },
+        });
+        return response.status(200).json(company);
+      }
+
+      default:
+        return response.status(400).json({
+          message: 'El parametro field debe tener el valor  "logo" o "banner"',
+        });
+    }
+  } catch (error) {
+    console.log(error);
+    return response.status(500).json({
+      message: 'Fatal Error',
+    });
+  }
+};
+
+module.exports = {
+  getCompanies,
+  createCompany,
+  searchCompany,
+  uploadImageCompany,
+};

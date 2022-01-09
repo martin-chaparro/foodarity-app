@@ -1,8 +1,11 @@
 const { Op } = require('sequelize');
 const { validationResult } = require('express-validator');
+const cloudinary = require('cloudinary').v2;
 const { generateJWT } = require('../helpers/generateJWT');
 const User = require('../models/User');
 const Role = require('../models/Role');
+
+cloudinary.config(process.env.CLOUDINARY_URL);
 
 const createUser = async (request, response) => {
   const { name, email, password } = request.body;
@@ -91,7 +94,6 @@ const deleteUser = async (request, response) => {
 };
 
 const updateUser = async (request, response) => {
-  
   let id = null;
 
   if (request.userRoleId === 2) {
@@ -122,9 +124,27 @@ const updateUser = async (request, response) => {
   }
 };
 
+const uploadPhotoUser = async (request, response) => {
+  const user = await User.findByPk(request.userId);
+
+  if (user.photo) {
+    cloudinary.uploader.destroy(user.photo.public_id);
+  }
+
+  const { tempFilePath } = request.files.file;
+
+  const { secure_url: secureUrl, public_id: publicId } =
+    await cloudinary.uploader.upload(tempFilePath);
+
+  await user.update({ photo: { public_id: publicId, url: secureUrl } });
+
+  return response.status(200).json(user);
+};
+
 module.exports = {
   createUser,
   getAllUsers,
   deleteUser,
   updateUser,
+  uploadPhotoUser,
 };

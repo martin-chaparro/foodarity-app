@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
+const fileUpload = require('express-fileupload');
 const connection = require('./database/connection');
 const CompanyType = require('./models/CompanyType');
 const Role = require('./models/Role');
@@ -48,6 +49,15 @@ class Server {
     this.app.use(express.json());
 
     this.app.use(morgan('dev'));
+
+    // Fileupload - Carga de archivos
+    this.app.use(
+      fileUpload({
+        useTempFiles: true,
+        tempFileDir: '/tmp/',
+        createParentPath: true,
+      })
+    );
   }
 
   routes() {
@@ -134,16 +144,16 @@ class Server {
     }
     try {
       console.log('||--> Seed location database...: <--||');
-      this.provincias.provincias.forEach((prov) => {
-        State.create({
+      this.provincias.provincias.forEach(async (prov) => {
+        await State.create({
           id: prov.id,
           name: prov.nombre,
           lat: prov.centroide.lat,
           lon: prov.centroide.lon,
         });
       });
-      this.municipios.municipios.forEach((muni) => {
-        City.create({
+      this.municipios.municipios.forEach(async (muni) => {
+        await City.create({
           id: muni.id,
           name: muni.nombre,
           lat: muni.centroide.lat,

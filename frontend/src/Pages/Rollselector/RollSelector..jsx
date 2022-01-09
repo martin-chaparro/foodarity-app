@@ -27,7 +27,7 @@ export default function RollSelector() {
           <h3>Comercio</h3>
         </div>
         <div className={styles.ongcontent}>
-          <Link to="registerongcommerce">
+          <Link to="register_form_ong">
             <button className={styles.btnong} type="submit">
               <img
                 className={styles.imgong}

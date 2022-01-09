@@ -7,6 +7,7 @@
   border-radius: 10px;
   background-color: rgb(52, 20, 54);
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+  margin-bottom: 10px;
 }
 
 .btncontent {
@@ -42,12 +43,11 @@
 }
 
 .btnresdiv {
-display: flex;
-justify-content: center;
-align-items: center;
-width: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 120px;
 }
-
 
 .btnres {
   background-color: #d68584;
@@ -84,19 +84,19 @@ width: 120px;
 }
 
 .img {
-  width: 70px;
-  height: 70px;
+  width: 100px;
+  height: 100px;
+  border-radius: 10px;
 }
 
-.divImg{
+.divImg {
   width: 100px;
   height: 100px;
   display: flex;
- background-color: rgb(255, 255, 255);
- position: relative;
- margin-right: 30px;
- margin-top: 10px;
- margin-left: 20px;
- border-radius: 10px;
- 
+  background-color: rgb(255, 255, 255);
+  position: relative;
+  margin-right: 30px;
+  margin-top: 10px;
+  margin-left: 20px;
+  border-radius: 10px;
 }

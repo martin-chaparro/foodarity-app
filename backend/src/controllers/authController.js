@@ -14,8 +14,8 @@ const userLogin = async (request, response) => {
   }
 
   try {
-    const user = await User.findOne({ 
-      where: {[Op.and]: [{ email }, { status: true }] } 
+    const user = await User.findOne({
+      where: { [Op.and]: [{ email }, { status: true }] },
     });
 
     if (!user) {
@@ -33,12 +33,16 @@ const userLogin = async (request, response) => {
       });
     }
     // Generar JWT
-    const token = await generateJWT({id:user.id, name:user.name,roleId:user.role_id});
+    const token = await generateJWT({
+      id: user.id,
+      name: user.name,
+      roleId: user.role_id,
+    });
 
     return response.json({
       id: user.id,
       name: user.name,
-      roleId:user.role_id,
+      roleId: user.role_id,
       token,
     });
   } catch (error) {
@@ -52,11 +56,16 @@ const userLogin = async (request, response) => {
 const renewToken = async (request, response) => {
   const { userId, userName, userRoleId } = request;
   // Generar JWT
-  const token = await generateJWT({id:userId, name:userName,roleId:userRoleId});
+  const token = await generateJWT({
+    id: userId,
+    name: userName,
+    roleId: userRoleId,
+  });
 
   return response.json({
     id: userId,
     name: userName,
+    roleId: userRoleId,
     token,
   });
 };
