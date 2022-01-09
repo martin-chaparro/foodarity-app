@@ -51,11 +51,13 @@ class Server {
     this.app.use(morgan('dev'));
 
     // Fileupload - Carga de archivos
-    this.app.use( fileUpload({
-      useTempFiles : true,
-      tempFileDir : '/tmp/',
-      createParentPath: true
-  }));
+    this.app.use(
+      fileUpload({
+        useTempFiles: true,
+        tempFileDir: '/tmp/',
+        createParentPath: true,
+      })
+    );
   }
 
   routes() {
