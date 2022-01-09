@@ -3,11 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
-<<<<<<< HEAD
-// import { logInUsers } from '../../actions/index';
-=======
 import { startLogin } from '../../redux/actions/authActions';
->>>>>>> fdf9825b6403e7187b38cb0d68ea01b9e9ed74ad
 import Header from '../../Components/Header/Header';
 import estilos from './Login.module.css';
 
@@ -72,17 +68,10 @@ export default function Login() {
 
   // Inicio
 
-<<<<<<< HEAD
-  // const handleSubmit = (e) => {
-  //   e.preventDefault(e);
-  //   dispatch(logInUsers(input));
-  // };
-=======
   const handleSubmit = (e) => {
     e.preventDefault(e);
     dispatch(startLogin(input.email, input.password));
   };
->>>>>>> fdf9825b6403e7187b38cb0d68ea01b9e9ed74ad
 
   // Fin
 
@@ -131,11 +120,7 @@ export default function Login() {
               margin: '3em 2em 2em',
               hover: false,
             }}
-<<<<<<< HEAD
-            // onClick={(e) => handleSubmit(e)}
-=======
             onClick={(e) => handleSubmit(e)}
->>>>>>> fdf9825b6403e7187b38cb0d68ea01b9e9ed74ad
           >
             Ingresar
           </Button>
