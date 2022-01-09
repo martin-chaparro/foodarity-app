@@ -6,6 +6,11 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
+/**
+ * Este componente es un alert para los componentes Formularios Crear Comercio y Crear ONG.
+ * Puede editarse el CSS de acuerdo a la documentación de Material UI,
+ * además de cambiar su mensaje de acuerdo al objetivo que se requiera.
+ */
 export default function AlertDialog() {
   const [open, setOpen] = React.useState(false);
 
@@ -31,12 +36,16 @@ export default function AlertDialog() {
         <DialogTitle id="alert-dialog-title">Solicitud Enviada</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Su solicitud ha sido recibida con éxito. Reisaremos sus datos y
+            Su solicitud ha sido recibida con éxito. Revisaremos sus datos y
             confirmaremos dentro de las próximas 48 horas. Para dudas o
             comentarios sobre su solicitud, enviar email a help@foodarity.com
           </DialogContentText>
         </DialogContent>
         <DialogActions>
+          {/* BOTON OK: Este botón debe agregarse 
+          un handleSubmit o handleChange para que redirija los datos de registro al Backend 
+          y además redirija al Home una vez haya finalizado. 
+          Actualmente solo tiene un handleClose para cerrar ventana */}
           <Button onClick={handleClose}>OK</Button>
         </DialogActions>
       </Dialog>

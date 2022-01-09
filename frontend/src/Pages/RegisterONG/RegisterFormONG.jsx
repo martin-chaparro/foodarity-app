@@ -7,7 +7,7 @@ import styles from './RegisterFormONG.module.css';
 import caridad1 from '../../assets/caridad-1.png';
 import Terminos from '../../Components/Term&Conditions/Terminos';
 import { api } from '../../services/api';
-import AlertOng from './AlertOng';
+import AlertOng from '../../Components/Alertas/AlertEnviarSolicitud';
 
 let time = null;
 let time2 = null;
