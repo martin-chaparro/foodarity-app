@@ -1,0 +1,100 @@
+.productcard {
+  border: solid 1px;
+  display: flex;
+  justify-content: center;
+  height: 180px;
+  width: 450px;
+  border-radius: 10px;
+  background-color: rgb(52, 20, 54);
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.btncontent {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 5px;
+}
+
+.content {
+  margin-right: 25px;
+}
+
+.name {
+  width: 260px;
+  font-size: 12px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-align: center;
+  border-radius: 4px;
+  padding-right: 0;
+  background-color: white;
+}
+
+.description {
+  background: white;
+  width: 260px;
+  border-radius: 4px;
+  height: 65px;
+}
+.btnContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.btnresdiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 120px;
+}
+
+.btnres {
+  background-color: #d68584;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 120px;
+  height: 30px;
+  border: transparent;
+  font-weight: 700;
+  font-size: 14px;
+  color: white;
+}
+
+.btndetdiv {
+  width: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btndet {
+  font-weight: 700;
+  font-size: 14px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  border-radius: 5px;
+  cursor: pointer;
+  border: transparent;
+  background-color: #fdffb6;
+  width: 120px;
+  height: 30px;
+}
+
+.img {
+  width: 70px;
+  height: 70px;
+}
+
+.divImg {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  background-color: rgb(255, 255, 255);
+  position: relative;
+  margin-right: 30px;
+  margin-top: 10px;
+  margin-left: 20px;
+  border-radius: 10px;
+}

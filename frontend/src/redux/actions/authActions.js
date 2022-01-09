@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2';
 import types from '../types/authTypes';
 import { api, apiWithToken } from '../../services/api';
 
@@ -34,7 +35,7 @@ export const startCheking = () => {
 export const startLogin = (email, password) => {
   return async (dispatch) => {
     try {
-      const response = await api.post('auth', { email, password });
+      const response = await api.post('/auth', { email, password });
       const { id, name, token } = response.data;
       localStorage.setItem('token', token);
       dispatch(
@@ -43,8 +44,17 @@ export const startLogin = (email, password) => {
           name,
         })
       );
+      window.location.replace('/home');
     } catch (error) {
-      console.log('Login error');
+      console.log(error);
+      // eslint-disable-next-line no-alert
+      // alert('Lo siento, el email o contraseña son incorrectos, o no existen.');
+      // window.location.reload(false);
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Lo sentimos, el email y/o contraseña son incorrectos.',
+      });
     }
   };
 };

@@ -90,7 +90,7 @@ const getCompanies = async (req, res) => {
 const searchCompany = async (req, res) => {
   try {
     const { id } = req.params;
-    const listCompanies = await Companies.findAll({
+    const company = await Companies.findByPk(id, {
       include: [
         { model: CompanyType, as: 'type', attributes: ['type'] },
         { model: Address, include: [{ model: City }, { model: State }] },
@@ -99,20 +99,13 @@ const searchCompany = async (req, res) => {
         exclude: ['createdAt', 'updatedAt'],
       },
     });
-
-    if (listCompanies.length > 0) {
-      const companyId = await listCompanies.filter(
-        (company) => company.id === id
-      );
-      // eslint-disable-next-line no-unused-expressions
-      companyId.length
-        ? res.status(200).json(companyId)
-        : res.status(404).send(' Company Id not existing');
+    if (company) {
+      res.status(200).json(company);
     } else {
-      res.status(404).send('Not found');
+      res.status(404).json({ msg: 'Not found' });
     }
   } catch (error) {
-    res.status(500).send(error);
+    res.status(500).send({ msg: error });
   }
 };
 
