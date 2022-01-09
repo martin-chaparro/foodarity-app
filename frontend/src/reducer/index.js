@@ -10,10 +10,6 @@ function rootReducer(state = initialState, action) {
         user: action.payload,
       };
 
-    case 'LOGIN_USER_LOCAL':
-      return {
-        user: action.payload,
-      };
     default:
       return state;
   }
