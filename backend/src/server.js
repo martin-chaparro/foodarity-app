@@ -142,16 +142,16 @@ class Server {
     }
     try {
       console.log('||--> Seed location database...: <--||');
-      this.provincias.provincias.forEach((prov) => {
-        State.create({
+      this.provincias.provincias.forEach(async (prov) => {
+        await State.create({
           id: prov.id,
           name: prov.nombre,
           lat: prov.centroide.lat,
           lon: prov.centroide.lon,
         });
       });
-      this.municipios.municipios.forEach((muni) => {
-        City.create({
+      this.municipios.municipios.forEach(async (muni) => {
+        await City.create({
           id: muni.id,
           name: muni.nombre,
           lat: muni.centroide.lat,

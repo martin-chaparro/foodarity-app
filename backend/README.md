@@ -71,6 +71,7 @@ body:
 
 }
 ```
+PATCH: /users/upload : Ruta para Subir/Cambiar la imagen del usuario. Se tiene que pasar en formdata un file. Es decir cuando se pasa la info del formularo campo del archivo se tiene que llamar "file"
 
 ### Rutas Companies
 ---
@@ -83,10 +84,7 @@ POST: /companies : Ruta para crear un comercio o ONG
 		* "phone": "3764202020", (solo numeros)
 		* "email": "mackros@gmail.com",
 		"website": "www.mackro.com",
-		* "logo": "img",
-		"banner": "algo",
 		* "status": true,
-		* "ownerId": 1,
 		* "type" : 1,
 		* "street": "rodriguez peña",
 		* "number": "123",
@@ -103,6 +101,10 @@ POST: /companies : Ruta para crear un comercio o ONG
 GET: /companies : Ruta para traer todas las compañias creadas
  
 GET: /companies/:id : Ruta para buscar compañias por id
+
+PATCH: /companies/:id/upload/:field : Ruta para Subir/Cambiar la imagen del usuario. Se tiene que pasar en formdata un file. Es decir cuando se pasa la info del formularo campo del archivo se tiene que llamar "file".
+:id = company ID
+:field = campo que se quiere modificar con la imagen puede ser "logo" o "banner"
 
 ### Rutas Products
 ---
