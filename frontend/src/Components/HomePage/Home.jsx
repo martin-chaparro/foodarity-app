@@ -49,19 +49,20 @@ export default function Home() {
             <ProfileCard />
           </div>
 
-        <div className={styles.contmobile}>
-          <SearchBar />
+          <div className={styles.contmobile}>
+            <SearchBar />
 
-          <div className={styles.ProductCardDiv}>{/* <ProductCard/> */}</div>
-          {currentProduct.map((product, index) => (
-            // eslint-disable-next-line react/no-array-index-key
-            <ProductCard key={index} product={product} />
-          ))}
-          <Pagination
-            paginado={paginado}
-            products={allProducts.length}
-            productsPerPage={productPerPage}
-          />
+            <div className={styles.ProductCardDiv}>{/* <ProductCard/> */}</div>
+            {currentProduct.map((product, index) => (
+              // eslint-disable-next-line react/no-array-index-key
+              <ProductCard key={index} product={product} />
+            ))}
+            <Pagination
+              paginado={paginado}
+              products={allProducts.length}
+              productsPerPage={productPerPage}
+            />
+          </div>
         </div>
       </div>
     </div>
