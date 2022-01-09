@@ -8,11 +8,13 @@ import Register from './Pages/Register/RegisterFormUser';
 import RegisterFormCommerce from './Pages/RegisterCommerce/RegisterFormCommerce';
 import RollSelector from './Pages/Rollselector/RollSelector.';
 import RegisterFormONG from './Pages/RegisterONG/RegisterFormONG';
+import Cards from './Components/Cards/Cards';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/prueba" element={<Cards />} />
         <Route path="/home" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Landing />} />

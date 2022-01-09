@@ -1,0 +1,56 @@
+.productcard {
+  border: solid 1px;
+  display: flex;
+  height: 130px;
+  width: 400px;
+  border-radius: 5px;
+  background-color: #3e2463;
+}
+
+.btncontent {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 5px;
+}
+
+.content {
+  margin-right: 25px;
+}
+
+.name {
+  width: 206px;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  text-align: center;
+  border: 1px solid;
+  border-radius: 3px;
+  padding-right: 0;
+  background-color: white;
+}
+
+.description {
+  width: 204px;
+}
+
+.btnres {
+  background-color: #d68584;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 79px;
+}
+
+.btndet {
+  margin-left: 51px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #fdffb6;
+}
+
+.img {
+  max-width: 82x;
+  max-height: 92x;
+}
