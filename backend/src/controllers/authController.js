@@ -57,6 +57,7 @@ const renewToken = async (request, response) => {
   return response.json({
     id: userId,
     name: userName,
+    roleId:userRoleId,
     token,
   });
 };
