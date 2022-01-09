@@ -69,7 +69,6 @@
   right: 100px;
   margin-bottom: 5px;
   margin-top: 5px;
-
 }
 
 .labelEmail {
@@ -84,7 +83,6 @@
   position: relative;
   right: 100px;
   margin-bottom: 5px;
-  margin-top: 5px;
 }
 .divInputEmail {
   display: flex;
@@ -111,7 +109,6 @@
   position: relative;
   right: 118px;
   margin-bottom: 5px;
-  margin-top: 5px;
 }
 
 .divInputNombre {
@@ -132,7 +129,6 @@
     Arial, sans-serif;
   position: relative;
   right: 130px;
-  margin-top: 10px;
   margin-bottom: 5px;
 }
 
@@ -194,22 +190,24 @@
   position: relative;
   left: 15px;
   width: 65px;
+  border-radius: 3px;
   margin-right: 5px;
   border: transparent;
+
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
 }
 
 .phonenumber {
   position: relative;
   left: 15px;
-  width: 252px;
+  width: 234px;
+  border-radius: 3px;
   border: transparent;
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
 }
 .divlabelPhone {
   position: relative;
   right: 60px;
-  margin-bottom: 5px;
   margin-top: 5px;
   display: flex;
   flex-direction: column;
@@ -229,11 +227,10 @@
 }
 
 .divlabelDir {
+  height: 25px;
   position: relative;
   right: 60px;
-  margin-bottom: 5px;
-  margin-top: 5px;
-    display: flex;
+  display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
@@ -254,7 +251,7 @@
   position: relative;
   right: 15px;
   display: flex;
- justify-content: center;
+  justify-content: center;
   align-items: center;
   position: relative;
 }
@@ -263,6 +260,7 @@
   position: relative;
   left: 15px;
   width: 210px;
+  border-radius: 3px;
   border: transparent;
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
   margin-right: 5px;
@@ -274,17 +272,17 @@
   width: 107px;
   margin-right: 5px;
   border: transparent;
+  border-radius: 3px;
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
 }
 
 .divCodPostal {
-  margin-top: 10px;
   position: relative;
   right: 123px;
   display: flex;
   justify-content: center;
-   align-items: center;
-   position: relative;
+  align-items: center;
+  position: relative;
 }
 .inputCodPostal {
   position: relative;
@@ -292,16 +290,16 @@
   width: 107px;
   margin-right: 5px;
   border: transparent;
+  border-radius: 3px;
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
 }
 
 .divCiudadyProv {
-  margin-top: 10px;
   position: relative;
   right: 15px;
   display: flex;
   justify-content: center;
-   align-items: center;
+  align-items: center;
 }
 
 .inputCiudad {
@@ -310,6 +308,7 @@
   width: 152px;
   margin-right: 5px;
   border: transparent;
+  border-radius: 3px;
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
 }
 
@@ -318,6 +317,7 @@
   left: 15px;
   width: 165px;
   border: transparent;
+  border-radius: 3px;
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
   margin-right: 5px;
 }
@@ -378,4 +378,139 @@
 
 .elements:last-child {
   border-bottom: none;
+}
+
+.divErrorName {
+  width: 330px;
+  height: 25px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.divErrorEmail {
+  width: 330px;
+  height: 25px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.divErrorUrl {
+  width: 330px;
+  height: 25px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.divInputAndErrorAreaCod {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+  width: 95px;
+}
+
+.divErrorAreaCod {
+  height: 25px;
+  width: 80px;
+  margin-left: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.divInputAndErrorTelefono {
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.divErrorTelefono {
+  width: 80px;
+  margin-left: 15px;
+  height: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.divInputAndErrorNumCalle {
+  display: flex;
+  flex-direction: column;
+  width: 120px;
+  justify-content: flex-start;
+  align-items: baseline;
+}
+
+.divInputAndErrorCalle {
+  display: flex;
+  flex-direction: column;
+  width: 220px;
+  justify-content: flex-start;
+  align-items: baseline;
+  margin-left: 5px;
+}
+
+.divErrorDireccion {
+  width: 60px;
+  margin-left: 15px;
+  height: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.divErrorCalle {
+  width: 80px;
+  margin-left: 15px;
+  height: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.divInputAndErrorCodPostal {
+  display: flex;
+  flex-direction: column;
+  width: 110px;
+  justify-content: flex-start;
+  align-items: flex-end;
+  margin-left: 5px;
+}
+.divErrorPostalCod {
+  position: relative;
+  left: 196px;
+  height: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.errors {
+  color: rgba(255, 29, 29, 0.7);
+  font-size: 12px;
+  font-weight: 700;
 }

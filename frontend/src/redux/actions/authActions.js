@@ -54,7 +54,7 @@ export const startLogin = (email, password) => {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: 'Lo sentimos, el email y/o contraseña son incorrectos.',
+        text: 'Lo sentimos, el email y/o contraseña no existen o son incorrectos.',
       });
     }
   };

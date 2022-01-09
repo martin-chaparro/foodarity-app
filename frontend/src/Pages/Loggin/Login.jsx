@@ -11,6 +11,7 @@ export default function Login() {
   const dispatch = useDispatch();
 
   const [errors, setErrors] = useState({});
+
   const [input, setInput] = useState({
     email: '',
     password: '',
@@ -28,7 +29,7 @@ export default function Login() {
     if (!expresion.test(value)) {
       setErrors({
         ...errors,
-        [name]: 'No es un email válido!',
+        [name]: 'No es un email válido!!',
       });
     } else {
       setErrors({
