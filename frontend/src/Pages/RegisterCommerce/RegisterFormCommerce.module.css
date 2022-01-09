@@ -391,7 +391,7 @@
   white-space: nowrap;
 }
 
-.divErrorEmail{
+.divErrorEmail {
   width: 330px;
   height: 25px;
   display: flex;
@@ -435,7 +435,6 @@
   width: 250px;
   justify-content: flex-start;
   align-items: flex-start;
-
 }
 
 .divErrorTelefono {
@@ -455,7 +454,7 @@
   flex-direction: column;
   width: 120px;
   justify-content: flex-start;
-  align-items:baseline;
+  align-items: baseline;
 }
 
 .divInputAndErrorCalle {
@@ -463,12 +462,12 @@
   flex-direction: column;
   width: 220px;
   justify-content: flex-start;
-  align-items:baseline;
+  align-items: baseline;
   margin-left: 5px;
 }
 
 .divErrorDireccion {
-   width: 60px;
+  width: 60px;
   margin-left: 15px;
   height: 25px;
   display: flex;
@@ -477,7 +476,6 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-
 }
 
 .divErrorCalle {
@@ -496,7 +494,7 @@
   flex-direction: column;
   width: 110px;
   justify-content: flex-start;
-  align-items:flex-end;
+  align-items: flex-end;
   margin-left: 5px;
 }
 .divErrorPostalCod {

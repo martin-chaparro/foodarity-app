@@ -1,0 +1,12 @@
+.botoneraContent {
+  display: flex;
+  justify-content: center;
+}
+
+.btn {
+  margin-left: 10px;
+  border: none;
+  background-color: #5b457a;
+  color: white;
+  border-radius: 100%;
+}
