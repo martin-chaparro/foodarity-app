@@ -4,10 +4,11 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import Button from '@mui/material/Button';
-import Header from '../../Components/Header/Header';
+import Header from '../../Components/Header/Header'
 import style from './RegisterFormUser.module.css';
 
-import { registerLocal } from '../../actions';
+// import { registerLocal } from '../../redux/actions/usersActions';
+import { startCheking, startRegister } from '../../redux/actions/authActions';
 
 function Register() {
   const dispatch = useDispatch();
@@ -26,7 +27,7 @@ function Register() {
       ...input,
       [name]: value,
     });
-    if (!/^[A-Z]+$/i.test(value)) {
+    if (!/[a-zA-Z ]+$/.test(value)) {
       setErrors({
         ...errors,
         [name]: 'Solo letras',
@@ -109,7 +110,16 @@ function Register() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(registerLocal(input));
+    if(
+      !errors.name &&
+      !errors.email &&
+      !errors.password &&
+      !errors.validatePassword
+    ){ 
+    // dispatch(registerLocal(input));
+    dispatch(startRegister(input))
+    dispatch(startCheking())
+    navigate('/rollselector');
     setInput({
       name: '',
       email: '',
@@ -117,13 +127,17 @@ function Register() {
       validatePassword: '',
     });
     navigate('/rollselector');
+  } else {
+    // eslint-disable-next-line no-alert
+    alert("Complete el formulario")
+  }
   };
 
   return (
     <div className={style.register}>
+        <Header/>
       <form className={style.form} onSubmit={handleSubmit}>
-        <Header />
-        <div>
+        <div className={style.divInputs}>
           <div className={style.title}>
             <label>Ingrese Su Nombre</label>
           </div>
@@ -139,8 +153,7 @@ function Register() {
             }}
           />
           <p>{errors.name}</p>
-        </div>
-        <div>
+       
           <label className={style.title}>Ingrese Su Email</label>
           <input
             className={style.inputs}
@@ -154,8 +167,6 @@ function Register() {
             }}
           />
           <p>{errors.email}</p>
-        </div>
-        <div>
           <label className={style.title}>Ingrese Su Contraseña</label>
           <input
             className={style.inputs}
@@ -169,8 +180,6 @@ function Register() {
             }}
           />
           <p>{errors.password}</p>
-        </div>
-        <div>
           <label className={style.title}>Repita Su Contraseña</label>
           <input
             className={style.inputs}
@@ -185,19 +194,11 @@ function Register() {
           />
           <p>{errors.validatePassword}</p>
         </div>
-
+            <div className={style.buttonsDiv}>
         <Button
           className={style.btn}
           type="submit"
           variant="contained"
-          sx={{
-            backgroundColor: '#FDFFB6',
-            height: '2.5em',
-            color: '#3e2463',
-            fontStyle: 'bold',
-            margin: '5em 2em 2em',
-            hover: false,
-          }}
         >
           Ingresar
         </Button>
@@ -205,17 +206,10 @@ function Register() {
         <Button
           className={style.google}
           variant="contained"
-          sx={{
-            backgroundColor: '#533c74',
-            height: '2.5em',
-            color: '#fffff',
-            fontStyle: 'bold',
-            margin: '10em 2em 2em',
-            hover: false,
-          }}
         >
           Ingresar con Google
         </Button>
+        </div>
       </form>
     </div>
   );
