@@ -1,4 +1,5 @@
 import * as React from 'react';
+// import { useDispatch } from 'react-redux';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -13,6 +14,7 @@ import DialogTitle from '@mui/material/DialogTitle';
  */
 export default function AlertDialog() {
   const [open, setOpen] = React.useState(false);
+  // const dispatch = useDispatch();
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -21,6 +23,11 @@ export default function AlertDialog() {
   const handleClose = () => {
     setOpen(false);
   };
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault(e);
+  //   dispatch(startLogin(input.email, input.password));
+  // };
 
   return (
     <div>
@@ -46,7 +53,7 @@ export default function AlertDialog() {
           un handleSubmit o handleChange para que redirija los datos de registro al Backend 
           y además redirija al Home una vez haya finalizado. 
           Actualmente solo tiene un handleClose para cerrar ventana */}
-          <Button onClick={handleClose}>OK</Button>
+          <Button>OK</Button>
         </DialogActions>
       </Dialog>
     </div>
