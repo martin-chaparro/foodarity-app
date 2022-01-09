@@ -20,18 +20,20 @@ export default function Home() {
         </div>
 
         <div className={styles.contmobile}>
+          <div className={styles.searchbarDiv}>
           <input
             className={styles.searchbar}
             type="text"
             placeHolder="Search.."
           />
-          <div className={styles.searchbar}>
-            <ProductCard />
+            </div>
+            <div className={styles.ProductCardDiv}>
+            <ProductCard/>
+            </div>
             {/* {products.map((product, index) => (
               // eslint-disable-next-line react/no-array-index-key
               <ProductCard key={index} product={product} />
             ))} */}
-          </div>
         </div>
       </div>
     </div>

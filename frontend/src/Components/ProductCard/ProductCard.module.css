@@ -1,10 +1,12 @@
 .productcard {
   border: solid 1px;
   display: flex;
-  height: 130px;
-  width: 400px;
-  border-radius: 5px;
-  background-color: #3e2463;
+  justify-content: center;
+  height: 180px;
+  width: 450px;
+  border-radius: 10px;
+  background-color: rgb(52, 20, 54);
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .btncontent {
@@ -18,19 +20,34 @@
 }
 
 .name {
-  width: 206px;
+  width: 260px;
+  font-size: 12px;
   margin-top: 10px;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
   text-align: center;
-  border: 1px solid;
-  border-radius: 3px;
+  border-radius: 4px;
   padding-right: 0;
   background-color: white;
 }
 
 .description {
-  width: 204px;
+  background: white;
+  width: 260px;
+  border-radius: 4px;
+  height: 65px;
 }
+.btnContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.btnresdiv {
+display: flex;
+justify-content: center;
+align-items: center;
+width: 120px;
+}
+
 
 .btnres {
   background-color: #d68584;
@@ -38,19 +55,48 @@
   padding-bottom: 3px;
   border-radius: 5px;
   cursor: pointer;
-  width: 79px;
+  width: 120px;
+  height: 30px;
+  border: transparent;
+  font-weight: 700;
+  font-size: 14px;
+  color: white;
+}
+
+.btndetdiv {
+  width: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .btndet {
-  margin-left: 51px;
+  font-weight: 700;
+  font-size: 14px;
   padding-top: 3px;
   padding-bottom: 3px;
   border-radius: 5px;
   cursor: pointer;
+  border: transparent;
   background-color: #fdffb6;
+  width: 120px;
+  height: 30px;
 }
 
 .img {
-  max-width: 82x;
-  max-height: 92x;
+  width: 70px;
+  height: 70px;
+}
+
+.divImg{
+  width: 100px;
+  height: 100px;
+  display: flex;
+ background-color: rgb(255, 255, 255);
+ position: relative;
+ margin-right: 30px;
+ margin-top: 10px;
+ margin-left: 20px;
+ border-radius: 10px;
+ 
 }
