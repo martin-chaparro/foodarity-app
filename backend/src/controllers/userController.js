@@ -125,21 +125,18 @@ const updateUser = async (request, response) => {
 };
 
 const uploadPhotoUser = async (request, response) => {
-
-
-  const user = await User.findByPk(request.userId)
+  const user = await User.findByPk(request.userId);
 
   if (user.photo) {
-    cloudinary.uploader.destroy(user.photo.public_id)
+    cloudinary.uploader.destroy(user.photo.public_id);
   }
 
   const { tempFilePath } = request.files.file;
 
-  const { secure_url:secureUrl, public_id:publicId } = await cloudinary.uploader.upload( tempFilePath );
+  const { secure_url: secureUrl, public_id: publicId } =
+    await cloudinary.uploader.upload(tempFilePath);
 
-  await user.update({photo:{public_id:publicId,url:secureUrl}})
-
-
+  await user.update({ photo: { public_id: publicId, url: secureUrl } });
 
   return response.status(200).json(user);
 };

@@ -8,6 +8,7 @@ import styles from './Home.module.css';
 import HeaderHome from '../Header/HeaderHome';
 import ProfileCard from '../ProfileCard/ProfileCard';
 import ProductCard from '../ProductCard/ProductCard';
+import ShopCard from '../ShopCard/ShopCard';
 // import productos from '../Cards/product.json';
 import Pagination from '../Pagination/Pagination';
 import SearchBar from '../Searchbar/Searchbar';
@@ -44,6 +45,10 @@ export default function Home() {
       <div className={styles.homecont}>
         <div className={styles.contweb}>
           <ProfileCard />
+          <div className={styles.ShopCardsContainer}>
+            <h3 className={styles.title}>Mi carrito de compras</h3>
+          <ShopCard/>
+          </div>
         </div>
 
         <div className={styles.contmobile}>
