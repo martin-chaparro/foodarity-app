@@ -27,7 +27,7 @@ class User extends Model {
           allowNull: true,
         },
         photo: {
-          type: DataTypes.STRING,
+          type: DataTypes.JSON,
           allowNull: true,
         },
         status: {
