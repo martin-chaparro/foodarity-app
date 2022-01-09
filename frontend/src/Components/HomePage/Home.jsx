@@ -8,6 +8,7 @@ import styles from './Home.module.css';
 import HeaderHome from '../Header/HeaderHome';
 import ProfileCard from '../ProfileCard/ProfileCard';
 import ProductCard from '../ProductCard/ProductCard';
+import Navbar from '../Navbar/Navbar';
 import ShopCard from '../ShopCard/ShopCard';
 // import productos from '../Cards/product.json';
 import Pagination from '../Pagination/Pagination';
@@ -40,30 +41,43 @@ export default function Home() {
   };
 
   return (
-    <div className={styles.home}>
-      <HeaderHome />
-      <div className={styles.homecont}>
-        <div className={styles.contweb}>
-          <ProfileCard />
-          <div className={styles.ShopCardsContainer}>
-            <h3 className={styles.title}>Mi carrito de compras</h3>
-          <ShopCard/>
+    <div>
+      <Navbar />
+      <div className={styles.home}>
+        <HeaderHome />
+        <div className={styles.homecont}>
+          <div className={styles.contweb}>
+            <ProfileCard />
           </div>
-        </div>
+          <div className={styles.home}>
+            <HeaderHome />
+            <div className={styles.homecont}>
+              <div className={styles.contweb}>
+                <ProfileCard />
+                <div className={styles.ShopCardsContainer}>
+                  <h3 className={styles.title}>Mi carrito de compras</h3>
+                  <ShopCard />
+                </div>
+              </div>
 
-        <div className={styles.contmobile}>
-          <SearchBar />
+              <div className={styles.contmobile}>
+                <SearchBar />
 
-          <div className={styles.ProductCardDiv}>{/* <ProductCard/> */}</div>
-          {currentProduct.map((product, index) => (
-            // eslint-disable-next-line react/no-array-index-key
-            <ProductCard key={index} product={product} />
-          ))}
-          <Pagination
-            paginado={paginado}
-            products={allProducts.length}
-            productsPerPage={productPerPage}
-          />
+                <div className={styles.ProductCardDiv}>
+                  {/* <ProductCard/> */}
+                </div>
+                {currentProduct.map((product, index) => (
+                  // eslint-disable-next-line react/no-array-index-key
+                  <ProductCard key={index} product={product} />
+                ))}
+                <Pagination
+                  paginado={paginado}
+                  products={allProducts.length}
+                  productsPerPage={productPerPage}
+                />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
