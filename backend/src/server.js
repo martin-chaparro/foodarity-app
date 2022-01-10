@@ -108,7 +108,7 @@ class Server {
       console.log('||--> Seed products(HARDCODE) database...: <--||');
       this.products.forEach(async (product) => {
         const {
-          name,
+          lote,
           description,
           photo,
           price,
@@ -117,7 +117,7 @@ class Server {
           category,
         } = product;
         const newProduct = await Product.create({
-          name,
+          lote,
           description,
           photo,
           price,
