@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
+// import { logInUsers } from '../../actions/index';
 import { startLogin } from '../../redux/actions/authActions';
 import Header from '../../Components/Header/Header';
 import estilos from './Login.module.css';
@@ -68,6 +69,10 @@ export default function Login() {
 
   // Inicio
 
+  // const handleSubmit = (e) => {
+  //   e.preventDefault(e);
+  //   dispatch(logInUsers(input));
+  // };
   const handleSubmit = (e) => {
     e.preventDefault(e);
     dispatch(startLogin(input.email, input.password));
@@ -125,6 +130,7 @@ export default function Login() {
               fontStyle: 'bold',
               margin: '3em 2em 2em',
             }}
+            // onClick={(e) => handleSubmit(e)}
             onClick={(e) => handleSubmit(e)}
           >
             Ingresar
