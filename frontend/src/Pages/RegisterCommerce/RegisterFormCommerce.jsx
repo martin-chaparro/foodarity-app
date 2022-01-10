@@ -227,7 +227,7 @@ export default function RegisterFormCommerce() {
   return (
     <div className={styles.RegisterFormCommerce}>
       <Header />
-      <form className={styles.form} onSubmit={handleSubmit}>
+      <form  autoComplete='off' className={styles.form} onSubmit={handleSubmit}>
         <div className={styles.containerLogo}>
           <div className={styles.commerceLogo}>
             <img
@@ -292,7 +292,7 @@ export default function RegisterFormCommerce() {
               }}
             />
             <div className={styles.divErrorUrl}>
-              <p className={styles.errors}>{errors.url}</p>
+              <p className={styles.errors}>{errors.website}</p>
             </div>
           </div>
           <div className={styles.labelDescripcion}>
@@ -323,7 +323,7 @@ export default function RegisterFormCommerce() {
               }}
             />
             <div className={styles.divErrorAreaCod}>
-            <p className={styles.errors}>{errors.codigoArea}</p>
+            <p className={styles.errors}>{errors.areaCode}</p>
             </div>
             </div>
             <div  className={styles.divInputAndErrorTelefono}>
@@ -339,7 +339,7 @@ export default function RegisterFormCommerce() {
               }}
               />
               <div className={styles.divErrorTelefono}>
-                <p className={styles.errors}>{errors.telefono}</p>
+                <p className={styles.errors}>{errors.phone}</p>
               </div>
             </div>
           </div>
@@ -359,7 +359,7 @@ export default function RegisterFormCommerce() {
             }}
              />
              <div className={styles.divErrorDireccion}>
-             <p className={styles.errors}>{errors.direccion}</p>
+             <p className={styles.errors}>{errors.street}</p>
              </div>
              </div>
              <div className={styles.divInputAndErrorNumCalle}>
@@ -375,7 +375,7 @@ export default function RegisterFormCommerce() {
               }}
             />
             <div className={styles.divErrorCalle}>
-            <p className={styles.errors}>{errors.numeroCalle}</p>
+            <p className={styles.errors}>{errors.number}</p>
             </div>
               </div>
             </div>
@@ -394,8 +394,9 @@ export default function RegisterFormCommerce() {
               }}
             />
             <div className={styles.divErrorPostalCod}>
-            <p className={styles.errors}>{errors.codigoPostal}</p>
+            <p className={styles.errors}>{errors.zipcode}</p>
             </div>
+          </div>
           </div>
           <div className={styles.divCiudadyProv}>
             <div>
@@ -450,14 +451,13 @@ export default function RegisterFormCommerce() {
                 </div>
               )}
             </div>
-          </div>
-          <div>
+          </div>  
+          <div className={styles.Terms}>
             {/* BOTON DE ACEPTAR TERMINOS Y CONDICIONES: Dicho botón se encuentra 
           dentro del componente Terminos, si se quiere editar el CSS de este botón
           debes editarlo desde el componente Terminos, que se encuentra dentro de la carpeta Componentes. */}
             <Terminos />
           </div>
-        </div>
 
         <div className={styles.divButton}>
           {/* BOTON DE ENVIAR SOLICITUD: Dicho botón se encuentra 

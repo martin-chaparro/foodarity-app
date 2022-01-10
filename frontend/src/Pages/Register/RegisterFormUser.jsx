@@ -1,7 +1,7 @@
 /* eslint-disable react/button-has-type */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import Button from '@mui/material/Button';
 import Header from '../../Components/Header/Header'
@@ -20,6 +20,7 @@ function Register() {
     password: '',
     validatePassword: '',
   });
+  
 
   const validateLetters = (e) => {
     const { name, value } = e.target;
@@ -132,10 +133,12 @@ function Register() {
     alert("Complete el formulario")
   }
   };
-
+  
   return (
     <div className={style.register}>
+     <Link to="/">
         <Header/>
+        </Link>
       <form className={style.form} onSubmit={handleSubmit}>
         <div className={style.divInputs}>
           <div className={style.title}>
@@ -152,8 +155,9 @@ function Register() {
               validateLetters(e);
             }}
           />
-          <p>{errors.name}</p>
-       
+          <div className={style.divErrorNombre}>
+          <p className={style.errors}>{errors.name}</p>
+          </div>
           <label className={style.title}>Ingrese Su Email</label>
           <input
             className={style.inputs}
@@ -166,7 +170,9 @@ function Register() {
               validateEmail(e);
             }}
           />
-          <p>{errors.email}</p>
+          <div className={style.divErrorEmail}>
+          <p className={style.errors}>{errors.email}</p>
+          </div>
           <label className={style.title}>Ingrese Su Contraseña</label>
           <input
             className={style.inputs}
@@ -179,7 +185,9 @@ function Register() {
               validatePassword(e);
             }}
           />
-          <p>{errors.password}</p>
+          <div className={style.divErrorPassword}>
+          <p className={style.errors}>{errors.password}</p>
+          </div>
           <label className={style.title}>Repita Su Contraseña</label>
           <input
             className={style.inputs}
@@ -192,7 +200,9 @@ function Register() {
               validatePassword2(e);
             }}
           />
-          <p>{errors.validatePassword}</p>
+           <div className={style.divErrorPassword2}>
+          <p className={style.errors}>{errors.validatePassword}</p>
+          </div>
         </div>
             <div className={style.buttonsDiv}>
         <Button
