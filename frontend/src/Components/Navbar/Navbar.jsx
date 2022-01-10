@@ -4,17 +4,20 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
+// import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
 import Badge from '@mui/material/Badge';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
-import AccountCircle from '@mui/icons-material/AccountCircle';
-import MailIcon from '@mui/icons-material/Mail';
-import NotificationsIcon from '@mui/icons-material/Notifications';
+// import AccountCircle from '@mui/icons-material/AccountCircle';
 import MoreIcon from '@mui/icons-material/MoreVert';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import Logo from '../../assets/Mobil-Full-Header-Logo.png';
+import Avatar from './Avatar';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -97,8 +100,9 @@ export default function PrimarySearchAppBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={handleMenuClose}>Perfil</MenuItem>
+      <MenuItem onClick={handleMenuClose}>Mi Cuenta</MenuItem>
+      <MenuItem onClick={handleMenuClose}>Cerrar Sesión</MenuItem>
     </Menu>
   );
 
@@ -121,11 +125,11 @@ export default function PrimarySearchAppBar() {
     >
       <MenuItem>
         <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="error">
-            <MailIcon />
+          <Badge badgeContent={4} color="secondary">
+            <FavoriteIcon />
           </Badge>
         </IconButton>
-        <p>Messages</p>
+        <p>Favoritos</p>
       </MenuItem>
       <MenuItem>
         <IconButton
@@ -133,11 +137,11 @@ export default function PrimarySearchAppBar() {
           aria-label="show 17 new notifications"
           color="inherit"
         >
-          <Badge badgeContent={17} color="error">
-            <NotificationsIcon />
+          <Badge badgeContent={17} color="secondary">
+            <ShoppingCartIcon />
           </Badge>
         </IconButton>
-        <p>Notifications</p>
+        <p>Carrito de Compras</p>
       </MenuItem>
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
@@ -147,9 +151,20 @@ export default function PrimarySearchAppBar() {
           aria-haspopup="true"
           color="inherit"
         >
-          <AccountCircle />
+          {/* <AccountCircle /> */}
+          <Avatar />
         </IconButton>
-        <p>Profile</p>
+        <p>Perfil</p>
+      </MenuItem>
+      <MenuItem>
+        <IconButton
+          size="large"
+          aria-label="show 17 new notifications"
+          color="inherit"
+        >
+          <ExitToAppIcon />
+        </IconButton>
+        <p>Cerrar Sesión</p>
       </MenuItem>
     </Menu>
   );
@@ -167,14 +182,7 @@ export default function PrimarySearchAppBar() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ display: { xs: 'none', sm: 'block' } }}
-          >
-            MUI
-          </Typography>
+          <img src={Logo} alt="Logo" />
           <Search>
             <SearchIconWrapper>
               <SearchIcon />
@@ -191,8 +199,8 @@ export default function PrimarySearchAppBar() {
               aria-label="show 4 new mails"
               color="inherit"
             >
-              <Badge badgeContent={4} color="error">
-                <MailIcon />
+              <Badge badgeContent={4} color="secondary">
+                <FavoriteIcon />
               </Badge>
             </IconButton>
             <IconButton
@@ -200,8 +208,8 @@ export default function PrimarySearchAppBar() {
               aria-label="show 17 new notifications"
               color="inherit"
             >
-              <Badge badgeContent={17} color="error">
-                <NotificationsIcon />
+              <Badge badgeContent={17} color="secondary">
+                <ShoppingCartIcon />
               </Badge>
             </IconButton>
             <IconButton
@@ -213,7 +221,7 @@ export default function PrimarySearchAppBar() {
               onClick={handleProfileMenuOpen}
               color="inherit"
             >
-              <AccountCircle />
+              <Avatar />
             </IconButton>
           </Box>
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
