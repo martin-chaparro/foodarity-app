@@ -8,9 +8,9 @@
 }
 
 .divInputs {
-display: flex;
-flex-direction: column;
-align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .inputs {
@@ -24,23 +24,22 @@ align-items: center;
 
 .title {
   font-weight: 700;
-display: flex;
-flex-direction: column;
-align-items: center;
-margin-bottom: 10px;
-position: relative;
-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 5px;
+  position: relative;
+  top: 10px;
 
   color: #3e2463;
 }
 
 .buttonsDiv {
-display: flex;
-flex-direction: column;
-align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .btn {
-
   position: relative;
   display: flex;
   margin: 0%;
@@ -54,4 +53,42 @@ align-items: center;
   top: 30px;
   margin: 0%;
   background: #3e2463;
+}
+
+.errors {
+  color: rgba(255, 29, 29, 0.7);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.divErrorNombre {
+  width: 300px;
+  height: 25px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.divErrorEmail {
+  width: 300px;
+  height: 25px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.divErrorPassword {
+  width: 300px;
+  height: 25px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.divErrorPassword2 {
+  width: 300px;
+  height: 25px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }

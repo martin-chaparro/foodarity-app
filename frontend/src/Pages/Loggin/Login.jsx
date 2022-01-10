@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
+// import { logInUsers } from '../../actions/index';
 import { startLogin } from '../../redux/actions/authActions';
 import Header from '../../Components/Header/Header';
 import estilos from './Login.module.css';
@@ -29,7 +30,7 @@ export default function Login() {
     if (!expresion.test(value)) {
       setErrors({
         ...errors,
-        [name]: 'No es un email válido!!',
+        [name]: 'No es un email válido!',
       });
     } else {
       setErrors({
@@ -68,6 +69,10 @@ export default function Login() {
 
   // Inicio
 
+  // const handleSubmit = (e) => {
+  //   e.preventDefault(e);
+  //   dispatch(logInUsers(input));
+  // };
   const handleSubmit = (e) => {
     e.preventDefault(e);
     dispatch(startLogin(input.email, input.password));
@@ -77,7 +82,9 @@ export default function Login() {
 
   return (
     <div backgroundColor="transparent">
+      <Link to='/'>
       <Header />
+      </Link>
       <div>
         <div className={estilos.contener}>
           <h3>Ingrese su Email</h3>
@@ -85,6 +92,7 @@ export default function Login() {
             type="text"
             name="email"
             value={input.email}
+            autoComplete='off'
             title="Email requerido"
             pattern="[a-zA-Z ]{2,254}"
             required
@@ -94,8 +102,9 @@ export default function Login() {
               validateEmail(e);
             }}
           />
-          <p>{errors.email}</p>
-
+          <div className={estilos.divErrorEmail}>
+          <p className={estilos.errors}>{errors.email}</p>
+          </div>
           <h3>Ingrese su Contraseña</h3>
           <input
             type="password"
@@ -109,7 +118,9 @@ export default function Login() {
               validatePassword(e);
             }}
           />
-          <p>{errors.password}</p>
+          <div className={estilos.divErrorContraseña}>
+          <p className={estilos.errors}>{errors.password}</p>
+          </div>
           <Button
             variant="contained"
             sx={{
@@ -118,8 +129,8 @@ export default function Login() {
               color: '#3e2463',
               fontStyle: 'bold',
               margin: '3em 2em 2em',
-              hover: false,
             }}
+            // onClick={(e) => handleSubmit(e)}
             onClick={(e) => handleSubmit(e)}
           >
             Ingresar
@@ -135,28 +146,10 @@ export default function Login() {
               color: '#fffff',
               fontStyle: 'bold',
               margin: '1em 1em 1em',
-              hover: false,
             }}
           >
             Ingresar con Google
           </Button>
-
-          <Link to="/">
-            <Button
-              variant="contained"
-              sx={{
-                // backgroundColor: '#533c74',
-                backgroundColor: '#533c74',
-                height: '2.5em',
-                color: '#fffff',
-                fontStyle: 'bold',
-                margin: '.5em 2em 2em',
-                hover: false,
-              }}
-            >
-              Regresar
-            </Button>
-          </Link>
         </div>
       </div>
     </div>
