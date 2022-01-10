@@ -53,7 +53,7 @@ export default function AlertDialog() {
           un handleSubmit o handleChange para que redirija los datos de registro al Backend 
           y además redirija al Home una vez haya finalizado. 
           Actualmente solo tiene un handleClose para cerrar ventana */}
-          <Button>OK</Button>
+          <Button onClose={handleClose}>OK</Button>
         </DialogActions>
       </Dialog>
     </div>
