@@ -18,6 +18,9 @@ export function getProducts() {
   // eslint-disable-next-line func-names
   return async function (dispatch) {
     try {
+      dispatch({
+        type: types.productLoading,
+      });
       const json = await axios.get('http://localhost:4000/api/v1/products');
 
       return dispatch({

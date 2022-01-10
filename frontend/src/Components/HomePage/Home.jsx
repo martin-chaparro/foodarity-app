@@ -12,14 +12,15 @@ import ShopCard from '../ShopCard/ShopCard';
 // import productos from '../Cards/product.json';
 import Pagination from '../Pagination/Pagination';
 import SearchBar from '../Searchbar/Searchbar';
+import Loading from '../Loading/Loading';
 
 export default function Home() {
   const dispatch = useDispatch();
   // eslint-disable-next-line no-unused-vars
   const allProducts = useSelector((state) => state.product.allProducts);
+  const isLoading = useSelector((state) => state.product.loading);
 
   useEffect(() => {
-    console.log('HOLAAAAAA');
     dispatch(getProducts());
   }, [dispatch]);
 
@@ -47,23 +48,31 @@ export default function Home() {
           <ProfileCard />
           <div className={styles.ShopCardsContainer}>
             <h3 className={styles.title}>Mi carrito de compras</h3>
-          <ShopCard/>
+            <ShopCard />
           </div>
         </div>
 
         <div className={styles.contmobile}>
           <SearchBar />
+          {isLoading ? (
+            <Loading />
+          ) : (
+            <div>
+              <div className={styles.ProductCardDiv}>
+                {/* <ProductCard/> */}
+              </div>
+              {currentProduct.map((product, index) => (
+                // eslint-disable-next-line react/no-array-index-key
+                <ProductCard key={index} product={product} />
+              ))}
 
-          <div className={styles.ProductCardDiv}>{/* <ProductCard/> */}</div>
-          {currentProduct.map((product, index) => (
-            // eslint-disable-next-line react/no-array-index-key
-            <ProductCard key={index} product={product} />
-          ))}
-          <Pagination
-            paginado={paginado}
-            products={allProducts.length}
-            productsPerPage={productPerPage}
-          />
+              <Pagination
+                paginado={paginado}
+                products={allProducts.length}
+                productsPerPage={productPerPage}
+              />
+            </div>
+          )}
         </div>
       </div>
     </div>
