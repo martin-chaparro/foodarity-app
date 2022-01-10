@@ -30,9 +30,11 @@ export default function Landing() {
           <img className={styles.imglogolanding} src={logoLanding} alt="logo" />
         </div>
         <div>
-          <button className={styles.btncontinuar} type="submit">
-            Continuar
-          </button>
+          <Link to="/home">
+            <button className={styles.btncontinuar} type="submit">
+              Continuar
+            </button>
+          </Link>
         </div>
       </div>
       <Footer />

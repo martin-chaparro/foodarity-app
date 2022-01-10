@@ -1,5 +1,6 @@
 // const { Op } = require('sequelize');
 const { validationResult } = require('express-validator');
+// eslint-disable-next-line import/no-unresolved
 const cloudinary = require('cloudinary').v2;
 const Companies = require('../models/Companies');
 const CompanyType = require('../models/CompanyType');
@@ -150,7 +151,9 @@ const uploadImageCompany = async (request, response) => {
         const { secure_url: secureUrl, public_id: publicId } =
           await cloudinary.uploader.upload(tempFilePath);
 
-        await company.update({ banner: { public_id: publicId, url: secureUrl } });
+        await company.update({
+          banner: { public_id: publicId, url: secureUrl },
+        });
         return response.status(200).json(company);
       }
 

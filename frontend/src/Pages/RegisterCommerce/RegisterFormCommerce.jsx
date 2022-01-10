@@ -9,6 +9,8 @@ import styles from './RegisterFormCommerce.module.css';
 import CommerceLogo from '../../assets/Mask-Group.png';
 import {api} from '../../services/api';
 import {registerComerce} from '../../redux/actions/usersActions'
+import Terminos from '../../Components/Term&Conditions/Terminos';
+import AlertOng from '../../Components/Alertas/AlertEnviarSolicitud';
 
 let time = null;
 let time2 = null;
@@ -190,7 +192,7 @@ export default function RegisterFormCommerce() {
         [name]: '',
       });
     }
-  }
+  };
 
   const handleOnChange = (e) => {
     e.preventDefault();
@@ -227,9 +229,13 @@ export default function RegisterFormCommerce() {
       <Header />
       <form className={styles.form} onSubmit={handleSubmit}>
         <div className={styles.containerLogo}>
-        <div className={styles.commerceLogo}>
-          <img className={styles.imgLogo} src={CommerceLogo} alt="CommerLogo" />
-        </div>
+          <div className={styles.commerceLogo}>
+            <img
+              className={styles.imgLogo}
+              src={CommerceLogo}
+              alt="CommerLogo"
+            />
+          </div>
         </div>
         <div className={styles.divsInputs}>
           <div className={styles.labelNombre}>
@@ -246,10 +252,9 @@ export default function RegisterFormCommerce() {
                 handleOnChange(e);
                 validateLetters(e);
               }}
-
             />
             <div className={styles.divErrorName}>
-            <p className={styles.errors}>{errors.name}</p>
+              <p className={styles.errors}>{errors.name}</p>
             </div>
           </div>
           <div className={styles.labelEmail}>
@@ -267,8 +272,8 @@ export default function RegisterFormCommerce() {
                 validateEmail(e);
               }}
             />
-             <div className={styles.divErrorEmail}>
-            <p className={styles.errors}>{errors.email}</p>
+            <div className={styles.divErrorEmail}>
+              <p className={styles.errors}>{errors.email}</p>
             </div>
           </div>
           <div className={styles.labelUrl}>
@@ -287,7 +292,7 @@ export default function RegisterFormCommerce() {
               }}
             />
             <div className={styles.divErrorUrl}>
-            <p className={styles.errors}>{errors.url}</p>
+              <p className={styles.errors}>{errors.url}</p>
             </div>
           </div>
           <div className={styles.labelDescripcion}>
@@ -334,9 +339,9 @@ export default function RegisterFormCommerce() {
               }}
               />
               <div className={styles.divErrorTelefono}>
-              <p className={styles.errors}>{errors.telefono}</p>
+                <p className={styles.errors}>{errors.telefono}</p>
               </div>
-              </div>
+            </div>
           </div>
           <div className={styles.divlabelDir}>
             <label className={styles.labelDir}>Dirección</label>
@@ -372,6 +377,7 @@ export default function RegisterFormCommerce() {
             <div className={styles.divErrorCalle}>
             <p className={styles.errors}>{errors.numeroCalle}</p>
             </div>
+              </div>
             </div>
           </div>
           <div className={styles.divCodPostal}>
@@ -390,7 +396,6 @@ export default function RegisterFormCommerce() {
             <div className={styles.divErrorPostalCod}>
             <p className={styles.errors}>{errors.codigoPostal}</p>
             </div>
-          </div>
           </div>
           <div className={styles.divCiudadyProv}>
             <div>
@@ -446,19 +451,19 @@ export default function RegisterFormCommerce() {
               )}
             </div>
           </div>
-          {/* <div className={styles.divSelects}>
-            <select className={styles.selectCiudad}>
-              <option value="City">Ciudad</option>
-            </select>
-            <select className={styles.selectProvincia}>
-              <option value="Prov">Provincia</option>
-            </select>
-          </div> */}
+          <div>
+            {/* BOTON DE ACEPTAR TERMINOS Y CONDICIONES: Dicho botón se encuentra 
+          dentro del componente Terminos, si se quiere editar el CSS de este botón
+          debes editarlo desde el componente Terminos, que se encuentra dentro de la carpeta Componentes. */}
+            <Terminos />
+          </div>
         </div>
+
         <div className={styles.divButton}>
-          <button className={styles.button} type="submit">
-            Enviar solicitud de registro
-          </button>
+          {/* BOTON DE ENVIAR SOLICITUD: Dicho botón se encuentra 
+          dentro del componente Alert Ong y para conectar el submit 
+          con el backend debe configurarse en ese mismo componente AlertOng */}
+          <AlertOng />
         </div>
       </form>
     </div>
