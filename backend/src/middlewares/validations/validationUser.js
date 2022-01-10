@@ -11,7 +11,6 @@ const ValidationsUser = {
   withoutPassword: [
     check('name', 'Ingrese su nombre completo').not().isEmpty(),
     check('email', 'Agrega un email válido').isEmail(),
-   
   ],
 };
 
