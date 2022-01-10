@@ -25,13 +25,18 @@ export default function RegisterFormONG() {
   const [formValues, setFormValues] = useState(initialFormValues);
   const [input, setInput] = useState({
     name: '',
-    url: '',
-    descripcion: '',
-    codigoArea: '',
-    telefono: '',
-    direccion: '',
-    numeroCalle: '',
-    codigoPostal: '',
+    type: '2',
+    description: '',
+    areaCode: '',
+    phone: '',
+    email: '',
+    website: '',
+    status: '',
+    street: '',
+    number: '',
+    zipcode: '',
+    cityId: '',
+    stateId: '',
   });
 
   const searchProvincia = (term) => {
@@ -218,15 +223,15 @@ export default function RegisterFormONG() {
             <input
               className={styles.inputNombre}
               type="text"
-              name="url"
-              value={input.url}
+              name="website"
+              value={input.website}
               autoComplete="off"
               onChange={(e) => {
                 handleOnChange(e);
                 validateUrl(e);
               }}
             />
-            <p>{errors.url}</p>
+            <p>{errors.website}</p>
           </div>
           <div className={styles.labelDescripcion}>
             <label>Descripción</label>
@@ -235,8 +240,8 @@ export default function RegisterFormONG() {
             <textarea
               className={styles.inputDescripcion}
               type="text"
-              name="descripcion"
-              value={input.descripcion}
+              name="description"
+              value={input.description}
               onChange={handleOnChange}
             />
           </div>
@@ -247,38 +252,38 @@ export default function RegisterFormONG() {
             <input
               className={styles.areacod}
               type="text"
-              name="codigoArea"
-              value={input.codigoArea}
+              name="areaCode"
+              value={input.areaCode}
               placeholder="Cód. Área"
               onChange={(e) => {
                 handleOnChange(e);
                 validateNum(e);
               }}
             />
-            <p>{errors.codigoArea}</p>
+            <p>{errors.areaCode}</p>
             <input
               className={styles.phonenumber}
               type="text"
-              name="telefono"
-              value={input.telefono}
+              name="phone"
+              value={input.phone}
               placeholder="Número"
               onChange={(e) => {
                 handleOnChange(e);
                 validateNum(e);
               }}
             />
-            <p>{errors.telefono}</p>
+            <p>{errors.phone}</p>
           </div>
           <div className={styles.divlabelDir}>
             <label className={styles.labelDir}>Dirección</label>
           </div>
           <div className={styles.divInputsCalleyNum}>
             <input
-              className={styles.calle}
+              className={styles.street}
               type="text"
               name="direccion"
               value={input.direccion}
-              placeholder="Calle"
+              placeholder="street"
               onChange={(e) => {
                 handleOnChange(e);
                 validateLetters(e);
@@ -288,29 +293,29 @@ export default function RegisterFormONG() {
             <input
               className={styles.numCalle}
               type="text"
-              name="numeroCalle"
-              value={input.numeroCalle}
+              name="number"
+              value={input.number}
               placeholder="Número de calle"
               onChange={(e) => {
                 handleOnChange(e);
                 validateNum(e);
               }}
             />
-            <p>{errors.numeroCalle}</p>
+            <p>{errors.number}</p>
           </div>
           <div className={styles.divCodPostal}>
             <input
               className={styles.inputCodPostal}
               type="text"
-              name="codigoPostal"
-              value={input.codigoPostal}
-              placeholder="Cód. Postal"
+              name="zipcode"
+              value={input.zipcode}
+              placeholder="Código Postal"
               onChange={(e) => {
                 handleOnChange(e);
                 validateNum(e);
               }}
             />
-            <p>{errors.codigoPostal}</p>
+            <p>{errors.zipcode}</p>
           </div>
           <div className={styles.divCiudadyProv}>
             <div>
@@ -343,7 +348,7 @@ export default function RegisterFormONG() {
               <input
                 className={styles.inputCiudad}
                 type="text"
-                placeholder="Ciudad"
+                placeholder="cityId"
                 value={termCiudad}
                 onChange={handleInputCiudad}
               />

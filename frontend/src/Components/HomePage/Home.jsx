@@ -5,13 +5,12 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProducts } from '../../redux/actions/productActions';
 import styles from './Home.module.css';
-import HeaderHome from '../Header/HeaderHome';
 import ProfileCard from '../ProfileCard/ProfileCard';
 import ProductCard from '../ProductCard/ProductCard';
 import Navbar from '../Navbar/Navbar';
 import ShopCard from '../ShopCard/ShopCard';
 // import productos from '../Cards/product.json';
-import Pagination from '../Pagination/Pagination';
+import Pagination from '../Pagination/BasicPagination';
 import SearchBar from '../Searchbar/Searchbar';
 
 export default function Home() {
@@ -44,13 +43,11 @@ export default function Home() {
     <div>
       <Navbar />
       <div className={styles.home}>
-        <HeaderHome />
         <div className={styles.homecont}>
           <div className={styles.contweb}>
             <ProfileCard />
           </div>
           <div className={styles.home}>
-            <HeaderHome />
             <div className={styles.homecont}>
               <div className={styles.contweb}>
                 <ProfileCard />
