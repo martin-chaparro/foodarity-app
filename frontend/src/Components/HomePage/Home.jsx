@@ -5,12 +5,12 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProducts } from '../../redux/actions/productActions';
 import styles from './Home.module.css';
-import HeaderHome from '../Header/HeaderHome';
 import ProfileCard from '../ProfileCard/ProfileCard';
 import ProductCard from '../ProductCard/ProductCard';
+import Navbar from '../Navbar/Navbar';
 import ShopCard from '../ShopCard/ShopCard';
 // import productos from '../Cards/product.json';
-import Pagination from '../Pagination/Pagination';
+import Pagination from '../Pagination/BasicPagination';
 import SearchBar from '../Searchbar/Searchbar';
 import Loading from '../Loading/Loading';
 
@@ -41,38 +41,47 @@ export default function Home() {
   };
 
   return (
-    <div className={styles.home}>
-      <HeaderHome />
-      <div className={styles.homecont}>
-        <div className={styles.contweb}>
-          <ProfileCard />
-          <div className={styles.ShopCardsContainer}>
-            <h3 className={styles.title}>Mi carrito de compras</h3>
-            <ShopCard />
+    <div>
+      <Navbar />
+      <div className={styles.home}>
+        <div className={styles.homecont}>
+          <div className={styles.contweb}>
+            <ProfileCard />
           </div>
-        </div>
-
-        <div className={styles.contmobile}>
-          <SearchBar />
-          {isLoading ? (
-            <Loading />
-          ) : (
-            <div>
-              <div className={styles.ProductCardDiv}>
-                {/* <ProductCard/> */}
+          <div className={styles.home}>
+            <div className={styles.homecont}>
+              <div className={styles.contweb}>
+                <ProfileCard />
+                <div className={styles.ShopCardsContainer}>
+                  <h3 className={styles.title}>Mi carrito de compras</h3>
+                  <ShopCard />
+                </div>
               </div>
-              {currentProduct.map((product, index) => (
-                // eslint-disable-next-line react/no-array-index-key
-                <ProductCard key={index} product={product} />
-              ))}
-
-              <Pagination
-                paginado={paginado}
-                products={allProducts.length}
-                productsPerPage={productPerPage}
-              />
             </div>
-          )}
+          </div>
+
+          <div className={styles.contmobile}>
+            <SearchBar />
+            {isLoading ? (
+              <Loading />
+            ) : (
+              <div>
+                <div className={styles.ProductCardDiv}>
+                  {/* <ProductCard/> */}
+                </div>
+                {currentProduct.map((product, index) => (
+                  // eslint-disable-next-line react/no-array-index-key
+                  <ProductCard key={index} product={product} />
+                ))}
+
+                <Pagination
+                  paginado={paginado}
+                  products={allProducts.length}
+                  productsPerPage={productPerPage}
+                />
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>
