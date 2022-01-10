@@ -5,18 +5,14 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProducts } from '../../redux/actions/productActions';
 import styles from './Home.module.css';
-// import ProfileCard from '../ProfileCard/ProfileCard';
+import ProfileCard from '../ProfileCard/ProfileCard';
 import ProductCard from '../ProductCard/ProductCard';
 import Navbar from '../Navbar/Navbar';
-// import ShopCard from '../ShopCard/ShopCard';
+import ShopCard from '../ShopCard/ShopCard';
 // import productos from '../Cards/product.json';
 import Pagination from '../Pagination/BasicPagination';
-<<<<<<< HEAD
 import SearchBar from '../Searchbar/Searchbar';
 import Loading from '../Loading/Loading';
-=======
-// import SearchBar from '../Searchbar/Searchbar';
->>>>>>> cc3faf5aaeeb5ddef49c72c805c3c3229e57952e
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -40,7 +36,6 @@ export default function Home() {
     indexOfLastProduct
   );
 
-  // console.log(product);
   const paginado = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
@@ -49,24 +44,18 @@ export default function Home() {
     <div>
       <Navbar />
       <div className={styles.home}>
-          <Pagination
-            paginado={paginado}
-            products={allProducts.length}
-            productsPerPage={productPerPage}
-          />
         <div className={styles.homecont}>
-          {/* <div className={styles.contweb}>
+          <div className={styles.contweb}>
             <ProfileCard />
-          </div> */}
+          </div>
           <div className={styles.home}>
             <div className={styles.homecont}>
-              {/* <div className={styles.contweb}>
+              <div className={styles.contweb}>
                 <ProfileCard />
                 <div className={styles.ShopCardsContainer}>
                   <h3 className={styles.title}>Mi carrito de compras</h3>
                   <ShopCard />
                 </div>
-<<<<<<< HEAD
               </div>
             </div>
           </div>
@@ -77,13 +66,6 @@ export default function Home() {
               <Loading />
             ) : (
               <div>
-=======
-              </div> */}
-
-              <div className={styles.contmobile}>
-                {/* <SearchBar /> */}
-
->>>>>>> cc3faf5aaeeb5ddef49c72c805c3c3229e57952e
                 <div className={styles.ProductCardDiv}>
                   {/* <ProductCard/> */}
                 </div>
@@ -91,15 +73,12 @@ export default function Home() {
                   // eslint-disable-next-line react/no-array-index-key
                   <ProductCard key={index} product={product} />
                 ))}
-<<<<<<< HEAD
 
                 <Pagination
                   paginado={paginado}
                   products={allProducts.length}
                   productsPerPage={productPerPage}
                 />
-=======
->>>>>>> cc3faf5aaeeb5ddef49c72c805c3c3229e57952e
               </div>
             )}
           </div>
