@@ -8,7 +8,9 @@ import styles from './RollSelector.module.css';
 export default function RollSelector() {
   return (
     <div className={styles.rollselector}>
+      <Link to='/'>
       <Header />
+      </Link>
       <h1>Registrar mi</h1>
       <div className={styles.content}>
         <div className={styles.commercecontent}>
@@ -41,9 +43,11 @@ export default function RollSelector() {
           <h3>ONG</h3>
         </div>
       </div>
+      <Link to='/home'>
       <button className={styles.btn} type="submit">
         Continuar como individuo
       </button>
+      </Link>
     </div>
   );
 }
