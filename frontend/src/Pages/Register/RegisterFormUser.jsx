@@ -115,11 +115,11 @@ function Register() {
       !errors.email &&
       !errors.password &&
       !errors.validatePassword
-      ){ 
-        // dispatch(registerLocal(input));
-        dispatch(startRegister(input))
-        dispatch(startCheking())
-        navigate('/rollselector');
+    ){ 
+    // dispatch(registerLocal(input));
+    dispatch(startRegister(input))
+    dispatch(startCheking())
+    navigate('/rollselector');
     setInput({
       name: '',
       email: '',
@@ -132,7 +132,7 @@ function Register() {
     alert("Complete el formulario")
   }
   };
-
+  
   return (
     <div className={style.register}>
      <Link to="/">
