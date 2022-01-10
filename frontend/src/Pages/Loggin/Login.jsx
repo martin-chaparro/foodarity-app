@@ -30,7 +30,7 @@ export default function Login() {
     if (!expresion.test(value)) {
       setErrors({
         ...errors,
-        [name]: 'No es un email válido!',
+        [name]: 'No es un email válido!!',
       });
     } else {
       setErrors({

@@ -3,10 +3,12 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import Header from '../../Components/Header/Header';
 import styles from './RegisterFormCommerce.module.css';
 import CommerceLogo from '../../assets/Mask-Group.png';
 import {api} from '../../services/api';
+import {registerComerce} from '../../redux/actions/usersActions'
 
 let time = null;
 let time2 = null;
@@ -21,19 +23,19 @@ export default function RegisterFormCommerce() {
     stateId: null,
     cityId: null,
   };
+  const dispatch = useDispatch()
   const [formValues, setFormValues] = useState(initialFormValues);
   const navigate = useNavigate()
   const [input, setInput] = useState({
     name: '',
-    url: '',
+    website: '',
     email: '',
-    descripcion: '',
-    codigoArea: '',
-    telefono: '',
-    direccion: '',
-    numeroCalle: '',
-    codigoPostal: '',
-
+    description: '',
+    areaCode: '',
+    phone: '',
+    street: '',
+    number: '',
+    zipcode: '',
   })
 
   const searchProvincia = (term) => {
@@ -203,16 +205,17 @@ export default function RegisterFormCommerce() {
     e.preventDefault();
     if(
       !errors.name &&
-      !errors.url &&
-      !errors.descripcion &&
-      !errors.codigoArea && 
-      !errors.telefono &&
-      !errors.direccion &&
-      !errors.numeroCalle &&
-      !errors.codigoArea
+      !errors.website &&
+      !errors.description &&
+      !errors.areaCode && 
+      !errors.phone &&
+      !errors.street &&
+      !errors.number &&
+      !errors.zipcode
      
     // eslint-disable-next-line no-empty
     ){
+      dispatch(registerComerce())
       navigate('/home')
     } else {
       // eslint-disable-next-line no-alert
@@ -275,8 +278,8 @@ export default function RegisterFormCommerce() {
             <input
               className={styles.inputNombre}
               type="text"
-              name="url"
-              value={input.url}
+              name="website"
+              value={input.website}
               autoComplete="off"
               onChange={(e) => {
                 handleOnChange(e);
@@ -293,8 +296,8 @@ export default function RegisterFormCommerce() {
           <div className={styles.divInputDescripcion}>
             <textarea className={styles.inputDescripcion}
              type="text"
-             name="descripcion"
-             value={input.descripcion}
+             name="description"
+             value={input.description}
              onChange={handleOnChange}
              />
           </div>
@@ -306,8 +309,8 @@ export default function RegisterFormCommerce() {
             <input
               className={styles.areacod}
               type="text"
-              name='codigoArea'
-              value={input.codigoArea}
+              name='areaCode'
+              value={input.areaCode}
               placeholder="Cód. Área"
               onChange={(e) => {
                 handleOnChange(e);
@@ -322,8 +325,8 @@ export default function RegisterFormCommerce() {
             <input 
               className={styles.phonenumber}
               type="text"
-              name='telefono'
-              value={input.telefono}
+              name='phone'
+              value={input.phone}
               placeholder="Número"
               onChange={(e) => {
                 handleOnChange(e);
@@ -342,8 +345,8 @@ export default function RegisterFormCommerce() {
           <div className={styles.divInputAndErrorCalle}>
             <input className={styles.calle}
              type="text"
-             name='direccion'
-             value={input.direccion}
+             name='street'
+             value={input.street}
              placeholder="Calle"
              onChange={(e) => {
               handleOnChange(e);
@@ -358,8 +361,8 @@ export default function RegisterFormCommerce() {
             <input
               className={styles.numCalle}
               type="text"
-              name='numeroCalle'
-              value={input.numeroCalle}
+              name='number'
+              value={input.number}
               placeholder="Número de calle"
               onChange={(e) => {
                 handleOnChange(e);
@@ -376,8 +379,8 @@ export default function RegisterFormCommerce() {
             <input
               className={styles.inputCodPostal}
               type="text"
-              name='codigoPostal'
-              value={input.codigoPostal}
+              name='zipcode'
+              value={input.zipcode}
               placeholder="Cód. Postal"
               onChange={(e) => {
                 handleOnChange(e);
