@@ -4,7 +4,7 @@ class Product extends Model {
   static init(sequelize) {
     super.init(
       {
-        name: {
+        lote: {
           type: DataTypes.STRING,
           allowNull: false,
         },
