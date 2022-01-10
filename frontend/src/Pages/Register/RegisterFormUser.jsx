@@ -1,7 +1,7 @@
 /* eslint-disable react/button-has-type */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import Button from '@mui/material/Button';
 import Header from '../../Components/Header/Header'
@@ -115,11 +115,11 @@ function Register() {
       !errors.email &&
       !errors.password &&
       !errors.validatePassword
-    ){ 
-    // dispatch(registerLocal(input));
-    dispatch(startRegister(input))
-    dispatch(startCheking())
-    navigate('/rollselector');
+      ){ 
+        // dispatch(registerLocal(input));
+        dispatch(startRegister(input))
+        dispatch(startCheking())
+        navigate('/rollselector');
     setInput({
       name: '',
       email: '',
@@ -135,7 +135,9 @@ function Register() {
 
   return (
     <div className={style.register}>
+     <Link to="/">
         <Header/>
+        </Link>
       <form className={style.form} onSubmit={handleSubmit}>
         <div className={style.divInputs}>
           <div className={style.title}>
