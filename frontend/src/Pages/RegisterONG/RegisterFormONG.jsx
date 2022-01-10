@@ -1,18 +1,21 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import Header from '../../Components/Header/Header';
-import styles from './RegisterFormONG.module.css';
-import caridad1 from '../../assets/caridad-1.png';
+import styles from './RegisterFormCommerce.module.css';
+import CommerceLogo from '../../assets/caridad-1.png';
+import {api} from '../../services/api';
+import {registerComerce} from '../../redux/actions/usersActions'
 import Terminos from '../../Components/Term&Conditions/Terminos';
-import { api } from '../../services/api';
 import AlertOng from '../../Components/Alertas/AlertEnviarSolicitud';
 
 let time = null;
 let time2 = null;
 
-export default function RegisterFormONG() {
+export default function RegisterFormCommerce() {
   const [provincia, setprovincia] = useState([]);
   const [ciudad, setCiudad] = useState([]);
   const [termProvincia, setTermProvincia] = useState('');
@@ -22,22 +25,20 @@ export default function RegisterFormONG() {
     stateId: null,
     cityId: null,
   };
+  const dispatch = useDispatch()
   const [formValues, setFormValues] = useState(initialFormValues);
+  const navigate = useNavigate()
   const [input, setInput] = useState({
     name: '',
-    type: '2',
+    website: '',
+    email: '',
     description: '',
     areaCode: '',
     phone: '',
-    email: '',
-    website: '',
-    status: '',
     street: '',
     number: '',
     zipcode: '',
-    cityId: '',
-    stateId: '',
-  });
+  })
 
   const searchProvincia = (term) => {
     api.get(`/states?name=${term}`).then((response) => {
@@ -113,6 +114,28 @@ export default function RegisterFormONG() {
     setTermCiudad(target.value);
   };
 
+  const validateEmail = (e) => {
+    const { name, value } = e.target;
+    const expresion =
+      // eslint-disable-next-line no-useless-escape
+      /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+    setInput({
+      ...input,
+      [name]: value,
+    });
+    if (!expresion.test(value)) {
+      setErrors({
+        ...errors,
+        [name]: 'No es un email valido!',
+      });
+    } else {
+      setErrors({
+        ...errors,
+        [name]: '',
+      });
+    }
+  };
+
   const validateLetters = (e) => {
     const { name, value } = e.target;
     setInput({
@@ -141,7 +164,7 @@ export default function RegisterFormONG() {
     if (!/^(ftp|http|https):\/\/[^ "]+$/.test(value)) {
       setErrors({
         ...errors,
-        [name]: 'La URL no es valida!',
+        [name]: 'La URL no es valida! - Debe contener https://www',
       });
     } else {
       setErrors({
@@ -179,18 +202,44 @@ export default function RegisterFormONG() {
     });
   };
 
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if(
+      !errors.name &&
+      !errors.website &&
+      !errors.description &&
+      !errors.areaCode && 
+      !errors.phone &&
+      !errors.street &&
+      !errors.number &&
+      !errors.zipcode
+     
+    // eslint-disable-next-line no-empty
+    ){
+      dispatch(registerComerce())
+      navigate('/home')
+    } else {
+      // eslint-disable-next-line no-alert
+      alert("Complete el formulario")
+    }
+  }
   return (
     <div className={styles.RegisterFormCommerce}>
       <Header />
-      <form className={styles.form}>
+      <form  autoComplete='off' className={styles.form} onSubmit={handleSubmit}>
         <div className={styles.containerLogo}>
           <div className={styles.commerceLogo}>
-            <img className={styles.imgLogo} src={caridad1} alt="ONGLogo" />
+            <img
+              className={styles.imgLogo}
+              src={CommerceLogo}
+              alt="CommerLogo"
+            />
           </div>
         </div>
         <div className={styles.divsInputs}>
           <div className={styles.labelNombre}>
-            <label>Nombre de la ONG</label>
+            <label>Nombre del comercio</label>
           </div>
           <div className={styles.divInputNombre}>
             <input
@@ -204,17 +253,28 @@ export default function RegisterFormONG() {
                 validateLetters(e);
               }}
             />
-            <p>{errors.name}</p>
+            <div className={styles.divErrorName}>
+              <p className={styles.errors}>{errors.name}</p>
+            </div>
           </div>
           <div className={styles.labelEmail}>
-            <label>Email de la Organización</label>
+            <label>Email de la empresa</label>
           </div>
           <div className={styles.divInputEmail}>
             <input
               className={styles.inputEmail}
               type="texto"
               autoComplete="off"
+              name="email"
+              value={input.email}
+              onChange={(e) => {
+                handleOnChange(e);
+                validateEmail(e);
+              }}
             />
+            <div className={styles.divErrorEmail}>
+              <p className={styles.errors}>{errors.email}</p>
+            </div>
           </div>
           <div className={styles.labelUrl}>
             <label>Url de sitio web</label>
@@ -231,28 +291,30 @@ export default function RegisterFormONG() {
                 validateUrl(e);
               }}
             />
-            <p>{errors.website}</p>
+            <div className={styles.divErrorUrl}>
+              <p className={styles.errors}>{errors.website}</p>
+            </div>
           </div>
           <div className={styles.labelDescripcion}>
             <label>Descripción</label>
           </div>
           <div className={styles.divInputDescripcion}>
-            <textarea
-              className={styles.inputDescripcion}
-              type="text"
-              name="description"
-              value={input.description}
-              onChange={handleOnChange}
-            />
+            <textarea className={styles.inputDescripcion}
+             type="text"
+             name="description"
+             value={input.description}
+             onChange={handleOnChange}
+             />
           </div>
           <div className={styles.divlabelPhone}>
             <label className={styles.labelPhone}>Teléfono</label>
           </div>
           <div className={styles.phoneDivs}>
+            <div className={styles.divInputAndErrorAreaCod}>
             <input
               className={styles.areacod}
               type="text"
-              name="areaCode"
+              name='areaCode'
               value={input.areaCode}
               placeholder="Cód. Área"
               onChange={(e) => {
@@ -260,40 +322,51 @@ export default function RegisterFormONG() {
                 validateNum(e);
               }}
             />
-            <p>{errors.areaCode}</p>
-            <input
+            <div className={styles.divErrorAreaCod}>
+            <p className={styles.errors}>{errors.areaCode}</p>
+            </div>
+            </div>
+            <div  className={styles.divInputAndErrorTelefono}>
+            <input 
               className={styles.phonenumber}
               type="text"
-              name="phone"
+              name='phone'
               value={input.phone}
               placeholder="Número"
               onChange={(e) => {
                 handleOnChange(e);
                 validateNum(e);
               }}
-            />
-            <p>{errors.phone}</p>
+              />
+              <div className={styles.divErrorTelefono}>
+                <p className={styles.errors}>{errors.phone}</p>
+              </div>
+            </div>
           </div>
           <div className={styles.divlabelDir}>
             <label className={styles.labelDir}>Dirección</label>
           </div>
           <div className={styles.divInputsCalleyNum}>
-            <input
-              className={styles.street}
-              type="text"
-              name="direccion"
-              value={input.direccion}
-              placeholder="street"
-              onChange={(e) => {
-                handleOnChange(e);
-                validateLetters(e);
-              }}
-            />
-            <p>{errors.direccion}</p>
+          <div className={styles.divInputAndErrorCalle}>
+            <input className={styles.calle}
+             type="text"
+             name='street'
+             value={input.street}
+             placeholder="Calle"
+             onChange={(e) => {
+              handleOnChange(e);
+              validateLetters(e);
+            }}
+             />
+             <div className={styles.divErrorDireccion}>
+             <p className={styles.errors}>{errors.street}</p>
+             </div>
+             </div>
+             <div className={styles.divInputAndErrorNumCalle}>
             <input
               className={styles.numCalle}
               type="text"
-              name="number"
+              name='number'
               value={input.number}
               placeholder="Número de calle"
               onChange={(e) => {
@@ -301,21 +374,29 @@ export default function RegisterFormONG() {
                 validateNum(e);
               }}
             />
-            <p>{errors.number}</p>
+            <div className={styles.divErrorCalle}>
+            <p className={styles.errors}>{errors.number}</p>
+            </div>
+              </div>
+            </div>
           </div>
           <div className={styles.divCodPostal}>
+            <div className={styles.divInputAndErrorCodPostal}>
             <input
               className={styles.inputCodPostal}
               type="text"
-              name="zipcode"
+              name='zipcode'
               value={input.zipcode}
-              placeholder="Código Postal"
+              placeholder="Cód. Postal"
               onChange={(e) => {
                 handleOnChange(e);
                 validateNum(e);
               }}
             />
-            <p>{errors.zipcode}</p>
+            <div className={styles.divErrorPostalCod}>
+            <p className={styles.errors}>{errors.zipcode}</p>
+            </div>
+          </div>
           </div>
           <div className={styles.divCiudadyProv}>
             <div>
@@ -348,7 +429,7 @@ export default function RegisterFormONG() {
               <input
                 className={styles.inputCiudad}
                 type="text"
-                placeholder="cityId"
+                placeholder="Ciudad"
                 value={termCiudad}
                 onChange={handleInputCiudad}
               />
@@ -370,18 +451,18 @@ export default function RegisterFormONG() {
                 </div>
               )}
             </div>
+          </div>  
+          <div className={styles.Terms}>
+            {/* BOTON DE ACEPTAR TERMINOS Y CONDICIONES: Dicho botón se encuentra 
+          dentro del componente Terminos, si se quiere editar el CSS de este botón
+          debes editarlo desde el componente Terminos, que se encuentra dentro de la carpeta Componentes. */}
+            <Terminos />
           </div>
-          {/* <div className={styles.divSelects}>
-            <select className={styles.selectCiudad}>
-              <option value="City">Ciudad</option>
-            </select>
-            <select className={styles.selectProvincia}>
-              <option value="Prov">Provincia</option>
-            </select>
-          </div> */}
-        </div>
-        <Terminos />
+
         <div className={styles.divButton}>
+          {/* BOTON DE ENVIAR SOLICITUD: Dicho botón se encuentra 
+          dentro del componente Alert Ong y para conectar el submit 
+          con el backend debe configurarse en ese mismo componente AlertOng */}
           <AlertOng />
         </div>
       </form>
