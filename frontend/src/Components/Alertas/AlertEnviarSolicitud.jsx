@@ -6,6 +6,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import { Link } from 'react-router-dom';
 
 /**
  * Este componente es un alert para los componentes Formularios Crear Comercio y Crear ONG.
@@ -53,7 +54,9 @@ export default function AlertDialog() {
           un handleSubmit o handleChange para que redirija los datos de registro al Backend 
           y además redirija al Home una vez haya finalizado. 
           Actualmente solo tiene un handleClose para cerrar ventana */}
-          <Button onClose={handleClose}>OK</Button>
+          <Link to="/home">
+            <Button onClose={handleClose}>OK</Button>
+          </Link>
         </DialogActions>
       </Dialog>
     </div>

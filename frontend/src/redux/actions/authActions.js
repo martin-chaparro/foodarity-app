@@ -45,7 +45,7 @@ export const startLogin = (email, password) => {
           name,
         })
       );
-      window.location.replace('/home');
+      window.location.replace('/rollSelector');
     } catch (error) {
       console.log(error);
       // eslint-disable-next-line no-alert
@@ -89,6 +89,3 @@ export const startRegister = (input) => {
     }
   };
 };
-
-
-
