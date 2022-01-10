@@ -20,6 +20,7 @@ function Register() {
     password: '',
     validatePassword: '',
   });
+  
 
   const validateLetters = (e) => {
     const { name, value } = e.target;
