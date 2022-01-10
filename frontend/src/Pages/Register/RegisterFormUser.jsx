@@ -152,8 +152,9 @@ function Register() {
               validateLetters(e);
             }}
           />
-          <p>{errors.name}</p>
-       
+          <div className={style.divErrorNombre}>
+          <p className={style.errors}>{errors.name}</p>
+          </div>
           <label className={style.title}>Ingrese Su Email</label>
           <input
             className={style.inputs}
@@ -166,7 +167,9 @@ function Register() {
               validateEmail(e);
             }}
           />
-          <p>{errors.email}</p>
+          <div className={style.divErrorEmail}>
+          <p className={style.errors}>{errors.email}</p>
+          </div>
           <label className={style.title}>Ingrese Su Contraseña</label>
           <input
             className={style.inputs}
@@ -179,7 +182,9 @@ function Register() {
               validatePassword(e);
             }}
           />
-          <p>{errors.password}</p>
+          <div className={style.divErrorPassword}>
+          <p className={style.errors}>{errors.password}</p>
+          </div>
           <label className={style.title}>Repita Su Contraseña</label>
           <input
             className={style.inputs}
@@ -192,7 +197,9 @@ function Register() {
               validatePassword2(e);
             }}
           />
-          <p>{errors.validatePassword}</p>
+           <div className={style.divErrorPassword2}>
+          <p className={style.errors}>{errors.validatePassword}</p>
+          </div>
         </div>
             <div className={style.buttonsDiv}>
         <Button

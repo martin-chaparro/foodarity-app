@@ -46,3 +46,25 @@ a {
   height: 2.2em;
   width: 20em;
 }
+
+.errors {
+  color: rgba(255, 29, 29, 0.7);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.divErrorEmail {
+  width: 270px;
+  height: 25px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.divErrorContraseña {
+  width: 270px;
+  height: 25px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}

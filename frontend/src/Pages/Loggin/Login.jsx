@@ -29,7 +29,7 @@ export default function Login() {
     if (!expresion.test(value)) {
       setErrors({
         ...errors,
-        [name]: 'No es un email válido!!',
+        [name]: 'No es un email válido!',
       });
     } else {
       setErrors({
@@ -94,8 +94,9 @@ export default function Login() {
               validateEmail(e);
             }}
           />
-          <p>{errors.email}</p>
-
+          <div className={estilos.divErrorEmail}>
+          <p className={estilos.errors}>{errors.email}</p>
+          </div>
           <h3>Ingrese su Contraseña</h3>
           <input
             type="password"
@@ -109,7 +110,9 @@ export default function Login() {
               validatePassword(e);
             }}
           />
-          <p>{errors.password}</p>
+          <div className={estilos.divErrorContraseña}>
+          <p className={estilos.errors}>{errors.password}</p>
+          </div>
           <Button
             variant="contained"
             sx={{
