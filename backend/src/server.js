@@ -34,6 +34,7 @@ class Server {
     this.provincias = require('./database/seeders/data/provincias.json');
     this.municipios = require('./database/seeders/data/municipios.json');
     this.products = require('./database/seeders/data-hardcode/products.json');
+    this.categories = require('./database/seeders/data/categories.json');
   }
 
   // express instance
@@ -99,11 +100,7 @@ class Server {
     }
     try {
       console.log('||--> Seed categories database...: <--||');
-      await Category.bulkCreate([
-        { name: 'Almacen' },
-        { name: 'Restorant/Rotiseria' },
-        { name: 'Verduleria' },
-      ]);
+      await Category.bulkCreate(this.categories);
     } catch (error) {
       console.log('||--> Seed categories not completed...: <--||');
     }
@@ -111,7 +108,7 @@ class Server {
       console.log('||--> Seed products(HARDCODE) database...: <--||');
       this.products.forEach(async (product) => {
         const {
-          name,
+          lote,
           description,
           photo,
           price,
@@ -120,7 +117,7 @@ class Server {
           category,
         } = product;
         const newProduct = await Product.create({
-          name,
+          lote,
           description,
           photo,
           price,

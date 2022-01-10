@@ -4,7 +4,7 @@ class Product extends Model {
   static init(sequelize) {
     super.init(
       {
-        name: {
+        lote: {
           type: DataTypes.STRING,
           allowNull: false,
         },
@@ -41,7 +41,7 @@ class Product extends Model {
   }
 
   static associate(models) {
-    this.hasOne(models.Category);
+    this.belongsTo(models.Category);
   }
 }
 
