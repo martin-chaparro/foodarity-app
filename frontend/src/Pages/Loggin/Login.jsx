@@ -82,8 +82,8 @@ export default function Login() {
 
   return (
     <div backgroundColor="transparent">
-      <Link to='/'>
-      <Header />
+      <Link to="/">
+        <Header />
       </Link>
       <div>
         <div className={estilos.contener}>
@@ -92,7 +92,7 @@ export default function Login() {
             type="text"
             name="email"
             value={input.email}
-            autoComplete='off'
+            autoComplete="off"
             title="Email requerido"
             pattern="[a-zA-Z ]{2,254}"
             required
@@ -103,7 +103,7 @@ export default function Login() {
             }}
           />
           <div className={estilos.divErrorEmail}>
-          <p className={estilos.errors}>{errors.email}</p>
+            <p className={estilos.errors}>{errors.email}</p>
           </div>
           <h3>Ingrese su Contraseña</h3>
           <input
@@ -119,7 +119,7 @@ export default function Login() {
             }}
           />
           <div className={estilos.divErrorContraseña}>
-          <p className={estilos.errors}>{errors.password}</p>
+            <p className={estilos.errors}>{errors.password}</p>
           </div>
           <Button
             variant="contained"
