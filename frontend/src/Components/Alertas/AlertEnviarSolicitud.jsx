@@ -13,7 +13,7 @@ import { Link } from 'react-router-dom';
  * Puede editarse el CSS de acuerdo a la documentación de Material UI,
  * además de cambiar su mensaje de acuerdo al objetivo que se requiera.
  */
-export default function AlertDialog() {
+export default function AlertDialog({ display }) {
   const [open, setOpen] = React.useState(false);
   // const dispatch = useDispatch();
 
@@ -32,7 +32,12 @@ export default function AlertDialog() {
 
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={handleClickOpen}
+        disabled={display}
+      >
         Enviar Solicitud
       </Button>
       <Dialog
