@@ -4,6 +4,42 @@ const Product = require('../models/Product');
 const User = require('../models/User');
 const Company = require('../models/Company');
 
+const include = [
+  {
+    model: Category,
+    as: 'category',
+    attributes: {
+      exclude: ['createdAt', 'updatedAt'],
+    },
+  },
+  {
+    model: Company,
+    as: 'company',
+    attributes: {
+      exclude: ['createdAt', 'updatedAt'],
+    },
+  },
+  {
+    model: User,
+    as: 'publisher',
+    attributes: {
+      exclude: ['createdAt', 'updatedAt', 'password'],
+    },
+  },
+]
+const attributes = {
+  exclude: [
+    'createdAt',
+    'updatedAt',
+    'CategoryId',
+    'CompanyId',
+    'categoryId',
+    'companyId',
+    'publisherId',
+    'UserId',
+  ],
+}
+
 const getProducts = async (req, res) => {
   try {
     const {
@@ -58,56 +94,23 @@ const getProducts = async (req, res) => {
       whereAttr.expirationDate = { [Op.lte]: expirationDate };
     }
 
-    const attributes = {
+    const params = {
       where: whereAttr,
-      include: [
-        {
-          model: Category,
-          as: 'category',
-          attributes: {
-            exclude: ['createdAt', 'updatedAt'],
-          },
-        },
-        {
-          model: Company,
-          as: 'company',
-          attributes: {
-            exclude: ['createdAt', 'updatedAt'],
-          },
-        },
-        {
-          model: User,
-          as: 'publisher',
-          attributes: {
-            exclude: ['createdAt', 'updatedAt', 'password'],
-          },
-        },
-      ],
+      include,
       order: orderAttr,
-      attributes: {
-        exclude: [
-          'createdAt',
-          'updatedAt',
-          'CategoryId',
-          'CompanyId',
-          'categoryId',
-          'companyId',
-          'publisherId',
-          'UserId',
-        ],
-      },
+      attributes,
     };
 
     if (size) {
-      attributes.limit = size;
-      attributes.offset = (page - 1) * size;
+      params.limit = size;
+      params.offset = (page - 1) * size;
     }
 
-    const products = await Product.findAll(attributes);
-    const count = await Product.count(attributes);
-    delete attributes.limit;
-    delete attributes.offset;
-    const totalCount = await Product.count(attributes);
+    const products = await Product.findAll(params);
+    const count = await Product.count(params);
+    delete params.limit;
+    delete params.offset;
+    const totalCount = await Product.count(params);
     const pages = Math.ceil(count / size);
     res.json({
       products,
@@ -206,41 +209,8 @@ const getCompanyProductsById = async (req, res) => {
     const products = await Product.findAll({
       where: { CompanyId: id, status: 'published' },
       order: [['id', 'DESC']],
-      include: [
-        {
-          model: Category,
-          as: 'category',
-          attributes: {
-            exclude: ['createdAt', 'updatedAt'],
-          },
-        },
-        {
-          model: Company,
-          as: 'company',
-          attributes: {
-            exclude: ['createdAt', 'updatedAt'],
-          },
-        },
-        {
-          model: User,
-          as: 'publisher',
-          attributes: {
-            exclude: ['createdAt', 'updatedAt', 'password'],
-          },
-        },
-      ],
-      attributes: {
-        exclude: [
-          'createdAt',
-          'updatedAt',
-          'CategoryId',
-          'CompanyId',
-          'categoryId',
-          'companyId',
-          'publisherId',
-          'UserId',
-        ],
-      },
+      include,
+      attributes,
     });
     res.json(products);
   } catch (error) {
@@ -257,41 +227,8 @@ const getCompanyProductsByAuth = async (req, res) => {
     const products = await Product.findAll({
       where: { CompanyId: id },
       order: [['id', 'DESC']],
-      include: [
-        {
-          model: Category,
-          as: 'category',
-          attributes: {
-            exclude: ['createdAt', 'updatedAt'],
-          },
-        },
-        {
-          model: Company,
-          as: 'company',
-          attributes: {
-            exclude: ['createdAt', 'updatedAt'],
-          },
-        },
-        {
-          model: User,
-          as: 'publisher',
-          attributes: {
-            exclude: ['createdAt', 'updatedAt', 'password'],
-          },
-        },
-      ],
-      attributes: {
-        exclude: [
-          'createdAt',
-          'updatedAt',
-          'CategoryId',
-          'CompanyId',
-          'categoryId',
-          'companyId',
-          'publisherId',
-          'UserId',
-        ],
-      },
+      include,
+      attributes,
     });
     res.json(products);
   } catch (error) {
@@ -303,41 +240,8 @@ const getProductById = async (req, res) => {
   try {
     const { id } = req.params;
     const product = await Product.findByPk(id, {
-      include: [
-        {
-          model: Category,
-          as: 'category',
-          attributes: {
-            exclude: ['createdAt', 'updatedAt'],
-          },
-        },
-        {
-          model: Company,
-          as: 'company',
-          attributes: {
-            exclude: ['createdAt', 'updatedAt'],
-          },
-        },
-        {
-          model: User,
-          as: 'publisher',
-          attributes: {
-            exclude: ['createdAt', 'updatedAt', 'password'],
-          },
-        },
-      ],
-      attributes: {
-        exclude: [
-          'createdAt',
-          'updatedAt',
-          'CategoryId',
-          'CompanyId',
-          'categoryId',
-          'companyId',
-          'publisherId',
-          'UserId',
-        ],
-      },
+      include,
+      attributes,
     });
     if (!product) {
       return res.status(404).json({ msg: 'Not found' });
