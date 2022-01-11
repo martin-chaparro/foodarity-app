@@ -14,4 +14,11 @@
   position: relative;
   right: 25px;
   z-index: 2;
+  cursor: pointer;
+}
+
+/* modificar pagina actual */
+.btn:disabled {
+  cursor: auto;
+  background-color: #8e6bbe;
 }

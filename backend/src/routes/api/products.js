@@ -10,9 +10,10 @@ const {
 } = require('../../controllers/productsController');
 
 router.get('/', getProducts);
-router.post('/', authMiddleware, ValidationProduct.post, postProduct);
+router.post('/', authMiddleware, ValidationProduct.post, postProduct); // TODO manejar la imagen cloudinary
 router.delete('/delete/:id', authMiddleware, deletePublication);
-// get by company id
-// get by token
+// por id de product
+// get by company id por params (solo published)
+// get by token 
 
 module.exports = router;
