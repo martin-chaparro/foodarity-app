@@ -13,7 +13,7 @@ cloudinary.config(process.env.CLOUDINARY_URL);
 // crear una empresa
 const createCompany = async (req, res) => {
   try {
-    const ownerId = req.userId;
+    const ownerId = req.userId; // revisar con chapa
 
     const {
       name,

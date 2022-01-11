@@ -12,6 +12,10 @@ class Product extends Model {
           type: DataTypes.STRING,
           allowNull: false,
         },
+        quantity: {
+          type: DataTypes.INTEGER,
+          allowNull: false,
+        },
         photo: {
           type: DataTypes.STRING,
           allowNull: true,
@@ -29,7 +33,13 @@ class Product extends Model {
           allowNull: false,
         },
         status: {
-          type: DataTypes.ENUM('published', 'reserved', 'sold', 'expired'),
+          type: DataTypes.ENUM(
+            'published',
+            'reserved',
+            'sold',
+            'expired',
+            'canceled'
+          ),
           allowNull: false,
           defaultValue: 'published',
         },
