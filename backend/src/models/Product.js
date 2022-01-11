@@ -51,8 +51,9 @@ class Product extends Model {
   }
 
   static associate(models) {
-    this.belongsTo(models.Category);
-    this.belongsTo(models.Company);
+    this.belongsTo(models.Category, { as: 'category' });
+    this.belongsTo(models.Company, { as: 'company' });
+    this.belongsTo(models.User, { as: 'publisher' });
   }
 }
 

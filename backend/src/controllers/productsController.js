@@ -1,6 +1,44 @@
 const { Op } = require('sequelize');
 const Category = require('../models/Category');
 const Product = require('../models/Product');
+const User = require('../models/User');
+const Company = require('../models/Company');
+
+const include = [
+  {
+    model: Category,
+    as: 'category',
+    attributes: {
+      exclude: ['createdAt', 'updatedAt'],
+    },
+  },
+  {
+    model: Company,
+    as: 'company',
+    attributes: {
+      exclude: ['createdAt', 'updatedAt'],
+    },
+  },
+  {
+    model: User,
+    as: 'publisher',
+    attributes: {
+      exclude: ['createdAt', 'updatedAt', 'password'],
+    },
+  },
+]
+const attributes = {
+  exclude: [
+    'createdAt',
+    'updatedAt',
+    'CategoryId',
+    'CompanyId',
+    'categoryId',
+    'companyId',
+    'publisherId',
+    'UserId',
+  ],
+}
 
 const getProducts = async (req, res) => {
   try {
@@ -56,32 +94,23 @@ const getProducts = async (req, res) => {
       whereAttr.expirationDate = { [Op.lte]: expirationDate };
     }
 
-    const attributes = {
+    const params = {
       where: whereAttr,
-      include: [
-        {
-          model: Category,
-          attributes: {
-            exclude: ['createdAt', 'updatedAt'],
-          },
-        },
-      ],
+      include,
       order: orderAttr,
-      attributes: {
-        exclude: ['createdAt', 'updatedAt', 'CategoryId'],
-      },
+      attributes,
     };
 
     if (size) {
-      attributes.limit = size;
-      attributes.offset = (page - 1) * size;
+      params.limit = size;
+      params.offset = (page - 1) * size;
     }
 
-    const products = await Product.findAll(attributes);
-    const count = await Product.count(attributes);
-    delete attributes.limit;
-    delete attributes.offset;
-    const totalCount = await Product.count(attributes);
+    const products = await Product.findAll(params);
+    const count = await Product.count(params);
+    delete params.limit;
+    delete params.offset;
+    const totalCount = await Product.count(params);
     const pages = Math.ceil(count / size);
     res.json({
       products,
@@ -90,13 +119,26 @@ const getProducts = async (req, res) => {
       pages: pages || 1,
     });
   } catch (error) {
-    res.send(error);
+    res.status(500).send(error);
   }
 };
 
 const postProduct = async (req, res) => {
   // TODO auth de company que publica y guardar el id
   try {
+    const { userId } = req;
+    const user = await User.findByPk(userId, {
+      include: [{ model: Company }],
+    });
+    if (!user.CompanyId) {
+      return res.json({ msg: 'El usuaria no posee un comercio' });
+    }
+    if (user.Company.type_id !== 1) {
+      return res.json({
+        msg: 'Solo las companias tipo comercio pueden publicar productos',
+      });
+    }
+
     const {
       lote,
       description,
@@ -118,17 +160,35 @@ const postProduct = async (req, res) => {
       status: 'published',
     });
     await newProduct.setCategory(category);
-    res.json(newProduct);
+    await newProduct.setCompany(user.Company);
+    await newProduct.setPublisher(userId);
+    return res.json(newProduct);
   } catch (error) {
-    res.send(error);
+    return res.status(500).send(error);
   }
 };
 
-const cancelPublication = async (req, res) => {
-  // TODO auth de que el que la esta cancelando sea quien lo publico
+const deletePublication = async (req, res) => {
   try {
+    const { userId } = req;
+    const user = await User.findByPk(userId, {
+      include: [{ model: Company }],
+    });
     const { id } = req.params;
-    const product = await Product.update(
+    let product = await Product.findByPk(id);
+    if (!product) {
+      return res.status(404).json({ msg: 'Not found' });
+    }
+
+    if (product.companyId !== user.CompanyId) {
+      return res.json({ msg: 'Tu compania no publico este producto' });
+    }
+    if (product.status !== 'published') {
+      return res.json({
+        msg: 'No puedes borrar un producto que ya no esta publicado',
+      });
+    }
+    await Product.update(
       {
         status: 'canceled',
       },
@@ -136,25 +196,67 @@ const cancelPublication = async (req, res) => {
         where: { id },
       }
     );
-    res.json(product);
+    product = await Product.findByPk(id);
+    return res.json({ msg: 'success', data: product });
   } catch (error) {
-    res.send(error);
+    return res.status(500).send(error);
   }
 };
 
-const getCompanyProducts = async (req, res) => {
+const getCompanyProductsById = async (req, res) => {
   try {
     const { id } = req.params;
-    const products = await Product.findAll({ where: { CompanyId: id } }); // TODO terminar de conectar cuando este conectado con companies
+    const products = await Product.findAll({
+      where: { CompanyId: id, status: 'published' },
+      order: [['id', 'DESC']],
+      include,
+      attributes,
+    });
     res.json(products);
   } catch (error) {
-    res.send(error);
+    res.status(500).send(error);
+  }
+};
+
+const getCompanyProductsByAuth = async (req, res) => {
+  try {
+    const { userId } = req;
+    const user = await User.findByPk(userId);
+    const id = user.CompanyId;
+    console.log(id);
+    const products = await Product.findAll({
+      where: { CompanyId: id },
+      order: [['id', 'DESC']],
+      include,
+      attributes,
+    });
+    res.json(products);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
+
+const getProductById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const product = await Product.findByPk(id, {
+      include,
+      attributes,
+    });
+    if (!product) {
+      return res.status(404).json({ msg: 'Not found' });
+    }
+    return res.status(200).json(product);
+  } catch (error) {
+    return res.status(500).send(error);
   }
 };
 
 module.exports = {
   getProducts,
   postProduct,
-  cancelPublication,
-  getCompanyProducts,
+  deletePublication,
+  getCompanyProductsById,
+  getProductById,
+  getCompanyProductsByAuth,
 };

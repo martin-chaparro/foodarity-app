@@ -7,250 +7,130 @@
     "publicationDate": "07/01/2022",
     "expirationDate":"08/01/2022",
     "quantity":5,
-    "category":4
-    
+    "category":4,
+    "publisher":1
   },
   {
-    "lote":"Tortas Mix",
-    "description":"En este paquete podrás encontrar deliciosos tipos de tortas preparadas en el día: 1kg Selva Negra , 1kg Marquise , 1kg Rogel , 500gr Chocotorta ",
-    "photo":"https://st.depositphotos.com/2038145/1967/i/950/depositphotos_19678993-stock-photo-cakes-on-display-in-an.jpg",
-    "price":1500.00,
-    "publicationDate": "10/01/2022",
-    "expirationDate":"11/01/2022",
-    "quantity":3,
-    "category":4
-    
-  },
-  {
-    "lote":"Masas dulces Mix",
-    "description":"En este paquete podrás encontrar deliciosos tipos de masas preparadas en el día: 1kg pan de queso , 1kg alfajores , 1kg brownies , 500gr pepas de chocolate, 500gr conitos ",
-    "photo":"https://www.nuria.com.ar/wp-content/uploads/2018/12/Confiteria-Nuria-2018-263.jpg",
-    "price":800.00,
-    "publicationDate": "12/01/2022",
-    "expirationDate":"12/01/2022",
-    "quantity":5,
-    "category":4
-    
-  },
-  {
-    "lote":"Facturas Mix",
-    "description":"En este paquete podrás encontrar deliciosos tipos de facturas preparadas en el día: 300gr medialunas , 300gr facturas con dulce de leche , 300gr facturas con membrillo , 300gr facturas con crema pastelera, 500gr hojaldradas ",
-    "photo":"https://www.nanette.com.ar/wp-content/uploads/2020/06/facturas-ok.png",
-    "price":1000.00,
-    "publicationDate": "12/01/2022",
-    "expirationDate":"12/01/2022",
-    "quantity":6,
-    "category":4
-    
-  },
-  {
-    "lote":"Postres en Vaso Mix",
-    "description":"En este paquete podrás encontrar deliciosos tipos de postres en vaso preparadas en el día: 1 porcion chocotorta , 1 porcion tiramisu , 1 porcion lemon pie",
-    "photo":"https://www.cocinavital.mx/wp-content/uploads/2018/02/postres_vasitos.jpg",
-    "price":800.00,
-    "publicationDate": "12/01/2022",
-    "expirationDate":"12/01/2022",
-    "quantity":10,
-    "category":5
-    
-  },
-  {
-    "lote":"Porciones Mix",
-    "description":"En este paquete podrás encontrar deliciosos tipos de porciones de postres preparados en el día: 6 unidades bombones de frutilla , 1 porcion chocoreo, 4 unidades alfajor helado, 3 unidades anana rellena",
-    "photo":"https://i.ytimg.com/vi/_1M40VlRmUk/maxresdefault.jpg",
-    "price":1500.00,
-    "publicationDate": "03/01/2022",
-    "expirationDate":"05/01/2022",
-    "quantity":6,
-    "category":5
-    
-  },
-  {
-    "lote":" Combos Hamburguesas Mix",
-    "description":"En este paquete podrás encontrar diferentes tipos de combos preparados en el día: 6 unidades hamburguesa doble , 1 unidad hamburguesa triple cheddar, 4 unidades papas fritas, 3 vasos Coca-Cola",
-    "photo":"https://vivo247.com/wp-content/uploads/2020/03/mostaza.jpg",
-    "price":2000.00,
-    "publicationDate": "03/01/2022",
-    "expirationDate":"05/01/2022",
-    "quantity":6,
-    "category":6
-    
-  },
-  {
-    "lote":" McCombos Mix",
-    "description":"En este paquete podrás encontrar diferentes tipos de combos preparados en el día: 3 unidades hamburguesa doble , 1 unidad hamburguesa pollo, 4 unidades papas fritas, 4 vasos Coca-Cola, 1 porcion nugets pollo",
-    "photo":"https://www.elliberal.com.ar/fotos/notas/2018/11/02/454054_20181102135511.jpg",
-    "price":1500.00,
-    "publicationDate": "12/01/2022",
-    "expirationDate":"12/01/2022",
-    "quantity":15,
-    "category":6
-    
-  },
-  {
-    "lote":" Snacks cerveceros Mix",
-    "description":"En este paquete podrás encontrar diferentes tipos de snaks preparados en el día: 2 unidades palitos 'POP' , 1 unidad Mani, 4 unidades papas fritas 'Pringles', 2 unidades Twistos, 1 unidad 3-D, 1 unidad cerveza 'Heineken'",
-    "photo":"https://http2.mlstatic.com/D_NQ_NP_878302-MLA44882753397_022021-O.jpg",
-    "price":1000.00,
-    "publicationDate": "12/01/2022",
-    "expirationDate":"12/01/2022",
-    "quantity":15,
-    "category":1
-    
-  },
-  {
-    "lote":"Lacteos Mix",
-    "description":"En este paquete podrás encontrar diferentes tipos de lacteos : 2 pack leche entera , 1 doc huevos, 4 pack yogurt descremado, 2kg queso sardo, 1kg queso mar del plata",
-    "photo":"https://clubdelicatessen.com/wp-content/uploads/2021/05/productos-lacteos.jpg",
-    "price":1700.00,
-    "publicationDate": "03/01/2022",
-    "expirationDate":"06/01/2022",
-    "quantity":10,
-    "category":1
-    
-  },
-  {
-    "lote":"Untables Mix",
-    "description":"En este paquete podrás encontrar diferentes tipos de untables para el desayuno : 1 unidad dulce de leche clasico , 1 unidad dulce de leche repostero, 1 unidad dulce de leche con chocolate, 1 unidad mermelada damasco, 1 unidad mermelada narnaja",
-    "photo":"https://2.bp.blogspot.com/-_Qv00SSEx3E/WvJBabxp8VI/AAAAAAAAC6U/fJU8qtsEn40DCkd7WpRDYIJukAUwfcCwACLcBGAs/s1600/dulce-de-leche.jpg",
-    "price":590.00,
-    "publicationDate": "03/01/2022",
-    "expirationDate":"12/01/2022",
-    "quantity":10,
-    "category":1
-    
-  },
-  {
-    "lote":"Viandas Almuerzo Mix",
-    "description":"En este paquete podrás encontrar diferentes tipos de viandas para el almuerzo : 2 unidades Pescado con pure de papas , 2 unidades Pastel de papa, 2 unidades pollo con arroz",
-    "photo":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBT-6DBXC1pPxuuKjjEqqd7Km-0ln8gMsJ4_0jCJkFPL_QVzvC7zSO3YkIQl_PVOSX5rk&usqp=CAU",
-    "price":1500.00,
-    "publicationDate": "12/01/2022",
-    "expirationDate":"12/01/2022",
-    "quantity":10,
-    "category":2
-    
-  },
-  {
-    "lote":"Pastas Mix",
-    "description":"En este paquete podrás encontrar diferentes tipos de pastas frescas : 1kg spaguetti , 200gr ravioles verdura, 200gr ravioles ricota, 500gr fideo moñito",
-    "photo":"https://blog.flota.es/wp-content/uploads/2017/09/diez-tipos-de-pasta-que-deberias-conocer.jpg",
-    "price":900.00,
-    "publicationDate": "12/01/2022",
-    "expirationDate":"12/01/2022",
-    "quantity":30,
-    "category":2
-    
-  },
-  {
-    "lote":"Verduras frescas Mix",
-    "description":"En este paquete podrás encontrar diferentes tipos de verduras frescas : 1 atado albhaca , 1 atado espinaca, 1 atado lechuga, 500gr zuchinni, 500gr zapallo , 500gr ajo y cebolla",
-    "photo":"https://laferiadelivery.cl/web/wp-content/uploads/2020/06/CANASTA.jpg",
-    "price":900.00,
-    "publicationDate": "12/01/2022",
-    "expirationDate":"12/01/2022",
-    "quantity":50,
-    "category":3
-    
-  },
-  {
-    "lote":"Frutas de estacion Mix",
-    "description":"En este paquete podrás encontrar diferentes tipos de frutas frescas: 400gr manzanas verdes, 400gr manzanas rojas, 200gr naranjas, 200gr kiwis, 200gr frutillas",
-    "photo":"https://s1.best-wallpaper.net/wallpaper/m/1805/Many-fruit-berries-plum-peach-cherry-lemon_m.jpg",
-    "price":1500.00,
-    "publicationDate": "12/01/2022",
-    "expirationDate":"12/01/2022",
-    "quantity":30,
-    "category":3
-    
-  },
-  {
-    "lote":"Combos saludable",
-    "description":"En este paquete podrás encontrar diferentes tipos de frutas y verduras frescas: 500gr manzanas, 400gr bananas, 1kg ananá, 200gr lechuga, 200gr zanahoria, 200gr papa, 200gr tomates, 200gr cebolla, 200gr morron",
-    "photo":"https://d251vmpe15rvty.cloudfront.net/eyJidWNrZXQiOiJuaWR1eC1zdG9yZXMiLCJrZXkiOiIyMzYxXC84OTczNC1wcm9kdWN0LTVlODIzMjQzMDY0YWEtY2FwdHVyYS1kZS1wYW50YWxsYS0yMDIwLTAzLTMwLWEtbGEtcy0xMS40NS4xOC5wbmciLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjgwMCwiaGVpZ2h0Ijo4MDAsImZpdCI6ImNvbnRhaW4iLCJiYWNrZ3JvdW5kIjp7InIiOjI1NSwiZyI6MjU1LCJiIjoyNTUsImFscGhhIjowfX19fQ==--f178f2deaf1f2bdeeff28a7994b99b90eee0386b5fae34f8d210ac86c2e29073",
-    "price":1000.00,
-    "publicationDate": "12/01/2022",
-    "expirationDate":"12/01/2022",
-    "quantity":20,
-    "category":3
-    
-  },
-  {
-    "lote":"Combo verde almuerzo/cena",
-    "description":"En este paquete podrás encontrar diferentes tipos de alimentos 100% vegetariano: 1 vianda haburguesa de soja, 1 vianda ensalada fresca, 1 vianda pastas salteadas",
-    "photo":"https://www.cocinavital.mx/wp-content/uploads/2019/02/menu-fesco-vegetariano.jpg",
-    "price":1200.00,
-    "publicationDate": "03/01/2022",
-    "expirationDate":"04/01/2022",
-    "quantity":5,
-    "category":7
-    
-  },
-  {
-    "lote":"Combo vegetariano",
-    "description":"En este paquete podrás encontrar diferentes tipos de hamburguesas 100% vegetariana: 1 unidad hamburguesa de soja, 1 unidad hamburguesa de zapallo , 1 unidad hamburguesa de garbanzos",
-    "photo":"https://estaticos.miarevista.es/uploads/images/article/58ff34255bafe8f7c63c9869/vegana_0.jpg",
+    "lote":"Panificados Mix",
+    "description":"En este paquete podrás encontrar deliciosos tipos de panificados preparados en el día: 1kg pan salvado , 500gr cremona , 2kg pan pebete , 700gr pan de campo ",
+    "photo":"https://st2.depositphotos.com/1027198/8127/i/600/depositphotos_81270964-stock-photo-croissant-and-various-bread.jpg",
     "price":700.00,
-    "publicationDate": "12/01/2022",
-    "expirationDate":"12/01/2022",
-    "quantity":8,
-    "category":7
-    
+    "publicationDate": "07/01/2022",
+    "expirationDate":"08/01/2022",
+    "quantity":5,
+    "category":4,
+    "publisher":1
   },
   {
-    "lote":"Combo vegano",
-    "description":"En este paquete podrás encontrar diferentes tipos de alimentos 100% veganos: 2 tapas zanahora y palta, 2 unidades ensalada fresca, 2 unidades pasta de espinaca",
-    "photo":"https://i.ytimg.com/vi/1w6NooZQlS4/maxresdefault.jpg",
-    "price":850.00,
-    "publicationDate": "11/01/2022",
-    "expirationDate":"11/01/2022",
-    "quantity":20,
-    "category":8
-    
+    "lote":"Panificados Mix",
+    "description":"En este paquete podrás encontrar deliciosos tipos de panificados preparados en el día: 1kg pan salvado , 500gr cremona , 2kg pan pebete , 700gr pan de campo ",
+    "photo":"https://st2.depositphotos.com/1027198/8127/i/600/depositphotos_81270964-stock-photo-croissant-and-various-bread.jpg",
+    "price":700.00,
+    "publicationDate": "07/01/2022",
+    "expirationDate":"08/01/2022",
+    "quantity":5,
+    "category":4,
+    "publisher":1
   },
   {
-    "lote":"Vegano Mix",
-    "description":"En este paquete podrás encontrar diferentes tipos de alimentos 100% veganos: 4 unidades sopa calabaza, 1 unidad vegetales grillados , 2 unidades sopa verde",
-    "photo":"https://cdn.shopify.com/s/files/1/0073/1643/9109/articles/5_cenas_veganas_faciles_y_rapidas_300x300.png?v=1551478522",
-    "price":950.00,
-    "publicationDate": "12/01/2022",
-    "expirationDate":"12/01/2022",
-    "quantity":20,
-    "category":8
-    
+    "lote":"Panificados Mix",
+    "description":"En este paquete podrás encontrar deliciosos tipos de panificados preparados en el día: 1kg pan salvado , 500gr cremona , 2kg pan pebete , 700gr pan de campo ",
+    "photo":"https://st2.depositphotos.com/1027198/8127/i/600/depositphotos_81270964-stock-photo-croissant-and-various-bread.jpg",
+    "price":700.00,
+    "publicationDate": "07/01/2022",
+    "expirationDate":"08/01/2022",
+    "quantity":5,
+    "category":4,
+    "publisher":1
   },
   {
-    "lote":"Sushi Mix",
-    "description":"En este paquete podrás encontrar variedad en piezas de sushi: 10 unidades hot roll, 10 unidades california , 10 unidades filadelfia",
-    "photo":"https://sushiboom.com.ar/wp-content/uploads/2021/08/COMBO-PRIMAVERA-2021-scaled.jpg",
-    "price":1000.00,
-    "publicationDate": "12/01/2022",
-    "expirationDate":"12/01/2022",
-    "quantity":20,
-    "category":9
-    
+    "lote":"Panificados Mix",
+    "description":"En este paquete podrás encontrar deliciosos tipos de panificados preparados en el día: 1kg pan salvado , 500gr cremona , 2kg pan pebete , 700gr pan de campo ",
+    "photo":"https://st2.depositphotos.com/1027198/8127/i/600/depositphotos_81270964-stock-photo-croissant-and-various-bread.jpg",
+    "price":700.00,
+    "publicationDate": "07/01/2022",
+    "expirationDate":"08/01/2022",
+    "quantity":5,
+    "category":4,
+    "publisher":1
   },
   {
-    "lote":"Combos Pizza",
-    "description":"En este paquete podrás encontrar variedad en pizza: 8 porciones muzzarella, 8 porciones fugaceta , 8 porciones rucula, 8 porciones margarita",
-    "photo":"https://i.blogs.es/fff4ca/pizzas/1366_2000.jpg",
-    "price":750.00,
-    "publicationDate": "12/01/2022",
-    "expirationDate":"12/01/2022",
-    "quantity":25,
-    "category":2
-    
+    "lote":"Panificados Mix",
+    "description":"En este paquete podrás encontrar deliciosos tipos de panificados preparados en el día: 1kg pan salvado , 500gr cremona , 2kg pan pebete , 700gr pan de campo ",
+    "photo":"https://st2.depositphotos.com/1027198/8127/i/600/depositphotos_81270964-stock-photo-croissant-and-various-bread.jpg",
+    "price":700.00,
+    "publicationDate": "07/01/2022",
+    "expirationDate":"08/01/2022",
+    "quantity":5,
+    "category":4,
+    "publisher":1
   },
   {
-    "lote":"Combos desayunador",
-    "description":"En este paquete podrás encontrar box de desayuno: 1 unidad cereales, 1 unidad crema de mani, 1 unidad azucar integral, 1 unidad frutos secos , 4 unidades mermeladas varias  ",
-    "photo":"https://d2r9epyceweg5n.cloudfront.net/stores/001/323/806/products/11-92f61b83dd5ec5d9b116032196577753-480-0.png",
-    "price":500.00,
-    "publicationDate": "12/01/2022",
-    "expirationDate":"12/01/2022",
-    "quantity":25,
-    "category":9
-    
+    "lote":"Panificados Mix",
+    "description":"En este paquete podrás encontrar deliciosos tipos de panificados preparados en el día: 1kg pan salvado , 500gr cremona , 2kg pan pebete , 700gr pan de campo ",
+    "photo":"https://st2.depositphotos.com/1027198/8127/i/600/depositphotos_81270964-stock-photo-croissant-and-various-bread.jpg",
+    "price":700.00,
+    "publicationDate": "07/01/2022",
+    "expirationDate":"08/01/2022",
+    "quantity":5,
+    "category":4,
+    "publisher":1
+  },
+  {
+    "lote":"Panificados Mix",
+    "description":"En este paquete podrás encontrar deliciosos tipos de panificados preparados en el día: 1kg pan salvado , 500gr cremona , 2kg pan pebete , 700gr pan de campo ",
+    "photo":"https://st2.depositphotos.com/1027198/8127/i/600/depositphotos_81270964-stock-photo-croissant-and-various-bread.jpg",
+    "price":700.00,
+    "publicationDate": "07/01/2022",
+    "expirationDate":"08/01/2022",
+    "quantity":5,
+    "category":4,
+    "publisher":1
+  },
+  {
+    "lote":"Panificados Mix",
+    "description":"En este paquete podrás encontrar deliciosos tipos de panificados preparados en el día: 1kg pan salvado , 500gr cremona , 2kg pan pebete , 700gr pan de campo ",
+    "photo":"https://st2.depositphotos.com/1027198/8127/i/600/depositphotos_81270964-stock-photo-croissant-and-various-bread.jpg",
+    "price":700.00,
+    "publicationDate": "07/01/2022",
+    "expirationDate":"08/01/2022",
+    "quantity":5,
+    "category":4,
+    "publisher":1
+  },
+  {
+    "lote":"Panificados Mix",
+    "description":"En este paquete podrás encontrar deliciosos tipos de panificados preparados en el día: 1kg pan salvado , 500gr cremona , 2kg pan pebete , 700gr pan de campo ",
+    "photo":"https://st2.depositphotos.com/1027198/8127/i/600/depositphotos_81270964-stock-photo-croissant-and-various-bread.jpg",
+    "price":700.00,
+    "publicationDate": "07/01/2022",
+    "expirationDate":"08/01/2022",
+    "quantity":5,
+    "category":4,
+    "publisher":1
+  },
+  {
+    "lote":"Panificados Mix",
+    "description":"En este paquete podrás encontrar deliciosos tipos de panificados preparados en el día: 1kg pan salvado , 500gr cremona , 2kg pan pebete , 700gr pan de campo ",
+    "photo":"https://st2.depositphotos.com/1027198/8127/i/600/depositphotos_81270964-stock-photo-croissant-and-various-bread.jpg",
+    "price":700.00,
+    "publicationDate": "07/01/2022",
+    "expirationDate":"08/01/2022",
+    "quantity":5,
+    "category":4,
+    "publisher":1
+  },
+  {
+    "lote":"Panificados Mix",
+    "description":"En este paquete podrás encontrar deliciosos tipos de panificados preparados en el día: 1kg pan salvado , 500gr cremona , 2kg pan pebete , 700gr pan de campo ",
+    "photo":"https://st2.depositphotos.com/1027198/8127/i/600/depositphotos_81270964-stock-photo-croissant-and-various-bread.jpg",
+    "price":700.00,
+    "publicationDate": "07/01/2022",
+    "expirationDate":"08/01/2022",
+    "quantity":5,
+    "category":4,
+    "publisher":1
   }
+ 
 
 ]
