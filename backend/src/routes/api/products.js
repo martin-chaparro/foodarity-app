@@ -7,13 +7,17 @@ const {
   getProducts,
   postProduct,
   deletePublication,
+  getProductById,
+  getCompanyProductsById,
+  getCompanyProductsByAuth
 } = require('../../controllers/productsController');
 
 router.get('/', getProducts);
 router.post('/', authMiddleware, ValidationProduct.post, postProduct); // TODO manejar la imagen cloudinary
 router.delete('/delete/:id', authMiddleware, deletePublication);
-// por id de product
-// get by company id por params (solo published)
-// get by token 
+router.get('/id/:id', getProductById)
+router.get('/companyid/:id', getCompanyProductsById)
+router.get('/byAuth', authMiddleware, getCompanyProductsByAuth) 
+
 
 module.exports = router;
