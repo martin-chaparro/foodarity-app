@@ -46,6 +46,7 @@ class Product extends Model {
 
   static associate(models) {
     this.hasOne(models.Category);
+    this.hasOne(models.Company);
   }
 }
 

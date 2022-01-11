@@ -111,7 +111,26 @@ const searchCompany = async (req, res) => {
   }
 };
 
-//actualizar imagen compañia
+// buscar empresa/ong por usuario logeado
+// const searchCompanyByUser = async (req, res) => {
+//   try{
+//     const ownerId = req.userId;
+//     const company = await Company.findOne({
+//       where: { ownerId },
+//     });
+//     if (company) {
+//       return res.status(200).json(company);
+//     }
+//   else {
+//     res.status(404).json({ msg: 'Not found' });
+//   }
+// } catch (error) {
+//   res.status(500).send({ msg: error });
+// }
+
+// }
+
+// actualizar imagen compañia
 
 const uploadImageCompany = async (request, response) => {
   const { id, field } = request.params;
@@ -172,85 +191,87 @@ const uploadImageCompany = async (request, response) => {
   }
 };
 
-//eliminar/deshabilitar empresa/ong
-const deleteCompany = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const company = await Company.findByPk(id);
-    if (!company) {
-      return res.status(400).json({ msg: 'No se encontro la empresa' });
-    }
-    await company.destroy();
-    return res.status(200).json({ msg: 'Empresa eliminada' });
-  } catch (error) {
-    return res.status(500).json({ msg: 'Error al eliminar la empresa' });
-  }
-}
+// eliminar/deshabilitar empresa/ong
+// const deleteCompany = async (req, res) => {
+//   try {
+//     const { id } = req.params;
+//     const ownerId = req.userId;
+//     const company = await Company.findOne({
+//       where: { id, ownerId },
+//     });
+//     if (!company) {
+//       return res.status(400).json({ msg: 'No se encontro la empresa' });
+//     }
+//     await company.update({ status: false });
+//     return res.status(200).json({ msg: 'Compañia deshabilitada' });
+//   } catch (error) {
+//     return res.status(500).json({ msg: 'Error al deshabilitar compañia' });
+//   }
+// }
 
-//update company
-const updateCompany = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const {
-      name,
-      description,
-      areaCode,
-      phone,
-      email,
-      website,
-      status,
-      type,
-      street,
-      number,
-      zipcode,
-      cityId,
-      stateId,
-    } = req.body;
+// //update company
+// const updateCompany = async (req, res) => {
+//   try {
+//     const { id } = req.params;
+//     const {
+//       name,
+//       description,
+//       areaCode,
+//       phone,
+//       email,
+//       website,
+//       status,
+//       type,
+//       street,
+//       number,
+//       zipcode,
+//       cityId,
+//       stateId,
+//     } = req.body;
 
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
-    }
+//     const errors = validationResult(req);
+//     if (!errors.isEmpty()) {
+//       return res.status(400).json({ errors: errors.array() });
+//     }
 
-    const company = await Company.findByPk(id);
-    if (!company) {
-      return res.status(400).json({ msg: 'No se encontro la empresa' });
-    }
+//     const company = await Company.findByPk(id);
+//     if (!company) {
+//       return res.status(400).json({ msg: 'No se encontro la empresa' });
+//     }
 
-    const address = await Address.findOne({
-      where: { companyId: id },
-    });
+//     const address = await Address.findOne({
+//       where: { companyId: id },
+//     });
 
-    if (!address) {
-      return res.status(400).json({ msg: 'No se encontro la direccion' });
-    }
+//     if (!address) {
+//       return res.status(400).json({ msg: 'No se encontro la direccion' });
+//     }
 
-    await company.update({
-      name,
-      description,
-      areaCode,
-      phone,
-      email,
-      website,
-      status,
-    });
+//     await company.update({
+//       name,
+//       description,
+//       areaCode,
+//       phone,
+//       email,
+//       website,
+//       status,
+//     });
 
-    await address.update({
-      street,
-      number,
-      zipcode,
-    });
+//     await address.update({
+//       street,
+//       number,
+//       zipcode,
+//     });
 
-    await company.setType(type);
-    await address.setCity(cityId);
-    await address.setState(stateId);
+//     await company.setType(type);
+//     await address.setCity(cityId);
+//     await address.setState(stateId);
 
-    return res.status(200).json(company);
-  } catch (error) {
-    return res.status(500).json({ msg: 'Error al actualizar la empresa' });
-  }
-}
-
+//     return res.status(200).json(company);
+//   } catch (error) {
+//     return res.status(500).json({ msg: 'Error al actualizar la empresa' });
+//   }
+// }
 
 module.exports = {
   getCompanies,

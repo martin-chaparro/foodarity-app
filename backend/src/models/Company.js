@@ -57,6 +57,7 @@ class Company extends Model {
     this.belongsTo(models.CompanyType, { foreignKey: 'type_id', as: 'type' });
     this.hasMany(models.User);
     this.hasOne(models.Address);
+    this.hasMany(models.Product, { foreignKey: 'product_id', as: 'product' });
   }
 }
 
