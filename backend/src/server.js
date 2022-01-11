@@ -114,6 +114,7 @@ class Server {
           price,
           publicationDate,
           expirationDate,
+          quantity,
           category,
         } = product;
         const newProduct = await Product.create({
@@ -123,6 +124,7 @@ class Server {
           price,
           publicationDate,
           expirationDate,
+          quantity,
         });
         await newProduct.setCategory(category);
       });

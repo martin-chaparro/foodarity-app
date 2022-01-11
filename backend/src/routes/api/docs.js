@@ -5,7 +5,7 @@ const YAML = require('yamljs');
 
 const router = new Router();
 
-const swaggerDocument = YAML.load('./swagger.yaml');
+const swaggerDocument = YAML.load('./src/config/swagger.yaml');
 
 const options = {
     customCss: '.swagger-ui .topbar { display: none }'
