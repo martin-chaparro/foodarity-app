@@ -14,7 +14,7 @@ const getProducts = async (req, res) => {
       order,
       size,
     } = req.query;
-    const page = req.query.page || 0;
+    const page = req.query.page || 1;
     const whereAttr = { status: 'published' };
     const orderAttr = [['id', 'ASC']];
 
@@ -58,8 +58,18 @@ const getProducts = async (req, res) => {
 
     const attributes = {
       where: whereAttr,
-      include: [{ model: Category }],
+      include: [
+        {
+          model: Category,
+          attributes: {
+            exclude: ['createdAt', 'updatedAt'],
+          },
+        },
+      ],
       order: orderAttr,
+      attributes: {
+        exclude: ['createdAt', 'updatedAt', 'CategoryId'],
+      },
     };
 
     if (size) {
@@ -68,7 +78,7 @@ const getProducts = async (req, res) => {
     }
 
     const products = await Product.findAll(attributes);
-    const count = await Product.count();
+    const count = await Product.count(attributes);
     const pages = Math.ceil(count / size);
     res.json({ products, page: parseInt(page, 10) || 1, pages: pages || 1 });
   } catch (error) {
