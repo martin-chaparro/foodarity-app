@@ -6,13 +6,14 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import { Link } from 'react-router-dom';
 
 /**
  * Este componente es un alert para los componentes Formularios Crear Comercio y Crear ONG.
  * Puede editarse el CSS de acuerdo a la documentación de Material UI,
  * además de cambiar su mensaje de acuerdo al objetivo que se requiera.
  */
-export default function AlertDialog() {
+export default function AlertDialog({ display }) {
   const [open, setOpen] = React.useState(false);
   // const dispatch = useDispatch();
 
@@ -31,7 +32,12 @@ export default function AlertDialog() {
 
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={handleClickOpen}
+        disabled={display}
+      >
         Enviar Solicitud
       </Button>
       <Dialog
@@ -53,7 +59,9 @@ export default function AlertDialog() {
           un handleSubmit o handleChange para que redirija los datos de registro al Backend 
           y además redirija al Home una vez haya finalizado. 
           Actualmente solo tiene un handleClose para cerrar ventana */}
-          <Button onClose={handleClose}>OK</Button>
+          <Link to="/home">
+            <Button onClose={handleClose}>OK</Button>
+          </Link>
         </DialogActions>
       </Dialog>
     </div>
