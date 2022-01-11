@@ -26,7 +26,7 @@ router.patch(
   validationFiles.fileExists,
   uploadImageCompany
 );
-router.delete('/:id', deleteCompany);
-router.put('/:id', updateCompany);
+router.delete('/disabled/:id', authMiddleware, deleteCompany);
+router.put('/:id', authMiddleware, updateCompany);
 
 module.exports = router;

@@ -44,7 +44,8 @@
     "publicationDate": "01/25/2022",
     "expirationDate":"01/25/2022",
     "quantity":6,
-    "category":4
+    "category":4,
+    "publisher":1
     
   },
   {
@@ -55,7 +56,8 @@
     "publicationDate": "01/27/2022",
     "expirationDate":"01/28/2022",
     "quantity":10,
-    "category":5
+    "category":5,
+    "publisher":1
     
   },
   {
@@ -78,8 +80,9 @@
     "publicationDate": "01/03/2022",
     "expirationDate":"01/05/2022",
     "quantity":6,
-    "category":6
-    
+    "category":6,
+    "publisher":1
+
   },
   {
     "lote":" McCombos Mix",
@@ -89,7 +92,8 @@
     "publicationDate": "01/13/2022",
     "expirationDate":"01/13/2022",
     "quantity":15,
-    "category":6
+    "category":6,
+    "publisher":1
     
   },
   {
@@ -100,7 +104,8 @@
     "publicationDate": "01/19/2022",
     "expirationDate":"01/21/2022",
     "quantity":15,
-    "category":1
+    "category":1,
+    "publisher":1
     
   },
   {
@@ -111,7 +116,8 @@
     "publicationDate": "01/03/2022",
     "expirationDate":"01/06/2022",
     "quantity":10,
-    "category":1
+    "category":1,
+    "publisher":1
     
   },
   {
@@ -122,7 +128,8 @@
     "publicationDate": "01/03/2022",
     "expirationDate":"01/16/2022",
     "quantity":10,
-    "category":1
+    "category":1,
+    "publisher":1
     
   },
   {
@@ -133,7 +140,8 @@
     "publicationDate": "01/26/2022",
     "expirationDate":"01/26/2022",
     "quantity":10,
-    "category":2
+    "category":2,
+    "publisher":1
     
   },
   {

@@ -38,9 +38,15 @@ class Company extends Model {
         },
         status: {
           // cuenta habilitada o no
-          type: DataTypes.BOOLEAN,
+          type: DataTypes.ENUM('Habilitada', 'Deshabilitada', 'Pendiente'),
           allowNull: false,
           defaultValue: false,
+        },
+        deleted: {
+          // cuenta eliminada o no
+          type: DataTypes.BOOLEAN,
+          allowNull: false,
+          defaultValue: true,
         },
         ownerId: {
           type: DataTypes.INTEGER,
