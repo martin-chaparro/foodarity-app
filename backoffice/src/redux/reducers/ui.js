@@ -1,20 +1,15 @@
 import { types } from '../types/ui';
 
 const initialState = {
-  alertModal: false,
+  asidemenu: false,
 };
 
 export const uiReducer = (state = initialState, action) => {
   switch (action.type) {
-    case types.showAlertModal:
+    case types.toggleAsideMenu:
       return {
         ...state,
-        alertModal: true,
-      };
-    case types.closeAlertModal:
-      return {
-        ...state,
-        alertModal: false,
+        asidemenu: action.payload,
       };
 
     default:

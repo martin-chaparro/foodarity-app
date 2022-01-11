@@ -20,6 +20,7 @@ module.exports = {
   plugins: ['react'],
   rules: {
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
+    'no-console': RULES.OFF,
     'react/function-component-definition': RULES.OFF,
     'default-param-last': RULES.OFF,
     'arrow-body-style': RULES.OFF,
