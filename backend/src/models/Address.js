@@ -26,7 +26,7 @@ class Address extends Model {
   static associate(models) {
     this.belongsTo(models.State);
     this.belongsTo(models.City);
-    this.belongsTo(models.Companies);
+    this.belongsTo(models.Company);
   }
 }
 
