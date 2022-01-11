@@ -1,4 +1,4 @@
-// const { Op } = require('sequelize');
+const { Op } = require('sequelize');
 const { validationResult } = require('express-validator');
 // eslint-disable-next-line import/no-unresolved
 const cloudinary = require('cloudinary').v2;
@@ -8,6 +8,7 @@ const Address = require('../models/Address');
 const City = require('../models/City');
 const State = require('../models/State');
 const User = require('../models/User');
+const Product = require('../models/Product');
 
 cloudinary.config(process.env.CLOUDINARY_URL);
 
@@ -207,20 +208,27 @@ const deleteCompany = async (req, res) => {
     if (ownerId !== company.ownerId) {
       return res.status(401).json({ message: 'Not owner' });
     }
+    await company.update({ deleted: true });
+    /// ////////////////////////////////////////////////////////////////////
+    await Product.update(
+      { status: 'canceled' },
+      { where: { [Op.and]: [{ CompanyId: id }, { status: 'published' }] } }
+    );
+    /// ///////////////////////////////////////////////////////////////////////
 
-    await company.update({ deleted: false });
-    return res.status(200).json({ msg: 'Compañia deshabilitada' });
+    return res
+      .status(200)
+      .json({ msg: 'Compañia deshabilitada y sus productos' });
   } catch (error) {
+    console.log(error);
     return res.status(500).json({ msg: 'Error al deshabilitar compañia' });
   }
 };
 // cancelar productos estado publicados de la compañia  deshabilitada
 // model company atribute deleted: boolean default false, status enum con 4 estados
 
-// update info company
+// update info company //VER RUTAAAA
 const updateCompany = async (req, res) => {
-  const ownerId = req.userId;
-  const { id } = req.params;
   const {
     description,
     areaCode,
@@ -229,30 +237,19 @@ const updateCompany = async (req, res) => {
     website,
     street,
     number,
-    // type,
     zipcode,
-    // cityId,
-    // stateId,
   } = req.body;
   try {
-    const company = await Company.findByPk(id);
-    if (!company) {
-      return res.status(400).json({ msg: 'No se encontro la empresa' });
+    let id = null;
+
+    if (req.userRoleId === 2) {
+      id = req.params.id;
+      if (!id) return res.status(400).json({ message: 'El id es requerido' });
+    } else {
+      id = req.userId;
     }
 
-    if (ownerId !== company.ownerId) {
-      return res.status(401).json({ message: 'Not owner' });
-    }
-
-    const address = await Address.findOne({
-      where: { companyId: id },
-    });
-
-    if (!address) {
-      return res.status(400).json({ msg: 'No se encontro la direccion' });
-    }
-
-    await company.update(
+    await Company.update(
       {
         description,
         areaCode,
@@ -265,19 +262,15 @@ const updateCompany = async (req, res) => {
       }
     );
 
-    await address.update({
+    await Address.update({
       street,
       number,
       zipcode,
     });
 
-    // await company.setType(type);
-    // await address.setCompany(company);
-    // await address.setCity(cityId);
-    // await address.setState(stateId);
-
     return res.status(200).json({ msg: 'Actualizado' });
   } catch (error) {
+    console.log(error);
     return res.status(500).json({ msg: 'Error al actualizar la empresa' });
   }
 };
