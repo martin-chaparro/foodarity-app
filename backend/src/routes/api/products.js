@@ -5,9 +5,11 @@ const ValidationProduct = require('../../middlewares/validations/validationProdu
 const {
   getProducts,
   postProduct,
+  cancelPublication,
 } = require('../../controllers/productsController');
 
 router.get('/', getProducts);
 router.post('/', ValidationProduct.post, postProduct);
+router.put('/cancel/:id', cancelPublication);
 
 module.exports = router;

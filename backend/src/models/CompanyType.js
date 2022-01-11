@@ -16,9 +16,7 @@ class CompanyType extends Model {
   }
 
   static associate(models) {
-    this.hasMany(
-      models.Company
-    );
+    this.hasMany(models.Company);
   }
 }
 

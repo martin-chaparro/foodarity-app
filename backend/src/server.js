@@ -112,19 +112,19 @@ class Server {
           description,
           photo,
           price,
+          quantity,
           publicationDate,
           expirationDate,
-          quantity,
           category,
         } = product;
         const newProduct = await Product.create({
           lote,
           description,
           photo,
+          quantity,
           price,
           publicationDate,
           expirationDate,
-          quantity,
         });
         await newProduct.setCategory(category);
       });
