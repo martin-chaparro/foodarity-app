@@ -163,6 +163,94 @@
     "quantity":30,
     "category":3
     
+  },
+  {
+    "lote":"Combos saludable",
+    "description":"En este paquete podrás encontrar diferentes tipos de frutas y verduras frescas: 500gr manzanas, 400gr bananas, 1kg ananá, 200gr lechuga, 200gr zanahoria, 200gr papa, 200gr tomates, 200gr cebolla, 200gr morron",
+    "photo":"https://d251vmpe15rvty.cloudfront.net/eyJidWNrZXQiOiJuaWR1eC1zdG9yZXMiLCJrZXkiOiIyMzYxXC84OTczNC1wcm9kdWN0LTVlODIzMjQzMDY0YWEtY2FwdHVyYS1kZS1wYW50YWxsYS0yMDIwLTAzLTMwLWEtbGEtcy0xMS40NS4xOC5wbmciLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjgwMCwiaGVpZ2h0Ijo4MDAsImZpdCI6ImNvbnRhaW4iLCJiYWNrZ3JvdW5kIjp7InIiOjI1NSwiZyI6MjU1LCJiIjoyNTUsImFscGhhIjowfX19fQ==--f178f2deaf1f2bdeeff28a7994b99b90eee0386b5fae34f8d210ac86c2e29073",
+    "price":1000.00,
+    "publicationDate": "15/01/2022",
+    "expirationDate":"15/01/2022",
+    "quantity":20,
+    "category":3
+    
+  },
+  {
+    "lote":"Combo verde almuerzo/cena",
+    "description":"En este paquete podrás encontrar diferentes tipos de alimentos 100% vegetariano: 1 vianda haburguesa de soja, 1 vianda ensalada fresca, 1 vianda pastas salteadas",
+    "photo":"https://www.cocinavital.mx/wp-content/uploads/2019/02/menu-fesco-vegetariano.jpg",
+    "price":1200.00,
+    "publicationDate": "3/01/2022",
+    "expirationDate":"4/01/2022",
+    "quantity":5,
+    "category":7
+    
+  },
+  {
+    "lote":"Combo vegetariano",
+    "description":"En este paquete podrás encontrar diferentes tipos de hamburguesas 100% vegetariana: 1 unidad hamburguesa de soja, 1 unidad hamburguesa de zapallo , 1 unidad hamburguesa de garbanzos",
+    "photo":"https://estaticos.miarevista.es/uploads/images/article/58ff34255bafe8f7c63c9869/vegana_0.jpg",
+    "price":700.00,
+    "publicationDate": "20/01/2022",
+    "expirationDate":"24/01/2022",
+    "quantity":8,
+    "category":7
+    
+  },
+  {
+    "lote":"Combo vegano",
+    "description":"En este paquete podrás encontrar diferentes tipos de alimentos 100% veganos: 2 tapas zanahora y palta, 2 unidades ensalada fresca, 2 unidades pasta de espinaca",
+    "photo":"https://i.ytimg.com/vi/1w6NooZQlS4/maxresdefault.jpg",
+    "price":850.00,
+    "publicationDate": "11/01/2022",
+    "expirationDate":"11/01/2022",
+    "quantity":20,
+    "category":8
+    
+  },
+  {
+    "lote":"Vegano Mix",
+    "description":"En este paquete podrás encontrar diferentes tipos de alimentos 100% veganos: 4 unidades sopa calabaza, 1 unidad vegetales grillados , 2 unidades sopa verde",
+    "photo":"https://cdn.shopify.com/s/files/1/0073/1643/9109/articles/5_cenas_veganas_faciles_y_rapidas_300x300.png?v=1551478522",
+    "price":950.00,
+    "publicationDate": "13/01/2022",
+    "expirationDate":"13/01/2022",
+    "quantity":20,
+    "category":8
+    
+  },
+  {
+    "lote":"Sushi Mix",
+    "description":"En este paquete podrás encontrar variedad en piezas de sushi: 10 unidades hot roll, 10 unidades california , 10 unidades filadelfia",
+    "photo":"https://sushiboom.com.ar/wp-content/uploads/2021/08/COMBO-PRIMAVERA-2021-scaled.jpg",
+    "price":1000.00,
+    "publicationDate": "28/01/2022",
+    "expirationDate":"28/01/2022",
+    "quantity":20,
+    "category":9
+    
+  },
+  {
+    "lote":"Combos Pizza",
+    "description":"En este paquete podrás encontrar variedad en pizza: 8 porciones muzzarella, 8 porciones fugaceta , 8 porciones rucula, 8 porciones margarita",
+    "photo":"https://i.blogs.es/fff4ca/pizzas/1366_2000.jpg",
+    "price":750.00,
+    "publicationDate": "29/01/2022",
+    "expirationDate":"29/01/2022",
+    "quantity":25,
+    "category":2
+    
+  },
+  {
+    "lote":"Combos desayunador",
+    "description":"En este paquete podrás encontrar box de desayuno: 1 unidad cereales, 1 unidad crema de mani, 1 unidad azucar integral, 1 unidad frutos secos , 4 unidades mermeladas varias  ",
+    "photo":"https://d2r9epyceweg5n.cloudfront.net/stores/001/323/806/products/11-92f61b83dd5ec5d9b116032196577753-480-0.png",
+    "price":500.00,
+    "publicationDate": "24/01/2022",
+    "expirationDate":"29/01/2022",
+    "quantity":25,
+    "category":9
+    
   }
 
 ]
