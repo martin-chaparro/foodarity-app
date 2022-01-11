@@ -39,13 +39,13 @@ export default function ProductCard({ product }) {
       </div>
       <div className={styles.content}>
         <div className={styles.nameDiv}>
-          <h3 className={styles.name}>{product.name}</h3>
+          <h3 className={styles.name}>{product.lote}</h3>
         </div>
 
-        <p className={styles.description}>{product.description}</p>
+        <p className={styles.description}>{(product.description).slice(0,70)}...</p>
         <div className={styles.divInc}>
-          <p className={styles.nameInc}>Nombre de la empresa</p>
-          <p className={styles.precio}>Precio</p>
+          <p className={styles.nameInc}>{product.company.name}</p>
+          <p className={styles.precio}>${product.price}</p>
         </div>
         <div className={styles.btnContainer}>
           <div className={styles.btnresdiv}>
@@ -75,7 +75,7 @@ export default function ProductCard({ product }) {
                     sx={{ mt: 2, fontSize: 20, margin: 0, }}
                     className={styles.titleTypographyName}
                   >
-                   Nombre de la empresa
+                   {product.company.name}
                   </Typography>
                   </div>
                 <div className={styles.DivcompanyData}>
@@ -87,7 +87,7 @@ export default function ProductCard({ product }) {
                   sx={{ mt: 2, margin: 0, }}
                   className={styles.titleTypographyDesc}
                 >
-                  Descripción detallada
+                  {product.description}
                 </Typography>
                 </div>
                 <Box
