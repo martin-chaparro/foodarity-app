@@ -16,7 +16,7 @@ class Category extends Model {
   }
 
   static associate(models) {
-    this.belongsTo(models.Product);
+    this.hasMany(models.Product);
   }
 }
 

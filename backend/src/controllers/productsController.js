@@ -28,7 +28,7 @@ const getProducts = async (req, res) => {
 const postProduct = async (req, res) => {
   try {
     const {
-      name,
+      lote,
       description,
       photo,
       price,
@@ -36,9 +36,8 @@ const postProduct = async (req, res) => {
       expirationDate,
       category,
     } = req.body;
-    console.log(name);
     const newProduct = await Product.create({
-      name,
+      lote,
       description,
       photo,
       price,
