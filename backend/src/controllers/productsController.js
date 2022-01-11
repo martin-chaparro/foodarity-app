@@ -79,8 +79,16 @@ const getProducts = async (req, res) => {
 
     const products = await Product.findAll(attributes);
     const count = await Product.count(attributes);
+    delete attributes.limit;
+    delete attributes.offset;
+    const totalCount = await Product.count(attributes);
     const pages = Math.ceil(count / size);
-    res.json({ products, page: parseInt(page, 10) || 1, pages: pages || 1 });
+    res.json({
+      products,
+      totalProducts: totalCount,
+      page: parseInt(page, 10) || 1,
+      pages: pages || 1,
+    });
   } catch (error) {
     res.send(error);
   }

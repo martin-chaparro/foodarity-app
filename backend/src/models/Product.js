@@ -9,7 +9,7 @@ class Product extends Model {
           allowNull: false,
         },
         description: {
-          type: DataTypes.STRING,
+          type: DataTypes.TEXT,
           allowNull: false,
         },
         quantity: {
@@ -17,7 +17,7 @@ class Product extends Model {
           allowNull: false,
         },
         photo: {
-          type: DataTypes.STRING,
+          type: DataTypes.TEXT, // TODO ACOMODAR
           allowNull: true,
         },
         price: {
