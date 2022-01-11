@@ -18,16 +18,12 @@ import Typography from '@mui/material/Typography';
 
 const drawerWidth = 240;
 
-function ResponsiveDrawer(props) {
+function ProfileTempleteCommerce(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   // eslint-disable-next-line no-unused-vars
   const [showNewProduct, setShowNewProduct] = React.useState(false);
-  // const [showProduct, setShowProduct] = React.useState(false);
-  // const [showDetail, setShowDetail] = React.useState(false);
-  // const [showOrder, setShowOrder] = React.useState(false);
-  // const [display, setDisplay] = React.useState('');
 
   const [display, setDisplay] = React.useState(-1);
 
@@ -172,7 +168,7 @@ function ResponsiveDrawer(props) {
   );
 }
 
-ResponsiveDrawer.propTypes = {
+ProfileTempleteCommerce.propTypes = {
   /**
    * Injected by the documentation to work in an iframe.
    * You won't need it on your project.
@@ -181,4 +177,4 @@ ResponsiveDrawer.propTypes = {
   window: PropTypes.func,
 };
 
-export default ResponsiveDrawer;
+export default ProfileTempleteCommerce;

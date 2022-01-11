@@ -1,7 +1,7 @@
 import React from 'react';
 
 import styles from './ProfileCompany.module.css';
-import ResponsiveDrawer from './ResponsiveDrawer';
+import ProfileTempleteCommerce from './ProfileTempleteCommerce';
 
 export default function ProfileCompany() {
   return (
@@ -10,7 +10,7 @@ export default function ProfileCompany() {
         <h1>aca va un NAV</h1>
           </div>
            */}
-      <ResponsiveDrawer />
+      <ProfileTempleteCommerce />
     </div>
   );
 }
