@@ -3,6 +3,7 @@ const Category = require('../models/Category');
 const Product = require('../models/Product');
 const User = require('../models/User');
 const Company = require('../models/Company');
+const Address = require('../models/Address');
 
 const include = [
   {
@@ -15,6 +16,9 @@ const include = [
   {
     model: Company,
     as: 'company',
+    include: [{model: Address, as:'address', attributes: {
+      exclude: ['createdAt', 'updatedAt', 'CompanyId','addressId'],
+    }}],
     attributes: {
       exclude: ['createdAt', 'updatedAt'],
     },
