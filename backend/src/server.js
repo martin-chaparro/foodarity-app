@@ -209,8 +209,8 @@ class Server {
           status: 'published',
         });
         await newProduct.setCategory(category);
-        const company = await Company.findByPk(publisher);
-        await newProduct.setCompany(company);
+        await newProduct.setCompany(publisher);
+        await newProduct.setPublisher(publisher);
       });
     } catch (error) {
       console.log('||--> Seed products(HARDCODE) not completed...: <--||');

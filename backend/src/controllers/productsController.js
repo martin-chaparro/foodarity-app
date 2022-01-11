@@ -75,6 +75,13 @@ const getProducts = async (req, res) => {
             exclude: ['createdAt', 'updatedAt'],
           },
         },
+        {
+          model: User,
+          as: 'publisher',
+          attributes: {
+            exclude: ['createdAt', 'updatedAt', 'password'],
+          },
+        },
       ],
       order: orderAttr,
       attributes: {
@@ -85,6 +92,8 @@ const getProducts = async (req, res) => {
           'CompanyId',
           'categoryId',
           'companyId',
+          'publisherId',
+          'UserId',
         ],
       },
     };
@@ -149,17 +158,25 @@ const postProduct = async (req, res) => {
     });
     await newProduct.setCategory(category);
     await newProduct.setCompany(user.Company);
+    await newProduct.setPublisher(userId);
     return res.json(newProduct);
   } catch (error) {
     return res.status(500).send(error);
   }
 };
 
-const cancelPublication = async (req, res) => {
-  // TODO auth de que el que la esta cancelando sea quien lo publico
+const deletePublication = async (req, res) => {
   try {
+    const { userId } = req;
+    const user = await User.findByPk(userId, {
+      include: [{ model: Company }],
+    });
     const { id } = req.params;
-    const product = await Product.update(
+    const product = await Product.findByPk(id);
+    if (product.companyId !== user.CompanyId) {
+      return res.json({ msg: 'Tu compania no publico este producto' });
+    }
+    const productDeleted = await Product.update(
       {
         status: 'canceled',
       },
@@ -167,13 +184,13 @@ const cancelPublication = async (req, res) => {
         where: { id },
       }
     );
-    res.json(product);
+    return res.json(productDeleted);
   } catch (error) {
-    res.send(error);
+    return res.send(error);
   }
 };
 
-const getCompanyProducts = async (req, res) => {
+const getCompanyProductsById = async (req, res) => {
   try {
     const { id } = req.params;
     const products = await Product.findAll({ where: { CompanyId: id } }); // TODO terminar de conectar cuando este conectado con companies
@@ -186,6 +203,6 @@ const getCompanyProducts = async (req, res) => {
 module.exports = {
   getProducts,
   postProduct,
-  cancelPublication,
-  getCompanyProducts,
+  deletePublication,
+  getCompanyProductsById,
 };
