@@ -8,6 +8,26 @@
     "publicationDate": "07/01/2022",
     "expirationDate":"02/02/2022",
     "category":1
+  },
+  {
+    "lote":"Leches y quesos",
+    "description":"2 saches de leche, y 500g de queso cremoso",
+    "photo":"https://portalechero.com/wp-content/uploads/2021/02/lacteos-6-750x495.jpg",
+    "quantity": 2,
+    "price":400.00,
+    "publicationDate": "07/01/2022",
+    "expirationDate":"02/02/2022",
+    "category":1
+  },
+  {
+    "lote":"Leches y quesos",
+    "description":"2 saches de leche, y 500g de queso cremoso",
+    "photo":"https://portalechero.com/wp-content/uploads/2021/02/lacteos-6-750x495.jpg",
+    "quantity": 2,
+    "price":300.00,
+    "publicationDate": "07/01/2022",
+    "expirationDate":"02/03/2022",
+    "category":1
   }
 
 ]

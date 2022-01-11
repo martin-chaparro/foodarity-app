@@ -18,8 +18,21 @@ const getProducts = async (req, res) => {
     const whereAttr = { status: 'published' };
     const orderAttr = [['id', 'ASC']];
 
-    if (order && (order === 'ASC' || order === 'DESC')) {
-      orderAttr.unshift(['price', order]);
+    switch (order) {
+      case 'priceASC':
+        orderAttr.unshift(['price', 'ASC']);
+        break;
+      case 'priceDESC':
+        orderAttr.unshift(['price', 'DESC']);
+        break;
+      case 'expirationASC':
+        orderAttr.unshift(['expirationDate', 'ASC']);
+        break;
+      case 'expirationDESC':
+        orderAttr.unshift(['expirationDate', 'DESC']);
+        break;
+      default:
+        break;
     }
     if (lote) {
       whereAttr.lote = { [Op.iLike]: `%${lote}%` };
