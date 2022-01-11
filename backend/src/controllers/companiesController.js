@@ -116,10 +116,11 @@ const searchCompany = async (req, res) => {
 const searchCompanyByUser = async (req, res) => {
   try {
     const { userId } = req;
+    console.log('CONSOLE LOG: userId', userId);
     const user = await User.findByPk(userId, {
       include: [{ model: Company }],
     });
-    if (!user.CompanyId) {
+    if (!user.CompanyId || user.CompanyId === null) {
       return res.json({ msg: 'El usuario no posee una compañia' });
     }
     return res.status(200).json(user.Company);
