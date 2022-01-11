@@ -1,7 +1,7 @@
 import React from 'react';
 
 import styles from './ProfileCompany.module.css';
-import ProfileTempleteCommerce from './ProfileTempleteCommerce';
+import ProfileTempleteCommerce from '../../Components/ProfileCompanyComponents/ProfileTempleteCommerce';
 
 export default function ProfileCompany() {
   return (

@@ -15,15 +15,15 @@ import MailIcon from '@mui/icons-material/Mail';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
+import CompanyDetail from './CompanyDetail';
+import PostNewBatch from './PostNewBatch';
+import PublishedProduct from './PublishedProduct';
 
 const drawerWidth = 240;
 
 function ProfileTempleteCommerce(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
-
-  // eslint-disable-next-line no-unused-vars
-  const [showNewProduct, setShowNewProduct] = React.useState(false);
 
   const [display, setDisplay] = React.useState(-1);
 
@@ -157,12 +157,12 @@ function ProfileTempleteCommerce(props) {
         }}
       >
         <Toolbar display="none" />
-        {display === 0 && <h1>DETALLES DE CUENTA </h1>}
+        {display === 0 && <CompanyDetail />}
 
-        {display === 1 && <h1>PRODUCTOS PUBLICADOS </h1>}
-        {display === 2 && <h1>PUBLIQUE NUEVOS LOTES </h1>}
+        {display === 2 && <PublishedProduct />}
+        {display === 3 && <PostNewBatch />}
 
-        {display === 3 && <h1>ORDENES DE COMPRA </h1>}
+        {display === 1 && <h1>ORDENES DE COMPRA </h1>}
       </Box>
     </Box>
   );
