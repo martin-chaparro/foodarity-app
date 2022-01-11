@@ -111,7 +111,7 @@ const searchCompany = async (req, res) => {
   }
 };
 
-//actualizar imagen compañia
+// actualizar imagen compañia
 
 const uploadImageCompany = async (request, response) => {
   const { id, field } = request.params;
@@ -172,7 +172,7 @@ const uploadImageCompany = async (request, response) => {
   }
 };
 
-//eliminar/deshabilitar empresa/ong
+// eliminar/deshabilitar empresa/ong
 const deleteCompany = async (req, res) => {
   try {
     const { id } = req.params;
@@ -185,9 +185,9 @@ const deleteCompany = async (req, res) => {
   } catch (error) {
     return res.status(500).json({ msg: 'Error al eliminar la empresa' });
   }
-}
+};
 
-//update company
+// update company
 const updateCompany = async (req, res) => {
   try {
     const { id } = req.params;
@@ -249,12 +249,13 @@ const updateCompany = async (req, res) => {
   } catch (error) {
     return res.status(500).json({ msg: 'Error al actualizar la empresa' });
   }
-}
-
+};
 
 module.exports = {
   getCompanies,
   createCompany,
   searchCompany,
   uploadImageCompany,
+  deleteCompany,
+  updateCompany,
 };

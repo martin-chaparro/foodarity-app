@@ -11,6 +11,8 @@ const {
   createCompany,
   searchCompany,
   uploadImageCompany,
+  deleteCompany,
+  updateCompany,
 } = require('../../controllers/companiesController');
 
 router.get('/', getCompanies);
@@ -22,5 +24,7 @@ router.patch(
   validationFiles.fileExists,
   uploadImageCompany
 );
+router.delete('/:id', deleteCompany);
+router.put('/:id', updateCompany);
 
 module.exports = router;
