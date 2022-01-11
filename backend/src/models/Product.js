@@ -28,6 +28,10 @@ class Product extends Model {
           type: DataTypes.DATEONLY,
           allowNull: false,
         },
+        quantity: {
+          type: DataTypes.INTEGER,
+          allowNull: false,
+        },
         status: {
           type: DataTypes.ENUM('published', 'reserved', 'sold', 'expired'),
           allowNull: false,
@@ -41,7 +45,7 @@ class Product extends Model {
   }
 
   static associate(models) {
-    this.belongsTo(models.Category);
+    this.hasOne(models.Category);
   }
 }
 
