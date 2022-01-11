@@ -1,6 +1,4 @@
-
-
-  function Backoffice() {
+function Backoffice() {
   return (
     <div>
       <h1>BackOffice</h1>
