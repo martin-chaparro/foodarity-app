@@ -8,6 +8,7 @@ import styles from './Home.module.css';
 // import ProfileCard from '../ProfileCard/ProfileCard';
 import ProductCard from '../ProductCard/ProductCard';
 import Navbar from '../Navbar/Navbar';
+// import NavbarCommerce from '../Navbar/NavbarCommerce';
 // import ShopCard from '../ShopCard/ShopCard';
 // import productos from '../Cards/product.json';
 import Pagination from '../Pagination/BasicPagination';
@@ -43,12 +44,13 @@ export default function Home() {
   return (
     <div>
       <Navbar />
+      {/* <NavbarCommerce /> */}
       <div className={styles.home}>
-          <Pagination
-            paginado={paginado}
-            products={allProducts.length}
-            productsPerPage={productPerPage}
-          />
+        <Pagination
+          paginado={paginado}
+          products={allProducts.length}
+          productsPerPage={productPerPage}
+        />
         <div className={styles.homecont}>
           {/* <div className={styles.contweb}>
             <ProfileCard />

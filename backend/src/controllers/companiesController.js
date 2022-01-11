@@ -2,7 +2,7 @@
 const { validationResult } = require('express-validator');
 // eslint-disable-next-line import/no-unresolved
 const cloudinary = require('cloudinary').v2;
-const Companies = require('../models/Companies');
+const Company = require('../models/Company');
 const CompanyType = require('../models/CompanyType');
 const Address = require('../models/Address');
 const City = require('../models/City');
@@ -13,7 +13,7 @@ cloudinary.config(process.env.CLOUDINARY_URL);
 // crear una empresa
 const createCompany = async (req, res) => {
   try {
-    const ownerId = req.userId;
+    const ownerId = req.userId; // revisar con chapa
 
     const {
       name,
@@ -36,7 +36,7 @@ const createCompany = async (req, res) => {
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const newCompany = await Companies.create({
+    const newCompany = await Company.create({
       name,
       description,
       areaCode,
@@ -69,7 +69,7 @@ const createCompany = async (req, res) => {
 // obtner info de todas las compañias
 const getCompanies = async (req, res) => {
   try {
-    const listCompanies = await Companies.findAll({
+    const listCompanies = await Company.findAll({
       include: [
         { model: CompanyType, as: 'type', attributes: ['type'] },
         { model: Address, include: [{ model: City }, { model: State }] },
@@ -88,11 +88,11 @@ const getCompanies = async (req, res) => {
   }
 };
 
-// buscar empresa por id
+// buscar empresa/ong por id
 const searchCompany = async (req, res) => {
   try {
     const { id } = req.params;
-    const company = await Companies.findByPk(id, {
+    const company = await Company.findByPk(id, {
       include: [
         { model: CompanyType, as: 'type', attributes: ['type'] },
         { model: Address, include: [{ model: City }, { model: State }] },
@@ -111,13 +111,15 @@ const searchCompany = async (req, res) => {
   }
 };
 
+// actualizar imagen compañia
+
 const uploadImageCompany = async (request, response) => {
   const { id, field } = request.params;
 
   const { userId: ownerId } = request;
 
   try {
-    const company = await Companies.findByPk(id);
+    const company = await Company.findByPk(id);
     if (!company) {
       return response.status(400).json({
         message: 'Company not found',
@@ -170,9 +172,90 @@ const uploadImageCompany = async (request, response) => {
   }
 };
 
+// eliminar/deshabilitar empresa/ong
+const deleteCompany = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const company = await Company.findByPk(id);
+    if (!company) {
+      return res.status(400).json({ msg: 'No se encontro la empresa' });
+    }
+    await company.destroy();
+    return res.status(200).json({ msg: 'Empresa eliminada' });
+  } catch (error) {
+    return res.status(500).json({ msg: 'Error al eliminar la empresa' });
+  }
+};
+
+// update company
+const updateCompany = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const {
+      name,
+      description,
+      areaCode,
+      phone,
+      email,
+      website,
+      status,
+      type,
+      street,
+      number,
+      zipcode,
+      cityId,
+      stateId,
+    } = req.body;
+
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    const company = await Company.findByPk(id);
+    if (!company) {
+      return res.status(400).json({ msg: 'No se encontro la empresa' });
+    }
+
+    const address = await Address.findOne({
+      where: { companyId: id },
+    });
+
+    if (!address) {
+      return res.status(400).json({ msg: 'No se encontro la direccion' });
+    }
+
+    await company.update({
+      name,
+      description,
+      areaCode,
+      phone,
+      email,
+      website,
+      status,
+    });
+
+    await address.update({
+      street,
+      number,
+      zipcode,
+    });
+
+    await company.setType(type);
+    await address.setCity(cityId);
+    await address.setState(stateId);
+
+    return res.status(200).json(company);
+  } catch (error) {
+    return res.status(500).json({ msg: 'Error al actualizar la empresa' });
+  }
+};
+
 module.exports = {
   getCompanies,
   createCompany,
   searchCompany,
   uploadImageCompany,
+  deleteCompany,
+  updateCompany,
 };

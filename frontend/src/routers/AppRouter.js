@@ -33,7 +33,6 @@ export function AppRouter() {
           path="/rollselector/*"
           element={
             <PrivateRoute isAuisAuthenticated={!!id}>
-              
               <RollSelectorRouter />
             </PrivateRoute>
           }
