@@ -126,7 +126,6 @@ const postProduct = async (req, res) => {
         msg: 'Solo las companias tipo comercio pueden publicar productos',
       });
     }
-    console.log(user);
 
     const {
       lote,
