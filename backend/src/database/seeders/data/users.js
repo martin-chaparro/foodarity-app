@@ -1,5 +1,11 @@
 module.exports = [
   {
+    name: 'demo',
+    email: 'demo@demo.com',
+    password: 'demo',
+    status: true,
+  },
+  {
     name: 'Martin Chaparro',
     email: 'martin.a.chaparro@gmail.com',
     password: '123456',

@@ -7,13 +7,14 @@ const CompanyType = require('../models/CompanyType');
 const Address = require('../models/Address');
 const City = require('../models/City');
 const State = require('../models/State');
+const User = require('../models/User');
 
 cloudinary.config(process.env.CLOUDINARY_URL);
 
 // crear una empresa
 const createCompany = async (req, res) => {
   try {
-    const ownerId = req.userId;
+    const ownerId = req.userId; // revisar con chapa
 
     const {
       name,
@@ -112,23 +113,20 @@ const searchCompany = async (req, res) => {
 };
 
 // buscar empresa/ong por usuario logeado
-// const searchCompanyByUser = async (req, res) => {
-//   try{
-//     const ownerId = req.userId;
-//     const company = await Company.findOne({
-//       where: { ownerId },
-//     });
-//     if (company) {
-//       return res.status(200).json(company);
-//     }
-//   else {
-//     res.status(404).json({ msg: 'Not found' });
-//   }
-// } catch (error) {
-//   res.status(500).send({ msg: error });
-// }
-
-// }
+const searchCompanyByUser = async (req, res) => {
+  try {
+    const { userId } = req;
+    const user = await User.findByPk(userId, {
+      include: [{ model: Company }],
+    });
+    if (!user.CompanyId) {
+      return res.json({ msg: 'El usuario no posee una compañia' });
+    }
+    return res.status(200).json(user.Company);
+  } catch (error) {
+    return res.status(500).send({ msg: error });
+  }
+};
 
 // actualizar imagen compañia
 
@@ -192,90 +190,93 @@ const uploadImageCompany = async (request, response) => {
 };
 
 // eliminar/deshabilitar empresa/ong
-// const deleteCompany = async (req, res) => {
-//   try {
-//     const { id } = req.params;
-//     const ownerId = req.userId;
-//     const company = await Company.findOne({
-//       where: { id, ownerId },
-//     });
-//     if (!company) {
-//       return res.status(400).json({ msg: 'No se encontro la empresa' });
-//     }
-//     await company.update({ status: false });
-//     return res.status(200).json({ msg: 'Compañia deshabilitada' });
-//   } catch (error) {
-//     return res.status(500).json({ msg: 'Error al deshabilitar compañia' });
-//   }
-// }
+const deleteCompany = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const ownerId = req.userId;
+    const company = await Company.findOne({
+      where: { id, ownerId },
+    });
+    if (!company) {
+      return res.status(400).json({ msg: 'No se encontro la empresa' });
+    }
+    await company.update({ status: false });
+    return res.status(200).json({ msg: 'Compañia deshabilitada' });
+  } catch (error) {
+    return res.status(500).json({ msg: 'Error al deshabilitar compañia' });
+  }
+};
 
-// //update company
-// const updateCompany = async (req, res) => {
-//   try {
-//     const { id } = req.params;
-//     const {
-//       name,
-//       description,
-//       areaCode,
-//       phone,
-//       email,
-//       website,
-//       status,
-//       type,
-//       street,
-//       number,
-//       zipcode,
-//       cityId,
-//       stateId,
-//     } = req.body;
+// update company
+const updateCompany = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const {
+      name,
+      description,
+      areaCode,
+      phone,
+      email,
+      website,
+      status,
+      type,
+      street,
+      number,
+      zipcode,
+      cityId,
+      stateId,
+    } = req.body;
 
-//     const errors = validationResult(req);
-//     if (!errors.isEmpty()) {
-//       return res.status(400).json({ errors: errors.array() });
-//     }
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
 
-//     const company = await Company.findByPk(id);
-//     if (!company) {
-//       return res.status(400).json({ msg: 'No se encontro la empresa' });
-//     }
+    const company = await Company.findByPk(id);
+    if (!company) {
+      return res.status(400).json({ msg: 'No se encontro la empresa' });
+    }
 
-//     const address = await Address.findOne({
-//       where: { companyId: id },
-//     });
+    const address = await Address.findOne({
+      where: { companyId: id },
+    });
 
-//     if (!address) {
-//       return res.status(400).json({ msg: 'No se encontro la direccion' });
-//     }
+    if (!address) {
+      return res.status(400).json({ msg: 'No se encontro la direccion' });
+    }
 
-//     await company.update({
-//       name,
-//       description,
-//       areaCode,
-//       phone,
-//       email,
-//       website,
-//       status,
-//     });
+    await company.update({
+      name,
+      description,
+      areaCode,
+      phone,
+      email,
+      website,
+      status,
+    });
 
-//     await address.update({
-//       street,
-//       number,
-//       zipcode,
-//     });
+    await address.update({
+      street,
+      number,
+      zipcode,
+    });
 
-//     await company.setType(type);
-//     await address.setCity(cityId);
-//     await address.setState(stateId);
+    await company.setType(type);
+    await address.setCity(cityId);
+    await address.setState(stateId);
 
-//     return res.status(200).json(company);
-//   } catch (error) {
-//     return res.status(500).json({ msg: 'Error al actualizar la empresa' });
-//   }
-// }
+    return res.status(200).json(company);
+  } catch (error) {
+    return res.status(500).json({ msg: 'Error al actualizar la empresa' });
+  }
+};
 
 module.exports = {
   getCompanies,
   createCompany,
   searchCompany,
   uploadImageCompany,
+  searchCompanyByUser,
+  deleteCompany,
+  updateCompany,
 };

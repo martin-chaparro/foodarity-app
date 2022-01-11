@@ -9,6 +9,7 @@
     "quantity":5,
     "category":4,
     "publisher":1
+<<<<<<< HEAD
 
     
   },
@@ -301,6 +302,9 @@
     "quantity":10,
     "category":1
     
+=======
+>>>>>>> 8bcd2e68ba091d98c0c0422ee25dd37be4459d48
   }
+ 
 
 ]

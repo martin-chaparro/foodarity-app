@@ -1,14 +1,16 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
 import Header from '../../Components/Header/Header';
 import styles from './RegisterFormCommerce.module.css';
 import CommerceLogo from '../../assets/Mask-Group.png';
-import {api} from '../../services/api';
-import {registerComerce} from '../../redux/actions/usersActions'
+import { api } from '../../services/api';
+import { registerComerce } from '../../redux/actions/usersActions';
 import Terminos from '../../Components/Term&Conditions/Terminos';
 import AlertOng from '../../Components/Alertas/AlertEnviarSolicitud';
 
@@ -25,9 +27,9 @@ export default function RegisterFormCommerce() {
     stateId: null,
     cityId: null,
   };
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [formValues, setFormValues] = useState(initialFormValues);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [input, setInput] = useState({
     name: '',
     website: '',
@@ -38,7 +40,14 @@ export default function RegisterFormCommerce() {
     street: '',
     number: '',
     zipcode: '',
-  })
+  });
+
+  const [checked, setChecked] = React.useState(true);
+
+  const handleCheck = (e) => {
+    e.preventDefault();
+    setChecked(!checked);
+  };
 
   const searchProvincia = (term) => {
     api.get(`/states?name=${term}`).then((response) => {
@@ -202,32 +211,31 @@ export default function RegisterFormCommerce() {
     });
   };
 
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(
+    if (
       !errors.name &&
       !errors.website &&
       !errors.description &&
-      !errors.areaCode && 
+      !errors.areaCode &&
       !errors.phone &&
       !errors.street &&
       !errors.number &&
       !errors.zipcode
-     
-    // eslint-disable-next-line no-empty
-    ){
-      dispatch(registerComerce())
-      navigate('/home')
+
+      // eslint-disable-next-line no-empty
+    ) {
+      dispatch(registerComerce());
+      navigate('/home');
     } else {
       // eslint-disable-next-line no-alert
-      alert("Complete el formulario")
+      alert('Complete el formulario');
     }
-  }
+  };
   return (
     <div className={styles.RegisterFormCommerce}>
       <Header />
-      <form  autoComplete='off' className={styles.form} onSubmit={handleSubmit}>
+      <form autoComplete="off" className={styles.form} onSubmit={handleSubmit}>
         <div className={styles.containerLogo}>
           <div className={styles.commerceLogo}>
             <img
@@ -299,44 +307,45 @@ export default function RegisterFormCommerce() {
             <label>Descripción</label>
           </div>
           <div className={styles.divInputDescripcion}>
-            <textarea className={styles.inputDescripcion}
-             type="text"
-             name="description"
-             value={input.description}
-             onChange={handleOnChange}
-             />
+            <textarea
+              className={styles.inputDescripcion}
+              type="text"
+              name="description"
+              value={input.description}
+              onChange={handleOnChange}
+            />
           </div>
           <div className={styles.divlabelPhone}>
             <label className={styles.labelPhone}>Teléfono</label>
           </div>
           <div className={styles.phoneDivs}>
             <div className={styles.divInputAndErrorAreaCod}>
-            <input
-              className={styles.areacod}
-              type="text"
-              name='areaCode'
-              value={input.areaCode}
-              placeholder="Cód. Área"
-              onChange={(e) => {
-                handleOnChange(e);
-                validateNum(e);
-              }}
-            />
-            <div className={styles.divErrorAreaCod}>
-            <p className={styles.errors}>{errors.areaCode}</p>
+              <input
+                className={styles.areacod}
+                type="text"
+                name="areaCode"
+                value={input.areaCode}
+                placeholder="Cód. Área"
+                onChange={(e) => {
+                  handleOnChange(e);
+                  validateNum(e);
+                }}
+              />
+              <div className={styles.divErrorAreaCod}>
+                <p className={styles.errors}>{errors.areaCode}</p>
+              </div>
             </div>
-            </div>
-            <div  className={styles.divInputAndErrorTelefono}>
-            <input 
-              className={styles.phonenumber}
-              type="text"
-              name='phone'
-              value={input.phone}
-              placeholder="Número"
-              onChange={(e) => {
-                handleOnChange(e);
-                validateNum(e);
-              }}
+            <div className={styles.divInputAndErrorTelefono}>
+              <input
+                className={styles.phonenumber}
+                type="text"
+                name="phone"
+                value={input.phone}
+                placeholder="Número"
+                onChange={(e) => {
+                  handleOnChange(e);
+                  validateNum(e);
+                }}
               />
               <div className={styles.divErrorTelefono}>
                 <p className={styles.errors}>{errors.phone}</p>
@@ -347,45 +356,46 @@ export default function RegisterFormCommerce() {
             <label className={styles.labelDir}>Dirección</label>
           </div>
           <div className={styles.divInputsCalleyNum}>
-          <div className={styles.divInputAndErrorCalle}>
-            <input className={styles.calle}
-             type="text"
-             name='street'
-             value={input.street}
-             placeholder="Calle"
-             onChange={(e) => {
-              handleOnChange(e);
-              validateLetters(e);
-            }}
-             />
-             <div className={styles.divErrorDireccion}>
-             <p className={styles.errors}>{errors.street}</p>
-             </div>
-             </div>
-             <div className={styles.divInputAndErrorNumCalle}>
-            <input
-              className={styles.numCalle}
-              type="text"
-              name='number'
-              value={input.number}
-              placeholder="Número de calle"
-              onChange={(e) => {
-                handleOnChange(e);
-                validateNum(e);
-              }}
-            />
-            <div className={styles.divErrorCalle}>
-            <p className={styles.errors}>{errors.number}</p>
+            <div className={styles.divInputAndErrorCalle}>
+              <input
+                className={styles.calle}
+                type="text"
+                name="street"
+                value={input.street}
+                placeholder="Calle"
+                onChange={(e) => {
+                  handleOnChange(e);
+                  validateLetters(e);
+                }}
+              />
+              <div className={styles.divErrorDireccion}>
+                <p className={styles.errors}>{errors.street}</p>
+              </div>
             </div>
+            <div className={styles.divInputAndErrorNumCalle}>
+              <input
+                className={styles.numCalle}
+                type="text"
+                name="number"
+                value={input.number}
+                placeholder="Número de calle"
+                onChange={(e) => {
+                  handleOnChange(e);
+                  validateNum(e);
+                }}
+              />
+              <div className={styles.divErrorCalle}>
+                <p className={styles.errors}>{errors.number}</p>
               </div>
             </div>
           </div>
-          <div className={styles.divCodPostal}>
-            <div className={styles.divInputAndErrorCodPostal}>
+        </div>
+        <div className={styles.divCodPostal}>
+          <div className={styles.divInputAndErrorCodPostal}>
             <input
               className={styles.inputCodPostal}
               type="text"
-              name='zipcode'
+              name="zipcode"
               value={input.zipcode}
               placeholder="Cód. Postal"
               onChange={(e) => {
@@ -394,76 +404,86 @@ export default function RegisterFormCommerce() {
               }}
             />
             <div className={styles.divErrorPostalCod}>
-            <p className={styles.errors}>{errors.zipcode}</p>
+              <p className={styles.errors}>{errors.zipcode}</p>
             </div>
           </div>
+        </div>
+        <div className={styles.divCiudadyProv}>
+          <div>
+            <input
+              className={styles.inputProv}
+              type="text"
+              placeholder="Provincia"
+              value={termProvincia}
+              onChange={handleInputProvincia}
+            />
+            {provincia.length > 0 && (
+              <div className={styles.containerResult}>
+                <div className={styles.containerElement}>
+                  {provincia.map((prov) => (
+                    <div
+                      className={styles.elements}
+                      key={prov.id}
+                      provid={prov.id}
+                      provname={prov.name}
+                      onClick={handleProvincia}
+                    >
+                      {prov.name}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
-          <div className={styles.divCiudadyProv}>
-            <div>
-              <input
-                className={styles.inputProv}
-                type="text"
-                placeholder="Provincia"
-                value={termProvincia}
-                onChange={handleInputProvincia}
-              />
-              {provincia.length > 0 && (
-                <div className={styles.containerResult}>
-                  <div className={styles.containerElement}>
-                    {provincia.map((prov) => (
-                      <div
-                        className={styles.elements}
-                        key={prov.id}
-                        provid={prov.id}
-                        provname={prov.name}
-                        onClick={handleProvincia}
-                      >
-                        {prov.name}
-                      </div>
-                    ))}
-                  </div>
+          <div>
+            <input
+              className={styles.inputCiudad}
+              type="text"
+              placeholder="Ciudad"
+              value={termCiudad}
+              onChange={handleInputCiudad}
+            />
+            {ciudad.length > 0 && (
+              <div className={styles.containerResult}>
+                <div className={styles.containerElement}>
+                  {ciudad.map((city) => (
+                    <div
+                      className={styles.elements}
+                      key={city.id}
+                      cityid={city.id}
+                      cityname={city.name}
+                      onClick={handleCiudad}
+                    >
+                      {city.name}
+                    </div>
+                  ))}
                 </div>
-              )}
-            </div>
-            <div>
-              <input
-                className={styles.inputCiudad}
-                type="text"
-                placeholder="Ciudad"
-                value={termCiudad}
-                onChange={handleInputCiudad}
-              />
-              {ciudad.length > 0 && (
-                <div className={styles.containerResult}>
-                  <div className={styles.containerElement}>
-                    {ciudad.map((city) => (
-                      <div
-                        className={styles.elements}
-                        key={city.id}
-                        cityid={city.id}
-                        cityname={city.name}
-                        onClick={handleCiudad}
-                      >
-                        {city.name}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>  
-          <div className={styles.Terms}>
-            {/* BOTON DE ACEPTAR TERMINOS Y CONDICIONES: Dicho botón se encuentra 
+              </div>
+            )}
+          </div>
+        </div>
+        <div className={styles.Terms}>
+          {/* BOTON DE ACEPTAR TERMINOS Y CONDICIONES: Dicho botón se encuentra 
           dentro del componente Terminos, si se quiere editar el CSS de este botón
           debes editarlo desde el componente Terminos, que se encuentra dentro de la carpeta Componentes. */}
-            <Terminos />
-          </div>
+
+          <FormControlLabel
+            control={<Checkbox color="secondary" />}
+            label="ACEPTAR TERMINOS Y CONDICIONES"
+            sx={{
+              color: 'secondary',
+              fontStyle: 'bold',
+            }}
+            onChange={(e) => handleCheck(e)}
+          />
+          <Terminos />
+        </div>
 
         <div className={styles.divButton}>
           {/* BOTON DE ENVIAR SOLICITUD: Dicho botón se encuentra 
           dentro del componente Alert Ong y para conectar el submit 
           con el backend debe configurarse en ese mismo componente AlertOng */}
-          <AlertOng />
+          <AlertOng display={checked} />
         </div>
       </form>
     </div>

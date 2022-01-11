@@ -9,11 +9,15 @@ class Product extends Model {
           allowNull: false,
         },
         description: {
-          type: DataTypes.STRING,
+          type: DataTypes.TEXT,
+          allowNull: false,
+        },
+        quantity: {
+          type: DataTypes.INTEGER,
           allowNull: false,
         },
         photo: {
-          type: DataTypes.STRING,
+          type: DataTypes.TEXT, // TODO ACOMODAR
           allowNull: true,
         },
         price: {
@@ -28,12 +32,14 @@ class Product extends Model {
           type: DataTypes.DATEONLY,
           allowNull: false,
         },
-        quantity: {
-          type: DataTypes.INTEGER,
-          allowNull: false,
-        },
         status: {
-          type: DataTypes.ENUM('published', 'reserved', 'sold', 'expired'),
+          type: DataTypes.ENUM(
+            'published',
+            'reserved',
+            'sold',
+            'expired',
+            'canceled'
+          ),
           allowNull: false,
           defaultValue: 'published',
         },
@@ -45,8 +51,8 @@ class Product extends Model {
   }
 
   static associate(models) {
-    this.hasOne(models.Category);
-    this.hasOne(models.Company);
+    this.belongsTo(models.Category, { as: 'category' });
+    this.belongsTo(models.Company, { as: 'company' });
   }
 }
 
