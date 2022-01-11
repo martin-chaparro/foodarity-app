@@ -1,7 +1,7 @@
 function Backoffice() {
   return (
     <div>
-      <h1>BackOffice</h1>
+      <h1>BackOffice Material</h1>
     </div>
   );
 }
