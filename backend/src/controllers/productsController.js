@@ -1,6 +1,8 @@
 const { Op } = require('sequelize');
 const Category = require('../models/Category');
 const Product = require('../models/Product');
+const User = require('../models/User');
+const Company = require('../models/Company');
 
 const getProducts = async (req, res) => {
   try {
@@ -61,6 +63,14 @@ const getProducts = async (req, res) => {
       include: [
         {
           model: Category,
+          as: 'category',
+          attributes: {
+            exclude: ['createdAt', 'updatedAt'],
+          },
+        },
+        {
+          model: Company,
+          as: 'company',
           attributes: {
             exclude: ['createdAt', 'updatedAt'],
           },
@@ -68,7 +78,14 @@ const getProducts = async (req, res) => {
       ],
       order: orderAttr,
       attributes: {
-        exclude: ['createdAt', 'updatedAt', 'CategoryId'],
+        exclude: [
+          'createdAt',
+          'updatedAt',
+          'CategoryId',
+          'CompanyId',
+          'categoryId',
+          'companyId',
+        ],
       },
     };
 
@@ -97,6 +114,19 @@ const getProducts = async (req, res) => {
 const postProduct = async (req, res) => {
   // TODO auth de company que publica y guardar el id
   try {
+    const { userId } = req;
+    const user = await User.findByPk(userId, {
+      include: [{ model: Company }],
+    });
+    if (!user.CompanyId) {
+      return res.json({ msg: 'El usuaria no posee un comercio' });
+    }
+    if (user.Company.type_id !== 1) {
+      return res.json({
+        msg: 'Solo las companias tipo comercio pueden publicar productos',
+      });
+    }
+
     const {
       lote,
       description,
@@ -118,9 +148,10 @@ const postProduct = async (req, res) => {
       status: 'published',
     });
     await newProduct.setCategory(category);
-    res.json(newProduct);
+    await newProduct.setCompany(user.Company);
+    return res.json(newProduct);
   } catch (error) {
-    res.send(error);
+    return res.status(500).send(error);
   }
 };
 
