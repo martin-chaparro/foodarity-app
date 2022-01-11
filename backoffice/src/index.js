@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Backoffice from './Backoffice';
+import { App } from './App';
+// import Backoffice from './Backoffice';
 
-ReactDOM.render(<Backoffice />, document.getElementById('root'));
+// ReactDOM.render(<Backoffice />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'));
