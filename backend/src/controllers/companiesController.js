@@ -76,7 +76,14 @@ const getCompanies = async (req, res) => {
     const listCompanies = await Company.findAll({
       include: [
         { model: CompanyType, as: 'type', attributes: ['type'] },
-        { model: Address, include: [{ model: City }, { model: State }] },
+        {
+          model: Address,
+          as: 'address',
+          include: [
+            { model: City, as: 'city' },
+            { model: State, as: 'state' },
+          ],
+        },
       ],
       attributes: {
         exclude: ['createdAt', 'updatedAt'],
@@ -99,10 +106,17 @@ const searchCompany = async (req, res) => {
     const company = await Company.findByPk(id, {
       include: [
         { model: CompanyType, as: 'type', attributes: ['type'] },
-        { model: Address, include: [{ model: City }, { model: State }] },
+        {
+          model: Address,
+          as: 'address',
+          include: [
+            { model: City, as: 'city' },
+            { model: State, as: 'state' },
+          ],
+        },
       ],
       attributes: {
-        exclude: ['createdAt', 'updatedAt'],
+        exclude: ['createdAt', 'updatedAt', 'CompanyTypeId'],
       },
     });
     if (company) {
@@ -121,7 +135,7 @@ const searchCompanyByUser = async (req, res) => {
     const { userId } = req;
     // console.log('CONSOLE LOG: userId', userId);
     const user = await User.findByPk(userId, {
-      include: [{ model: Company }],
+      include: [{ model: Company, as: 'company' }],
     });
     if (!user.CompanyId || user.CompanyId === null) {
       return res.json({ msg: 'El usuario no posee una compañia' });
