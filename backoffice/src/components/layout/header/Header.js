@@ -19,7 +19,7 @@ import { toggleAsideMenu } from '../../../redux/actions/ui';
 
 import perfil from '../../../assets/perfil.jpeg';
 
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = ['Logout'];
 
 const drawerWidth = 240;
 
@@ -61,10 +61,10 @@ export const Header = () => {
   };
 
   const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
+    setAnchorElUser(anchorElNav);
   };
 
-  console.log(anchorElNav);
+
 
   return (
     <AppBar
