@@ -4,6 +4,7 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import Rating from '@mui/material/Rating';
 import StarIcon from '@mui/icons-material/Star';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
 import styles from './ProductCard.module.css';
 // import Company from '../../assets/SuperDia.png';
 
@@ -42,7 +43,9 @@ export default function ProductCard({ product }) {
           <h3 className={styles.name}>{product.lote}</h3>
         </div>
 
-        <p className={styles.description}>{(product.description).slice(0,70)}...</p>
+        <p className={styles.description}>
+          {product.description.slice(0, 70)}...
+        </p>
         <div className={styles.divInc}>
           <p className={styles.nameInc}>{product.company.name}</p>
           <p className={styles.precio}>${product.price}</p>
@@ -68,59 +71,79 @@ export default function ProductCard({ product }) {
               aria-labelledby="modal-modal-title"
               aria-describedby="modal-modal-description"
             >
-              <Box sx={style} className={styles.Box}>
+              <Box sx={style} className={styles.BoxGeneral}>
+                <Box className={styles.boxCompany} sx={{ width: 225,}}>
                   <div className={styles.CompanyNameDiv}>
+                    <Typography
+                      id="modal-modal-description"
+                      sx={{ mt: 2, fontSize: 24, margin: 0 }}
+                      className={styles.titleTypographyName}
+                    >
+                      {product.company.name}
+                    </Typography>
+                    <Box
+                      sx={{
+                        width: 200,
+                        display: 'flex',
+                        alignItems: 'center',
+                      }}
+                    >
+                      <Rating
+                        className={styles.Rating}
+                        name="hover-feedback"
+                        defaultValue={3}
+                        precision={1}
+                        onChange={(event, newValue) => {
+                          setValue(newValue);
+                        }}
+                        onChangeActive={(event, newHover) => {
+                          setHover(newHover);
+                        }}
+                        emptyIcon={
+                          <StarIcon
+                            className={styles.star}
+                            fontSize="inherit"
+                          />
+                        }
+                      />
+                      {value !== null && (
+                        <Box sx={{ ml: 2, position: 'relative', left: 0, }}>
+                          {labels[hover !== -1 ? hover : value]}
+                        </Box>
+                      )}
+                    </Box>
+                  </div>
+                    <Typography
+                      id="modal-modal-description"
+                      sx={{ mt: 2, margin: 0, position: 'relative', right: 20, bottom: 40, }}
+                      className={styles.titleTypographyStreet}
+                    ><LocationOnIcon/>
+                      {product.company.address.street}
+                    </Typography>
+                </Box>
+                <Box sx={{ width: 330 }}>
+                  <div className={styles.DivPostData}>
+                    <div className={styles.PostImgDiv}>
+                      <img
+                        className={styles.PostImg}
+                        src={product.photo}
+                        alt="CompanyPhoto"
+                      />
+                    </div>
+                  </div>
                   <Typography
                     id="modal-modal-description"
-                    sx={{ mt: 2, fontSize: 20, margin: 0, }}
-                    className={styles.titleTypographyName}
+                    sx={{ mt: 2, margin: 0, fontSize: 14 }}
+                    className={styles.titleTypographyDesc}
                   >
-                   {product.company.name}
+                    {product.description}
                   </Typography>
+                  <div className={styles.divBtnReservar}>
+                    <button className={styles.btnReservar} type="submit">
+                      Reservar
+                    </button>
                   </div>
-                <div className={styles.DivcompanyData}>
-                  <div className={styles.companyImgDiv}>
-                  <img className={styles.companyImg} src={product.photo} alt="CompanyPhoto" />
-                  </div>
-                <Typography
-                  id="modal-modal-description"
-                  sx={{ mt: 2, margin: 0, }}
-                  className={styles.titleTypographyDesc}
-                >
-                  {product.description}
-                </Typography>
-                </div>
-                <Box
-                  sx={{
-                    width: 200,
-                    display: 'flex',
-                    alignItems: 'center',
-                  }}
-                >
-                  <Rating
-                    className={styles.Rating}
-                    name="hover-feedback"
-                    defaultValue={3}
-                    precision={1}
-                    onChange={(event, newValue) => {
-                      setValue(newValue);
-                    }}
-                    onChangeActive={(event, newHover) => {
-                      setHover(newHover);
-                    }}
-                    emptyIcon={
-                      <StarIcon className={styles.star} fontSize="inherit" />
-                    }
-                  />
-                  {value !== null && (
-                    <Box sx={{ ml: 2, position: 'relative', left: 10 }}>
-                      {labels[hover !== -1 ? hover : value]}
-                    </Box>
-                  )}
                 </Box>
-                <div className={styles.divBtnComprar}>
-                <button className={styles.btnComprar} type="submit">Reservar</button>
-                </div>
               </Box>
             </Modal>
           </div>
