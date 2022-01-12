@@ -336,7 +336,7 @@ paths:
       tags:
         - 'Company'
       summary: 'Crear comercio u ONG'
-      description: 'Ruta para la creacion de usuarios.'
+      description: 'Ruta para la creacion de comercios.'
       operationId: 'addCompany'
       consumes:
         - 'application/json'
@@ -400,7 +400,7 @@ paths:
           description: 'Internal Server Error'
           schema:
             $ref: '#/definitions/ErrorResponse500'      
-  /companies/{id}:
+  /companies/id/{id}:
     get:
       tags:
         - 'Company'
@@ -411,6 +411,47 @@ paths:
         - 'application/json'
       produces:
         - 'application/json'
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id de la compañia "
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        '200':
+          description: 'OK'
+          schema:
+            $ref: '#/definitions/Response200'
+        '400':
+          description: 'Bad Request'
+          schema:
+            $ref: '#/definitions/ErrorResponse400'
+        '401':
+          description: ' Unauthorized'
+          schema:
+            $ref: '#/definitions/ErrorResponse401'
+        '500':
+          description: 'Internal Server Error'
+          schema:
+            $ref: '#/definitions/ErrorResponse500'
+  /companies/byUser:
+    get:
+      tags:
+        - 'Company'
+      summary: 'Muestra la compania del usuario auth'
+      description: 'Muestra la compania del usuario autenticado'
+      operationId: 'getCompanyByUser'
+      consumes:
+        - 'application/json'
+      produces:
+        - 'application/json'
+      parameters:
+      - name: "Authorization"
+        in: "header"
+        required: true
+        type: "string"
+        description: 'Bearer Token'
       responses:
         '200':
           description: 'OK'
@@ -464,13 +505,103 @@ paths:
             $ref: '#/definitions/ErrorResponse500'
       security:
         - api_key: []
+  /companies/{id}:
+    put:
+      tags:
+        - 'Company'
+      summary: 'Actualizacion de info compañia'
+      description: '(no funcional) Actualizacion de info compañia, se deben actualizar todos los datos que se pasan por body'
+      operationId: 'UpdateUser'
+      consumes:
+        - 'application/json'
+      produces:
+        - 'application/json'
+      parameters:
+      - name: "Authorization"
+        in: "header"
+        required: true
+        type: "string"
+        description: 'Bearer Token'
+      - name: "id"
+        in: "path"
+        description: "Id de la compañia a actualizar"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: 'Body'
+        in: 'body'
+        description: 'Datos a actualizar'
+        required: true
+        schema:
+          $ref: '#/definitions/UpdateCompanyRequest'
+      responses:
+        '200':
+          description: 'OK'
+          schema:
+            $ref: '#/definitions/Response200'
+        '400':
+          description: 'Bad Request'
+          schema:
+            $ref: '#/definitions/ErrorResponse400'
+        '401':
+          description: ' Unauthorized'
+          schema:
+            $ref: '#/definitions/ErrorResponse401'
+        '500':
+          description: 'Internal Server Error'
+          schema:
+            $ref: '#/definitions/ErrorResponse500'
+      security:
+        - api_key: []
+  /companies/disabled/{id}:
+    delete:
+      tags:
+        - 'Company'
+      summary: 'Deshabilitar compañia y productos  '
+      description: 'Deshabilitar compañia y sus productos publicados con autenticacion del propietario de la compañia'
+      operationId: 'DeleteCompany'
+      consumes:
+        - 'application/json'
+      produces:
+        - 'application/json'
+      parameters:
+      - name: "Authorization"
+        in: "header"
+        required: true
+        type: "string"
+        description: 'Bearer Token'
+      - name: "id"
+        in: "path"
+        description: "Id de la compañia a deshabilitar"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        '200':
+          description: 'OK'
+          schema:
+            $ref: '#/definitions/Response200'
+        '400':
+          description: 'Bad Request'
+          schema:
+            $ref: '#/definitions/ErrorResponse400'
+        '401':
+          description: ' Unauthorized'
+          schema:
+            $ref: '#/definitions/ErrorResponse401'
+        '500':
+          description: 'Internal Server Error'
+          schema:
+            $ref: '#/definitions/ErrorResponse500'
+      security:
+        - api_key: []
   /products:
     post:
       tags:
         - 'Product'
       summary: 'Crear Producto'
-      description: 'Crea Productos'
-      operationId: 'addProduct'
+      description: 'Crea Productos para publicar, solo tiene auth los users que tengan comercio habilitado'
+      operationId: 'postProduct'
       consumes:
         - 'application/json'
       produces:
@@ -486,7 +617,7 @@ paths:
         description: 'Crear un Producto'
         required: true
         schema:
-          $ref: '#/definitions/CreateUserRequest'
+          $ref: '#/definitions/CreateProductRequest'
       responses:
         '200':
           description: 'OK'
@@ -510,17 +641,213 @@ paths:
       tags:
         - 'Product'
       summary: 'Lista Productos'
-      description: 'Lista todos los productos'
-      operationId: 'GetAllProducts'
+      description: 'Lista de productos (solo las publicaciones activas), incluyendo opciones de paginado, filtrado y ordenamiento'
+      operationId: 'getProducts'
       consumes:
         - 'application/json'
       produces:
         - 'application/json'
+      parameters:
+      - name: "lote"
+        in: "query"
+        description: "Filtra por nombre los resultados"
+        type: "string"
+      - name: "size"
+        in: "query"
+        description: "Decide la cantidad de productos por pagina"
+        type: "string"
+      - name: "page"
+        in: "query"
+        description: "Selecciona la pagina que devuelve"
+        type: "string"
+      - name: "categoryName"
+        in: "query"
+        description: "Filtra por nombre de categoria los resultados"
+        type: "string"
+      - name: "categoryId"
+        in: "query"
+        description: "Filtra por id de categoria los resultados"
+        type: "string"
+      - name: "minPrice"
+        in: "query"
+        description: "Filtra por precio minimo los resultados"
+        type: "string"
+      - name: "maxPrice"
+        in: "query"
+        description: "Filtra por precio maximo los resultados"
+        type: "string"
+      - name: "expirationDate"
+        in: "query"
+        description: "Filtra por fecha de vencimiento los resultados"
+        type: "string"
+      - name: "order"
+        in: "query"
+        description: "ordena los resultados pasandole 'priceASC', 'priceDesc', 'expirationASC', 'expirationDESC'"
+        type: "string"
+      responses:
+        '200':
+          description: 'OK'
+          schema:
+            $ref: '#/definitions/ProductResponse200'
+        '400':
+          description: 'Bad Request'
+          schema:
+            $ref: '#/definitions/ErrorResponse400'
+        '401':
+          description: ' Unauthorized'
+          schema:
+            $ref: '#/definitions/ErrorResponse401'
+        '500':
+          description: 'Internal Server Error'
+          schema:
+            $ref: '#/definitions/ErrorResponse500'
+  /products/id/:productId:
+    get:
+      tags:
+        - 'Product'
+      summary: 'Producto por id'
+      description: 'trae un producto por id'
+      operationId: 'getProductById'
+      consumes:
+        - 'application/json'
+      produces:
+        - 'application/json'
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id del producto"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        '200':
+          description: 'OK'
+          schema:
+            $ref: '#/definitions/ProductResponse200'
+        '400':
+          description: 'Bad Request'
+          schema:
+            $ref: '#/definitions/ErrorResponse400'
+        '401':
+          description: ' Unauthorized'
+          schema:
+            $ref: '#/definitions/ErrorResponse401'
+        '404':
+          description: 'Not Found'
+          schema:
+            $ref: '#/definitions/ErrorResponse404'
+        '500':
+          description: 'Internal Server Error'
+          schema:
+            $ref: '#/definitions/ErrorResponse500'
+    delete:
+      tags:
+        - 'Product'
+      summary: 'Eliminar producto'
+      description: 'Elimina un producto'
+      operationId: 'DeleteProducts'
+      consumes:
+        - 'application/json'
+      produces:
+        - 'application/json'
+      parameters:
+      - name: "Authorization"
+        in: "header"
+        required: true
+        type: "string"
+        description: 'Bearer Token'
+      - name: "id"
+        in: "path"
+        description: "Id del producto a eliminar"
+        required: true
+        type: "integer"
+        format: "int64"
       responses:
         '200':
           description: 'OK'
           schema:
             $ref: '#/definitions/Response200'
+        '400':
+          description: 'Bad Request'
+          schema:
+            $ref: '#/definitions/ErrorResponse400'
+        '401':
+          description: ' Unauthorized'
+          schema:
+            $ref: '#/definitions/ErrorResponse401'
+        '500':
+          description: 'Internal Server Error'
+          schema:
+            $ref: '#/definitions/ErrorResponse500'
+      security:
+        - api_key: []
+  /products/company/:companyid:
+    get:
+      tags:
+        - 'Product'
+      summary: 'Lista de productos por compania'
+      description: 'trae una lista de productos (solo las publicaciones activas) por id de compania'
+      operationId: 'getCompanyProductsById'
+      consumes:
+        - 'application/json'
+      produces:
+        - 'application/json'
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id de la compania"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        '200':
+          description: 'OK'
+          schema:
+            $ref: '#/definitions/ProductResponse200'
+        '400':
+          description: 'Bad Request'
+          schema:
+            $ref: '#/definitions/ErrorResponse400'
+        '401':
+          description: ' Unauthorized'
+          schema:
+            $ref: '#/definitions/ErrorResponse401'
+        '404':
+          description: 'Not Found'
+          schema:
+            $ref: '#/definitions/ErrorResponse404'
+        '500':
+          description: 'Internal Server Error'
+          schema:
+            $ref: '#/definitions/ErrorResponse500'
+  /products/byAuth:
+    get:
+      tags:
+        - 'Product'
+      summary: 'Lista de productos por usuario logeado'
+      description: 'trae una lista de todos los productos de la compania del usuario logeado'
+      operationId: 'getCompanyProductsByAuth'
+      consumes:
+        - 'application/json'
+      produces:
+        - 'application/json'
+      parameters:
+      - name: "Authorization"
+        in: "header"
+        required: true
+        type: "string"
+        description: 'Bearer Token'
+      - name: "id"
+        in: "path"
+        description: "Id de la compania"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        '200':
+          description: 'OK'
+          schema:
+            $ref: '#/definitions/ProductResponse200'
         '400':
           description: 'Bad Request'
           schema:
@@ -540,6 +867,11 @@ paths:
       summary: 'Listado de Provincias'
       description: 'Lista todas las provincias'
       operationId: 'getStates'
+      parameters:
+      - name: "name"
+        in: "query"
+        description: "Filtra por nombre los resultados"
+        type: "string"
       consumes:
         - 'application/json'
       produces:
@@ -548,7 +880,7 @@ paths:
         '200':
           description: 'OK'
           schema:
-            $ref: '#/definitions/Response200'
+            $ref: '#/definitions/LocationResponse200' 
         '400':
           description: 'Bad Request'
           schema:
@@ -566,7 +898,7 @@ paths:
       tags:
         - 'Location'
       summary: 'Listado de ciudades'
-      description: 'Lista todas las ciudades'
+      description: 'Filtra por nombre los resultados'
       operationId: 'getCities'
       consumes:
         - 'application/json'
@@ -581,7 +913,7 @@ paths:
         '200':
           description: 'OK'
           schema:
-            $ref: '#/definitions/Response200'
+            $ref: '#/definitions/LocationResponse200'
         '400':
           description: 'Bad Request'
           schema:
@@ -594,7 +926,7 @@ paths:
           description: 'Internal Server Error'
           schema:
             $ref: '#/definitions/ErrorResponse500'
-  /cities/{stateId}:
+  /cities/:stateId:
     get:
       tags:
         - 'Location'
@@ -611,11 +943,15 @@ paths:
         description: "Id de la provincia a buscar"
         required: true
         type: "string"
+      - name: "name"
+        in: "query"
+        description: "Nombre de la ciudad a buscar"
+        type: "string"
       responses:
         '200':
           description: 'OK'
           schema:
-            $ref: '#/definitions/Response200'
+            $ref: '#/definitions/LocationResponse200'
         '400':
           description: 'Bad Request'
           schema:
@@ -766,9 +1102,9 @@ definitions:
       description:
         type: 'string'
       areaCode:
-        type: 'string'
+        type: 'integer'
       phone:
-        type: 'string'
+        type: 'integer'
       email:
         type: 'string'
       website:
@@ -778,16 +1114,59 @@ definitions:
       street:
         type: 'string'
       number:
-        type: 'string'
+        type: 'integer'
       zipcode:
-        type: 'string'
+        type: 'integer'
       cityId:
-        type: 'string'
+        type: 'integer'
       stateId:
-        type: 'string'
+        type: 'integer'
       type_id:
         type: 'integer'
         format: 'int64'
+  UpdateCompanyRequest:
+    type: 'object'
+    properties:
+      description:
+        type: 'string'
+      areaCode:
+        type: 'string'
+      phone:
+        type: 'string'
+      email:
+        type: 'string'
+      webside:
+        type: 'string'
+      street:
+        type: 'string'
+      number:
+        type: 'string'
+      zipcode:
+        type: 'string'
+  CreateProductRequest:
+    type: 'object'
+    properties:
+      lote:
+        type: 'string'
+      description:
+        type: 'string'
+        format: 'text'
+      photo:
+        type: 'object'
+      quantity:
+        type: 'integer'
+      price: 
+        type: 'integer'
+        format: 'double'
+      publicationDate:
+        type: 'string'
+        format: 'MM/DD/AAAA'
+      expirationDate:
+        type: 'string'
+        format: 'MM/DD/AAAA'
+      category:
+        type: 'integer'
+        format: 'id'
   LoginResponse200:
     type: 'object'
     properties:
@@ -826,6 +1205,49 @@ definitions:
     properties:
       message:
         type: 'string'
+  LocationResponse200:
+    type: 'object'
+    properties:
+      id:
+        type: 'integer'
+      name:
+        type: 'string'
+      lat: 
+        type: 'integer'
+        format: 'double'
+      lon: 
+        type: 'integer'
+        format: 'double'
+  ProductResponse200:
+    type: 'object'
+    properties:
+      id:
+        type: 'string'
+      lote:
+        type: 'string'
+      description:
+        type: 'string'
+      quantity:
+        type: 'integer'
+      photo:
+        type: 'string'
+        format: 'url'
+      price:
+        type: 'integer'
+      publicationDate:
+        type: 'string'
+        format: 'date'
+      expirationDate:
+        type: 'string'
+        format: 'date'
+      status:
+        type: 'string'
+      category:
+        type: 'object'
+      company: 
+        type: 'object'
+      publisher:
+        type: 'object'
   Response200:
     type: 'object'
     properties:
@@ -842,6 +1264,11 @@ definitions:
       message:
         type: 'string'
   ErrorResponse401:
+    type: 'object'
+    properties:
+      message:
+        type: 'string'
+  ErrorResponse404:
     type: 'object'
     properties:
       message:

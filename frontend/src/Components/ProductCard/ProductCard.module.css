@@ -3,11 +3,10 @@
   justify-content: center;
   height: 180px;
   width: 450px;
-  background-color: rgba(38, 5, 41, 0.527);  
+  background-color: rgba(38, 5, 41, 0.527);
   margin-bottom: 10px;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
-
 
 .btncontent {
   display: flex;
@@ -32,41 +31,40 @@
   text-align: center;
   border-radius: 4px;
   padding-right: 0;
-color: white;
+  color: white;
 }
 
 .description {
-
   width: 260px;
   height: 45px;
   font-size: 14px;
-  font-family: "Quicksand", sans-serif;
+  font-family: 'Quicksand', sans-serif;
   color: white;
 }
 
 .divInc {
-display: flex;
-justify-content: space-around;
-position: relative;
-bottom: 10px;
+  display: flex;
+  justify-content: space-around;
+  position: relative;
+  bottom: 10px;
 }
 
 .nameInc {
-color: white;
-font-size: 12px;
-font-weight:bold;
-font-family: "Quicksand", sans-serif;
-position: relative;
-right: 25px;
+  color: rgb(157, 255, 201);
+  font-size: 14px;
+  font-weight: bold;
+  font-family: 'Quicksand', sans-serif;
+  position: relative;
+  right: 25px;
 }
 
 .precio {
-  color: white;
-font-size: 12px;
-font-weight:bold;
-font-family: "Quicksand", sans-serif;
-position: relative;
-right: 20px;
+  color: rgb(157, 255, 201);
+  font-size: 14px;
+  font-weight: bold;
+  font-family: 'Quicksand', sans-serif;
+  position: relative;
+  right: 20px;
 }
 
 .btnContainer {
@@ -99,9 +97,8 @@ right: 20px;
 }
 
 .btnres:hover {
-  background-color: #d685846b;
+  background-color: rgba(221, 128, 51, 0.692);
 }
-
 
 .btndetdiv {
   width: 120px;
@@ -126,7 +123,7 @@ right: 20px;
 }
 
 .btndet:hover {
-  background-color: #fdffb662;
+  background-color: #389e63dc;
 }
 
 .img {
@@ -134,23 +131,19 @@ right: 20px;
   left: 13px;
   width: 160px;
   height: 180px;
- 
 }
 
 .divImg {
   width: 160px;
   height: 180px;
   display: flex;
-  /* background-color: rgb(255, 255, 255); */
   position: relative;
   margin-right: 30px;
-/* background: turquoise; */
-
 }
 
 .BoxGeneral {
   color: white;
-  background-color: rgba(38, 5, 41, 0.788);  
+  background-color: rgba(38, 5, 41, 0.788);
   box-shadow: 2px rgba(255, 0, 0, 0.288);
   border-radius: 4px;
   font-size: 14px;
@@ -159,54 +152,53 @@ right: 20px;
 }
 
 .titleTypographyName {
-display: flex;
-position: relative;
-bottom: 5px;
+  display: flex;
+  position: relative;
+  bottom: 5px;
 }
 
 .titleTypographyStreet {
   display: flex;
   justify-content: flex-end;
-position: relative;
-top: 20px;
+  position: relative;
+  top: 20px;
+  right: 5px;
 }
 
 .titleTypographyDesc {
-position: relative;
-bottom: 5px;
-width: 300px;
-height: 140px;
+  position: relative;
+  width: 180px;
+  height: 140px;
+  left: 10px;
 }
 
 .DivPostData {
-  display:flex;
-  justify-content: space-around;
+  display: flex;
+  flex-direction: row;
   width: 550px;
   height: 150px;
 }
 
 .PostImgDiv {
-width: 100px;  
-position: relative;
-margin-bottom: 10px;
-right: 225px;
+  width: 140px;
+  position: relative;
+  margin-bottom: 10px;
 }
 
 .PostImg {
   width: 140px;
   height: 140px;
   border: 2px solid white;
-  /* border-radius: 10px; */
 }
 
 .CompanyNameDiv {
   position: relative;
+  left: 20px;
   width: 200px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-end;
-
 }
 
 .star {
@@ -215,36 +207,34 @@ right: 225px;
 
 .Rating {
   position: relative;
-
 }
 
 .divBtnReservar {
-width: 100px;
-height: 40px;
-display: flex;
-justify-content: center;
-position: relative;
-left: 22px;
-bottom: 10px;
+  width: 100px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  left: 22px;
+  top: 20px;
 }
 
 .btnReservar {
-width: 100px;
-height: 30px;
-background-color: transparent;
-border: 2px solid white;
-color: white;
-font-size: 14px;
-font-weight: 700;
-border-radius: 2px;
-transition: 0.3s;
-cursor: pointer;
+  width: 100px;
+  height: 30px;
+  background-color: transparent;
+  border: 2px solid white;
+  color: white;
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: 2px;
+  transition: 0.3s;
+  cursor: pointer;
 }
 
 .btnReservar:hover {
-background-color: rgba(221, 128, 51, 0.692);
+  background-color: rgba(221, 128, 51, 0.692);
 }
-/* 
-.boxCompany {
-  background-color: rgba(0, 0, 0, 0.25);
+
+/* .boxCompany {
 } */
