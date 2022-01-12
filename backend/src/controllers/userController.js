@@ -4,6 +4,10 @@ const cloudinary = require('cloudinary').v2;
 const { generateJWT } = require('../helpers/generateJWT');
 const User = require('../models/User');
 const Role = require('../models/Role');
+const Company = require('../models/Company');
+const City = require('../models/City');
+const State = require('../models/State');
+const Address = require('../models/Address');
 
 cloudinary.config(process.env.CLOUDINARY_URL);
 
@@ -65,6 +69,46 @@ const getAllUsers = async (request, response) => {
   return response.status(200).json(users);
 };
 
+const getUser = async (request, response) => {
+  const { id } = request.params;
+
+  const user = await User.findByPk(id, {
+    attributes: {
+      exclude: [
+        'password',
+        'createdAt',
+        'updatedAt',
+        'RoleId',
+        'role_id',
+        'CompanyId',
+        'companyId',
+      ],
+    },
+    where: { status: true },
+    include: [
+      { model: Role, as: 'role', attributes: ['id', 'role'] },
+      {
+        model: Company,
+        as: 'company',
+        include: {
+          model: Address,
+          as: 'address',
+          attributes: {
+            exclude: ['CompanyId'],
+          },
+          include: [{ model: City,as:'city' }, { model: State,as:'state' }],
+        },
+      },
+    ],
+  });
+
+  if (!user) {
+    return response.status(400).json({ message: 'Usuario no encontrador' });
+  }
+
+  return response.status(200).json(user);
+};
+
 const deleteUser = async (request, response) => {
   let id = null;
 
@@ -95,6 +139,11 @@ const deleteUser = async (request, response) => {
 
 const updateUser = async (request, response) => {
   let id = null;
+
+  const errors = validationResult(request);
+  if (!errors.isEmpty()) {
+    return response.status(400).json({ errors: errors.array() });
+  }
 
   if (request.userRoleId === 2) {
     id = request.params.id;
@@ -144,6 +193,7 @@ const uploadPhotoUser = async (request, response) => {
 module.exports = {
   createUser,
   getAllUsers,
+  getUser,
   deleteUser,
   updateUser,
   uploadPhotoUser,

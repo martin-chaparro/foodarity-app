@@ -4,6 +4,7 @@ const router = new Router();
 const {
   createUser,
   getAllUsers,
+  getUser,
   deleteUser,
   updateUser,
   uploadPhotoUser,
@@ -14,6 +15,7 @@ const authMiddleware = require('../../middlewares/auth');
 
 router.post('/', ValidationsUser.withPassword, createUser);
 router.get('/', authMiddleware, getAllUsers);
+router.get('/:id', authMiddleware, getUser);
 router.delete('/:id', authMiddleware, deleteUser);
 router.put('/:id', authMiddleware, ValidationsUser.withoutPassword, updateUser);
 router.patch(
