@@ -4,6 +4,7 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import Rating from '@mui/material/Rating';
 import StarIcon from '@mui/icons-material/Star';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import styles from './ProductCard.module.css';
 // import Company from '../../assets/SuperDia.png';
@@ -15,6 +16,7 @@ const labels = {
   4: 'Buenisimo',
   5: 'Excelente',
 };
+
 
 const style = {
   position: 'absolute',
@@ -32,6 +34,7 @@ export default function ProductCard({ product }) {
   const handleClose = () => setOpen(false);
   const [value, setValue] = React.useState(5);
   const [hover, setHover] = React.useState(-1);
+ 
 
   return (
     <div className={styles.productcard}>
@@ -120,6 +123,12 @@ export default function ProductCard({ product }) {
                     ><LocationOnIcon/>
                       {product.company.address.street}
                     </Typography>
+                      <div className={styles.divFavButton}>
+                        <button className={styles.favButton} type='submit'>
+                        Añadir a favoritos
+                        <FavoriteIcon sx={{color: 'white',}}/>
+                        </button>
+                      </div>
                 </Box>
                 <Box sx={{ width: 330 }}>
                   <div className={styles.DivPostData}>
@@ -139,7 +148,7 @@ export default function ProductCard({ product }) {
                   </Typography>
                   </div>
                   <div><h3>
-                    Fecha de vencimiento: {product.expirationDate}
+                    El lote expira: {product.expirationDate}
                     </h3></div>
                     <div><h3>
                     Categoria: {product.category.name}
