@@ -78,7 +78,7 @@ const getCompanies = async (req, res) => {
         { model: CompanyType, as: 'type', attributes: ['type'] },
         {
           model: Address,
-          as:'address',
+          as: 'address',
           include: [
             { model: City, as: 'city' },
             { model: State, as: 'state' },
@@ -108,7 +108,7 @@ const searchCompany = async (req, res) => {
         { model: CompanyType, as: 'type', attributes: ['type'] },
         {
           model: Address,
-          as:'address',
+          as: 'address',
           include: [
             { model: City, as: 'city' },
             { model: State, as: 'state' },
@@ -116,7 +116,7 @@ const searchCompany = async (req, res) => {
         },
       ],
       attributes: {
-        exclude: ['createdAt', 'updatedAt'],
+        exclude: ['createdAt', 'updatedAt', 'CompanyTypeId'],
       },
     });
     if (company) {
