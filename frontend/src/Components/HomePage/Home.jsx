@@ -13,6 +13,7 @@ import Navbar from '../Navbar/Navbar';
 // import productos from '../Cards/product.json';
 import Pagination from '../Pagination/BasicPagination';
 // import SearchBar from '../Searchbar/Searchbar';
+// import Loading from '../Loading/Loading';
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -36,7 +37,6 @@ export default function Home() {
     dispatch(getProducts());
   }, [dispatch]);
 
-  // console.log(product);
   const paginado = (pageNumber) => {
     // setCurrentPage(pageNumber);
     dispatch(getProducts({ page: pageNumber }));
@@ -48,7 +48,14 @@ export default function Home() {
 
   return (
     <div>
-      <div style={{ marginBottom: '1em' }}>
+      <div
+        style={{
+          marginBottom: '1em',
+          display: 'flex',
+          justifyContent: 'center',
+          width: '100%',
+        }}
+      >
         <Navbar filtrado={filtrado} />
       </div>
       {/* <NavbarCommerce /> */}
@@ -64,25 +71,28 @@ export default function Home() {
           </div> */}
           <div className={styles.home}>
             <div className={styles.homecont}>
-              {/* <div className={styles.contweb}>
-                <ProfileCard />
+              <div className={styles.contweb}>
+                {/* <ProfileCard /> */}
                 <div className={styles.ShopCardsContainer}>
-                  <h3 className={styles.title}>Mi carrito de compras</h3>
-                  <ShopCard />
+                  {/* <h3 className={styles.title}>Mi carrito de compras</h3>
+                  <ShopCard /> */}
                 </div>
-              </div> */}
-
-              <div className={styles.contmobile}>
-                {/* <SearchBar /> */}
-
-                <div className={styles.ProductCardDiv}>
-                  {/* <ProductCard/> */}
-                </div>
-                {allProducts?.map((product, index) => (
-                  // eslint-disable-next-line react/no-array-index-key
-                  <ProductCard key={index} product={product} />
-                ))}
               </div>
+            </div>
+          </div>
+
+          <div className={styles.contmobile}>
+            {/* <SearchBar /> */}
+
+            <div>
+              <div className={styles.ProductCardDiv}>
+                {/* <ProductCard/> */}
+              </div>
+
+              {allProducts?.map((product, index) => (
+                // eslint-disable-next-line react/no-array-index-key
+                <ProductCard key={index} product={product} />
+              ))}
             </div>
           </div>
         </div>

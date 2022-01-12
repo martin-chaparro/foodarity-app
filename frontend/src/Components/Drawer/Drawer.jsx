@@ -11,8 +11,6 @@ import CategoryIcon from '@mui/icons-material/Category';
 import MenuIcon from '@mui/icons-material/Tune';
 import ArrowBackIosTwoToneIcon from '@mui/icons-material/ArrowBackIosTwoTone';
 import LocalDiningIcon from '@mui/icons-material/LocalDining';
-// import PhoneInTalkIcon from '@mui/icons-material/PhoneInTalk';
-// import InboxIcon from '@mui/icons-material/MoveToInbox';
 import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
 import MailIcon from '@mui/icons-material/Mail';
 
