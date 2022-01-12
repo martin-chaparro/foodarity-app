@@ -5,14 +5,11 @@ import { Link } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
-// import Typography from '@mui/material/Typography';
-import InputBase from '@mui/material/InputBase';
+// import InputBase from '@mui/material/InputBase';
 import Badge from '@mui/material/Badge';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
-// import MenuIcon from '@mui/icons-material/Menu';
-import SearchIcon from '@mui/icons-material/Search';
-// import AccountCircle from '@mui/icons-material/AccountCircle';
+// import SearchIcon from '@mui/icons-material/Search';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -21,15 +18,21 @@ import HelpIcon from '@mui/icons-material/Help';
 import Logo from '../../assets/Mobil-Full-Header-Logo.png';
 import Avatar from './Avatar';
 import Drawer from '../Drawer/Drawer';
+import SearchBar from '../Searchbar/Searchbar';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  backgroundColor: alpha(theme.palette.common.white, 0.95),
   '&:hover': {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
+    backgroundColor: alpha(theme.palette.common.white, 0.95),
   },
-  marginRight: theme.spacing(2),
+  marginRight: theme.spacing(1),
+  display: 'flex',
+  flexDirection: 'colum',
+  justifyContent: 'spaceBetween',
+  marginTop: '1em',
+  marginButtom: '1em',
   marginLeft: 0,
   width: '100%',
   [theme.breakpoints.up('sm')]: {
@@ -38,30 +41,30 @@ const Search = styled('div')(({ theme }) => ({
   },
 }));
 
-const SearchIconWrapper = styled('div')(({ theme }) => ({
-  color: 'secondary',
-  padding: theme.spacing(0, 2),
-  height: '100%',
-  position: 'absolute',
-  pointerEvents: 'none',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-}));
+// const SearchIconWrapper = styled('div')(({ theme }) => ({
+//   color: 'secondary',
+//   padding: theme.spacing(0, 2),
+//   height: '100%',
+//   position: 'absolute',
+//   pointerEvents: 'none',
+//   display: 'flex',
+//   alignItems: 'center',
+//   justifyContent: 'center',
+// }));
 
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: 'inherit',
-  '& .MuiInputBase-input': {
-    padding: theme.spacing(1, 1, 1, 1),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('md')]: {
-      width: '60ch',
-    },
-  },
-}));
+// const StyledInputBase = styled(InputBase)(({ theme }) => ({
+//   color: 'inherit',
+//   '& .MuiInputBase-input': {
+//     padding: theme.spacing(1, 1, 1, 1),
+//     // vertical padding + font size from searchIcon
+//     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+//     transition: theme.transitions.create('width'),
+//     width: '100%',
+//     [theme.breakpoints.up('md')]: {
+//       width: '60ch',
+//     },
+//   },
+// }));
 
 export default function Navbar({ filtrado }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -89,25 +92,6 @@ export default function Navbar({ filtrado }) {
 
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
-    // <Menu
-    //   anchorEl={anchorEl}
-    //   anchorOrigin={{
-    //     vertical: 'top',
-    //     horizontal: 'right',
-    //   }}
-    //   id={menuId}
-    //   keepMounted
-    //   transformOrigin={{
-    //     vertical: 'top',
-    //     horizontal: 'right',
-    //   }}
-    //   open={isMenuOpen}
-    //   onClose={handleMenuClose}
-    // >
-    //   <MenuItem onClick={handleMenuClose}>Perfil</MenuItem>
-    //   <MenuItem onClick={handleMenuClose}>Mi Cuenta</MenuItem>
-    //   <MenuItem onClick={handleMenuClose}>Cerrar Sesión</MenuItem>
-    // </Menu>
     <Menu
       anchorEl={anchorEl}
       anchorOrigin={{
@@ -212,7 +196,7 @@ export default function Navbar({ filtrado }) {
         </IconButton>
         <p>Carrito de Compras</p>
       </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
+      <MenuItem>
         <IconButton
           size="large"
           aria-label="account of current user"
@@ -220,7 +204,6 @@ export default function Navbar({ filtrado }) {
           aria-haspopup="true"
           color="secondary"
         >
-          {/* <AccountCircle /> */}
           <Avatar />
         </IconButton>
         <p>Perfil</p>
@@ -252,20 +235,24 @@ export default function Navbar({ filtrado }) {
             aria-label="open drawer"
             sx={{ mr: 4.5 }}
           >
-            <Drawer filtrado={filtrado} />
+            {/* <Drawer filtrado={filtrado} /> */}
           </IconButton>
           <Link to="/">
             <img src={Logo} alt="Logo" />
           </Link>
           <Search>
+            <SearchBar />
+          </Search>
+          {/* <Search>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
-            <StyledInputBase
+                    <StyledInputBase
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}
             />
-          </Search>
+          </Search> */}
+
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <IconButton
@@ -299,6 +286,7 @@ export default function Navbar({ filtrado }) {
             </IconButton>
           </Box>
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
+            <Drawer filtrado={filtrado} />
             <IconButton
               size="large"
               aria-label="show more"

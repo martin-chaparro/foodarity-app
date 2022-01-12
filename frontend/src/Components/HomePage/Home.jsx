@@ -12,7 +12,6 @@ import Navbar from '../Navbar/Navbar';
 // import ShopCard from '../ShopCard/ShopCard';
 // import productos from '../Cards/product.json';
 import Pagination from '../Pagination/BasicPagination';
-// import SearchBar from '../Searchbar/Searchbar';
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -48,7 +47,14 @@ export default function Home() {
 
   return (
     <div>
-      <div style={{ marginBottom: '1em' }}>
+      <div
+        style={{
+          marginBottom: '1em',
+          display: 'flex',
+          justifyContent: 'center',
+          width: '100%',
+        }}
+      >
         <Navbar filtrado={filtrado} />
       </div>
       {/* <NavbarCommerce /> */}
