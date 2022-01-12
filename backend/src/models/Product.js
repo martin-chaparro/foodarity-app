@@ -52,6 +52,7 @@ class Product extends Model {
     this.belongsTo(models.Category, { as: 'category' });
     this.belongsTo(models.Company, { as: 'company' });
     this.belongsTo(models.User, { as: 'publisher' });
+    this.hasMany(models.Order, {as : 'orders'})
   }
 }
 
