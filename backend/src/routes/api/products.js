@@ -10,7 +10,7 @@ const {
   getProductById,
   getCompanyProductsById,
   getCompanyProductsByAuth,
-} = require('../../controllers/productsController'); 
+} = require('../../controllers/productsController');
 
 router.get('/', getProducts);
 router.post('/', authMiddleware, ValidationProduct.post, postProduct); // TODO manejar la imagen cloudinary

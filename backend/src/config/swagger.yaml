@@ -295,7 +295,7 @@ paths:
       tags:
         - 'Company'
       summary: 'Crear comercio u ONG'
-      description: 'Ruta para la creacion de usuarios.'
+      description: 'Ruta para la creacion de comercios.'
       operationId: 'addCompany'
       consumes:
         - 'application/json'
@@ -359,7 +359,7 @@ paths:
           description: 'Internal Server Error'
           schema:
             $ref: '#/definitions/ErrorResponse500'      
-  /companies/{id}:
+  /companies/id/{id}:
     get:
       tags:
         - 'Company'
@@ -370,6 +370,47 @@ paths:
         - 'application/json'
       produces:
         - 'application/json'
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id de la compañia "
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        '200':
+          description: 'OK'
+          schema:
+            $ref: '#/definitions/Response200'
+        '400':
+          description: 'Bad Request'
+          schema:
+            $ref: '#/definitions/ErrorResponse400'
+        '401':
+          description: ' Unauthorized'
+          schema:
+            $ref: '#/definitions/ErrorResponse401'
+        '500':
+          description: 'Internal Server Error'
+          schema:
+            $ref: '#/definitions/ErrorResponse500'
+  /companies/byUser:
+    get:
+      tags:
+        - 'Company'
+      summary: 'Muestra la compania del usuario auth'
+      description: 'Muestra la compania del usuario autenticado'
+      operationId: 'getCompanyByUser'
+      consumes:
+        - 'application/json'
+      produces:
+        - 'application/json'
+      parameters:
+      - name: "Authorization"
+        in: "header"
+        required: true
+        type: "string"
+        description: 'Bearer Token'
       responses:
         '200':
           description: 'OK'
@@ -404,6 +445,96 @@ paths:
         required: true
         type: "string"
         description: 'Bearer Token'
+      responses:
+        '200':
+          description: 'OK'
+          schema:
+            $ref: '#/definitions/Response200'
+        '400':
+          description: 'Bad Request'
+          schema:
+            $ref: '#/definitions/ErrorResponse400'
+        '401':
+          description: ' Unauthorized'
+          schema:
+            $ref: '#/definitions/ErrorResponse401'
+        '500':
+          description: 'Internal Server Error'
+          schema:
+            $ref: '#/definitions/ErrorResponse500'
+      security:
+        - api_key: []
+  /companies/{id}:
+    put:
+      tags:
+        - 'Company'
+      summary: 'Actualizacion de info compañia'
+      description: '(no funcional) Actualizacion de info compañia, se deben actualizar todos los datos que se pasan por body'
+      operationId: 'UpdateUser'
+      consumes:
+        - 'application/json'
+      produces:
+        - 'application/json'
+      parameters:
+      - name: "Authorization"
+        in: "header"
+        required: true
+        type: "string"
+        description: 'Bearer Token'
+      - name: "id"
+        in: "path"
+        description: "Id de la compañia a actualizar"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: 'Body'
+        in: 'body'
+        description: 'Datos a actualizar'
+        required: true
+        schema:
+          $ref: '#/definitions/UpdateCompanyRequest'
+      responses:
+        '200':
+          description: 'OK'
+          schema:
+            $ref: '#/definitions/Response200'
+        '400':
+          description: 'Bad Request'
+          schema:
+            $ref: '#/definitions/ErrorResponse400'
+        '401':
+          description: ' Unauthorized'
+          schema:
+            $ref: '#/definitions/ErrorResponse401'
+        '500':
+          description: 'Internal Server Error'
+          schema:
+            $ref: '#/definitions/ErrorResponse500'
+      security:
+        - api_key: []
+  /companies/disabled/{id}:
+    delete:
+      tags:
+        - 'Company'
+      summary: 'Deshabilitar compañia y productos  '
+      description: 'Deshabilitar compañia y sus productos publicados con autenticacion del propietario de la compañia'
+      operationId: 'DeleteCompany'
+      consumes:
+        - 'application/json'
+      produces:
+        - 'application/json'
+      parameters:
+      - name: "Authorization"
+        in: "header"
+        required: true
+        type: "string"
+        description: 'Bearer Token'
+      - name: "id"
+        in: "path"
+        description: "Id de la compañia a deshabilitar"
+        required: true
+        type: "integer"
+        format: "int64"
       responses:
         '200':
           description: 'OK'
@@ -853,7 +984,7 @@ definitions:
       website:
         type: 'string'
       status:
-        type: 'boolean'
+        type: "string" 
       ownerId:
         type: 'integer'
         format: 'int64'
@@ -901,6 +1032,25 @@ definitions:
       type_id:
         type: 'integer'
         format: 'int64'
+  UpdateCompanyRequest:
+    type: 'object'
+    properties:
+      description:
+        type: 'string'
+      areaCode:
+        type: 'string'
+      phone:
+        type: 'string'
+      email:
+        type: 'string'
+      webside:
+        type: 'string'
+      street:
+        type: 'string'
+      number:
+        type: 'string'
+      zipcode:
+        type: 'string'
   CreateProductRequest:
     type: 'object'
     properties:

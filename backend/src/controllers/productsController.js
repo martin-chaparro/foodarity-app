@@ -97,13 +97,13 @@ const getProducts = async (req, res) => {
     // TODO corroborar como buscar por relacion de entidades
     if (categoryName) {
       include[0].where = {
-        'name' : categoryName
-      }
+        name: categoryName,
+      };
     }
     if (categoryId) {
       include[0].where = {
-        'id' : categoryId
-      }
+        id: categoryId,
+      };
     }
 
     if (minPrice && maxPrice) {
@@ -257,8 +257,8 @@ const getCompanyProductsByAuth = async (req, res) => {
     const { userId } = req;
     const user = await User.findByPk(userId);
     const id = user.CompanyId;
-    const company = await Company.findByPk(id)
-    console.log(company.type_id)
+    const company = await Company.findByPk(id);
+    console.log(company.type_id);
     if (!company) {
       return res.status(401).json({ message: 'No posees una compania' });
     }

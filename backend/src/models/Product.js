@@ -33,11 +33,7 @@ class Product extends Model {
           allowNull: false,
         },
         status: {
-          type: DataTypes.ENUM(
-            'published',
-            'finished',
-            'canceled'
-          ),
+          type: DataTypes.ENUM('published', 'finished', 'canceled'),
           allowNull: false,
           defaultValue: 'published',
         },
