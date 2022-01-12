@@ -1,7 +1,7 @@
 import { types } from '../types/ui';
 
 const initialState = {
-  asidemenu: false,
+  asidemenu: true,
 };
 
 export const uiReducer = (state = initialState, action) => {
