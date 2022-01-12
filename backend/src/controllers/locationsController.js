@@ -8,21 +8,37 @@ const getCities = async (req, res) => {
   try {
     if (!name) {
       const cities = await City.findAll({
-        include: [{ model: State, as: 'state', attributes: {
-          exclude: ['createdAt', 'updatedAt'],} }],
+        include: [
+          {
+            model: State,
+            as: 'state',
+            attributes: {
+              exclude: ['createdAt', 'updatedAt'],
+            },
+          },
+        ],
         order: [['name', 'ASC']],
         attributes: {
-          exclude: ['createdAt', 'updatedAt','state_id'],}
+          exclude: ['createdAt', 'updatedAt', 'state_id'],
+        },
       });
       res.status(200).json(cities);
     } else {
       const cities = await City.findAll({
         where: { name: { [Op.iLike]: `%${name}%` } },
-        include: [{ model: State, as: 'state', attributes: {
-          exclude: ['createdAt', 'updatedAt'],} }],
+        include: [
+          {
+            model: State,
+            as: 'state',
+            attributes: {
+              exclude: ['createdAt', 'updatedAt'],
+            },
+          },
+        ],
         order: [['name', 'ASC']],
         attributes: {
-          exclude: ['createdAt', 'updatedAt'],}
+          exclude: ['createdAt', 'updatedAt'],
+        },
       });
       res.status(200).json(cities);
     }
@@ -43,17 +59,23 @@ const getCitiesByState = async (req, res) => {
     try {
       const cities = await City.findAll({
         where: { state_id: stateId },
-        include: [{ model: State, as: 'state', attributes: {
-          exclude: ['createdAt', 'updatedAt'], 
-      } }],
+        include: [
+          {
+            model: State,
+            as: 'state',
+            attributes: {
+              exclude: ['createdAt', 'updatedAt'],
+            },
+          },
+        ],
         order: [['name', 'ASC']],
         attributes: {
-          exclude: ['createdAt', 'updatedAt','state_id'],
-        }
+          exclude: ['createdAt', 'updatedAt', 'state_id'],
+        },
       });
       return res.status(200).json(cities);
     } catch (error) {
-      return res.status(500).send({message : error});
+      return res.status(500).send({ message: error });
     }
   } else {
     try {
@@ -64,17 +86,23 @@ const getCitiesByState = async (req, res) => {
             { state_id: stateId },
           ],
         },
-        include: [{ model: State, as: 'state', attributes: {
-          exclude: ['createdAt', 'updatedAt'], 
-      } }],
+        include: [
+          {
+            model: State,
+            as: 'state',
+            attributes: {
+              exclude: ['createdAt', 'updatedAt'],
+            },
+          },
+        ],
         order: [['name', 'ASC']],
         attributes: {
-          exclude: ['createdAt', 'updatedAt','state_id']
-        }
+          exclude: ['createdAt', 'updatedAt', 'state_id'],
+        },
       });
       return res.status(200).json(cities);
     } catch (error) {
-      return res.status(200).send({message : error});
+      return res.status(200).send({ message: error });
     }
   }
 };
@@ -86,17 +114,18 @@ const getStates = async (req, res) => {
       const states = await State.findAll({
         order: [['name', 'ASC']],
         attributes: {
-          exclude: ['createdAt', 'updatedAt'], 
-      }});
+          exclude: ['createdAt', 'updatedAt'],
+        },
+      });
       res.status(200).json(states);
     } else {
       const states = await State.findAll({
         where: { name: { [Op.iLike]: `%${name}%` } },
         order: [['name', 'ASC']],
-        
+
         attributes: {
-      exclude: ['createdAt', 'updatedAt'],
-    }
+          exclude: ['createdAt', 'updatedAt'],
+        },
       });
       res.status(200).json(states);
     }
