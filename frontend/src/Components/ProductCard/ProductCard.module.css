@@ -52,8 +52,8 @@ bottom: 10px;
 }
 
 .nameInc {
-color: white;
-font-size: 12px;
+color: rgb(157, 255, 201);
+font-size: 14px;
 font-weight:bold;
 font-family: "Quicksand", sans-serif;
 position: relative;
@@ -61,8 +61,8 @@ right: 25px;
 }
 
 .precio {
-  color: white;
-font-size: 12px;
+color: rgb(157, 255, 201);
+font-size: 14px;
 font-weight:bold;
 font-family: "Quicksand", sans-serif;
 position: relative;
@@ -99,7 +99,7 @@ right: 20px;
 }
 
 .btnres:hover {
-  background-color: #d685846b;
+  background-color: rgba(221, 128, 51, 0.692);
 }
 
 
@@ -126,7 +126,7 @@ right: 20px;
 }
 
 .btndet:hover {
-  background-color: #fdffb662;
+  background-color: #389e63dc;
 }
 
 .img {
@@ -141,11 +141,8 @@ right: 20px;
   width: 160px;
   height: 180px;
   display: flex;
-  /* background-color: rgb(255, 255, 255); */
   position: relative;
   margin-right: 30px;
-/* background: turquoise; */
-
 }
 
 .BoxGeneral {
@@ -169,38 +166,38 @@ bottom: 5px;
   justify-content: flex-end;
 position: relative;
 top: 20px;
+right: 5px;
 }
 
 .titleTypographyDesc {
 position: relative;
-bottom: 5px;
-width: 300px;
+width: 180px;
 height: 140px;
+left: 10px;
 }
 
 .DivPostData {
   display:flex;
-  justify-content: space-around;
+  flex-direction: row;
   width: 550px;
   height: 150px;
 }
 
 .PostImgDiv {
-width: 100px;  
+width: 140px;  
 position: relative;
 margin-bottom: 10px;
-right: 225px;
 }
 
 .PostImg {
   width: 140px;
   height: 140px;
   border: 2px solid white;
-  /* border-radius: 10px; */
 }
 
 .CompanyNameDiv {
   position: relative;
+  left: 20px;
   width: 200px;
   display: flex;
   flex-direction: column;
@@ -225,7 +222,7 @@ display: flex;
 justify-content: center;
 position: relative;
 left: 22px;
-bottom: 10px;
+top: 20px;
 }
 
 .btnReservar {
@@ -244,7 +241,6 @@ cursor: pointer;
 .btnReservar:hover {
 background-color: rgba(221, 128, 51, 0.692);
 }
-/* 
-.boxCompany {
-  background-color: rgba(0, 0, 0, 0.25);
+
+/* .boxCompany {
 } */
