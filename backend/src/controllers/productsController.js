@@ -30,7 +30,7 @@ const include = [
       exclude: ['createdAt', 'updatedAt', 'password'],
     },
   },
-]
+];
 const attributes = {
   exclude: [
     'createdAt',
@@ -42,7 +42,7 @@ const attributes = {
     'publisherId',
     'UserId',
   ],
-}
+};
 
 const getProducts = async (req, res) => {
   try {
