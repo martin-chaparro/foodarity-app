@@ -15,7 +15,7 @@ export default function Pagination({ paginado }) {
   return (
     <nav className={styles.botoneraContent}>
       <ul>
-        {pages > 1 &&
+        {pageNumbers &&
           pageNumbers.map((number) => {
             return (
               // eslint-disable-next-line react/button-has-type
