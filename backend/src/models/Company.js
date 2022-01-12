@@ -38,7 +38,12 @@ class Company extends Model {
         },
         status: {
           // cuenta habilitada o no
-          type: DataTypes.ENUM('Habilitada', 'Deshabilitada', 'Pendiente'),
+          type: DataTypes.ENUM(
+            'Habilitada',
+            'Deshabilitada',
+            'Pendiente',
+            'Banneada'
+          ),
           allowNull: false,
         },
         deleted: {
@@ -61,7 +66,7 @@ class Company extends Model {
   static associate(models) {
     this.belongsTo(models.CompanyType, { foreignKey: 'type_id', as: 'type' });
     this.hasMany(models.User);
-    this.hasOne(models.Address,{ as:'address'});
+    this.hasOne(models.Address, { as: 'address' });
     this.hasMany(models.Product);
   }
 }
