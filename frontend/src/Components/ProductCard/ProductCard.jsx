@@ -30,7 +30,7 @@ export default function ProductCard({ product }) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const [value, setValue] = React.useState(3);
+  const [value, setValue] = React.useState(5);
   const [hover, setHover] = React.useState(-1);
 
   return (
@@ -91,7 +91,7 @@ export default function ProductCard({ product }) {
                       <Rating
                         className={styles.Rating}
                         name="hover-feedback"
-                        defaultValue={3}
+                        defaultValue={5}
                         precision={1}
                         onChange={(event, newValue) => {
                           setValue(newValue);
@@ -115,7 +115,7 @@ export default function ProductCard({ product }) {
                   </div>
                     <Typography
                       id="modal-modal-description"
-                      sx={{ mt: 2, margin: 0, position: 'relative', right: 20, bottom: 40, }}
+                      sx={{ mt: 2, margin: 0, position: 'relative', right: 5, bottom: 40, fontSize: 18, }}
                       className={styles.titleTypographyStreet}
                     ><LocationOnIcon/>
                       {product.company.address.street}
@@ -127,17 +127,23 @@ export default function ProductCard({ product }) {
                       <img
                         className={styles.PostImg}
                         src={product.photo}
-                        alt="CompanyPhoto"
+                        alt="ProductPhoto"
                       />
                     </div>
-                  </div>
                   <Typography
                     id="modal-modal-description"
-                    sx={{ mt: 2, margin: 0, fontSize: 14 }}
+                    sx={{ mt: 2, margin: 0, fontSize: 12 }}
                     className={styles.titleTypographyDesc}
                   >
                     {product.description}
                   </Typography>
+                  </div>
+                  <div><h3>
+                    Fecha de vencimiento: {product.expirationDate}
+                    </h3></div>
+                    <div><h3>
+                    Categoria: {product.category.name}
+                    </h3></div>
                   <div className={styles.divBtnReservar}>
                     <button className={styles.btnReservar} type="submit">
                       Reservar
