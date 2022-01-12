@@ -35,9 +35,7 @@ class Product extends Model {
         status: {
           type: DataTypes.ENUM(
             'published',
-            'reserved',
-            'sold',
-            'expired',
+            'finished',
             'canceled'
           ),
           allowNull: false,

@@ -253,10 +253,12 @@ const getCompanyProductsByAuth = async (req, res) => {
     const { userId } = req;
     const user = await User.findByPk(userId);
     const id = user.CompanyId;
-    if (!user.Company) {
+    const company = await Company.findByPk(id)
+    console.log(company.type_id)
+    if (!company) {
       return res.status(401).json({ message: 'No posees una compania' });
     }
-    if (!user.Company.type !== 1) {
+    if (company.type_id !== 1) {
       return res.status(401).json({ message: 'No posees un comercio' });
     }
     const products = await Product.findAll({
