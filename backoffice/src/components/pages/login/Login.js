@@ -1,27 +1,37 @@
 import React from 'react';
-// import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
-// import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 
 import logo from '../../../assets/WEB-background-logo.png';
 
 const theme = createTheme();
 
 export const Login = () => {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-  };
+  
+
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+      password: '',
+    },
+    validationSchema: Yup.object({
+      email: Yup.string()
+        .email('Must be a valid email')
+        .max(255)
+        .required('Email is required'),
+      password: Yup.string().max(255).required('Password is required'),
+    }),
+    onSubmit: () => {
+      console.log(formik.values)
+    },
+  });
 
   return (
     <ThemeProvider theme={theme}>
@@ -41,35 +51,43 @@ export const Login = () => {
           </Typography>
           <Box
             component="form"
-            onSubmit={handleSubmit}
+            onSubmit={formik.handleSubmit}
             noValidate
             sx={{ mt: 1 }}
           >
             <TextField
-              margin="normal"
-              required
+              error={Boolean(formik.touched.email && formik.errors.email)}
               fullWidth
-              id="email"
-              label="Direccion de Email"
+              helperText={formik.touched.email && formik.errors.email}
+              label="Email Address"
+              margin="normal"
               name="email"
-              autoComplete="off"
-              autoFocus
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
+              type="email"
+              value={formik.values.email}
+              variant="outlined"
             />
             <TextField
-              margin="normal"
-              required
+              error={Boolean(formik.touched.password && formik.errors.password)}
               fullWidth
-              name="password"
+              helperText={formik.touched.password && formik.errors.password}
               label="Password"
+              margin="normal"
+              name="password"
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
               type="password"
-              id="password"
-              autoComplete="off"
+              value={formik.values.password}
+              variant="outlined"
             />
             <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+               color="primary"
+               disabled={formik.isSubmitting}
+               fullWidth
+               size="large"
+               type="submit"
+               variant="contained"
             >
               Ingresar
             </Button>
