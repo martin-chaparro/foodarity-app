@@ -50,7 +50,10 @@
 }
 
 .btncontinuar {
-  background-color: #ffffff;
+  background-color: transparent;
+  border: 2px solid white;
+  color: white;
+  font-weight: 700;
   width: 95px;
   padding-top: 3px;
   padding-bottom: 3px;
