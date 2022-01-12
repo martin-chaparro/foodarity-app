@@ -5,6 +5,8 @@ import Login from '../Pages/Loggin/Login';
 import Home from '../Components/HomePage/Home';
 import Landing from '../Pages/LandingPage/Landing';
 import Register from '../Pages/Register/RegisterFormUser';
+import Loading from '../Components/Loading/Loading';
+import ProfileCompany from '../Pages/ProfileCompany/ProfileCompany';
 
 import { PrivateRoute } from './PrivateRoute';
 import { RollSelectorRouter } from './RollSelectorRouter';
@@ -19,12 +21,13 @@ export function AppRouter() {
   }, [dispatch]);
 
   if (checking) {
-    return <h5>Espere...Aca va un loading</h5>;
+    return <Loading />;
   }
 
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/profilecompany" element={<ProfileCompany />} />
         <Route path="/home" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Landing />} />

@@ -97,7 +97,14 @@ const getUser = async (request, response) => {
           model: Address,
           as: 'address',
           attributes: {
-            exclude: ['CompanyId', 'createdAt', 'updatedAt', 'addressId','CityId','StateId'],
+            exclude: [
+              'CompanyId',
+              'createdAt',
+              'updatedAt',
+              'addressId',
+              'CityId',
+              'StateId',
+            ],
           },
           include: [
             {
