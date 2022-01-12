@@ -1,19 +1,21 @@
-// const { Op } = require('sequelize');
+const { Op } = require('sequelize');
 const { validationResult } = require('express-validator');
 // eslint-disable-next-line import/no-unresolved
 const cloudinary = require('cloudinary').v2;
-const Companies = require('../models/Companies');
+const Company = require('../models/Company');
 const CompanyType = require('../models/CompanyType');
 const Address = require('../models/Address');
 const City = require('../models/City');
 const State = require('../models/State');
+const User = require('../models/User');
+const Product = require('../models/Product');
 
 cloudinary.config(process.env.CLOUDINARY_URL);
 
 // crear una empresa
 const createCompany = async (req, res) => {
   try {
-    const ownerId = req.userId;
+    const ownerId = req.userId; // revisar con chapa
 
     const {
       name,
@@ -23,6 +25,7 @@ const createCompany = async (req, res) => {
       email,
       website,
       status,
+      deleted,
       type,
       street,
       number,
@@ -36,7 +39,7 @@ const createCompany = async (req, res) => {
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const newCompany = await Companies.create({
+    const newCompany = await Company.create({
       name,
       description,
       areaCode,
@@ -44,6 +47,7 @@ const createCompany = async (req, res) => {
       email,
       website,
       status,
+      deleted,
       ownerId,
     });
 
@@ -69,7 +73,7 @@ const createCompany = async (req, res) => {
 // obtner info de todas las compañias
 const getCompanies = async (req, res) => {
   try {
-    const listCompanies = await Companies.findAll({
+    const listCompanies = await Company.findAll({
       include: [
         { model: CompanyType, as: 'type', attributes: ['type'] },
         { model: Address, include: [{ model: City }, { model: State }] },
@@ -88,11 +92,11 @@ const getCompanies = async (req, res) => {
   }
 };
 
-// buscar empresa por id
+// buscar empresa/ong por id
 const searchCompany = async (req, res) => {
   try {
     const { id } = req.params;
-    const company = await Companies.findByPk(id, {
+    const company = await Company.findByPk(id, {
       include: [
         { model: CompanyType, as: 'type', attributes: ['type'] },
         { model: Address, include: [{ model: City }, { model: State }] },
@@ -111,13 +115,32 @@ const searchCompany = async (req, res) => {
   }
 };
 
+// buscar empresa/ong por usuario logeado
+const searchCompanyByUser = async (req, res) => {
+  try {
+    const { userId } = req;
+    // console.log('CONSOLE LOG: userId', userId);
+    const user = await User.findByPk(userId, {
+      include: [{ model: Company }],
+    });
+    if (!user.CompanyId || user.CompanyId === null) {
+      return res.json({ msg: 'El usuario no posee una compañia' });
+    }
+    return res.status(200).json(user.Company);
+  } catch (error) {
+    return res.status(500).send({ msg: error });
+  }
+};
+
+// actualizar imagen compañia
+
 const uploadImageCompany = async (request, response) => {
   const { id, field } = request.params;
 
   const { userId: ownerId } = request;
 
   try {
-    const company = await Companies.findByPk(id);
+    const company = await Company.findByPk(id);
     if (!company) {
       return response.status(400).json({
         message: 'Company not found',
@@ -170,9 +193,94 @@ const uploadImageCompany = async (request, response) => {
   }
 };
 
+// eliminar/deshabilitar empresa/ong
+const deleteCompany = async (req, res) => {
+  const { id } = req.params;
+  const ownerId = req.userId;
+  try {
+    const company = await Company.findByPk(id);
+    if (!company) {
+      return res.status(400).json({
+        message: 'Company not found',
+      });
+    }
+
+    if (ownerId !== company.ownerId) {
+      return res.status(401).json({ message: 'Not owner' });
+    }
+    await company.update({ deleted: true });
+    /// ////////////////////////////////////////////////////////////////////
+    await Product.update(
+      { status: 'canceled' },
+      { where: { [Op.and]: [{ CompanyId: id }, { status: 'published' }] } }
+    );
+    /// ///////////////////////////////////////////////////////////////////////
+
+    return res
+      .status(200)
+      .json({ msg: 'Compañia deshabilitada y sus productos' });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ msg: 'Error al deshabilitar compañia' });
+  }
+};
+// cancelar productos estado publicados de la compañia  deshabilitada
+// model company atribute deleted: boolean default false, status enum con 4 estados
+
+// update info company //VER RUTAAAA
+const updateCompany = async (req, res) => {
+  const {
+    description,
+    areaCode,
+    phone,
+    email,
+    website,
+    street,
+    number,
+    zipcode,
+  } = req.body;
+  try {
+    let id = null;
+
+    if (req.userRoleId === 2) {
+      id = req.params.id;
+      if (!id) return res.status(400).json({ message: 'El id es requerido' });
+    } else {
+      id = req.userId;
+    }
+
+    await Company.update(
+      {
+        description,
+        areaCode,
+        phone,
+        email,
+        website,
+      },
+      {
+        where: { id },
+      }
+    );
+
+    await Address.update({
+      street,
+      number,
+      zipcode,
+    });
+
+    return res.status(200).json({ msg: 'Actualizado' });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ msg: 'Error al actualizar la empresa' });
+  }
+};
+
 module.exports = {
   getCompanies,
   createCompany,
   searchCompany,
   uploadImageCompany,
+  searchCompanyByUser,
+  deleteCompany,
+  updateCompany,
 };

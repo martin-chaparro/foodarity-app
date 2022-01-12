@@ -4,16 +4,20 @@ class Product extends Model {
   static init(sequelize) {
     super.init(
       {
-        name: {
+        lote: {
           type: DataTypes.STRING,
           allowNull: false,
         },
         description: {
-          type: DataTypes.STRING,
+          type: DataTypes.TEXT,
+          allowNull: false,
+        },
+        quantity: {
+          type: DataTypes.INTEGER,
           allowNull: false,
         },
         photo: {
-          type: DataTypes.STRING,
+          type: DataTypes.TEXT, // TODO ACOMODAR
           allowNull: true,
         },
         price: {
@@ -29,7 +33,13 @@ class Product extends Model {
           allowNull: false,
         },
         status: {
-          type: DataTypes.ENUM('published', 'reserved', 'sold', 'expired'),
+          type: DataTypes.ENUM(
+            'published',
+            'reserved',
+            'sold',
+            'expired',
+            'canceled'
+          ),
           allowNull: false,
           defaultValue: 'published',
         },
@@ -41,7 +51,9 @@ class Product extends Model {
   }
 
   static associate(models) {
-    this.hasOne(models.Category);
+    this.belongsTo(models.Category, { as: 'category' });
+    this.belongsTo(models.Company, { as: 'company' });
+    this.belongsTo(models.User, { as: 'publisher' });
   }
 }
 

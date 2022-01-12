@@ -1,8 +1,10 @@
 import types from '../types/productTypes';
 
 const initialState = {
-  product: [],
-  allProducts: [],
+  products: [],
+  totalProducts: null,
+  page: null,
+  pages: null,
 };
 
 export default (state = initialState, action) => {
@@ -16,7 +18,10 @@ export default (state = initialState, action) => {
     case types.getProducts:
       return {
         ...state,
-        allProducts: action.payload,
+        products: action.payload.products,
+        totalProducts: action.payload.totalProducts,
+        page: action.payload.page,
+        pages: action.payload.pages,
       };
 
     case types.searchProducts:
