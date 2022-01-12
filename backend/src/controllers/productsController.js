@@ -96,10 +96,14 @@ const getProducts = async (req, res) => {
     }
     // TODO corroborar como buscar por relacion de entidades
     if (categoryName) {
-      whereAttr['$Category.name$'] = categoryName;
+      include[0].where = {
+        'name' : categoryName
+      }
     }
     if (categoryId) {
-      whereAttr['$Category.id$'] = categoryId;
+      include[0].where = {
+        'id' : categoryId
+      }
     }
 
     if (minPrice && maxPrice) {
