@@ -16,9 +16,15 @@ const include = [
   {
     model: Company,
     as: 'company',
-    include: [{model: Address, as:'address', attributes: {
-      exclude: ['createdAt', 'updatedAt', 'CompanyId','addressId'],
-    }}],
+    include: [
+      {
+        model: Address,
+        as: 'address',
+        attributes: {
+          exclude: ['createdAt', 'updatedAt', 'CompanyId', 'addressId'],
+        },
+      },
+    ],
     attributes: {
       exclude: ['createdAt', 'updatedAt'],
     },
@@ -27,7 +33,16 @@ const include = [
     model: User,
     as: 'publisher',
     attributes: {
-      exclude: ['createdAt', 'updatedAt', 'password'],
+      exclude: [
+        'phone',
+        'createdAt',
+        'updatedAt',
+        'password',
+        'status',
+        'CompanyId',
+        'RoleId',
+        'role_id',
+      ],
     },
   },
 ];
@@ -116,14 +131,14 @@ const getProducts = async (req, res) => {
     delete params.offset;
     const totalCount = await Product.count(params);
     const pages = Math.ceil(count / size);
-    res.json({
+    res.status(200).json({
       products,
       totalProducts: totalCount,
       page: parseInt(page, 10) || 1,
       pages: pages || 1,
     });
   } catch (error) {
-    res.status(500).send(error);
+    res.status(500).send({ message: error });
   }
 };
 
@@ -135,11 +150,16 @@ const postProduct = async (req, res) => {
       include: [{ model: Company }],
     });
     if (!user.CompanyId) {
-      return res.json({ msg: 'El usuaria no posee un comercio' });
+      return res.status(401).json({ msg: 'El usuaria no posee un comercio' });
     }
     if (user.Company.type_id !== 1) {
-      return res.json({
+      return res.status(401).json({
         msg: 'Solo las companias tipo comercio pueden publicar productos',
+      });
+    }
+    if (user.Company.status !== 'Habilitada') {
+      return res.status(401).json({
+        msg: 'Solo los comercios habilitados pueden publicar productos',
       });
     }
 
@@ -166,9 +186,9 @@ const postProduct = async (req, res) => {
     await newProduct.setCategory(category);
     await newProduct.setCompany(user.Company);
     await newProduct.setPublisher(userId);
-    return res.json(newProduct);
+    return res.status(200).json(newProduct);
   } catch (error) {
-    return res.status(500).send(error);
+    return res.status(500).send({ message: error });
   }
 };
 
@@ -185,10 +205,12 @@ const deletePublication = async (req, res) => {
     }
 
     if (product.companyId !== user.CompanyId) {
-      return res.json({ msg: 'Tu compania no publico este producto' });
+      return res
+        .status(401)
+        .json({ msg: 'Tu compania no publico este producto' });
     }
     if (product.status !== 'published') {
-      return res.json({
+      return res.status(401).json({
         msg: 'No puedes borrar un producto que ya no esta publicado',
       });
     }
@@ -201,24 +223,28 @@ const deletePublication = async (req, res) => {
       }
     );
     product = await Product.findByPk(id);
-    return res.json({ msg: 'success', data: product });
+    return res.status(200).json({ msg: 'success', data: product });
   } catch (error) {
-    return res.status(500).send(error);
+    return res.status(500).send({ message: error });
   }
 };
 
 const getCompanyProductsById = async (req, res) => {
   try {
     const { id } = req.params;
+    const company = await Company.findByPk(id);
+    if (!company) {
+      return res.status(404).json({ message: 'Not found' });
+    }
     const products = await Product.findAll({
       where: { CompanyId: id, status: 'published' },
       order: [['id', 'DESC']],
       include,
       attributes,
     });
-    res.json(products);
+    return res.status(200).json(products);
   } catch (error) {
-    res.status(500).send(error);
+    return res.status(500).send({ message: error });
   }
 };
 
@@ -227,16 +253,23 @@ const getCompanyProductsByAuth = async (req, res) => {
     const { userId } = req;
     const user = await User.findByPk(userId);
     const id = user.CompanyId;
-    console.log(id);
+    const company = await Company.findByPk(id)
+    console.log(company.type_id)
+    if (!company) {
+      return res.status(401).json({ message: 'No posees una compania' });
+    }
+    if (company.type_id !== 1) {
+      return res.status(401).json({ message: 'No posees un comercio' });
+    }
     const products = await Product.findAll({
       where: { CompanyId: id },
       order: [['id', 'DESC']],
       include,
       attributes,
     });
-    res.json(products);
+    return res.status(200).json(products);
   } catch (error) {
-    res.status(500).send(error);
+    return res.status(500).send({ message: error });
   }
 };
 
@@ -248,11 +281,11 @@ const getProductById = async (req, res) => {
       attributes,
     });
     if (!product) {
-      return res.status(404).json({ msg: 'Not found' });
+      return res.status(404).json({ message: 'Not found' });
     }
     return res.status(200).json(product);
   } catch (error) {
-    return res.status(500).send(error);
+    return res.status(500).send({ message: error });
   }
 };
 

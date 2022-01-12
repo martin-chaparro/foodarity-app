@@ -38,7 +38,7 @@ class Company extends Model {
         },
         status: {
           // cuenta habilitada o no
-          type: DataTypes.ENUM('Habilitada', 'Deshabilitada', 'Pendiente'),
+          type: DataTypes.ENUM('Habilitada', 'Deshabilitada', 'Pendiente','Banneada'),
           allowNull: false,
         },
         deleted: {

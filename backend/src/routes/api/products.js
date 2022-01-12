@@ -10,13 +10,13 @@ const {
   getProductById,
   getCompanyProductsById,
   getCompanyProductsByAuth,
-} = require('../../controllers/productsController');
+} = require('../../controllers/productsController'); 
 
 router.get('/', getProducts);
 router.post('/', authMiddleware, ValidationProduct.post, postProduct); // TODO manejar la imagen cloudinary
-router.delete('/delete/:id', authMiddleware, deletePublication);
+router.delete('/id/:id', authMiddleware, deletePublication);
 router.get('/id/:id', getProductById);
-router.get('/companyid/:id', getCompanyProductsById);
+router.get('/company/:id', getCompanyProductsById);
 router.get('/byAuth', authMiddleware, getCompanyProductsByAuth);
 
 module.exports = router;
