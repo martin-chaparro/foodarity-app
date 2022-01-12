@@ -222,13 +222,14 @@ const deleteCompany = async (req, res) => {
     if (ownerId !== company.ownerId) {
       return res.status(401).json({ message: 'Not owner' });
     }
-    await company.update({ deleted: true });
-    /// ////////////////////////////////////////////////////////////////////
+    if (company.deleted === false) {
+      await company.update({ deleted: true });
+    }
+
     await Product.update(
       { status: 'canceled' },
       { where: { [Op.and]: [{ CompanyId: id }, { status: 'published' }] } }
     );
-    /// ///////////////////////////////////////////////////////////////////////
 
     return res
       .status(200)
@@ -238,8 +239,6 @@ const deleteCompany = async (req, res) => {
     return res.status(500).json({ msg: 'Error al deshabilitar compañia' });
   }
 };
-// cancelar productos estado publicados de la compañia  deshabilitada
-// model company atribute deleted: boolean default false, status enum con 4 estados
 
 // update info company //VER RUTAAAA
 const updateCompany = async (req, res) => {
@@ -253,14 +252,17 @@ const updateCompany = async (req, res) => {
     number,
     zipcode,
   } = req.body;
+  const { id } = req.params;
+  const ownerId = req.userId;
   try {
-    let id = null;
-
-    if (req.userRoleId === 2) {
-      id = req.params.id;
-      if (!id) return res.status(400).json({ message: 'El id es requerido' });
-    } else {
-      id = req.userId;
+    const company = await Company.findByPk(id);
+    if (!company) {
+      return res.status(400).json({
+        message: 'Company not found',
+      });
+    }
+    if (ownerId !== company.ownerId) {
+      return res.status(401).json({ message: 'Not owner' });
     }
 
     await Company.update(
@@ -276,11 +278,16 @@ const updateCompany = async (req, res) => {
       }
     );
 
-    await Address.update({
-      street,
-      number,
-      zipcode,
-    });
+    await Address.update(
+      {
+        street,
+        number,
+        zipcode,
+      },
+      {
+        where: { companyId: id },
+      }
+    );
 
     return res.status(200).json({ msg: 'Actualizado' });
   } catch (error) {
