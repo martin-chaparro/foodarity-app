@@ -209,6 +209,7 @@ class Server {
         });
         await newProduct.setCategory(category);
         await newProduct.setCompany(1);
+
         await newProduct.setPublisher(1);
       });
     } catch (error) {
