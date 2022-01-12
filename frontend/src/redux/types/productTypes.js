@@ -3,4 +3,5 @@ export default {
   agregarProducto: 'AGREGAR_PRODUCTOS',
   getProducts: 'GET_PRODUCTS',
   searchProducts: 'SEARCH_PRODUCT',
+  productLoading: 'LOADING_PRODUCT',
 };
