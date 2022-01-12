@@ -20,7 +20,6 @@ export default function Home() {
   const allProducts = useSelector((state) => state.product.products);
   // TODO revisar si se actualiza
 
-
   // const [currentPage, setCurrentPage] = useState(1);
 
   // PAGINADO LOGICA
@@ -28,7 +27,7 @@ export default function Home() {
   // const productPerPage = 5;
   // const indexOfLastProduct = currentPage * productPerPage;
   // const indexOfFirstProduct = indexOfLastProduct - productPerPage;
- /*  const currentProduct = allProducts.slice(
+  /*  const currentProduct = allProducts.slice(
     indexOfFirstProduct,
     indexOfLastProduct
   ); */
@@ -40,12 +39,16 @@ export default function Home() {
   // console.log(product);
   const paginado = (pageNumber) => {
     // setCurrentPage(pageNumber);
-    dispatch(getProducts({page: pageNumber}));
+    dispatch(getProducts({ page: pageNumber }));
+  };
+
+  const filtrado = (category) => {
+    dispatch(getProducts({ categoryName: category, size: 1000 }));
   };
 
   return (
     <div>
-      <Navbar />
+      <Navbar filtrado={filtrado} />
       {/* <NavbarCommerce /> */}
       <div className={styles.home}>
         <Pagination

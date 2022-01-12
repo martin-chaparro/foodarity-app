@@ -61,7 +61,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function PrimarySearchAppBar() {
+export default function Navbar({ filtrado }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -182,7 +182,7 @@ export default function PrimarySearchAppBar() {
             aria-label="open drawer"
             sx={{ mr: 2 }}
           >
-            <Drawer />
+            <Drawer filtrado={filtrado} />
           </IconButton>
           <Link to="/">
             <img src={Logo} alt="Logo" />

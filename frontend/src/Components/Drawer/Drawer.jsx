@@ -5,15 +5,16 @@ import Button from '@mui/material/Button';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
-// import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import CategoryIcon from '@mui/icons-material/Category';
 import MenuIcon from '@mui/icons-material/Menu';
 import ArrowBackIosTwoToneIcon from '@mui/icons-material/ArrowBackIosTwoTone';
+import LocalDiningIcon from '@mui/icons-material/LocalDining';
 // import InboxIcon from '@mui/icons-material/MoveToInbox';
 // import MailIcon from '@mui/icons-material/Mail';
 
-export default function SwipeableTemporaryDrawer() {
+export default function Drawer({ filtrado }) {
   const [state, setState] = React.useState({
     left: false,
   });
@@ -54,19 +55,25 @@ export default function SwipeableTemporaryDrawer() {
         </ListItem>
       </List>
       <Divider />
-      <List>
-        <ListItem>
-          <Button
-            variant="contained"
-            color="secondary"
-            fontStyle="bold"
-            backgroundColor="primary"
-            src="#"
-          >
-            TODAS LAS CATEGORIAS
-          </Button>
-          <ListItemText />
-        </ListItem>
+      <List color="primary">
+        {[
+          'Almacén',
+          'Restorant/Rotiseria',
+          'Frutas y verduras',
+          'Panificados',
+          'Postres',
+          'Comida rápida',
+          'Vegetarianos',
+          'Veganos',
+          'Otros',
+        ].map((text) => (
+          <ListItem button key={text} onClick={() => filtrado(text)}>
+            <ListItemIcon>
+              <LocalDiningIcon />
+            </ListItemIcon>
+            <ListItemText primary={text} />
+          </ListItem>
+        ))}
       </List>
     </Box>
   );
