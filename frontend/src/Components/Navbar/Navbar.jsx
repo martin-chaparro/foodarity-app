@@ -10,7 +10,7 @@ import InputBase from '@mui/material/InputBase';
 import Badge from '@mui/material/Badge';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
+// import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 // import AccountCircle from '@mui/icons-material/AccountCircle';
 import MoreIcon from '@mui/icons-material/MoreVert';
@@ -19,6 +19,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import Logo from '../../assets/Mobil-Full-Header-Logo.png';
 import Avatar from './Avatar';
+import Drawer from '../Drawer/Drawer';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -181,7 +182,7 @@ export default function PrimarySearchAppBar() {
             aria-label="open drawer"
             sx={{ mr: 2 }}
           >
-            <MenuIcon />
+            <Drawer />
           </IconButton>
           <Link to="/">
             <img src={Logo} alt="Logo" />
