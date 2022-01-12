@@ -48,7 +48,9 @@ export default function Home() {
 
   return (
     <div>
-      <Navbar filtrado={filtrado} />
+      <div style={{ marginBottom: '1em' }}>
+        <Navbar filtrado={filtrado} />
+      </div>
       {/* <NavbarCommerce /> */}
       <div className={styles.home}>
         <Pagination

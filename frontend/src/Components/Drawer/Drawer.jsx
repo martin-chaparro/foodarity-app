@@ -11,8 +11,10 @@ import CategoryIcon from '@mui/icons-material/Category';
 import MenuIcon from '@mui/icons-material/Menu';
 import ArrowBackIosTwoToneIcon from '@mui/icons-material/ArrowBackIosTwoTone';
 import LocalDiningIcon from '@mui/icons-material/LocalDining';
+// import PhoneInTalkIcon from '@mui/icons-material/PhoneInTalk';
 // import InboxIcon from '@mui/icons-material/MoveToInbox';
-// import MailIcon from '@mui/icons-material/Mail';
+import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
+import MailIcon from '@mui/icons-material/Mail';
 
 export default function Drawer({ filtrado }) {
   const [state, setState] = React.useState({
@@ -42,15 +44,15 @@ export default function Drawer({ filtrado }) {
     >
       <List>
         <ListItem>
-          <CategoryIcon color="secondary" />
-          <p color="secondary" fontStyle="bold">
-            TODAS LAS CATEGORIAS
-          </p>
-
+          <CategoryIcon
+            color="primary"
+            sx={{ width: '1.5em', mr: '1em', hover: 'true' }}
+          />
+          <p style={{ color: '#3E2463' }}>TODAS LAS CATEGORIAS</p>
           <ArrowBackIosTwoToneIcon
             color="secondary"
             cursor="pointer"
-            sx={{ width: '10em', hover: 'true' }}
+            sx={{ width: '8em', hover: 'true' }}
           />
         </ListItem>
       </List>
@@ -69,11 +71,28 @@ export default function Drawer({ filtrado }) {
         ].map((text) => (
           <ListItem button key={text} onClick={() => filtrado(text)}>
             <ListItemIcon>
-              <LocalDiningIcon />
+              <LocalDiningIcon color="secondary" />
             </ListItemIcon>
             <ListItemText primary={text} />
           </ListItem>
         ))}
+      </List>
+      <Divider />
+      <List color="primary">
+        {['Acerca de Foodarity', 'Contacto', 'Políticas de Uso'].map(
+          (text2, index1) => (
+            <ListItem button key={text2} onClick={() => filtrado(text2)}>
+              <ListItemIcon>
+                {index1 % 2 === 0 ? (
+                  <DoubleArrowIcon color="primary" />
+                ) : (
+                  <MailIcon color="primary" />
+                )}
+              </ListItemIcon>
+              <ListItemText primary={text2} />
+            </ListItem>
+          )
+        )}
       </List>
     </Box>
   );
