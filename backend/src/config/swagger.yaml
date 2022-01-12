@@ -336,7 +336,7 @@ paths:
       tags:
         - 'Company'
       summary: 'Crear comercio u ONG'
-      description: 'Ruta para la creacion de comercios.'
+      description: 'Ruta para la creacion de comercios. Campos NO requeridos => webside, logo, banner. Referencias: type: 1 = Comercio / 2 = ONG'
       operationId: 'addCompany'
       consumes:
         - 'application/json'
@@ -1109,7 +1109,13 @@ definitions:
         type: 'string'
       website:
         type: 'string'
+      banner:
+        type: 'object'
+      logo:
+        type: 'object'
       status:
+        type: 'string'
+      deleted:
         type: 'boolean'
       street:
         type: 'string'
@@ -1121,7 +1127,7 @@ definitions:
         type: 'integer'
       stateId:
         type: 'integer'
-      type_id:
+      type:
         type: 'integer'
         format: 'int64'
   UpdateCompanyRequest:
