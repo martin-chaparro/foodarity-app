@@ -474,7 +474,7 @@ paths:
       tags:
         - 'Company'
       summary: 'Actualiza Imagen Compania'
-      description: 'Actualiza o crea una imagen de una compania'
+      description: 'Actualiza o crea una imagen de una compania. Ejemplo: http://localhost:4000/api/v1/companies/1/upload/logo'
       operationId: 'UpdateCompanyImage'
       consumes:
         - 'application/json'
@@ -486,6 +486,17 @@ paths:
         required: true
         type: "string"
         description: 'Bearer Token'
+      - name: "id"
+        in: "path"
+        description: "Id de la compañia a actualizar"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "file"
+        in: "formData"
+        description: "file to upload"
+        required: true
+        type: "file"
       responses:
         '200':
           description: 'OK'
