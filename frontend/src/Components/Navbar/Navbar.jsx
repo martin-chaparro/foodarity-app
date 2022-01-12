@@ -10,15 +10,17 @@ import InputBase from '@mui/material/InputBase';
 import Badge from '@mui/material/Badge';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
+// import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 // import AccountCircle from '@mui/icons-material/AccountCircle';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import HelpIcon from '@mui/icons-material/Help';
 import Logo from '../../assets/Mobil-Full-Header-Logo.png';
 import Avatar from './Avatar';
+import Drawer from '../Drawer/Drawer';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -31,12 +33,13 @@ const Search = styled('div')(({ theme }) => ({
   marginLeft: 0,
   width: '100%',
   [theme.breakpoints.up('sm')]: {
-    marginLeft: theme.spacing(3),
+    marginLeft: theme.spacing(16.5),
     width: 'auto',
   },
 }));
 
 const SearchIconWrapper = styled('div')(({ theme }) => ({
+  color: 'secondary',
   padding: theme.spacing(0, 2),
   height: '100%',
   position: 'absolute',
@@ -49,18 +52,18 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: 'inherit',
   '& .MuiInputBase-input': {
-    padding: theme.spacing(1, 1, 1, 0),
+    padding: theme.spacing(1, 1, 1, 1),
     // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create('width'),
     width: '100%',
     [theme.breakpoints.up('md')]: {
-      width: '20ch',
+      width: '60ch',
     },
   },
 }));
 
-export default function PrimarySearchAppBar() {
+export default function Navbar({ filtrado }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -86,6 +89,25 @@ export default function PrimarySearchAppBar() {
 
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
+    // <Menu
+    //   anchorEl={anchorEl}
+    //   anchorOrigin={{
+    //     vertical: 'top',
+    //     horizontal: 'right',
+    //   }}
+    //   id={menuId}
+    //   keepMounted
+    //   transformOrigin={{
+    //     vertical: 'top',
+    //     horizontal: 'right',
+    //   }}
+    //   open={isMenuOpen}
+    //   onClose={handleMenuClose}
+    // >
+    //   <MenuItem onClick={handleMenuClose}>Perfil</MenuItem>
+    //   <MenuItem onClick={handleMenuClose}>Mi Cuenta</MenuItem>
+    //   <MenuItem onClick={handleMenuClose}>Cerrar Sesión</MenuItem>
+    // </Menu>
     <Menu
       anchorEl={anchorEl}
       anchorOrigin={{
@@ -101,9 +123,55 @@ export default function PrimarySearchAppBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Perfil</MenuItem>
-      <MenuItem onClick={handleMenuClose}>Mi Cuenta</MenuItem>
-      <MenuItem onClick={handleMenuClose}>Cerrar Sesión</MenuItem>
+      <MenuItem>
+        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+          <Avatar />
+        </IconButton>
+        <p>Mi Cuenta</p>
+      </MenuItem>
+      <MenuItem>
+        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+          <FavoriteIcon fontsize="small" color="secondary" />
+        </IconButton>
+        <p>Favoritos</p>
+      </MenuItem>
+      <MenuItem>
+        <IconButton
+          size="large"
+          aria-label="show 17 new notifications"
+          color="inherit"
+        >
+          <Badge badgeContent={17} color="secondary">
+            <ShoppingCartIcon color="primary" />
+          </Badge>
+        </IconButton>
+        <p>Carrito de Compras</p>
+      </MenuItem>
+      <MenuItem>
+        <IconButton
+          size="large"
+          aria-label="account of current user"
+          aria-controls="primary-search-account-menu"
+          aria-haspopup="true"
+          color="inherit"
+        >
+          {/* <AccountCircle /> */}
+          <HelpIcon color="secondary" />
+        </IconButton>
+        <p>Ayuda</p>
+      </MenuItem>
+      <MenuItem>
+        <IconButton
+          size="large"
+          aria-label="show 17 new notifications"
+          color="inherit"
+        >
+          <ExitToAppIcon color="secondary" />
+        </IconButton>
+        <Link to="/" textDecoration="none">
+          Cerrar Sesión
+        </Link>
+      </MenuItem>
     </Menu>
   );
 
@@ -126,8 +194,8 @@ export default function PrimarySearchAppBar() {
     >
       <MenuItem>
         <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={2} color="secondary">
-            <FavoriteIcon fontsize="small" />
+          <Badge>
+            <FavoriteIcon fontsize="small" color="secondary" />
           </Badge>
         </IconButton>
         <p>Favoritos</p>
@@ -138,8 +206,8 @@ export default function PrimarySearchAppBar() {
           aria-label="show 17 new notifications"
           color="inherit"
         >
-          <Badge badgeContent={17} color="secondary">
-            <ShoppingCartIcon />
+          <Badge>
+            <ShoppingCartIcon color="secondary" />
           </Badge>
         </IconButton>
         <p>Carrito de Compras</p>
@@ -150,7 +218,7 @@ export default function PrimarySearchAppBar() {
           aria-label="account of current user"
           aria-controls="primary-search-account-menu"
           aria-haspopup="true"
-          color="inherit"
+          color="secondary"
         >
           {/* <AccountCircle /> */}
           <Avatar />
@@ -162,10 +230,13 @@ export default function PrimarySearchAppBar() {
           size="large"
           aria-label="show 17 new notifications"
           color="inherit"
+          href="/"
         >
-          <ExitToAppIcon />
+          <ExitToAppIcon color="secondary" />
         </IconButton>
-        <p>Cerrar Sesión</p>
+        <Link to="/" textDecoration="none">
+          Cerrar Sesión
+        </Link>
       </MenuItem>
     </Menu>
   );
@@ -179,9 +250,9 @@ export default function PrimarySearchAppBar() {
             edge="start"
             color="inherit"
             aria-label="open drawer"
-            sx={{ mr: 2 }}
+            sx={{ mr: 4.5 }}
           >
-            <MenuIcon />
+            <Drawer filtrado={filtrado} />
           </IconButton>
           <Link to="/">
             <img src={Logo} alt="Logo" />
@@ -211,7 +282,7 @@ export default function PrimarySearchAppBar() {
               aria-label="show 17 new notifications"
               color="inherit"
             >
-              <Badge badgeContent={17} color="secondary">
+              <Badge badgeContent={3} color="secondary">
                 <ShoppingCartIcon />
               </Badge>
             </IconButton>
