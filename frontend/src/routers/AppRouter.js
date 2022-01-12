@@ -28,7 +28,7 @@ export function AppRouter() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/profile" element={<ProfileCompany />} />
+        <Route path="/profilecompany" element={<ProfileCompany />} />
         <Route path="/home" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Landing />} />
