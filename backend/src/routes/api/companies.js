@@ -13,10 +13,12 @@ const {
   uploadImageCompany,
   deleteCompany,
   updateCompany,
+  searchCompanyByUser,
 } = require('../../controllers/companiesController');
 
 router.get('/', getCompanies);
-router.get('/:id', searchCompany);
+router.get('/id/:id', searchCompany);
+router.get('/byUser', authMiddleware, searchCompanyByUser);
 router.post('/', authMiddleware, ValidationCompany.create, createCompany);
 router.patch(
   '/:id/upload/:field', 
@@ -24,7 +26,7 @@ router.patch(
   validationFiles.fileExists,
   uploadImageCompany
 );
-router.delete('/:id', deleteCompany);
-router.put('/:id', updateCompany);
+router.delete('/disabled/:id', authMiddleware, deleteCompany);
+router.put('/:id', authMiddleware, updateCompany);
 
 module.exports = router;

@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Mayorista Mackro",
+        "description": "supermercado",
+        "areaCode": "123",
+        "phone": "3764202020",
+        "email": "mackros@gmail.com",
+        "website": "www.mackro.com",
+        "status": true,
+        "type": 1,
+        "street": "rodriguez peña",
+        "number": "123",
+        "zipcode": "1640",
+        "cityId": "60854",
+        "stateId": "6"
+    },
+    {
+        "name": "Pan Fresco",
+        "description": "Panaderia artesanal",
+        "areaCode": "0335",
+        "phone": "3764222832",
+        "email": "panfresco@gmail.com",
+        "website": "www.panfresco.com",
+        "status": true,
+        "type": 1,
+        "street": "Av. Alvear",
+        "number": "500",
+        "zipcode": "1640",
+        "cityId": "60854",
+        "stateId": "6"
+    }
+]
