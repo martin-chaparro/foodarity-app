@@ -1,13 +1,11 @@
 .productcard {
-  border: solid 1px;
   display: flex;
   justify-content: center;
   height: 180px;
   width: 450px;
-  border-radius: 10px;
-  background-color: rgb(52, 20, 54);
-  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+  background-color: rgba(38, 5, 41, 0.527);
   margin-bottom: 10px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .btncontent {
@@ -20,26 +18,60 @@
   margin-right: 25px;
 }
 
+.nameDiv {
+  position: relative;
+  top: 5px;
+  width: 260px;
+  height: 20px;
+}
 .name {
   width: 260px;
-  font-size: 12px;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  font-size: 14px;
+  margin-top: 5px;
   text-align: center;
   border-radius: 4px;
   padding-right: 0;
-  background-color: white;
+  color: white;
 }
 
 .description {
-  background: white;
   width: 260px;
-  border-radius: 4px;
-  height: 65px;
+  height: 45px;
+  font-size: 14px;
+  font-family: 'Quicksand', sans-serif;
+  color: white;
 }
+
+.divInc {
+  display: flex;
+  justify-content: space-around;
+  position: relative;
+  bottom: 10px;
+}
+
+.nameInc {
+  color: rgb(157, 255, 201);
+  font-size: 14px;
+  font-weight: bold;
+  font-family: 'Quicksand', sans-serif;
+  position: relative;
+  right: 25px;
+}
+
+.precio {
+  color: rgb(157, 255, 201);
+  font-size: 14px;
+  font-weight: bold;
+  font-family: 'Quicksand', sans-serif;
+  position: relative;
+  right: 20px;
+}
+
 .btnContainer {
   display: flex;
   justify-content: space-between;
+  position: relative;
+  bottom: 5px;
 }
 
 .btnresdiv {
@@ -47,20 +79,25 @@
   justify-content: center;
   align-items: center;
   width: 120px;
+  position: relative;
 }
 
 .btnres {
-  background-color: #d68584;
+  background-color: transparent;
   padding-top: 3px;
   padding-bottom: 3px;
-  border-radius: 5px;
   cursor: pointer;
   width: 120px;
   height: 30px;
-  border: transparent;
   font-weight: 700;
   font-size: 14px;
   color: white;
+  border: 2px solid white;
+  transition: 0.3s;
+}
+
+.btnres:hover {
+  background-color: rgba(221, 128, 51, 0.692);
 }
 
 .btndetdiv {
@@ -68,6 +105,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 
 .btndet {
@@ -75,28 +113,128 @@
   font-size: 14px;
   padding-top: 3px;
   padding-bottom: 3px;
-  border-radius: 5px;
   cursor: pointer;
-  border: transparent;
-  background-color: #fdffb6;
+  color: white;
+  border: 2px solid white;
+  background-color: transparent;
   width: 120px;
   height: 30px;
+  transition: 0.3s;
+}
+
+.btndet:hover {
+  background-color: #389e63dc;
 }
 
 .img {
-  width: 100px;
-  height: 100px;
-  border-radius: 10px;
+  position: relative;
+  left: 13px;
+  width: 160px;
+  height: 180px;
 }
 
 .divImg {
-  width: 100px;
-  height: 100px;
+  width: 160px;
+  height: 180px;
   display: flex;
-  background-color: rgb(255, 255, 255);
   position: relative;
   margin-right: 30px;
-  margin-top: 10px;
-  margin-left: 20px;
-  border-radius: 10px;
 }
+
+.BoxGeneral {
+  color: white;
+  background-color: rgba(38, 5, 41, 0.788);
+  box-shadow: 2px rgba(255, 0, 0, 0.288);
+  border-radius: 4px;
+  font-size: 14px;
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.titleTypographyName {
+  display: flex;
+  position: relative;
+  bottom: 5px;
+}
+
+.titleTypographyStreet {
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+  top: 20px;
+  right: 5px;
+}
+
+.titleTypographyDesc {
+  position: relative;
+  width: 180px;
+  height: 140px;
+  left: 10px;
+}
+
+.DivPostData {
+  display: flex;
+  flex-direction: row;
+  width: 550px;
+  height: 150px;
+}
+
+.PostImgDiv {
+  width: 140px;
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.PostImg {
+  width: 140px;
+  height: 140px;
+  border: 2px solid white;
+}
+
+.CompanyNameDiv {
+  position: relative;
+  left: 20px;
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.star {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.Rating {
+  position: relative;
+}
+
+.divBtnReservar {
+  width: 100px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  left: 22px;
+  top: 20px;
+}
+
+.btnReservar {
+  width: 100px;
+  height: 30px;
+  background-color: transparent;
+  border: 2px solid white;
+  color: white;
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: 2px;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.btnReservar:hover {
+  background-color: rgba(221, 128, 51, 0.692);
+}
+
+/* .boxCompany {
+} */

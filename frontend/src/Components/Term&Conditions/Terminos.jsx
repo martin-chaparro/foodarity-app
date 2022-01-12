@@ -33,17 +33,19 @@ export default function Terminos() {
     <div>
       <Button
         onClick={handleClickOpen('paper')}
-        variant="contained"
+        variant="outlined"
+        backgroundColor="primary"
+        color="primary"
+        fontStyle="bold"
         sx={{
-          backgroundColor: '#533c74',
+          backgroundColor: 'primary',
           height: '2.51em',
-          color: '#fffff',
-          fontStyle: 'bold',
-          margin: '1em 2em 2em',
+          fontSize: '.75em',
+          margin: '.5em 2em 2em',
           hover: false,
         }}
       >
-        Terminos y Condiciones
+        MAS INFORMACION
       </Button>
 
       <Dialog
@@ -105,8 +107,7 @@ Dado que Foodarity es un punto de encuentro entre comprador y vendedor y no part
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose}>Estoy de Acuerdo</Button>
+          <Button onClick={handleClose}>Cerrar</Button>
         </DialogActions>
       </Dialog>
     </div>

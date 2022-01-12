@@ -14,7 +14,6 @@ import { startCheking } from '../redux/actions/authActions';
 
 export function AppRouter() {
   const dispatch = useDispatch();
-  // eslint-disable-next-line no-unused-vars
   const { checking, id } = useSelector((state) => state.auth);
 
   useEffect(() => {
@@ -36,8 +35,7 @@ export function AppRouter() {
         <Route
           path="/rollselector/*"
           element={
-            <PrivateRoute isAuisAuthenticated>
-              {/* ={!!id} */}
+            <PrivateRoute isAuisAuthenticated={!!id}>
               <RollSelectorRouter />
             </PrivateRoute>
           }

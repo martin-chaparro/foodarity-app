@@ -10,6 +10,8 @@ const State = require('./models/State');
 const City = require('./models/City');
 const Category = require('./models/Category');
 const Product = require('./models/Product');
+const Company = require('./models/Company');
+const Address = require('./models/Address');
 
 class Server {
   constructor() {
@@ -34,6 +36,8 @@ class Server {
     this.provincias = require('./database/seeders/data/provincias.json');
     this.municipios = require('./database/seeders/data/municipios.json');
     this.products = require('./database/seeders/data-hardcode/products.json');
+    this.categories = require('./database/seeders/data/categories.json');
+    this.companies = require('./database/seeders/data-hardcode/companies.json');
   }
 
   // express instance
@@ -92,47 +96,6 @@ class Server {
   async seed() {
     console.log('||--> Seed database...: <--||');
     try {
-      console.log('||--> Seed types database...: <--||');
-      await CompanyType.bulkCreate([{ type: 'Comercio' }, { type: 'ONG' }]);
-    } catch (error) {
-      console.log('||--> Seed types not completed...: <--||');
-    }
-    try {
-      console.log('||--> Seed categories database...: <--||');
-      await Category.bulkCreate([
-        { name: 'Almacen' },
-        { name: 'Restorant/Rotiseria' },
-        { name: 'Verduleria' },
-      ]);
-    } catch (error) {
-      console.log('||--> Seed categories not completed...: <--||');
-    }
-    try {
-      console.log('||--> Seed products(HARDCODE) database...: <--||');
-      this.products.forEach(async (product) => {
-        const {
-          name,
-          description,
-          photo,
-          price,
-          publicationDate,
-          expirationDate,
-          category,
-        } = product;
-        const newProduct = await Product.create({
-          name,
-          description,
-          photo,
-          price,
-          publicationDate,
-          expirationDate,
-        });
-        await newProduct.setCategory(category);
-      });
-    } catch (error) {
-      console.log('||--> Seed products(HARDCODE) not completed...: <--||');
-    }
-    try {
       console.log('||--> Seed users database...: <--||');
       await Role.bulkCreate(this.roles);
       const usersCreated = await User.bulkCreate(this.users);
@@ -163,6 +126,94 @@ class Server {
       });
     } catch (error) {
       console.log('||--> Seed locations not completed...: <--||');
+    }
+    try {
+      console.log('||--> Seed companies database...: <--||');
+      this.companies.forEach(async (company) => {
+        const {
+          name,
+          description,
+          areaCode,
+          phone,
+          email,
+          website,
+          type,
+          status,
+          street,
+          number,
+          zipcode,
+          cityId,
+          stateId,
+          ownerId,
+        } = company;
+        const newCompany = await Company.create({
+          name,
+          description,
+          areaCode,
+          phone,
+          email,
+          website,
+          status,
+          ownerId,
+        });
+        const newAddress = await Address.create({
+          street,
+          number,
+          zipcode,
+        });
+        const findType = await CompanyType.findByPk(type);
+        await newCompany.setType(findType);
+        await newCompany.setAddress(newAddress);
+        await newAddress.setCity(cityId);
+        await newAddress.setState(stateId);
+        const owner = await User.findByPk(ownerId);
+        await owner.setCompany(newCompany);
+      });
+    } catch (error) {
+      console.log('||--> Seed companies not completed...: <--||');
+    }
+    try {
+      console.log('||--> Seed types database...: <--||');
+      await CompanyType.bulkCreate([{ type: 'Comercio' }, { type: 'ONG' }]);
+    } catch (error) {
+      console.log('||--> Seed types not completed...: <--||');
+    }
+    try {
+      console.log('||--> Seed categories database...: <--||');
+      await Category.bulkCreate(this.categories);
+    } catch (error) {
+      console.log('||--> Seed categories not completed...: <--||');
+    }
+    try {
+      console.log('||--> Seed products(HARDCODE) database...: <--||');
+      this.products.forEach(async (product) => {
+        const {
+          lote,
+          description,
+          photo,
+          price,
+          quantity,
+          publicationDate,
+          expirationDate,
+          category,
+        } = product;
+        const newProduct = await Product.create({
+          lote,
+          description,
+          photo,
+          quantity,
+          price,
+          publicationDate,
+          expirationDate,
+          status: 'published',
+        });
+        await newProduct.setCategory(category);
+        await newProduct.setCompany(1);
+
+        await newProduct.setPublisher(1);
+      });
+    } catch (error) {
+      console.log('||--> Seed products(HARDCODE) not completed...: <--||');
     }
   }
 

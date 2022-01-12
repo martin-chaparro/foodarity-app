@@ -14,14 +14,34 @@ export const agregarProducto = () => async (dispatch) => {
   }
 };
 
-export function getProducts() {
+export function getProducts(params = {}) {
+  const {
+    lote,
+    size,
+    page,
+    categoryName,
+    categoryId,
+    minPrice,
+    maxPrice,
+    expirationDate,
+    order,
+  } = {
+    lote: params.lote || '',
+    size: params.size || 5, // CANTIDAD de productos por pagina
+    page: params.page || '',
+    categoryName: params.categoryName || '',
+    categoryId: params.categoryId || '',
+    minPrice: params.minPrice || '',
+    maxPrice: params.maxPrice || '',
+    expirationDate: params.expirationDate || '',
+    order: params.order || '',
+  };
   // eslint-disable-next-line func-names
   return async function (dispatch) {
     try {
-      dispatch({
-        type: types.productLoading,
-      });
-      const json = await axios.get('http://localhost:4000/api/v1/products');
+      const json = await axios.get(
+        `http://localhost:4000/api/v1/products?lote=${lote}&size=${size}&page=${page}&categoryName=${categoryName}&categoryId=${categoryId}&minPrice=${minPrice}&maxPrice=${maxPrice}&expirationDate=${expirationDate}&order=${order}`
+      );
 
       return dispatch({
         type: types.getProducts,

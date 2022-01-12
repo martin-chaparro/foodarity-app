@@ -1,6 +1,6 @@
 const { Model, DataTypes } = require('sequelize');
 
-class Companies extends Model {
+class Company extends Model {
   static init(sequelize) {
     super.init(
       {
@@ -38,6 +38,16 @@ class Companies extends Model {
         },
         status: {
           // cuenta habilitada o no
+          type: DataTypes.ENUM(
+            'Habilitada',
+            'Deshabilitada',
+            'Pendiente',
+            'Banneada'
+          ),
+          allowNull: false,
+        },
+        deleted: {
+          // cuenta eliminada o no
           type: DataTypes.BOOLEAN,
           allowNull: false,
           defaultValue: false,
@@ -56,8 +66,9 @@ class Companies extends Model {
   static associate(models) {
     this.belongsTo(models.CompanyType, { foreignKey: 'type_id', as: 'type' });
     this.hasMany(models.User);
-    this.hasOne(models.Address);
+    this.hasOne(models.Address, { as: 'address' });
+    this.hasMany(models.Product);
   }
 }
 
-module.exports = Companies;
+module.exports = Company;
