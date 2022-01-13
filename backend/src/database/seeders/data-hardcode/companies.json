@@ -19,5 +19,25 @@
 		"cityId": "60854",
 		"stateId" : "6" ,
     "ownerId": 1
+},
+{
+	"name": "Comedor barrial",
+	"description": "comedor barrial",
+	"areaCode": "123",
+	"phone": "3764202020",
+	"email": "comedir@gmail.com",
+	"status": "Habilitada",
+	"deleted": false,
+	"logo": {
+		"public_id": "fkkjowmukqs5crisblk9",
+		"url": "https://res.cloudinary.com/dpsxxuslt/image/upload/v1642014699/fkkjowmukqs5crisblk9.jpg"
+	},
+	"type" : 2,
+	"street": "rodriguez peña",
+	"number": "123",
+	"zipcode": "1640",
+	"cityId": "60854",
+	"stateId" : "6" ,
+	"ownerId": 2
 }
 ]

@@ -32,12 +32,19 @@ const createCompany = async (req, res) => {
       zipcode,
       cityId,
       stateId,
-    } = req.body;
+    } = JSON.parse(req.body.data);
 
-    const errors = validationResult(req);
+    const errors = validationResult(JSON.parse(req.body.data));
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
+///////////////////////FOTO//////////////////////////////////////////////////
+const { tempFilePath } = req.files.file;
+
+    const { secure_url: secureUrl, public_id: publicId } =
+      await cloudinary.uploader.upload(tempFilePath);
+
+    const logo = { public_id: publicId, url: secureUrl };
 
     const newCompany = await Company.create({
       name,
@@ -46,6 +53,7 @@ const createCompany = async (req, res) => {
       phone,
       email,
       website,
+      logo,
       status,
       deleted,
       ownerId,
