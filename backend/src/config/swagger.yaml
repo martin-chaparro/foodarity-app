@@ -155,6 +155,47 @@ paths:
       security:
         - api_key: []
   /users/{id}:
+    get:
+      tags:
+        - 'User'
+      summary: 'Usuario por Id'
+      description: 'Obtiene un usuario por su I'
+      operationId: 'getUser'
+      consumes:
+        - 'application/json'
+      produces:
+        - 'application/json'
+      parameters:
+      - name: "Authorization"
+        in: "header"
+        required: true
+        type: "string"
+        description: 'Bearer Token'
+      - name: "id"
+        in: "path"
+        description: "Id del usuario a obtener"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        '200':
+          description: 'OK'
+          schema:
+            $ref: '#/definitions/GetUserResponse200'
+        '400':
+          description: 'Bad Request'
+          schema:
+            $ref: '#/definitions/ErrorResponse400'
+        '401':
+          description: ' Unauthorized'
+          schema:
+            $ref: '#/definitions/ErrorResponse401'
+        '500':
+          description: 'Internal Server Error'
+          schema:
+            $ref: '#/definitions/ErrorResponse500'
+      security:
+        - api_key: []
     delete:
       tags:
         - 'User'
@@ -295,7 +336,7 @@ paths:
       tags:
         - 'Company'
       summary: 'Crear comercio u ONG'
-      description: 'Ruta para la creacion de comercios.'
+      description: 'Ruta para la creacion de comercios. Campos NO requeridos => webside, logo, banner. Referencias: type: 1 = Comercio / 2 = ONG'
       operationId: 'addCompany'
       consumes:
         - 'application/json'
@@ -433,7 +474,7 @@ paths:
       tags:
         - 'Company'
       summary: 'Actualiza Imagen Compania'
-      description: 'Actualiza o crea una imagen de una compania'
+      description: 'Actualiza o crea una imagen de una compania. Ejemplo: http://localhost:4000/api/v1/companies/1/upload/logo'
       operationId: 'UpdateCompanyImage'
       consumes:
         - 'application/json'
@@ -445,6 +486,17 @@ paths:
         required: true
         type: "string"
         description: 'Bearer Token'
+      - name: "id"
+        in: "path"
+        description: "Id de la compañia a actualizar"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "file"
+        in: "formData"
+        description: "file to upload"
+        required: true
+        type: "file"
       responses:
         '200':
           description: 'OK'
@@ -929,6 +981,38 @@ securityDefinitions:
     name: 'Authorization'
     in: 'header'
 definitions:
+  Address:
+    type: 'object'
+    properties:
+      id:
+        type: 'integer'
+        format: 'int64'
+      street:
+        type: 'string'
+      number:
+        type: 'integer'
+        format: 'int64'
+      zipcode:
+        type: 'string'
+      stateId:
+        type: 'string'
+      cityId:
+        type: 'string'
+      companyId:
+        type: 'integer'
+        format: 'int64'      
+      city:
+        $ref: '#/definitions/City'
+      state:
+        $ref: '#/definitions/State'
+  City:
+    type: 'object'
+    properties:
+      id:
+        type: 'integer'
+        format: 'int64'
+      name:
+        type: 'string'
   User:
     type: 'object'
     properties:
@@ -957,6 +1041,14 @@ definitions:
         type: 'string'
       url:
         type: 'string'
+  State:
+    type: 'object'
+    properties:
+      id:
+        type: 'integer'
+        format: 'int64'
+      name:
+        type: 'string'
   UserRole:
     type: 'object'
     properties:
@@ -964,6 +1056,11 @@ definitions:
         type: 'integer'
         format: 'int64'
       role:
+        type: 'string'
+  CompanyType:
+    type: 'object'
+    properties:
+      type:
         type: 'string'
   Company:
     type: 'object'
@@ -983,18 +1080,24 @@ definitions:
         type: 'string'
       website:
         type: 'string'
-      status:
-        type: "string" 
-      ownerId:
-        type: 'integer'
-        format: 'int64'
       logo:
         $ref: '#/definitions/Photo'
       banner:
         $ref: '#/definitions/Photo'
+      status:
+        type: 'string'
+      deleted:
+        type: 'boolean'
+      ownerId:
+        type: 'integer'
+        format: 'int64'
       type_id:
         type: 'integer'
         format: 'int64'
+      type:
+        $ref: '#/definitions/CompanyType'
+      address:
+        $ref: '#/definitions/Address'
   LoginRequest:
     type: 'object'
     properties:
@@ -1017,7 +1120,13 @@ definitions:
         type: 'string'
       website:
         type: 'string'
+      banner:
+        type: 'object'
+      logo:
+        type: 'object'
       status:
+        type: 'string'
+      deleted:
         type: 'boolean'
       street:
         type: 'string'
@@ -1029,7 +1138,7 @@ definitions:
         type: 'integer'
       stateId:
         type: 'integer'
-      type_id:
+      type:
         type: 'integer'
         format: 'int64'
   UpdateCompanyRequest:
@@ -1088,6 +1197,26 @@ definitions:
         format: 'int64'
       token:
         type: 'string'
+  GetUserResponse200:
+    type: 'object'
+    properties:
+      id:
+        type: 'integer'
+        format: 'int64'
+      name:
+        type: 'string'
+      email:
+        type: 'string'
+      phone:
+        type: 'string'
+      photo:
+        $ref: '#/definitions/Photo'
+      status:
+        type: 'boolean'
+      role:
+        $ref: '#/definitions/UserRole'
+      company:
+        $ref: '#/definitions/Company'
   LoginResponse400:
     type: 'object'
     properties:

@@ -184,7 +184,7 @@ export default function Navbar({ filtrado }) {
             aria-label="open drawer"
             sx={{ mr: 1, marginTop: 1 }}
           >
-            <Drawer filtrado={filtrado} />
+            {/* <Drawer filtrado={filtrado} /> */}
           </IconButton>
           <Link to="/">
             <img src={Logo} alt="Logo" />
@@ -221,7 +221,8 @@ export default function Navbar({ filtrado }) {
               <Avatar />
             </IconButton>
           </Box>
-          <Box sx={{ display: { xs: 'flex', md: 'flex' } }}>
+          <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
+            <Drawer filtrado={filtrado} />
             <IconButton
               size="large"
               aria-label="show more"
