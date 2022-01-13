@@ -12,6 +12,7 @@ const Category = require('./models/Category');
 const Product = require('./models/Product');
 const Company = require('./models/Company');
 const Address = require('./models/Address');
+const PaymentMethod = require('./models/PaymentMethod');
 
 class Server {
   constructor() {
@@ -38,7 +39,7 @@ class Server {
     this.products = require('./database/seeders/data-hardcode/products.json');
     this.categories = require('./database/seeders/data/categories.json');
     this.companies = require('./database/seeders/data-hardcode/companies.json');
-    this.paymentMethods = require('./database/seeders/data/paymentMethods.json')
+    this.paymentMethods = require('./database/seeders/data/paymentMethods.json');
   }
 
   // express instance
@@ -188,12 +189,6 @@ class Server {
       console.log('||--> Seed categories not completed...: <--||');
     }
     try {
-      console.log('||--> Seed payment methods database...: <--||');
-      await Category.bulkCreate(this.paymentMethods);
-    } catch (error) {
-      console.log('||--> Seed categories not completed...: <--||');
-    }
-    try {
       console.log('||--> Seed products(HARDCODE) database...: <--||');
       this.products.forEach(async (product) => {
         const {
@@ -211,7 +206,7 @@ class Server {
           description,
           photo,
           quantity,
-          totalQuantity : quantity,
+          totalQuantity: quantity,
           price,
           publicationDate,
           expirationDate,
@@ -223,6 +218,12 @@ class Server {
       });
     } catch (error) {
       console.log('||--> Seed products(HARDCODE) not completed...: <--||');
+    }
+    try {
+      console.log('||--> Seed payment methods database...: <--||');
+      await PaymentMethod.bulkCreate(this.paymentMethods);
+    } catch (error) {
+      console.log('||--> Seed payment methods not completed...: <--||');
     }
   }
 
