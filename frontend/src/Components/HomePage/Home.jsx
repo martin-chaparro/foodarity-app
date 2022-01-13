@@ -48,7 +48,14 @@ export default function Home() {
 
   return (
     <div>
-      <div style={{ marginBottom: '1em' }}>
+      <div
+        style={{
+          marginBottom: '1em',
+          display: 'flex',
+          justifyContent: 'center',
+          width: '100%',
+        }}
+      >
         <Navbar filtrado={filtrado} />
       </div>
       {/* <NavbarCommerce /> */}
