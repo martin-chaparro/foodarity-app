@@ -7,6 +7,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
+import styles from './PublishedProduct.module.css';
 
 const columns = [
   { id: 'lote', label: 'LOTE', minWidth: 170 },
@@ -62,7 +63,10 @@ export default function PublishedProduct() {
   };
 
   return (
-    <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+    <Paper
+      className={styles.content}
+      sx={{ width: '100%', overflow: 'hidden' }}
+    >
       <TableContainer sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>

@@ -18,6 +18,9 @@ import Typography from '@mui/material/Typography';
 import CompanyDetail from './CompanyDetail';
 import PostNewBatch from './PostNewBatch';
 import PublishedProduct from './PublishedProduct';
+import PrimarySearchAppBar from '../Navbar/NavbarCommerce';
+import Orders from './Orders';
+import styles from './ProfileTempleteCommerce.module.css';
 
 const drawerWidth = 240;
 
@@ -38,8 +41,8 @@ function ProfileTempleteCommerce(props) {
   const drawer = (
     <div>
       <Toolbar />
-      <Divider />
-      <List>
+      <Divider className={styles.barra} />
+      <List className={styles.barra}>
         {[
           {
             text: 'Detalles de Cuenta',
@@ -70,7 +73,7 @@ function ProfileTempleteCommerce(props) {
       </List>
       <Divider />
       <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
+        {['All mail', 'Trash'].map((text, index) => (
           <ListItem button key={text}>
             <ListItemIcon>
               {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
@@ -86,85 +89,88 @@ function ProfileTempleteCommerce(props) {
     window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box sx={{ display: 'flex' }}>
-      <CssBaseline />
-      <AppBar
-        position="fixed"
-        sx={{
-          width: { sm: `calc(100% - ${drawerWidth}px)` },
-          ml: { sm: `${drawerWidth}px` },
-        }}
-      >
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: 'none' } }}
+    <div>
+      <Box sx={{ display: 'flex' }}>
+        <CssBaseline />
+        <AppBar
+          position="fixed"
+          sx={{
+            width: { sm: `calc(100% - ${drawerWidth}px)` },
+            ml: { sm: `${drawerWidth}px` },
+          }}
+        >
+          <PrimarySearchAppBar />
+          <Toolbar>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              edge="start"
+              onClick={handleDrawerToggle}
+              sx={{ mr: 2, display: { sm: 'none' } }}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography variant="h6" noWrap component="div">
+              PANADERIA BUENOS AIRES
+            </Typography>
+          </Toolbar>
+        </AppBar>
+        <Box
+          component="nav"
+          sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+          aria-label="mailbox folders"
+        >
+          {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
+          <Drawer
+            container={container}
+            variant="temporary"
+            open={mobileOpen}
+            onClose={handleDrawerToggle}
+            ModalProps={{
+              keepMounted: true, // Better open performance on mobile.
+            }}
+            sx={{
+              display: { xs: 'block', sm: 'none' },
+              '& .MuiDrawer-paper': {
+                boxSizing: 'border-box',
+                width: drawerWidth,
+              },
+            }}
           >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            PANADERIA BUENOS AIRES
-          </Typography>
-        </Toolbar>
-      </AppBar>
-      <Box
-        component="nav"
-        sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-        aria-label="mailbox folders"
-      >
-        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-        <Drawer
-          container={container}
-          variant="temporary"
-          open={mobileOpen}
-          onClose={handleDrawerToggle}
-          ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
-          }}
+            {drawer}
+          </Drawer>
+          <Drawer
+            variant="permanent"
+            sx={{
+              display: { xs: 'none', sm: 'block' },
+              '& .MuiDrawer-paper': {
+                boxSizing: 'border-box',
+                width: drawerWidth,
+              },
+            }}
+            open
+          >
+            {drawer}
+          </Drawer>
+        </Box>
+        <Box
+          component="main"
           sx={{
-            display: { xs: 'block', sm: 'none' },
-            '& .MuiDrawer-paper': {
-              boxSizing: 'border-box',
-              width: drawerWidth,
-            },
+            flexGrow: 1,
+            p: 3,
+            width: { sm: `calc(100% - ${drawerWidth}px)` },
           }}
         >
-          {drawer}
-        </Drawer>
-        <Drawer
-          variant="permanent"
-          sx={{
-            display: { xs: 'none', sm: 'block' },
-            '& .MuiDrawer-paper': {
-              boxSizing: 'border-box',
-              width: drawerWidth,
-            },
-          }}
-          open
-        >
-          {drawer}
-        </Drawer>
-      </Box>
-      <Box
-        component="main"
-        sx={{
-          flexGrow: 1,
-          p: 3,
-          width: { sm: `calc(100% - ${drawerWidth}px)` },
-        }}
-      >
-        <Toolbar display="none" />
-        {display === 0 && <CompanyDetail />}
+          <Toolbar display="none" />
+          {display === 0 && <CompanyDetail />}
 
-        {display === 2 && <PublishedProduct />}
-        {display === 3 && <PostNewBatch />}
+          {display === 2 && <PublishedProduct />}
+          {display === 3 && <PostNewBatch />}
 
-        {display === 1 && <h1>ORDENES DE COMPRA </h1>}
+          {display === 1 && <Orders />}
+        </Box>
       </Box>
-    </Box>
+    </div>
   );
 }
 

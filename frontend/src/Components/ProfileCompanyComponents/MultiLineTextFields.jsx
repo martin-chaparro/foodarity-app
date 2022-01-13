@@ -2,7 +2,7 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 
-export default function MultilineTextFields() {
+export default function Descipcion() {
   // eslint-disable-next-line no-unused-vars
   const [value, setValue] = React.useState('Controlled');
 
@@ -15,7 +15,7 @@ export default function MultilineTextFields() {
     <Box
       component="form"
       sx={{
-        '& .MuiTextField-root': { m: 1, width: '25ch' },
+        '& .MuiTextField-root': { m: 1, width: '464px' },
       }}
       noValidate
       autoComplete="off"
