@@ -16,6 +16,10 @@ class Product extends Model {
           type: DataTypes.INTEGER,
           allowNull: false,
         },
+        totalQuantity: {
+          type: DataTypes.INTEGER,
+          allowNull: false,
+        },
         photo: {
           type: DataTypes.TEXT, // TODO ACOMODAR
           allowNull: true,

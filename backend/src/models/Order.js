@@ -21,6 +21,7 @@ class Order extends Model {
 
   static associate(models) {
     this.belongsTo(models.User, {as: 'buyer'})
+    this.belongsTo(models.Company, {as: 'company'})
     this.belongsTo(models.Product, {as: 'product'})
     this.belongsTo(models.PaymentMethod, {as: 'paymentMethod'})
   }

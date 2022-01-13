@@ -154,16 +154,16 @@ const postProduct = async (req, res) => {
       include: [{ model: Company }],
     });
     if (!user.CompanyId) {
-      return res.status(401).json({ msg: 'El usuaria no posee un comercio' });
+      return res.status(401).json({ message: 'El usuaria no posee un comercio' });
     }
     if (user.Company.type_id !== 1) {
       return res.status(401).json({
-        msg: 'Solo las companias tipo comercio pueden publicar productos',
+        message: 'Solo las companias tipo comercio pueden publicar productos',
       });
     }
     if (user.Company.status !== 'Habilitada') {
       return res.status(401).json({
-        msg: 'Solo los comercios habilitados pueden publicar productos',
+        message: 'Solo los comercios habilitados pueden publicar productos',
       });
     }
 
@@ -182,6 +182,7 @@ const postProduct = async (req, res) => {
       description,
       photo,
       quantity,
+      totalQuantity : quantity,
       price,
       publicationDate,
       expirationDate,
@@ -211,11 +212,11 @@ const deletePublication = async (req, res) => {
     if (product.companyId !== user.CompanyId) {
       return res
         .status(401)
-        .json({ msg: 'Tu compania no publico este producto' });
+        .json({ message: 'Tu compania no publico este producto' });
     }
     if (product.status !== 'published') {
       return res.status(401).json({
-        msg: 'No puedes borrar un producto que ya no esta publicado',
+        message: 'No puedes borrar un producto que ya no esta publicado',
       });
     }
     await Product.update(
