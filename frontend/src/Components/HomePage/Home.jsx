@@ -12,7 +12,7 @@ import Navbar from '../Navbar/Navbar';
 // import ShopCard from '../ShopCard/ShopCard';
 // import productos from '../Cards/product.json';
 import Pagination from '../Pagination/BasicPagination';
-// import SearchBar from '../Searchbar/Searchbar';
+import BannerSearch from '../Searchbar/BannerSearch';
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -48,8 +48,9 @@ export default function Home() {
 
   return (
     <div>
+      <Navbar filtrado={filtrado} />
       <div style={{ marginBottom: '1em' }}>
-        <Navbar filtrado={filtrado} />
+        <BannerSearch />
       </div>
       {/* <NavbarCommerce /> */}
       <div className={styles.home}>
@@ -78,7 +79,7 @@ export default function Home() {
                 <div className={styles.ProductCardDiv}>
                   {/* <ProductCard/> */}
                 </div>
-                {allProducts.map((product, index) => (
+                {allProducts?.map((product, index) => (
                   // eslint-disable-next-line react/no-array-index-key
                   <ProductCard key={index} product={product} />
                 ))}

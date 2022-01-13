@@ -10,17 +10,17 @@ export default function Pagination({ paginado }) {
   // eslint-disable-next-line no-plusplus
   for (let i = 1; i <= pages; i++) {
     pageNumbers.push(i);
-  } 
+  }
 
   return (
     <nav className={styles.botoneraContent}>
       <ul>
-        {pages > 1 &&
+        {pageNumbers &&
           pageNumbers.map((number) => {
             return (
               // eslint-disable-next-line react/button-has-type
               <button
-                disabled={page===number}
+                disabled={page === number}
                 className={styles.btn}
                 key={number}
                 onClick={() => paginado(number)}

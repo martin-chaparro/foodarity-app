@@ -1,40 +1,60 @@
-// eslint-disable-next-line import/no-duplicates
-import React from 'react';
-// eslint-disable-next-line import/no-duplicates
-import { useState } from 'react';
-// eslint-disable-next-line import/no-duplicates
-import { useDispatch } from 'react-redux';
-import { searchProducts } from '../../redux/actions/productActions';
-import styles from './Searchbar.module.css';
+import * as React from 'react';
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
+// import { styled, alpha } from '@mui/material/styles';
 
-export default function SearchBar() {
-  // eslint-disable-next-line no-unused-vars
-  const dispatch = useDispatch();
+// const Search = styled('div')(({ theme }) => ({
+//   position: 'relative',
+//   borderRadius: theme.shape.borderRadius,
+//   backgroundColor: alpha(theme.palette.common.white, 1),
+//   '&:hover': {
+//     backgroundColor: alpha(theme.palette.common.white, 1),
+//   },
+//   marginRight: theme.spacing(0),
+//   marginLeft: 0,
+//   width: '50%',
+//   [theme.breakpoints.up('sm')]: {
+//     marginLeft: theme.spacing(5),
+//     width: 'auto',
+//   },
+// }));
 
-  const [input, setInput] = useState('');
+const options = [
+  'Pollo',
+  'Leche',
+  'Quesos',
+  'Vegetables',
+  'Frutas',
+  'Postres',
+  'Popotes',
+];
 
-  function handleInputOnchange(e) {
-    setInput(e.target.value);
-  }
-
-  function handleKeyPress(event) {
-    if (event.key === 'Enter') {
-      dispatch(searchProducts(input));
-    }
-  }
+export default function ControllableStates() {
+  const [value, setValue] = React.useState(options[0]);
+  const [inputValue, setInputValue] = React.useState('');
 
   return (
-    <div className={styles.searchbarDiv}>
-      <input
-        className={styles.searchbar}
-        value={input}
-        onKeyPress={handleKeyPress}
-        type="text"
-        onChange={(e) => {
-          handleInputOnchange(e);
+    <div>
+      {/* <div>{`value: ${value !== null ? `'${value}'` : 'null'}`}</div>
+      <div>{`inputValue: '${inputValue}'`}</div>
+      <br /> */}
+      {/* <Search> */}
+      <Autocomplete
+        value={value}
+        onChange={(event, newValue) => {
+          setValue(newValue);
         }}
-        placeholder="Search.."
+        inputValue={inputValue}
+        onInputChange={(event, newInputValue) => {
+          setInputValue(newInputValue);
+        }}
+        id="controllable-states-demo"
+        options={options}
+        sx={{ width: '100%', backgroundColor: 'white', textColor: 'white' }}
+        // eslint-disable-next-line react/jsx-props-no-spreading
+        renderInput={(params) => <TextField {...params} label="Buscar..." />}
       />
+      {/* </Search> */}
     </div>
   );
 }
