@@ -27,6 +27,6 @@ router.patch(
   uploadImageCompany
 );
 router.delete('/disabled/:id', authMiddleware, deleteCompany);
-router.put('/:id', authMiddleware, updateCompany);
+router.put('/:id', authMiddleware, ValidationCompany.update, updateCompany);
 
 module.exports = router;

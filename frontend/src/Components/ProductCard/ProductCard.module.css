@@ -97,7 +97,7 @@
 }
 
 .btnres:hover {
-  background-color: rgba(221, 128, 51, 0.692);
+  background-color:#6f2add6b;
 }
 
 .btndetdiv {
@@ -123,7 +123,7 @@
 }
 
 .btndet:hover {
-  background-color: #e29911dc;
+  background-color: #6f2add6b;
 }
 
 .img {

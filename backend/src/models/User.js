@@ -31,10 +31,7 @@ class User extends Model {
           allowNull: true,
         },
         registerMethod: {
-          type: DataTypes.ENUM(
-            'direct',
-            'google'
-          ),
+          type: DataTypes.ENUM('direct', 'google'),
           allowNull: false,
           defaultValue: 'direct',
         },
