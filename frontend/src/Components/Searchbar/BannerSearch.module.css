@@ -1,0 +1,55 @@
+.body,
+html {
+  height: 100%, margin 0;
+  padding: 0;
+  background: #f1f1f1;
+}
+
+.heroimage {
+  position: relative;
+  height: 500px;
+  overflow: hidden;
+  background-image: url(../../assets/hero4.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  overflow: hidden;
+  text-align: center;
+  color: white;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.container h1 {
+  font-size: 5 2px;
+  letter-spacing: 0.2em;
+  margin: 0;
+}
+
+.container h1 span {
+  border: 10px solid white;
+  padding: 6px 20px;
+  display: inline-block;
+  margin-bottom: 1em;
+}
+
+.des {
+  margin: 20px;
+  display: block;
+  font-size: 26px;
+  text-shadow: 0 0 10px black;
+}
+
+.searchbar {
+  margin-top: 1em;
+  padding: 10px 24px;
+  font-size: 20px;
+  margin-bottom: 1em;
+}
