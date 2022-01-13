@@ -42,6 +42,8 @@ const userLogin = async (request, response) => {
     return response.json({
       id: user.id,
       name: user.name,
+      photo:user.photo,
+      socialPhoto:user.socialPhoto,
       roleId: user.role_id,
       token,
     });
