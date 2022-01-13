@@ -36,7 +36,7 @@ const include = [
             attributes: {
               exclude: ['createdAt', 'updatedAt'],
             },
-          }
+          },
         ],
         attributes: {
           exclude: ['createdAt', 'updatedAt', 'CompanyId', 'addressId'],

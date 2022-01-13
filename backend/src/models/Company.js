@@ -43,7 +43,6 @@ class Company extends Model {
             'Deshabilitada',
             'Pendiente',
             'Banneada'
-
           ),
           allowNull: false,
           defaultValue: 'Pendiente',

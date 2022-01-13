@@ -12,6 +12,7 @@ import Navbar from '../Navbar/Navbar';
 // import ShopCard from '../ShopCard/ShopCard';
 // import productos from '../Cards/product.json';
 import Pagination from '../Pagination/BasicPagination';
+import BannerSearch from '../Searchbar/BannerSearch';
 // import SearchBar from '../Searchbar/Searchbar';
 // import Loading from '../Loading/Loading';
 
@@ -46,17 +47,15 @@ export default function Home() {
     dispatch(getProducts({ categoryName: category, size: 1000 }));
   };
 
+  const search = (products) => {
+    dispatch(getProducts({ lote: products, size: 1000 }));
+  };
+
   return (
     <div>
-      <div
-        style={{
-          marginBottom: '1em',
-          display: 'flex',
-          justifyContent: 'center',
-          width: '100%',
-        }}
-      >
-        <Navbar filtrado={filtrado} />
+      <Navbar filtrado={filtrado} />
+      <div style={{ marginBottom: '1em' }}>
+        <BannerSearch search={search} lote={allProducts} />
       </div>
       {/* <NavbarCommerce /> */}
       <div className={styles.home}>
