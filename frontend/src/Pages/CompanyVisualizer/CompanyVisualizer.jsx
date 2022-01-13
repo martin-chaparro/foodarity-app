@@ -17,7 +17,6 @@ export default function CompanyVisualizer () {
 return (
 <div className={styles.GeneralProfileImgs}>
 <div className={styles.LogoDiv}>
-    {/* <p>{companies.name}</p> */}
 <img src='' alt="logo" />
 </div>
 
