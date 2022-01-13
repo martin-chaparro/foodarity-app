@@ -142,12 +142,15 @@ const getProducts = async (req, res) => {
       attributes,
     };
 
+    // const allProducts = await Product.findAll(params);
+    let products = await Product.findAll(params);
+    const allProducts = products;
     if (size > 1) {
-      params.limit = size;
-      params.offset = (page - 1) * size;
+      // params.limit = size;
+      // params.offset = (page - 1) * size;
+      products = products.slice((page - 1) * size, (page - 1) * size + size);
     }
 
-    const products = await Product.findAll(params);
     const count = await Product.count(params);
     delete params.limit;
     delete params.offset;
@@ -155,6 +158,7 @@ const getProducts = async (req, res) => {
     const pages = Math.ceil(count / size);
     res.status(200).json({
       products,
+      allProducts,
       totalProducts: totalCount,
       page: parseInt(page, 10) || 1,
       pages: pages || 1,

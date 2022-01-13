@@ -21,7 +21,7 @@ const authGoogle = async (request, response) => {
         name,
         email,
         password: uuidv4(),
-        registerMethod:'google'
+        registerMethod: 'google',
       });
 
       await newUser.setRole(1);
@@ -62,7 +62,7 @@ const authGoogle = async (request, response) => {
       token,
     });
   } catch (error) {
-    console.log(error)
+    console.log(error);
     return response.status(500).json({
       message: 'Por favor hable con el administrador',
     });
