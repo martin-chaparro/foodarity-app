@@ -50,6 +50,7 @@ export const registerComerce = (inputForm, select) => async (dispatch) => {
 
     const response = await apiWithToken.post('/companies', requestData);
     // TODO: Generar alerta de aviso de que se guardo el Comercio
+    console.log('DATAAAAAAA', response.data);
     return dispatch({
       type: types.registerComerce,
       payload: response.data,
