@@ -45,6 +45,7 @@ class Company extends Model {
             'Banneada'
           ),
           allowNull: false,
+          defaultValue: 'Pendiente',
         },
         deleted: {
           // cuenta eliminada o no

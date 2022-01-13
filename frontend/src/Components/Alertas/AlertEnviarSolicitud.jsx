@@ -33,6 +33,7 @@ export default function AlertDialog({ display }) {
   return (
     <div>
       <Button
+        type='submit'
         variant="contained"
         color="primary"
         onClick={handleClickOpen}

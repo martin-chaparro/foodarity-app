@@ -24,9 +24,9 @@ class Address extends Model {
   }
 
   static associate(models) {
-    this.belongsTo(models.State, {as:'state'});
-    this.belongsTo(models.City, {as:'city'});
-    this.belongsTo(models.Company, {as:'company'});
+    this.belongsTo(models.State, { as: 'state' });
+    this.belongsTo(models.City, { as: 'city' });
+    this.belongsTo(models.Company, { as: 'company' });
   }
 }
 
