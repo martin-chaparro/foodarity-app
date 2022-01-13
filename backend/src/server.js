@@ -139,6 +139,7 @@ class Server {
           website,
           type,
           status,
+          logo,
           street,
           number,
           zipcode,
@@ -154,6 +155,7 @@ class Server {
           email,
           website,
           status,
+          logo,
           ownerId,
         });
         const newAddress = await Address.create({
@@ -209,7 +211,7 @@ class Server {
         });
         await newProduct.setCategory(category);
         await newProduct.setCompany(1);
-        
+
         await newProduct.setPublisher(1);
       });
     } catch (error) {
