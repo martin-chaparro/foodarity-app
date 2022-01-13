@@ -23,17 +23,15 @@ import perfil from '../../../../assets/perfil.jpeg';
 import { Layout } from '../../../layout/Layout';
 
 export const UsersScreen = () => {
-
-
   const handleChangePage = () => {};
   const handleChangeRowsPerPage = () => {};
 
   const handleEdit = (event) => {
-    console.log(event.target.attributes.dataid.value)
-  }
+    console.log(event.target.attributes.dataid.value);
+  };
   const handleDelete = (event) => {
-    console.log(event.target.attributes.dataid.value)
-  }
+    console.log(event.target.attributes.dataid.value);
+  };
 
   return (
     <Layout>

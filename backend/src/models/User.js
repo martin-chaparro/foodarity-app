@@ -30,6 +30,10 @@ class User extends Model {
           type: DataTypes.JSON,
           allowNull: true,
         },
+        socialPhoto: {
+          type: DataTypes.STRING,
+          allowNull: true,
+        },
         registerMethod: {
           type: DataTypes.ENUM('direct', 'google'),
           allowNull: false,
