@@ -101,8 +101,8 @@ class Server {
       console.log('||--> Seed users database...: <--||');
       await Role.bulkCreate(this.roles);
       const usersCreated = await User.bulkCreate(this.users);
-      usersCreated.forEach((user) => {
-        user.setRole(1);
+      usersCreated.forEach((user,index) => {
+        user.setRole(this.users[index].roleId);
       });
     } catch (error) {
       console.log('||--> Seed users not completed...: <--||');

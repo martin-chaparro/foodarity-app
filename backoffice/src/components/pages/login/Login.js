@@ -1,4 +1,5 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
@@ -8,13 +9,19 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { GoogleLogin } from 'react-google-login';
+import GoogleIcon from '@mui/icons-material/Google';
 
 import logo from '../../../assets/WEB-background-logo.png';
+import {
+  startGoogleLogin,
+  startLogin,
+} from '../../../redux/actions/authActions';
 
 const theme = createTheme();
 
 export const Login = () => {
-  
+  const dispatch = useDispatch();
 
   const formik = useFormik({
     initialValues: {
@@ -23,15 +30,26 @@ export const Login = () => {
     },
     validationSchema: Yup.object({
       email: Yup.string()
-        .email('Must be a valid email')
+        .email('Tiene que ser un email valido')
         .max(255)
-        .required('Email is required'),
-      password: Yup.string().max(255).required('Password is required'),
+        .required('El email es requerido'),
+      password: Yup.string()
+        .min(4, 'Minimo 4 caractes')
+        .max(12, 'Maximo 12 Caracteres')
+        .required('La password es requerida'),
     }),
     onSubmit: () => {
-      console.log(formik.values)
+      const { email, password } = formik.values;
+      return dispatch(startLogin(email, password));
     },
   });
+
+  const responseGoogleSucces = ({ tokenId }) => {
+    return dispatch(startGoogleLogin(tokenId));
+  };
+  const responseGoogleFail = (response) => {
+    console.log(response);
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -82,15 +100,44 @@ export const Login = () => {
               variant="outlined"
             />
             <Button
-               color="primary"
-               disabled={formik.isSubmitting}
-               fullWidth
-               size="large"
-               type="submit"
-               variant="contained"
+              color="primary"
+              disabled={formik.isSubmitting}
+              fullWidth
+              size="large"
+              type="submit"
+              variant="contained"
+              style={{ marginBottom: '1em' }}
             >
               Ingresar
             </Button>
+            {/* <GoogleLogin
+              clientId="327655390134-3dkok4tsgubva7v5gj7drncddv260lor.apps.googleusercontent.com"
+              buttonText="Continuar con Google"
+              onSuccess={responseGoogleSucces}
+              onFailure={responseGoogleFail}
+              cookiePolicy="single_host_origin"
+              style={{ width: '100%',display:'block' }}
+            /> */}
+            <GoogleLogin
+              clientId="327655390134-3dkok4tsgubva7v5gj7drncddv260lor.apps.googleusercontent.com"
+              render={(renderProps) => (
+                <Button
+                  onClick={renderProps.onClick}
+                  disabled={renderProps.disabled}
+                  fullWidth
+                  size="large"
+                  color="error"
+                  startIcon={<GoogleIcon />}
+                  variant="outlined"
+                >
+                  Continuar con google
+                </Button>
+              )}
+              buttonText="Login"
+              onSuccess={responseGoogleSucces}
+              onFailure={responseGoogleFail}
+              cookiePolicy="single_host_origin"
+            />
           </Box>
         </Box>
       </Container>

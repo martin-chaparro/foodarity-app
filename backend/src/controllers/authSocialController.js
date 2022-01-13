@@ -8,7 +8,7 @@ const authGoogle = async (request, response) => {
   const { tokenId } = request.body;
 
   try {
-    const { name, email } = await googleVerify(tokenId);
+    const { name, email, picture } = await googleVerify(tokenId);
 
     const user = await User.findOne({
       where: { email },
@@ -20,6 +20,7 @@ const authGoogle = async (request, response) => {
       const newUser = await User.create({
         name,
         email,
+        socialPhoto: picture,
         password: uuidv4(),
         registerMethod: 'google',
       });
@@ -36,6 +37,8 @@ const authGoogle = async (request, response) => {
       return response.status(201).json({
         id: newUser.id,
         name: newUser.name,
+        photo: newUser.photo,
+        socialPhoto: newUser.socialPhoto,
         roleId: newUser.role_id,
         token,
       });
@@ -58,6 +61,8 @@ const authGoogle = async (request, response) => {
     return response.json({
       id: user.id,
       name: user.name,
+      photo: user.photo,
+      socialPhoto: picture,
       roleId: user.role_id,
       token,
     });

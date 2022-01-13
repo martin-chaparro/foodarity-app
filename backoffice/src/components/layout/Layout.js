@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
 import Toolbar from '@mui/material/Toolbar';
@@ -9,10 +10,22 @@ import Container from '@mui/material/Container';
 
 import { Header } from './header/Header';
 import { Aside } from './aside/Aside';
+import { startLogout } from '../../redux/actions/authActions';
 
 const mdTheme = createTheme();
 
 export const Layout = ({ children }) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { roleId } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (roleId !== 2) {
+      dispatch(startLogout());
+      navigate('/home', { replace: true });
+    }
+  }, []);
+
   return (
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: 'flex' }}>
