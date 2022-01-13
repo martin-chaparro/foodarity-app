@@ -72,8 +72,8 @@ export default function Home() {
 
   return (
     <div>
-      <Navbar filtrado={filtrado} />
       <div style={{ marginBottom: '1em' }}>
+        <Navbar filtrado={filtrado} />
         <BannerSearch search={search} lote={allProducts} />
       </div>
       {/* <NavbarCommerce /> */}
