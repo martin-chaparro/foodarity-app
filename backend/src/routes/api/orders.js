@@ -1,6 +1,7 @@
 const { Router } = require('express');
 
 const router = new Router();
+const validationOrder = require('../../middlewares/validations/validationOrder');
 const authMiddleware = require('../../middlewares/auth');
 const {
   getOrdersByUser,
@@ -10,6 +11,6 @@ const {
 
 router.get('/user', authMiddleware, getOrdersByUser);
 router.get('/company', authMiddleware, getOrdersByCompany);
-router.post('/:id', authMiddleware, postOrder);
+router.post('/:id', authMiddleware, validationOrder, postOrder);
 
 module.exports = router;
