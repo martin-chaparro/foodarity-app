@@ -339,6 +339,11 @@ const addUser = async (req, res) => {
         message: 'El usuario no esta habilitado',
       });
     }
+    if (user.companyId === owner.companyId) {
+      return res.status(400).json({
+        message: 'El usuario ya pertenece a tu compania',
+      });
+    }
     if (user.companyId) {
       return res.status(400).json({
         message: 'El usuario ya pertenece a otra compania',
@@ -353,19 +358,22 @@ const addUser = async (req, res) => {
 
 const deleteUser = async (req, res) => {
   try {
-    const { id } = req.params;
+    let { id } = req.params;
+    id = parseInt(id,10)
     const { userId } = req;
     const owner = await User.findByPk(userId, {
       include: { model: Company, as: 'company' },
     });
-
+    console.log('id params', id, 'user id', userId)
     if (!owner.companyId) {
       return res.status(400).json({
         message: 'El usuario no tiene compania',
       });
     }
     if (userId !== owner.company.ownerId) {
-      return res.status(401).json({ message: 'Not owner' });
+      if (userId !== id) {
+        return res.status(401).json({ message: 'Not owner' });
+      } 
     }
     if (owner.company.status !== 'Habilitada') {
       return res.status(400).json({
@@ -386,17 +394,22 @@ const deleteUser = async (req, res) => {
         message: 'El usuario no pertenece a tu compania',
       });
     }
-    if (user.id === owner.id) {
+    if (user.id === owner.company.ownerId) {
       return res.status(400).json({
         message: 'El dueño no puede elimarse de la compania',
       });
     }
     user.setCompany(null);
+    if (userId === id) {
+      return res.status(200).send({ message: `you exit the company '${owner.company.name}'` });
+    }
     return res.status(200).send({ message: `${user.email} deleted` });
   } catch (error) {
     return res.status(500).send(error);
   }
 };
+
+
 
 module.exports = {
   getCompanies,
