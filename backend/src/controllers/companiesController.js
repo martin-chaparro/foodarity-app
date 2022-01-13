@@ -15,7 +15,7 @@ cloudinary.config(process.env.CLOUDINARY_URL);
 // crear una empresa
 const createCompany = async (req, res) => {
   try {
-    const ownerId = req.userId; // revisar con chapa
+    const ownerId = req.userId; 
 
     const {
       name,
@@ -56,11 +56,14 @@ const createCompany = async (req, res) => {
       number,
       zipcode,
     });
-
-    await newCompany.setType(type);
-    await newAddress.setCompany(newCompany);
-    await newAddress.setCity(cityId);
+    //primero me formo el objeto de address con state y city  y despues le paso el objeto a la compañia creada
     await newAddress.setState(stateId);
+    await newAddress.setCity(cityId);
+    await newCompany.setType(type);
+    await newCompany.setAddress(newAddress);
+    const owner = await User.findByPk(ownerId);
+    await owner.setCompany(newCompany.id);
+    
     return res.status(200).json(newCompany);
   } catch (error) {
     console.log(error);
@@ -80,8 +83,8 @@ const getCompanies = async (req, res) => {
           model: Address,
           as: 'address',
           include: [
-            { model: City, as: 'city' },
-            { model: State, as: 'state' },
+            { model: City, as: 'city', attributes: ['name'] },
+            { model: State, as: 'state', attributes: ['name'] },
           ],
         },
       ],
@@ -243,11 +246,13 @@ const deleteCompany = async (req, res) => {
 // update info company //VER RUTAAAA
 const updateCompany = async (req, res) => {
   const {
+    name,
     description,
     areaCode,
     phone,
     email,
     website,
+    type,
     street,
     number,
     zipcode,
@@ -265,30 +270,27 @@ const updateCompany = async (req, res) => {
       return res.status(401).json({ message: 'Not owner' });
     }
 
-    await Company.update(
+    await company.update(
       {
+        name,
         description,
         areaCode,
         phone,
         email,
-        website,
+        website
       },
-      {
-        where: { id },
-      }
     );
-
-    await Address.update(
+    
+    const address = await Address.findByPk(company.id)
+   if(address){
+    await address.update(
       {
         street,
         number,
         zipcode,
       },
-      {
-        where: { companyId: id },
-      }
     );
-
+   }
     return res.status(200).json({ msg: 'Actualizado' });
   } catch (error) {
     console.log(error);
