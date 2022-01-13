@@ -10,7 +10,7 @@ import Header from '../../Components/Header/Header';
 import styles from './RegisterFormCommerce.module.css';
 import CommerceLogo from '../../assets/Mask-Group.png';
 import { api } from '../../services/api';
-import { registerComerce } from '../../redux/actions/usersActions';
+import { registerComerce } from '../../redux/actions/CompaniesActions';
 import Terminos from '../../Components/Term&Conditions/Terminos';
 import AlertOng from '../../Components/Alertas/AlertEnviarSolicitud';
 
