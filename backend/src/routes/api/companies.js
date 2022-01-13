@@ -21,7 +21,7 @@ router.get('/id/:id', searchCompany);
 router.get('/byUser', authMiddleware, searchCompanyByUser);
 router.post('/', authMiddleware, ValidationCompany.create, createCompany);
 router.patch(
-  '/:id/upload/:field', 
+  '/:id/upload/:field',
   authMiddleware,
   validationFiles.fileExists,
   uploadImageCompany

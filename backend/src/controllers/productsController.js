@@ -4,6 +4,8 @@ const Product = require('../models/Product');
 const User = require('../models/User');
 const Company = require('../models/Company');
 const Address = require('../models/Address');
+const State = require('../models/State');
+const City = require('../models/City');
 
 const include = [
   {
@@ -20,6 +22,22 @@ const include = [
       {
         model: Address,
         as: 'address',
+        include: [
+          {
+            model: State,
+            as: 'state',
+            attributes: {
+              exclude: ['createdAt', 'updatedAt'],
+            },
+          },
+          {
+            model: City,
+            as: 'city',
+            attributes: {
+              exclude: ['createdAt', 'updatedAt'],
+            },
+          }
+        ],
         attributes: {
           exclude: ['createdAt', 'updatedAt', 'CompanyId', 'addressId'],
         },
