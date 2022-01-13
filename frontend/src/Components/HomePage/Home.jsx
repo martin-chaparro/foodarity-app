@@ -47,11 +47,15 @@ export default function Home() {
     dispatch(getProducts({ categoryName: category, size: 1000 }));
   };
 
+  const search = (products) => {
+    dispatch(getProducts({ lote: products, size: 1000 }));
+  };
+
   return (
     <div>
       <Navbar filtrado={filtrado} />
       <div style={{ marginBottom: '1em' }}>
-        <BannerSearch />
+        <BannerSearch search={search} lote={allProducts} />
       </div>
       {/* <NavbarCommerce /> */}
       <div className={styles.home}>
