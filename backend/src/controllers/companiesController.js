@@ -252,13 +252,18 @@ const updateCompany = async (req, res) => {
     phone,
     email,
     website,
-    type,
     street,
     number,
     zipcode,
   } = req.body;
   const { id } = req.params;
   const ownerId = req.userId;
+
+  const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+    
   try {
     const company = await Company.findByPk(id);
     if (!company) {
