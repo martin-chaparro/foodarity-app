@@ -25,7 +25,7 @@ export default function SearchBar({ search, lote }) {
         id="free-solo-2-demo"
         disableClearable
         freeSolo
-        options={options}
+        options={options || 'not found'}
         sx={{ width: '100%', backgroundColor: 'white', textColor: 'white' }}
         // eslint-disable-next-line react/jsx-props-no-spreading
         renderInput={(params) => <TextField {...params} label="Buscar..." />}
