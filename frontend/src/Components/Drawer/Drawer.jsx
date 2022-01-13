@@ -8,7 +8,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import CategoryIcon from '@mui/icons-material/Category';
-import MenuIcon from '@mui/icons-material/TagSharp';
+import MenuIcon from '@mui/icons-material/Tune';
 import ArrowBackIosTwoToneIcon from '@mui/icons-material/ArrowBackIosTwoTone';
 import LocalDiningIcon from '@mui/icons-material/LocalDining';
 // import PhoneInTalkIcon from '@mui/icons-material/PhoneInTalk';
@@ -46,7 +46,7 @@ export default function Drawer({ filtrado }) {
         <ListItem>
           <CategoryIcon
             color="primary"
-            sx={{ width: '1em', mr: '1em', hover: 'true' }}
+            sx={{ width: '1em', mr: '1em', hover: 'false' }}
           />
           <p style={{ color: '#3E2463' }}>TODAS LAS CATEGORIAS</p>
           <ArrowBackIosTwoToneIcon
