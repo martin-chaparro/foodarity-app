@@ -44,11 +44,11 @@ export default function Home() {
   };
 
   const filtrado = (category) => {
-    dispatch(getProducts({ categoryName: category, size: 1000 }));
+    dispatch(getProducts({ categoryName: category }));
   };
 
   const search = (products) => {
-    dispatch(getProducts({ lote: products, size: 1000 }));
+    dispatch(getProducts({ lote: products}));
   };
 
   return (
