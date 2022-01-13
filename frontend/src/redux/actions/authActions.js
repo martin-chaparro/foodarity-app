@@ -60,6 +60,30 @@ export const startLogin = (email, password) => {
   };
 };
 
+export const startGoogleLogin = (tokenId) => {
+  return async (dispatch) => {
+    try {
+      const response = await api.post('/auth/social/google', { tokenId });
+      const { id, name, token } = response.data;
+      localStorage.setItem('token', token);
+      dispatch(
+        login({
+          id,
+          name,
+        })
+      );
+      return window.location.replace('/');
+    } catch (error) {
+      console.log(error);
+      return Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Lo sentimos, Algo Salio mal',
+      });
+    }
+  };
+};
+
 const logout = () => ({
   type: types.authLogout,
 });
@@ -78,14 +102,45 @@ export const startRegister = (input) => {
       const { id, name, token } = response.data;
       localStorage.setItem('token', token);
 
-      return dispatch(
+      dispatch(
         login({
           id,
           name,
         })
       );
+      return window.location.replace('/rollSelector');
     } catch (err) {
-      return console.log(err);
+      console.log(err);
+      return Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Lo sentimos, Algo Salio mal con el registro',
+      });
+    }
+  };
+};
+
+export const startGoogleRegister = (tokenId) => {
+  return async (dispatch) => {
+    try {
+      const response = await api.post('/auth/social/google', { tokenId });
+      const { id, name, token } = response.data;
+      localStorage.setItem('token', token);
+
+      dispatch(
+        login({
+          id,
+          name,
+        })
+      );
+      return window.location.replace('/rollSelector');
+    } catch (err) {
+      console.log(err);
+      return Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Lo sentimos, Algo Salio mal con el registro',
+      });
     }
   };
 };

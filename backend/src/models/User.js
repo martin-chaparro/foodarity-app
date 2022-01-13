@@ -30,10 +30,20 @@ class User extends Model {
           type: DataTypes.JSON,
           allowNull: true,
         },
+        registerMethod: {
+          type: DataTypes.ENUM('direct', 'google'),
+          allowNull: false,
+          defaultValue: 'direct',
+        },
         status: {
           type: DataTypes.BOOLEAN,
           allowNull: false,
           defaultValue: true,
+        },
+        deleted: {
+          type: DataTypes.BOOLEAN,
+          allowNull: false,
+          defaultValue: false,
         },
       },
       {
