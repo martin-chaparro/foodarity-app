@@ -12,6 +12,7 @@ const Category = require('./models/Category');
 const Product = require('./models/Product');
 const Company = require('./models/Company');
 const Address = require('./models/Address');
+const PaymentMethod = require('./models/PaymentMethod');
 
 class Server {
   constructor() {
@@ -38,6 +39,7 @@ class Server {
     this.products = require('./database/seeders/data-hardcode/products.json');
     this.categories = require('./database/seeders/data/categories.json');
     this.companies = require('./database/seeders/data-hardcode/companies.json');
+    this.paymentMethods = require('./database/seeders/data/paymentMethods.json');
   }
 
   // express instance
@@ -204,6 +206,7 @@ class Server {
           description,
           photo,
           quantity,
+          totalQuantity: quantity,
           price,
           publicationDate,
           expirationDate,
@@ -211,11 +214,16 @@ class Server {
         });
         await newProduct.setCategory(category);
         await newProduct.setCompany(1);
-
         await newProduct.setPublisher(1);
       });
     } catch (error) {
       console.log('||--> Seed products(HARDCODE) not completed...: <--||');
+    }
+    try {
+      console.log('||--> Seed payment methods database...: <--||');
+      await PaymentMethod.bulkCreate(this.paymentMethods);
+    } catch (error) {
+      console.log('||--> Seed payment methods not completed...: <--||');
     }
   }
 
