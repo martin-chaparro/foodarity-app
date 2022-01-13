@@ -1,15 +1,18 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
+import { GoogleLogin } from 'react-google-login';
 // import { logInUsers } from '../../actions/index';
-import { startLogin } from '../../redux/actions/authActions';
+import { startGoogleLogin, startLogin } from '../../redux/actions/authActions';
 import Header from '../../Components/Header/Header';
 import estilos from './Login.module.css';
 
+
 export default function Login() {
   const dispatch = useDispatch();
+  const navigate = useNavigate()
 
   const [errors, setErrors] = useState({});
 
@@ -67,6 +70,13 @@ export default function Login() {
     });
   };
 
+  const responseGoogleSucces = ({tokenId}) => {
+    dispatch(startGoogleLogin(tokenId))
+  }
+  const responseGoogleFail = () => {
+    navigate("/login", { replace: true });
+  }
+
   // Inicio
 
   // const handleSubmit = (e) => {
@@ -81,7 +91,7 @@ export default function Login() {
   // Fin
 
   return (
-    <div backgroundColor="transparent">
+    <div backgroundcolor="transparent">
       <Link to="/">
         <Header />
       </Link>
@@ -135,21 +145,14 @@ export default function Login() {
           >
             Ingresar
           </Button>
-
-          {/* ESTE BOTON ES TEMPORAL, SERÁ ELIMINADO CUANDO SE INGRESE EL BOTON DE LA LIBRERIA DE GOOGLE */}
-          <Button
-            variant="contained"
-            sx={{
-              // backgroundColor: '#533c74',
-              backgroundColor: '#533c74',
-              height: '2.51em',
-              color: '#fffff',
-              fontStyle: 'bold',
-              margin: '1em 1em 1em',
-            }}
-          >
-            Ingresar con Google
-          </Button>
+          <GoogleLogin
+            clientId="327655390134-3dkok4tsgubva7v5gj7drncddv260lor.apps.googleusercontent.com"
+            buttonText="Continuar con Google"
+            onSuccess={responseGoogleSucces}
+            onFailure={responseGoogleFail}
+            cookiePolicy='single_host_origin'
+            style={{width: '100%'}}
+          />
         </div>
       </div>
     </div>

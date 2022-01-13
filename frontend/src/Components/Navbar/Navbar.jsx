@@ -1,15 +1,12 @@
 import * as React from 'react';
-import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import { Link } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
-// import InputBase from '@mui/material/InputBase';
 import Badge from '@mui/material/Badge';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
-// import SearchIcon from '@mui/icons-material/Search';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -18,53 +15,6 @@ import HelpIcon from '@mui/icons-material/Help';
 import Logo from '../../assets/Mobil-Full-Header-Logo.png';
 import Avatar from './Avatar';
 import Drawer from '../Drawer/Drawer';
-import SearchBar from '../Searchbar/Searchbar';
-
-const Search = styled('div')(({ theme }) => ({
-  position: 'relative',
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.95),
-  '&:hover': {
-    backgroundColor: alpha(theme.palette.common.white, 0.95),
-  },
-  marginRight: theme.spacing(1),
-  display: 'flex',
-  flexDirection: 'colum',
-  justifyContent: 'spaceBetween',
-  marginTop: '1em',
-  marginButtom: '1em',
-  marginLeft: 0,
-  width: '100%',
-  [theme.breakpoints.up('sm')]: {
-    marginLeft: theme.spacing(16.5),
-    width: 'auto',
-  },
-}));
-
-// const SearchIconWrapper = styled('div')(({ theme }) => ({
-//   color: 'secondary',
-//   padding: theme.spacing(0, 2),
-//   height: '100%',
-//   position: 'absolute',
-//   pointerEvents: 'none',
-//   display: 'flex',
-//   alignItems: 'center',
-//   justifyContent: 'center',
-// }));
-
-// const StyledInputBase = styled(InputBase)(({ theme }) => ({
-//   color: 'inherit',
-//   '& .MuiInputBase-input': {
-//     padding: theme.spacing(1, 1, 1, 1),
-//     // vertical padding + font size from searchIcon
-//     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-//     transition: theme.transitions.create('width'),
-//     width: '100%',
-//     [theme.breakpoints.up('md')]: {
-//       width: '60ch',
-//     },
-//   },
-// }));
 
 export default function Navbar({ filtrado }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -90,7 +40,7 @@ export default function Navbar({ filtrado }) {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
-  const menuId = 'primary-search-account-menu';
+  const menuId = 'web-vista-account-menu';
   const renderMenu = (
     <Menu
       anchorEl={anchorEl}
@@ -135,11 +85,10 @@ export default function Navbar({ filtrado }) {
         <IconButton
           size="large"
           aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
+          aria-controls="web-vista-account-menu"
           aria-haspopup="true"
           color="inherit"
         >
-          {/* <AccountCircle /> */}
           <HelpIcon color="secondary" />
         </IconButton>
         <p>Ayuda</p>
@@ -159,7 +108,7 @@ export default function Navbar({ filtrado }) {
     </Menu>
   );
 
-  const mobileMenuId = 'primary-search-account-menu-mobile';
+  const mobileMenuId = 'vista-mobile';
   const renderMobileMenu = (
     <Menu
       anchorEl={mobileMoreAnchorEl}
@@ -200,7 +149,7 @@ export default function Navbar({ filtrado }) {
         <IconButton
           size="large"
           aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
+          aria-controls="vista-mobile"
           aria-haspopup="true"
           color="secondary"
         >
@@ -226,33 +175,20 @@ export default function Navbar({ filtrado }) {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar position="fixed">
         <Toolbar>
           <IconButton
             size="large"
             edge="start"
             color="inherit"
             aria-label="open drawer"
-            sx={{ mr: 4.5 }}
+            sx={{ mr: 1, marginTop: 1 }}
           >
             {/* <Drawer filtrado={filtrado} /> */}
           </IconButton>
           <Link to="/">
             <img src={Logo} alt="Logo" />
           </Link>
-          <Search>
-            <SearchBar />
-          </Search>
-          {/* <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-                    <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </Search> */}
-
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <IconButton

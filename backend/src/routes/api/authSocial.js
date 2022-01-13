@@ -1,8 +1,8 @@
 const { Router } = require('express');
 
 const router = new Router();
-const { getHome } = require('../../controllers/authSocialController');
+const { authGoogle } = require('../../controllers/authSocialController');
 
-router.get('/', getHome);
+router.post('/google', authGoogle);
 
 module.exports = router;

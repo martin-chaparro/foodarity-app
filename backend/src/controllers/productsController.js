@@ -36,7 +36,7 @@ const include = [
             attributes: {
               exclude: ['createdAt', 'updatedAt'],
             },
-          }
+          },
         ],
         attributes: {
           exclude: ['createdAt', 'updatedAt', 'CompanyId', 'addressId'],
@@ -142,7 +142,7 @@ const getProducts = async (req, res) => {
       attributes,
     };
 
-    if (size) {
+    if (size > 1) {
       params.limit = size;
       params.offset = (page - 1) * size;
     }

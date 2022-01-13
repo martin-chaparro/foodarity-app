@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/no-duplicates
 import React from 'react';
 // eslint-disable-next-line import/no-duplicates
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProducts } from '../../redux/actions/productActions';
 import styles from './Home.module.css';
@@ -12,6 +12,7 @@ import Navbar from '../Navbar/Navbar';
 // import ShopCard from '../ShopCard/ShopCard';
 // import productos from '../Cards/product.json';
 import Pagination from '../Pagination/BasicPagination';
+import BannerSearch from '../Searchbar/BannerSearch';
 // import SearchBar from '../Searchbar/Searchbar';
 // import Loading from '../Loading/Loading';
 
@@ -37,26 +38,44 @@ export default function Home() {
     dispatch(getProducts());
   }, [dispatch]);
 
-  const paginado = (pageNumber) => {
-    // setCurrentPage(pageNumber);
-    dispatch(getProducts({ page: pageNumber }));
+  const [allProductValues, setAllProductValues] = useState({
+    lote: '',
+    size: '',
+    page: '',
+    categoryName: '',
+    categoryId: '',
+    minPrice: '',
+    maxPrice: '',
+    expirationDate: '',
+    order: '',
+  });
+
+  const handleSearch = () => {
+    dispatch(getProducts(allProductValues));
   };
 
-  const filtrado = (category) => {
-    dispatch(getProducts({ categoryName: category, size: 1000 }));
+  const paginado = (page) => {
+    // setCurrentPage(pageNumber);
+    setAllProductValues({ ...allProductValues, page });
   };
+
+  const filtrado = (categoryName) => {
+    setAllProductValues({ ...allProductValues, categoryName, page: 1 });
+  };
+
+  const search = (lote) => {
+    setAllProductValues({ ...allProductValues, lote, page: 1 });
+  };
+
+  useEffect(() => {
+    handleSearch();
+  }, [allProductValues]);
 
   return (
     <div>
-      <div
-        style={{
-          marginBottom: '1em',
-          display: 'flex',
-          justifyContent: 'center',
-          width: '100%',
-        }}
-      >
-        <Navbar filtrado={filtrado} />
+      <Navbar filtrado={filtrado} />
+      <div style={{ marginBottom: '1em' }}>
+        <BannerSearch search={search} lote={allProducts} />
       </div>
       {/* <NavbarCommerce /> */}
       <div className={styles.home}>

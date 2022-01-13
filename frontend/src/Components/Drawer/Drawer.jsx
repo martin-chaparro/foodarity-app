@@ -34,7 +34,7 @@ export default function Drawer({ filtrado }) {
   const list = (anchor) => (
     <Box
       sx={{
-        width: anchor === 'right' || anchor === 'bottom' ? 'auto' : 300,
+        width: anchor === 'left' || anchor === 'bottom' ? 'auto' : 100,
       }}
       role="presentation"
       onClick={toggleDrawer(anchor, false)}
@@ -44,13 +44,13 @@ export default function Drawer({ filtrado }) {
         <ListItem>
           <CategoryIcon
             color="primary"
-            sx={{ width: '1.5em', mr: '1em', hover: 'true' }}
+            sx={{ width: '1em', mr: '1em', hover: 'false' }}
           />
           <p style={{ color: '#3E2463' }}>TODAS LAS CATEGORIAS</p>
           <ArrowBackIosTwoToneIcon
             color="secondary"
             cursor="pointer"
-            sx={{ width: '8em', hover: 'true' }}
+            sx={{ width: '1em', hover: 'true' }}
           />
         </ListItem>
       </List>
