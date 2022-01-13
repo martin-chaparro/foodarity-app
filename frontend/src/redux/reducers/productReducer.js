@@ -2,6 +2,7 @@ import types from '../types/productTypes';
 
 const initialState = {
   products: [],
+  allProductsList: null,
   totalProducts: null,
   page: null,
   pages: null,
@@ -19,12 +20,13 @@ export default (state = initialState, action) => {
       return {
         ...state,
         products: action.payload.products,
+        allProductsList: action.payload.allProducts,
         totalProducts: action.payload.totalProducts,
         page: action.payload.page,
         pages: action.payload.pages,
       };
 
-    case types.searchProducts:
+   /*  case types.searchProducts:
       // eslint-disable-next-line no-case-declarations
       console.log(state.allProducts);
       console.log(action.payload);
@@ -37,7 +39,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         allProducts: filterProduct,
-      };
+      }; */
 
     case types.productLoading:
       return {
