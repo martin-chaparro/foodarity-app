@@ -1,10 +1,10 @@
 const { Router } = require('express');
 
-const docsRoutes = require('./docs')
+const docsRoutes = require('./docs');
 const companiesRoutes = require('./companies');
 const userRoutes = require('./user');
 const authRoutes = require('./auth');
-const authSocialRoutes = require('./authSocial')
+const authSocialRoutes = require('./authSocial');
 const statesRoutes = require('./states');
 const citiesRoutes = require('./cities');
 const productsRoutes = require('./products');

@@ -20,7 +20,7 @@ const createUser = async (request, response) => {
   }
 
   let user = await User.findOne({
-    where: { [Op.and]: [{ email },{deleted:false}] },
+    where: { [Op.and]: [{ email }, { deleted: false }] },
   });
 
   if (user) {
