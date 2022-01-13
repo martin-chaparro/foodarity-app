@@ -3,12 +3,17 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { GoogleLogin } from 'react-google-login';
 import Button from '@mui/material/Button';
-import Header from '../../Components/Header/Header'
+import Header from '../../Components/Header/Header';
 import style from './RegisterFormUser.module.css';
 
 // import { registerLocal } from '../../redux/actions/usersActions';
-import { startCheking, startRegister } from '../../redux/actions/authActions';
+import {
+  startCheking,
+  startGoogleRegister,
+  startRegister,
+} from '../../redux/actions/authActions';
 
 function Register() {
   const dispatch = useDispatch();
@@ -20,7 +25,6 @@ function Register() {
     password: '',
     validatePassword: '',
   });
-  
 
   const validateLetters = (e) => {
     const { name, value } = e.target;
@@ -111,34 +115,41 @@ function Register() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(
+    if (
       !errors.name &&
       !errors.email &&
       !errors.password &&
       !errors.validatePassword
-    ){ 
-    // dispatch(registerLocal(input));
-    dispatch(startRegister(input))
-    dispatch(startCheking())
-    navigate('/rollselector');
-    setInput({
-      name: '',
-      email: '',
-      password: '',
-      validatePassword: '',
-    });
-    navigate('/rollselector');
-  } else {
-    // eslint-disable-next-line no-alert
-    alert("Complete el formulario")
-  }
+    ) {
+      // dispatch(registerLocal(input));
+      dispatch(startRegister(input));
+      dispatch(startCheking());
+      navigate('/rollselector');
+      setInput({
+        name: '',
+        email: '',
+        password: '',
+        validatePassword: '',
+      });
+      navigate('/rollselector');
+    } else {
+      // eslint-disable-next-line no-alert
+      alert('Complete el formulario');
+    }
   };
-  
+
+  const responseGoogleSucces = ({ tokenId }) => {
+    dispatch(startGoogleRegister(tokenId));
+  };
+  const responseGoogleFail = () => {
+    navigate('/login', { replace: true });
+  };
+
   return (
     <div className={style.register}>
-     <Link to="/">
-        <Header/>
-        </Link>
+      <Link to="/">
+        <Header />
+      </Link>
       <form className={style.form} onSubmit={handleSubmit}>
         <div className={style.divInputs}>
           <div className={style.title}>
@@ -156,7 +167,7 @@ function Register() {
             }}
           />
           <div className={style.divErrorNombre}>
-          <p className={style.errors}>{errors.name}</p>
+            <p className={style.errors}>{errors.name}</p>
           </div>
           <label className={style.title}>Ingrese Su Email</label>
           <input
@@ -171,7 +182,7 @@ function Register() {
             }}
           />
           <div className={style.divErrorEmail}>
-          <p className={style.errors}>{errors.email}</p>
+            <p className={style.errors}>{errors.email}</p>
           </div>
           <label className={style.title}>Ingrese Su Contraseña</label>
           <input
@@ -186,7 +197,7 @@ function Register() {
             }}
           />
           <div className={style.divErrorPassword}>
-          <p className={style.errors}>{errors.password}</p>
+            <p className={style.errors}>{errors.password}</p>
           </div>
           <label className={style.title}>Repita Su Contraseña</label>
           <input
@@ -200,25 +211,23 @@ function Register() {
               validatePassword2(e);
             }}
           />
-           <div className={style.divErrorPassword2}>
-          <p className={style.errors}>{errors.validatePassword}</p>
+          <div className={style.divErrorPassword2}>
+            <p className={style.errors}>{errors.validatePassword}</p>
           </div>
         </div>
-            <div className={style.buttonsDiv}>
-        <Button
-          className={style.btn}
-          type="submit"
-          variant="contained"
-        >
-          Ingresar
-        </Button>
+        <div className={style.buttonsDiv}>
+          <Button className={style.btn} type="submit" variant="contained" style={{marginBottom:'1em'}}>
+            Ingresar
+          </Button>
 
-        <Button
-          className={style.google}
-          variant="contained"
-        >
-          Ingresar con Google
-        </Button>
+          <GoogleLogin
+            clientId="327655390134-3dkok4tsgubva7v5gj7drncddv260lor.apps.googleusercontent.com"
+            buttonText="Registrarse con Google"
+            onSuccess={responseGoogleSucces}
+            onFailure={responseGoogleFail}
+            cookiePolicy="single_host_origin"
+            style={{ width: '100%' }}
+          />
         </div>
       </form>
     </div>
