@@ -80,8 +80,8 @@ const getCompanies = async (req, res) => {
           model: Address,
           as: 'address',
           include: [
-            { model: City, as: 'city' },
-            { model: State, as: 'state' },
+            { model: City, as: 'city', attributes: ['name'] },
+            { model: State, as: 'state', attributes: ['name'] },
           ],
         },
       ],

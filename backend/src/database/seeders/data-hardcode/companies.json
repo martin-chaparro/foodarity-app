@@ -8,6 +8,10 @@
 		"website": "www.mackro.com",
 		"status": "Habilitada",
 		"deleted": false,
+		"logo": {
+			"public_id": "fkkjowmukqs5crisblk9",
+			"url": "https://res.cloudinary.com/dpsxxuslt/image/upload/v1642014699/fkkjowmukqs5crisblk9.jpg"
+		},
 		"type" : 1,
 		"street": "rodriguez peña",
 		"number": "123",
