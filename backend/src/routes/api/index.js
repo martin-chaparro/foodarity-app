@@ -1,6 +1,7 @@
 const { Router } = require('express');
 
 const docsRoutes = require('./docs');
+const adminRoutes = require('./admin')
 const companiesRoutes = require('./companies');
 const userRoutes = require('./user');
 const authRoutes = require('./auth');
@@ -15,6 +16,9 @@ const router = new Router();
 
 // Docs Route
 router.use('/docs', docsRoutes);
+
+// Admin Routes
+router.use('/admin', adminRoutes);
 
 router.use('/companies', companiesRoutes);
 router.use('/users', userRoutes);
