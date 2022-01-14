@@ -315,6 +315,23 @@ const getProductById = async (req, res) => {
   }
 };
 
+const getCategories = async (req , res) =>{
+  try{
+    const allCategories = await Category.findAll(
+      {
+        attributes: ['id', 'name'],
+      }
+    );
+    if(!allCategories){
+      return res.status(404).json({ message: 'Not found' });
+    }
+    return res.status(200).json(allCategories);
+  }catch(error){
+    return res.status(500).send({ message: error });
+  }
+}
+
+
 module.exports = {
   getProducts,
   postProduct,
@@ -322,4 +339,5 @@ module.exports = {
   getCompanyProductsById,
   getProductById,
   getCompanyProductsByAuth,
+  getCategories
 };
