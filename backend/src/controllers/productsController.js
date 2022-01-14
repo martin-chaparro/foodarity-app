@@ -87,17 +87,24 @@ const getProducts = async (req, res) => {
       lote,
       categoryName,
       categoryId,
-      minPrice,
-      maxPrice,
       expirationDate,
       order,
       size,
     } = req.query;
+    let {
+      minPrice,
+      maxPrice,
+    } = req.query
+     minPrice = parseInt(minPrice,10) || 0
+     maxPrice = parseInt(maxPrice,10) || 0
     const page = req.query.page || 1;
     const whereAttr = { status: 'published' };
-    const orderAttr = [['id', 'ASC']];
+    const orderAttr = [['id', 'DESC']];
 
     switch (order) {
+      case 'recents':
+        orderAttr.unshift(['id', 'DESC']);
+        break
       case 'priceASC':
         orderAttr.unshift(['price', 'ASC']);
         break;
@@ -137,10 +144,14 @@ const getProducts = async (req, res) => {
       whereAttr.price = { [Op.gte]: minPrice };
     } else if (maxPrice) {
       whereAttr.price = { [Op.lte]: maxPrice };
-    }
+    } 
+    console.log(minPrice, maxPrice)
+    
+
     if (expirationDate) {
       whereAttr.expirationDate = { [Op.lte]: expirationDate };
     }
+
 
     const params = {
       where: whereAttr,
