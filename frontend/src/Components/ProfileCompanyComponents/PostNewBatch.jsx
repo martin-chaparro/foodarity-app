@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { apiWithToken } from '../../services/api';
+
 import styles from './PostNewBatch.module.css';
 
 import {
@@ -19,6 +21,10 @@ export default function PostNewBatch() {
 
   const categories = useSelector((state) => state.product.categories);
 
+  const [orders, setOrders] = useState({});
+
+  const [company, setCompany] = useState({});
+
   const [photo, setPhoto] = useState({});
 
   const [input, setInput] = useState({
@@ -26,20 +32,33 @@ export default function PostNewBatch() {
     description: '',
     quantity: 0,
     price: 0,
-    publicationDate: new Date()
-      .toLocaleDateString()
-      .split('/')
-      .reverse()
-      .join('-'),
+    publicationDate: new Date().toLocaleDateString('en-ca'),
     expirationDate: '',
     category: '',
   });
 
-  useEffect(() => {
-    dispatch(getCategories());
-    const companyId = localStorage.getItem('token');
+  // async function getCompany() {
+  //   try {
+  //     const response = await apiWithToken.get(`/companies/byuser`);
 
-    console.log(companyId);
+  //     console.log(response.data);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // }
+
+  useEffect(() => {
+    apiWithToken.get(`/companies/byuser`).then((response) => {
+      setCompany(response.data);
+    });
+
+    dispatch(getCategories());
+  }, []);
+
+  useEffect(() => {
+    apiWithToken
+      .get('/orders/company')
+      .then((response) => setOrders(response.data));
   }, []);
 
   function validate(inputs) {
@@ -67,19 +86,16 @@ export default function PostNewBatch() {
       errors.category = 'Category is required';
     }
 
-    // if (inputs.photo === {}) {
-    //   errors.photo = 'Photo is required';
-    // }
+    if (inputs.photo === {}) {
+      errors.photo = 'Photo is required';
+    }
 
     return errors;
   }
 
   function handlePhoto(e) {
-    console.log(e);
-    console.log(e.target.files[0]);
     e.preventDefault();
     setPhoto(e.target.files[0]);
-    console.log(photo);
   }
 
   function handleOnChange(e) {
@@ -104,11 +120,8 @@ export default function PostNewBatch() {
         description: '',
         quantity: 0,
         price: 0,
-        publicationDate: new Date()
-          .toLocaleDateString()
-          .split('/')
-          .reverse()
-          .join('-'),
+        photo: {},
+        publicationDate: new Date().toLocaleDateString('en-ca'),
         expirationDate: '',
         category: '',
       });
@@ -120,6 +133,17 @@ export default function PostNewBatch() {
       alert('Complete todos los Campos');
     }
   }
+
+  useEffect(() => {
+    const date = input.expirationDate;
+
+    const arr = date.split('-');
+    const year = arr.shift();
+    arr.push(year);
+    const expirationDate = arr.join('/');
+
+    setInput({ ...input, expirationDate });
+  }, [input.expirationDate]);
 
   return (
     <div className={styles.formcont}>
@@ -151,6 +175,15 @@ export default function PostNewBatch() {
             </div>
           </div>
 
+          <button
+            type="button"
+            onClick={() => {
+              console.log(company);
+              console.log(orders);
+            }}
+          >
+            x
+          </button>
           <div className={styles.cont}>
             <div className={styles.contname}>
               <div>

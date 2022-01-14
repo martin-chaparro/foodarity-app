@@ -66,7 +66,7 @@ export const getCompanies = () => async (dispatch) => {
 //     try {
 
 //       const response = await apiWithToken.get(
-//         `/companies/id${companyDetail}`
+//         `/companies/id/${token}`
 //       );
 
 //       return dispatch({

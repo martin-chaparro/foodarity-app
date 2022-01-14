@@ -2,7 +2,6 @@ import types from '../types/companiesTypes';
 
 const initialState = {
   comerce: [],
-  companyDetail: {},
 };
 
 export default (state = initialState, action) => {
@@ -16,10 +15,6 @@ export default (state = initialState, action) => {
         comerce: action.payload,
       };
 
-    case types.getCompaniesDetail:
-      return {
-        companyDetail: action.payload,
-      };
     default:
       return state;
   }

@@ -1,5 +1,6 @@
 /* eslint-disable func-names */
 import axios from 'axios';
+import { apiWithToken } from '../../services/api';
 
 import types from '../types/productTypes';
 
@@ -70,16 +71,16 @@ export function postProduct(payload, photo) {
   // eslint-disable-next-line no-unused-vars
 
   console.log(payload);
-  console.log(photo);
+
   // eslint-disable-next-line no-unused-vars
   return async function (dispatch) {
     try {
       const form = new FormData();
 
-      form.append('photo', photo);
+      form.append('file', photo);
       form.append('data', JSON.stringify(payload));
 
-      const response = await axios.post(
+      const response = await apiWithToken.post(
         'http://localhost:4000/api/v1/products',
         form
       );
