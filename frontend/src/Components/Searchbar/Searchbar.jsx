@@ -1,39 +1,34 @@
-// eslint-disable-next-line import/no-duplicates
-import React from 'react';
-// eslint-disable-next-line import/no-duplicates
-import { useState } from 'react';
-// eslint-disable-next-line import/no-duplicates
-import { useDispatch } from 'react-redux';
-import { searchProducts } from '../../redux/actions/productActions';
-import styles from './Searchbar.module.css';
+import * as React from 'react';
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
+import { useEffect } from 'react';
 
-export default function SearchBar() {
-  // eslint-disable-next-line no-unused-vars
-  const dispatch = useDispatch();
+export default function SearchBar({ search, lote }) {
+  const options = lote.map((productos) => productos.lote);
+  const [inputValue, setInputValue] = React.useState('');
 
-  const [input, setInput] = useState('');
-
-  function handleInputOnchange(e) {
-    setInput(e.target.value);
-  }
-
-  function handleKeyPress(event) {
-    if (event.key === 'Enter') {
-      dispatch(searchProducts(input));
-    }
-  }
+  useEffect(() => {
+    search(inputValue);
+  }, [inputValue]);
 
   return (
-    <div className={styles.searchbarDiv}>
-      <input
-        className={styles.searchbar}
-        value={input}
-        onKeyPress={handleKeyPress}
-        type="text"
-        onChange={(e) => {
-          handleInputOnchange(e);
+    <div>
+      <Autocomplete
+        // value={value}
+        onChange={() => {
+          search(inputValue);
         }}
-        placeholder="Search.."
+        inputValue={inputValue}
+        onInputChange={(event, newInputValue) => {
+          setInputValue(newInputValue);
+        }}
+        id="free-solo-2-demo"
+        disableClearable
+        freeSolo
+        options={options || 'not found'}
+        sx={{ width: '100%', backgroundColor: 'white', textColor: 'white' }}
+        // eslint-disable-next-line react/jsx-props-no-spreading
+        renderInput={(params) => <TextField {...params} label="Buscar..." />}
       />
     </div>
   );

@@ -30,10 +30,24 @@ class User extends Model {
           type: DataTypes.JSON,
           allowNull: true,
         },
+        socialPhoto: {
+          type: DataTypes.STRING,
+          allowNull: true,
+        },
+        registerMethod: {
+          type: DataTypes.ENUM('direct', 'google'),
+          allowNull: false,
+          defaultValue: 'direct',
+        },
         status: {
           type: DataTypes.BOOLEAN,
           allowNull: false,
           defaultValue: true,
+        },
+        deleted: {
+          type: DataTypes.BOOLEAN,
+          allowNull: false,
+          defaultValue: false,
         },
       },
       {
@@ -46,6 +60,8 @@ class User extends Model {
     this.belongsTo(models.Role, { foreignKey: 'role_id', as: 'role' });
     this.belongsTo(models.Company, { as: 'company' });
     this.hasMany(models.Product, { as: 'publications' });
+    this.hasMany(models.Donation);
+    this.hasMany(models.Order, {as : 'orders'})
   }
 }
 

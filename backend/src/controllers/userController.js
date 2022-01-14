@@ -20,7 +20,7 @@ const createUser = async (request, response) => {
   }
 
   let user = await User.findOne({
-    where: { [Op.or]: [{ email }] },
+    where: { [Op.and]: [{ email }, { deleted: false }] },
   });
 
   if (user) {
@@ -49,6 +49,8 @@ const createUser = async (request, response) => {
     id: user.id,
     name: user.name,
     email: user.email,
+    photo:user.photo,
+    socialPhoto:user.socialPhoto,
     token,
   });
 };
@@ -58,7 +60,6 @@ const getAllUsers = async (request, response) => {
     attributes: {
       exclude: ['password', 'createdAt', 'updatedAt', 'RoleId', 'role_id'],
     },
-    where: { status: true },
     include: {
       model: Role,
       as: 'role',
@@ -84,7 +85,7 @@ const getUser = async (request, response) => {
         'companyId',
       ],
     },
-    where: { status: true },
+    where: { deleted: false },
     include: [
       { model: Role, as: 'role', attributes: ['id', 'role'] },
       {
@@ -146,7 +147,7 @@ const deleteUser = async (request, response) => {
   try {
     await User.update(
       {
-        status: false,
+        deleted: true,
       },
       {
         where: { id },

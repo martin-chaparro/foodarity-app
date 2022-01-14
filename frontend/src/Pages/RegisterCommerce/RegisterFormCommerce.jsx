@@ -10,7 +10,7 @@ import Header from '../../Components/Header/Header';
 import styles from './RegisterFormCommerce.module.css';
 import CommerceLogo from '../../assets/Mask-Group.png';
 import { api } from '../../services/api';
-import { registerComerce } from '../../redux/actions/usersActions';
+import { registerComerce } from '../../redux/actions/CompaniesActions';
 import Terminos from '../../Components/Term&Conditions/Terminos';
 import AlertOng from '../../Components/Alertas/AlertEnviarSolicitud';
 
@@ -31,15 +31,16 @@ export default function RegisterFormCommerce() {
   const [formValues, setFormValues] = useState(initialFormValues);
   const navigate = useNavigate();
   const [input, setInput] = useState({
-    name: '',
-    website: '',
-    email: '',
-    description: '',
-    areaCode: '',
-    phone: '',
-    street: '',
-    number: '',
-    zipcode: '',
+    name: 'Conga',
+    website: 'http://www.conga.com',
+    email: 'conga@conga.com',
+    description: 'Esto es alguna descripcion',
+    areaCode: '280',
+    phone: '4530813',
+    street: 'la calle',
+    number: '1234',
+    zipcode: '9120',
+    type: 1
   });
 
   const [checked, setChecked] = React.useState(true);
@@ -225,7 +226,7 @@ export default function RegisterFormCommerce() {
 
       // eslint-disable-next-line no-empty
     ) {
-      dispatch(registerComerce());
+      dispatch(registerComerce(input,formValues)); // formValues
       navigate('/home');
     } else {
       // eslint-disable-next-line no-alert

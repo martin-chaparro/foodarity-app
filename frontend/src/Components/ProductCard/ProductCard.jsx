@@ -34,8 +34,8 @@ export default function ProductCard({ product }) {
   const handleClose = () => setOpen(false);
   const [value, setValue] = React.useState(5);
   const [hover, setHover] = React.useState(-1);
- 
-
+  const ExpirationDate = product.expirationDate;
+  const Date = ExpirationDate.split('-').reverse().join('/');
   return (
     <div className={styles.productcard}>
       <div className={styles.divImg}>
@@ -118,10 +118,10 @@ export default function ProductCard({ product }) {
                   </div>
                     <Typography
                       id="modal-modal-description"
-                      sx={{ mt: 2, margin: 0, position: 'relative', right: 5, bottom: 40, fontSize: 18, }}
+                      sx={{ mt: 2, margin: 0, position: 'relative', right: 5, bottom: 40, fontSize: 14, }}
                       className={styles.titleTypographyStreet}
-                    ><LocationOnIcon/>
-                      {product.company.address.street}
+                    ><LocationOnIcon sx={{ position: 'relative', bottom: 5,}}/>
+                      {product.company.address.state.name}, {product.company.address.city.name}
                     </Typography>
                       <div className={styles.divFavButton}>
                         <button className={styles.favButton} type='submit'>
@@ -148,7 +148,7 @@ export default function ProductCard({ product }) {
                   </Typography>
                   </div>
                   <div><h3>
-                    El lote expira: {product.expirationDate}
+                    El lote expira: {Date}
                     </h3></div>
                     <div><h3>
                     Categoria: {product.category.name}

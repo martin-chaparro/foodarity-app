@@ -12,6 +12,9 @@ const City = require('../models/City');
 const State = require('../models/State');
 const Product = require('../models/Product');
 const Category = require('../models/Category');
+const Order = require('../models/Order');
+const PaymentMethod = require('../models/PaymentMethod');
+const Donation = require('../models/Donation');
 
 // Models Init
 
@@ -24,6 +27,9 @@ City.init(connection);
 State.init(connection);
 Category.init(connection);
 Product.init(connection);
+Order.init(connection);
+PaymentMethod.init(connection);
+Donation.init(connection);
 
 // Associate
 Company.associate(connection.models);
@@ -35,5 +41,8 @@ City.associate(connection.models);
 State.associate(connection.models);
 Category.associate(connection.models);
 Product.associate(connection.models);
+Order.associate(connection.models);
+PaymentMethod.associate(connection.models);
+Donation.associate(connection.models);
 
 module.exports = connection;

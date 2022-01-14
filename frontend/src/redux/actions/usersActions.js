@@ -1,7 +1,4 @@
 /* eslint-disable consistent-return */
-import { api } from '../../services/api';
-
-import types from '../types/userTypes';
 
 // eslint-disable-next-line import/prefer-default-export
 // export const registerLocal = (input) => async (dispatch) => {
@@ -15,16 +12,3 @@ import types from '../types/userTypes';
 //     return console.log(err);
 //   }
 // };
-
-export const registerComerce = (input) => async (dispatch) => {
-  try {
-    const response = await api.post('/companies', input)
-    return dispatch({
-      type: types.registerComerce,
-      payload: response.data
-    })
-  } catch(err){
-    console.log(err)
-  }
-
-}

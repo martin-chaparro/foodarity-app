@@ -1,0 +1,13 @@
+.GeneralProfileImgs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.LogoDiv {
+  background-color: aquamarine;
+}
+
+.BannerDiv {
+  background-color: burlywood;
+}

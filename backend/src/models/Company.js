@@ -45,6 +45,7 @@ class Company extends Model {
             'Banneada'
           ),
           allowNull: false,
+          defaultValue: 'Pendiente',
         },
         deleted: {
           // cuenta eliminada o no
@@ -68,6 +69,8 @@ class Company extends Model {
     this.hasMany(models.User);
     this.hasOne(models.Address, { as: 'address' });
     this.hasMany(models.Product);
+    this.hasMany(models.Donation);
+    this.hasMany(models.Order);
   }
 }
 

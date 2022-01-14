@@ -15,7 +15,7 @@ cloudinary.config(process.env.CLOUDINARY_URL);
 // crear una empresa
 const createCompany = async (req, res) => {
   try {
-    const ownerId = req.userId; // revisar con chapa
+    const ownerId = req.userId;
 
     const {
       name,
@@ -32,12 +32,19 @@ const createCompany = async (req, res) => {
       zipcode,
       cityId,
       stateId,
-    } = req.body;
+    } = JSON.parse(req.body.data);
 
-    const errors = validationResult(req);
+    const errors = validationResult(JSON.parse(req.body.data));
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
+///////////////////////FOTO//////////////////////////////////////////////////
+const { tempFilePath } = req.files.file;
+
+    const { secure_url: secureUrl, public_id: publicId } =
+      await cloudinary.uploader.upload(tempFilePath);
+
+    const logo = { public_id: publicId, url: secureUrl };
 
     const newCompany = await Company.create({
       name,
@@ -46,6 +53,7 @@ const createCompany = async (req, res) => {
       phone,
       email,
       website,
+      logo,
       status,
       deleted,
       ownerId,
@@ -56,11 +64,14 @@ const createCompany = async (req, res) => {
       number,
       zipcode,
     });
-
-    await newCompany.setType(type);
-    await newAddress.setCompany(newCompany);
-    await newAddress.setCity(cityId);
+    // primero me formo el objeto de address con state y city  y despues le paso el objeto a la compañia creada
     await newAddress.setState(stateId);
+    await newAddress.setCity(cityId);
+    await newCompany.setType(type);
+    await newCompany.setAddress(newAddress);
+    const owner = await User.findByPk(ownerId);
+    await owner.setCompany(newCompany.id);
+
     return res.status(200).json(newCompany);
   } catch (error) {
     console.log(error);
@@ -80,8 +91,8 @@ const getCompanies = async (req, res) => {
           model: Address,
           as: 'address',
           include: [
-            { model: City, as: 'city' },
-            { model: State, as: 'state' },
+            { model: City, as: 'city', attributes: ['name'] },
+            { model: State, as: 'state', attributes: ['name'] },
           ],
         },
       ],
@@ -231,6 +242,11 @@ const deleteCompany = async (req, res) => {
       { where: { [Op.and]: [{ CompanyId: id }, { status: 'published' }] } }
     );
 
+    const users = await User.findAll({ where: { companyId: id } });
+    users.forEach((user) => {
+      user.setCompany(null);
+    });
+
     return res
       .status(200)
       .json({ msg: 'Compañia deshabilitada y sus productos' });
@@ -243,6 +259,7 @@ const deleteCompany = async (req, res) => {
 // update info company //VER RUTAAAA
 const updateCompany = async (req, res) => {
   const {
+    name,
     description,
     areaCode,
     phone,
@@ -254,6 +271,12 @@ const updateCompany = async (req, res) => {
   } = req.body;
   const { id } = req.params;
   const ownerId = req.userId;
+
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
   try {
     const company = await Company.findByPk(id);
     if (!company) {
@@ -265,36 +288,136 @@ const updateCompany = async (req, res) => {
       return res.status(401).json({ message: 'Not owner' });
     }
 
-    await Company.update(
-      {
-        description,
-        areaCode,
-        phone,
-        email,
-        website,
-      },
-      {
-        where: { id },
-      }
-    );
+    await company.update({
+      name,
+      description,
+      areaCode,
+      phone,
+      email,
+      website,
+    });
 
-    await Address.update(
-      {
+    const address = await Address.findByPk(company.id);
+    if (address) {
+      await address.update({
         street,
         number,
         zipcode,
-      },
-      {
-        where: { companyId: id },
-      }
-    );
-
+      });
+    }
     return res.status(200).json({ msg: 'Actualizado' });
   } catch (error) {
     console.log(error);
     return res.status(500).json({ msg: 'Error al actualizar la empresa' });
   }
 };
+
+const addUser = async (req, res) => {
+  try {
+    const { email } = req.query;
+    const { userId } = req;
+    const owner = await User.findByPk(userId, {
+      include: { model: Company, as: 'company' },
+    });
+
+    if (!owner.companyId) {
+      return res.status(400).json({
+        message: 'El usuario no tiene compania',
+      });
+    }
+    if (userId !== owner.company.ownerId) {
+      return res.status(401).json({ message: 'Not owner' });
+    }
+    if (owner.company.status !== 'Habilitada') {
+      return res.status(400).json({
+        message: 'La compania no esta habilitada',
+      });
+    }
+    const user = await User.findOne({
+      where: { email },
+      include: { model: Company, as: 'company' },
+    });
+    if (!user || user.deleted) {
+      return res.status(400).json({
+        message: 'El usuario no existe',
+      });
+    }
+    if (!user.status) {
+      return res.status(400).json({
+        message: 'El usuario no esta habilitado',
+      });
+    }
+    if (user.companyId === owner.companyId) {
+      return res.status(400).json({
+        message: 'El usuario ya pertenece a tu compania',
+      });
+    }
+    if (user.companyId) {
+      return res.status(400).json({
+        message: 'El usuario ya pertenece a otra compania',
+      });
+    }
+    user.setCompany(owner.companyId);
+    return res.status(200).send({ message: `${user.email} added` });
+  } catch (error) {
+    return res.status(500).send(error);
+  }
+};
+
+const deleteUser = async (req, res) => {
+  try {
+    let { id } = req.params;
+    id = parseInt(id,10)
+    const { userId } = req;
+    const owner = await User.findByPk(userId, {
+      include: { model: Company, as: 'company' },
+    });
+    console.log('id params', id, 'user id', userId)
+    if (!owner.companyId) {
+      return res.status(400).json({
+        message: 'El usuario no tiene compania',
+      });
+    }
+    if (userId !== owner.company.ownerId) {
+      if (userId !== id) {
+        return res.status(401).json({ message: 'Not owner' });
+      } 
+    }
+    if (owner.company.status !== 'Habilitada') {
+      return res.status(400).json({
+        message: 'La compania no esta habilitada',
+      });
+    }
+    const user = await User.findOne({
+      where: { id },
+      include: { model: Company, as: 'company' },
+    });
+    if (!user || user.deleted) {
+      return res.status(400).json({
+        message: 'El usuario no existe',
+      });
+    }
+    if (user.companyId !== owner.companyId) {
+      return res.status(400).json({
+        message: 'El usuario no pertenece a tu compania',
+      });
+    }
+    if (user.id === owner.company.ownerId) {
+      return res.status(400).json({
+        message: 'El dueño no puede elimarse de la compania',
+      });
+    }
+    user.setCompany(null);
+    if (userId === id) {
+      return res.status(200).send({ message: `you exit the company '${owner.company.name}'` });
+    }
+    return res.status(200).send({ message: `${user.email} deleted` });
+  } catch (error) {
+    return res.status(500).send(error);
+  }
+};
+
+
 
 module.exports = {
   getCompanies,
@@ -304,4 +427,6 @@ module.exports = {
   searchCompanyByUser,
   deleteCompany,
   updateCompany,
+  addUser,
+  deleteUser,
 };

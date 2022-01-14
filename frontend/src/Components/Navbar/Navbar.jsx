@@ -1,67 +1,22 @@
 import * as React from 'react';
-import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import { Link } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
-// import Typography from '@mui/material/Typography';
-import InputBase from '@mui/material/InputBase';
 import Badge from '@mui/material/Badge';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
-// import MenuIcon from '@mui/icons-material/Menu';
-import SearchIcon from '@mui/icons-material/Search';
-// import AccountCircle from '@mui/icons-material/AccountCircle';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import LogoutIcon from '@mui/icons-material/Logout';
 import HelpIcon from '@mui/icons-material/Help';
+import LoginIcon from '@mui/icons-material/Login';
+import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
 import Logo from '../../assets/Mobil-Full-Header-Logo.png';
 import Avatar from './Avatar';
 import Drawer from '../Drawer/Drawer';
-
-const Search = styled('div')(({ theme }) => ({
-  position: 'relative',
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
-  '&:hover': {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
-  },
-  marginRight: theme.spacing(2),
-  marginLeft: 0,
-  width: '100%',
-  [theme.breakpoints.up('sm')]: {
-    marginLeft: theme.spacing(16.5),
-    width: 'auto',
-  },
-}));
-
-const SearchIconWrapper = styled('div')(({ theme }) => ({
-  color: 'secondary',
-  padding: theme.spacing(0, 2),
-  height: '100%',
-  position: 'absolute',
-  pointerEvents: 'none',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: 'inherit',
-  '& .MuiInputBase-input': {
-    padding: theme.spacing(1, 1, 1, 1),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('md')]: {
-      width: '60ch',
-    },
-  },
-}));
 
 export default function Navbar({ filtrado }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -87,27 +42,8 @@ export default function Navbar({ filtrado }) {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
-  const menuId = 'primary-search-account-menu';
+  const menuId = 'web-vista-account-menu';
   const renderMenu = (
-    // <Menu
-    //   anchorEl={anchorEl}
-    //   anchorOrigin={{
-    //     vertical: 'top',
-    //     horizontal: 'right',
-    //   }}
-    //   id={menuId}
-    //   keepMounted
-    //   transformOrigin={{
-    //     vertical: 'top',
-    //     horizontal: 'right',
-    //   }}
-    //   open={isMenuOpen}
-    //   onClose={handleMenuClose}
-    // >
-    //   <MenuItem onClick={handleMenuClose}>Perfil</MenuItem>
-    //   <MenuItem onClick={handleMenuClose}>Mi Cuenta</MenuItem>
-    //   <MenuItem onClick={handleMenuClose}>Cerrar Sesión</MenuItem>
-    // </Menu>
     <Menu
       anchorEl={anchorEl}
       anchorOrigin={{
@@ -151,11 +87,10 @@ export default function Navbar({ filtrado }) {
         <IconButton
           size="large"
           aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
+          aria-controls="web-vista-account-menu"
           aria-haspopup="true"
           color="inherit"
         >
-          {/* <AccountCircle /> */}
           <HelpIcon color="secondary" />
         </IconButton>
         <p>Ayuda</p>
@@ -165,8 +100,21 @@ export default function Navbar({ filtrado }) {
           size="large"
           aria-label="show 17 new notifications"
           color="inherit"
+          href="/"
         >
-          <ExitToAppIcon color="secondary" />
+          <LoginIcon color="secondary" />
+        </IconButton>
+        <Link to="/login" textDecoration="none">
+          Iniciar Sesión
+        </Link>
+      </MenuItem>
+      <MenuItem>
+        <IconButton
+          size="large"
+          aria-label="show 17 new notifications"
+          color="inherit"
+        >
+          <LogoutIcon color="secondary" />
         </IconButton>
         <Link to="/" textDecoration="none">
           Cerrar Sesión
@@ -175,7 +123,7 @@ export default function Navbar({ filtrado }) {
     </Menu>
   );
 
-  const mobileMenuId = 'primary-search-account-menu-mobile';
+  const mobileMenuId = 'vista-mobile';
   const renderMobileMenu = (
     <Menu
       anchorEl={mobileMoreAnchorEl}
@@ -212,18 +160,30 @@ export default function Navbar({ filtrado }) {
         </IconButton>
         <p>Carrito de Compras</p>
       </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
+      <MenuItem>
         <IconButton
           size="large"
           aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
+          aria-controls="vista-mobile"
           aria-haspopup="true"
           color="secondary"
         >
-          {/* <AccountCircle /> */}
           <Avatar />
         </IconButton>
-        <p>Perfil</p>
+        <p>Mi Cuenta</p>
+      </MenuItem>
+      <MenuItem>
+        <IconButton
+          size="large"
+          aria-label="show 17 new notifications"
+          color="inherit"
+          href="/register"
+        >
+          <AppRegistrationIcon color="secondary" />
+        </IconButton>
+        <Link to="/login" textDecoration="none">
+          Registrarse
+        </Link>
       </MenuItem>
       <MenuItem>
         <IconButton
@@ -232,7 +192,20 @@ export default function Navbar({ filtrado }) {
           color="inherit"
           href="/"
         >
-          <ExitToAppIcon color="secondary" />
+          <LoginIcon color="secondary" />
+        </IconButton>
+        <Link to="/login" textDecoration="none">
+          Iniciar Sesión
+        </Link>
+      </MenuItem>
+      <MenuItem>
+        <IconButton
+          size="large"
+          aria-label="show 17 new notifications"
+          color="inherit"
+          href="/"
+        >
+          <LogoutIcon color="secondary" />
         </IconButton>
         <Link to="/" textDecoration="none">
           Cerrar Sesión
@@ -243,29 +216,20 @@ export default function Navbar({ filtrado }) {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar position="fixed">
         <Toolbar>
           <IconButton
             size="large"
             edge="start"
             color="inherit"
             aria-label="open drawer"
-            sx={{ mr: 4.5 }}
+            sx={{ mr: 1, marginTop: 1 }}
           >
-            <Drawer filtrado={filtrado} />
+            {/* <Drawer filtrado={filtrado} /> */}
           </IconButton>
           <Link to="/">
             <img src={Logo} alt="Logo" />
           </Link>
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </Search>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <IconButton
@@ -299,6 +263,7 @@ export default function Navbar({ filtrado }) {
             </IconButton>
           </Box>
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
+            <Drawer filtrado={filtrado} />
             <IconButton
               size="large"
               aria-label="show more"

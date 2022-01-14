@@ -1,19 +1,20 @@
 // eslint-disable-next-line import/no-duplicates
 import React from 'react';
 // eslint-disable-next-line import/no-duplicates
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProducts } from '../../redux/actions/productActions';
 import styles from './Home.module.css';
 // import ProfileCard from '../ProfileCard/ProfileCard';
 import ProductCard from '../ProductCard/ProductCard';
 import Navbar from '../Navbar/Navbar';
+import FiltroWeb from '../Drawer/FiltroWeb';
 // import NavbarCommerce from '../Navbar/NavbarCommerce';
 // import ShopCard from '../ShopCard/ShopCard';
 // import productos from '../Cards/product.json';
 import Pagination from '../Pagination/BasicPagination';
+import BannerSearch from '../Searchbar/BannerSearch';
 // import SearchBar from '../Searchbar/Searchbar';
-// import Loading from '../Loading/Loading';
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -37,19 +38,62 @@ export default function Home() {
     dispatch(getProducts());
   }, [dispatch]);
 
-  const paginado = (pageNumber) => {
-    // setCurrentPage(pageNumber);
-    dispatch(getProducts({ page: pageNumber }));
+  const [allProductValues, setAllProductValues] = useState({
+    lote: '',
+    size: '',
+    page: '',
+    categoryName: '',
+    categoryId: '',
+    minPrice: '',
+    maxPrice: '',
+    expirationDate: '',
+    order: '',
+  });
+
+  const handleSearch = () => {
+    dispatch(getProducts(allProductValues));
   };
 
-  const filtrado = (category) => {
-    dispatch(getProducts({ categoryName: category, size: 1000 }));
+  const paginado = (page) => {
+    // setCurrentPage(pageNumber);
+    setAllProductValues({ ...allProductValues, page });
   };
+
+  const filtrado = (params = {}) => {
+    const data = {
+      categoryId: params.categoryId || null,
+      categoryName: params.categoryName || null,
+      order: params.order || null,
+      minPrice: params.minPrice || null,
+      maxPrice: params.maxPrice || null,
+      expirationDate: params.expirationDate || null,
+    };
+    Object.keys(data).forEach((key) => {
+      if (!data[key]) {
+        delete data[key];
+      }
+    });
+
+    if (data.categoryName === allProductValues.categoryName) {
+      data.categoryName = '';
+    }
+
+    setAllProductValues({ ...allProductValues, ...data, page: 1 });
+  };
+
+  const search = (lote) => {
+    setAllProductValues({ ...allProductValues, lote, page: 1 });
+  };
+
+  useEffect(() => {
+    handleSearch();
+  }, [allProductValues]);
 
   return (
     <div>
       <div style={{ marginBottom: '1em' }}>
         <Navbar filtrado={filtrado} />
+        <BannerSearch search={search} lote={allProducts} />
       </div>
       {/* <NavbarCommerce /> */}
       <div className={styles.home}>
@@ -58,34 +102,32 @@ export default function Home() {
           /* products={allProducts.length}
           productsPerPage={productPerPage} */
         />
+        <FiltroWeb />
         <div className={styles.homecont}>
           {/* <div className={styles.contweb}>
             <ProfileCard />
           </div> */}
           <div className={styles.home}>
             <div className={styles.homecont}>
-              <div className={styles.contweb}>
-                {/* <ProfileCard /> */}
+              {/* <div className={styles.contweb}>
+                <ProfileCard />
                 <div className={styles.ShopCardsContainer}>
-                  {/* <h3 className={styles.title}>Mi carrito de compras</h3>
-                  <ShopCard /> */}
+                  <h3 className={styles.title}>Mi carrito de compras</h3>
+                  <ShopCard />
                 </div>
+              </div> */}
+
+              <div className={styles.contmobile}>
+                {/* <SearchBar /> */}
+
+                <div className={styles.ProductCardDiv}>
+                  {/* <ProductCard/> */}
+                </div>
+                {allProducts.map((product, index) => (
+                  // eslint-disable-next-line react/no-array-index-key
+                  <ProductCard key={index} product={product} />
+                ))}
               </div>
-            </div>
-          </div>
-
-          <div className={styles.contmobile}>
-            {/* <SearchBar /> */}
-
-            <div>
-              <div className={styles.ProductCardDiv}>
-                {/* <ProductCard/> */}
-              </div>
-
-              {allProducts?.map((product, index) => (
-                // eslint-disable-next-line react/no-array-index-key
-                <ProductCard key={index} product={product} />
-              ))}
             </div>
           </div>
         </div>
