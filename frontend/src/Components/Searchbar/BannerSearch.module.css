@@ -6,8 +6,9 @@ html {
 }
 
 .heroimage {
+  margin-top: 3em;
   position: relative;
-  height: 500px;
+  height: 470px;
   overflow: hidden;
   /* background-image: url(../../assets/gif3.gif); */
   background-image: url(../../assets/gif5.gif);
