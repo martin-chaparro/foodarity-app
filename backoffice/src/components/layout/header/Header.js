@@ -17,7 +17,7 @@ import Avatar from '@mui/material/Avatar';
 
 import { toggleAsideMenu } from '../../../redux/actions/ui';
 
-import perfil from '../../../assets/perfil.jpeg';
+import defaultAvatar from '../../../assets/avatar_default.png';
 import { startLogout } from '../../../redux/actions/authActions';
 
 const drawerWidth = 240;
@@ -45,6 +45,7 @@ export const Header = () => {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
   const { asidemenu } = useSelector((state) => state.ui);
+  const { user } = useSelector((state) => state);
   const dispatch = useDispatch();
 
   const toggleDrawer = () => {
@@ -66,15 +67,15 @@ export const Header = () => {
     dispatch(startLogout());
   };
 
-  const profilePhoto = perfil;
+  let profilePhoto = defaultAvatar;
 
-  // if (user.photo) {
-  //   profilePhoto = user.photo.url;
-  // } else if (user.socialPhoto) {
-  //   profilePhoto = user.socialPhoto;
-  // } else {
-  //   profilePhoto = perfil;
-  // }
+  if (user.photo) {
+    profilePhoto = user.photo.url;
+  } else if (user.socialPhoto) {
+    profilePhoto = user.socialPhoto;
+  } else {
+    profilePhoto = defaultAvatar;
+  }
 
   return (
     <AppBar

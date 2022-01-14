@@ -1,10 +1,24 @@
 module.exports = [
   {
-    name: 'demo',
+    name: 'democomercio',
     email: 'demo@demo.com',
     password: 'demo',
     status: true,
     roleId:1
+  },
+  {
+    name: 'demoOng',
+    email: 'demo@demoOng.com',
+    password: 'demo',
+    status: true,
+    roleId:1
+  },
+  {
+    name: 'admin',
+    email: 'admin@admin.com',
+    password: 'admin',
+    status: true,
+    roleId:2
   },
   {
     name: 'Martin Chaparro',
@@ -14,17 +28,34 @@ module.exports = [
     roleId:2
   },
   {
-    name: 'Karen',
-    email: 'karen@gmail.com',
+    name: 'Karen Derkach',
+    email: 'derkach.m.karen@gmail.com',
     password: '123456',
     status: true,
-    roleId:1
+    roleId:2
   },
   {
-    name: 'Manu',
-    email: 'manu@gmail.com',
+    name: 'Manuel Mauro',
+    email: 'manuelrmauro@gmail.com',
     password: '123456',
     status: true,
-    roleId:1
+    roleId:2
   },
+  {
+    name: 'Augusto Iphar',
+    email: 'augustoiphar99@hotmail.com',
+    password: '123456',
+    status: true,
+    roleId:2
+  },
+
+  {
+    name: 'Liliana Martinez',
+    email: 'liliana.martinezgo@gmail.com',
+    password: '123456',
+    status: true,
+    roleId:2
+  },
+
+  
 ];
