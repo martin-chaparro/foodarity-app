@@ -2,7 +2,7 @@ import * as React from 'react';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import Button from '@mui/material/Button';
 import MenuIcon from '@mui/icons-material/Tune';
-/* import Box from '@mui/material/Box';
+import Box from '@mui/material/Box';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
@@ -13,9 +13,9 @@ import CategoryIcon from '@mui/icons-material/Category';
 import ArrowBackIosTwoToneIcon from '@mui/icons-material/ArrowBackIosTwoTone';
 import LocalDiningIcon from '@mui/icons-material/LocalDining';
 import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
-import MailIcon from '@mui/icons-material/Mail'; */
+import MailIcon from '@mui/icons-material/Mail';
 
-export default function Drawer(/* { filtrado } */) {
+export default function Drawer({ filtrado }) {
   const [state, setState] = React.useState({
     right: false,
   });
@@ -32,7 +32,7 @@ export default function Drawer(/* { filtrado } */) {
     setState({ ...state, [anchor]: open });
   };
 
-/*   const list = (anchor) => (
+  const list = (anchor) => (
     <Box
       sx={{
         width: anchor === 'right' || anchor === 'bottom' ? 'auto' : 100,
@@ -57,6 +57,16 @@ export default function Drawer(/* { filtrado } */) {
       </List>
       <Divider />
       <List color="primary">
+        <ListItem
+          button
+          key="Todas"
+          onClick={() => filtrado({ categoryName: 'Todas' })}
+        >
+          <ListItemIcon>
+            <LocalDiningIcon color="secondary" />
+          </ListItemIcon>
+          <ListItemText primary="Todas" />
+        </ListItem>
         {[
           'Almacén',
           'Restorant/Rotiseria',
@@ -99,7 +109,7 @@ export default function Drawer(/* { filtrado } */) {
       </List>
     </Box>
   );
- */
+
   return (
     <div>
       {['right'].map((anchor) => (
@@ -108,7 +118,7 @@ export default function Drawer(/* { filtrado } */) {
             sx={{ backgroundColor: 'transparent' }}
             onClick={toggleDrawer(anchor, true)}
           >
-             <MenuIcon color="secondary" sx={{ fontSize: '2.5em' }} /> 
+            <MenuIcon color="secondary" sx={{ fontSize: '2.5em' }} />
           </Button>
           <SwipeableDrawer
             sx={{ backgroundColor: 'primary' }}
@@ -117,7 +127,7 @@ export default function Drawer(/* { filtrado } */) {
             onClose={toggleDrawer(anchor, false)}
             onOpen={toggleDrawer(anchor, true)}
           >
-            {/* {list(anchor)} */}
+            {list(anchor)}
           </SwipeableDrawer>
         </React.Fragment>
       ))}

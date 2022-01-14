@@ -134,7 +134,7 @@ const getProducts = async (req, res) => {
         id: categoryId,
       };
     }
-    if (categoryName ==='') {
+    if (categoryName ==='' || categoryName ==='Todas') {
       delete include[0].where
     }
 
@@ -145,7 +145,6 @@ const getProducts = async (req, res) => {
     } else if (maxPrice) {
       whereAttr.price = { [Op.lte]: maxPrice };
     } 
-    console.log(minPrice, maxPrice)
     
 
     if (expirationDate) {
