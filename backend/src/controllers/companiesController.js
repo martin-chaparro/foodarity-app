@@ -312,6 +312,28 @@ const updateCompany = async (req, res) => {
   }
 };
 
+const getUsers = async (req, res) => {
+  try {
+    const {userId} = req
+    const user = await User.findByPk(userId, {include: [{model: Company, as: 'company'}]})
+    if (!user.companyId) {
+      return res.status(400).json({
+        message: 'El usuario no tiene compania',
+      });
+    }
+    if (user.company.status !== 'Habilitada') {
+      return res.status(400).json({
+        message: 'La compania no esta habilitada',
+      });
+    }
+    const users = await User.findAll({where: {companyId : user.companyId}, attributes: {exclude: ['password', 'createdAt', 'updatedAt', 'RoleId'] }})
+    return res.status(200).json(users)
+
+  } catch (error) {
+    return res.status(500).send(error)
+  }
+}
+
 const addUser = async (req, res) => {
   try {
     const { email } = req.query;
@@ -429,4 +451,5 @@ module.exports = {
   updateCompany,
   addUser,
   deleteUser,
+  getUsers
 };
