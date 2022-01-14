@@ -38,7 +38,6 @@ const createCompany = async (req, res) => {
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-///////////////////////FOTO//////////////////////////////////////////////////
 const { tempFilePath } = req.files.file;
 
     const { secure_url: secureUrl, public_id: publicId } =
@@ -150,10 +149,10 @@ const searchCompanyByUser = async (req, res) => {
     const user = await User.findByPk(userId, {
       include: [{ model: Company, as: 'company' }],
     });
-    if (!user.CompanyId || user.CompanyId === null) {
+    if (!user.companyId || user.companyId === null) {
       return res.json({ msg: 'El usuario no posee una compañia' });
     }
-    return res.status(200).json(user.Company);
+    return res.status(200).json(user.company);
   } catch (error) {
     return res.status(500).send({ msg: error });
   }
