@@ -7,11 +7,11 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import styles from './PublishedProduct.module.css';
+import styles from './Usuarios.module.css';
 
 const columns = [
   { id: 'lote', label: 'LOTE', minWidth: 170 },
-  { id: 'code', label: 'ISO\u00a0Code', minWidth: 100 },
+  //   { id: 'empleado', label: 'Publicado', minWidth: 100 },
   {
     id: 'cantidad',
     label: 'CANTIDAD',
@@ -33,23 +33,36 @@ const columns = [
     align: 'right',
     format: (value) => value.toFixed(2),
   },
+  {
+    id: 'empleado',
+    label: 'Publicado por',
+    minWidth: 170,
+    align: 'right',
+    format: (value) => value.toFixed(2),
+  },
 ];
 
-function createData(lote, cantidad, precio, fecha) {
+function createData(lote, cantidad, precio, fecha, empleado) {
   // const density = population / size;
-  return { lote, cantidad, precio, fecha };
+  return { lote, cantidad, precio, fecha, empleado };
 }
 
 const rows = [
-  createData('Lote pre-pizzas', 2, 120, '12/06/2022'),
-  createData('Lote facturas', '3', 400, '12/06/2022'),
-  createData('Lote tortas', '1', 100, '12/06/2022'),
-  createData('Lote panes', '4', 327, '12/06/2022'),
-  createData('Lote pan Rayado', '4', 376, '12/06/2022'),
-  createData('Lote combo pasteleria/rotiseria', '6', 2547, '12/06/2022'),
+  createData('Lote pre-pizzas', 2, 120, '12/06/2022', 'augusto'),
+  createData('Lote facturas', '3', 400, '12/06/2022', 'augusto'),
+  createData('Lote tortas', '1', 100, '12/06/2022', 'augusto'),
+  createData('Lote panes', '4', 327, '12/06/2022', 'augusto'),
+  createData('Lote pan Rayado', '4', 376, '12/06/2022', 'augusto'),
+  createData(
+    'Lote combo pasteleria/rotiseria',
+    '6',
+    2547,
+    '12/06/2022',
+    'augusto'
+  ),
 ];
 
-export default function PublishedProduct() {
+export default function Usuarios() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -63,10 +76,7 @@ export default function PublishedProduct() {
   };
 
   return (
-    <Paper
-      className={styles.content}
-      sx={{ width: '100%', overflow: 'hidden' }}
-    >
+    <Paper className={styles.users} sx={{ width: '100%', overflow: 'hidden' }}>
       <TableContainer sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>

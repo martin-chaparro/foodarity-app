@@ -16,7 +16,7 @@ export default function CompanyDetail() {
   }
 
   return (
-    <div>
+    <div className={styles.infocont}>
       {displayDetail ? (
         <div className={styles.companydetail}>
           <div className={styles.cont}>

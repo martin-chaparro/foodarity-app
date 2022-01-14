@@ -7,16 +7,14 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 // import Typography from '@mui/material/Typography';
 import HelpIcon from '@mui/icons-material/Help';
-import Badge from '@mui/material/Badge';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
+// import MenuIcon from '@mui/icons-material/Menu';
 import LocalPoliceIcon from '@mui/icons-material/LocalPolice';
 // import AccountCircle from '@mui/icons-material/AccountCircle';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import LogoutIcon from '@mui/icons-material/Logout';
-import AddBusinessIcon from '@mui/icons-material/AddBusiness';
-import LocalShippingIcon from '@mui/icons-material/LocalShipping';
+import HomeIcon from '@mui/icons-material/Home';
 import AvatarCommerce from './AvatarCommerce';
 import Logo from '../../assets/Mobil-Full-Header-Logo.png';
 
@@ -85,27 +83,8 @@ export default function PrimarySearchAppBar() {
   };
 
   const menuId = 'primary-search-account-menu';
+  // eslint-disable-next-line no-unused-vars
   const renderMenu = (
-    // <Menu
-    //   anchorEl={anchorEl}
-    //   anchorOrigin={{
-    //     vertical: 'top',
-    //     horizontal: 'right',
-    //   }}
-    //   id={menuId}
-    //   keepMounted
-    //   transformOrigin={{
-    //     vertical: 'top',
-    //     horizontal: 'right',
-    //   }}
-    //   open={isMenuOpen}
-    //   onClose={handleMenuClose}
-    // >
-    //   <MenuItem onClick={handleMenuClose}>Portal de Empresa</MenuItem>
-    //   <MenuItem onClick={handleMenuClose}>Mis Ordenes</MenuItem>
-    //   <MenuItem onClick={handleMenuClose}>Cerrar Sesión</MenuItem>
-    // </Menu>
-
     <Menu
       anchorEl={anchorEl}
       anchorOrigin={{
@@ -122,30 +101,6 @@ export default function PrimarySearchAppBar() {
       onClose={handleMenuClose}
     >
       <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <HelpIcon />
-        </IconButton>
-        <p>Ayuda</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <LocalPoliceIcon fontsize="small" />
-        </IconButton>
-        <p>Politica de Uso</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="show 17 new notifications"
-          color="inherit"
-        >
-          <Badge badgeContent={17} color="secondary">
-            <LocalShippingIcon />
-          </Badge>
-        </IconButton>
-        <p>Mis Ordenes</p>
-      </MenuItem>
-      <MenuItem>
         <IconButton
           size="large"
           aria-label="account of current user"
@@ -154,10 +109,26 @@ export default function PrimarySearchAppBar() {
           color="inherit"
         >
           {/* <AccountCircle /> */}
-          <AddBusinessIcon />
+          <HomeIcon />
         </IconButton>
-        <p>Portal de Empresa</p>
+        <Link to="/home" textDecoration="none">
+          Home
+        </Link>
       </MenuItem>
+
+      <MenuItem>
+        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+          <HelpIcon />
+        </IconButton>
+        <p>Ayuda</p>
+      </MenuItem>
+      <MenuItem>
+        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+          <LocalPoliceIcon fontSize="small" />
+        </IconButton>
+        <p>Politica de Uso</p>
+      </MenuItem>
+
       <MenuItem>
         <IconButton
           size="large"
@@ -166,12 +137,15 @@ export default function PrimarySearchAppBar() {
         >
           <LogoutIcon />
         </IconButton>
-        <p>Cerrar Sesión</p>
+        <Link to="/" textDecoration="none">
+          Cerrar Sesión
+        </Link>
       </MenuItem>
     </Menu>
   );
 
   const mobileMenuId = 'primary-search-account-menu-mobile';
+  // eslint-disable-next-line no-unused-vars
   const renderMobileMenu = (
     <Menu
       anchorEl={mobileMoreAnchorEl}
@@ -189,30 +163,6 @@ export default function PrimarySearchAppBar() {
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <HelpIcon />
-        </IconButton>
-        <p>Ayuda</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <LocalPoliceIcon fontsize="small" />
-        </IconButton>
-        <p>Politica de Uso</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="show 17 new notifications"
-          color="inherit"
-        >
-          <Badge badgeContent={17} color="secondary">
-            <LocalShippingIcon />
-          </Badge>
-        </IconButton>
-        <p>Mis Ordenes</p>
-      </MenuItem>
-      <MenuItem>
         <IconButton
           size="large"
           aria-label="account of current user"
@@ -221,10 +171,26 @@ export default function PrimarySearchAppBar() {
           color="inherit"
         >
           {/* <AccountCircle /> */}
-          <AddBusinessIcon />
+          <HomeIcon />
         </IconButton>
-        <p>Portal de Empresa</p>
+        <Link to="/home" textDecoration="none">
+          Home
+        </Link>
       </MenuItem>
+
+      <MenuItem>
+        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+          <HelpIcon />
+        </IconButton>
+        <p>Ayuda</p>
+      </MenuItem>
+      <MenuItem>
+        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+          <LocalPoliceIcon fontSize="small" />
+        </IconButton>
+        <p>Politica de Uso</p>
+      </MenuItem>
+
       <MenuItem>
         <IconButton
           size="large"
@@ -233,7 +199,9 @@ export default function PrimarySearchAppBar() {
         >
           <LogoutIcon />
         </IconButton>
-        <p>Cerrar Sesión</p>
+        <Link to="/" textDecoration="none">
+          Cerrar Sesión
+        </Link>
       </MenuItem>
     </Menu>
   );
@@ -242,7 +210,7 @@ export default function PrimarySearchAppBar() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton
+          {/* <IconButton
             size="large"
             edge="start"
             color="inherit"
@@ -250,12 +218,13 @@ export default function PrimarySearchAppBar() {
             sx={{ mr: 2 }}
           >
             <MenuIcon />
-          </IconButton>
+          </IconButton> */}
           <Link to="/">
             <img src={Logo} alt="Logo" />
           </Link>
 
           <Box sx={{ flexGrow: 1 }} />
+
           <p>Mi Portal</p>
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <IconButton

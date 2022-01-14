@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Grid';
@@ -21,10 +21,31 @@ import CircularProgress from '@mui/material/CircularProgress';
 import perfil from '../../../../assets/avatar_default.png';
 
 import { Layout } from '../../../layout/Layout';
+import { apiWithToken } from '../../../../services/api';
 
 export const UsersScreen = () => {
-  const handleChangePage = () => {};
-  const handleChangeRowsPerPage = () => {};
+  const [users, setUsers] = useState();
+  const [page, setPage] = useState(0);
+  const [size, setSize] = useState(5);
+  const [totalUsers, settotalUsers] = useState(0);
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+  const handleChangeRowsPerPage = (event) => {
+    setSize(parseInt(event.target.value, 10));
+    setPage(0);
+  };
+
+  useEffect(async () => {
+    const response = await apiWithToken.get(
+      `/admin/users?page=${page}&size=${size}`
+    );
+    setUsers(response.data.users);
+    settotalUsers(response.data.totalUsers);
+  }, [page, size]);
+
+  console.log(users);
 
   const handleEdit = (event) => {
     console.log(event.target.attributes.dataid.value);
@@ -67,6 +88,8 @@ export const UsersScreen = () => {
                     <TableCell>id</TableCell>
                     <TableCell>Nombre</TableCell>
                     <TableCell>email</TableCell>
+                    <TableCell>Role</TableCell>
+                    <TableCell>Status</TableCell>
                     <TableCell>Actions</TableCell>
                   </TableRow>
                 </TableHead>
@@ -83,6 +106,12 @@ export const UsersScreen = () => {
                     </TableCell>
                     <TableCell>
                       <Typography noWrap>demo@demo.com</Typography>
+                    </TableCell>
+                    <TableCell>
+                      <Typography noWrap>User</Typography>
+                    </TableCell>
+                    <TableCell>
+                      <Typography noWrap>Activo</Typography>
                     </TableCell>
                     <TableCell>
                       <Grid container>
@@ -119,9 +148,9 @@ export const UsersScreen = () => {
             <TablePagination
               rowsPerPageOptions={[5, 10, 25]}
               component="div"
-              count={1}
-              rowsPerPage={5}
-              page={0}
+              count={totalUsers}
+              rowsPerPage={size}
+              page={page}
               onPageChange={handleChangePage}
               onRowsPerPageChange={handleChangeRowsPerPage}
             />

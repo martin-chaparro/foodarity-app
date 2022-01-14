@@ -20,7 +20,7 @@ const {
 
 router.get('/', getCompanies);
 router.get('/id/:id', searchCompany);
-router.get('/byUser', authMiddleware, searchCompanyByUser);
+router.get('/byuser', authMiddleware, searchCompanyByUser);
 router.post('/', authMiddleware, ValidationCompany.create, createCompany);
 router.patch(
   '/:id/upload/:field',

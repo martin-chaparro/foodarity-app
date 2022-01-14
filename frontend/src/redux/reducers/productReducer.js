@@ -6,6 +6,7 @@ const initialState = {
   totalProducts: null,
   page: null,
   pages: null,
+  categories: [],
 };
 
 export default (state = initialState, action) => {
@@ -26,7 +27,7 @@ export default (state = initialState, action) => {
         pages: action.payload.pages,
       };
 
-   /*  case types.searchProducts:
+    /*  case types.searchProducts:
       // eslint-disable-next-line no-case-declarations
       console.log(state.allProducts);
       console.log(action.payload);
@@ -45,6 +46,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         loading: true,
+      };
+
+    case types.getCategories:
+      return {
+        ...state,
+        categories: action.payload,
       };
 
     default:

@@ -9,10 +9,13 @@ export default function BannerSearch({ search, lote }) {
       <div className={estilo.heroimage}>
         <div className={estilo.container}>
           <h1>
-            <span>Mejores productos a un click...</span>
+            <span>Ahorre, Ayude y contribuya al planeta</span>
           </h1>
           <div className={estilo.search}>
             <SearchBar sx={{ marginTop: '10em' }} search={search} lote={lote} />
+            {/* <span className={estilo.span}>
+              Busque los productos más frescos...
+            </span> */}
           </div>
         </div>
       </div>

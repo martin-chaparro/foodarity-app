@@ -7,7 +7,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import styles from './PublishedProduct.module.css';
+import styles from './Orders.module.css';
 
 const columns = [
   { id: 'lote', label: 'LOTE', minWidth: 170 },
@@ -49,7 +49,7 @@ const rows = [
   createData('Lote combo pasteleria/rotiseria', '6', 2547, '12/06/2022'),
 ];
 
-export default function PublishedProduct() {
+export default function Orders() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -63,10 +63,7 @@ export default function PublishedProduct() {
   };
 
   return (
-    <Paper
-      className={styles.content}
-      sx={{ width: '100%', overflow: 'hidden' }}
-    >
+    <Paper className={styles.orders} sx={{ width: '100%', overflow: 'hidden' }}>
       <TableContainer sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
