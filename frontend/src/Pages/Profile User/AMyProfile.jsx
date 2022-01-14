@@ -172,7 +172,7 @@ export default function AMyProfile() {
           </Drawer>
           <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
             <DrawerHeader />
-            <Typography paragraph>
+            {/* <Typography paragraph>
               11111qqqqqqqLorem ipsum dolor sit amet, consectetur adipiscing
               elit, sed do eiusmod tempor incididunt ut labore et dolore magna
               aliqua. Rhoncus dolor purus non enim praesent elementum facilisis
@@ -185,7 +185,7 @@ export default function AMyProfile() {
               Ornare suspendisse sed nisi lacus sed viverra tellus. Purus sit
               amet volutpat consequat mauris. Elementum eu facilisis sed odio
               morbi.
-            </Typography>
+            </Typography> */}
           </Box>
         </Box>
       </div>
