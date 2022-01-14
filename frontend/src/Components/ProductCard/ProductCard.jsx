@@ -39,7 +39,7 @@ export default function ProductCard({ product }) {
   return (
     <div className={styles.productcard}>
       <div className={styles.divImg}>
-        <img src={product.photo} alt="food" className={styles.img} />
+        <img src={product.photo.url} alt="food" className={styles.img} />
       </div>
       <div className={styles.content}>
         <div className={styles.nameDiv}>
@@ -135,7 +135,7 @@ export default function ProductCard({ product }) {
                     <div className={styles.PostImgDiv}>
                       <img
                         className={styles.PostImg}
-                        src={product.photo}
+                        src={product.photo.url}
                         alt="ProductPhoto"
                       />
                     </div>
