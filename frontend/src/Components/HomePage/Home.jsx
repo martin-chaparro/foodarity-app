@@ -8,6 +8,7 @@ import styles from './Home.module.css';
 // import ProfileCard from '../ProfileCard/ProfileCard';
 import ProductCard from '../ProductCard/ProductCard';
 import Navbar from '../Navbar/Navbar';
+import FiltroWeb from '../Drawer/FiltroWeb';
 // import NavbarCommerce from '../Navbar/NavbarCommerce';
 // import ShopCard from '../ShopCard/ShopCard';
 // import productos from '../Cards/product.json';
@@ -58,8 +59,26 @@ export default function Home() {
     setAllProductValues({ ...allProductValues, page });
   };
 
-  const filtrado = (categoryName) => {
-    setAllProductValues({ ...allProductValues, categoryName, page: 1 });
+  const filtrado = (params = {}) => {
+    const data = {
+      categoryId: params.categoryId || null,
+      categoryName: params.categoryName || null,
+      order: params.order || null,
+      minPrice: params.minPrice || null,
+      maxPrice: params.maxPrice || null,
+      expirationDate: params.expirationDate || null,
+    };
+    Object.keys(data).forEach((key) => {
+      if (!data[key]) {
+        delete data[key];
+      }
+    });
+
+    if (data.categoryName === allProductValues.categoryName) {
+      data.categoryName = '';
+    }
+
+    setAllProductValues({ ...allProductValues, ...data, page: 1 });
   };
 
   const search = (lote) => {
@@ -72,8 +91,8 @@ export default function Home() {
 
   return (
     <div>
-      <Navbar filtrado={filtrado} />
       <div style={{ marginBottom: '1em' }}>
+        <Navbar filtrado={filtrado} />
         <BannerSearch search={search} lote={allProducts} />
       </div>
       {/* <NavbarCommerce /> */}
@@ -83,6 +102,7 @@ export default function Home() {
           /* products={allProducts.length}
           productsPerPage={productPerPage} */
         />
+        <FiltroWeb />
         <div className={styles.homecont}>
           {/* <div className={styles.contweb}>
             <ProfileCard />

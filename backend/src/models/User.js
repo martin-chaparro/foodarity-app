@@ -60,6 +60,7 @@ class User extends Model {
     this.belongsTo(models.Role, { foreignKey: 'role_id', as: 'role' });
     this.belongsTo(models.Company, { as: 'company' });
     this.hasMany(models.Product, { as: 'publications' });
+    this.hasMany(models.Donation);
     this.hasMany(models.Order, {as : 'orders'})
   }
 }

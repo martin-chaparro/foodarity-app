@@ -18,6 +18,8 @@ tags:
     description: 'Operaciones sobre Productos'
   - name: 'Location'
     description: 'Busqueda de Provicias y Ciudades'
+  - name: 'Donation'
+    description: 'Genera donaciones y permite verlas'
 schemes:
   - 'http'
 paths:
@@ -336,7 +338,7 @@ paths:
       tags:
         - 'Company'
       summary: 'Crear comercio u ONG'
-      description: 'Ruta para la creacion de comercios. Campos NO requeridos => webside, logo, banner. Referencias: type: 1 = Comercio / 2 = ONG'
+      description: 'Ruta para la creacion de comercios. Campos NO requeridos => webside. Referencias: type: 1 = Comercio / 2 = ONG. LOGO: Se debe subir por file y los demas datos dentro de un JSON llamado data'
       operationId: 'addCompany'
       consumes:
         - 'application/json'
@@ -348,6 +350,11 @@ paths:
         required: true
         type: "string"
         description: 'Bearer Token'
+      - name: "file"
+        in: "formData"
+        description: "file to upload"
+        required: true
+        type: "file"
       - in: 'body'
         name: 'Body'
         description: 'Crear Usuario'
@@ -975,6 +982,128 @@ paths:
           description: 'Internal Server Error'
           schema:
             $ref: '#/definitions/ErrorResponse500'
+  /donation/:ongId:
+    post:
+      tags:
+        - 'Donation'
+      summary: 'Crear donacion'
+      description: 'Crea una donacion por parte de un comercio a una ONG especifica pasada por params para publicar, solo podran hacer los comercios auth.Se puede añadir una imagen del lote pero debe ir en file'
+      operationId: 'postDonation'
+      consumes:
+        - 'application/json'
+      produces:
+        - 'application/json'
+      parameters:
+      - name: "Authorization"
+        in: "header"
+        required: true
+        type: "string"
+        description: 'Bearer Token'
+      - name: "id"
+        in: "path"
+        description: "Id de la ONG a donar"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "file"
+        in: "formData"
+        description: "file to upload"
+        required: true
+        type: "file"
+      - in: 'body'
+        name: 'Body'
+        description: 'Crear Donacion'
+        required: true
+        schema:
+          $ref: '#/definitions/CreateDonationRequest'
+      responses:
+        '200':
+          description: 'OK'
+          schema:
+            $ref: '#/definitions/Response200'
+        '400':
+          description: 'Bad Request'
+          schema:
+            $ref: '#/definitions/ErrorResponse400'
+        '401':
+          description: ' Unauthorized'
+          schema:
+            $ref: '#/definitions/ErrorResponse401'
+        '500':
+          description: 'Internal Server Error'
+          schema:
+            $ref: '#/definitions/ErrorResponse500'
+      security:
+        - api_key: []
+  /donation:
+    get:
+      tags:
+        - 'Donation'
+      summary: 'Lista de donaciones recibidas por la ONG'
+      description: 'Lista de donaciones recibidas por una ONG, se especifica que empresa realizo la donacion y el producto. Debe estar auth la ONG'
+      operationId: 'GetAllDonationByOng'
+      consumes:
+        - 'application/json'
+      produces:
+        - 'application/json'
+      parameters:
+      - name: "Authorization"
+        in: "header"
+        required: true
+        type: "string"
+        description: 'Bearer Token'
+      responses:
+        '200':
+          description: 'OK'
+          schema:
+            $ref: '#/definitions/Response200'
+        '400':
+          description: 'Bad Request'
+          schema:
+            $ref: '#/definitions/ErrorResponse400'
+        '401':
+          description: ' Unauthorized'
+          schema:
+            $ref: '#/definitions/ErrorResponse401'
+        '500':
+          description: 'Internal Server Error'
+          schema:
+            $ref: '#/definitions/ErrorResponse500'
+  /donation/commerce:
+    get:
+      tags:
+        - 'Donation'
+      summary: 'Lista de donaciones hechas por una empresa'
+      description: 'Lista de donaciones realizadas por una empresa, se especifica que ONG recibio el producto. Debe estar auth la empresa'
+      operationId: 'GetAllDonationByCommerce'
+      consumes:
+        - 'application/json'
+      produces:
+        - 'application/json'
+      parameters:
+      - name: "Authorization"
+        in: "header"
+        required: true
+        type: "string"
+        description: 'Bearer Token'
+      responses:
+        '200':
+          description: 'OK'
+          schema:
+            $ref: '#/definitions/Response200'
+        '400':
+          description: 'Bad Request'
+          schema:
+            $ref: '#/definitions/ErrorResponse400'
+        '401':
+          description: ' Unauthorized'
+          schema:
+            $ref: '#/definitions/ErrorResponse401'
+        '500':
+          description: 'Internal Server Error'
+          schema:
+            $ref: '#/definitions/ErrorResponse500'
+
 securityDefinitions:
   api_key:
     type: 'apiKey'
@@ -1120,10 +1249,6 @@ definitions:
         type: 'string'
       website:
         type: 'string'
-      banner:
-        type: 'object'
-      logo:
-        type: 'object'
       status:
         type: 'string'
       deleted:
@@ -1217,6 +1342,19 @@ definitions:
         $ref: '#/definitions/UserRole'
       company:
         $ref: '#/definitions/Company'
+  CreateDonationRequest:
+    type: 'object'
+    properties:
+      lote:
+        type: 'string'
+      description:
+        type: 'string'
+        format: 'text'
+      quantity:
+        type: 'integer'
+      category:
+        type: 'integer'
+        format: 'id'
   LoginResponse400:
     type: 'object'
     properties:

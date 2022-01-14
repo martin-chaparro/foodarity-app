@@ -17,7 +17,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import Avatar from '@mui/material/Avatar';
 import CircularProgress from '@mui/material/CircularProgress';
 
-import perfil from '../../../../assets/perfil.jpeg';
+import perfil from '../../../../assets/avatar_default.png';
 
 import { Layout } from '../../../layout/Layout';
 

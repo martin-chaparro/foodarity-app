@@ -14,6 +14,8 @@ const {
   deleteCompany,
   updateCompany,
   searchCompanyByUser,
+  addUser,
+  deleteUser,
 } = require('../../controllers/companiesController');
 
 router.get('/', getCompanies);
@@ -28,5 +30,7 @@ router.patch(
 );
 router.delete('/disabled/:id', authMiddleware, deleteCompany);
 router.put('/:id', authMiddleware, ValidationCompany.update, updateCompany);
+router.post('/user', authMiddleware, addUser);
+router.delete('/user/:id', authMiddleware, deleteUser);
 
 module.exports = router;

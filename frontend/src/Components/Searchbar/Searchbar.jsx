@@ -5,23 +5,14 @@ import { useEffect } from 'react';
 
 export default function SearchBar({ search, lote }) {
   const options = lote.map((productos) => productos.lote);
-  // const [value] = React.useState(options[0]);
   const [inputValue, setInputValue] = React.useState('');
 
- useEffect(() => {
-  search(inputValue);
- }, [inputValue])
-  
+  useEffect(() => {
+    search(inputValue);
+  }, [inputValue]);
+
   return (
     <div>
-      {/* <div>{`value: ${value !== null ? `'${value}'` : 'null'}`}</div>
-      <div>{`inputValue: '${inputValue}'`}</div> */}
-      {/* BORRAR EL SIGUIENTE FORM */}
-      {/* <form onSubmit={e => { e.preventDefault(); search(input)}}>
-        <input onChange={e => handleChange(e)} value={input} />
-        <button type='submit'>button</button>
-      </form> */}
-      <br />
       <Autocomplete
         // value={value}
         onChange={() => {
@@ -34,7 +25,7 @@ export default function SearchBar({ search, lote }) {
         id="free-solo-2-demo"
         disableClearable
         freeSolo
-        options={options}
+        options={options || 'not found'}
         sx={{ width: '100%', backgroundColor: 'white', textColor: 'white' }}
         // eslint-disable-next-line react/jsx-props-no-spreading
         renderInput={(params) => <TextField {...params} label="Buscar..." />}
