@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styles from './PostNewBatch.module.css';
 
 import {
@@ -9,13 +9,17 @@ import {
   Fecha,
   Categoria,
 } from './TextFieldSizes';
-import { postProduct } from '../../redux/actions/productActions';
+import { postProduct, getCategories } from '../../redux/actions/productActions';
 import Descripcion from './MultiLineTextFields';
 import logo from '../../assets/user-6.png';
 // import { object } from 'prop-types';
 
 export default function PostNewBatch() {
   const dispatch = useDispatch();
+
+  const categories = useSelector((state) => state.product.categories);
+
+  const [photo, setPhoto] = useState({});
 
   const [input, setInput] = useState({
     lote: '',
@@ -32,15 +36,16 @@ export default function PostNewBatch() {
   });
 
   useEffect(() => {
-    //  dispatch(getCategories())
-  });
+    dispatch(getCategories());
+    const companyId = localStorage.getItem('token');
 
-  const [photo, setPhoto] = useState();
+    console.log(companyId);
+  }, []);
 
   function validate(inputs) {
     const errors = {};
 
-    if (!inputs.name) {
+    if (!inputs.lote) {
       errors.lote = 'Lote is required !';
     }
     if (!inputs.description) {
@@ -54,7 +59,7 @@ export default function PostNewBatch() {
       errors.price = 'Price is required';
     }
 
-    if (!inputs.exprirationDate) {
+    if (!inputs.expirationDate) {
       errors.exprirationDate = 'Date is required';
     }
 
@@ -62,14 +67,16 @@ export default function PostNewBatch() {
       errors.category = 'Category is required';
     }
 
-    if (inputs.photo === {}) {
-      errors.photo = 'Photo is required';
-    }
+    // if (inputs.photo === {}) {
+    //   errors.photo = 'Photo is required';
+    // }
 
     return errors;
   }
 
   function handlePhoto(e) {
+    console.log(e);
+    console.log(e.target.files[0]);
     e.preventDefault();
     setPhoto(e.target.files[0]);
     console.log(photo);
@@ -107,7 +114,7 @@ export default function PostNewBatch() {
       });
 
       console.log(input);
-      setPhoto();
+      setPhoto({});
     } else {
       // eslint-disable-next-line no-alert
       alert('Complete todos los Campos');
@@ -137,6 +144,7 @@ export default function PostNewBatch() {
               <Categoria
                 setInput={setInput}
                 input={input}
+                categories={categories}
                 // eslint-disable-next-line react/jsx-no-bind
                 handleOnChange={handleOnChange}
               />

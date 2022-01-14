@@ -15,7 +15,6 @@ export const agregarProducto = () => async (dispatch) => {
   }
 };
 
-
 export function getProducts(params = {}) {
   const {
     lote,
@@ -71,6 +70,7 @@ export function postProduct(payload, photo) {
   // eslint-disable-next-line no-unused-vars
 
   console.log(payload);
+  console.log(photo);
   // eslint-disable-next-line no-unused-vars
   return async function (dispatch) {
     try {
@@ -91,19 +91,19 @@ export function postProduct(payload, photo) {
   };
 }
 
-// export function getCategories() {
+export function getCategories() {
+  return async function (dispatch) {
+    try {
+      const response = await axios.get(
+        'http://localhost:4000/api/v1/products/categories'
+      );
 
-//   return async function (dispatch) {
-
-//     try {
-//       return console.log(err);
-//       const response= await axios.get('http://localhost:4000/api/v1/products/categories')
-
-//     } catch (err) {
-
-//       console.log(err)
-//     }
-
-//   }
-
-// }
+      return dispatch({
+        type: types.getCategories,
+        payload: response.data,
+      });
+    } catch (err) {
+      return console.log(err);
+    }
+  };
+}

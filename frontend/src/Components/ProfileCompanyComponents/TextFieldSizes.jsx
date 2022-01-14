@@ -120,7 +120,7 @@ export function Fecha({ handleOnChange, input }) {
   );
 }
 
-export function Categoria({ setInput, input }) {
+export function Categoria({ setInput, input, categories }) {
   const [cat, setCat] = React.useState('');
 
   const handleChange = (event) => {
@@ -141,17 +141,13 @@ export function Categoria({ setInput, input }) {
           name="category"
           value={cat}
           label="Categoria"
-          // onChange={(e) => {
-          //   handleOnChange(e);
-          // }}
           onChange={handleChange}
         >
-          <MenuItem value="">
-            <em>none</em>
-          </MenuItem>
-          <MenuItem value="almacen">Almacen</MenuItem>
-          <MenuItem value="Restorant/Rotiseria">Restorant/Rotiseria</MenuItem>
-          <MenuItem value="Verduleria">Verduleria</MenuItem>
+          {categories.map((el) => (
+            <MenuItem key={el.id} value={el.id}>
+              {el.name}
+            </MenuItem>
+          ))}
         </Select>
       </FormControl>
     </div>
