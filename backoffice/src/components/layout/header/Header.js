@@ -18,8 +18,7 @@ import Avatar from '@mui/material/Avatar';
 import { toggleAsideMenu } from '../../../redux/actions/ui';
 
 import perfil from '../../../assets/perfil.jpeg';
-
-const settings = ['Logout'];
+import { startLogout } from '../../../redux/actions/authActions';
 
 const drawerWidth = 240;
 
@@ -63,8 +62,19 @@ export const Header = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(anchorElNav);
   };
+  const handleLogOut = () => {
+    dispatch(startLogout());
+  };
 
+  const profilePhoto = perfil;
 
+  // if (user.photo) {
+  //   profilePhoto = user.photo.url;
+  // } else if (user.socialPhoto) {
+  //   profilePhoto = user.socialPhoto;
+  // } else {
+  //   profilePhoto = perfil;
+  // }
 
   return (
     <AppBar
@@ -119,9 +129,9 @@ export const Header = () => {
           </IconButton>
         </Box>
         <Box sx={{ flexGrow: 0 }}>
-          <Tooltip title="Open settings">
+          <Tooltip title="Cuenta">
             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-              <Avatar alt="Remy Sharp" src={perfil} />
+              <Avatar alt="Foto de perfil" src={profilePhoto} />
             </IconButton>
           </Tooltip>
           <Menu
@@ -140,11 +150,11 @@ export const Header = () => {
             open={Boolean(anchorElUser)}
             onClose={handleCloseUserMenu}
           >
-            {settings.map((setting) => (
-              <MenuItem key={setting} onClick={handleCloseNavMenu}>
-                <Typography textAlign="center">{setting}</Typography>
-              </MenuItem>
-            ))}
+            <MenuItem onClick={handleCloseNavMenu}>
+              <Typography textAlign="center" onClick={handleLogOut}>
+                Logout
+              </Typography>
+            </MenuItem>
           </Menu>
         </Box>
       </Toolbar>

@@ -70,6 +70,7 @@ class Company extends Model {
     this.hasOne(models.Address, { as: 'address' });
     this.hasMany(models.Product);
     this.hasMany(models.Donation);
+    this.hasMany(models.Order);
   }
 }
 

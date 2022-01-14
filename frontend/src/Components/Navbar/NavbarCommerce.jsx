@@ -14,7 +14,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import LocalPoliceIcon from '@mui/icons-material/LocalPolice';
 // import AccountCircle from '@mui/icons-material/AccountCircle';
 import MoreIcon from '@mui/icons-material/MoreVert';
-import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import LogoutIcon from '@mui/icons-material/Logout';
 import AddBusinessIcon from '@mui/icons-material/AddBusiness';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import AvatarCommerce from './AvatarCommerce';
@@ -164,7 +164,7 @@ export default function PrimarySearchAppBar() {
           aria-label="show 17 new notifications"
           color="inherit"
         >
-          <ExitToAppIcon />
+          <LogoutIcon />
         </IconButton>
         <p>Cerrar Sesión</p>
       </MenuItem>
@@ -231,7 +231,7 @@ export default function PrimarySearchAppBar() {
           aria-label="show 17 new notifications"
           color="inherit"
         >
-          <ExitToAppIcon />
+          <LogoutIcon />
         </IconButton>
         <p>Cerrar Sesión</p>
       </MenuItem>

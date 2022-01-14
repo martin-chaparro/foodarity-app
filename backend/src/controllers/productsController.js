@@ -1,3 +1,5 @@
+const cloudinary = require('cloudinary').v2;
+
 const { Op } = require('sequelize');
 const Category = require('../models/Category');
 const Product = require('../models/Product');
@@ -6,6 +8,8 @@ const Company = require('../models/Company');
 const Address = require('../models/Address');
 const State = require('../models/State');
 const City = require('../models/City');
+
+cloudinary.config(process.env.CLOUDINARY_URL);
 
 const include = [
   {
@@ -123,6 +127,9 @@ const getProducts = async (req, res) => {
         id: categoryId,
       };
     }
+    if (categoryName ==='') {
+      delete include[0].where
+    }
 
     if (minPrice && maxPrice) {
       whereAttr.price = { [Op.between]: [minPrice, maxPrice] };
@@ -173,44 +180,53 @@ const postProduct = async (req, res) => {
   try {
     const { userId } = req;
     const user = await User.findByPk(userId, {
-      include: [{ model: Company }],
+      include: [{ model: Company, as: 'company' }],
     });
-    if (!user.CompanyId) {
-      return res.status(401).json({ msg: 'El usuaria no posee un comercio' });
+    if (!user.companyId) {
+      return res
+        .status(401)
+        .json({ message: 'El usuaria no posee un comercio' });
     }
-    if (user.Company.type_id !== 1) {
+    if (user.company.type_id !== 1) {
       return res.status(401).json({
-        msg: 'Solo las companias tipo comercio pueden publicar productos',
+        message: 'Solo las companias tipo comercio pueden publicar productos',
       });
     }
-    if (user.Company.status !== 'Habilitada') {
+    if (user.company.status !== 'Habilitada') {
       return res.status(401).json({
-        msg: 'Solo los comercios habilitados pueden publicar productos',
+        message: 'Solo los comercios habilitados pueden publicar productos',
       });
     }
+
+    const { tempFilePath } = req.files.file;
+
+    const { secure_url: secureUrl, public_id: publicId } =
+      await cloudinary.uploader.upload(tempFilePath);
+
+    const photo = { public_id: publicId, url: secureUrl };
 
     const {
       lote,
       description,
-      photo,
       quantity,
       price,
       publicationDate,
       expirationDate,
       category,
-    } = req.body;
+    } = JSON.parse(req.body.data);
     const newProduct = await Product.create({
       lote,
       description,
       photo,
       quantity,
+      totalQuantity: quantity,
       price,
       publicationDate,
       expirationDate,
       status: 'published',
     });
     await newProduct.setCategory(category);
-    await newProduct.setCompany(user.Company);
+    await newProduct.setCompany(user.company);
     await newProduct.setPublisher(userId);
     return res.status(200).json(newProduct);
   } catch (error) {
@@ -233,11 +249,11 @@ const deletePublication = async (req, res) => {
     if (product.companyId !== user.CompanyId) {
       return res
         .status(401)
-        .json({ msg: 'Tu compania no publico este producto' });
+        .json({ message: 'Tu compania no publico este producto' });
     }
     if (product.status !== 'published') {
       return res.status(401).json({
-        msg: 'No puedes borrar un producto que ya no esta publicado',
+        message: 'No puedes borrar un producto que ya no esta publicado',
       });
     }
     await Product.update(

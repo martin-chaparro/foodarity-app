@@ -30,6 +30,10 @@ class User extends Model {
           type: DataTypes.JSON,
           allowNull: true,
         },
+        socialPhoto: {
+          type: DataTypes.STRING,
+          allowNull: true,
+        },
         registerMethod: {
           type: DataTypes.ENUM('direct', 'google'),
           allowNull: false,
@@ -57,6 +61,7 @@ class User extends Model {
     this.belongsTo(models.Company, { as: 'company' });
     this.hasMany(models.Product, { as: 'publications' });
     this.hasMany(models.Donation);
+    this.hasMany(models.Order, {as : 'orders'})
   }
 }
 

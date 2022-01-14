@@ -49,6 +49,8 @@ const createUser = async (request, response) => {
     id: user.id,
     name: user.name,
     email: user.email,
+    photo:user.photo,
+    socialPhoto:user.socialPhoto,
     token,
   });
 };
