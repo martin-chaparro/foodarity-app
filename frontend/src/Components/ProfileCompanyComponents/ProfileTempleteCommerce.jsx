@@ -24,6 +24,7 @@ import PublishedProduct from './PublishedProduct';
 import PrimarySearchAppBar from '../Navbar/NavbarCommerce';
 import Orders from './Orders';
 import Usuarios from './Usuarios';
+import Donations from './Donations'
 import styles from './ProfileTempleteCommerce.module.css';
 
 const drawerWidth = 240;
@@ -36,6 +37,10 @@ function ProfileTempleteCommerce(props) {
   const [products, setProducts] = useState({});
 
   const [users, setUsers] = useState({});
+
+  const [commerceDonations, setCommerceDonations] = useState({})
+
+  const [ongDonations, setOngDonations] = useState({})
 
   useEffect(() => {
     apiWithToken
@@ -52,6 +57,14 @@ function ProfileTempleteCommerce(props) {
 
     apiWithToken.get('/companies/users').then((response) => {
       setUsers(response.data);
+    });
+    
+    apiWithToken.get('/donation/commerce').then((response) => {
+      setCommerceDonations(response.data);
+    });
+
+    apiWithToken.get('/donation').then((response) => {
+      setOngDonations(response.data);
     });
   }, []);
 
@@ -87,6 +100,7 @@ function ProfileTempleteCommerce(props) {
             text: 'Publicar Nuevo Lote',
           },
           { text: 'Usuarios' },
+          {text: 'Donaciones'}
         ].map(({ text }, index) => (
           <ListItem
             button
@@ -200,6 +214,7 @@ function ProfileTempleteCommerce(props) {
 
           {display === 1 && <Orders orders={orders} />}
           {display === 4 && <Usuarios users={users} />}
+          {display === 5 && <Donations commerceDonations={commerceDonations} ongDonations={ongDonations} />}
         </Box>
       </Box>
     </div>

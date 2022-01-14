@@ -38,12 +38,7 @@ const createCompany = async (req, res) => {
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-<<<<<<< HEAD
-
-    const { tempFilePath } = req.files.file;
-=======
 const { tempFilePath } = req.files.file;
->>>>>>> 27b7b1bc54a84cbabe933d8a5dfa998025c7fef6
 
     const { secure_url: secureUrl, public_id: publicId } =
       await cloudinary.uploader.upload(tempFilePath);
