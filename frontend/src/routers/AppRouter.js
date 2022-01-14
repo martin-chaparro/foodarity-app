@@ -7,6 +7,7 @@ import Landing from '../Pages/LandingPage/Landing';
 import Register from '../Pages/Register/RegisterFormUser';
 import Loading from '../Components/Loading/Loading';
 import ProfileCompany from '../Pages/ProfileCompany/ProfileCompany';
+import CompanyVisualizer from '../Pages/CompanyVisualizer/CompanyVisualizer';
 
 import { PrivateRoute } from './PrivateRoute';
 import { RollSelectorRouter } from './RollSelectorRouter';
@@ -28,10 +29,12 @@ export function AppRouter() {
     <BrowserRouter>
       <Routes>
         <Route path="/profilecompany" element={<ProfileCompany />} />
+        <Route path="/CompanyVisualizer" element={<CompanyVisualizer />} />
         <Route path="/home" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Landing />} />
         <Route path="/register" element={<Register />} />
+
         <Route
           path="/rollselector/*"
           element={

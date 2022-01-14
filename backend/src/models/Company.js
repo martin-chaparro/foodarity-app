@@ -69,6 +69,7 @@ class Company extends Model {
     this.hasMany(models.User);
     this.hasOne(models.Address, { as: 'address' });
     this.hasMany(models.Product);
+    this.hasMany(models.Order);
   }
 }
 
