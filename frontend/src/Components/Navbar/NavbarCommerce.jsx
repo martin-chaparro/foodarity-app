@@ -130,7 +130,7 @@ export default function PrimarySearchAppBar() {
       </MenuItem>
       <MenuItem>
         <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <LocalPoliceIcon fontsize="small" />
+          <LocalPoliceIcon fontSize="small" />
         </IconButton>
         <p>Politica de Uso</p>
       </MenuItem>
@@ -198,7 +198,7 @@ export default function PrimarySearchAppBar() {
       </MenuItem>
       <MenuItem>
         <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <LocalPoliceIcon fontsize="small" />
+          <LocalPoliceIcon fontSize="small" />
         </IconButton>
         <p>Politica de Uso</p>
       </MenuItem>

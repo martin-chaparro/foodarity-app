@@ -30,3 +30,35 @@
   background-color: #d68584;
   cursor: pointer;
 }
+
+.divupload {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.inputfoto {
+  width: 180px;
+  z-index: 1;
+  position: relative;
+  left: 70px;
+  opacity: 0;
+}
+
+.logo {
+  position: relative;
+  right: 100px;
+}
+
+.btninput {
+  width: 60px;
+  position: relative;
+  left: 10px;
+  height: 70px;
+  cursor: pointer;
+}
+
+.imagecontent {
+  display: flex;
+  justify-content: flex-start;
+}

@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@mui/material/AppBar';
@@ -20,6 +21,7 @@ import PostNewBatch from './PostNewBatch';
 import PublishedProduct from './PublishedProduct';
 import PrimarySearchAppBar from '../Navbar/NavbarCommerce';
 import Orders from './Orders';
+import Usuarios from './Usuarios';
 import styles from './ProfileTempleteCommerce.module.css';
 
 const drawerWidth = 240;
@@ -56,6 +58,7 @@ function ProfileTempleteCommerce(props) {
           {
             text: 'Publicar Nuevo Lote',
           },
+          { text: 'Usuarios' },
         ].map(({ text }, index) => (
           <ListItem
             button
@@ -168,6 +171,7 @@ function ProfileTempleteCommerce(props) {
           {display === 3 && <PostNewBatch />}
 
           {display === 1 && <Orders />}
+          {display === 4 && <Usuarios />}
         </Box>
       </Box>
     </div>

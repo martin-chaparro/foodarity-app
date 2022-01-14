@@ -529,3 +529,9 @@
   background-color: #d68584;
   cursor: pointer;
 }
+
+.inputcontenedor {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

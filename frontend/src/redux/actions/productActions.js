@@ -1,3 +1,4 @@
+/* eslint-disable func-names */
 import axios from 'axios';
 
 import types from '../types/productTypes';
@@ -62,3 +63,46 @@ export function searchProducts(name) {
     payload: name,
   };
 }
+
+export function postProduct(payload, photo) {
+  // eslint-disable-next-line no-unused-vars
+  // eslint-disable-next-line func-names
+  // eslint-disable-next-line no-unused-vars
+
+  console.log(payload);
+  // eslint-disable-next-line no-unused-vars
+  return async function (dispatch) {
+    try {
+      const form = new FormData();
+
+      form.append('photo', photo);
+      form.append('data', JSON.stringify(payload));
+
+      const response = await axios.post(
+        'http://localhost:4000/api/v1/products',
+        form
+      );
+
+      return response;
+    } catch (err) {
+      return console.log(err);
+    }
+  };
+}
+
+// export function getCategories() {
+
+//   return async function (dispatch) {
+
+//     try {
+//       return console.log(err);
+//       const response= await axios.get('http://localhost:4000/api/v1/products/categories')
+
+//     } catch (err) {
+
+//       console.log(err)
+//     }
+
+//   }
+
+// }

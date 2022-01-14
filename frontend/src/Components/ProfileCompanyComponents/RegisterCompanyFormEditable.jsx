@@ -228,11 +228,16 @@ export default function RegisterCompanyFormEditable() {
       <form autoComplete="off" className={styles.form} onSubmit={handleSubmit}>
         <div className={styles.containerLogo}>
           <div className={styles.commerceLogo}>
-            <img
-              className={styles.imgLogo}
-              src={CommerceLogo}
-              alt="CommerLogo"
-            />
+            <div className={styles.inputcontenedor}>
+              <input className={styles.btninput} type="file" name="foto" />
+            </div>
+            <div className={styles.logocomercio}>
+              <img
+                className={styles.imgLogo}
+                src={CommerceLogo}
+                alt="CommerLogo"
+              />
+            </div>
           </div>
         </div>
         <div className={styles.divsInputs}>

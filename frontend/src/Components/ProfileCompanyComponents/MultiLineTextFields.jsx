@@ -2,7 +2,7 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 
-export default function Descipcion() {
+export default function Descipcion({ handleOnChange, input }) {
   // eslint-disable-next-line no-unused-vars
   const [value, setValue] = React.useState('Controlled');
 
@@ -25,8 +25,12 @@ export default function Descipcion() {
         label="Descripcion"
         multiline
         rows={4}
-        defaultValue=""
+        onChange={(e) => {
+          handleOnChange(e);
+        }}
+        value={input.description}
         variant="filled"
+        name="description"
       />
     </Box>
   );
