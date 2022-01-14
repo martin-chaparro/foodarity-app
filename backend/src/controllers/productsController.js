@@ -127,7 +127,7 @@ const getProducts = async (req, res) => {
         id: categoryId,
       };
     }
-    if (categoryName ==='' || categoryId === '') {
+    if (categoryName ==='') {
       delete include[0].where
     }
 
