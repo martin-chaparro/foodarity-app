@@ -18,7 +18,7 @@ import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
 import CircularProgress from '@mui/material/CircularProgress';
 
-import perfil from '../../../../assets/perfil.jpeg';
+import perfil from '../../../../assets/avatar_default.png';
 
 import { Layout } from '../../../layout/Layout';
 
