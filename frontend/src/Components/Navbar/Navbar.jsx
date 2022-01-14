@@ -14,6 +14,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import HelpIcon from '@mui/icons-material/Help';
 import LoginIcon from '@mui/icons-material/Login';
 import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
+import StoreIcon from '@mui/icons-material/Store';
 import Logo from '../../assets/Mobil-Full-Header-Logo.png';
 import Avatar from './Avatar';
 import Drawer from '../Drawer/Drawer';
@@ -63,8 +64,22 @@ export default function Navbar({ filtrado }) {
         <IconButton size="large" aria-label="show 4 new mails" color="inherit">
           <Avatar />
         </IconButton>
-        <Link to="/userprofile" textDecoration="none">
+        <Link to="/profileuser" textDecoration="none">
           Mi Cuenta
+        </Link>
+      </MenuItem>
+      <MenuItem>
+        <IconButton
+          size="large"
+          aria-label="account of current user"
+          aria-controls="vista-mobile"
+          aria-haspopup="true"
+          color="secondary"
+        >
+          <StoreIcon />
+        </IconButton>
+        <Link to="/profilecompany" textDecoration="none">
+          Portal Empresa
         </Link>
       </MenuItem>
       <MenuItem>
@@ -80,10 +95,10 @@ export default function Navbar({ filtrado }) {
           color="inherit"
         >
           <Badge color="secondary">
-            <ShoppingCartIcon color="primary" />
+            <ShoppingCartIcon color="secondary" />
           </Badge>
         </IconButton>
-        <p>Carrito de Compras</p>
+        <p>Mi Carrito</p>
       </MenuItem>
       <MenuItem>
         <IconButton
@@ -143,6 +158,34 @@ export default function Navbar({ filtrado }) {
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
+        <IconButton
+          size="large"
+          aria-label="account of current user"
+          aria-controls="vista-mobile"
+          aria-haspopup="true"
+          color="secondary"
+        >
+          <Avatar />
+        </IconButton>
+        <Link to="/profileuser" textDecoration="none">
+          Mi Cuenta
+        </Link>
+      </MenuItem>
+      <MenuItem>
+        <IconButton
+          size="large"
+          aria-label="account of current user"
+          aria-controls="vista-mobile"
+          aria-haspopup="true"
+          color="secondary"
+        >
+          <StoreIcon />
+        </IconButton>
+        <Link to="/profilecompany" textDecoration="none">
+          Portal Empresa
+        </Link>
+      </MenuItem>
+      <MenuItem>
         <IconButton size="large" aria-label="show 4 new mails" color="inherit">
           <Badge>
             <FavoriteIcon fontSize="small" color="secondary" />
@@ -160,21 +203,7 @@ export default function Navbar({ filtrado }) {
             <ShoppingCartIcon color="secondary" />
           </Badge>
         </IconButton>
-        <p>Carrito de Compras</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="account of current user"
-          aria-controls="vista-mobile"
-          aria-haspopup="true"
-          color="secondary"
-        >
-          <Avatar />
-        </IconButton>
-        <Link to="/userprofile" textDecoration="none">
-          Mi Cuenta
-        </Link>
+        <p>Mi Carrito</p>
       </MenuItem>
       <MenuItem>
         <IconButton
