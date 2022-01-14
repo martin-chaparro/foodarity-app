@@ -13,6 +13,9 @@ export const startCheking = () => {
   return async (dispatch) => {
     try {
       const token = localStorage.getItem('token') || '';
+      const profile = localStorage.getItem('profile') || '';
+      // console.log(JSON.parse(profile))
+
       if (token !== '') {
         const response = await apiWithToken.get('auth/renew');
         const { id, roleId } = response.data;
@@ -23,6 +26,9 @@ export const startCheking = () => {
             roleId,
           })
         );
+        if (profile !== '') {
+          dispatch(saveUserProfile(JSON.parse(profile)));
+        }
       } else {
         dispatch(checkingFinish());
       }
@@ -38,6 +44,10 @@ export const startLogin = (email, password) => {
       const response = await api.post('/auth', { email, password });
       const { id, token, roleId, name, photo, socialPhoto } = response.data;
       localStorage.setItem('token', token);
+      localStorage.setItem(
+        'profile',
+        JSON.stringify({ name, photo, socialPhoto })
+      );
       dispatch(
         login({
           id,
@@ -58,6 +68,10 @@ export const startGoogleLogin = (tokenId) => {
       const response = await api.post('/auth/social/google', { tokenId });
       const { id, roleId, token, name, photo, socialPhoto } = response.data;
       localStorage.setItem('token', token);
+      localStorage.setItem(
+        'profile',
+        JSON.stringify({ name, photo, socialPhoto })
+      );
       dispatch(
         login({
           id,
