@@ -8,6 +8,7 @@ const authSocialRoutes = require('./authSocial');
 const statesRoutes = require('./states');
 const citiesRoutes = require('./cities');
 const productsRoutes = require('./products');
+const donationRoutes = require('./donation')
 const ordersRoutes = require('./orders');
 
 const router = new Router();
@@ -22,6 +23,7 @@ router.use('/auth/social', authSocialRoutes);
 router.use('/states', statesRoutes);
 router.use('/cities', citiesRoutes);
 router.use('/products', productsRoutes);
+router.use('/donation', donationRoutes);
 router.use('/orders', ordersRoutes);
 
 module.exports = router;

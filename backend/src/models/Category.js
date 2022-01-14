@@ -17,6 +17,8 @@ class Category extends Model {
 
   static associate(models) {
     this.hasMany(models.Product);
+    // se agrega una ForeingKey donationId a la tabla Donation
+    this.hasMany(models.Donation);
   }
 }
 
