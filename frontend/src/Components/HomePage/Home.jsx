@@ -73,10 +73,10 @@ export default function Home() {
         delete data[key];
       }
     });
-
+    /* 
     if (data.categoryName === allProductValues.categoryName) {
       data.categoryName = '';
-    }
+    } */
 
     setAllProductValues({ ...allProductValues, ...data, page: 1 });
   };
@@ -102,7 +102,7 @@ export default function Home() {
           /* products={allProducts.length}
           productsPerPage={productPerPage} */
         />
-        <FiltroWeb />
+        <FiltroWeb filtrado={filtrado} />
         <div className={styles.homecont}>
           {/* <div className={styles.contweb}>
             <ProfileCard />

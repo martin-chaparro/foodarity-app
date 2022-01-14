@@ -13,6 +13,9 @@ export default function BannerSearch({ search, lote }) {
           </h1>
           <div className={estilo.search}>
             <SearchBar sx={{ marginTop: '10em' }} search={search} lote={lote} />
+            {/* <span className={estilo.span}>
+              Busque los productos más frescos...
+            </span> */}
           </div>
         </div>
       </div>

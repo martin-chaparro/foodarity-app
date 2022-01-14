@@ -1,4 +1,6 @@
+/* eslint-disable func-names */
 import axios from 'axios';
+import { apiWithToken } from '../../services/api';
 
 import types from '../types/productTypes';
 
@@ -13,7 +15,6 @@ export const agregarProducto = () => async (dispatch) => {
     return console.log(err);
   }
 };
-
 
 export function getProducts(params = {}) {
   const {
@@ -61,5 +62,49 @@ export function searchProducts(name) {
     type: types.searchProducts,
     // eslint-disable-next-line no-undef
     payload: name,
+  };
+}
+
+export function postProduct(payload, photo) {
+  // eslint-disable-next-line no-unused-vars
+  // eslint-disable-next-line func-names
+  // eslint-disable-next-line no-unused-vars
+
+  console.log(payload);
+
+  // eslint-disable-next-line no-unused-vars
+  return async function (dispatch) {
+    try {
+      const form = new FormData();
+
+      form.append('file', photo);
+      form.append('data', JSON.stringify(payload));
+
+      const response = await apiWithToken.post(
+        'http://localhost:4000/api/v1/products',
+        form
+      );
+
+      return response;
+    } catch (err) {
+      return console.log(err);
+    }
+  };
+}
+
+export function getCategories() {
+  return async function (dispatch) {
+    try {
+      const response = await axios.get(
+        'http://localhost:4000/api/v1/products/categories'
+      );
+
+      return dispatch({
+        type: types.getCategories,
+        payload: response.data,
+      });
+    } catch (err) {
+      return console.log(err);
+    }
   };
 }
