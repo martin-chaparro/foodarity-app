@@ -116,6 +116,7 @@ const searchCompany = async (req, res) => {
     const { id } = req.params;
     const company = await Company.findByPk(id, {
       include: [
+        { model: User, attributes:['id', 'name' , 'email'] },
         { model: CompanyType, as: 'type', attributes: ['type'] },
         {
           model: Address,
@@ -125,6 +126,7 @@ const searchCompany = async (req, res) => {
             { model: State, as: 'state' },
           ],
         },
+        
       ],
       attributes: {
         exclude: ['createdAt', 'updatedAt', 'CompanyTypeId'],

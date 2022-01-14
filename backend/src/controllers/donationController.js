@@ -77,40 +77,55 @@ const postDonation = async (req, res) => {
 
 
 
-// una ONG puede ver las donaciones recibidas
+// una ONG puede ver las donaciones recibidas //VER RUTA
 const getDonationsByOng = async (req, res) => {
   const ownerId = req.userId;
 
   const ong = await Company.findByPk(ownerId);
+  
   if(!ong){
     return res.status(401).json({ msg: 'La ONG no existe' });
   }
-
   if(ong.type_id !== 2){
     return res.status(401).json({
-      msg: 'Solo las companias tipo ONG recibir donaciones',
+      msg: 'Solo las companias tipo ONG pueden realizar esta accion',
     });
   }
+  
 
   try {
+    // const listDonations = await Donation.findAll({
+    //   include: [
+    //     { model: Company, as: 'commerce', attributes: ['areaCode','phone','email','website','banner','status','deleted','ownerId','createAt','updateAt','type_id']},
+    //     { model: User, as: 'publisher',attributes: {
+    //       exclude: [
+    //         'phone',
+    //         'createdAt',
+    //         'updatedAt',
+    //         'password',
+    //         'status',
+    //         'CompanyId',
+    //         'RoleId',
+    //         'role_id',
+    //       ],
+    //     }, },
+    //     { model: Category, as: 'category', attributes: {exclude:[ 'createdAt','updatedAt']}},
+    //   ], attributes: {exclude:['createdAt', 'updatedAt'] },
+    
+    //   where: {
+    //     ongId: ownerId,
+    //   },
+    // });
+    // return res.status(200).json(listDonations);
     const listDonations = await Donation.findAll({
       include: [
-        { model: Company, as: 'commerce', attributes: ['areaCode','phone','email','website','banner','status','deleted','ownerId','createAt','updateAt','type_id']},
-        { model: User, as: 'publisher',attributes: {
-          exclude: [
-            'phone',
-            'createdAt',
-            'updatedAt',
-            'password',
-            'status',
-            'CompanyId',
-            'RoleId',
-            'role_id',
-          ],
-        }, },
-        { model: Category, as: 'category', attributes: {exclude:[ 'createdAt','updatedAt']}},
+        { model: Company, as: 'commerce', attributes: ['id', 'name']},
+        { model: Category, as: 'category', attributes: ['name']},
       ], attributes: {exclude:['createdAt', 'updatedAt'] },
       order: [['lote', 'ASC']],
+      where: {
+        ongId: ownerId,
+      },
     });
     return res.status(200).json(listDonations);
   } catch (error) {
@@ -136,8 +151,8 @@ const getDonationsByCommerce = async (req, res) => {
 
     const listDonations = await Donation.findAll({
       include: [
-        { model: Company, as: 'ong', attributes: ['areaCode','phone','email','website','banner','status','deleted','ownerId','createAt','updateAt','type_id']},
-        { model: Category, as: 'category', attributes: {exclude:[ 'createdAt','updatedAt']}},
+        { model: Company, as: 'ong', attributes: ['id', 'name']},
+        { model: Category, as: 'category', attributes: ['name']},
       ], attributes: {exclude:['createdAt', 'updatedAt'] },
       order: [['lote', 'ASC']],
       where: {
