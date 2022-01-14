@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { apiWithToken } from '../../services/api';
-
 import styles from './PostNewBatch.module.css';
 
 import {
@@ -14,16 +12,11 @@ import {
 import { postProduct, getCategories } from '../../redux/actions/productActions';
 import Descripcion from './MultiLineTextFields';
 import logo from '../../assets/user-6.png';
-// import { object } from 'prop-types';
 
 export default function PostNewBatch() {
   const dispatch = useDispatch();
 
   const categories = useSelector((state) => state.product.categories);
-
-  const [orders, setOrders] = useState({});
-
-  const [company, setCompany] = useState({});
 
   const [photo, setPhoto] = useState({});
 
@@ -36,30 +29,6 @@ export default function PostNewBatch() {
     expirationDate: '',
     category: '',
   });
-
-  // async function getCompany() {
-  //   try {
-  //     const response = await apiWithToken.get(`/companies/byuser`);
-
-  //     console.log(response.data);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // }
-
-  useEffect(() => {
-    apiWithToken.get(`/companies/byuser`).then((response) => {
-      setCompany(response.data);
-    });
-
-    dispatch(getCategories());
-  }, []);
-
-  useEffect(() => {
-    apiWithToken
-      .get('/orders/company')
-      .then((response) => setOrders(response.data));
-  }, []);
 
   function validate(inputs) {
     const errors = {};
@@ -141,7 +110,7 @@ export default function PostNewBatch() {
     const year = arr.shift();
     arr.push(year);
     const expirationDate = arr.join('/');
-
+    getCategories();
     setInput({ ...input, expirationDate });
   }, [input.expirationDate]);
 
@@ -175,15 +144,6 @@ export default function PostNewBatch() {
             </div>
           </div>
 
-          <button
-            type="button"
-            onClick={() => {
-              console.log(company);
-              console.log(orders);
-            }}
-          >
-            x
-          </button>
           <div className={styles.cont}>
             <div className={styles.contname}>
               <div>

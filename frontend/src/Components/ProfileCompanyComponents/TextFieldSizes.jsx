@@ -4,10 +4,8 @@ import TextField from '@mui/material/TextField';
 import FilledInput from '@mui/material/FilledInput';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
-
 import InputLabel from '@mui/material/InputLabel';
 import InputAdornment from '@mui/material/InputAdornment';
-
 import FormControl from '@mui/material/FormControl';
 
 export function NuevoLote({ handleOnChange, input }) {
