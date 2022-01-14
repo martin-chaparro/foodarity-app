@@ -10,7 +10,7 @@ import HelpIcon from '@mui/icons-material/Help';
 import Badge from '@mui/material/Badge';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
+// import MenuIcon from '@mui/icons-material/Menu';
 import LocalPoliceIcon from '@mui/icons-material/LocalPolice';
 // import AccountCircle from '@mui/icons-material/AccountCircle';
 import MoreIcon from '@mui/icons-material/MoreVert';
@@ -85,6 +85,7 @@ export default function PrimarySearchAppBar() {
   };
 
   const menuId = 'primary-search-account-menu';
+  // eslint-disable-next-line no-unused-vars
   const renderMenu = (
     // <Menu
     //   anchorEl={anchorEl}
@@ -129,7 +130,7 @@ export default function PrimarySearchAppBar() {
       </MenuItem>
       <MenuItem>
         <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <LocalPoliceIcon fontsize="small" />
+          <LocalPoliceIcon fontSize="small" />
         </IconButton>
         <p>Politica de Uso</p>
       </MenuItem>
@@ -172,6 +173,7 @@ export default function PrimarySearchAppBar() {
   );
 
   const mobileMenuId = 'primary-search-account-menu-mobile';
+  // eslint-disable-next-line no-unused-vars
   const renderMobileMenu = (
     <Menu
       anchorEl={mobileMoreAnchorEl}
@@ -196,7 +198,7 @@ export default function PrimarySearchAppBar() {
       </MenuItem>
       <MenuItem>
         <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <LocalPoliceIcon fontsize="small" />
+          <LocalPoliceIcon fontSize="small" />
         </IconButton>
         <p>Politica de Uso</p>
       </MenuItem>
@@ -242,7 +244,7 @@ export default function PrimarySearchAppBar() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton
+          {/* <IconButton
             size="large"
             edge="start"
             color="inherit"
@@ -250,7 +252,7 @@ export default function PrimarySearchAppBar() {
             sx={{ mr: 2 }}
           >
             <MenuIcon />
-          </IconButton>
+          </IconButton> */}
           <Link to="/">
             <img src={Logo} alt="Logo" />
           </Link>

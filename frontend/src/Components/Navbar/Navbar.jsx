@@ -63,11 +63,13 @@ export default function Navbar({ filtrado }) {
         <IconButton size="large" aria-label="show 4 new mails" color="inherit">
           <Avatar />
         </IconButton>
-        <p>Mi Cuenta</p>
+        <Link to="/userprofile" textDecoration="none">
+          Mi Cuenta
+        </Link>
       </MenuItem>
       <MenuItem>
         <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <FavoriteIcon fontsize="small" color="secondary" />
+          <FavoriteIcon fontSize="small" color="secondary" />
         </IconButton>
         <p>Favoritos</p>
       </MenuItem>
@@ -77,7 +79,7 @@ export default function Navbar({ filtrado }) {
           aria-label="show 17 new notifications"
           color="inherit"
         >
-          <Badge badgeContent={17} color="secondary">
+          <Badge color="secondary">
             <ShoppingCartIcon color="primary" />
           </Badge>
         </IconButton>
@@ -143,7 +145,7 @@ export default function Navbar({ filtrado }) {
       <MenuItem>
         <IconButton size="large" aria-label="show 4 new mails" color="inherit">
           <Badge>
-            <FavoriteIcon fontsize="small" color="secondary" />
+            <FavoriteIcon fontSize="small" color="secondary" />
           </Badge>
         </IconButton>
         <p>Favoritos</p>
@@ -170,7 +172,9 @@ export default function Navbar({ filtrado }) {
         >
           <Avatar />
         </IconButton>
-        <p>Mi Cuenta</p>
+        <Link to="/userprofile" textDecoration="none">
+          Mi Cuenta
+        </Link>
       </MenuItem>
       <MenuItem>
         <IconButton

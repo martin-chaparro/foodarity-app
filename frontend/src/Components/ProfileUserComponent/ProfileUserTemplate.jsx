@@ -15,10 +15,11 @@ import MailIcon from '@mui/icons-material/Mail';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
+import PrimarySearchAppBar from '../Navbar/NavbarCommerce';
 
 const drawerWidth = 240;
 
-function ProfileTempleteCommerce(props) {
+function ProfileUserTemplate(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -40,16 +41,16 @@ function ProfileTempleteCommerce(props) {
       <List>
         {[
           {
-            text: 'Detalles de Cuenta',
+            text: 'Datos usuarios',
           },
           {
-            text: 'Ordenes',
+            text: 'Mis Pedidos',
           },
           {
-            text: 'Productos Publicados',
+            text: 'Locales Favoritos',
           },
           {
-            text: 'Publicar Nuevo Lote',
+            text: 'Comentarios',
           },
         ].map(({ text }, index) => (
           <ListItem
@@ -93,6 +94,7 @@ function ProfileTempleteCommerce(props) {
           ml: { sm: `${drawerWidth}px` },
         }}
       >
+        <PrimarySearchAppBar />
         <Toolbar>
           <IconButton
             color="inherit"
@@ -104,7 +106,7 @@ function ProfileTempleteCommerce(props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            PANADERIA BUENOS AIRES
+            LILIANA
           </Typography>
         </Toolbar>
       </AppBar>
@@ -155,18 +157,18 @@ function ProfileTempleteCommerce(props) {
         }}
       >
         <Toolbar display="none" />
-        {/* {display === 0 && <CompanyDetail />}
+        {display === 0 && <h1>Datos Usuarios</h1>}
 
-        {display === 2 && <PublishedProduct />}
-        {display === 3 && <PostNewBatch />}
+        {display === 2 && <h1>LOCALES FAVORITOS</h1>}
+        {display === 3 && <h1>COMENTARIOS</h1>}
 
-        {display === 1 && <h1>ORDENES DE COMPRA </h1>} */}
+        {display === 1 && <h1>MIS PEDIDOS</h1>}
       </Box>
     </Box>
   );
 }
 
-ProfileTempleteCommerce.propTypes = {
+ProfileUserTemplate.propTypes = {
   /**
    * Injected by the documentation to work in an iframe.
    * You won't need it on your project.
@@ -175,4 +177,4 @@ ProfileTempleteCommerce.propTypes = {
   window: PropTypes.func,
 };
 
-export default ProfileTempleteCommerce;
+export default ProfileUserTemplate;
