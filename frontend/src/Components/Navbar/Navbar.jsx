@@ -10,8 +10,10 @@ import Menu from '@mui/material/Menu';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import LogoutIcon from '@mui/icons-material/Logout';
 import HelpIcon from '@mui/icons-material/Help';
+import LoginIcon from '@mui/icons-material/Login';
+import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
 import Logo from '../../assets/Mobil-Full-Header-Logo.png';
 import Avatar from './Avatar';
 import Drawer from '../Drawer/Drawer';
@@ -98,8 +100,21 @@ export default function Navbar({ filtrado }) {
           size="large"
           aria-label="show 17 new notifications"
           color="inherit"
+          href="/"
         >
-          <ExitToAppIcon color="secondary" />
+          <LoginIcon color="secondary" />
+        </IconButton>
+        <Link to="/login" textDecoration="none">
+          Iniciar Sesión
+        </Link>
+      </MenuItem>
+      <MenuItem>
+        <IconButton
+          size="large"
+          aria-label="show 17 new notifications"
+          color="inherit"
+        >
+          <LogoutIcon color="secondary" />
         </IconButton>
         <Link to="/" textDecoration="none">
           Cerrar Sesión
@@ -155,7 +170,20 @@ export default function Navbar({ filtrado }) {
         >
           <Avatar />
         </IconButton>
-        <p>Perfil</p>
+        <p>Mi Cuenta</p>
+      </MenuItem>
+      <MenuItem>
+        <IconButton
+          size="large"
+          aria-label="show 17 new notifications"
+          color="inherit"
+          href="/register"
+        >
+          <AppRegistrationIcon color="secondary" />
+        </IconButton>
+        <Link to="/login" textDecoration="none">
+          Registrarse
+        </Link>
       </MenuItem>
       <MenuItem>
         <IconButton
@@ -164,7 +192,20 @@ export default function Navbar({ filtrado }) {
           color="inherit"
           href="/"
         >
-          <ExitToAppIcon color="secondary" />
+          <LoginIcon color="secondary" />
+        </IconButton>
+        <Link to="/login" textDecoration="none">
+          Iniciar Sesión
+        </Link>
+      </MenuItem>
+      <MenuItem>
+        <IconButton
+          size="large"
+          aria-label="show 17 new notifications"
+          color="inherit"
+          href="/"
+        >
+          <LogoutIcon color="secondary" />
         </IconButton>
         <Link to="/" textDecoration="none">
           Cerrar Sesión
