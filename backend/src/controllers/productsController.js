@@ -127,6 +127,9 @@ const getProducts = async (req, res) => {
         id: categoryId,
       };
     }
+    if (categoryName ==='' || categoryId === '') {
+      delete include[0].where
+    }
 
     if (minPrice && maxPrice) {
       whereAttr.price = { [Op.between]: [minPrice, maxPrice] };
