@@ -69,7 +69,7 @@ export default function Navbar({ filtrado }) {
       </MenuItem>
       <MenuItem>
         <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <FavoriteIcon fontsize="small" color="secondary" />
+          <FavoriteIcon fontSize="small" color="secondary" />
         </IconButton>
         <p>Favoritos</p>
       </MenuItem>
@@ -145,7 +145,7 @@ export default function Navbar({ filtrado }) {
       <MenuItem>
         <IconButton size="large" aria-label="show 4 new mails" color="inherit">
           <Badge>
-            <FavoriteIcon fontsize="small" color="secondary" />
+            <FavoriteIcon fontSize="small" color="secondary" />
           </Badge>
         </IconButton>
         <p>Favoritos</p>

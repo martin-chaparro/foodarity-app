@@ -4,4 +4,5 @@ export default {
   getProducts: 'GET_PRODUCTS',
   searchProducts: 'SEARCH_PRODUCT',
   productLoading: 'LOADING_PRODUCT',
+  getCategories: 'GET_CATEGORIES',
 };

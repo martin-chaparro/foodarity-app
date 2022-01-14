@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-undef */
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -9,10 +10,9 @@ import { startGoogleLogin, startLogin } from '../../redux/actions/authActions';
 import Header from '../../Components/Header/Header';
 import estilos from './Login.module.css';
 
-
 export default function Login() {
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [errors, setErrors] = useState({});
 
@@ -70,12 +70,12 @@ export default function Login() {
     });
   };
 
-  const responseGoogleSucces = ({tokenId}) => {
-    dispatch(startGoogleLogin(tokenId))
-  }
+  const responseGoogleSucces = ({ tokenId }) => {
+    dispatch(startGoogleLogin(tokenId));
+  };
   const responseGoogleFail = () => {
-    navigate("/login", { replace: true });
-  }
+    navigate('/login', { replace: true });
+  };
 
   // Inicio
 
@@ -85,6 +85,7 @@ export default function Login() {
   // };
   const handleSubmit = (e) => {
     e.preventDefault(e);
+
     dispatch(startLogin(input.email, input.password));
   };
 
@@ -145,13 +146,14 @@ export default function Login() {
           >
             Ingresar
           </Button>
+
           <GoogleLogin
             clientId="327655390134-3dkok4tsgubva7v5gj7drncddv260lor.apps.googleusercontent.com"
             buttonText="Continuar con Google"
             onSuccess={responseGoogleSucces}
             onFailure={responseGoogleFail}
-            cookiePolicy='single_host_origin'
-            style={{width: '100%'}}
+            cookiePolicy="single_host_origin"
+            style={{ width: '100%' }}
           />
         </div>
       </div>
