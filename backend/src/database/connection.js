@@ -42,7 +42,7 @@ State.associate(connection.models);
 Category.associate(connection.models);
 Product.associate(connection.models);
 Order.associate(connection.models);
-PaymentMethod..associate(connection.models);
+PaymentMethod.associate(connection.models);
 Donation.associate(connection.models);
 
 module.exports = connection;
