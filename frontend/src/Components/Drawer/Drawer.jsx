@@ -67,7 +67,7 @@ export default function Drawer({ filtrado }) {
           'Veganos',
           'Otros',
         ].map((text) => (
-          <ListItem button key={text} onClick={() => filtrado(text)}>
+          <ListItem button key={text} onClick={() => filtrado({categoryName : text})}>
             <ListItemIcon>
               <LocalDiningIcon color="secondary" />
             </ListItemIcon>

@@ -58,8 +58,26 @@ export default function Home() {
     setAllProductValues({ ...allProductValues, page });
   };
 
-  const filtrado = (categoryName) => {
-    setAllProductValues({ ...allProductValues, categoryName, page: 1 });
+  const filtrado = (params = {}) => {
+    const data = {
+      categoryId: params.categoryId || null,
+      categoryName: params.categoryName || null,
+      order: params.order || null,
+      minPrice: params.minPrice || null,
+      maxPrice: params.maxPrice || null,
+      expirationDate: params.expirationDate || null,
+    };
+    Object.keys(data).forEach((key) => {
+      if (!data[key]) {
+        delete data[key];
+      }
+    });
+
+    if (data.categoryName === allProductValues.categoryName) {
+      data.categoryName = '';
+    }
+
+    setAllProductValues({ ...allProductValues, ...data, page: 1 });
   };
 
   const search = (lote) => {
