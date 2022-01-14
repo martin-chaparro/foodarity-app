@@ -12,13 +12,11 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import LogoutIcon from '@mui/icons-material/Logout';
 import HelpIcon from '@mui/icons-material/Help';
-import LoginIcon from '@mui/icons-material/Login';
-import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
+import HomeIcon from '@mui/icons-material/Home';
 import Logo from '../../assets/Mobil-Full-Header-Logo.png';
 import Avatar from './Avatar';
-import Drawer from '../Drawer/Drawer';
 
-export default function Navbar({ filtrado }) {
+export default function Navbar() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -68,6 +66,20 @@ export default function Navbar({ filtrado }) {
         </Link>
       </MenuItem>
       <MenuItem>
+        <IconButton
+          size="large"
+          aria-label="account of current user"
+          aria-controls="vista-mobile"
+          aria-haspopup="true"
+          color="secondary"
+        >
+          <HomeIcon />
+        </IconButton>
+        <Link to="/home" textDecoration="none">
+          Home
+        </Link>
+      </MenuItem>
+      <MenuItem>
         <IconButton size="large" aria-label="show 4 new mails" color="inherit">
           <FavoriteIcon fontsize="small" color="secondary" />
         </IconButton>
@@ -79,7 +91,7 @@ export default function Navbar({ filtrado }) {
           aria-label="show 17 new notifications"
           color="inherit"
         >
-          <Badge color="secondary">
+          <Badge badgeContent={17} color="secondary">
             <ShoppingCartIcon color="primary" />
           </Badge>
         </IconButton>
@@ -96,19 +108,6 @@ export default function Navbar({ filtrado }) {
           <HelpIcon color="secondary" />
         </IconButton>
         <p>Ayuda</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="show 17 new notifications"
-          color="inherit"
-          href="/"
-        >
-          <LoginIcon color="secondary" />
-        </IconButton>
-        <Link to="/login" textDecoration="none">
-          Iniciar Sesión
-        </Link>
       </MenuItem>
       <MenuItem>
         <IconButton
@@ -143,6 +142,35 @@ export default function Navbar({ filtrado }) {
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
+        <IconButton
+          size="large"
+          aria-label="account of current user"
+          aria-controls="vista-mobile"
+          aria-haspopup="true"
+          color="secondary"
+        >
+          <Avatar />
+        </IconButton>
+        <Link to="/userprofile" textDecoration="none">
+          Mi Cuenta
+        </Link>
+      </MenuItem>
+      <MenuItem>
+        <IconButton
+          size="large"
+          aria-label="account of current user"
+          aria-controls="vista-mobile"
+          aria-haspopup="true"
+          color="secondary"
+        >
+          <HomeIcon />
+        </IconButton>
+        <Link to="/home" textDecoration="none">
+          Home
+        </Link>
+      </MenuItem>
+
+      <MenuItem>
         <IconButton size="large" aria-label="show 4 new mails" color="inherit">
           <Badge>
             <FavoriteIcon fontsize="small" color="secondary" />
@@ -165,46 +193,6 @@ export default function Navbar({ filtrado }) {
       <MenuItem>
         <IconButton
           size="large"
-          aria-label="account of current user"
-          aria-controls="vista-mobile"
-          aria-haspopup="true"
-          color="secondary"
-        >
-          <Avatar />
-        </IconButton>
-        <Link to="/userprofile" textDecoration="none">
-          Mi Cuenta
-        </Link>
-      </MenuItem>
-      <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="show 17 new notifications"
-          color="inherit"
-          href="/register"
-        >
-          <AppRegistrationIcon color="secondary" />
-        </IconButton>
-        <Link to="/login" textDecoration="none">
-          Registrarse
-        </Link>
-      </MenuItem>
-      <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="show 17 new notifications"
-          color="inherit"
-          href="/"
-        >
-          <LoginIcon color="secondary" />
-        </IconButton>
-        <Link to="/login" textDecoration="none">
-          Iniciar Sesión
-        </Link>
-      </MenuItem>
-      <MenuItem>
-        <IconButton
-          size="large"
           aria-label="show 17 new notifications"
           color="inherit"
           href="/"
@@ -220,17 +208,8 @@ export default function Navbar({ filtrado }) {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="fixed">
+      <AppBar position="flex">
         <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            sx={{ mr: 1, marginTop: 1 }}
-          >
-            {/* <Drawer filtrado={filtrado} /> */}
-          </IconButton>
           <Link to="/">
             <img src={Logo} alt="Logo" />
           </Link>
@@ -267,7 +246,6 @@ export default function Navbar({ filtrado }) {
             </IconButton>
           </Box>
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
-            <Drawer filtrado={filtrado} />
             <IconButton
               size="large"
               aria-label="show more"
