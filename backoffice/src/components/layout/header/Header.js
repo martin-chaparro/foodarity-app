@@ -17,7 +17,7 @@ import Avatar from '@mui/material/Avatar';
 
 import { toggleAsideMenu } from '../../../redux/actions/ui';
 
-import perfil from '../../../assets/perfil.jpeg';
+import defaultAvatar from '../../../assets/avatar_default.png';
 import { startLogout } from '../../../redux/actions/authActions';
 
 const drawerWidth = 240;
@@ -66,7 +66,7 @@ export const Header = () => {
     dispatch(startLogout());
   };
 
-  const profilePhoto = perfil;
+  const profilePhoto = defaultAvatar;
 
   // if (user.photo) {
   //   profilePhoto = user.photo.url;
