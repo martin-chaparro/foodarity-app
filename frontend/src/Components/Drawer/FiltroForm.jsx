@@ -59,7 +59,7 @@ function FiltroForm({ filtrado }) {
           <label>Filtrar por categoria:</label>
           <label>
             <select name='categoryName' onChange={handleChange}>
-              <option value=''>Ninguna</option>
+              <option value='Todas'>Ninguna</option>
             {categories && categories.map(category => 
               <option  key={category.name} value={category.name}>{category.name}</option>
             )}
