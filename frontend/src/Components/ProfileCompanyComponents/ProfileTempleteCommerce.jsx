@@ -1,5 +1,6 @@
 /* eslint-disable no-undef */
-import * as React from 'react';
+import React, { useEffect, useState } from 'react';
+
 import PropTypes from 'prop-types';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -16,6 +17,7 @@ import MailIcon from '@mui/icons-material/Mail';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
+import { apiWithToken } from '../../services/api';
 import CompanyDetail from './CompanyDetail';
 import PostNewBatch from './PostNewBatch';
 import PublishedProduct from './PublishedProduct';
@@ -27,6 +29,32 @@ import styles from './ProfileTempleteCommerce.module.css';
 const drawerWidth = 240;
 
 function ProfileTempleteCommerce(props) {
+  const [orders, setOrders] = useState({});
+
+  const [company, setCompany] = useState({});
+
+  const [products, setProducts] = useState({});
+
+  const [users, setUsers] = useState({});
+
+  useEffect(() => {
+    apiWithToken
+      .get('/orders/company')
+      .then((response) => setOrders(response.data));
+
+    apiWithToken.get(`/companies/byuser`).then((response) => {
+      setCompany(response.data);
+    });
+
+    apiWithToken.get('/products/byauth').then((response) => {
+      setProducts(response.data);
+    });
+
+    apiWithToken.get('/companies/users').then((response) => {
+      setUsers(response.data);
+    });
+  }, []);
+
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -165,13 +193,13 @@ function ProfileTempleteCommerce(props) {
           }}
         >
           <Toolbar display="none" />
-          {display === 0 && <CompanyDetail />}
+          {display === 0 && <CompanyDetail company={company} />}
 
-          {display === 2 && <PublishedProduct />}
+          {display === 2 && <PublishedProduct products={products} />}
           {display === 3 && <PostNewBatch />}
 
-          {display === 1 && <Orders />}
-          {display === 4 && <Usuarios />}
+          {display === 1 && <Orders orders={orders} />}
+          {display === 4 && <Usuarios users={users} />}
         </Box>
       </Box>
     </div>

@@ -12,7 +12,6 @@ import {
 import { postProduct, getCategories } from '../../redux/actions/productActions';
 import Descripcion from './MultiLineTextFields';
 import logo from '../../assets/user-6.png';
-// import { object } from 'prop-types';
 
 export default function PostNewBatch() {
   const dispatch = useDispatch();
@@ -26,21 +25,10 @@ export default function PostNewBatch() {
     description: '',
     quantity: 0,
     price: 0,
-    publicationDate: new Date()
-      .toLocaleDateString()
-      .split('/')
-      .reverse()
-      .join('-'),
+    publicationDate: new Date().toLocaleDateString('en-ca'),
     expirationDate: '',
     category: '',
   });
-
-  useEffect(() => {
-    dispatch(getCategories());
-    const companyId = localStorage.getItem('token');
-
-    console.log(companyId);
-  }, []);
 
   function validate(inputs) {
     const errors = {};
@@ -67,19 +55,16 @@ export default function PostNewBatch() {
       errors.category = 'Category is required';
     }
 
-    // if (inputs.photo === {}) {
-    //   errors.photo = 'Photo is required';
-    // }
+    if (inputs.photo === {}) {
+      errors.photo = 'Photo is required';
+    }
 
     return errors;
   }
 
   function handlePhoto(e) {
-    console.log(e);
-    console.log(e.target.files[0]);
     e.preventDefault();
     setPhoto(e.target.files[0]);
-    console.log(photo);
   }
 
   function handleOnChange(e) {
@@ -104,11 +89,8 @@ export default function PostNewBatch() {
         description: '',
         quantity: 0,
         price: 0,
-        publicationDate: new Date()
-          .toLocaleDateString()
-          .split('/')
-          .reverse()
-          .join('-'),
+        photo: {},
+        publicationDate: new Date().toLocaleDateString('en-ca'),
         expirationDate: '',
         category: '',
       });
@@ -120,6 +102,17 @@ export default function PostNewBatch() {
       alert('Complete todos los Campos');
     }
   }
+
+  useEffect(() => {
+    const date = input.expirationDate;
+
+    const arr = date.split('-');
+    const year = arr.shift();
+    arr.push(year);
+    const expirationDate = arr.join('/');
+    getCategories();
+    setInput({ ...input, expirationDate });
+  }, [input.expirationDate]);
 
   return (
     <div className={styles.formcont}>
