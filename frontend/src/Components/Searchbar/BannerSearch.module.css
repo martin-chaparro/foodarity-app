@@ -9,7 +9,8 @@ html {
   position: relative;
   height: 500px;
   overflow: hidden;
-  background-image: url(../../assets/hero4.png);
+  /* background-image: url(../../assets/gif3.gif); */
+  background-image: url(../../assets/gif5.gif);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -34,6 +35,14 @@ html {
 }
 
 .container h1 span {
+  border: 10px solid white;
+  padding: 6px 20px;
+  display: inline-block;
+  margin-bottom: 1em;
+  background-color: #ab7ab990;
+}
+
+.container h1 .span {
   border: 10px solid white;
   padding: 6px 20px;
   display: inline-block;

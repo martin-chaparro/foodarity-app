@@ -28,7 +28,10 @@ export default function SearchBar({ search, lote }) {
         options={options || 'not found'}
         sx={{ width: '100%', backgroundColor: 'white', textColor: 'white' }}
         // eslint-disable-next-line react/jsx-props-no-spreading
-        renderInput={(params) => <TextField {...params} label="Buscar..." />}
+        renderInput={(params) => (
+          // eslint-disable-next-line react/jsx-props-no-spreading
+          <TextField {...params} label="Buscar..." />
+        )}
       />
     </div>
   );
