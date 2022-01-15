@@ -47,6 +47,7 @@ export default function AlertDialog({ display }) {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
+        
         <DialogTitle id="alert-dialog-title">Solicitud Enviada</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
