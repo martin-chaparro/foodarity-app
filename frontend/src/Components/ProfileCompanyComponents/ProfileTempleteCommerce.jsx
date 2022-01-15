@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
 import React, { useEffect, useState } from 'react';
-
+// import DetailsIcon from '@mui/icons-material/Details';
+// import InventoryIcon from '@mui/icons-material/Inventory';
 import PropTypes from 'prop-types';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -8,15 +9,16 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
+
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
+// import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import MailIcon from '@mui/icons-material/Mail';
+
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
+import { useNavigate } from 'react-router-dom';
 import { apiWithToken } from '../../services/api';
 import CompanyDetail from './CompanyDetail';
 import PostNewBatch from './PostNewBatch';
@@ -30,6 +32,8 @@ import styles from './ProfileTempleteCommerce.module.css';
 const drawerWidth = 240;
 
 function ProfileTempleteCommerce(props) {
+  const navigate = useNavigate();
+
   const [orders, setOrders] = useState({});
 
   const [company, setCompany] = useState({});
@@ -42,6 +46,8 @@ function ProfileTempleteCommerce(props) {
 
   const [ongDonations, setOngDonations] = useState({});
 
+  const [logged, setLogged] = useState('loading');
+
   useEffect(() => {
     apiWithToken
       .get('/orders/company')
@@ -49,6 +55,11 @@ function ProfileTempleteCommerce(props) {
 
     apiWithToken.get(`/companies/byuser`).then((response) => {
       setCompany(response.data);
+      if (response.data.id) {
+        setLogged('true');
+      } else {
+        setLogged('false');
+      }
     });
 
     apiWithToken.get('/products/byauth').then((response) => {
@@ -68,6 +79,8 @@ function ProfileTempleteCommerce(props) {
     });
   }, []);
 
+  console.log(products);
+
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -80,6 +93,10 @@ function ProfileTempleteCommerce(props) {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
+
+  useEffect(() => {
+    setDisplay(0);
+  }, []);
 
   const drawer = (
     <div>
@@ -107,7 +124,7 @@ function ProfileTempleteCommerce(props) {
 
           { text: 'Donaciones', typesAllow: [1, 2] },
         ].map(
-          ({ text, typesAllow}, index) =>
+          ({ text, typesAllow }, index) =>
             typesAllow.includes(company.company_type_id) && (
               <ListItem
                 button
@@ -116,25 +133,23 @@ function ProfileTempleteCommerce(props) {
                   handleDisplay(index);
                 }}
               >
-                <ListItemIcon>
+                {/* <ListItemIcon>
                   {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
+                </ListItemIcon> */}
                 <ListItemText primary={text} />
               </ListItem>
             )
         )}
       </List>
       <Divider />
-      <List>
-        {['All mail', 'Trash'].map((text, index) => (
+      {/* <List>
+        {['All mail', 'Trash'].map((text) => (
           <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
+             <ListItemIcon>{index === 0 && <DetailsIcon />}</ListItemIcon> 
             <ListItemText primary={text} />
           </ListItem>
         ))}
-      </List>
+      </List>  */}
     </div>
   );
 
@@ -221,9 +236,12 @@ function ProfileTempleteCommerce(props) {
           {display === 3 && <PostNewBatch />}
 
           {display === 1 && <Orders orders={orders} />}
-          {display === 4 && <Usuarios users={users} />}
-          {display === 5 && <Donations
-              donations={company.company_type_id === 1 ? commerceDonations : ongDonations}
+          {display === 4 && <Usuarios users={users} company={company} />}
+          {display === 5 && (
+            <Donations
+              donations={
+                company.company_type_id === 1 ? commerceDonations : ongDonations
+              }
               typeId={company.company_type_id}
             />}
         </Box>
@@ -231,12 +249,14 @@ function ProfileTempleteCommerce(props) {
     </div>
   );
 
-  const renderNoCompany = <div>NO TENES COMPANIA</div>;
+  // TODO
+  const loading = <div>CARGANDO...</div>;
 
   return (
     <div>
-      {company.id && loggedRender}
-      {!company.id && renderNoCompany}
+      {logged === 'true' && loggedRender}
+      {logged === 'false' && navigate('/home')}
+      {logged === 'loading' && loading}
     </div>
   );
 }

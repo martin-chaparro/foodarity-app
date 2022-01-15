@@ -17,6 +17,10 @@ export default function CompanyDetail({company}) {
     setDisplayDetail(false);
   }
 
+  function handleBack () {
+    setDisplayDetail(true)
+  }
+
   function handleDelete() {
     apiWithToken.delete(`/companies/disabled/${company.id}`)
     window.location.reload()
@@ -86,7 +90,8 @@ export default function CompanyDetail({company}) {
           </div>
         </div>
       ) : (
-        <RegisterCompanyFormEditable company={company}/>
+        // eslint-disable-next-line react/jsx-no-bind
+        <RegisterCompanyFormEditable company={company} handleBack={handleBack} />
       )}
     </div>
   );

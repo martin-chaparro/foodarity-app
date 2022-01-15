@@ -5,6 +5,7 @@ import Footer from '../../Components/Footer/Footer';
 import styles from './Landing.module.css';
 import logoLanding from '../../assets/Mobil-background-landing.png';
 
+
 export default function Landing() {
   return (
     <div className={styles.landing}>

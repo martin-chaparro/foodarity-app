@@ -13,7 +13,7 @@ import { api, apiWithToken } from '../../services/api';
 let time = null;
 let time2 = null;
 
-export default function RegisterCompanyFormEditable({company}) {
+export default function RegisterCompanyFormEditable({company, handleBack}) {
   const [provincia, setprovincia] = useState([]);
   const [ciudad, setCiudad] = useState([]);
   const [termProvincia, setTermProvincia] = useState(company.address.state.name);
@@ -38,12 +38,13 @@ export default function RegisterCompanyFormEditable({company}) {
     zipcode: company.address.zipcode,
   });
 
-  const [photo, setPhoto] = useState({})
-
+  const [photo, setPhoto] = useState({
+    url: company.logo ? company.logo.url : ''
+  })
+  console.log(company)
   const searchProvincia = (term) => {
     api.get(`/states?name=${term}`).then((response) => {
       setprovincia(response.data);
-      console.log(response.data)
       
     });
   };
@@ -272,7 +273,7 @@ export default function RegisterCompanyFormEditable({company}) {
             <div className={styles.logocomercio}>
               <img
                 className={styles.imgLogo}
-                src={CommerceLogo}
+                src={photo.url ? photo.url : CommerceLogo}
                 alt="CommerLogo"
               />
             </div>
@@ -499,6 +500,9 @@ export default function RegisterCompanyFormEditable({company}) {
         <div className={styles.divButton}>
           <button type="submit" className={styles.btnactulizar}>
             ACTUALIZAR CAMBIOS
+          </button>
+          <button type='button' onClick={handleBack} className={styles.btnactulizar}>
+            CANCELAR
           </button>
           {/* BOTON DE ENVIAR SOLICITUD: Dicho botón se encuentra 
           dentro del componente Alert Ong y para conectar el submit 
