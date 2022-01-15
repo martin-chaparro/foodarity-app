@@ -48,6 +48,7 @@ function ProfileTempleteCommerce(props) {
 
   const [logged, setLogged] = useState('loading');
 
+ 
   useEffect(() => {
     apiWithToken
       .get('/orders/company')
@@ -78,8 +79,6 @@ function ProfileTempleteCommerce(props) {
       setOngDonations(response.data);
     });
   }, []);
-
-  console.log(products);
 
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -152,6 +151,7 @@ function ProfileTempleteCommerce(props) {
       </List>  */}
     </div>
   );
+
 
   const container =
     window !== undefined ? () => window().document.body : undefined;
@@ -230,21 +230,22 @@ function ProfileTempleteCommerce(props) {
           }}
         >
           <Toolbar display="inline" />
-          {display === 0 && <CompanyDetail company={company} />}
+          {display === 0 && <CompanyDetail company={company}/>}
 
-          {display === 2 && <PublishedProduct products={products} />}
-          {display === 3 && <PostNewBatch />}
+          {display === 2 && <PublishedProduct products={products}/>}
+          {display === 3 && <PostNewBatch/>}
 
-          {display === 1 && <Orders orders={orders} />}
-
-          {display === 4 && <Usuarios users={users} company={company} />}
+          {display === 1 && <Orders orders={orders}/>}
+          {display === 4 && <Usuarios users={users} company={company} setUsers={setUsers}/>}
           {display === 5 && (
             <Donations
               donations={
                 company.company_type_id === 1 ? commerceDonations : ongDonations
               }
               typeId={company.company_type_id}
-            />}
+             
+            />
+          )}
         </Box>
       </Box>
     </div>
