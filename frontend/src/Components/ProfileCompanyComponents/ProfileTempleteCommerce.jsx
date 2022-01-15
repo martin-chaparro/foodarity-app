@@ -243,7 +243,7 @@ function ProfileTempleteCommerce(props) {
                 company.company_type_id === 1 ? commerceDonations : ongDonations
               }
               typeId={company.company_type_id}
-            />}
+            />)}
         </Box>
       </Box>
     </div>
