@@ -7,57 +7,11 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import styles from './Orders.module.css';
+import styles from './PublishedProduct.module.css';
 
-const columns = [
-  { id: 'lote', label: 'LOTE', minWidth: 170 },
-  {
-    id: 'vendida',
-    label: 'CANTIDAD VENDIDA',
-    minWidth: 170,
-    align: 'right',
-    format: (value) => value.toLocaleString('en-US'),
-  },
 
-  {
-    id: 'cantidad',
-    label: 'CANTIDAD PUBLICADA',
-    minWidth: 170,
-    align: 'right',
-    format: (value) => value.toLocaleString('en-US'),
-  },
-  {
-    id: 'precio',
-    label: 'PRECIO PUBLICADO (ARS)',
-    minWidth: 170,
-    align: 'right',
-    format: (value) => value.toLocaleString('en-US'),
-  },
-  {
-    id: 'fecha',
-    label: 'FECHA PUBLICACION',
-    minWidth: 170,
-    align: 'right',
-    format: (value) => value.toFixed(2),
-  },
-];
 
-function createData(lote, vendida, cantidad, precio, fecha) {
-  // const density = population / size;
-  return { lote, vendida, cantidad, precio, fecha };
-}
-
-const rows = [
-  createData('Lote pre-pizzas', 2, 120, '12/06/2022'),
-  createData('Lote facturas', '3', 400, '12/06/2022'),
-  createData('Lote tortas', '1', 100, '12/06/2022'),
-  createData('Lote panes', '4', 327, '12/06/2022'),
-  createData('Lote pan Rayado', '4', 376, '12/06/2022'),
-  createData('Lote combo pasteleria/rotiseria', '6', 2547, '12/06/2022'),
-];
-
-export default function Orders({orders}) {
-  console.log(orders)
+export default function Donations ({donations , typeId}) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -69,9 +23,43 @@ export default function Orders({orders}) {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
+  const columns = [
+    { id: 'lote', label: 'LOTE', minWidth: 170 },
+    { id: 'ong', label: (typeId ===  1? 'ONG' : 'COMERCIO') , minWidth: 100 },
+    {
+      id: 'cantidad',
+      label: 'CANTIDAD',
+      minWidth: 170,
+      align: 'right',
+      format: (value) => value.toLocaleString('en-US'),
+    },
+    {
+      id: 'fecha',
+      label: 'FECHA DONACION',
+      minWidth: 170,
+      align: 'right',
+      format: (value) => value.toFixed(2),
+    },
+  ];
+  
 
+  function createData(lote, ong,  cantidad, fecha) {
+    // const density = population / size;
+ 
+    return { lote, ong, cantidad, fecha }; 
+  }
+  
+  
+  const rows = donations.map(donation => {
+
+    return createData(donation.lote, ( typeId ===  1? donation.ong.name : donation.commerce.name), donation.quantity, donation.fecha, )
+  })
+ console.log(donations[0])
   return (
-    <Paper className={styles.orders} sx={{ width: '100%', overflow: 'hidden' }}>
+    <Paper
+      className={styles.content}
+      sx={{ width: '100%', overflow: 'hidden' }}
+    >
       <TableContainer sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
@@ -80,11 +68,7 @@ export default function Orders({orders}) {
                 <TableCell
                   key={column.id}
                   align={column.align}
-                  style={{
-                    minWidth: column.minWidth,
-                    backgroundColor: 'lightgray',
-                    fontWeight: '700',
-                  }}
+                  style={{ minWidth: column.minWidth }}
                 >
                   {column.label}
                 </TableCell>

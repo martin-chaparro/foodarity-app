@@ -2,17 +2,28 @@
 import React from 'react';
 // eslint-disable-next-line import/no-duplicates
 import { useState } from 'react';
+import { apiWithToken } from '../../services/api';
 import styles from './CompanyDetail.module.css';
 
 import RegisterCompanyFormEditable from './RegisterCompanyFormEditable';
 
 // const [displayForm, setDisplayForm] = useState(false);
 
-export default function CompanyDetail() {
+export default function CompanyDetail({company}) {
   const [displayDetail, setDisplayDetail] = useState(true);
+
 
   function handleOnclick() {
     setDisplayDetail(false);
+  }
+
+  function handleBack () {
+    setDisplayDetail(true)
+  }
+
+  function handleDelete() {
+    apiWithToken.delete(`/companies/disabled/${company.id}`)
+    window.location.reload()
   }
 
   return (
@@ -21,52 +32,39 @@ export default function CompanyDetail() {
         <div className={styles.companydetail}>
           <div className={styles.cont}>
             <h3 className={styles.titulo}>Nombre de Comercio:</h3>
-            <h3 className={styles.descripcion}>Panaderia Buenos Aires</h3>
+            <h3 className={styles.descripcion}>{company.name}</h3>
+          </div>
+          <div className={styles.cont}>
+            <h3 className={styles.titulo}>Descripcion:</h3>
+            <h3 className={styles.descripcion}>
+            {company.description}
+            </h3>
           </div>
           <div className={styles.cont}>
             <h3 className={styles.titulo}>Email de la Empresa:</h3>
             <h3 className={styles.descripcion}>
-              panaderiabuenosaires@gmail.com{' '}
+            {company.email}
             </h3>
           </div>
-
           <div className={styles.cont}>
             <h3 className={styles.titulo}>Url sitio Web:</h3>
-            <h3 className={styles.descripcion}>www.panaderiabuenosaires.com</h3>
+            <h3 className={styles.descripcion}>{company.website}</h3>
           </div>
-
-          <div className={styles.cont}>
-            <h3 className={styles.titulo}>Descripcion:</h3>
-            <h3 className={styles.descripcion}>
-              {' '}
-              Descripcion: Desarrollo panificados artesanales, integrales,
-              pasteleria...
-            </h3>
-          </div>
-
           <div className={styles.cont}>
             <h3 className={styles.titulo}>Telefono :</h3>
             <h3 className={styles.descripcion}>
-              <span>Cod. Area</span> 011 <span>32615516</span>.
+              <span>{company.areaCode}</span> <span>{company.phone}</span>.
             </h3>
           </div>
-
           <div className={styles.cont}>
-            <h3 className={styles.titulo}>Dierección:</h3>
+            <h3 className={styles.titulo}>Dirección:</h3>
             <h3 className={styles.descripcion}>
-              <span>Calle: Av.Libertador </span>
-              <span>Numero: 666 </span> <span>Codigo postal: 1425</span>
+              <span>{company.address.street}</span>
+              <span> {company.address.number}, </span> 
+              <span> {company.address.city.name}, </span> 
+              <span> {company.address.state.name}, </span> 
+              <span>{company.address.zipcode}</span>
             </h3>
-          </div>
-
-          <div className={styles.cont}>
-            <h3 className={styles.titulo}>Provincia:</h3>
-            <h3 className={styles.descripcion}>Buenos Aires</h3>
-          </div>
-
-          <div className={styles.cont}>
-            <h3 className={styles.titulo}>Ciudad:</h3>
-            <h3 className={styles.descripcion}>CABA</h3>
           </div>
           <div className={styles.btncont}>
             <button
@@ -79,10 +77,21 @@ export default function CompanyDetail() {
             >
               EDITAR DATOS
             </button>
+            <button
+              type="submit"
+              className={styles.btn}
+              onClick={() => {
+                // eslint-disable-next-line no-undef
+                handleDelete();
+              }}
+            >
+              ELIMINAR CUENTA
+            </button>
           </div>
         </div>
       ) : (
-        <RegisterCompanyFormEditable />
+        // eslint-disable-next-line react/jsx-no-bind
+        <RegisterCompanyFormEditable company={company} handleBack={handleBack} />
       )}
     </div>
   );

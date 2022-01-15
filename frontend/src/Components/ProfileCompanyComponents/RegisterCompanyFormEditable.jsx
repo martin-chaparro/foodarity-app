@@ -2,47 +2,50 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-
+// import { useNavigate } from 'react-router-dom';
 import styles from './RegisterCompanyFormEditable.module.css';
 import CommerceLogo from '../../assets/Mask-Group.png';
-import { api } from '../../services/api';
-import { registerComerce } from '../../redux/actions/usersActions';
+import { api, apiWithToken } from '../../services/api';
+
 
 // import AlertOng from '../Alertas/AlertEnviarSolicitud';
 
 let time = null;
 let time2 = null;
 
-export default function RegisterCompanyFormEditable() {
+export default function RegisterCompanyFormEditable({company, handleBack}) {
   const [provincia, setprovincia] = useState([]);
   const [ciudad, setCiudad] = useState([]);
-  const [termProvincia, setTermProvincia] = useState('');
-  const [termCiudad, setTermCiudad] = useState('');
+  const [termProvincia, setTermProvincia] = useState(company.address.state.name);
+  const [termCiudad, setTermCiudad] = useState(company.address.state.name);
   const [errors, setErrors] = useState({});
   const initialFormValues = {
-    stateId: null,
-    cityId: null,
+    stateId: company.address.state.id,
+    cityId: company.address.city.id,
   };
-  const dispatch = useDispatch();
+
   const [formValues, setFormValues] = useState(initialFormValues);
-  const navigate = useNavigate();
+ // const navigate = useNavigate();
   const [input, setInput] = useState({
-    name: '',
-    website: '',
-    email: '',
-    description: '',
-    areaCode: '',
-    phone: '',
-    street: '',
-    number: '',
-    zipcode: '',
+    name: company.name,
+    website: company.website,
+    email: company.email,
+    description: company.description,
+    areaCode: company.areaCode,
+    phone: company.phone,
+    street: company.address.street,
+    number: company.address.number,
+    zipcode: company.address.zipcode,
   });
 
+  const [photo, setPhoto] = useState({
+    url: company.logo ? company.logo.url : ''
+  })
+  console.log(company)
   const searchProvincia = (term) => {
     api.get(`/states?name=${term}`).then((response) => {
       setprovincia(response.data);
+      
     });
   };
 
@@ -113,6 +116,29 @@ export default function RegisterCompanyFormEditable() {
     });
     setTermCiudad(target.value);
   };
+
+  const handlePhoto = async (e) => {
+    try {
+      const form = new FormData();
+      form.append('file', e.target.files[0]);
+      console.log(e.target.files) 
+      await apiWithToken.patch(`http://localhost:4000/api/v1/companies/${company.id}/upload/logo`, form)
+      .then(res => { 
+        setPhoto(res.data.logo)
+        console.log(photo)
+      return res})
+      .then(res => {
+        if (res.status === 200) {
+          // eslint-disable-next-line no-alert
+          alert('Logo actualizado con exito')
+        }
+      })
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+ 
 
   const validateEmail = (e) => {
     const { name, value } = e.target;
@@ -203,7 +229,9 @@ export default function RegisterCompanyFormEditable() {
   };
 
   const handleSubmit = (e) => {
+    
     e.preventDefault();
+    
     if (
       !errors.name &&
       !errors.website &&
@@ -216,8 +244,17 @@ export default function RegisterCompanyFormEditable() {
 
       // eslint-disable-next-line no-empty
     ) {
-      dispatch(registerComerce());
-      navigate('/home');
+      apiWithToken.put(`/companies/${company.id}`, {...input, ...formValues})
+      .then(res => {
+        if (res.status === 200) {
+          window.location.reload()
+        } else {
+          // eslint-disable-next-line no-alert
+          alert(res.data)
+        }
+      })
+      
+       
     } else {
       // eslint-disable-next-line no-alert
       alert('Complete el formulario');
@@ -229,12 +266,14 @@ export default function RegisterCompanyFormEditable() {
         <div className={styles.containerLogo}>
           <div className={styles.commerceLogo}>
             <div className={styles.inputcontenedor}>
-              <input className={styles.btninput} type="file" name="foto" />
+              <input className={styles.btninput} type="file"
+                  name="photo"
+                  onChange={handlePhoto} />
             </div>
             <div className={styles.logocomercio}>
               <img
                 className={styles.imgLogo}
-                src={CommerceLogo}
+                src={photo.url ? photo.url : CommerceLogo}
                 alt="CommerLogo"
               />
             </div>
@@ -461,6 +500,9 @@ export default function RegisterCompanyFormEditable() {
         <div className={styles.divButton}>
           <button type="submit" className={styles.btnactulizar}>
             ACTUALIZAR CAMBIOS
+          </button>
+          <button type='button' onClick={handleBack} className={styles.btnactulizar}>
+            CANCELAR
           </button>
           {/* BOTON DE ENVIAR SOLICITUD: Dicho botón se encuentra 
           dentro del componente Alert Ong y para conectar el submit 
