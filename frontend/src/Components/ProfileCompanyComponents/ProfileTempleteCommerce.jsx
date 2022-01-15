@@ -214,7 +214,10 @@ function ProfileTempleteCommerce(props) {
 
           {display === 1 && <Orders orders={orders} />}
           {display === 4 && <Usuarios users={users} />}
-          {display === 5 && <Donations commerceDonations={commerceDonations} ongDonations={ongDonations} />}
+          {display === 5 && <Donations
+              donations={company.company_type_id === 1 ? commerceDonations : ongDonations}
+              typeId={company.company_type_id}
+            />}
         </Box>
       </Box>
     </div>
