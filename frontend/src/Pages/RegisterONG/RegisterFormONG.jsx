@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import Swal from 'sweetalert2';
 import Checkbox from '@mui/material/Checkbox';
 import Header from '../../Components/Header/Header';
 import styles from './RegisterFormCommerce.module.css';
@@ -205,6 +206,26 @@ export default function RegisterFormCommerce() {
     }
   };
 
+  const validateTextNum = (e) => {
+    const { name, value } = e.target;
+    setInput({
+      ...input,
+      [name]: value,
+    });
+    // eslint-disable-next-line no-useless-escape
+    if (!/^[aA-zZ0-9_-]{3,16}$/.test(value)) {
+      setErrors({
+        ...errors,
+        [name]: 'Solo numeros',
+      });
+    } else {
+      setErrors({
+        ...errors,
+        [name]: '',
+      });
+    }
+  };
+
   const handleOnChange = (e) => {
     e.preventDefault();
     setInput({
@@ -228,6 +249,11 @@ export default function RegisterFormCommerce() {
       // eslint-disable-next-line no-empty
     ) {
       dispatch(registerComerce(input, formValues));
+      Swal.fire({
+        icon: 'success',
+        title: 'Bien',
+        text: 'La ONG fue registrada Correctamente',
+      });
       navigate('/home');
     } else {
       // eslint-disable-next-line no-alert
@@ -415,7 +441,7 @@ export default function RegisterFormCommerce() {
               placeholder="Cód. Postal"
               onChange={(e) => {
                 handleOnChange(e);
-                validateNum(e);
+                validateTextNum(e);
               }}
               required
               title="Campo Requerido"
