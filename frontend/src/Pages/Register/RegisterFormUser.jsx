@@ -5,11 +5,11 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { GoogleLogin } from 'react-google-login';
+import Swal from 'sweetalert2';
 import Button from '@mui/material/Button';
 import Header from '../../Components/Header/Header';
 import style from './RegisterFormUser.module.css';
 
-import { registerLocal } from '../../redux/actions/usersActions';
 import {
   startCheking,
   startGoogleRegister,
@@ -122,10 +122,13 @@ function Register() {
       !errors.password &&
       !errors.validatePassword
     ) {
-      dispatch(registerLocal(input));
       dispatch(startRegister(input));
       dispatch(startCheking());
-      navigate('/rollselector');
+       Swal.fire({
+        icon: 'success',
+        title: 'Bien!',
+        text: 'Te registraste Correctamente',
+      });
       setInput({
         name: '',
         email: '',
@@ -219,7 +222,7 @@ function Register() {
         <div className={style.buttonsDiv}>
           <Button
             className={style.btn}
-            type="submit"
+            type='submit'
             variant="contained"
             style={{ marginBottom: '1em' }}
           >

@@ -3,11 +3,13 @@ import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 // import deleteLogo from '../../assets/deleteIcon';
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
+import { apiWithToken } from '../../services/api';
 import styles from './PublishedProduct.module.css';
 
 const columns = [
@@ -50,13 +52,19 @@ const columns = [
 ];
 
 // eslint-disable-next-line no-unused-vars
-export default function PublishedProduct({ products }) {
+export default function PublishedProduct({ products, setProducts }) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   function createData(lote, estado, cantidad, precio, fecha, eliminar) {
     // const density = population / size;
     return { lote, estado, cantidad, precio, fecha, eliminar };
+  }
+
+  async function handleDelete(id) {
+    apiWithToken.delete(`/products/id/${id}`).then((response) => {
+      setProducts(products.filter((el) => el.id !== response.data.id));
+    });
   }
 
   const rows = products.map((producto) => {
@@ -66,7 +74,15 @@ export default function PublishedProduct({ products }) {
       producto.quantity,
       producto.price,
       producto.publicationDate,
-      <button type="button">eliminar</button>
+      // eslint-disable-next-line no-alert
+      <HighlightOffIcon
+        onClick={() => {
+          // eslint-disable-next-line no-alert
+          if (window.confirm('Queres eliminar este item?'))
+            handleDelete(producto.id);
+        }}
+      />
+      // <button type="button">eliminar</button>
     );
   });
 
