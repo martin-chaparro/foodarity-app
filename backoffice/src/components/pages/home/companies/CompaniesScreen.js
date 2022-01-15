@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Grid';
@@ -20,16 +21,68 @@ import CircularProgress from '@mui/material/CircularProgress';
 import perfil from '../../../../assets/avatar_default.png';
 
 import { Layout } from '../../../layout/Layout';
+import { apiWithToken } from '../../../../services/api';
+
+let time = null;
 
 export const CompaniesScreen = () => {
-  const handleChangePage = () => {};
-  const handleChangeRowsPerPage = () => {};
+  const [companies, setCompanies] = useState();
+  const [page, setPage] = useState(0);
+  const [size, setSize] = useState(5);
+  const [totalCompanies, setTotalCompanies] = useState(0);
+  const [term, setTerm] = useState('');
 
-  const handleEdit = (event) => {
-    console.log(event.target.attributes.dataid.value);
+  const navigate = useNavigate();
+
+  useEffect(async () => {
+    const response = await apiWithToken.get(
+      `/admin/companies?page=${page}&size=${size}`
+    );
+    setCompanies(response.data.companies);
+    setTotalCompanies(response.data.totalCompanies);
+  }, [page, size]);
+
+  useEffect(async () => {
+    clearTimeout(time);
+    if (term !== '') {
+      time = setTimeout(async () => {
+        setPage(0);
+        const response = await apiWithToken.get(
+          `/admin/companies?page=${page}&size=${size}&search=${term}`
+        );
+        setCompanies(response.data.companies);
+        setTotalCompanies(response.data.totalCompanies);
+      }, 1000);
+    } else {
+      setPage(0);
+      const response = await apiWithToken.get(
+        `/admin/companies?page=${page}&size=${size}`
+      );
+      setCompanies(response.data.companies);
+      setTotalCompanies(response.data.totalCompanies);
+    }
+    return () => {
+      setPage(0);
+    };
+  }, [term]);
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
   };
-  const handleDelete = (event) => {
-    console.log(event.target.attributes.dataid.value);
+  const handleChangeRowsPerPage = (event) => {
+    setSize(parseInt(event.target.value, 10));
+    setPage(0);
+  };
+
+  const handleEdit = (event, id) => {
+    navigate(`/users/${id}`, { replace: true });
+  };
+  const handleDelete = (event, id) => {
+    console.log(id);
+  };
+
+  const handleInputSearch = ({ target }) => {
+    setTerm(target.value);
   };
 
   return (
@@ -57,6 +110,7 @@ export const CompaniesScreen = () => {
                 type="search"
                 variant="standard"
                 style={{ backgroundColor: 'white', marginBottom: '2em' }}
+                onChange={handleInputSearch}
               />
               <Table mt={20}>
                 <TableHead>
@@ -64,62 +118,82 @@ export const CompaniesScreen = () => {
                     <TableCell>id</TableCell>
                     <TableCell>Logo</TableCell>
                     <TableCell>Nombre</TableCell>
+                    <TableCell>Email</TableCell>
                     <TableCell>Typo</TableCell>
+                    <TableCell>Ciudad</TableCell>
+                    <TableCell>status</TableCell>
                     <TableCell>Actions</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  <TableRow>
-                    <TableCell>
-                      <Typography noWrap>1</Typography>
-                    </TableCell>
-                    <TableCell>
-                      <Avatar alt="Remy Sharp" src={perfil} />
-                    </TableCell>
-                    <TableCell>
-                      <Typography noWrap>Macro</Typography>
-                    </TableCell>
-                    <TableCell>
-                      <Typography noWrap>Comercio</Typography>
-                    </TableCell>
-                    <TableCell>
-                      <Grid container>
-                        <Button
-                          variant="outlined"
-                          color="info"
-                          startIcon={<EditIcon />}
-                          dataid="1"
-                          onClick={handleEdit}
-                        >
-                          Editar
-                        </Button>
-                        <Button
-                          variant="outlined"
-                          style={{ marginLeft: '1em' }}
-                          color="error"
-                          startIcon={<DeleteIcon />}
-                          dataid="1"
-                          onClick={handleDelete}
-                        >
-                          Eliminar
-                        </Button>
-                      </Grid>
-                    </TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell align="center" colSpan={5} sx={{ py: 3 }}>
-                      <CircularProgress />
-                    </TableCell>
-                  </TableRow>
+                  {companies ? (
+                    companies.map((company) => (
+                      <TableRow key={company.id}>
+                        <TableCell>
+                          <Typography noWrap>{company.id}</Typography>
+                        </TableCell>
+                        <TableCell>
+                          <Avatar
+                            alt="Logo"
+                            src={company.logo ? company.logo.url : perfil}
+                          />
+                        </TableCell>
+                        <TableCell>
+                          <Typography noWrap>{company.name}</Typography>
+                        </TableCell>
+                        <TableCell>
+                          <Typography noWrap>{company.email}</Typography>
+                        </TableCell>
+                        <TableCell>
+                          <Typography noWrap>{company.type.type}</Typography>
+                        </TableCell>
+                        <TableCell>
+                          <Typography noWrap>
+                            {company.address.city.name}
+                          </Typography>
+                        </TableCell>
+                        <TableCell>
+                          <Typography noWrap>{company.status}</Typography>
+                        </TableCell>
+                        <TableCell>
+                          <Grid container>
+                            <Button
+                              variant="outlined"
+                              color="warning"
+                              dataid={company.id}
+                              onClick={(e) => handleEdit(e, company.id)}
+                            >
+                              <EditIcon />
+                            </Button>
+                            <Button
+                              variant="outlined"
+                              style={{ marginLeft: '1em' }}
+                              color="error"
+                              dataid={company.id}
+                              onClick={(e) => handleDelete(e, company.id)}
+                            >
+                              <DeleteIcon />
+                            </Button>
+                          </Grid>
+                        </TableCell>
+                      </TableRow>
+                    ))
+                  ) : (
+                    <TableRow>
+                      <TableCell align="center" colSpan={8} sx={{ py: 3 }}>
+                        <CircularProgress />
+                      </TableCell>
+                    </TableRow>
+                  )}
                 </TableBody>
               </Table>
             </TableContainer>
             <TablePagination
               rowsPerPageOptions={[5, 10, 25]}
               component="div"
-              count={1}
-              rowsPerPage={5}
-              page={0}
+              count={totalCompanies}
+              rowsPerPage={size}
+              page={page}
               onPageChange={handleChangePage}
               onRowsPerPageChange={handleChangeRowsPerPage}
             />
