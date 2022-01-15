@@ -47,22 +47,28 @@ function createData(nombre, email, telefono, rol, eliminar) {
   return {nombre, email, telefono, rol, eliminar};
 }
 
-export default function Usuarios({users, company}) {
+export default function Usuarios({users, company,  setUsers }) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [rows, setRows] = React.useState([])
+  
 
 
 
 
   const handleDelete = (id) => {
-    apiWithToken.delete(`/companies/user/${id}`)
+
+    apiWithToken.delete(`/companies/user/${id}`).then(() => {
+      apiWithToken.get('/companies/users').then((response) => {
+        setUsers(response.data);
+      });
+    })
+
   }
 
   React.useEffect(() => {
     const finalRows = []
-    users.forEach(user => {
-      console.log(user.name)
+   users.forEach(user => {
       finalRows.push(createData(user.name, user.email, user.phone, (user.id === company.ownerId ? 'Dueño' : 'Empleado'), (user.id !== company.ownerId && <button type="button" onClick={() => {handleDelete(user.id)}}>X</button>)))
       setRows(finalRows)
     })
