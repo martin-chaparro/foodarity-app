@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Grid';
@@ -23,11 +24,16 @@ import perfil from '../../../../assets/avatar_default.png';
 import { Layout } from '../../../layout/Layout';
 import { apiWithToken } from '../../../../services/api';
 
+let time = null;
+
 export const UsersScreen = () => {
   const [users, setUsers] = useState();
   const [page, setPage] = useState(0);
   const [size, setSize] = useState(5);
   const [totalUsers, settotalUsers] = useState(0);
+  const [term, setTerm] = useState('');
+
+  const navigate = useNavigate();
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -45,13 +51,39 @@ export const UsersScreen = () => {
     settotalUsers(response.data.totalUsers);
   }, [page, size]);
 
-  console.log(users);
+  useEffect(async () => {
+    clearTimeout(time);
+    if (term !== '') {
+      time = setTimeout(async () => {
+        setPage(0);
+        const response = await apiWithToken.get(
+          `/admin/users?page=${page}&size=${size}&search=${term}`
+        );
+        setUsers(response.data.users);
+        settotalUsers(response.data.totalUsers);
+      }, 1000);
+    } else {
+      setPage(0);
+      const response = await apiWithToken.get(
+        `/admin/users?page=${page}&size=${size}`
+      );
+      setUsers(response.data.users);
+      settotalUsers(response.data.totalUsers);
+    }
+    return () => {
+      setPage(0);
+    };
+  }, [term]);
 
-  const handleEdit = (event) => {
-    console.log(event.target.attributes.dataid.value);
+  const handleEdit = (event, id) => {
+    navigate(`/users/${id}`, { replace: true });
   };
-  const handleDelete = (event) => {
-    console.log(event.target.attributes.dataid.value);
+  const handleDelete = (event, id) => {
+    console.log(id);
+  };
+
+  const handleInputSearch = ({ target }) => {
+    setTerm(target.value);
   };
 
   return (
@@ -66,7 +98,7 @@ export const UsersScreen = () => {
         <Button variant="outlined">Agregar Usuario</Button>
       </Grid>
       <Grid container spacing={3} pt={2}>
-        <Grid item xs={12} lg={10}>
+        <Grid item xs={12} lg={12}>
           <Paper
             sx={{
               p: 2,
@@ -81,6 +113,7 @@ export const UsersScreen = () => {
                 type="search"
                 variant="standard"
                 style={{ backgroundColor: 'white', marginBottom: '2em' }}
+                onChange={handleInputSearch}
               />
               <Table mt={20}>
                 <TableHead>
@@ -94,54 +127,63 @@ export const UsersScreen = () => {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  <TableRow>
-                    <TableCell>
-                      <Typography noWrap>1</Typography>
-                    </TableCell>
-                    <TableCell>
-                      <Stack direction="row" alignItems="center" spacing={2}>
-                        <Avatar alt="Remy Sharp" src={perfil} />
-                        <Typography noWrap>Martin Chaparro</Typography>
-                      </Stack>
-                    </TableCell>
-                    <TableCell>
-                      <Typography noWrap>demo@demo.com</Typography>
-                    </TableCell>
-                    <TableCell>
-                      <Typography noWrap>User</Typography>
-                    </TableCell>
-                    <TableCell>
-                      <Typography noWrap>Activo</Typography>
-                    </TableCell>
-                    <TableCell>
-                      <Grid container>
-                        <Button
-                          variant="outlined"
-                          color="info"
-                          startIcon={<EditIcon />}
-                          dataid="1"
-                          onClick={handleEdit}
-                        >
-                          Editar
-                        </Button>
-                        <Button
-                          variant="outlined"
-                          style={{ marginLeft: '1em' }}
-                          color="error"
-                          startIcon={<DeleteIcon />}
-                          dataid="1"
-                          onClick={handleDelete}
-                        >
-                          Eliminar
-                        </Button>
-                      </Grid>
-                    </TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell align="center" colSpan={5} sx={{ py: 3 }}>
-                      <CircularProgress />
-                    </TableCell>
-                  </TableRow>
+                  {users ? (
+                    users.map((user) => (
+                      <TableRow key={user.id}>
+                        <TableCell>
+                          <Typography noWrap>{user.id}</Typography>
+                        </TableCell>
+                        <TableCell>
+                          <Stack
+                            direction="row"
+                            alignItems="center"
+                            spacing={2}
+                          >
+                            <Avatar alt="Remy Sharp" src={perfil} />
+                            <Typography noWrap>{user.name}</Typography>
+                          </Stack>
+                        </TableCell>
+                        <TableCell>
+                          <Typography noWrap>{user.email}</Typography>
+                        </TableCell>
+                        <TableCell>
+                          <Typography noWrap>{user.role.role}</Typography>
+                        </TableCell>
+                        <TableCell>
+                          <Typography noWrap>
+                            {user.status ? 'Activo' : 'Inactivo'}
+                          </Typography>
+                        </TableCell>
+                        <TableCell>
+                          <Grid container>
+                            <Button
+                              variant="outlined"
+                              color="warning"
+                              dataid={user.id}
+                              onClick={(e) => handleEdit(e, user.id)}
+                            >
+                              <EditIcon />
+                            </Button>
+                            <Button
+                              variant="outlined"
+                              style={{ marginLeft: '1em' }}
+                              color="error"
+                              dataid={user.id}
+                              onClick={(e) => handleDelete(e, user.id)}
+                            >
+                              <DeleteIcon />
+                            </Button>
+                          </Grid>
+                        </TableCell>
+                      </TableRow>
+                    ))
+                  ) : (
+                    <TableRow>
+                      <TableCell align="center" colSpan={5} sx={{ py: 3 }}>
+                        <CircularProgress />
+                      </TableCell>
+                    </TableRow>
+                  )}
                 </TableBody>
               </Table>
             </TableContainer>
