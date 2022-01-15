@@ -14,6 +14,12 @@ const {
   searchCompany,
 } = require('../../controllers/admin/companiesController');
 
+const {
+  getProducts,
+  getProductById,
+  getCategories,
+} = require('../../controllers/admin/productsController');
+
 const ValidationsUser = require('../../middlewares/validations/validationUser');
 // const ValidationCompany = require('../../middlewares/validations/validationCompany');
 const ValidationAuth = require('../../middlewares/validations/validationAuth');
@@ -37,6 +43,10 @@ router.put(
 router.get('/companies', getCompanies);
 router.get('/companies/id/:id', searchCompany);
 
+// Products Routes
+router.get('/products',authMiddleware, ValidationAuth.isAdmin, getProducts);
+router.get('/products/id/:id',authMiddleware, ValidationAuth.isAdmin, getProductById);
+router.get('/products/categories',authMiddleware, ValidationAuth.isAdmin,getCategories);
 
 
 
