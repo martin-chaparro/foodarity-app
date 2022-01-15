@@ -25,7 +25,7 @@ router.post(
 router.delete('/id/:id', authMiddleware, deletePublication);
 router.get('/id/:id', getProductById);
 router.get('/company/:id', getCompanyProductsById);
-router.get('/byAuth', authMiddleware, getCompanyProductsByAuth);
+router.get('/byauth', authMiddleware, getCompanyProductsByAuth);
 router.get('/categories', getCategories);
 
 module.exports = router;

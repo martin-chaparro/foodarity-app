@@ -59,22 +59,3 @@ export const getCompanies = () => async (dispatch) => {
     console.log(error);
   }
 };
-
-// export function getCompanyDetail() {
-//   // eslint-disable-next-line func-names
-//   return async function (dispatch) {
-//     try {
-
-//       const response = await apiWithToken.get(
-//         `/companies/id/${token}`
-//       );
-
-//       return dispatch({
-//         type: types.getCompaniesDetail,
-//         payload: response.data,
-//       });
-//     } catch (err) {
-//       console.log(err);
-//     }
-//   };
-// }

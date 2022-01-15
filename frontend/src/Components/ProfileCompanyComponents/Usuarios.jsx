@@ -1,4 +1,5 @@
 import * as React from 'react';
+// import deleteLogo from '../../assets/deleteIcon';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -86,7 +87,11 @@ export default function Usuarios({users, company}) {
                 <TableCell
                   key={column.id}
                   align={column.align}
-                  style={{ minWidth: column.minWidth }}
+                  style={{
+                    minWidth: column.minWidth,
+                    backgroundColor: 'lightgray',
+                    fontWeight: '700',
+                  }}
                 >
                   {column.label}
                 </TableCell>

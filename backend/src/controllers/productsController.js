@@ -313,7 +313,7 @@ const getCompanyProductsByAuth = async (req, res) => {
     if (!company) {
       return res.status(401).json({ message: 'No posees una compania' });
     }
-    if (company.commerce_type_id !== 1) {
+    if (company.company_type_id !== 1) {
       return res.status(401).json({ message: 'No posees un comercio' });
     }
     const products = await Product.findAll({
