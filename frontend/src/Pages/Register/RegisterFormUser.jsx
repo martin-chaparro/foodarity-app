@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-undef */
 /* eslint-disable react/button-has-type */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
@@ -8,7 +9,7 @@ import Button from '@mui/material/Button';
 import Header from '../../Components/Header/Header';
 import style from './RegisterFormUser.module.css';
 
-// import { registerLocal } from '../../redux/actions/usersActions';
+import { registerLocal } from '../../redux/actions/usersActions';
 import {
   startCheking,
   startGoogleRegister,
@@ -121,7 +122,7 @@ function Register() {
       !errors.password &&
       !errors.validatePassword
     ) {
-      // dispatch(registerLocal(input));
+      dispatch(registerLocal(input));
       dispatch(startRegister(input));
       dispatch(startCheking());
       navigate('/rollselector');
@@ -216,7 +217,12 @@ function Register() {
           </div>
         </div>
         <div className={style.buttonsDiv}>
-          <Button className={style.btn} type="submit" variant="contained" style={{marginBottom:'1em'}}>
+          <Button
+            className={style.btn}
+            type="submit"
+            variant="contained"
+            style={{ marginBottom: '1em' }}
+          >
             Ingresar
           </Button>
 

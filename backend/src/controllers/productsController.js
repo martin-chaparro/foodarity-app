@@ -87,17 +87,24 @@ const getProducts = async (req, res) => {
       lote,
       categoryName,
       categoryId,
-      minPrice,
-      maxPrice,
       expirationDate,
       order,
       size,
     } = req.query;
+    let {
+      minPrice,
+      maxPrice,
+    } = req.query
+     minPrice = parseInt(minPrice,10) || 0
+     maxPrice = parseInt(maxPrice,10) || 0
     const page = req.query.page || 1;
     const whereAttr = { status: 'published' };
-    const orderAttr = [['id', 'ASC']];
+    const orderAttr = [['id', 'DESC']];
 
     switch (order) {
+      case 'recents':
+        orderAttr.unshift(['id', 'DESC']);
+        break
       case 'priceASC':
         orderAttr.unshift(['price', 'ASC']);
         break;
@@ -127,7 +134,7 @@ const getProducts = async (req, res) => {
         id: categoryId,
       };
     }
-    if (categoryName ==='') {
+    if (categoryName ==='' || categoryName ==='Todas') {
       delete include[0].where
     }
 
@@ -137,10 +144,17 @@ const getProducts = async (req, res) => {
       whereAttr.price = { [Op.gte]: minPrice };
     } else if (maxPrice) {
       whereAttr.price = { [Op.lte]: maxPrice };
-    }
+    } 
+    
+
     if (expirationDate) {
       whereAttr.expirationDate = { [Op.lte]: expirationDate };
     }
+    if (expirationDate === '') {
+      delete whereAttr.expirationDate
+    }
+    
+
 
     const params = {
       where: whereAttr,
@@ -296,11 +310,10 @@ const getCompanyProductsByAuth = async (req, res) => {
     const user = await User.findByPk(userId);
     const id = user.CompanyId;
     const company = await Company.findByPk(id);
-    console.log(company.type_id);
     if (!company) {
       return res.status(401).json({ message: 'No posees una compania' });
     }
-    if (company.type_id !== 1) {
+    if (company.company_type_id !== 1) {
       return res.status(401).json({ message: 'No posees un comercio' });
     }
     const products = await Product.findAll({

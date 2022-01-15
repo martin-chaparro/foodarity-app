@@ -14,6 +14,7 @@ export default (state = initialState, action) => {
       return {
         comerce: action.payload,
       };
+
     default:
       return state;
   }

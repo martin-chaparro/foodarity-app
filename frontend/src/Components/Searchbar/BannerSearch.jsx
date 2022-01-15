@@ -5,7 +5,7 @@ import SearchBar from './Searchbar';
 
 export default function BannerSearch({ search, lote }) {
   return (
-    <body>
+    <body className={estilo.body}>
       <div className={estilo.heroimage}>
         <div className={estilo.container}>
           <h1>

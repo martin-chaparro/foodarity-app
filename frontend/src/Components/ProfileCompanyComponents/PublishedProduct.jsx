@@ -2,15 +2,24 @@ import * as React from 'react';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
+// import deleteLogo from '../../assets/deleteIcon';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
+import styles from './PublishedProduct.module.css';
 
 const columns = [
   { id: 'lote', label: 'LOTE', minWidth: 170 },
-  { id: 'code', label: 'ISO\u00a0Code', minWidth: 100 },
+  {
+    id: 'estado',
+    label: 'ESTADO',
+    minWidth: 170,
+    align: 'right',
+    format: (value) => value.toLocaleString('en-US'),
+  },
+
   {
     id: 'cantidad',
     label: 'CANTIDAD',
@@ -32,25 +41,34 @@ const columns = [
     align: 'right',
     format: (value) => value.toFixed(2),
   },
+  {
+    id: 'eliminar',
+
+    minWidth: 170,
+    align: 'right',
+  },
 ];
 
-function createData(lote, cantidad, precio, fecha) {
-  // const density = population / size;
-  return { lote, cantidad, precio, fecha };
-}
-
-const rows = [
-  createData('Lote pre-pizzas', 2, 120, '12/06/2022'),
-  createData('Lote facturas', '3', 400, '12/06/2022'),
-  createData('Lote tortas', '1', 100, '12/06/2022'),
-  createData('Lote panes', '4', 327, '12/06/2022'),
-  createData('Lote pan Rayado', '4', 376, '12/06/2022'),
-  createData('Lote combo pasteleria/rotiseria', '6', 2547, '12/06/2022'),
-];
-
-export default function PublishedProduct() {
+// eslint-disable-next-line no-unused-vars
+export default function PublishedProduct({ products }) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+
+  function createData(lote, estado, cantidad, precio, fecha, eliminar) {
+    // const density = population / size;
+    return { lote, estado, cantidad, precio, fecha, eliminar };
+  }
+
+  const rows = products.map((producto) => {
+    return createData(
+      producto.lote,
+      producto.status,
+      producto.quantity,
+      producto.price,
+      producto.publicationDate,
+      <button type="button">eliminar</button>
+    );
+  });
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -62,7 +80,10 @@ export default function PublishedProduct() {
   };
 
   return (
-    <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+    <Paper
+      className={styles.content}
+      sx={{ width: '100%', overflow: 'hidden' }}
+    >
       <TableContainer sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
@@ -71,7 +92,12 @@ export default function PublishedProduct() {
                 <TableCell
                   key={column.id}
                   align={column.align}
-                  style={{ minWidth: column.minWidth }}
+                  style={{
+                    minWidth: column.minWidth,
+                    backgroundColor: 'lightgray',
+                    fontWeight: '700',
+                  }}
+                  className={styles.titulos}
                 >
                   {column.label}
                 </TableCell>

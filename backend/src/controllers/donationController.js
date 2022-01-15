@@ -5,6 +5,7 @@ const Company = require('../models/Company');
 const Category = require('../models/Category');
 
 
+
 cloudinary.config(process.env.CLOUDINARY_URL);
 
 // un comercio puede postear una donacion
@@ -14,16 +15,16 @@ const postDonation = async (req, res) => {
   const { lote, description, quantity, category } = JSON.parse(req.body.data);
   const {ongId} = req.params
   
-  //verifica que sea un usuario registrado
+  // verifica que sea un usuario registrado
     const user = await User.findByPk(userId)
     if (!user.CompanyId) {
       return res.status(401).json({ msg: 'El usuario no posee un comercio' });
     }
 
-    //verifica que el usuario no sea una ONG
+    // verifica que el usuario no sea una ONG
     const commerce = await Company.findByPk(user.companyId)
 
-       if (commerce.type_id !== 1) {
+       if (commerce.company_type_id !== 1) {
       return res.status(401).json({
         msg: 'Solo las companias tipo comercio pueden realizar donaciones',
       });
@@ -33,12 +34,12 @@ const postDonation = async (req, res) => {
         msg: 'Solo los comercios habilitados pueden realizar donaciones',
       });
     } 
-    //verifica que el id de la ONG pasada por params exista, sea una ONG y este habilitada
+    // verifica que el id de la ONG pasada por params exista, sea una ONG y este habilitada
     const ong = await Company.findByPk(ongId)
     if (!ong) {
       return res.status(401).json({ msg: 'La ONG no existe' });
     }
-    if (ong.type_id !== 2) {
+    if (ong.company_type_id !== 2) {
       return res.status(401).json({ msg: 'Solo las companias tipo ONG pueden recibir donaciones' });
     }
     if(ong.status !== 'Habilitada'){
@@ -47,14 +48,14 @@ const postDonation = async (req, res) => {
       });
     }
  
-    /////////////////////foto/////////////////////////////
+
     const { tempFilePath } = req.files.file;
 
     const { secure_url: secureUrl, public_id: publicId } =
       await cloudinary.uploader.upload(tempFilePath);
 
     const photo = { public_id: publicId, url: secureUrl };
-    /////////////////////foto/////////////////////////////
+  
     
     const newDonation = await Donation.create({
       lote,
@@ -77,40 +78,29 @@ const postDonation = async (req, res) => {
 
 
 
-// una ONG puede ver las donaciones recibidas
+// una ONG puede ver las donaciones recibidas //VER RUTA
 const getDonationsByOng = async (req, res) => {
   const ownerId = req.userId;
-
+  try {
   const ong = await Company.findByPk(ownerId);
+  
   if(!ong){
     return res.status(401).json({ msg: 'La ONG no existe' });
   }
-
-  if(ong.type_id !== 2){
+  if(ong.company_type_id !== 2){
     return res.status(401).json({
-      msg: 'Solo las companias tipo ONG recibir donaciones',
+      msg: 'Solo las companias tipo ONG pueden realizar esta accion',
     });
   }
-
-  try {
     const listDonations = await Donation.findAll({
       include: [
-        { model: Company, as: 'commerce', attributes: ['areaCode','phone','email','website','banner','status','deleted','ownerId','createAt','updateAt','type_id']},
-        { model: User, as: 'publisher',attributes: {
-          exclude: [
-            'phone',
-            'createdAt',
-            'updatedAt',
-            'password',
-            'status',
-            'CompanyId',
-            'RoleId',
-            'role_id',
-          ],
-        }, },
-        { model: Category, as: 'category', attributes: {exclude:[ 'createdAt','updatedAt']}},
+        { model: Company, as: 'commerce', attributes: ['id', 'name']} ,
+        { model: Category, as: 'category', attributes: ['name']},
       ], attributes: {exclude:['createdAt', 'updatedAt'] },
       order: [['lote', 'ASC']],
+      where: {
+        ongId: ownerId,
+      },
     });
     return res.status(200).json(listDonations);
   } catch (error) {
@@ -118,7 +108,7 @@ const getDonationsByOng = async (req, res) => {
   }
 };
 
-//un comercio puede ver las donaciones hechas
+// un comercio puede ver las donaciones hechas
 const getDonationsByCommerce = async (req, res) => {
   const ownerId = req.userId;
 
@@ -128,7 +118,7 @@ const getDonationsByCommerce = async (req, res) => {
     return res.status(401).json({ msg: 'La empresa no existe' });
   }
 
-  if(commerce.type_id !== 1){
+  if(commerce.company_type_id !== 1){
     return res.status(401).json({
       msg: 'Solo las empresas pueden realizar esta accion',
     });
@@ -136,8 +126,8 @@ const getDonationsByCommerce = async (req, res) => {
 
     const listDonations = await Donation.findAll({
       include: [
-        { model: Company, as: 'ong', attributes: ['areaCode','phone','email','website','banner','status','deleted','ownerId','createAt','updateAt','type_id']},
-        { model: Category, as: 'category', attributes: {exclude:[ 'createdAt','updatedAt']}},
+        { model: Company, as: 'ong', attributes: ['id', 'name']} ,
+        { model: Category, as: 'category', attributes: ['name']},
       ], attributes: {exclude:['createdAt', 'updatedAt'] },
       order: [['lote', 'ASC']],
       where: {
