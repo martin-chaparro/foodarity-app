@@ -10,7 +10,6 @@ import Button from '@mui/material/Button';
 import Header from '../../Components/Header/Header';
 import style from './RegisterFormUser.module.css';
 
-import { registerLocal } from '../../redux/actions/usersActions';
 import {
   startCheking,
   startGoogleRegister,
@@ -123,7 +122,6 @@ function Register() {
       !errors.password &&
       !errors.validatePassword
     ) {
-      dispatch(registerLocal(input));
       dispatch(startRegister(input));
       dispatch(startCheking());
        Swal.fire({
