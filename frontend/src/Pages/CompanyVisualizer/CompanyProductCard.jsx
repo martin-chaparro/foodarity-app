@@ -7,7 +7,7 @@ import Rating from '@mui/material/Rating';
 import StarIcon from '@mui/icons-material/Star';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
-import styles from './ProductCard.module.css';
+import styles from './CompanyProductCard.module.css';
 // import Company from '../../assets/SuperDia.png';
 
 const labels = {

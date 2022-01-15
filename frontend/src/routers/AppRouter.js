@@ -14,6 +14,7 @@ import { PrivateRoute } from './PrivateRoute';
 import { RollSelectorRouter } from './RollSelectorRouter';
 import { startCheking } from '../redux/actions/authActions';
 
+
 export function AppRouter() {
   const dispatch = useDispatch();
   const { checking, id } = useSelector((state) => state.auth);
@@ -22,15 +23,17 @@ export function AppRouter() {
     dispatch(startCheking());
   }, [dispatch]);
 
+ 
+
+
   if (checking) {
     return <Loading />;
   }
-
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/profilecompany" element={<ProfileCompany />} />
-        <Route path="/CompanyVisualizer" element={<CompanyVisualizer />} />
+        <Route path="/home/company/:id" element={<CompanyVisualizer />} />
         <Route path="/userprofile" element={<AMyProfile />} />
         <Route path="/home" element={<Home />} />
         <Route path="/login" element={<Login />} />
