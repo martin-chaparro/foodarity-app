@@ -1,3 +1,8 @@
 .nav h1 {
   text-align: center;
 }
+
+.profilecompany {
+  background-color: white;
+  height: 100vh;
+}

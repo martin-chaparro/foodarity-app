@@ -1,4 +1,5 @@
 import * as React from 'react';
+// import deleteLogo from '../../assets/deleteIcon';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -10,41 +11,41 @@ import TableRow from '@mui/material/TableRow';
 import styles from './Usuarios.module.css';
 
 const columns = [
-  { id: 'lote', label: 'LOTE', minWidth: 170 },
+  { id: 'nombre', label: 'NOMBRE USUARIO', minWidth: 170 },
   //   { id: 'empleado', label: 'Publicado', minWidth: 100 },
   {
-    id: 'cantidad',
-    label: 'CANTIDAD',
+    id: 'mail',
+    label: 'MAIL',
     minWidth: 170,
     align: 'right',
     format: (value) => value.toLocaleString('en-US'),
   },
   {
-    id: 'precio',
-    label: 'PRECIO PUBLICADO (ARS)',
+    id: 'telefono',
+    label: 'TELEFONO',
     minWidth: 170,
     align: 'right',
     format: (value) => value.toLocaleString('en-US'),
   },
   {
-    id: 'fecha',
-    label: 'FECHA PUBLICACION',
+    id: 'localidad',
+    label: 'LOCALIDAD',
     minWidth: 170,
     align: 'right',
     format: (value) => value.toFixed(2),
   },
   {
-    id: 'empleado',
-    label: 'Publicado por',
+    id: 'vendidos',
+    label: 'LOTES VENDIDOS',
     minWidth: 170,
     align: 'right',
     format: (value) => value.toFixed(2),
   },
 ];
 
-function createData(lote, cantidad, precio, fecha, empleado) {
+function createData(nombre, mail, telefono, localidad, vendidos) {
   // const density = population / size;
-  return { lote, cantidad, precio, fecha, empleado };
+  return { nombre, mail, telefono, localidad, vendidos };
 }
 
 const rows = [
@@ -85,7 +86,11 @@ export default function Usuarios() {
                 <TableCell
                   key={column.id}
                   align={column.align}
-                  style={{ minWidth: column.minWidth }}
+                  style={{
+                    minWidth: column.minWidth,
+                    backgroundColor: 'lightgray',
+                    fontWeight: '700',
+                  }}
                 >
                   {column.label}
                 </TableCell>

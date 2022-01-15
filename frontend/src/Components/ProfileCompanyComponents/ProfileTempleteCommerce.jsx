@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
 import React, { useEffect, useState } from 'react';
-
+// import DetailsIcon from '@mui/icons-material/Details';
+// import InventoryIcon from '@mui/icons-material/Inventory';
 import PropTypes from 'prop-types';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -8,12 +9,12 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
+
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
+// import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import MailIcon from '@mui/icons-material/Mail';
+
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
@@ -68,6 +69,8 @@ function ProfileTempleteCommerce(props) {
     });
   }, []);
 
+  console.log(products);
+
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -107,7 +110,7 @@ function ProfileTempleteCommerce(props) {
 
           { text: 'Donaciones', typesAllow: [1, 2] },
         ].map(
-          ({ text, typesAllow}, index) =>
+          ({ text, typesAllow }, index) =>
             typesAllow.includes(company.company_type_id) && (
               <ListItem
                 button
@@ -116,9 +119,9 @@ function ProfileTempleteCommerce(props) {
                   handleDisplay(index);
                 }}
               >
-                <ListItemIcon>
+                {/* <ListItemIcon>
                   {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
+                </ListItemIcon> */}
                 <ListItemText primary={text} />
               </ListItem>
             )
@@ -126,11 +129,9 @@ function ProfileTempleteCommerce(props) {
       </List>
       <Divider />
       <List>
-        {['All mail', 'Trash'].map((text, index) => (
+        {['All mail', 'Trash'].map((text) => (
           <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
+            {/* <ListItemIcon>{index === 0 && <DetailsIcon />}</ListItemIcon> */}
             <ListItemText primary={text} />
           </ListItem>
         ))}
@@ -224,7 +225,9 @@ function ProfileTempleteCommerce(props) {
           {display === 4 && <Usuarios users={users} />}
           {display === 5 && (
             <Donations
-              donations={company.company_type_id === 1 ? commerceDonations : ongDonations}
+              donations={
+                company.company_type_id === 1 ? commerceDonations : ongDonations
+              }
               typeId={company.company_type_id}
             />
           )}
