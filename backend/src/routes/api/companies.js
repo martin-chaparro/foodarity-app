@@ -16,11 +16,12 @@ const {
   searchCompanyByUser,
   addUser,
   deleteUser,
+  getUsers,
 } = require('../../controllers/companiesController');
 
 router.get('/', getCompanies);
 router.get('/id/:id', searchCompany);
-router.get('/byUser', authMiddleware, searchCompanyByUser);
+router.get('/byuser', authMiddleware, searchCompanyByUser);
 router.post('/', authMiddleware, ValidationCompany.create, createCompany);
 router.patch(
   '/:id/upload/:field',
@@ -32,5 +33,6 @@ router.delete('/disabled/:id', authMiddleware, deleteCompany);
 router.put('/:id', authMiddleware, ValidationCompany.update, updateCompany);
 router.post('/user', authMiddleware, addUser);
 router.delete('/user/:id', authMiddleware, deleteUser);
+router.get('/users', authMiddleware, getUsers)
 
 module.exports = router;

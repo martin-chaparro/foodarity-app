@@ -16,9 +16,7 @@ class CompanyType extends Model {
   }
 
   static associate(models) {
-    this.hasMany(models.Company);
-   // se agrega una ForeingKey donationId a la tabla Donation
-    this.hasMany(models.Donation);
+    this.hasMany(models.Company );
   }
 }
 

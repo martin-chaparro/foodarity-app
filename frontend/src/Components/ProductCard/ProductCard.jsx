@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
@@ -28,7 +29,12 @@ const style = {
   p: 4,
 };
 
+
+
 export default function ProductCard({ product }) {
+
+  const navigate = useNavigate()
+
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -36,10 +42,15 @@ export default function ProductCard({ product }) {
   const [hover, setHover] = React.useState(-1);
   const ExpirationDate = product.expirationDate;
   const Date = ExpirationDate.split('-').reverse().join('/');
+
+
+  const handleCompanyClick = (event, id)=>{
+    navigate(`company/${id}`, { replace: true })
+  }
   return (
     <div className={styles.productcard}>
       <div className={styles.divImg}>
-        <img src={product.photo} alt="food" className={styles.img} />
+        <img src={product.photo.url} alt="food" className={styles.img} />
       </div>
       <div className={styles.content}>
         <div className={styles.nameDiv}>
@@ -81,6 +92,7 @@ export default function ProductCard({ product }) {
                       id="modal-modal-description"
                       sx={{ mt: 2, fontSize: 24, margin: 0 }}
                       className={styles.titleTypographyName}
+                      onClick={(e) => handleCompanyClick(e, product.company.id)}
                     >
                       {product.company.name}
                     </Typography>
@@ -135,7 +147,7 @@ export default function ProductCard({ product }) {
                     <div className={styles.PostImgDiv}>
                       <img
                         className={styles.PostImg}
-                        src={product.photo}
+                        src={product.photo.url}
                         alt="ProductPhoto"
                       />
                     </div>

@@ -1,6 +1,7 @@
 .RegisterFormCommerce {
   height: 100vh;
   background: #ececec;
+  margin-top: 60px;
 }
 
 .form {
@@ -527,4 +528,10 @@
   font-weight: 600;
   background-color: #d68584;
   cursor: pointer;
+}
+
+.inputcontenedor {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

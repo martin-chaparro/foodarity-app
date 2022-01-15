@@ -38,8 +38,7 @@ const createCompany = async (req, res) => {
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-///////////////////////FOTO//////////////////////////////////////////////////
-const { tempFilePath } = req.files.file;
+    const { tempFilePath } = req.files.file;
 
     const { secure_url: secureUrl, public_id: publicId } =
       await cloudinary.uploader.upload(tempFilePath);
@@ -116,6 +115,8 @@ const searchCompany = async (req, res) => {
     const { id } = req.params;
     const company = await Company.findByPk(id, {
       include: [
+        { model: User, as: 'user', attributes: ['id', 'name', 'email'] },
+
         { model: CompanyType, as: 'type', attributes: ['type'] },
         {
           model: Address,
@@ -146,12 +147,33 @@ const searchCompanyByUser = async (req, res) => {
     const { userId } = req;
     // console.log('CONSOLE LOG: userId', userId);
     const user = await User.findByPk(userId, {
-      include: [{ model: Company, as: 'company' }],
+      include: [
+        {
+          model: Company,
+          as: 'company',
+          include: [
+            { model: User, as: 'user', attributes: ['id', 'name', 'email'] },
+
+            { model: CompanyType, as: 'type', attributes: ['type'] },
+            {
+              model: Address,
+              as: 'address',
+              include: [
+                { model: City, as: 'city' },
+                { model: State, as: 'state' },
+              ],
+            },
+          ],
+          attributes: {
+            exclude: ['createdAt', 'updatedAt', 'CompanyTypeId'],
+          },
+        },
+      ],
     });
-    if (!user.CompanyId || user.CompanyId === null) {
+    if (!user.companyId || user.companyId === null) {
       return res.json({ msg: 'El usuario no posee una compañia' });
     }
-    return res.status(200).json(user.Company);
+    return res.status(200).json(user.company);
   } catch (error) {
     return res.status(500).send({ msg: error });
   }
@@ -312,6 +334,32 @@ const updateCompany = async (req, res) => {
   }
 };
 
+const getUsers = async (req, res) => {
+  try {
+    const { userId } = req;
+    const user = await User.findByPk(userId, {
+      include: [{ model: Company, as: 'company' }],
+    });
+    if (!user.companyId) {
+      return res.status(400).json({
+        message: 'El usuario no tiene compania',
+      });
+    }
+    if (user.company.status !== 'Habilitada') {
+      return res.status(400).json({
+        message: 'La compania no esta habilitada',
+      });
+    }
+    const users = await User.findAll({
+      where: { companyId: user.companyId },
+      attributes: { exclude: ['password', 'createdAt', 'updatedAt', 'RoleId'] },
+    });
+    return res.status(200).json(users);
+  } catch (error) {
+    return res.status(500).send(error);
+  }
+};
+
 const addUser = async (req, res) => {
   try {
     const { email } = req.query;
@@ -367,12 +415,12 @@ const addUser = async (req, res) => {
 const deleteUser = async (req, res) => {
   try {
     let { id } = req.params;
-    id = parseInt(id,10)
+    id = parseInt(id, 10);
     const { userId } = req;
     const owner = await User.findByPk(userId, {
       include: { model: Company, as: 'company' },
     });
-    console.log('id params', id, 'user id', userId)
+    console.log('id params', id, 'user id', userId);
     if (!owner.companyId) {
       return res.status(400).json({
         message: 'El usuario no tiene compania',
@@ -381,7 +429,7 @@ const deleteUser = async (req, res) => {
     if (userId !== owner.company.ownerId) {
       if (userId !== id) {
         return res.status(401).json({ message: 'Not owner' });
-      } 
+      }
     }
     if (owner.company.status !== 'Habilitada') {
       return res.status(400).json({
@@ -409,15 +457,15 @@ const deleteUser = async (req, res) => {
     }
     user.setCompany(null);
     if (userId === id) {
-      return res.status(200).send({ message: `you exit the company '${owner.company.name}'` });
+      return res
+        .status(200)
+        .send({ message: `you exit the company '${owner.company.name}'` });
     }
     return res.status(200).send({ message: `${user.email} deleted` });
   } catch (error) {
     return res.status(500).send(error);
   }
 };
-
-
 
 module.exports = {
   getCompanies,
@@ -429,4 +477,5 @@ module.exports = {
   updateCompany,
   addUser,
   deleteUser,
+  getUsers,
 };

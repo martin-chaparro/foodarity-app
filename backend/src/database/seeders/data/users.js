@@ -1,7 +1,14 @@
 module.exports = [
   {
-    name: 'demo',
+    name: 'democomercio',
     email: 'demo@demo.com',
+    password: 'demo',
+    status: true,
+    roleId:1
+  },
+  {
+    name: 'demoOng',
+    email: 'demo@demoOng.com',
     password: 'demo',
     status: true,
     roleId:1
@@ -48,6 +55,20 @@ module.exports = [
     password: '123456',
     status: true,
     roleId:2
+  },
+  {
+    name: 'Common user',
+    email: 'user@user.com',
+    password: 'user',
+    status: true,
+    roleId:1
+  },
+  {
+    name: 'Common user 2',
+    email: 'user2@user.com',
+    password: 'user',
+    status: true,
+    roleId:1
   },
 
   

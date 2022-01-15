@@ -14,11 +14,12 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import HelpIcon from '@mui/icons-material/Help';
 import LoginIcon from '@mui/icons-material/Login';
 import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
+import StoreIcon from '@mui/icons-material/Store';
 import Logo from '../../assets/Mobil-Full-Header-Logo.png';
 import Avatar from './Avatar';
-import Drawer from '../Drawer/Drawer';
+// import Drawer from '../Drawer/Drawer';
 
-export default function Navbar({ filtrado }) {
+export default function Navbar() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -26,7 +27,11 @@ export default function Navbar({ filtrado }) {
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
   const handleProfileMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget);
+    if (isMenuOpen) {
+      setAnchorEl(null);
+    } else {
+      setAnchorEl(event.currentTarget);
+    }
   };
 
   const handleMobileMenuClose = () => {
@@ -39,12 +44,116 @@ export default function Navbar({ filtrado }) {
   };
 
   const handleMobileMenuOpen = (event) => {
-    setMobileMoreAnchorEl(event.currentTarget);
+    if (isMenuOpen) {
+      setAnchorEl(null);
+    } else {
+      setAnchorEl(event.currentTarget);
+    }
   };
+
+  const menuItems = (<span>  <MenuItem>
+    <IconButton
+      size="large"
+      aria-label="account of current user"
+      aria-controls="vista-mobile"
+      aria-haspopup="true"
+      color="secondary"
+    >
+      <Avatar />
+    </IconButton>
+    <Link to="/profileuser" textDecoration="none">
+      Mi Cuenta
+    </Link>
+  </MenuItem>
+  <MenuItem>
+    <IconButton
+      size="large"
+      aria-label="account of current user"
+      aria-controls="vista-mobile"
+      aria-haspopup="true"
+      color="secondary"
+    >
+      <StoreIcon />
+    </IconButton>
+    <Link to="/profilecompany" textDecoration="none">
+      Portal Empresa
+    </Link>
+  </MenuItem>
+  <MenuItem>
+    <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+      <Badge>
+        <FavoriteIcon fontSize="small" color="secondary" />
+      </Badge>
+    </IconButton>
+    <p>Favoritos</p>
+  </MenuItem>
+  <MenuItem>
+    <IconButton
+      size="large"
+      aria-label="show 17 new notifications"
+      color="inherit"
+    >
+      <Badge>
+        <ShoppingCartIcon color="secondary" />
+      </Badge>
+    </IconButton>
+    <p>Mi Carrito</p>
+  </MenuItem>
+  <MenuItem>
+    <IconButton
+      size="large"
+      aria-label="show 17 new notifications"
+      color="inherit"
+      href="/register"
+    >
+      <AppRegistrationIcon color="secondary" />
+    </IconButton>
+    <Link to="/login" textDecoration="none">
+      Registrarse
+    </Link>
+  </MenuItem>
+  <MenuItem>
+          <IconButton
+            size="large"
+            aria-label="account of current user"
+            aria-controls="web-vista-account-menu"
+            aria-haspopup="true"
+            color="inherit"
+          >
+            <HelpIcon color="secondary" />
+          </IconButton>
+          <p>Ayuda</p>
+        </MenuItem>
+  <MenuItem>
+    <IconButton
+      size="large"
+      aria-label="show 17 new notifications"
+      color="inherit"
+      href="/"
+    >
+      <LoginIcon color="secondary" />
+    </IconButton>
+    <Link to="/login" textDecoration="none">
+      Iniciar Sesión
+    </Link>
+  </MenuItem>
+  <MenuItem>
+    <IconButton
+      size="large"
+      aria-label="show 17 new notifications"
+      color="inherit"
+      href="/"
+    >
+      <LogoutIcon color="secondary" />
+    </IconButton>
+    <Link to="/" textDecoration="none">
+      Cerrar Sesión
+    </Link>
+  </MenuItem></span>)
 
   const menuId = 'web-vista-account-menu';
   const renderMenu = (
-    <Menu
+    <Menu sx={{zIndex:10010, marginTop:5.3}}
       anchorEl={anchorEl}
       anchorOrigin={{
         vertical: 'top',
@@ -59,69 +168,7 @@ export default function Navbar({ filtrado }) {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <Avatar />
-        </IconButton>
-        <Link to="/userprofile" textDecoration="none">
-          Mi Cuenta
-        </Link>
-      </MenuItem>
-      <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <FavoriteIcon fontsize="small" color="secondary" />
-        </IconButton>
-        <p>Favoritos</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="show 17 new notifications"
-          color="inherit"
-        >
-          <Badge color="secondary">
-            <ShoppingCartIcon color="primary" />
-          </Badge>
-        </IconButton>
-        <p>Carrito de Compras</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="account of current user"
-          aria-controls="web-vista-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <HelpIcon color="secondary" />
-        </IconButton>
-        <p>Ayuda</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="show 17 new notifications"
-          color="inherit"
-          href="/"
-        >
-          <LoginIcon color="secondary" />
-        </IconButton>
-        <Link to="/login" textDecoration="none">
-          Iniciar Sesión
-        </Link>
-      </MenuItem>
-      <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="show 17 new notifications"
-          color="inherit"
-        >
-          <LogoutIcon color="secondary" />
-        </IconButton>
-        <Link to="/" textDecoration="none">
-          Cerrar Sesión
-        </Link>
-      </MenuItem>
+        {menuItems}
     </Menu>
   );
 
@@ -142,84 +189,12 @@ export default function Navbar({ filtrado }) {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <Badge>
-            <FavoriteIcon fontsize="small" color="secondary" />
-          </Badge>
-        </IconButton>
-        <p>Favoritos</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="show 17 new notifications"
-          color="inherit"
-        >
-          <Badge>
-            <ShoppingCartIcon color="secondary" />
-          </Badge>
-        </IconButton>
-        <p>Carrito de Compras</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="account of current user"
-          aria-controls="vista-mobile"
-          aria-haspopup="true"
-          color="secondary"
-        >
-          <Avatar />
-        </IconButton>
-        <Link to="/userprofile" textDecoration="none">
-          Mi Cuenta
-        </Link>
-      </MenuItem>
-      <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="show 17 new notifications"
-          color="inherit"
-          href="/register"
-        >
-          <AppRegistrationIcon color="secondary" />
-        </IconButton>
-        <Link to="/login" textDecoration="none">
-          Registrarse
-        </Link>
-      </MenuItem>
-      <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="show 17 new notifications"
-          color="inherit"
-          href="/"
-        >
-          <LoginIcon color="secondary" />
-        </IconButton>
-        <Link to="/login" textDecoration="none">
-          Iniciar Sesión
-        </Link>
-      </MenuItem>
-      <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="show 17 new notifications"
-          color="inherit"
-          href="/"
-        >
-          <LogoutIcon color="secondary" />
-        </IconButton>
-        <Link to="/" textDecoration="none">
-          Cerrar Sesión
-        </Link>
-      </MenuItem>
+    {menuItems}
     </Menu>
   );
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1, zIndex :10000, position:'absolute', top: 0}} >
       <AppBar position="fixed">
         <Toolbar>
           <IconButton
@@ -267,7 +242,6 @@ export default function Navbar({ filtrado }) {
             </IconButton>
           </Box>
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
-            <Drawer filtrado={filtrado} />
             <IconButton
               size="large"
               aria-label="show more"
