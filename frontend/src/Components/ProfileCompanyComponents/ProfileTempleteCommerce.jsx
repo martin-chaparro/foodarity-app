@@ -25,6 +25,7 @@ import PublishedProduct from './PublishedProduct';
 import PrimarySearchAppBar from '../Navbar/NavbarCommerce';
 import Orders from './Orders';
 import Usuarios from './Usuarios';
+import Donations from './Donations';
 import styles from './ProfileTempleteCommerce.module.css';
 
 const drawerWidth = 240;
@@ -37,6 +38,10 @@ function ProfileTempleteCommerce(props) {
   const [products, setProducts] = useState({});
 
   const [users, setUsers] = useState({});
+
+  const [commerceDonations, setCommerceDonations] = useState({});
+
+  const [ongDonations, setOngDonations] = useState({});
 
   useEffect(() => {
     apiWithToken
@@ -53,6 +58,14 @@ function ProfileTempleteCommerce(props) {
 
     apiWithToken.get('/companies/users').then((response) => {
       setUsers(response.data);
+    });
+
+    apiWithToken.get('/donation/commerce').then((response) => {
+      setCommerceDonations(response.data);
+    });
+
+    apiWithToken.get('/donation').then((response) => {
+      setOngDonations(response.data);
     });
   }, []);
 
@@ -79,32 +92,40 @@ function ProfileTempleteCommerce(props) {
         {[
           {
             text: 'Detalles de Cuenta',
+            typesAllow: [1, 2],
           },
           {
             text: 'Ordenes',
+            typesAllow: [1],
           },
           {
             text: 'Productos Publicados',
+            typesAllow: [1],
           },
           {
             text: 'Publicar Nuevo Lote',
+            typesAllow: [1],
           },
-          { text: 'Usuarios' },
-        ].map(({ text }, index) => (
-          <ListItem
-            button
-            key={text}
-            onClick={() => {
-              handleDisplay(index);
-            }}
-          >
-            {/* <ListItemIcon>{index === 0 && <DetailsIcon />}</ListItemIcon>
-            <ListItemIcon>
-              {index === 1 && <InventoryIcon sx={{ fontSize: 'large' }} />}
-            </ListItemIcon> */}
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
+          { text: 'Usuarios', typesAllow: [1, 2] },
+
+          { text: 'Donaciones', typesAllow: [1, 2] },
+        ].map(
+          ({ text, typesAllow }, index) =>
+            typesAllow.includes(company.company_type_id) && (
+              <ListItem
+                button
+                key={text}
+                onClick={() => {
+                  handleDisplay(index);
+                }}
+              >
+                {/* <ListItemIcon>
+                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                </ListItemIcon> */}
+                <ListItemText primary={text} />
+              </ListItem>
+            )
+        )}
       </List>
       <Divider />
       <List>
@@ -121,7 +142,7 @@ function ProfileTempleteCommerce(props) {
   const container =
     window !== undefined ? () => window().document.body : undefined;
 
-  return (
+  const loggedRender = (
     <div>
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
@@ -144,7 +165,7 @@ function ProfileTempleteCommerce(props) {
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" noWrap component="div">
-              PANADERIA BUENOS AIRES
+              {company.name}
             </Typography>
           </Toolbar>
         </AppBar>
@@ -194,7 +215,7 @@ function ProfileTempleteCommerce(props) {
             width: { sm: `calc(100% - ${drawerWidth}px)` },
           }}
         >
-          <Toolbar display="none" />
+          <Toolbar display="inline" />
           {display === 0 && <CompanyDetail company={company} />}
 
           {display === 2 && <PublishedProduct products={products} />}
@@ -202,8 +223,25 @@ function ProfileTempleteCommerce(props) {
 
           {display === 1 && <Orders orders={orders} />}
           {display === 4 && <Usuarios users={users} />}
+          {display === 5 && (
+            <Donations
+              donations={
+                company.company_type_id === 1 ? commerceDonations : ongDonations
+              }
+              typeId={company.company_type_id}
+            />
+          )}
         </Box>
       </Box>
+    </div>
+  );
+
+  const renderNoCompany = <div>NO TENES COMPANIA</div>;
+
+  return (
+    <div>
+      {company.id && loggedRender}
+      {!company.id && renderNoCompany}
     </div>
   );
 }

@@ -65,8 +65,8 @@ class Company extends Model {
   }
 
   static associate(models) {
-    this.belongsTo(models.CompanyType, { foreignKey: 'type_id', as: 'type' });
-    this.hasMany(models.User);
+    this.belongsTo(models.CompanyType, { foreignKey: 'company_type_id', as: 'type' });
+    this.hasMany(models.User, {as: 'user'});
     this.hasOne(models.Address, { as: 'address' });
     this.hasMany(models.Product);
     this.hasMany(models.Donation);

@@ -150,6 +150,10 @@ const getProducts = async (req, res) => {
     if (expirationDate) {
       whereAttr.expirationDate = { [Op.lte]: expirationDate };
     }
+    if (expirationDate === '') {
+      delete whereAttr.expirationDate
+    }
+    
 
 
     const params = {
