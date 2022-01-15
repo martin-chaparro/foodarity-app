@@ -10,11 +10,11 @@ import ProfileCompany from '../Pages/ProfileCompany/ProfileCompany';
 import ProfileUser from '../Pages/ProfileUser/ProfileUser';
 import CompanyVisualizer from '../Pages/CompanyVisualizer/CompanyVisualizer';
 import AMyProfile from '../Pages/Profile User/AMyProfile';
+import Navbar from '../Components/Navbar/Navbar';
 
 import { PrivateRoute } from './PrivateRoute';
 import { RollSelectorRouter } from './RollSelectorRouter';
 import { startCheking } from '../redux/actions/authActions';
-
 
 export function AppRouter() {
   const dispatch = useDispatch();
@@ -24,24 +24,28 @@ export function AppRouter() {
     dispatch(startCheking());
   }, [dispatch]);
 
- 
-
-
   if (checking) {
     return <Loading />;
   }
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/profileuser" element={<ProfileUser />} />
-        <Route path="/profilecompany" element={<ProfileCompany />} />
-        <Route path="/home/company/:id" element={<CompanyVisualizer />} />
-        <Route path="/userprofile" element={<AMyProfile />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/" element={<Landing />} />
-        <Route path="/register" element={<Register />} />
+        <Route path="*" element={<Navbar />} />
+      </Routes>
 
+      <Routes>
+        <Route exact path="/" element={<Landing />} />
+        <Route exact path="/profileuser" element={<ProfileUser />} />
+        <Route exact path="/profilecompany" element={<ProfileCompany />} />
+        <Route
+          exact
+          path="/CompanyVisualizer"
+          element={<CompanyVisualizer />}
+        />
+        <Route exact path="/userprofile" element={<AMyProfile />} />
+        <Route exact path="/home" element={<Home />} />
+        <Route exact path="/login" element={<Login />} />
+        <Route exact path="/register" element={<Register />} />
         <Route
           path="/rollselector/*"
           element={

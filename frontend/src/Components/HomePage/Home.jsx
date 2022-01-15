@@ -82,11 +82,12 @@ export default function Home() {
   return (
     <div>
       <div>
-        <Navbar filtrado={filtrado} />
+        <Navbar filtrado={filtrado} /> 
         <BannerSearch
           search={search}
           lote={allProducts}
           sx={{ marginBottom: '1em', width: '100%' }}
+          filtrado={filtrado}
         />
         <Pagination paginado={paginado} />
       </div>

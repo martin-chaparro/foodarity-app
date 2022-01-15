@@ -59,4 +59,3 @@ export const getCompanies = () => async (dispatch) => {
     console.log(error);
   }
 };
-
