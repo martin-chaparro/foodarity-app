@@ -56,6 +56,20 @@ module.exports = [
     status: true,
     roleId:2
   },
+  {
+    name: 'Common user',
+    email: 'user@user.com',
+    password: 'user',
+    status: true,
+    roleId:1
+  },
+  {
+    name: 'Common user 2',
+    email: 'user2@user.com',
+    password: 'user',
+    status: true,
+    roleId:1
+  },
 
   
 ];

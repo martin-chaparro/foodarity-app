@@ -18,6 +18,7 @@ import ListItemText from '@mui/material/ListItemText';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
+import { useNavigate } from 'react-router-dom';
 import { apiWithToken } from '../../services/api';
 import CompanyDetail from './CompanyDetail';
 import PostNewBatch from './PostNewBatch';
@@ -31,6 +32,8 @@ import styles from './ProfileTempleteCommerce.module.css';
 const drawerWidth = 240;
 
 function ProfileTempleteCommerce(props) {
+  const navigate = useNavigate();
+
   const [orders, setOrders] = useState({});
 
   const [company, setCompany] = useState({});
@@ -43,6 +46,8 @@ function ProfileTempleteCommerce(props) {
 
   const [ongDonations, setOngDonations] = useState({});
 
+  const [logged, setLogged] = useState('loading');
+
   useEffect(() => {
     apiWithToken
       .get('/orders/company')
@@ -50,6 +55,11 @@ function ProfileTempleteCommerce(props) {
 
     apiWithToken.get(`/companies/byuser`).then((response) => {
       setCompany(response.data);
+      if (response.data.id) {
+        setLogged('true');
+      } else {
+        setLogged('false');
+      }
     });
 
     apiWithToken.get('/products/byauth').then((response) => {
@@ -83,6 +93,10 @@ function ProfileTempleteCommerce(props) {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
+
+  useEffect(() => {
+    setDisplay(0);
+  }, []);
 
   const drawer = (
     <div>
@@ -128,14 +142,14 @@ function ProfileTempleteCommerce(props) {
         )}
       </List>
       <Divider />
-      <List>
+      {/* <List>
         {['All mail', 'Trash'].map((text) => (
           <ListItem button key={text}>
-            {/* <ListItemIcon>{index === 0 && <DetailsIcon />}</ListItemIcon> */}
+             <ListItemIcon>{index === 0 && <DetailsIcon />}</ListItemIcon> 
             <ListItemText primary={text} />
           </ListItem>
         ))}
-      </List>
+      </List>  */}
     </div>
   );
 
@@ -222,7 +236,7 @@ function ProfileTempleteCommerce(props) {
           {display === 3 && <PostNewBatch />}
 
           {display === 1 && <Orders orders={orders} />}
-          {display === 4 && <Usuarios users={users} />}
+          {display === 4 && <Usuarios users={users} company={company} />}
           {display === 5 && (
             <Donations
               donations={
@@ -236,12 +250,14 @@ function ProfileTempleteCommerce(props) {
     </div>
   );
 
-  const renderNoCompany = <div>NO TENES COMPANIA</div>;
+  // TODO
+  const loading = <div>CARGANDO...</div>;
 
   return (
     <div>
-      {company.id && loggedRender}
-      {!company.id && renderNoCompany}
+      {logged === 'true' && loggedRender}
+      {logged === 'false' && navigate('/home')}
+      {logged === 'loading' && loading}
     </div>
   );
 }
