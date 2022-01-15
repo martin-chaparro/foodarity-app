@@ -89,19 +89,18 @@ export default function Home() {
           sx={{ marginBottom: '1em', width: '100%' }}
           filtrado={filtrado}
         />
-      </div>
-
-      <div className={styles.home}>
         <Pagination paginado={paginado} />
-        <div className={styles.homecont}>
-          <div className={styles.contmobile}>
-            {allProducts.map((product, index) => (
-              // eslint-disable-next-line react/no-array-index-key
-              <ProductCard key={index} product={product} />
-            ))}
-          </div>
+      </div>
+      <div className={styles.parent}>
+        <div className={styles.filtroWeb}>
+          <FiltroWeb filtrado={filtrado} />
         </div>
-        <FiltroWeb filtrado={filtrado} />
+        <div>
+          {allProducts.map((product, index) => (
+            // eslint-disable-next-line react/no-array-index-key
+            <ProductCard key={index} product={product} />
+          ))}
+        </div>
       </div>
     </div>
   );

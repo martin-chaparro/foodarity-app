@@ -27,7 +27,6 @@ export function AppRouter() {
   if (checking) {
     return <Loading />;
   }
-
   return (
     <BrowserRouter>
       <Routes>

@@ -1,6 +1,6 @@
 /* eslint-disable consistent-return */
 // import axios from 'axios';
-import { apiWithToken } from '../../services/api';
+import { api, apiWithToken } from '../../services/api';
 
 import types from '../types/companiesTypes';
 
@@ -49,7 +49,7 @@ export const registerComerce = (inputForm, select) => async (dispatch) => {
 
 export const getCompanies = () => async (dispatch) => {
   try {
-    const response = await apiWithToken.get('/companies');
+    const response = await api.get('/companies');
     console.log('DATAAAA1', response.data);
     return dispatch({
       type: types.getCompanies,
