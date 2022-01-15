@@ -70,8 +70,6 @@ export function postProduct(payload, photo) {
   // eslint-disable-next-line func-names
   // eslint-disable-next-line no-unused-vars
 
-  console.log(payload);
-
   // eslint-disable-next-line no-unused-vars
   return async function (dispatch) {
     try {
