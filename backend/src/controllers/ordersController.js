@@ -73,13 +73,15 @@ const getOrdersByUser = async (req, res) => {
 const getOrdersByCompany = async (req, res) => {
   try {
     const { userId } = req;
+   
     const user = await User.findByPk(userId, {
       include: [{ model: Company, as: 'company' }],
     });
+
     if (!user.companyId) {
       return res.status(401).json({ msg: 'El usuaria no posee un comercio' });
     }
-    if (user.company.type_id !== 1) {
+    if (user.company.company_type_id !== 1) {
       return res.status(401).json({
         message: 'La compania no es un comercio',
       });

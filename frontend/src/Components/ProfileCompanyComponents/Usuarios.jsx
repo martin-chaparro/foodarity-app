@@ -62,7 +62,8 @@ const rows = [
   ),
 ];
 
-export default function Usuarios() {
+export default function Usuarios({users}) {
+  console.log(users)
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
