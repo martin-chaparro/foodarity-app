@@ -113,15 +113,15 @@ export default function Drawer({ filtrado }) {
   return (
     <div>
       {['right'].map((anchor) => (
-        <React.Fragment key={anchor}>
+        <React.Fragment key={anchor} >
           <Button
-            sx={{ backgroundColor: 'transparent' }}
+            sx={{ backgroundColor: 'transparent' , }}
             onClick={toggleDrawer(anchor, true)}
           >
             <MenuIcon color="secondary" sx={{ fontSize: '2.5em' }} />
           </Button>
-          <SwipeableDrawer
-            sx={{ backgroundColor: 'primary' }}
+          <SwipeableDrawer 
+            sx={{ backgroundColor: 'primary', zIndex:10002 }}
             anchor={anchor}
             open={state[anchor]}
             onClose={toggleDrawer(anchor, false)}

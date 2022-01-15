@@ -1,5 +1,4 @@
-import React from 'react';
-// import deleteLogo from '../../assets/deleteIcon';
+import * as React from 'react';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -8,84 +7,51 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import styles from './Usuarios.module.css';
-import { apiWithToken } from '../../services/api';
+import styles from './Compras.module.css';
 
 const columns = [
-  { id: 'nombre', label: 'NOMBRE', minWidth: 170 },
+  { id: 'lote', label: 'LOTE', minWidth: 170 },
+  { id: 'code', label: 'ISO\u00a0Code', minWidth: 100 },
   {
-    id: 'email',
-    label: 'EMAIL',
+    id: 'cantidad',
+    label: 'CANTIDAD',
     minWidth: 170,
     align: 'right',
     format: (value) => value.toLocaleString('en-US'),
   },
   {
-    id: 'telefono',
-    label: 'TELEFONO',
+    id: 'precio',
+    label: 'PRECIO PUBLICADO (ARS)',
     minWidth: 170,
     align: 'right',
     format: (value) => value.toLocaleString('en-US'),
   },
   {
-    id: 'rol',
-    label: 'ROL',
-    minWidth: 170,
-    align: 'right',
-    format: (value) => value.toFixed(2),
-  },
-  {
-    id: 'eliminar',
-    label: 'ELIMINAR',
+    id: 'fecha',
+    label: 'FECHA PUBLICACION',
     minWidth: 170,
     align: 'right',
     format: (value) => value.toFixed(2),
   },
 ];
 
-function createData(nombre, email, telefono, rol, eliminar) {
-  return { nombre, email, telefono, rol, eliminar };
+function createData(lote, cantidad, precio, fecha) {
+  // const density = population / size;
+  return { lote, cantidad, precio, fecha };
 }
 
-export default function Usuarios({ users, company }) {
+const rows = [
+  createData('Lote pre-pizzas', 2, 120, '12/06/2022'),
+  createData('Lote facturas', '3', 400, '12/06/2022'),
+  createData('Lote tortas', '1', 100, '12/06/2022'),
+  createData('Lote panes', '4', 327, '12/06/2022'),
+  createData('Lote pan Rayado', '4', 376, '12/06/2022'),
+  createData('Lote combo pasteleria/rotiseria', '6', 2547, '12/06/2022'),
+];
+
+export default function Orders() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  const [rows, setRows] = React.useState([]);
-  const [input, setInput] = React.useState('');
-
-  function handleOnChange(e) {
-    setInput(e.target.value);
-  }
-
-  const handleDelete = (id) => {
-    apiWithToken.delete(`/companies/user/${id}`);
-  };
-
-  React.useEffect(() => {
-    const finalRows = [];
-    users.forEach((user) => {
-      console.log(user.name);
-      finalRows.push(
-        createData(
-          user.name,
-          user.email,
-          user.phone,
-          user.id === company.ownerId ? 'Dueño' : 'Empleado',
-          user.id !== company.ownerId && (
-            <button
-              type="button"
-              onClick={() => {
-                handleDelete(user.id);
-              }}
-            >
-              X
-            </button>
-          )
-        )
-      );
-      setRows(finalRows);
-    });
-  }, []);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -96,29 +62,8 @@ export default function Usuarios({ users, company }) {
     setPage(0);
   };
 
-  // /companies/user?email=demo@demo.com
-
-  function handleAddAcount() {
-    apiWithToken
-      .post(`/companies/user?email=${input}`)
-      .then((response) => console.log(response.data));
-  }
-
   return (
-    <Paper className={styles.users} sx={{ width: '100%', overflow: 'hidden' }}>
-      <div className={styles.contagregar}>
-        <h2>Agregar nueva cuenta</h2>
-        <input type="text" name="email" onChange={(e) => handleOnChange(e)} />
-        <button
-          type="button"
-          onClick={() => {
-            handleAddAcount();
-          }}
-        >
-          AGREGAR
-        </button>
-      </div>
-
+    <Paper className={styles.orders} sx={{ width: '100%', overflow: 'hidden' }}>
       <TableContainer sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
@@ -127,11 +72,7 @@ export default function Usuarios({ users, company }) {
                 <TableCell
                   key={column.id}
                   align={column.align}
-                  style={{
-                    minWidth: column.minWidth,
-                    backgroundColor: 'lightgray',
-                    fontWeight: '700',
-                  }}
+                  style={{ minWidth: column.minWidth }}
                 >
                   {column.label}
                 </TableCell>
@@ -140,7 +81,7 @@ export default function Usuarios({ users, company }) {
           </TableHead>
           <TableBody>
             {rows
-              /* .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage) */
+              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => {
                 return (
                   <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>

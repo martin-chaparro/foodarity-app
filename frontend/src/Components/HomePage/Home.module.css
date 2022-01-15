@@ -1,3 +1,11 @@
+.parent {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr;
+  grid-column-gap: 1em;
+  grid-row-gap: 0px;
+}
+
 .home {
   background-color: #ececec;
   height: 100vh;
@@ -52,8 +60,15 @@
   font-size: 14px;
 }
 
+.filtroWeb {
+  padding: 1em 2em;
+}
+
 @media screen and (max-width: 576px) {
   .contweb {
+    display: none;
+  }
+  .filtroWeb {
     display: none;
   }
 }

@@ -5,16 +5,11 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProducts } from '../../redux/actions/productActions';
 import styles from './Home.module.css';
-// import ProfileCard from '../ProfileCard/ProfileCard';
 import ProductCard from '../ProductCard/ProductCard';
 import Navbar from '../Navbar/Navbar';
 import FiltroWeb from '../Drawer/FiltroWeb';
-// import NavbarCommerce from '../Navbar/NavbarCommerce';
-// import ShopCard from '../ShopCard/ShopCard';
-// import productos from '../Cards/product.json';
 import Pagination from '../Pagination/BasicPagination';
 import BannerSearch from '../Searchbar/BannerSearch';
-// import SearchBar from '../Searchbar/Searchbar';
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -55,7 +50,6 @@ export default function Home() {
   };
 
   const paginado = (page) => {
-    // setCurrentPage(pageNumber);
     setAllProductValues({ ...allProductValues, page });
   };
 
@@ -73,10 +67,6 @@ export default function Home() {
         delete data[key];
       }
     });
-    /* 
-    if (data.categoryName === allProductValues.categoryName) {
-      data.categoryName = '';
-    } */
 
     setAllProductValues({ ...allProductValues, ...data, page: 1 });
   };
@@ -91,45 +81,25 @@ export default function Home() {
 
   return (
     <div>
-      <div style={{ marginBottom: '1em' }}>
-        <Navbar filtrado={filtrado} />
-        <BannerSearch search={search} lote={allProducts} />
-      </div>
-      {/* <NavbarCommerce /> */}
-      <div className={styles.home}>
-        <Pagination
-          paginado={paginado}
-          /* products={allProducts.length}
-          productsPerPage={productPerPage} */
+      <div>
+        <Navbar filtrado={filtrado} /> 
+        <BannerSearch
+          search={search}
+          lote={allProducts}
+          sx={{ marginBottom: '1em', width: '100%' }}
+          filtrado={filtrado}
         />
-        <FiltroWeb filtrado={filtrado} />
-        <div className={styles.homecont}>
-          {/* <div className={styles.contweb}>
-            <ProfileCard />
-          </div> */}
-          <div className={styles.home}>
-            <div className={styles.homecont}>
-              {/* <div className={styles.contweb}>
-                <ProfileCard />
-                <div className={styles.ShopCardsContainer}>
-                  <h3 className={styles.title}>Mi carrito de compras</h3>
-                  <ShopCard />
-                </div>
-              </div> */}
-
-              <div className={styles.contmobile}>
-                {/* <SearchBar /> */}
-
-                <div className={styles.ProductCardDiv}>
-                  {/* <ProductCard/> */}
-                </div>
-                {allProducts.map((product, index) => (
-                  // eslint-disable-next-line react/no-array-index-key
-                  <ProductCard key={index} product={product} />
-                ))}
-              </div>
-            </div>
-          </div>
+        <Pagination paginado={paginado} />
+      </div>
+      <div className={styles.parent}>
+        <div className={styles.filtroWeb}>
+          <FiltroWeb filtrado={filtrado} />
+        </div>
+        <div>
+          {allProducts.map((product, index) => (
+            // eslint-disable-next-line react/no-array-index-key
+            <ProductCard key={index} product={product} />
+          ))}
         </div>
       </div>
     </div>

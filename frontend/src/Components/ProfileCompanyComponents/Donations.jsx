@@ -43,16 +43,16 @@ export default function Donations ({donations , typeId}) {
   ];
   
 
-  function createData(lote, compania,  cantidad, fecha) {
+  function createData(lote, ong,  cantidad, fecha) {
     // const density = population / size;
  
-    return { lote, compania, cantidad, fecha };
+    return { lote, ong, cantidad, fecha }; 
   }
   
   
   const rows = donations.map(donation => {
 
-    return createData(donation.lote, ( typeId ===  1? donation.ong : donation.commerce), donation.quantity, donation.fecha, )
+    return createData(donation.lote, ( typeId ===  1? donation.ong.name : donation.commerce.name), donation.quantity, donation.fecha, )
   })
  console.log(donations[0])
   return (

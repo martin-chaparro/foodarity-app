@@ -23,13 +23,15 @@ import { apiWithToken } from '../../services/api';
 import CompanyDetail from './CompanyDetail';
 import PostNewBatch from './PostNewBatch';
 import PublishedProduct from './PublishedProduct';
-import PrimarySearchAppBar from '../Navbar/NavbarCommerce';
+// import PrimarySearchAppBar from '../Navbar/NavbarCommerce';
 import Orders from './Orders';
 import Usuarios from './Usuarios';
 import Donations from './Donations';
 import styles from './ProfileTempleteCommerce.module.css';
 
 const drawerWidth = 240;
+
+const generalHeight = 58;
 
 function ProfileTempleteCommerce(props) {
   const navigate = useNavigate();
@@ -79,8 +81,6 @@ function ProfileTempleteCommerce(props) {
     });
   }, []);
 
-  console.log(products);
-
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -101,7 +101,10 @@ function ProfileTempleteCommerce(props) {
   const drawer = (
     <div>
       <Toolbar />
-      <Divider className={styles.barra} />
+      <Divider
+        className={styles.barra}
+        sx={{ height: generalHeight, border: 0, margin: 0 }}
+      />
       <List className={styles.barra}>
         {[
           {
@@ -157,28 +160,35 @@ function ProfileTempleteCommerce(props) {
     window !== undefined ? () => window().document.body : undefined;
 
   const loggedRender = (
-    <div>
+    <div sx={{ position: 'inherital' }}>
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
+
         <AppBar
           position="fixed"
           sx={{
-            width: { sm: `calc(100% - ${drawerWidth}px)` },
+            width: { sm: `100%`, zIndex: 9999 },
             ml: { sm: `${drawerWidth}px` },
+            top: 0,
           }}
         >
-          <PrimarySearchAppBar />
-          <Toolbar>
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              edge="start"
-              onClick={handleDrawerToggle}
-              sx={{ mr: 2, display: { sm: 'none' } }}
+          {/* <PrimarySearchAppBar />  */}
+          <Toolbar sx={{ height: generalHeight * 2 }}>
+            <Typography
+              variant="h6"
+              noWrap
+              component="div"
+              sx={{ paddingTop: generalHeight / 7.5 }}
             >
-              <MenuIcon />
-            </IconButton>
-            <Typography variant="h6" noWrap component="div">
+              <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                edge="start"
+                onClick={handleDrawerToggle}
+                sx={{ mr: 2, display: { sm: 'none' } }}
+              >
+                <MenuIcon />
+              </IconButton>
               {company.name}
             </Typography>
           </Toolbar>
@@ -232,14 +242,13 @@ function ProfileTempleteCommerce(props) {
           <Toolbar display="inline" />
           {display === 0 && <CompanyDetail company={company} />}
 
-          {display === 2 && (
-            <PublishedProduct products={products} setProducts={setProducts} />
-          )}
+          {display === 2 && <PublishedProduct products={products} />}
           {display === 3 && <PostNewBatch />}
 
           {display === 1 && <Orders orders={orders} />}
-
-          {display === 4 && <Usuarios users={users} company={company} />}
+          {display === 4 && (
+            <Usuarios users={users} company={company} setUsers={setUsers} />
+          )}
           {display === 5 && (
             <Donations
               donations={

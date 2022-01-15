@@ -269,6 +269,7 @@ const deletePublication = async (req, res) => {
     product = await Product.findByPk(id);
     return res.status(200).json({ msg: 'success', data: product });
   } catch (error) {
+    console.log(error);
     return res.status(500).send({ message: error });
   }
 };
