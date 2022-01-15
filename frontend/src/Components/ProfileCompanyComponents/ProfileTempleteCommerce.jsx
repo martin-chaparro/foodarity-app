@@ -50,7 +50,6 @@ function ProfileTempleteCommerce(props) {
 
   const [logged, setLogged] = useState('loading');
 
- 
   useEffect(() => {
     apiWithToken
       .get('/orders/company')
@@ -102,8 +101,11 @@ function ProfileTempleteCommerce(props) {
   const drawer = (
     <div>
       <Toolbar />
-      <Divider className={styles.barra} sx={{height:generalHeight, border: 0, margin: 0}} />
-      <List className={styles.barra} >
+      <Divider
+        className={styles.barra}
+        sx={{ height: generalHeight, border: 0, margin: 0 }}
+      />
+      <List className={styles.barra}>
         {[
           {
             text: 'Detalles de Cuenta',
@@ -154,45 +156,46 @@ function ProfileTempleteCommerce(props) {
     </div>
   );
 
-
   const container =
     window !== undefined ? () => window().document.body : undefined;
 
   const loggedRender = (
-    <div sx={{position: 'inherital'}}>
+    <div sx={{ position: 'inherital' }}>
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
-        
+
         <AppBar
           position="fixed"
           sx={{
-            width: { sm: `100%` , zIndex: 9999},
+            width: { sm: `100%`, zIndex: 9999 },
             ml: { sm: `${drawerWidth}px` },
-            top: 0
+            top: 0,
           }}
         >
-         {/* <PrimarySearchAppBar />  */}
-          <Toolbar sx={{height:(generalHeight*2)}}>
-             
-            <Typography variant="h6" noWrap component="div" sx={{paddingTop: generalHeight/7.5}}>
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              edge="start"
-              onClick={handleDrawerToggle}
-              sx={{ mr: 2, display: { sm: 'none' } }}
+          {/* <PrimarySearchAppBar />  */}
+          <Toolbar sx={{ height: generalHeight * 2 }}>
+            <Typography
+              variant="h6"
+              noWrap
+              component="div"
+              sx={{ paddingTop: generalHeight / 7.5 }}
             >
-              <MenuIcon />
-            </IconButton> 
+              <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                edge="start"
+                onClick={handleDrawerToggle}
+                sx={{ mr: 2, display: { sm: 'none' } }}
+              >
+                <MenuIcon />
+              </IconButton>
               {company.name}
             </Typography>
           </Toolbar>
-          
-          
         </AppBar>
         <Box
           component="nav"
-          sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 }}}
+          sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
           aria-label="mailbox folders"
         >
           {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
@@ -237,20 +240,21 @@ function ProfileTempleteCommerce(props) {
           }}
         >
           <Toolbar display="inline" />
-          {display === 0 && <CompanyDetail company={company}/>}
+          {display === 0 && <CompanyDetail company={company} />}
 
-          {display === 2 && <PublishedProduct products={products}/>}
-          {display === 3 && <PostNewBatch/>}
+          {display === 2 && <PublishedProduct products={products} />}
+          {display === 3 && <PostNewBatch />}
 
-          {display === 1 && <Orders orders={orders}/>}
-          {display === 4 && <Usuarios users={users} company={company} setUsers={setUsers}/>}
+          {display === 1 && <Orders orders={orders} />}
+          {display === 4 && (
+            <Usuarios users={users} company={company} setUsers={setUsers} />
+          )}
           {display === 5 && (
             <Donations
               donations={
                 company.company_type_id === 1 ? commerceDonations : ongDonations
               }
               typeId={company.company_type_id}
-             
             />
           )}
         </Box>
