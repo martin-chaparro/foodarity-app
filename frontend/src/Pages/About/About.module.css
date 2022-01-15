@@ -1,36 +1,13 @@
-:root {
-  --fondo: #3e2463;
-  --fondo-header: #533c74;
-  --verde-claro-texto: #7ed957;
-  --white-text: #fff;
-  --black-text: #000;
-}
-.container {
-  font-family: 'Roboto', sans-serif;
-  text-align: center;
-  background-color: var(--fondo);
-  color: var(--white-text);
-  padding: 40px;
-  /* padding-left: 40px;
-  padding-right: 40px; */
+.containerCard{
+  min-width: 275;
 }
 
-.container h2 {
-  margin-top: 20px;
-  margin-bottom: 20px;
+@media screen and (max-width: 576px) {
+  .containerCard{
+    width: 300px;
+    position: relative;
+    right: 10px;
+  }
 }
+  
 
-.text {
-  line-height: 1.5rem;
-  background-color: var(--white-text);
-  color: var(--black-text);
-  padding: 10px;
-  border-radius: 8px;
-  box-shadow: 8px 8px 12px rgba(0, 0, 0, 0.4);
-}
-
-.text ul li {
-  text-align: start;
-  list-style: none;
-  margin-bottom: 10px;
-}

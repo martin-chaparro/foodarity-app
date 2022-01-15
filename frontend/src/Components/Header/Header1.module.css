@@ -1,11 +1,13 @@
-.header {
+/* .header {
   text-align: center;
   background-color: #5b457a;
   height: 95px;
-}
+} */
 .logo{
   position: relative;
   top: 23px;
+  display: flex;
+  flex-direction: center;
 }
 .logo1 {
   position: relative;

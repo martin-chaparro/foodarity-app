@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import Login from '../Pages/Loggin/Login';
 import Home from '../Components/HomePage/Home';
 import Landing from '../Pages/LandingPage/Landing';
+import About from '../Pages/About/About';
 import Register from '../Pages/Register/RegisterFormUser';
 import Loading from '../Components/Loading/Loading';
 import ProfileCompany from '../Pages/ProfileCompany/ProfileCompany';
@@ -37,6 +38,7 @@ export function AppRouter() {
         <Route path="/home" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Landing />} />
+        <Route path="/" element={<About />}/>
         <Route path="/register" element={<Register />} />
 
         <Route

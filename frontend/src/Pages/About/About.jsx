@@ -1,9 +1,10 @@
-import React from "react";
-import styles from "./About.module.css";
+
+import * as React from 'react';
+import styles from './About.module.css';
 
 export default function About() {
   return (
-    <div className={styles.container}>
+    <div className={styles.container} id= 'place-to-visit'>
       <h2>Acerca de Nosotros</h2>
       <p className={styles.text}>
         Foodarity es una app que te permite ubicar de manera sumamente simple
@@ -19,6 +20,7 @@ export default function About() {
         alimentos, disminuir la generación de desperdicios y brindar ayuda a los
         sectores de la comunidad que más lo necesiten.
       </p>
+
       <h2>Misión</h2>
       <p className={styles.text}>
         Evitar la pérdida de alimentos mientras contribuimos para reducir la
