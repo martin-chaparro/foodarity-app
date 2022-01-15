@@ -5,7 +5,7 @@ import SearchBar from './Searchbar';
 
 export default function BannerSearch({ search, lote }) {
   return (
-    <body>
+    <body className={estilo.body}>
       <div className={estilo.heroimage}>
         <div className={estilo.container}>
           <h1>
@@ -13,9 +13,6 @@ export default function BannerSearch({ search, lote }) {
           </h1>
           <div className={estilo.search}>
             <SearchBar sx={{ marginTop: '10em' }} search={search} lote={lote} />
-            {/* <span className={estilo.span}>
-              Busque los productos más frescos...
-            </span> */}
           </div>
         </div>
       </div>
