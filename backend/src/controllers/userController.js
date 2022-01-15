@@ -19,118 +19,132 @@ const createUser = async (request, response) => {
     return response.status(400).json({ errors: errors.array() });
   }
 
-  let user = await User.findOne({
-    where: { [Op.and]: [{ email }, { deleted: false }] },
-  });
+  try {
+    let user = await User.findOne({
+      where: { [Op.and]: [{ email }, { deleted: false }] },
+    });
 
-  if (user) {
-    if (user.email === email)
-      return response
-        .status(400)
-        .json({ message: 'Este email ya esta en uso' });
+    if (user) {
+      if (user.email === email)
+        return response
+          .status(400)
+          .json({ message: 'Este email ya esta en uso' });
+    }
+
+    user = await User.create({
+      name,
+      email,
+      password,
+    });
+
+    await user.setRole(1);
+
+    // Generar JWT
+    const token = await generateJWT({
+      id: user.id,
+      name: user.name,
+      roleId: user.role_id,
+    });
+
+    return response.status(201).json({
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      photo: user.photo,
+      socialPhoto: user.socialPhoto,
+      token,
+    });
+  } catch (error) {
+    return response.status(500).json({ message: 'Internal Server error' });
   }
-
-  user = await User.create({
-    name,
-    email,
-    password,
-  });
-
-  await user.setRole(1);
-
-  // Generar JWT
-  const token = await generateJWT({
-    id: user.id,
-    name: user.name,
-    roleId: user.role_id,
-  });
-
-  return response.status(201).json({
-    id: user.id,
-    name: user.name,
-    email: user.email,
-    photo:user.photo,
-    socialPhoto:user.socialPhoto,
-    token,
-  });
 };
 
 const getAllUsers = async (request, response) => {
-  const users = await User.findAll({
-    attributes: {
-      exclude: ['password', 'createdAt', 'updatedAt', 'RoleId', 'role_id'],
-    },
-    include: {
-      model: Role,
-      as: 'role',
-      attributes: ['id', 'role'],
-    },
-  });
+  try {
+    const users = await User.findAll({
+      attributes: {
+        exclude: ['password', 'createdAt', 'updatedAt', 'RoleId', 'role_id'],
+      },
+      include: {
+        model: Role,
+        as: 'role',
+        attributes: ['id', 'role'],
+      },
+    });
 
-  return response.status(200).json(users);
+    return response.status(200).json(users);
+  } catch (error) {
+    return response.status(500).json({ message: 'Internal Server error' });
+  }
 };
 
 const getUser = async (request, response) => {
   const { id } = request.params;
 
-  const user = await User.findByPk(id, {
-    attributes: {
-      exclude: [
-        'password',
-        'createdAt',
-        'updatedAt',
-        'RoleId',
-        'role_id',
-        'CompanyId',
-        'companyId',
-      ],
-    },
-    where: { deleted: false },
-    include: [
-      { model: Role, as: 'role', attributes: ['id', 'role'] },
-      {
-        model: Company,
-        as: 'company',
-        attributes: {
-          exclude: ['createdAt', 'updatedAt'],
-        },
-        include: {
-          model: Address,
-          as: 'address',
+  try {
+    const user = await User.findByPk(id, {
+      attributes: {
+        exclude: [
+          'password',
+          'createdAt',
+          'updatedAt',
+          'RoleId',
+          'role_id',
+          'CompanyId',
+          'companyId',
+        ],
+      },
+      where: { deleted: false },
+      include: [
+        { model: Role, as: 'role', attributes: ['id', 'role'] },
+        {
+          model: Company,
+          as: 'company',
           attributes: {
-            exclude: [
-              'CompanyId',
-              'createdAt',
-              'updatedAt',
-              'addressId',
-              'CityId',
-              'StateId',
+            exclude: ['createdAt', 'updatedAt'],
+          },
+          include: {
+            model: Address,
+            as: 'address',
+            attributes: {
+              exclude: [
+                'CompanyId',
+                'createdAt',
+                'updatedAt',
+                'addressId',
+                'CityId',
+                'StateId',
+              ],
+            },
+            include: [
+              {
+                model: City,
+                as: 'city',
+                attributes: {
+                  exclude: ['createdAt', 'updatedAt', 'state_id', 'lat', 'lon'],
+                },
+              },
+              {
+                model: State,
+                as: 'state',
+                attributes: {
+                  exclude: ['createdAt', 'updatedAt', 'lat', 'lon'],
+                },
+              },
             ],
           },
-          include: [
-            {
-              model: City,
-              as: 'city',
-              attributes: {
-                exclude: ['createdAt', 'updatedAt', 'state_id', 'lat', 'lon'],
-              },
-            },
-            {
-              model: State,
-              as: 'state',
-              attributes: { exclude: ['createdAt', 'updatedAt', 'lat', 'lon'] },
-            },
-          ],
         },
-      },
-    ],
-  });
+      ],
+    });
 
-  if (!user) {
-    return response.status(400).json({ message: 'Usuario no encontrador' });
+    if (!user) {
+      return response.status(400).json({ message: 'Usuario no encontrador' });
+    }
+
+    return response.status(200).json(user);
+  } catch (error) {
+    return response.status(500).json({ message: 'Internal Server error' });
   }
-
-  return response.status(200).json(user);
 };
 
 const deleteUser = async (request, response) => {
