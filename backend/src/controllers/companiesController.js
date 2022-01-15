@@ -149,7 +149,24 @@ const searchCompanyByUser = async (req, res) => {
     const { userId } = req;
     // console.log('CONSOLE LOG: userId', userId);
     const user = await User.findByPk(userId, {
-      include: [{ model: Company, as: 'company' }],
+      include: [{ model: Company, as: 'company' ,  include: [
+
+        { model: User, as:'user', attributes:['id', 'name' , 'email'] },
+
+
+        { model: CompanyType, as: 'type', attributes: ['type'] },
+        {
+          model: Address,
+          as: 'address',
+          include: [
+            { model: City, as: 'city' },
+            { model: State, as: 'state' },
+          ],
+        },
+      ],
+      attributes: {
+        exclude: ['createdAt', 'updatedAt', 'CompanyTypeId'],
+      },}],
     });
     if (!user.companyId || user.companyId === null) {
       return res.json({ msg: 'El usuario no posee una compañia' });
