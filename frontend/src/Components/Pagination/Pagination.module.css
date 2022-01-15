@@ -1,6 +1,8 @@
 .botoneraContent {
   display: flex;
   justify-content: center;
+  position: relative;
+  bottom: 10px;
 }
 
 .btn {
@@ -15,6 +17,7 @@
   right: 25px;
   z-index: 2;
   cursor: pointer;
+
 }
 
 /* modificar pagina actual */

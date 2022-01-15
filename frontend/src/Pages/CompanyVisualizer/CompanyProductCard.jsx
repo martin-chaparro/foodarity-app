@@ -7,7 +7,7 @@ import Rating from '@mui/material/Rating';
 import StarIcon from '@mui/icons-material/Star';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
-import styles from './ProductCard.module.css';
+import styles from './CompanyProductCard.module.css';
 // import Company from '../../assets/SuperDia.png';
 
 const labels = {
@@ -50,7 +50,7 @@ export default function ProductCard({ product }) {
   return (
     <div className={styles.productcard}>
       <div className={styles.divImg}>
-        <img src={product.photo.url} alt="food" className={styles.img} />
+        <img src={product.photo} alt="food" className={styles.img} />
       </div>
       <div className={styles.content}>
         <div className={styles.nameDiv}>
@@ -147,7 +147,7 @@ export default function ProductCard({ product }) {
                     <div className={styles.PostImgDiv}>
                       <img
                         className={styles.PostImg}
-                        src={product.photo.url}
+                        src={product.photo}
                         alt="ProductPhoto"
                       />
                     </div>

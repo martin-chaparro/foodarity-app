@@ -72,7 +72,7 @@ export const startGoogleLogin = (tokenId) => {
           name,
         })
       );
-      return window.location.replace('/');
+      return window.location.replace('/Home');
     } catch (error) {
       console.log(error);
       return Swal.fire({
