@@ -9,21 +9,20 @@ import RegisterCompanyFormEditable from './RegisterCompanyFormEditable';
 
 // const [displayForm, setDisplayForm] = useState(false);
 
-export default function CompanyDetail({company}) {
+export default function CompanyDetail({ company }) {
   const [displayDetail, setDisplayDetail] = useState(true);
-
 
   function handleOnclick() {
     setDisplayDetail(false);
   }
 
-  function handleBack () {
-    setDisplayDetail(true)
+  function handleBack() {
+    setDisplayDetail(true);
   }
 
   function handleDelete() {
-    apiWithToken.delete(`/companies/disabled/${company.id}`)
-    window.location.reload()
+    apiWithToken.delete(`/companies/disabled/${company.id}`);
+    window.location.reload();
   }
 
   return (
@@ -36,15 +35,11 @@ export default function CompanyDetail({company}) {
           </div>
           <div className={styles.cont}>
             <h3 className={styles.titulo}>Descripcion:</h3>
-            <h3 className={styles.descripcion}>
-            {company.description}
-            </h3>
+            <h3 className={styles.descripcion}>{company.description}</h3>
           </div>
           <div className={styles.cont}>
             <h3 className={styles.titulo}>Email de la Empresa:</h3>
-            <h3 className={styles.descripcion}>
-            {company.email}
-            </h3>
+            <h3 className={styles.descripcion}>{company.email}</h3>
           </div>
           <div className={styles.cont}>
             <h3 className={styles.titulo}>Url sitio Web:</h3>
@@ -60,9 +55,9 @@ export default function CompanyDetail({company}) {
             <h3 className={styles.titulo}>Dirección:</h3>
             <h3 className={styles.descripcion}>
               <span>{company.address.street}</span>
-              <span> {company.address.number}, </span> 
-              <span> {company.address.city.name}, </span> 
-              <span> {company.address.state.name}, </span> 
+              <span> {company.address.number}, </span>
+              <span> {company.address.city.name}, </span>
+              <span> {company.address.state.name}, </span>
               <span>{company.address.zipcode}</span>
             </h3>
           </div>
@@ -91,7 +86,11 @@ export default function CompanyDetail({company}) {
         </div>
       ) : (
         // eslint-disable-next-line react/jsx-no-bind
-        <RegisterCompanyFormEditable company={company} handleBack={handleBack} />
+        <RegisterCompanyFormEditable
+          company={company}
+          // eslint-disable-next-line react/jsx-no-bind
+          handleBack={handleBack}
+        />
       )}
     </div>
   );
