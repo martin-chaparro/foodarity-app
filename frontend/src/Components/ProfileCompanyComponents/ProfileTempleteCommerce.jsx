@@ -23,13 +23,15 @@ import { apiWithToken } from '../../services/api';
 import CompanyDetail from './CompanyDetail';
 import PostNewBatch from './PostNewBatch';
 import PublishedProduct from './PublishedProduct';
-import PrimarySearchAppBar from '../Navbar/NavbarCommerce';
+// import PrimarySearchAppBar from '../Navbar/NavbarCommerce';
 import Orders from './Orders';
 import Usuarios from './Usuarios';
 import Donations from './Donations';
 import styles from './ProfileTempleteCommerce.module.css';
 
 const drawerWidth = 240;
+
+const generalHeight = 58;
 
 function ProfileTempleteCommerce(props) {
   const navigate = useNavigate();
@@ -100,8 +102,8 @@ function ProfileTempleteCommerce(props) {
   const drawer = (
     <div>
       <Toolbar />
-      <Divider className={styles.barra} />
-      <List className={styles.barra}>
+      <Divider className={styles.barra} sx={{height:generalHeight, border: 0, margin: 0}} />
+      <List className={styles.barra} >
         {[
           {
             text: 'Detalles de Cuenta',
@@ -157,18 +159,22 @@ function ProfileTempleteCommerce(props) {
     window !== undefined ? () => window().document.body : undefined;
 
   const loggedRender = (
-    <div>
+    <div sx={{position: 'inherital'}}>
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
+        
         <AppBar
           position="fixed"
           sx={{
-            width: { sm: `calc(100% - ${drawerWidth}px)` },
+            width: { sm: `100%` , zIndex: 9999},
             ml: { sm: `${drawerWidth}px` },
+            top: 0
           }}
         >
-          <PrimarySearchAppBar />
-          <Toolbar>
+         {/* <PrimarySearchAppBar />  */}
+          <Toolbar sx={{height:(generalHeight*2)}}>
+             
+            <Typography variant="h6" noWrap component="div" sx={{paddingTop: generalHeight/7.5}}>
             <IconButton
               color="inherit"
               aria-label="open drawer"
@@ -177,15 +183,16 @@ function ProfileTempleteCommerce(props) {
               sx={{ mr: 2, display: { sm: 'none' } }}
             >
               <MenuIcon />
-            </IconButton>
-            <Typography variant="h6" noWrap component="div">
+            </IconButton> 
               {company.name}
             </Typography>
           </Toolbar>
+          
+          
         </AppBar>
         <Box
           component="nav"
-          sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+          sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 }}}
           aria-label="mailbox folders"
         >
           {/* The implementation can be swapped with js to avoid SEO duplication of links. */}

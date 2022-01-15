@@ -252,7 +252,7 @@ const deletePublication = async (req, res) => {
   try {
     const { userId } = req;
     const user = await User.findByPk(userId, {
-      include: [{ model: Company }],
+      include: [{ model: Company , as:'company'}],
     });
     const { id } = req.params;
     let product = await Product.findByPk(id);
@@ -281,6 +281,7 @@ const deletePublication = async (req, res) => {
     product = await Product.findByPk(id);
     return res.status(200).json({ msg: 'success', data: product });
   } catch (error) {
+    console.log(error)
     return res.status(500).send({ message: error });
   }
 };
