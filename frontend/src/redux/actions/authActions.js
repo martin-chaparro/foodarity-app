@@ -108,7 +108,7 @@ export const startRegister = (input) => {
           name,
         })
       );
-      return window.location.replace('/rollSelector');
+      return window.location.replace('/');
     } catch (err) {
       console.log(err);
       return Swal.fire({

@@ -1,6 +1,7 @@
 import * as React from 'react';
+import {useSelector, useDispatch} from 'react-redux'
 import AppBar from '@mui/material/AppBar';
-import { Link } from 'react-router-dom';
+import { Link, useLocation} from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
@@ -17,14 +18,42 @@ import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
 import StoreIcon from '@mui/icons-material/Store';
 import Logo from '../../assets/Mobil-Full-Header-Logo.png';
 import Avatar from './Avatar';
+import { apiWithToken } from '../../services/api';
+import { startLogout } from '../../redux/actions/authActions';
 // import Drawer from '../Drawer/Drawer';
 
 export default function Navbar() {
+  const dispatch = useDispatch()
+  const { id } = useSelector((state) => state.auth);
+  const location = useLocation()
+ 
+  const [currentPath, setCurrentPath] = React.useState('')
+  const [user, setUser] = React.useState({})
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
+  React.useEffect(() => {
+    setCurrentPath(location.pathname)
+  },[location])
+
+  React.useEffect(() => {
+    if (id)
+    apiWithToken.get(`/users/${id}`).then(res => {
+      setUser(res.data)
+      console.log(res.data)
+    })
+  },[id])
+
+
+  const handleLogOut = () => {
+    dispatch(startLogout())
+  }
+
+
 
   const handleProfileMenuOpen = (event) => {
     if (isMenuOpen) {
@@ -51,7 +80,8 @@ export default function Navbar() {
     }
   };
 
-  const menuItems = (<span>  <MenuItem>
+  const menuItems = (<span>  
+    {id && <MenuItem>
     <IconButton
       size="large"
       aria-label="account of current user"
@@ -64,8 +94,8 @@ export default function Navbar() {
     <Link to="/profileuser" textDecoration="none">
       Mi Cuenta
     </Link>
-  </MenuItem>
-  <MenuItem>
+  </MenuItem>}
+  {id && user.company && currentPath !== '/profilecompany'  && <MenuItem>
     <IconButton
       size="large"
       aria-label="account of current user"
@@ -78,16 +108,44 @@ export default function Navbar() {
     <Link to="/profilecompany" textDecoration="none">
       Portal Empresa
     </Link>
-  </MenuItem>
-  <MenuItem>
+  </MenuItem>}
+  {id && !user.company && <MenuItem>
+    <IconButton
+      size="large"
+      aria-label="account of current user"
+      aria-controls="vista-mobile"
+      aria-haspopup="true"
+      color="secondary"
+    >
+      <StoreIcon />
+    </IconButton>
+    <Link to="/rollSelector/registerformcommerce" textDecoration="none">
+      Añadir comercio
+    </Link>
+  </MenuItem>}
+  {id && !user.company && <MenuItem>
+    <IconButton
+      size="large"
+      aria-label="account of current user"
+      aria-controls="vista-mobile"
+      aria-haspopup="true"
+      color="secondary"
+    >
+      <StoreIcon />
+    </IconButton>
+    <Link to="/rollSelector/register_form_ong" textDecoration="none">
+      Añadir ONG
+    </Link>
+  </MenuItem>}
+  {id && currentPath === '/home' && <MenuItem>
     <IconButton size="large" aria-label="show 4 new mails" color="inherit">
       <Badge>
         <FavoriteIcon fontSize="small" color="secondary" />
       </Badge>
     </IconButton>
     <p>Favoritos</p>
-  </MenuItem>
-  <MenuItem>
+  </MenuItem>}
+  {id && currentPath === '/home' && <MenuItem>
     <IconButton
       size="large"
       aria-label="show 17 new notifications"
@@ -98,8 +156,8 @@ export default function Navbar() {
       </Badge>
     </IconButton>
     <p>Mi Carrito</p>
-  </MenuItem>
-  <MenuItem>
+  </MenuItem>}
+  {!id && <MenuItem>
     <IconButton
       size="large"
       aria-label="show 17 new notifications"
@@ -108,10 +166,36 @@ export default function Navbar() {
     >
       <AppRegistrationIcon color="secondary" />
     </IconButton>
-    <Link to="/login" textDecoration="none">
+    <Link to="/register" textDecoration="none">
       Registrarse
     </Link>
-  </MenuItem>
+  </MenuItem>}
+  {!id && <MenuItem>
+    <IconButton
+      size="large"
+      aria-label="show 17 new notifications"
+      color="inherit"
+      href="/"
+    >
+      <LoginIcon color="secondary" />
+    </IconButton>
+    <Link to="/login" textDecoration="none">
+      Iniciar Sesión
+    </Link>
+  </MenuItem>}
+  {id && <MenuItem>
+    <IconButton
+      size="large"
+      aria-label="show 17 new notifications"
+      color="inherit"
+      href="/"
+    >
+      <LogoutIcon color="secondary" />
+    </IconButton>
+    <Link to="/" onClick={handleLogOut} textDecoration="none">
+      Cerrar Sesión
+    </Link>
+  </MenuItem>}
   <MenuItem>
           <IconButton
             size="large"
@@ -124,32 +208,7 @@ export default function Navbar() {
           </IconButton>
           <p>Ayuda</p>
         </MenuItem>
-  <MenuItem>
-    <IconButton
-      size="large"
-      aria-label="show 17 new notifications"
-      color="inherit"
-      href="/"
-    >
-      <LoginIcon color="secondary" />
-    </IconButton>
-    <Link to="/login" textDecoration="none">
-      Iniciar Sesión
-    </Link>
-  </MenuItem>
-  <MenuItem>
-    <IconButton
-      size="large"
-      aria-label="show 17 new notifications"
-      color="inherit"
-      href="/"
-    >
-      <LogoutIcon color="secondary" />
-    </IconButton>
-    <Link to="/" textDecoration="none">
-      Cerrar Sesión
-    </Link>
-  </MenuItem></span>)
+  </span>)
 
   const menuId = 'web-vista-account-menu';
   const renderMenu = (
@@ -206,7 +265,7 @@ export default function Navbar() {
           >
             {/* <Drawer filtrado={filtrado} /> */}
           </IconButton>
-          <Link to="/">
+          <Link to="/home">
             <img src={Logo} alt="Logo" />
           </Link>
           <Box sx={{ flexGrow: 1 }} />
