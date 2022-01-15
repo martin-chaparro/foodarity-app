@@ -232,7 +232,9 @@ function ProfileTempleteCommerce(props) {
           <Toolbar display="inline" />
           {display === 0 && <CompanyDetail company={company} />}
 
-          {display === 2 && <PublishedProduct products={products} />}
+          {display === 2 && (
+            <PublishedProduct products={products} setProducts={setProducts} />
+          )}
           {display === 3 && <PostNewBatch />}
 
           {display === 1 && <Orders orders={orders} />}
@@ -244,7 +246,8 @@ function ProfileTempleteCommerce(props) {
                 company.company_type_id === 1 ? commerceDonations : ongDonations
               }
               typeId={company.company_type_id}
-            />}
+            />
+          )}
         </Box>
       </Box>
     </div>

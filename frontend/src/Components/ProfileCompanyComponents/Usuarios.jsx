@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 // import deleteLogo from '../../assets/deleteIcon';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
@@ -44,29 +44,48 @@ const columns = [
 ];
 
 function createData(nombre, email, telefono, rol, eliminar) {
-  return {nombre, email, telefono, rol, eliminar};
+  return { nombre, email, telefono, rol, eliminar };
 }
 
-export default function Usuarios({users, company}) {
+export default function Usuarios({ users, company }) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  const [rows, setRows] = React.useState([])
+  const [rows, setRows] = React.useState([]);
+  const [input, setInput] = React.useState('');
 
-
-
-
-  const handleDelete = (id) => {
-    apiWithToken.delete(`/companies/user/${id}`)
+  function handleOnChange(e) {
+    setInput(e.target.value);
   }
 
+  const handleDelete = (id) => {
+    apiWithToken.delete(`/companies/user/${id}`);
+  };
+
   React.useEffect(() => {
-    const finalRows = []
-    users.forEach(user => {
-      console.log(user.name)
-      finalRows.push(createData(user.name, user.email, user.phone, (user.id === company.ownerId ? 'Dueño' : 'Empleado'), (user.id !== company.ownerId && <button type="button" onClick={() => {handleDelete(user.id)}}>X</button>)))
-      setRows(finalRows)
-    })
-  }, [])
+    const finalRows = [];
+    users.forEach((user) => {
+      console.log(user.name);
+      finalRows.push(
+        createData(
+          user.name,
+          user.email,
+          user.phone,
+          user.id === company.ownerId ? 'Dueño' : 'Empleado',
+          user.id !== company.ownerId && (
+            <button
+              type="button"
+              onClick={() => {
+                handleDelete(user.id);
+              }}
+            >
+              X
+            </button>
+          )
+        )
+      );
+      setRows(finalRows);
+    });
+  }, []);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -77,8 +96,31 @@ export default function Usuarios({users, company}) {
     setPage(0);
   };
 
+  // /companies/user?email=demo@demo.com
+
+  function handleAddAcount() {
+    apiWithToken
+      .post(`/companies/user?email=${input}`)
+      .then((response) => console.log(response.data));
+  }
+
   return (
     <Paper className={styles.users} sx={{ width: '100%', overflow: 'hidden' }}>
+      <div className={ styles.contagregar}>
+
+
+      <h2>Agregar nueva cuenta</h2>
+      <input type="text" name="email" onChange={(e) => handleOnChange(e)} />
+      <button
+        type="button"
+        onClick={() => {
+          handleAddAcount();
+        }}
+      >
+        AGREGAR
+      </button>
+      </div>
+
       <TableContainer sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
@@ -119,7 +161,7 @@ export default function Usuarios({users, company}) {
               })}
           </TableBody>
         </Table>
-      </TableContainer> 
+      </TableContainer>
       <TablePagination
         rowsPerPageOptions={[10, 25, 100]}
         component="div"
