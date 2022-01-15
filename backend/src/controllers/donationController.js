@@ -5,6 +5,7 @@ const Company = require('../models/Company');
 const Category = require('../models/Category');
 
 
+
 cloudinary.config(process.env.CLOUDINARY_URL);
 
 // un comercio puede postear una donacion
@@ -23,7 +24,7 @@ const postDonation = async (req, res) => {
     //verifica que el usuario no sea una ONG
     const commerce = await Company.findByPk(user.companyId)
 
-       if (commerce.type_id !== 1) {
+       if (commerce.company_type_id !== 1) {
       return res.status(401).json({
         msg: 'Solo las companias tipo comercio pueden realizar donaciones',
       });
@@ -38,7 +39,7 @@ const postDonation = async (req, res) => {
     if (!ong) {
       return res.status(401).json({ msg: 'La ONG no existe' });
     }
-    if (ong.type_id !== 2) {
+    if (ong.company_type_id !== 2) {
       return res.status(401).json({ msg: 'Solo las companias tipo ONG pueden recibir donaciones' });
     }
     if(ong.status !== 'Habilitada'){
@@ -80,46 +81,20 @@ const postDonation = async (req, res) => {
 // una ONG puede ver las donaciones recibidas //VER RUTA
 const getDonationsByOng = async (req, res) => {
   const ownerId = req.userId;
-
+  try {
   const ong = await Company.findByPk(ownerId);
   
   if(!ong){
     return res.status(401).json({ msg: 'La ONG no existe' });
   }
-  if(ong.type_id !== 2){
+  if(ong.company_type_id !== 2){
     return res.status(401).json({
       msg: 'Solo las companias tipo ONG pueden realizar esta accion',
     });
   }
-  
-
-  try {
-    // const listDonations = await Donation.findAll({
-    //   include: [
-    //     { model: Company, as: 'commerce', attributes: ['areaCode','phone','email','website','banner','status','deleted','ownerId','createAt','updateAt','type_id']},
-    //     { model: User, as: 'publisher',attributes: {
-    //       exclude: [
-    //         'phone',
-    //         'createdAt',
-    //         'updatedAt',
-    //         'password',
-    //         'status',
-    //         'CompanyId',
-    //         'RoleId',
-    //         'role_id',
-    //       ],
-    //     }, },
-    //     { model: Category, as: 'category', attributes: {exclude:[ 'createdAt','updatedAt']}},
-    //   ], attributes: {exclude:['createdAt', 'updatedAt'] },
-    
-    //   where: {
-    //     ongId: ownerId,
-    //   },
-    // });
-    // return res.status(200).json(listDonations);
     const listDonations = await Donation.findAll({
       include: [
-        { model: Company, as: 'commerce', attributes: ['id', 'name']},
+        { model: Company, as: 'commerce', attributes: ['id', 'name']} ,
         { model: Category, as: 'category', attributes: ['name']},
       ], attributes: {exclude:['createdAt', 'updatedAt'] },
       order: [['lote', 'ASC']],
@@ -143,7 +118,7 @@ const getDonationsByCommerce = async (req, res) => {
     return res.status(401).json({ msg: 'La empresa no existe' });
   }
 
-  if(commerce.type_id !== 1){
+  if(commerce.company_type_id !== 1){
     return res.status(401).json({
       msg: 'Solo las empresas pueden realizar esta accion',
     });
@@ -151,7 +126,7 @@ const getDonationsByCommerce = async (req, res) => {
 
     const listDonations = await Donation.findAll({
       include: [
-        { model: Company, as: 'ong', attributes: ['id', 'name']},
+        { model: Company, as: 'ong', attributes: ['id', 'name']} ,
         { model: Category, as: 'category', attributes: ['name']},
       ], attributes: {exclude:['createdAt', 'updatedAt'] },
       order: [['lote', 'ASC']],

@@ -236,6 +236,7 @@ function ProfileTempleteCommerce(props) {
           {display === 3 && <PostNewBatch />}
 
           {display === 1 && <Orders orders={orders} />}
+
           {display === 4 && <Usuarios users={users} company={company} />}
           {display === 5 && (
             <Donations
@@ -243,8 +244,7 @@ function ProfileTempleteCommerce(props) {
                 company.company_type_id === 1 ? commerceDonations : ongDonations
               }
               typeId={company.company_type_id}
-            />
-          )}
+            />}
         </Box>
       </Box>
     </div>
