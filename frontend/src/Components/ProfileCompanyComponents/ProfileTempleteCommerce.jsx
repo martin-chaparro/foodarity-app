@@ -139,7 +139,7 @@ function ProfileTempleteCommerce(props) {
         )}
       </List>
       <Divider />
-      <List>
+      {/* <List>
         {['All mail', 'Trash'].map((text, index) => (
           <ListItem button key={text}>
             <ListItemIcon>
@@ -148,7 +148,7 @@ function ProfileTempleteCommerce(props) {
             <ListItemText primary={text} />
           </ListItem>
         ))}
-      </List>
+      </List> */}
     </div>
   );
 
@@ -235,7 +235,7 @@ function ProfileTempleteCommerce(props) {
           {display === 3 && <PostNewBatch />}
 
           {display === 1 && <Orders orders={orders} />}
-          {display === 4 && <Usuarios users={users} />}
+          {display === 4 && <Usuarios users={users} company={company} />}
           {display === 5 && (
             <Donations
               donations={
