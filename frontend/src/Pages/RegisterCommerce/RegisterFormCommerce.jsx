@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
+import Swal from 'sweetalert2';
 import Header from '../../Components/Header/Header';
 import styles from './RegisterFormCommerce.module.css';
 import CommerceLogo from '../../assets/Mask-Group.png';
@@ -204,6 +205,28 @@ export default function RegisterFormCommerce() {
     }
   };
 
+  const validateTextNum = (e) => {
+    const { name, value } = e.target;
+    setInput({
+      ...input,
+      [name]: value,
+    });
+    // eslint-disable-next-line no-useless-escape
+    if (!/^[aA-zZ0-9_-]{3,16}$/.test(value)) {
+      setErrors({
+        ...errors,
+        [name]: 'Solo numeros',
+      });
+    } else {
+      setErrors({
+        ...errors,
+        [name]: '',
+      });
+    }
+  };
+
+
+
   const handleOnChange = (e) => {
     e.preventDefault();
     setInput({
@@ -226,7 +249,12 @@ export default function RegisterFormCommerce() {
 
       // eslint-disable-next-line no-empty
     ) {
-      dispatch(registerComerce(input,formValues)); // formValues
+      dispatch(registerComerce(input,formValues));
+       Swal.fire({
+         icon: 'success',
+         title: 'Bien',
+         text: 'El Comercio fue registrado Correctamente',
+       });
       navigate('/home');
     } else {
       // eslint-disable-next-line no-alert
@@ -401,7 +429,7 @@ export default function RegisterFormCommerce() {
               placeholder="Cód. Postal"
               onChange={(e) => {
                 handleOnChange(e);
-                validateNum(e);
+                validateTextNum(e);
               }}
             />
             <div className={styles.divErrorPostalCod}>

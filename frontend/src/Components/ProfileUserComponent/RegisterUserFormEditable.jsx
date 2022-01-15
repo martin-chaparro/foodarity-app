@@ -8,7 +8,7 @@ import { useDispatch } from 'react-redux';
 import styles from './RegisterUserFormEditable.module.css';
 import CommerceLogo from '../../assets/Mask-Group.png';
 import { api } from '../../services/api';
-import { registerComerce } from '../../redux/actions/usersActions';
+import { registerComerce } from '../../redux/actions/CompaniesActions';
 
 // import AlertOng from '../Alertas/AlertEnviarSolicitud';
 
