@@ -11,10 +11,17 @@ import styles from './Orders.module.css';
 
 const columns = [
   { id: 'lote', label: 'LOTE', minWidth: 170 },
-  { id: 'code', label: 'ISO\u00a0Code', minWidth: 100 },
+  {
+    id: 'vendida',
+    label: 'CANTIDAD VENDIDA',
+    minWidth: 170,
+    align: 'right',
+    format: (value) => value.toLocaleString('en-US'),
+  },
+
   {
     id: 'cantidad',
-    label: 'CANTIDAD',
+    label: 'CANTIDAD PUBLICADA',
     minWidth: 170,
     align: 'right',
     format: (value) => value.toLocaleString('en-US'),
@@ -35,9 +42,9 @@ const columns = [
   },
 ];
 
-function createData(lote, cantidad, precio, fecha) {
+function createData(lote, vendida, cantidad, precio, fecha) {
   // const density = population / size;
-  return { lote, cantidad, precio, fecha };
+  return { lote, vendida, cantidad, precio, fecha };
 }
 
 const rows = [
@@ -49,7 +56,8 @@ const rows = [
   createData('Lote combo pasteleria/rotiseria', '6', 2547, '12/06/2022'),
 ];
 
-export default function Orders() {
+export default function Orders({orders}) {
+  console.log(orders)
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -72,7 +80,11 @@ export default function Orders() {
                 <TableCell
                   key={column.id}
                   align={column.align}
-                  style={{ minWidth: column.minWidth }}
+                  style={{
+                    minWidth: column.minWidth,
+                    backgroundColor: 'lightgray',
+                    fontWeight: '700',
+                  }}
                 >
                   {column.label}
                 </TableCell>

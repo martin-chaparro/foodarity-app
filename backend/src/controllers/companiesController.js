@@ -38,7 +38,7 @@ const createCompany = async (req, res) => {
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-const { tempFilePath } = req.files.file;
+    const { tempFilePath } = req.files.file;
 
     const { secure_url: secureUrl, public_id: publicId } =
       await cloudinary.uploader.upload(tempFilePath);
@@ -115,9 +115,7 @@ const searchCompany = async (req, res) => {
     const { id } = req.params;
     const company = await Company.findByPk(id, {
       include: [
-
-        { model: User, as:'user', attributes:['id', 'name' , 'email'] },
-
+        { model: User, as: 'user', attributes: ['id', 'name', 'email'] },
 
         { model: CompanyType, as: 'type', attributes: ['type'] },
         {
@@ -149,24 +147,28 @@ const searchCompanyByUser = async (req, res) => {
     const { userId } = req;
     // console.log('CONSOLE LOG: userId', userId);
     const user = await User.findByPk(userId, {
-      include: [{ model: Company, as: 'company' ,  include: [
-
-        { model: User, as:'user', attributes:['id', 'name' , 'email'] },
-
-
-        { model: CompanyType, as: 'type', attributes: ['type'] },
+      include: [
         {
-          model: Address,
-          as: 'address',
+          model: Company,
+          as: 'company',
           include: [
-            { model: City, as: 'city' },
-            { model: State, as: 'state' },
+            { model: User, as: 'user', attributes: ['id', 'name', 'email'] },
+
+            { model: CompanyType, as: 'type', attributes: ['type'] },
+            {
+              model: Address,
+              as: 'address',
+              include: [
+                { model: City, as: 'city' },
+                { model: State, as: 'state' },
+              ],
+            },
           ],
+          attributes: {
+            exclude: ['createdAt', 'updatedAt', 'CompanyTypeId'],
+          },
         },
       ],
-      attributes: {
-        exclude: ['createdAt', 'updatedAt', 'CompanyTypeId'],
-      },}],
     });
     if (!user.companyId || user.companyId === null) {
       return res.json({ msg: 'El usuario no posee una compañia' });
@@ -334,8 +336,10 @@ const updateCompany = async (req, res) => {
 
 const getUsers = async (req, res) => {
   try {
-    const {userId} = req
-    const user = await User.findByPk(userId, {include: [{model: Company, as: 'company'}]})
+    const { userId } = req;
+    const user = await User.findByPk(userId, {
+      include: [{ model: Company, as: 'company' }],
+    });
     if (!user.companyId) {
       return res.status(400).json({
         message: 'El usuario no tiene compania',
@@ -346,13 +350,15 @@ const getUsers = async (req, res) => {
         message: 'La compania no esta habilitada',
       });
     }
-    const users = await User.findAll({where: {companyId : user.companyId}, attributes: {exclude: ['password', 'createdAt', 'updatedAt', 'RoleId'] }})
-    return res.status(200).json(users)
-
+    const users = await User.findAll({
+      where: { companyId: user.companyId },
+      attributes: { exclude: ['password', 'createdAt', 'updatedAt', 'RoleId'] },
+    });
+    return res.status(200).json(users);
   } catch (error) {
-    return res.status(500).send(error)
+    return res.status(500).send(error);
   }
-}
+};
 
 const addUser = async (req, res) => {
   try {
@@ -471,5 +477,5 @@ module.exports = {
   updateCompany,
   addUser,
   deleteUser,
-  getUsers
+  getUsers,
 };
