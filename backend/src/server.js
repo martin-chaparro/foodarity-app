@@ -232,9 +232,7 @@ class Server {
     this.app.listen(this.port, async () => {
       console.log(`||--> Http server running in port:${this.port} <--||`);
       await this.connectDb();
-      if (this.environment === 'development') {
-        await this.seed();
-      }
+      await this.seed();
     });
   }
 }
