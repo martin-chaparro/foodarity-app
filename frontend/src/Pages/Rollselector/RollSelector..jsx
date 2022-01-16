@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Header from '../../Components/Header/Header';
+// import Header from '../../Components/Header/Header';
 import imgcomercio from '../../assets/Mask-Group.png';
 import imgong from '../../assets/caridad-1.png';
 import styles from './RollSelector.module.css';
@@ -8,9 +8,9 @@ import styles from './RollSelector.module.css';
 export default function RollSelector() {
   return (
     <div className={styles.rollselector}>
-      <Link to='/'>
+      {/* <Link to='/'>
       <Header />
-      </Link>
+      </Link> */}
       <h1>Registrar mi</h1>
       <div className={styles.content}>
         <div className={styles.commercecontent}>

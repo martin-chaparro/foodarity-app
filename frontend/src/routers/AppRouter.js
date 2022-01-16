@@ -35,14 +35,29 @@ export function AppRouter() {
 
       <Routes>
         <Route exact path="/" element={<Landing />} />
-        <Route exact path="/profileuser" element={<ProfileUser />} />
-        <Route exact path="/profilecompany" element={<ProfileCompany />} />
+        <Route
+          exact
+          path="/profileuser"
+          element={
+            <PrivateRoute isAuisAuthenticated={!!id}>
+              <ProfileUser />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          exact
+          path="/profilecompany"
+          element={
+            <PrivateRoute isAuisAuthenticated={!!id}>
+              <ProfileCompany />
+            </PrivateRoute>
+          }
+        />
         <Route
           exact
           path="/CompanyVisualizer"
           element={<CompanyVisualizer />}
         />
-
         <Route exact path="/home" element={<Home />} />
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/register" element={<Register />} />
