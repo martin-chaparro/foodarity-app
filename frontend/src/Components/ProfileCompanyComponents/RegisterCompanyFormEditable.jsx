@@ -122,7 +122,7 @@ export default function RegisterCompanyFormEditable({company, handleBack}) {
       const form = new FormData();
       form.append('file', e.target.files[0]);
       console.log(e.target.files) 
-      await apiWithToken.patch(`http://localhost:4000/api/v1/companies/${company.id}/upload/logo`, form)
+      await apiWithToken.patch(`/companies/${company.id}/upload/logo`, form)
       .then(res => { 
         setPhoto(res.data.logo)
         console.log(photo)
