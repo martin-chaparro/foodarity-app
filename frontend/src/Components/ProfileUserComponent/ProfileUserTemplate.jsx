@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -32,6 +32,7 @@ function ProfileUserTemplate(props) {
   const id = localStorage.getItem('id');
 
   const [userData, setUserData] = React.useState({});
+  const [orders, setOrders] = useState({});
 
   // eslint-disable-next-line no-unused-vars
   const [display, setDisplay] = React.useState(0);
@@ -50,6 +51,12 @@ function ProfileUserTemplate(props) {
       .then((response) => setUserData(response.data));
   }, []);
   console.log(userData);
+
+  useEffect(() => {
+    apiWithToken
+      .get(`/orders/users/${id}`)
+      .then((response) => setOrders(response.data));
+  });
 
   const drawer = (
     <div>
@@ -183,7 +190,7 @@ function ProfileUserTemplate(props) {
           {display === 0 && <Bienvenida detail={userData} />}
 
           {display === 1 && <UserDetail detail={userData} />}
-          {display === 2 && <Compras />}
+          {display === 2 && <Compras orders={orders} />}
 
           {display === 3 && <h1>MIS PEDIDOS</h1>}
           {display === 4 && <h1>MIS PEDIDOS</h1>}
