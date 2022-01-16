@@ -10,7 +10,7 @@ import ProfileCompany from '../Pages/ProfileCompany/ProfileCompany';
 import ProfileUser from '../Pages/ProfileUser/ProfileUser';
 // import AMyProfile from '../Pages/Profile User/AMyProfile';
 import CompanyVisualizer from '../Pages/CompanyVisualizer/CompanyVisualizer';
-
+import Navbar from '../Components/Navbar/Navbar';
 import { PrivateRoute } from './PrivateRoute';
 import { RollSelectorRouter } from './RollSelectorRouter';
 import { startCheking } from '../redux/actions/authActions';
@@ -28,20 +28,13 @@ export function AppRouter() {
   }
   return (
     <BrowserRouter>
-<<<<<<< HEAD
-      {/* <Routes>
-=======
-      <Routes>
-        <Route exact path="/" element={<Landing />} />
->>>>>>> 424fa2e0dc116ebf881c886244667bbde7e0bff6
-        <Route path="*" element={<Navbar />} />
-      </Routes> */}
+
 
       <Routes>
-<<<<<<< HEAD
-        <Route path="/" element={<Landing />} />
-=======
->>>>>>> 424fa2e0dc116ebf881c886244667bbde7e0bff6
+        <Route exact path="/" element={<Landing />} />
+        <Route path="*" element={<Navbar />} />
+      </Routes>
+      <Routes>
         <Route
           exact
           path="/profileuser"
@@ -76,7 +69,7 @@ export function AppRouter() {
             </PrivateRoute>
           }
         />
-        <Route path="*" element={<Navigate to="/" />} />
+         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </BrowserRouter>
   );

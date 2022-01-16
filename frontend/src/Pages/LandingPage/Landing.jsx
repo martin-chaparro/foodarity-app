@@ -19,14 +19,9 @@ import logo from '../../assets/Mobil-Full-Header-Logo.png'
 import logo1 from '../../assets/WEB-Logo-Combinado.png';
 
 
-
-
-
-
 export default function Landing() {
 
   const { ref, inView } = useInView({
-    /* Optional options */
     threshold: 0.4,
   })
 
