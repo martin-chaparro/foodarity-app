@@ -1,7 +1,7 @@
 import * as React from 'react';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import Button from '@mui/material/Button';
-import MenuIcon from '@mui/icons-material/Tune';
+// import MenuIcon from '@mui/icons-material/Tune';
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
@@ -9,7 +9,6 @@ import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import CategoryIcon from '@mui/icons-material/Category';
-
 import ArrowBackIosTwoToneIcon from '@mui/icons-material/ArrowBackIosTwoTone';
 import LocalDiningIcon from '@mui/icons-material/LocalDining';
 import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
@@ -113,15 +112,15 @@ export default function Drawer({ filtrado }) {
   return (
     <div>
       {['right'].map((anchor) => (
-        <React.Fragment key={anchor} >
+        <React.Fragment key={anchor}>
           <Button
-            sx={{ backgroundColor: 'transparent' , }}
+            sx={{ backgroundColor: 'transparent' }}
             onClick={toggleDrawer(anchor, true)}
           >
-            <MenuIcon color="secondary" sx={{ fontSize: '2.5em' }} />
+            FILTRAR POR CATEGORIAS
           </Button>
-          <SwipeableDrawer 
-            sx={{ backgroundColor: 'primary', zIndex:10002 }}
+          <SwipeableDrawer
+            sx={{ backgroundColor: 'secondary', zIndex: 10002 }}
             anchor={anchor}
             open={state[anchor]}
             onClose={toggleDrawer(anchor, false)}
