@@ -4,19 +4,12 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 
 import Typography from '@mui/material/Typography';
+import styles from './About.module.css';
 
-// const bull = (
-//   <Box
-//     component="span"
-//     sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}
-//   >
-//     •
-//   </Box>
-// );
 
 export default function AboutValores() {
   return (
-    <Card sx={{ minwidth: 275, background: '#6C698D'}}>
+    <Card sx={{ minwidth: 275, background: '#6C698D',boxShadow: '4px 4px 10px rgba(0, 0, 0, 1)'}}className={styles.containerCard}>
       <CardContent>
         <Typography sx={{ color: "black", background: 'white', borderRadius: 1, display: "flex", justifyContent: "center", alignItems: "center", }} variant="h5" component="div">
         Valores

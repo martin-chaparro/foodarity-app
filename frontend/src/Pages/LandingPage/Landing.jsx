@@ -4,6 +4,8 @@ import { IconButton } from '@mui/material';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import { Link as Scroll} from 'react-scroll'
+import { useInView } from 'react-intersection-observer';
+import 'animate.css'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import AboutCard from '../About/AboutCard';
 import AboutVision from '../About/AboutVision';
@@ -11,6 +13,7 @@ import AboutMision from '../About/AboutMision';
 import AboutValores from '../About/AboutValores';
 import Footer from '../../Components/Footer/Footer';
 import styles from './Landing.module.css';
+import './Cards.css'
 import logoLanding from '../../assets/Mobil-background-landing.png';
 import logo from '../../assets/Mobil-Full-Header-Logo.png'
 import logo1 from '../../assets/WEB-Logo-Combinado.png';
@@ -18,21 +21,21 @@ import logo1 from '../../assets/WEB-Logo-Combinado.png';
 
 
 
+
+
 export default function Landing() {
 
-  // const [checked , setChecked] = useState(false)
+  const { ref, inView } = useInView({
+    /* Optional options */
+    threshold: 0.4,
+  })
 
-  // useEffect(() => {
-  //   setChecked(true);
-  // }, [])
-  
   return (
     <div>
     <div className={styles.landing}>
     <img className={styles.logo1} src={logo1} alt="" />
       <img className={styles.logo} src={logo} alt=""/>
-      {/* <Collapse in={checked} {...checked ? { timeout: 1000}: {}} collapsedHeight={50}> */}
-      <div className={styles.content}>
+      <div className={styles.content} >
         <div className={styles.divImgLanding}>
           <img className={styles.imglogolanding} src={logoLanding} alt="logo" />
         </div>
@@ -61,21 +64,20 @@ export default function Landing() {
           </IconButton>
        </Scroll>
       </div>
-      {/* </Collapse> */}
       </div>
-      <div className={styles.aboutCards} id= 'place-to-visit'>
-      <div   >
+      <div className={styles.aboutCards} id= 'place-to-visit' ref={ref} >
+      <div className={inView ? 'about' : 'about--zoom'}  >
       <AboutCard />
       </div>
-      <div>
+      <div className={inView ? 'about' : 'about--zoom'} >
       <AboutValores />
       </div>
       </div>
-      <div className={styles.containerAbouts}> 
-      <div>
+      <div className={styles.containerAbouts} ref={ref}> 
+      <div className={inView ? 'about' : 'about--zoom'}>
       <AboutMision />
       </div>
-      <div>
+      <div className={inView ? 'about' : 'about--zoom'}>
       <AboutVision />
       </div>
       </div>

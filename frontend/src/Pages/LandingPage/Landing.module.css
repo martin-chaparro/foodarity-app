@@ -1,3 +1,4 @@
+
 .content {
   display: flex;
   flex-direction: column;
@@ -28,56 +29,6 @@ align-items: center;
 
 }
 
-.btningresar {
-  background-color: #fdffb6;
-  width: 95px;
-  padding-top: 3px;
-  padding-bottom: 3px;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-left: 25px;
-  margin-top: 40px;
-
-  letter-spacing: 0.5px;
-
-  font-family: 'Baloo Bhaijaan 2', cursive;
-  font-family: 'Changa', sans-serif;
-  font-family: 'Roboto', sans-serif;
-}
-
-.btnreg {
-  background-color: #d68584;
-  width: 95px;
-  padding-top: 3px;
-  padding-bottom: 3px;
-  border-radius: 5px;
-  margin-top: 40px;
-  cursor: pointer;
-
-  letter-spacing: 0.5px;
-
-  font-family: 'Baloo Bhaijaan 2', cursive;
-  font-family: 'Changa', sans-serif;
-  font-family: 'Roboto', sans-serif;
-}
-
-.btncontinuar {
-  background-color: transparent;
-  border: 2px solid white;
-  color: white;
-  font-weight: 700;
-  width: 95px;
-  padding-top: 3px;
-  padding-bottom: 3px;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-bottom: 20px;
-  letter-spacing: 0.5px;
-
-  font-family: 'Baloo Bhaijaan 2', cursive;
-  font-family: 'Changa', sans-serif;
-  font-family: 'Roboto', sans-serif;
-}
 .logo{
   position: relative;
   top: 23px;
@@ -99,6 +50,9 @@ align-items: center;
 .imglogolanding {
   width: 400px;
   height: 400px;
+  animation: fadeInDown;
+  animation-duration: 10s;
+ 
 }
 
 .goDown{
@@ -113,11 +67,14 @@ align-items: center;
   margin-top: 25px;
 }
 
+
 .containerAbouts{
   display: flex;
   justify-content: space-around;
   flex-direction: row;
 }
+
+
 
 @media screen and (max-width: 576px) {
 .logo1 {
@@ -146,13 +103,3 @@ align-items: center;
 
  
 }
-
-/* @media screen and (min-width: 576px) {
-  .btningresar {
-    display: none;
-  }
-
-  .btnreg {
-    display: none;
-  }
-} */
