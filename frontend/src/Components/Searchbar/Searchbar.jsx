@@ -17,6 +17,8 @@ export default function SearchBar({ search, lote }) {
         // value={value}
         onChange={() => {
           search(inputValue);
+          const elmnt = document.getElementById('card');
+          elmnt.scrollIntoView();
         }}
         inputValue={inputValue}
         onInputChange={(event, newInputValue) => {

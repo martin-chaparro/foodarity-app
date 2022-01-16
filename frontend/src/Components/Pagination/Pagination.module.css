@@ -1,6 +1,8 @@
 .botoneraContent {
   display: flex;
   justify-content: center;
+  position: relative;
+  bottom: 10px;
 }
 
 .btn {

@@ -1,21 +1,29 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
 import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
+import FaceIcon from '@mui/icons-material/Face';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import MailIcon from '@mui/icons-material/Mail';
-import MenuIcon from '@mui/icons-material/Menu';
+import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
+// import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import PrimarySearchAppBar from '../Navbar/NavbarCommerce';
+// import Typography from '@mui/material/Typography';
+import HelpIcon from '@mui/icons-material/Help';
+import DeleteSweepIcon from '@mui/icons-material/DeleteSweep';
+// import PrimarySearchAppBar from '../Navbar/NavbarCommerce';
+import MoreIcon from '@mui/icons-material/MoreVert';
+import UserDetail from './UserDetail';
+import Compras from './Compras';
+import AvatarCommerce from '../Navbar/AvatarCommerce';
+import Logo from '../../assets/Mobil-Full-Header-Logo.png';
 
 const drawerWidth = 240;
 
@@ -41,16 +49,10 @@ function ProfileUserTemplate(props) {
       <List>
         {[
           {
-            text: 'Datos usuarios',
+            text: 'Mis Datos',
           },
           {
-            text: 'Mis Pedidos',
-          },
-          {
-            text: 'Locales Favoritos',
-          },
-          {
-            text: 'Comentarios',
+            text: 'Mis Compras',
           },
         ].map(({ text }, index) => (
           <ListItem
@@ -61,7 +63,7 @@ function ProfileUserTemplate(props) {
             }}
           >
             <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+              {index % 2 === 0 ? <FaceIcon /> : <ShoppingBasketIcon />}
             </ListItemIcon>
             <ListItemText primary={text} />
           </ListItem>
@@ -69,10 +71,10 @@ function ProfileUserTemplate(props) {
       </List>
       <Divider />
       <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
+        {['Centro de Ayuda', 'Eliminar Cuenta'].map((text, index) => (
           <ListItem button key={text}>
             <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+              {index % 2 === 0 ? <HelpIcon /> : <DeleteSweepIcon />}
             </ListItemIcon>
             <ListItemText primary={text} />
           </ListItem>
@@ -87,6 +89,7 @@ function ProfileUserTemplate(props) {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
+      {/* <PrimarySearchAppBar /> */}
       <AppBar
         position="fixed"
         sx={{
@@ -94,8 +97,7 @@ function ProfileUserTemplate(props) {
           ml: { sm: `${drawerWidth}px` },
         }}
       >
-        <PrimarySearchAppBar />
-        <Toolbar>
+        {/* <Toolbar>
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -108,6 +110,49 @@ function ProfileUserTemplate(props) {
           <Typography variant="h6" noWrap component="div">
             LILIANA
           </Typography>
+        </Toolbar> */}
+        <Toolbar>
+          {/* <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="open drawer"
+            sx={{ mr: 2 }}
+          >
+            <MenuIcon />
+          </IconButton> */}
+          <Link to="/">
+            <img src={Logo} alt="Logo" />
+          </Link>
+
+          <Box sx={{ flexGrow: 1 }} />
+
+          <p>Mi Portal</p>
+          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+            <IconButton
+              size="large"
+              edge="end"
+              aria-label="account of current user"
+              // aria-controls={menuId}
+              aria-haspopup="true"
+              // onClick={handleProfileMenuOpen}
+              color="inherit"
+            >
+              <AvatarCommerce />
+            </IconButton>
+          </Box>
+          <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
+            <IconButton
+              size="large"
+              aria-label="show more"
+              // aria-controls={mobileMenuId}
+              aria-haspopup="true"
+              // onClick={handleMobileMenuOpen}
+              color="inherit"
+            >
+              <MoreIcon />
+            </IconButton>
+          </Box>
         </Toolbar>
       </AppBar>
       <Box
@@ -157,12 +202,12 @@ function ProfileUserTemplate(props) {
         }}
       >
         <Toolbar display="none" />
-        {display === 0 && <h1>Datos Usuarios</h1>}
+        {display === 0 && <UserDetail />}
 
-        {display === 2 && <h1>LOCALES FAVORITOS</h1>}
-        {display === 3 && <h1>COMENTARIOS</h1>}
+        {display === 1 && <Compras />}
+        {display === 2 && <h1>COMENTARIOS</h1>}
 
-        {display === 1 && <h1>MIS PEDIDOS</h1>}
+        {display === 3 && <h1>MIS PEDIDOS</h1>}
       </Box>
     </Box>
   );

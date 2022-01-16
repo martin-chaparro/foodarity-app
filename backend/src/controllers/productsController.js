@@ -83,20 +83,11 @@ const attributes = {
 
 const getProducts = async (req, res) => {
   try {
-    const {
-      lote,
-      categoryName,
-      categoryId,
-      expirationDate,
-      order,
-      size,
-    } = req.query;
-    let {
-      minPrice,
-      maxPrice,
-    } = req.query
-     minPrice = parseInt(minPrice,10) || 0
-     maxPrice = parseInt(maxPrice,10) || 0
+    const { lote, categoryName, categoryId, expirationDate, order, size } =
+      req.query;
+    let { minPrice, maxPrice } = req.query;
+    minPrice = parseInt(minPrice, 10) || 0;
+    maxPrice = parseInt(maxPrice, 10) || 0;
     const page = req.query.page || 1;
     const whereAttr = { status: 'published' };
     const orderAttr = [['id', 'DESC']];
@@ -104,7 +95,7 @@ const getProducts = async (req, res) => {
     switch (order) {
       case 'recents':
         orderAttr.unshift(['id', 'DESC']);
-        break
+        break;
       case 'priceASC':
         orderAttr.unshift(['price', 'ASC']);
         break;
@@ -134,8 +125,8 @@ const getProducts = async (req, res) => {
         id: categoryId,
       };
     }
-    if (categoryName ==='' || categoryName ==='Todas') {
-      delete include[0].where
+    if (categoryName === '' || categoryName === 'Todas') {
+      delete include[0].where;
     }
 
     if (minPrice && maxPrice) {
@@ -144,17 +135,14 @@ const getProducts = async (req, res) => {
       whereAttr.price = { [Op.gte]: minPrice };
     } else if (maxPrice) {
       whereAttr.price = { [Op.lte]: maxPrice };
-    } 
-    
+    }
 
     if (expirationDate) {
       whereAttr.expirationDate = { [Op.lte]: expirationDate };
     }
     if (expirationDate === '') {
-      delete whereAttr.expirationDate
+      delete whereAttr.expirationDate;
     }
-    
-
 
     const params = {
       where: whereAttr,
@@ -252,7 +240,7 @@ const deletePublication = async (req, res) => {
   try {
     const { userId } = req;
     const user = await User.findByPk(userId, {
-      include: [{ model: Company }],
+      include: [{ model: Company, as: 'company' }],
     });
     const { id } = req.params;
     let product = await Product.findByPk(id);
@@ -281,6 +269,7 @@ const deletePublication = async (req, res) => {
     product = await Product.findByPk(id);
     return res.status(200).json({ msg: 'success', data: product });
   } catch (error) {
+    console.log(error);
     return res.status(500).send({ message: error });
   }
 };
@@ -344,22 +333,19 @@ const getProductById = async (req, res) => {
   }
 };
 
-const getCategories = async (req , res) =>{
-  try{
-    const allCategories = await Category.findAll(
-      {
-        attributes: ['id', 'name'],
-      }
-    );
-    if(!allCategories){
+const getCategories = async (req, res) => {
+  try {
+    const allCategories = await Category.findAll({
+      attributes: ['id', 'name'],
+    });
+    if (!allCategories) {
       return res.status(404).json({ message: 'Not found' });
     }
     return res.status(200).json(allCategories);
-  }catch(error){
+  } catch (error) {
     return res.status(500).send({ message: error });
   }
-}
-
+};
 
 module.exports = {
   getProducts,
@@ -368,5 +354,5 @@ module.exports = {
   getCompanyProductsById,
   getProductById,
   getCompanyProductsByAuth,
-  getCategories
+  getCategories,
 };

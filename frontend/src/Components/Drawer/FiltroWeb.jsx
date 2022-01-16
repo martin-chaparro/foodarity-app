@@ -1,13 +1,11 @@
 import React from 'react';
-import FiltroForm from './FiltroForm'
+import FiltroForm from './FiltroForm';
 
-export default function FiltroWeb({filtrado}) {
+export default function FiltroWeb({ filtrado }) {
   return (
     <div>
-      <box>
-        <FiltroForm isMobile={false} filtrado={filtrado}/>
-        <h1>Filtro Web</h1>
-      </box>
+      <h2>Filtros</h2>
+      <FiltroForm isMobile={false} filtrado={filtrado} />
     </div>
   );
 }

@@ -1,7 +1,6 @@
 const { Op } = require('sequelize');
 const { validationResult } = require('express-validator');
 const cloudinary = require('cloudinary').v2;
-const { generateJWT } = require('../../helpers/generateJWT');
 const User = require('../../models/User');
 const Role = require('../../models/Role');
 const Company = require('../../models/Company');
@@ -11,50 +10,6 @@ const Address = require('../../models/Address');
 
 cloudinary.config(process.env.CLOUDINARY_URL);
 
-const createUser = async (request, response) => {
-  const { name, email, password } = request.body;
-
-  const errors = validationResult(request);
-  if (!errors.isEmpty()) {
-    return response.status(400).json({ errors: errors.array() });
-  }
-
-  let user = await User.findOne({
-    where: { [Op.and]: [{ email }, { deleted: false }] },
-  });
-
-  if (user) {
-    if (user.email === email)
-      return response
-        .status(400)
-        .json({ message: 'Este email ya esta en uso' });
-  }
-
-  user = await User.create({
-    name,
-    email,
-    password,
-  });
-
-  await user.setRole(1);
-
-  // Generar JWT
-  const token = await generateJWT({
-    id: user.id,
-    name: user.name,
-    roleId: user.role_id,
-  });
-
-  return response.status(201).json({
-    id: user.id,
-    name: user.name,
-    email: user.email,
-    photo: user.photo,
-    socialPhoto: user.socialPhoto,
-    token,
-  });
-};
-
 const getAllUsers = async (request, response) => {
   const getPagination = (page, size) => {
     const limit = size ? +size : 3;
@@ -63,13 +18,43 @@ const getAllUsers = async (request, response) => {
     return { limit, offset };
   };
 
-  const { page, size } = request.query;
+  const { page, size, search } = request.query;
 
   const { limit, offset } = getPagination(page, size);
+
+  if (!search) {
+    const users = await User.findAndCountAll({
+      attributes: {
+        exclude: ['password', 'createdAt', 'updatedAt', 'RoleId', 'role_id'],
+      },
+      include: {
+        model: Role,
+        as: 'role',
+        attributes: ['id', 'role'],
+      },
+      offset,
+      limit,
+      order: [['id', 'ASC']],
+    });
+
+    return response.status(200).json({
+      users: users.rows,
+      totalUsers: users.count,
+      size: limit,
+      page: offset,
+      totalPages: Math.ceil(users.count / limit),
+    });
+  }
 
   const users = await User.findAndCountAll({
     attributes: {
       exclude: ['password', 'createdAt', 'updatedAt', 'RoleId', 'role_id'],
+    },
+    where: {
+      [Op.or]: [
+        { name: { [Op.iLike]: `%${search}%` } },
+        { email: { [Op.iLike]: `%${search}%` } },
+      ],
     },
     include: {
       model: Role,
@@ -78,6 +63,7 @@ const getAllUsers = async (request, response) => {
     },
     offset,
     limit,
+    order: [['id', 'ASC']],
   });
 
   return response.status(200).json({
@@ -216,28 +202,9 @@ const updateUser = async (request, response) => {
   }
 };
 
-const uploadPhotoUser = async (request, response) => {
-  const user = await User.findByPk(request.userId);
-
-  if (user.photo) {
-    cloudinary.uploader.destroy(user.photo.public_id);
-  }
-
-  const { tempFilePath } = request.files.file;
-
-  const { secure_url: secureUrl, public_id: publicId } =
-    await cloudinary.uploader.upload(tempFilePath);
-
-  await user.update({ photo: { public_id: publicId, url: secureUrl } });
-
-  return response.status(200).json(user);
-};
-
 module.exports = {
-  createUser,
   getAllUsers,
   getUser,
   deleteUser,
   updateUser,
-  uploadPhotoUser,
 };
