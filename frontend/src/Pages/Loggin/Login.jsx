@@ -7,7 +7,7 @@ import Button from '@mui/material/Button';
 import { GoogleLogin } from 'react-google-login';
 // import { logInUsers } from '../../actions/index';
 import { startGoogleLogin, startLogin } from '../../redux/actions/authActions';
-import Header from '../../Components/Header/Header';
+// import Header from '../../Components/Header/Header';
 import estilos from './Login.module.css';
 
 export default function Login() {
@@ -93,9 +93,9 @@ export default function Login() {
 
   return (
     <div backgroundcolor="transparent">
-      <Link to="/">
-        <Header />
-      </Link>
+      {/* <Link to="/">
+        <Header /> 
+      </Link> */}
       <div>
         <div className={estilos.contener}>
           <h3>Ingrese su Email</h3>

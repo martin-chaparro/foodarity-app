@@ -1,6 +1,7 @@
 .RegisterFormCommerce {
-  height: 100vh;
+  height: calc(100vh - 75px);
   background: #ececec;
+  padding-top: 75px;
 }
 
 .form {

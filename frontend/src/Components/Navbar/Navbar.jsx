@@ -1,6 +1,7 @@
 import * as React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import AppBar from '@mui/material/AppBar';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
@@ -17,14 +18,35 @@ import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
 import StoreIcon from '@mui/icons-material/Store';
 import Logo from '../../assets/Mobil-Full-Header-Logo.png';
 import Avatar from './Avatar';
+import { apiWithToken } from '../../services/api';
+import { startLogout } from '../../redux/actions/authActions';
 // import Drawer from '../Drawer/Drawer';
 
 export default function Navbar() {
+  const dispatch = useDispatch();
+  const { id } = useSelector((state) => state.auth);
+  const location = useLocation();
+
+  const [currentPath, setCurrentPath] = React.useState('');
+  const [user, setUser] = React.useState({});
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
+  React.useEffect(() => {
+    setCurrentPath(location.pathname);
+  }, [location]);
+
+  React.useEffect(() => {
+    if (id)
+      apiWithToken.get(`/users/${id}`).then((res) => {
+        setUser(res.data);
+        console.log(res.data);
+      });
+  }, [id]);
 
   const handleProfileMenuOpen = (event) => {
     if (isMenuOpen) {
@@ -43,6 +65,11 @@ export default function Navbar() {
     handleMobileMenuClose();
   };
 
+  const handleLogOut = () => {
+    dispatch(startLogout());
+    handleMenuClose();
+  };
+
   const handleMobileMenuOpen = (event) => {
     if (isMenuOpen) {
       setAnchorEl(null);
@@ -51,109 +78,183 @@ export default function Navbar() {
     }
   };
 
-  const menuItems = (<span>  <MenuItem>
-    <IconButton
-      size="large"
-      aria-label="account of current user"
-      aria-controls="vista-mobile"
-      aria-haspopup="true"
-      color="secondary"
-    >
-      <Avatar />
-    </IconButton>
-    <Link to="/profileuser" textDecoration="none">
-      Mi Cuenta
-    </Link>
-  </MenuItem>
-  <MenuItem>
-    <IconButton
-      size="large"
-      aria-label="account of current user"
-      aria-controls="vista-mobile"
-      aria-haspopup="true"
-      color="secondary"
-    >
-      <StoreIcon />
-    </IconButton>
-    <Link to="/profilecompany" textDecoration="none">
-      Portal Empresa
-    </Link>
-  </MenuItem>
-  <MenuItem>
-    <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-      <Badge>
-        <FavoriteIcon fontSize="small" color="secondary" />
-      </Badge>
-    </IconButton>
-    <p>Favoritos</p>
-  </MenuItem>
-  <MenuItem>
-    <IconButton
-      size="large"
-      aria-label="show 17 new notifications"
-      color="inherit"
-    >
-      <Badge>
-        <ShoppingCartIcon color="secondary" />
-      </Badge>
-    </IconButton>
-    <p>Mi Carrito</p>
-  </MenuItem>
-  <MenuItem>
-    <IconButton
-      size="large"
-      aria-label="show 17 new notifications"
-      color="inherit"
-      href="/register"
-    >
-      <AppRegistrationIcon color="secondary" />
-    </IconButton>
-    <Link to="/login" textDecoration="none">
-      Registrarse
-    </Link>
-  </MenuItem>
-  <MenuItem>
+  const menuItems = (
+    <span>
+      {id && currentPath !== '/profileuser' && (
+        <MenuItem>
           <IconButton
             size="large"
             aria-label="account of current user"
-            aria-controls="web-vista-account-menu"
+            aria-controls="vista-mobile"
             aria-haspopup="true"
+            color="secondary"
+          >
+            <Avatar/>
+          </IconButton>
+          <Link
+            to="/profileuser"
+            textDecoration="none"
+            onClick={handleMenuClose}
+          >
+            {user.name}
+          </Link>
+        </MenuItem> 
+      )}
+      {id && user.company && currentPath !== '/profilecompany' && (
+        <MenuItem>
+          <IconButton
+            size="large"
+            aria-label="account of current user"
+            aria-controls="vista-mobile"
+            aria-haspopup="true"
+            color="secondary"
+          >
+            <StoreIcon />
+          </IconButton>
+          <Link
+            to="/profilecompany"
+            textDecoration="none"
+            onClick={handleMenuClose}
+          >
+            {/* {user.company && (user.company.company_type_id === 1 ? 'Mi comercio' : 'Mi ONG')} */}
+            {user.company.name}
+          </Link>
+        </MenuItem>
+      )}
+      {id &&
+        !user.company &&
+        currentPath !== '/rollselector/registerformcommerce' && (
+          <MenuItem>
+            <IconButton
+              size="large"
+              aria-label="account of current user"
+              aria-controls="vista-mobile"
+              aria-haspopup="true"
+              color="secondary"
+            >
+              <StoreIcon />
+            </IconButton>
+            <Link
+              to="/rollSelector/registerformcommerce"
+              textDecoration="none"
+              onClick={handleMenuClose}
+            >
+              Añadir comercio
+            </Link>
+          </MenuItem>
+        )}
+      {id &&
+        !user.company &&
+        currentPath !== '/rollselector/register_form_ong' && (
+          <MenuItem>
+            <IconButton
+              size="large"
+              aria-label="account of current user"
+              aria-controls="vista-mobile"
+              aria-haspopup="true"
+              color="secondary"
+            >
+              <StoreIcon />
+            </IconButton>
+            <Link
+              to="/rollSelector/register_form_ong"
+              textDecoration="none"
+              onClick={handleMenuClose}
+            >
+              Añadir ONG
+            </Link>
+          </MenuItem>
+        )}
+      {id && currentPath === '/home' && (
+        <MenuItem>
+          <IconButton
+            size="large"
+            aria-label="show 4 new mails"
             color="inherit"
           >
-            <HelpIcon color="secondary" />
+            <Badge>
+              <FavoriteIcon fontSize="small" color="secondary" />
+            </Badge>
           </IconButton>
-          <p>Ayuda</p>
+          <p>Favoritos</p>
         </MenuItem>
-  <MenuItem>
-    <IconButton
-      size="large"
-      aria-label="show 17 new notifications"
-      color="inherit"
-      href="/"
-    >
-      <LoginIcon color="secondary" />
-    </IconButton>
-    <Link to="/login" textDecoration="none">
-      Iniciar Sesión
-    </Link>
-  </MenuItem>
-  <MenuItem>
-    <IconButton
-      size="large"
-      aria-label="show 17 new notifications"
-      color="inherit"
-      href="/"
-    >
-      <LogoutIcon color="secondary" />
-    </IconButton>
-    <Link to="/" textDecoration="none">
-      Cerrar Sesión
-    </Link>
-  </MenuItem></span>)
+      )}
+      {id && currentPath === '/home' && (
+        <MenuItem>
+          <IconButton
+            size="large"
+            aria-label="show 17 new notifications"
+            color="inherit"
+          >
+            <Badge>
+              <ShoppingCartIcon color="secondary" />
+            </Badge>
+          </IconButton>
+          <p>Mi Carrito</p>
+        </MenuItem>
+      )}
+      {!id && (
+        <MenuItem>
+          <IconButton
+            size="large"
+            aria-label="show 17 new notifications"
+            color="inherit"
+          >
+            <AppRegistrationIcon color="secondary" />
+          </IconButton>
+          <Link to="/register" textDecoration="none" onClick={handleMenuClose}>
+            Registrarse
+          </Link>
+        </MenuItem>
+      )}
+      {!id && (
+        <MenuItem>
+          <IconButton
+            size="large"
+            aria-label="show 17 new notifications"
+            color="inherit"
+          >
+            <LoginIcon color="secondary" />
+          </IconButton>
+          <Link to="/login" textDecoration="none" onClick={handleMenuClose}>
+            Iniciar Sesión
+          </Link>
+        </MenuItem>
+      )}
+      {id && (
+        <MenuItem>
+          <IconButton
+            size="large"
+            aria-label="show 17 new notifications"
+            color="inherit"
+            href="/"
+          >
+            <LogoutIcon color="secondary" />
+          </IconButton>
+          <Link to="/" onClick={handleLogOut} textDecoration="none">
+            Cerrar Sesión
+          </Link>
+        </MenuItem>
+      )}
+      <MenuItem>
+        <IconButton
+          size="large"
+          aria-label="account of current user"
+          aria-controls="web-vista-account-menu"
+          aria-haspopup="true"
+          color="inherit"
+        >
+          <HelpIcon color="secondary" />
+        </IconButton>
+        <p>Ayuda</p>
+      </MenuItem>
+    </span>
+  );
 
   const menuId = 'web-vista-account-menu';
   const renderMenu = (
-    <Menu sx={{zIndex:10010, marginTop:5.3}}
+    <Menu
+      sx={{ zIndex: 10010, marginTop: 5.3 }}
       anchorEl={anchorEl}
       anchorOrigin={{
         vertical: 'top',
@@ -168,7 +269,7 @@ export default function Navbar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-        {menuItems}
+      {menuItems}
     </Menu>
   );
 
@@ -189,12 +290,12 @@ export default function Navbar() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-    {menuItems}
+      {menuItems}
     </Menu>
   );
 
   return (
-    <Box sx={{ flexGrow: 1, zIndex :10000, position:'absolute', top: 0}} >
+    <Box sx={{ flexGrow: 1, zIndex: 10000, position: 'absolute', top: 0 }}>
       <AppBar position="fixed">
         <Toolbar>
           <IconButton
@@ -206,7 +307,7 @@ export default function Navbar() {
           >
             {/* <Drawer filtrado={filtrado} /> */}
           </IconButton>
-          <Link to="/">
+          <Link to="/home">
             <img src={Logo} alt="Logo" />
           </Link>
           <Box sx={{ flexGrow: 1 }} />
@@ -238,7 +339,7 @@ export default function Navbar() {
               onClick={handleProfileMenuOpen}
               color="inherit"
             >
-              <Avatar />
+              <Avatar photo={user.photo} />
             </IconButton>
           </Box>
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>

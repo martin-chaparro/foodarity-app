@@ -55,7 +55,7 @@ export const startLogin = (email, password) => {
         })
       );
       dispatch(saveUserProfile({ name, photo, socialPhoto }));
-      // startSaveUserProfile({name,photo,socialPhoto})
+      dispatch(startCheking());
     } catch (error) {
       console.log(error);
     }
@@ -79,6 +79,7 @@ export const startGoogleLogin = (tokenId) => {
         })
       );
       dispatch(saveUserProfile({ name, photo, socialPhoto }));
+      dispatch(startCheking());
     } catch (error) {
       console.log(error);
     }

@@ -19,15 +19,15 @@ const labels = {
 };
 
 
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 550,
-  height: 300,
-  p: 4,
-};
+// const style = {
+//   position: 'absolute',
+//   top: '50%',
+//   left: '50%',
+//   transform: 'translate(-50%, -50%)',
+//   width: 550,
+//   height: 300,
+//   p: 4,
+// };
 
 
 
@@ -85,23 +85,18 @@ export default function ProductCard({ product }) {
               aria-labelledby="modal-modal-title"
               aria-describedby="modal-modal-description"
             >
-              <Box sx={style} className={styles.BoxGeneral}>
+              <Box  className={styles.BoxGeneral}>
                 <Box className={styles.boxCompany} sx={{ width: 225,}}>
                   <div className={styles.CompanyNameDiv}>
                     <Typography
                       id="modal-modal-description"
-                      sx={{ mt: 2, fontSize: 24, margin: 0 }}
                       className={styles.titleTypographyName}
                       onClick={(e) => handleCompanyClick(e, product.company.id)}
                     >
                       {product.company.name}
                     </Typography>
                     <Box
-                      sx={{
-                        width: 200,
-                        display: 'flex',
-                        alignItems: 'center',
-                      }}
+                    className={styles.boxCompanyInfo}
                     >
                       <Rating
                         className={styles.Rating}
@@ -117,20 +112,19 @@ export default function ProductCard({ product }) {
                         emptyIcon={
                           <StarIcon
                             className={styles.star}
-                            fontSize="inherit"
                           />
                         }
-                      />
-                      {value !== null && (
-                        <Box sx={{ ml: 2, position: 'relative', left: 0, }}>
-                          {labels[hover !== -1 ? hover : value]}
-                        </Box>
-                      )}
+                        />
+                        {value !== null && (
+                          <Box className={styles.labelRating} sx={{ ml: 2, }}>
+                            {labels[hover !== -1 ? hover : value]}
+                          </Box>
+                        )}
                     </Box>
                   </div>
                     <Typography
                       id="modal-modal-description"
-                      sx={{ mt: 2, margin: 0, position: 'relative', right: 5, bottom: 40, fontSize: 14, }}
+                      sx={{ mt: 2,}}
                       className={styles.titleTypographyStreet}
                     ><LocationOnIcon sx={{ position: 'relative', bottom: 5,}}/>
                       {product.company.address.state.name}, {product.company.address.city.name}
@@ -138,7 +132,7 @@ export default function ProductCard({ product }) {
                       <div className={styles.divFavButton}>
                         <button className={styles.favButton} type='submit'>
                         Añadir a favoritos
-                        <FavoriteIcon sx={{color: 'white',}}/>
+                        <FavoriteIcon className={styles.heart}/>
                         </button>
                       </div>
                 </Box>
@@ -153,16 +147,16 @@ export default function ProductCard({ product }) {
                     </div>
                   <Typography
                     id="modal-modal-description"
-                    sx={{ mt: 2, margin: 0, fontSize: 12 }}
+                    sx={{ mt: 2, }}
                     className={styles.titleTypographyDesc}
                   >
                     {product.description}
                   </Typography>
                   </div>
-                  <div><h3>
+                  <div className={styles.expDate}><h3>
                     El lote expira: {Date}
                     </h3></div>
-                    <div><h3>
+                    <div className={styles.category}><h3>
                     Categoria: {product.category.name}
                     </h3></div>
                   <div className={styles.divBtnReservar}>

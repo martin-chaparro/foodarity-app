@@ -10,58 +10,64 @@ import TableRow from '@mui/material/TableRow';
 import styles from './Orders.module.css';
 
 const columns = [
+  { id: 'comprador', label: 'COMPRADOR', minWidth: 170 },
+  { id: 'pago', label: 'PAGO', minWidth: 170 },
   { id: 'lote', label: 'LOTE', minWidth: 170 },
   {
-    id: 'vendida',
-    label: 'CANTIDAD VENDIDA',
+    id: 'vendidos',
+    label: 'VENDIDOS',
     minWidth: 170,
     align: 'right',
     format: (value) => value.toLocaleString('en-US'),
   },
 
   {
-    id: 'cantidad',
-    label: 'CANTIDAD PUBLICADA',
+    id: 'total',
+    label: 'TOTAL',
     minWidth: 170,
     align: 'right',
     format: (value) => value.toLocaleString('en-US'),
   },
   {
     id: 'precio',
-    label: 'PRECIO PUBLICADO (ARS)',
+    label: 'PRECIO',
     minWidth: 170,
     align: 'right',
     format: (value) => value.toLocaleString('en-US'),
   },
   {
     id: 'fecha',
-    label: 'FECHA PUBLICACION',
+    label: 'FECHA COMPRA',
     minWidth: 170,
     align: 'right',
     format: (value) => value.toFixed(2),
   },
 ];
 
-function createData(lote, vendida, cantidad, precio, fecha) {
+function createData(comprador , pago,lote, vendidos, total, precio, fecha ) {
   // const density = population / size;
-  return { lote, vendida, cantidad, precio, fecha };
+  return { comprador, pago ,lote, vendidos, total, precio, fecha };
 }
 
-const rows = [
+/* const rows = [
   createData('Lote pre-pizzas', 2, 120, '12/06/2022'),
   createData('Lote facturas', '3', 400, '12/06/2022'),
   createData('Lote tortas', '1', 100, '12/06/2022'),
   createData('Lote panes', '4', 327, '12/06/2022'),
   createData('Lote pan Rayado', '4', 376, '12/06/2022'),
   createData('Lote combo pasteleria/rotiseria', '6', 2547, '12/06/2022'),
-];
+]; */
 
 export default function Orders({orders}) {
-  console.log(orders)
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  console.log(orders)
+  const rows = orders.map(order => 
+    
+    createData(order.buyer.name, order.paymentMethod.method, order.product.lote, order.quantity, order.product.totalQuantity, order.product.price, order.date),
+  )
 
-  const handleChangePage = (event, newPage) => {
+  const handleChangePage = (newPage) => {
     setPage(newPage);
   };
 

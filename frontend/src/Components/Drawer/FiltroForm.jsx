@@ -1,7 +1,10 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState, useEffect } from 'react';
+import {useDispatch} from 'react-redux'
+import {getProducts} from '../../redux/actions/productActions'
 
 function FiltroForm({ filtrado }) {
+  const dispatch = useDispatch()
   const [categories, setCategories] = useState();
   const [input, setInput] = useState({
     categoryName: '',
@@ -27,6 +30,19 @@ function FiltroForm({ filtrado }) {
       });
   }, []);
 
+  const handleClear = (e) => {
+    e.preventDefault()
+    setInput({
+      categoryName: 'Todas',
+      categoryId: '',
+      minPrice: 0,
+      maxPrice: 0,
+      expirationDate: '',
+      order: '',
+    })
+    dispatch(getProducts())
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
     filtrado(input);
@@ -34,7 +50,9 @@ function FiltroForm({ filtrado }) {
 
   const handleChange = (e) => {
     e.preventDefault();
-    setInput({ ...input, [e.target.name]: e.target.value });
+    if (e.target.name === 'expirationDate' && e.target.value === '') {
+      setInput({ ...input, expirationDate: 'clear' });
+    } else setInput({ ...input, [e.target.name]: e.target.value });
   };
 
   return (
@@ -43,7 +61,7 @@ function FiltroForm({ filtrado }) {
         <div>
           <label>Ordenar por:</label>
           <label>
-            <select name="order" onChange={handleChange}>
+            <select name="order" onChange={handleChange} value={input.order}>
               <option value="recents">Mas recientes</option>
               <option value="priceASC">Precio minimo</option>
               <option value="priceDESC">Precio maximo</option>
@@ -55,8 +73,8 @@ function FiltroForm({ filtrado }) {
         <div>
           <label>Filtrar por categoria:</label>
           <label>
-            <select name="categoryName" onChange={handleChange}>
-              <option value="">Ninguna</option>
+            <select name="categoryName" onChange={handleChange} value={input.categoryName}>
+              <option value="Todas">Todas</option>
               {categories &&
                 categories.map((category) => (
                   <option key={category.name} value={category.name}>
@@ -74,6 +92,7 @@ function FiltroForm({ filtrado }) {
               name="minPrice"
               min="0"
               onChange={handleChange}
+              value={input.minPrice}
             />
           </div>
           <div>
@@ -83,6 +102,7 @@ function FiltroForm({ filtrado }) {
               name="maxPrice"
               min="0"
               onChange={handleChange}
+              value={input.maxPrice}
             />
           </div>
         </div>
@@ -94,9 +114,11 @@ function FiltroForm({ filtrado }) {
             name="expirationDate"
             min={new Date().toLocaleDateString('en-ca')}
             onChange={handleChange}
+            
           />
         </div>
         <button type="submit">Aplicar filtros</button>
+        <button type="button" onClick={handleClear}>Limpiar</button>
       </form>
     </div>
   );

@@ -8,8 +8,10 @@ import RegisterUserFormEditable from './RegisterUserFormEditable';
 
 // const [displayForm, setDisplayForm] = useState(false);
 
-export default function CompanyDetail() {
+export default function UserDetail({ detail }) {
   const [displayDetail, setDisplayDetail] = useState(true);
+  // email, id, phone, photo, deleted, socialPhoto, status;
+  const { name } = detail;
 
   function handleOnclick() {
     setDisplayDetail(false);
@@ -20,28 +22,14 @@ export default function CompanyDetail() {
       {displayDetail ? (
         <div className={styles.companydetail}>
           <div className={styles.cont}>
-            <h3 className={styles.titulo}>Nombre de Comercio:</h3>
-            <h3 className={styles.descripcion}>Panaderia Buenos Aires</h3>
+            <h3 className={styles.titulo}>Información de Cuenta</h3>
           </div>
+          <div className={styles.cont}>
+            <h3 className={styles.titulo}>Nombre: {name}</h3>
+          </div>
+
           <div className={styles.cont}>
             <h3 className={styles.titulo}>Email de la Empresa:</h3>
-            <h3 className={styles.descripcion}>
-              panaderiabuenosaires@gmail.com{' '}
-            </h3>
-          </div>
-
-          <div className={styles.cont}>
-            <h3 className={styles.titulo}>Url sitio Web:</h3>
-            <h3 className={styles.descripcion}>www.panaderiabuenosaires.com</h3>
-          </div>
-
-          <div className={styles.cont}>
-            <h3 className={styles.titulo}>Descripcion:</h3>
-            <h3 className={styles.descripcion}>
-              {' '}
-              Descripcion: Desarrollo panificados artesanales, integrales,
-              pasteleria...
-            </h3>
           </div>
 
           <div className={styles.cont}>
