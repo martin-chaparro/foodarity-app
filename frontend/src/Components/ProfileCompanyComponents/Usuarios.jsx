@@ -53,24 +53,21 @@ export default function Usuarios({ company }) {
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [rows, setRows] = React.useState([]);
   const [input, setInput] = React.useState('');
-  const [users, setUsers] = React.useState([])
+  const [users, setUsers] = React.useState([]);
 
   function handleOnChange(e) {
     setInput(e.target.value);
   }
 
   const handleDelete = (id) => {
-    apiWithToken.delete(`/companies/user/${id}`).then(
-      ()=> {
-        apiWithToken.get('/companies/users').then((response) => {
-          setUsers(response.data);
-        });
-      }
-    );
-    
+    apiWithToken.delete(`/companies/user/${id}`).then(() => {
+      apiWithToken.get('/companies/users').then((response) => {
+        setUsers(response.data);
+      });
+    });
   };
 
-  const handleRows = function () {
+  const handleRows = () => {
     const finalRows = [];
     users.forEach((user) => {
       finalRows.push(
@@ -81,7 +78,7 @@ export default function Usuarios({ company }) {
           user.id === company.ownerId ? 'Dueño' : 'Empleado',
           user.id !== company.ownerId && (
             <HighlightOffIcon
-            sx={{color: 'red'}}
+              sx={{ color: 'red' }}
               onClick={() => {
                 // eslint-disable-next-line no-alert
                 if (window.confirm('Queres eliminar este usuario?'))
@@ -91,20 +88,19 @@ export default function Usuarios({ company }) {
           )
         )
       );
-    })
+    });
     setRows(finalRows);
-  }
+  };
 
   React.useEffect(() => {
     apiWithToken.get('/companies/users').then((response) => {
       setUsers(response.data);
     });
-  },[])
+  }, []);
 
   React.useEffect(() => {
-    handleRows()
-  },[users])
-
+    handleRows();
+  }, [users]);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -120,21 +116,24 @@ export default function Usuarios({ company }) {
   function handleAddAcount() {
     // eslint-disable-next-line no-alert
     if (window.confirm(`Agregar a ${input} a la compania?`))
-    apiWithToken
-      .post(`/companies/user?email=${input}`)
-      .then(() => 
-      {setInput('')
-      apiWithToken.get('/companies/users').then((response) => {
-        setUsers(response.data);
-      })}
-      );
+      apiWithToken.post(`/companies/user?email=${input}`).then(() => {
+        setInput('');
+        apiWithToken.get('/companies/users').then((response) => {
+          setUsers(response.data);
+        });
+      });
   }
 
   return (
     <Paper className={styles.users} sx={{ width: '100%', overflow: 'hidden' }}>
       <div className={styles.contagregar}>
         <h2>Agregar nueva cuenta</h2>
-        <input type="text" name="email" onChange={(e) => handleOnChange(e)} value={input}/>
+        <input
+          type="text"
+          name="email"
+          onChange={(e) => handleOnChange(e)}
+          value={input}
+        />
         <button
           type="button"
           onClick={() => {
@@ -165,24 +164,30 @@ export default function Usuarios({ company }) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows && rows
-              /* .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage) */
-              .map((row) => {
-                return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                    {columns.map((column) => {
-                      const value = row[column.id];
-                      return (
-                        <TableCell key={column.id} align={column.align}>
-                          {column.format && typeof value === 'number'
-                            ? column.format(value)
-                            : value}
-                        </TableCell>
-                      );
-                    })}
-                  </TableRow>
-                );
-              })}
+            {rows &&
+              rows
+                /* .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage) */
+                .map((row) => {
+                  return (
+                    <TableRow
+                      hover
+                      role="checkbox"
+                      tabIndex={-1}
+                      key={row.code}
+                    >
+                      {columns.map((column) => {
+                        const value = row[column.id];
+                        return (
+                          <TableCell key={column.id} align={column.align}>
+                            {column.format && typeof value === 'number'
+                              ? column.format(value)
+                              : value}
+                          </TableCell>
+                        );
+                      })}
+                    </TableRow>
+                  );
+                })}
           </TableBody>
         </Table>
       </TableContainer>

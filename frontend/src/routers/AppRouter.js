@@ -1,4 +1,4 @@
-import { Routes, Route, BrowserRouter } from 'react-router-dom';
+import { Routes, Route, BrowserRouter, Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import Login from '../Pages/Loggin/Login';
@@ -34,6 +34,7 @@ export function AppRouter() {
       </Routes>
 
       <Routes>
+        <Route path="*" element={<Navigate to="/" />} />
         <Route exact path="/" element={<Landing />} />
         <Route
           exact
