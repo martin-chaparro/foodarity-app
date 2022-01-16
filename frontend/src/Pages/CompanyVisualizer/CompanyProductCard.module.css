@@ -266,3 +266,6 @@
 .favButton:focus-within {
   background-color: rgb(243, 67, 67);
 }
+
+@media screen and (max-width: 576px) {
+}

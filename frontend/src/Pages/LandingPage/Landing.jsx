@@ -4,6 +4,7 @@ import { IconButton } from '@mui/material';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import { Link as Scroll } from 'react-scroll';
+// eslint-disable-next-line import/no-unresolved
 import { useInView } from 'react-intersection-observer';
 // import 'animate.css'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';

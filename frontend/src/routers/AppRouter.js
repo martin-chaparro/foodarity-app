@@ -67,7 +67,7 @@ export function AppRouter() {
             </PrivateRoute>
           }
         />
-         {/* <Route path="*" element={<Navigate to="/" />} /> */}
+        {/* <Route path="*" element={<Navigate to="/" />} /> */}
       </Routes>
     </BrowserRouter>
   );

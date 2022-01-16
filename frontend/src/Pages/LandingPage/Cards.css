@@ -1,9 +1,8 @@
-.about{
-    transform: scale(85%);
-    transition: 2s;
-  }
-.about--zoom{
-    transform: scale(100%);
-    transition: 2s;
-  }
- 
+.about {
+  transform: scale(85%);
+  transition: 2s;
+}
+.about--zoom {
+  transform: scale(100%);
+  transition: 2s;
+}
