@@ -2,7 +2,6 @@
 import React from 'react';
 // eslint-disable-next-line import/no-duplicates
 import { useState } from 'react';
-import { apiWithToken } from '../../services/api';
 import styles from './CompanyDetail.module.css';
 
 import RegisterCompanyFormEditable from './RegisterCompanyFormEditable';
@@ -20,10 +19,7 @@ export default function CompanyDetail({ company }) {
     setDisplayDetail(true);
   }
 
-  function handleDelete() {
-    apiWithToken.delete(`/companies/disabled/${company.id}`);
-    window.location.reload();
-  }
+
 
   return (
     <div className={styles.infocont}>
@@ -72,16 +68,7 @@ export default function CompanyDetail({ company }) {
             >
               EDITAR DATOS
             </button>
-            <button
-              type="submit"
-              className={styles.btn}
-              onClick={() => {
-                // eslint-disable-next-line no-undef
-                handleDelete();
-              }}
-            >
-              ELIMINAR CUENTA
-            </button>
+            
           </div>
         </div>
       ) : (
