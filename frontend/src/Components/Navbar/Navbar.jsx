@@ -17,6 +17,7 @@ import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
 import StoreIcon from '@mui/icons-material/Store';
 import Logo from '../../assets/Mobil-Full-Header-Logo.png';
 import Avatar from './Avatar';
+import { startLogout } from '../../redux/actions/authActions';
 // import Drawer from '../Drawer/Drawer';
 
 export default function Navbar() {
@@ -51,109 +52,125 @@ export default function Navbar() {
     }
   };
 
-  const menuItems = (<span>  <MenuItem>
-    <IconButton
-      size="large"
-      aria-label="account of current user"
-      aria-controls="vista-mobile"
-      aria-haspopup="true"
-      color="secondary"
-    >
-      <Avatar />
-    </IconButton>
-    <Link to="/profileuser" textDecoration="none">
-      Mi Cuenta
-    </Link>
-  </MenuItem>
-  <MenuItem>
-    <IconButton
-      size="large"
-      aria-label="account of current user"
-      aria-controls="vista-mobile"
-      aria-haspopup="true"
-      color="secondary"
-    >
-      <StoreIcon />
-    </IconButton>
-    <Link to="/profilecompany" textDecoration="none">
-      Portal Empresa
-    </Link>
-  </MenuItem>
-  <MenuItem>
-    <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-      <Badge>
-        <FavoriteIcon fontSize="small" color="secondary" />
-      </Badge>
-    </IconButton>
-    <p>Favoritos</p>
-  </MenuItem>
-  <MenuItem>
-    <IconButton
-      size="large"
-      aria-label="show 17 new notifications"
-      color="inherit"
-    >
-      <Badge>
-        <ShoppingCartIcon color="secondary" />
-      </Badge>
-    </IconButton>
-    <p>Mi Carrito</p>
-  </MenuItem>
-  <MenuItem>
-    <IconButton
-      size="large"
-      aria-label="show 17 new notifications"
-      color="inherit"
-      href="/register"
-    >
-      <AppRegistrationIcon color="secondary" />
-    </IconButton>
-    <Link to="/login" textDecoration="none">
-      Registrarse
-    </Link>
-  </MenuItem>
-  <MenuItem>
-          <IconButton
-            size="large"
-            aria-label="account of current user"
-            aria-controls="web-vista-account-menu"
-            aria-haspopup="true"
-            color="inherit"
-          >
-            <HelpIcon color="secondary" />
-          </IconButton>
-          <p>Ayuda</p>
-        </MenuItem>
-  <MenuItem>
-    <IconButton
-      size="large"
-      aria-label="show 17 new notifications"
-      color="inherit"
-      href="/"
-    >
-      <LoginIcon color="secondary" />
-    </IconButton>
-    <Link to="/login" textDecoration="none">
-      Iniciar Sesión
-    </Link>
-  </MenuItem>
-  <MenuItem>
-    <IconButton
-      size="large"
-      aria-label="show 17 new notifications"
-      color="inherit"
-      href="/"
-    >
-      <LogoutIcon color="secondary" />
-    </IconButton>
-    <Link to="/" textDecoration="none">
-      Cerrar Sesión
-    </Link>
-  </MenuItem></span>)
+  const handleLogOut = () => {
+    startLogout();
+  };
+
+  const menuItems = (
+    <span>
+      {' '}
+      <MenuItem>
+        <IconButton
+          size="large"
+          aria-label="account of current user"
+          aria-controls="vista-mobile"
+          aria-haspopup="true"
+          color="secondary"
+        >
+          <Avatar />
+        </IconButton>
+        <Link to="/profileuser" textDecoration="none">
+          Mi Cuenta
+        </Link>
+      </MenuItem>
+      <MenuItem>
+        <IconButton
+          size="large"
+          aria-label="account of current user"
+          aria-controls="vista-mobile"
+          aria-haspopup="true"
+          color="secondary"
+        >
+          <StoreIcon />
+        </IconButton>
+        <Link to="/profilecompany" textDecoration="none">
+          Portal Empresa
+        </Link>
+      </MenuItem>
+      <MenuItem>
+        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+          <Badge>
+            <FavoriteIcon fontSize="small" color="secondary" />
+          </Badge>
+        </IconButton>
+        <p>Favoritos</p>
+      </MenuItem>
+      <MenuItem>
+        <IconButton
+          size="large"
+          aria-label="show 17 new notifications"
+          color="inherit"
+        >
+          <Badge>
+            <ShoppingCartIcon color="secondary" />
+          </Badge>
+        </IconButton>
+        <p>Mi Carrito</p>
+      </MenuItem>
+      <MenuItem>
+        <IconButton
+          size="large"
+          aria-label="show 17 new notifications"
+          color="inherit"
+          href="/register"
+        >
+          <AppRegistrationIcon color="secondary" />
+        </IconButton>
+        <Link to="/register" textDecoration="none">
+          Registrarse
+        </Link>
+      </MenuItem>
+      <MenuItem>
+        <IconButton
+          size="large"
+          aria-label="account of current user"
+          aria-controls="web-vista-account-menu"
+          aria-haspopup="true"
+          color="inherit"
+        >
+          <HelpIcon color="secondary" />
+        </IconButton>
+        <p>Ayuda</p>
+      </MenuItem>
+      <MenuItem>
+        <IconButton
+          size="large"
+          aria-label="show 17 new notifications"
+          color="inherit"
+          href="/"
+        >
+          <LoginIcon color="secondary" />
+        </IconButton>
+        <Link to="/login" textDecoration="none">
+          Iniciar Sesión
+        </Link>
+      </MenuItem>
+      <MenuItem>
+        <IconButton
+          size="large"
+          aria-label="show 17 new notifications"
+          color="inherit"
+          href="/"
+        >
+          <LogoutIcon color="secondary" />
+        </IconButton>
+        <Link
+          onClick={() => {
+            handleLogOut();
+          }}
+          to="/"
+          textDecoration="none"
+        >
+          Cerrar Sesión
+        </Link>
+      </MenuItem>
+    </span>
+  );
 
   const menuId = 'web-vista-account-menu';
   const renderMenu = (
-    <Menu sx={{zIndex:10010, marginTop:5.3}}
+    <Menu
+      sx={{ zIndex: 10010, marginTop: 5.3 }}
       anchorEl={anchorEl}
       anchorOrigin={{
         vertical: 'top',
@@ -168,7 +185,7 @@ export default function Navbar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-        {menuItems}
+      {menuItems}
     </Menu>
   );
 
@@ -189,12 +206,12 @@ export default function Navbar() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-    {menuItems}
+      {menuItems}
     </Menu>
   );
 
   return (
-    <Box sx={{ flexGrow: 1, zIndex :10000, position:'absolute', top: 0}} >
+    <Box sx={{ flexGrow: 1, zIndex: 10000, position: 'absolute', top: 0 }}>
       <AppBar position="fixed">
         <Toolbar>
           <IconButton
