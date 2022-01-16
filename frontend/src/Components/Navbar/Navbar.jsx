@@ -98,7 +98,7 @@ export default function Navbar() {
           >
             Mi Cuenta
           </Link>
-        </MenuItem>
+        </MenuItem> 
       )}
       {id && user.company && currentPath !== '/profilecompany' && (
         <MenuItem>
