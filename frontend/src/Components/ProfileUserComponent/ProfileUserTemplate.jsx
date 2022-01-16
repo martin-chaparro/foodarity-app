@@ -71,7 +71,7 @@ function ProfileUserTemplate(props) {
             text: 'Mis Compras',
           },
           {
-            text: 'Mis Datos',
+            text: 'Detalle de Cuenta',
           },
         ].map(({ text }, index) => (
           <ListItem
@@ -85,7 +85,7 @@ function ProfileUserTemplate(props) {
               {index % 2 === 0 ? (
                 <FaceIcon />
               ) : (
-                <FaceIcon /> && <ShoppingBasketIcon />
+                <ShoppingBasketIcon /> && <ShoppingBasketIcon />
               )}
             </ListItemIcon>
             <ListItemText primary={text} />
@@ -189,8 +189,8 @@ function ProfileUserTemplate(props) {
         >
           {display === 0 && <Bienvenida detail={userData} />}
 
-          {display === 1 && <UserDetail detail={userData} />}
-          {display === 2 && <Compras orders={orders} />}
+          {display === 1 && <Compras orders={orders} />}
+          {display === 2 && <UserDetail detail={userData} />}
 
           {display === 3 && <h1>MIS PEDIDOS</h1>}
           {display === 4 && <h1>MIS PEDIDOS</h1>}
