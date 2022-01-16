@@ -18,7 +18,6 @@ const labels = {
   5: 'Excelente',
 };
 
-
 const style = {
   position: 'absolute',
   top: '50%',
@@ -29,11 +28,8 @@ const style = {
   p: 4,
 };
 
-
-
 export default function ProductCard({ product }) {
-
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -43,14 +39,13 @@ export default function ProductCard({ product }) {
   const ExpirationDate = product.expirationDate;
   const Date = ExpirationDate.split('-').reverse().join('/');
 
-
-  const handleCompanyClick = (event, id)=>{
-    navigate(`company/${id}`, { replace: true })
-  }
+  const handleCompanyClick = (event, id) => {
+    navigate(`company/${id}`, { replace: true });
+  };
   return (
     <div className={styles.productcard}>
       <div className={styles.divImg}>
-        <img src={product.photo} alt="food" className={styles.img} />
+        <img src={product.photo.url} alt="food" className={styles.img} />
       </div>
       <div className={styles.content}>
         <div className={styles.nameDiv}>
@@ -86,7 +81,7 @@ export default function ProductCard({ product }) {
               aria-describedby="modal-modal-description"
             >
               <Box sx={style} className={styles.BoxGeneral}>
-                <Box className={styles.boxCompany} sx={{ width: 225,}}>
+                <Box className={styles.boxCompany} sx={{ width: 225 }}>
                   <div className={styles.CompanyNameDiv}>
                     <Typography
                       id="modal-modal-description"
@@ -122,49 +117,58 @@ export default function ProductCard({ product }) {
                         }
                       />
                       {value !== null && (
-                        <Box sx={{ ml: 2, position: 'relative', left: 0, }}>
+                        <Box sx={{ ml: 2, position: 'relative', left: 0 }}>
                           {labels[hover !== -1 ? hover : value]}
                         </Box>
                       )}
                     </Box>
                   </div>
-                    <Typography
-                      id="modal-modal-description"
-                      sx={{ mt: 2, margin: 0, position: 'relative', right: 5, bottom: 40, fontSize: 14, }}
-                      className={styles.titleTypographyStreet}
-                    ><LocationOnIcon sx={{ position: 'relative', bottom: 5,}}/>
-                      {product.company.address.state.name}, {product.company.address.city.name}
-                    </Typography>
-                      <div className={styles.divFavButton}>
-                        <button className={styles.favButton} type='submit'>
-                        Añadir a favoritos
-                        <FavoriteIcon sx={{color: 'white',}}/>
-                        </button>
-                      </div>
+                  <Typography
+                    id="modal-modal-description"
+                    sx={{
+                      mt: 2,
+                      margin: 0,
+                      position: 'relative',
+                      right: 5,
+                      bottom: 40,
+                      fontSize: 14,
+                    }}
+                    className={styles.titleTypographyStreet}
+                  >
+                    <LocationOnIcon sx={{ position: 'relative', bottom: 5 }} />
+                    {product.company.address.state.name},{' '}
+                    {product.company.address.city.name}
+                  </Typography>
+                  <div className={styles.divFavButton}>
+                    <button className={styles.favButton} type="submit">
+                      Añadir a favoritos
+                      <FavoriteIcon sx={{ color: 'white' }} />
+                    </button>
+                  </div>
                 </Box>
                 <Box sx={{ width: 330 }}>
                   <div className={styles.DivPostData}>
                     <div className={styles.PostImgDiv}>
                       <img
                         className={styles.PostImg}
-                        src={product.photo}
+                        src={product.photo.url}
                         alt="ProductPhoto"
                       />
                     </div>
-                  <Typography
-                    id="modal-modal-description"
-                    sx={{ mt: 2, margin: 0, fontSize: 12 }}
-                    className={styles.titleTypographyDesc}
-                  >
-                    {product.description}
-                  </Typography>
+                    <Typography
+                      id="modal-modal-description"
+                      sx={{ mt: 2, margin: 0, fontSize: 12 }}
+                      className={styles.titleTypographyDesc}
+                    >
+                      {product.description}
+                    </Typography>
                   </div>
-                  <div><h3>
-                    El lote expira: {Date}
-                    </h3></div>
-                    <div><h3>
-                    Categoria: {product.category.name}
-                    </h3></div>
+                  <div>
+                    <h3>El lote expira: {Date}</h3>
+                  </div>
+                  <div>
+                    <h3>Categoria: {product.category.name}</h3>
+                  </div>
                   <div className={styles.divBtnReservar}>
                     <button className={styles.btnReservar} type="submit">
                       Reservar

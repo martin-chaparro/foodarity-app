@@ -265,3 +265,105 @@
 .favButton:focus-within {
   background-color: rgb(243, 67, 67);
 }
+
+@media screen and (max-width: 576px) {
+  .productcard {
+    width: 340px;
+    height: 140px;
+    position: relative;
+    left: 10px;
+  }
+  .content {
+    margin-right: 50px;
+    width: 220px;
+    position: relative;
+    left: 10px;
+  }
+
+  .nameDiv {
+    width: 200px;
+    position: relative;
+    left: 10px;
+    bottom: 5px;
+  }
+
+  .name {
+    width: 200px;
+    position: relative;
+    bottom: 5px;
+    right: 5px;
+  }
+
+  .img {
+    object-fit: cover;
+    object-position: center;
+    position: relative;
+    left: 40px;
+    width: 120px;
+    height: 140px;
+  }
+  .divImg {
+    width: 120px;
+    height: 140px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin-right: 30px;
+    /* bottom: 10px; */
+  }
+  .divInc {
+    width: 200px;
+    position: relative;
+    left: 18px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+  }
+
+  .nameInc {
+    font-size: 12px;
+  }
+
+  .precio {
+    position: relative;
+    right: 20px;
+    font-size: 12px;
+  }
+
+  .description {
+    width: 215px;
+    position: relative;
+    left: 10px;
+    bottom: 5px;
+    font-size: 13px;
+  }
+
+  .btnContainer {
+    width: 220px;
+    position: relative;
+    bottom: 5px;
+  }
+
+  .btnres {
+    width: 90px;
+    height: 25px;
+    font-size: 12px;
+  }
+
+  .btnresdiv {
+    width: 100px;
+    left: 5px;
+  }
+  .btndet {
+    width: 90px;
+    height: 25px;
+    font-size: 12px;
+  }
+
+  .btndetdiv {
+    width: 100px;
+    position: relative;
+    right: 5px;
+  }
+}

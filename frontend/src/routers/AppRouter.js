@@ -37,11 +37,7 @@ export function AppRouter() {
         <Route exact path="/" element={<Landing />} />
         <Route exact path="/profileuser" element={<ProfileUser />} />
         <Route exact path="/profilecompany" element={<ProfileCompany />} />
-        <Route
-          exact
-          path="/CompanyVisualizer"
-          element={<CompanyVisualizer />}
-        />
+        <Route exact path="/home/company/:id" element={<CompanyVisualizer />} />
         <Route exact path="/userprofile" element={<AMyProfile />} />
         <Route exact path="/home" element={<Home />} />
         <Route exact path="/login" element={<Login />} />
