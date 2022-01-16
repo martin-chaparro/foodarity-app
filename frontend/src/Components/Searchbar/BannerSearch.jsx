@@ -1,14 +1,10 @@
-import React from 'react';  
+import React from 'react';
 import estilo from './BannerSearch.module.css';
 import SearchBar from './Searchbar';
 import Drawer from '../Drawer/Drawer';
 // import hero1 from '../../assets/hero1.jpg';
 
-export default function BannerSearch({ search, lote, filtrado}) {
-
-
- 
-
+export default function BannerSearch({ search, lote, filtrado }) {
   return (
     <body className={estilo.body}>
       <div className={estilo.heroimage}>
@@ -18,9 +14,18 @@ export default function BannerSearch({ search, lote, filtrado}) {
           </h1>
           <div className={estilo.search}>
             <SearchBar sx={{ marginTop: '10em' }} search={search} lote={lote} />
-            {/* <button type='button' sx={{ display: { xs: 'flex', md: 'none' } , backgroundColor: 'transparent', border: 'none'}} >
-          </button> */}
-            <Drawer filtrado={filtrado}/>
+            <div className={estilo.btn}>
+              <button
+                type="button"
+                sx={{
+                  display: { xs: 'flex', md: '1' },
+                  backgroundColor: 'primary',
+                  border: 'none',
+                }}
+              >
+                <Drawer filtrado={filtrado} />
+              </button>
+            </div>
           </div>
         </div>
       </div>

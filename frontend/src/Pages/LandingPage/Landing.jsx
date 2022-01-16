@@ -1,43 +1,94 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-// import Header1 from '../../Components/Header/Header1';
-// import Footer from '../../Components/Footer/Footer';
+import { IconButton } from '@mui/material';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
+import { Link as Scroll } from 'react-scroll';
+// eslint-disable-next-line import/no-unresolved
+import { useInView } from 'react-intersection-observer';
+// import 'animate.css'
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import AboutCard from '../About/AboutCard';
+import AboutVision from '../About/AboutVision';
+import AboutMision from '../About/AboutMision';
+import AboutValores from '../About/AboutValores';
+import Footer from '../../Components/Footer/Footer';
 import styles from './Landing.module.css';
+import './Cards.css';
 import logoLanding from '../../assets/Mobil-background-landing.png';
+import logo from '../../assets/Mobil-Full-Header-Logo.png';
+import logo1 from '../../assets/WEB-Logo-Combinado.png';
 
 export default function Landing() {
+  const { ref, inView } = useInView({
+    threshold: 0.4,
+  });
+
   return (
-    <div className={styles.landing}>
-      {/* <Header1 /> */}
-      <div className={styles.content}>
-        <div className={styles.btncontent}>
-          <div>
-            <Link to="/register">
-              <button className={styles.btnreg} type="submit">
-                Registrarse
-              </button>
-            </Link>
+    <div>
+      <div className={styles.landing}>
+        <img className={styles.logo1} src={logo1} alt="" />
+        <img className={styles.logo} src={logo} alt="" />
+        <div className={styles.content}>
+          <div className={styles.divImgLanding}>
+            <img
+              className={styles.imglogolanding}
+              src={logoLanding}
+              alt="logo"
+            />
           </div>
           <div>
-            <Link to="/login">
-              <button className={styles.btningresar} type="submit">
-                Ingresar
-              </button>
-            </Link>
+            <div className={styles.btncont}>
+              <IconButton>
+                <Stack spacing={1} direction="row">
+                  <Link to="/login">
+                    <Button variant="contained" size="small" type="submit">
+                      Ingresar
+                    </Button>
+                  </Link>
+                  <Link to="/register">
+                    <Button variant="contained" size="small" type="submit">
+                      Registrarse
+                    </Button>
+                  </Link>
+                  <Link to="/home">
+                    <Button variant="contained" size="small" type="submit">
+                      Continuar
+                    </Button>
+                  </Link>
+                </Stack>
+              </IconButton>
+            </div>
           </div>
-        </div>
-        <div>
-          <img className={styles.imglogolanding} src={logoLanding} alt="logo" />
-        </div>
-        <div>
-          <Link to="/home">
-            <button className={styles.btncontinuar} type="submit">
-              Continuar
-            </button>
-          </Link>
+          <Scroll to="place-to-visit">
+            <IconButton>
+              <KeyboardArrowDownIcon
+                className={styles.goDown}
+                sx={{ fontSize: 50, position: 'relative', bottom: 5 }}
+              />
+            </IconButton>
+          </Scroll>
         </div>
       </div>
-      {/* <Footer /> */}
+      <div className={styles.aboutCards} id="place-to-visit" ref={ref}>
+        <div className={inView ? 'about' : 'about--zoom'}>
+          <AboutCard />
+        </div>
+        <div className={inView ? 'about' : 'about--zoom'}>
+          <AboutValores />
+        </div>
+      </div>
+      <div className={styles.containerAbouts} ref={ref}>
+        <div className={inView ? 'about' : 'about--zoom'}>
+          <AboutMision />
+        </div>
+        <div className={inView ? 'about' : 'about--zoom'}>
+          <AboutVision />
+        </div>
+      </div>
+      <div>
+        <Footer />
+      </div>
     </div>
   );
 }
