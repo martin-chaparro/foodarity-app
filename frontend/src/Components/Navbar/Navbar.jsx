@@ -80,7 +80,7 @@ export default function Navbar() {
 
   const menuItems = (
     <span>
-      {id && (
+      {id && currentPath !== '/profileuser' && (
         <MenuItem>
           <IconButton
             size="large"
@@ -89,14 +89,14 @@ export default function Navbar() {
             aria-haspopup="true"
             color="secondary"
           >
-            <Avatar />
+            <Avatar/>
           </IconButton>
           <Link
             to="/profileuser"
             textDecoration="none"
             onClick={handleMenuClose}
           >
-            Mi Cuenta
+            {user.name}
           </Link>
         </MenuItem> 
       )}
@@ -116,7 +116,8 @@ export default function Navbar() {
             textDecoration="none"
             onClick={handleMenuClose}
           >
-            Portal Empresa
+            {/* {user.company && (user.company.company_type_id === 1 ? 'Mi comercio' : 'Mi ONG')} */}
+            {user.company.name}
           </Link>
         </MenuItem>
       )}

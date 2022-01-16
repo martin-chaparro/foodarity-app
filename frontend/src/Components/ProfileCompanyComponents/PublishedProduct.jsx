@@ -52,9 +52,14 @@ const columns = [
 ];
 
 // eslint-disable-next-line no-unused-vars
-export default function PublishedProduct({ products, setProducts }) {
+export default function PublishedProduct() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+   const [products, setProducts] = React.useState([]);
+   const [rows, setRows] = React.useState([]);
+
+  
+ 
 
   function createData(lote, estado, cantidad, precio, fecha, eliminar) {
     // const density = population / size;
@@ -62,29 +67,43 @@ export default function PublishedProduct({ products, setProducts }) {
   }
 
   async function handleDelete(id) {
-    apiWithToken.delete(`/products/id/${id}`).then((response) => {
-      setProducts(products.filter((el) => el.id !== response.data.id));
+    apiWithToken.delete(`/products/id/${id}`).then(() => {
+      apiWithToken.get('/products/byauth').then((response) => {
+        setProducts(response.data);
+      });
     });
   }
 
-  const rows = products.map((producto) => {
-    return createData(
-      producto.lote,
-      producto.status,
-      producto.quantity,
-      producto.price,
-      producto.publicationDate,
-      // eslint-disable-next-line no-alert
-      <HighlightOffIcon
-        onClick={() => {
-          // eslint-disable-next-line no-alert
-          if (window.confirm('Queres eliminar este item?'))
-            handleDelete(producto.id);
-        }}
-      />
-      // <button type="button">eliminar</button>
-    );
-  });
+  React.useEffect(() => {
+    apiWithToken.get('/products/byauth').then((response) => {
+      setProducts(response.data);
+    });
+  }, [])
+
+  React.useEffect(() => {
+    const finalRows = products.map((producto) => {
+      return createData(
+        producto.lote,
+        producto.status,
+        producto.quantity,
+        producto.price,
+        producto.publicationDate,
+        // eslint-disable-next-line no-alert
+        producto.status === 'published' && <HighlightOffIcon
+        sx={{color: 'red'}}
+          onClick={() => {
+            // eslint-disable-next-line no-alert
+            if (window.confirm('Queres cancelar esta publicacion?'))
+              handleDelete(producto.id);
+          }}
+        />
+        // <button type="button">eliminar</button>
+      );
+    });
+    setRows(finalRows)
+  }, [products])
+
+  
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
