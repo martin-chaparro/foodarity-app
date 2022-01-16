@@ -76,7 +76,8 @@ class Server {
       switch (this.environment) {
         case 'production':
           console.log('||--> Production mode setting in: authenticate<--||');
-          await connection.authenticate();
+          // await connection.authenticate();
+          await connection.sync({ force: false });
           break;
         case 'test':
           console.log('||--> Test mode setting in: force = false<--||');
