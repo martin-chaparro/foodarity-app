@@ -101,7 +101,7 @@ class Server {
       console.log('||--> Seed users database...: <--||');
       await Role.bulkCreate(this.roles);
       const usersCreated = await User.bulkCreate(this.users);
-      usersCreated.forEach((user,index) => {
+      usersCreated.forEach((user, index) => {
         user.setRole(this.users[index].roleId);
       });
     } catch (error) {
@@ -231,7 +231,9 @@ class Server {
     this.app.listen(this.port, async () => {
       console.log(`||--> Http server running in port:${this.port} <--||`);
       await this.connectDb();
-      await this.seed();
+      if (this.environment === 'development') {
+        await this.seed();
+      }
     });
   }
 }
