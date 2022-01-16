@@ -70,7 +70,7 @@ export default function Usuarios({ company }) {
     
   };
 
-  const handleRows = function () {
+  const handleRows =  () => {
     const finalRows = [];
     users.forEach((user) => {
       finalRows.push(
