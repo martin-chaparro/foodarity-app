@@ -1,4 +1,4 @@
-import { Routes, Route, BrowserRouter, Navigate } from 'react-router-dom';
+import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import Login from '../Pages/Loggin/Login';
@@ -15,6 +15,7 @@ import Navbar from '../Components/Navbar/Navbar';
 import { PrivateRoute } from './PrivateRoute';
 import { RollSelectorRouter } from './RollSelectorRouter';
 import { startCheking } from '../redux/actions/authActions';
+import ConcreteRegister from '../Components/MercadoPago/concreteRegister';
 
 export function AppRouter() {
   const dispatch = useDispatch();
@@ -35,6 +36,7 @@ export function AppRouter() {
       </Routes>
 
       <Routes>
+        <Route exact path="/mercadopagotest" element={<ConcreteRegister />} />
         <Route
           exact
           path="/profileuser"
@@ -69,7 +71,7 @@ export function AppRouter() {
             </PrivateRoute>
           }
         />
-        <Route path="*" element={<Navigate to="/" />} />
+        <Route path="*" element={<Landing />} />
       </Routes>
     </BrowserRouter>
   );
