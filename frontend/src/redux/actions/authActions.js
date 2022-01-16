@@ -45,7 +45,7 @@ export const startLogin = (email, password) => {
           name,
         })
       );
-      window.location.replace('/rollSelector');
+      window.location.replace('/home');
     } catch (error) {
       console.log(error);
       // eslint-disable-next-line no-alert
@@ -101,14 +101,15 @@ export const startRegister = (input) => {
       const response = await api.post('/users', input);
       const { id, name, token } = response.data;
       localStorage.setItem('token', token);
-
+      localStorage.setItem('id', id);
+      localStorage.setItem('name', name);
       dispatch(
         login({
           id,
           name,
         })
       );
-      return window.location.replace('/rollSelector');
+      return window.location.replace('/rollselector');
     } catch (err) {
       console.log(err);
       return Swal.fire({

@@ -33,7 +33,8 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
   },
 }));
 
-export default function BadgeAvatars() {
+export default function BadgeAvatars({photo}) {
+  console.log(photo)
   return (
     <Stack direction="row" spacing={2}>
       <StyledBadge
@@ -42,8 +43,8 @@ export default function BadgeAvatars() {
         variant="dot"
       >
         <Avatar
-          alt="Leonardo DiCaprio"
-          src="https://www.themoviedb.org/t/p/original/wo2hJpn04vbtmh0B9utCFdsQhxM.jpg"
+          alt="profilePhoto"
+          src={photo ? photo.url : 'https://res.cloudinary.com/dp4nhvfgbd/image/upload/v1642298841/user_v3ucu6.jpg'}
         />
       </StyledBadge>
     </Stack>

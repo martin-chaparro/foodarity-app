@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Swal from 'sweetalert2';
 import Checkbox from '@mui/material/Checkbox';
-import Header from '../../Components/Header/Header';
+// import Header from '../../Components/Header/Header';
 import styles from './RegisterFormCommerce.module.css';
 import CommerceLogo from '../../assets/caridad-1.png';
 import { api } from '../../services/api';
@@ -262,7 +262,7 @@ export default function RegisterFormCommerce() {
   };
   return (
     <div className={styles.RegisterFormCommerce}>
-      <Header />
+      {/* <Header /> */}
       <form autoComplete="off" className={styles.form} onSubmit={handleSubmit}>
         <div className={styles.containerLogo}>
           <div className={styles.commerceLogo}>

@@ -19,6 +19,7 @@ export default function PostNewBatch() {
   const categories = useSelector((state) => state.product.categories);
 
   const [photo, setPhoto] = useState({});
+  // const [photoPrev, setPhotoPrev] = useState('');
 
   const [input, setInput] = useState({
     lote: '',
@@ -65,6 +66,7 @@ export default function PostNewBatch() {
   function handlePhoto(e) {
     e.preventDefault();
     setPhoto(e.target.files[0]);
+    
   }
 
   function handleOnChange(e) {
@@ -147,6 +149,7 @@ export default function PostNewBatch() {
           <div className={styles.cont}>
             <div className={styles.contname}>
               <div>
+                
                 <NuevoLote
                   setInput={setInput}
                   input={input}

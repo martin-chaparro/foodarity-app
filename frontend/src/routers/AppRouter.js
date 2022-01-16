@@ -9,8 +9,8 @@ import Register from '../Pages/Register/RegisterFormUser';
 import Loading from '../Components/Loading/Loading';
 import ProfileCompany from '../Pages/ProfileCompany/ProfileCompany';
 import ProfileUser from '../Pages/ProfileUser/ProfileUser';
+// import AMyProfile from '../Pages/Profile User/AMyProfile';
 import CompanyVisualizer from '../Pages/CompanyVisualizer/CompanyVisualizer';
-import AMyProfile from '../Pages/Profile User/AMyProfile';
 import Navbar from '../Components/Navbar/Navbar';
 
 import { PrivateRoute } from './PrivateRoute';
@@ -36,14 +36,29 @@ export function AppRouter() {
 
       <Routes>
         <Route exact path="/" element={<Landing />} />
-        <Route exact path="/profileuser" element={<ProfileUser />} />
-        <Route exact path="/profilecompany" element={<ProfileCompany />} />
+        <Route
+          exact
+          path="/profileuser"
+          element={
+            <PrivateRoute isAuisAuthenticated={!!id}>
+              <ProfileUser />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          exact
+          path="/profilecompany"
+          element={
+            <PrivateRoute isAuisAuthenticated={!!id}>
+              <ProfileCompany />
+            </PrivateRoute>
+          }
+        />
         <Route
           exact
           path="/CompanyVisualizer"
           element={<CompanyVisualizer />}
         />
-        <Route exact path="/userprofile" element={<AMyProfile />} />
         <Route exact path="/home" element={<Home />} />
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/register" element={<Register />} />
