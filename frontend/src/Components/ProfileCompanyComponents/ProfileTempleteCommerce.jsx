@@ -28,6 +28,7 @@ import Orders from './Orders';
 import Usuarios from './Usuarios';
 import Donations from './Donations';
 import styles from './ProfileTempleteCommerce.module.css';
+import Delete from './Delete';
 
 const drawerWidth = 240;
 
@@ -40,15 +41,13 @@ function ProfileTempleteCommerce(props) {
 
   const [company, setCompany] = useState({});
 
-  const [products, setProducts] = useState({});
-
-  const [users, setUsers] = useState({});
-
+  
   const [commerceDonations, setCommerceDonations] = useState({});
-
+  
   const [ongDonations, setOngDonations] = useState({});
-
+  
   const [logged, setLogged] = useState('loading');
+  
 
   useEffect(() => {
     apiWithToken
@@ -62,14 +61,6 @@ function ProfileTempleteCommerce(props) {
       } else {
         setLogged('false');
       }
-    });
-
-    apiWithToken.get('/products/byauth').then((response) => {
-      setProducts(response.data);
-    });
-
-    apiWithToken.get('/companies/users').then((response) => {
-      setUsers(response.data);
     });
 
     apiWithToken.get('/donation/commerce').then((response) => {
@@ -111,21 +102,21 @@ function ProfileTempleteCommerce(props) {
             text: 'Detalles de Cuenta',
             typesAllow: [1, 2],
           },
+          { text: 'Usuarios', typesAllow: [1, 2] },
+
           {
-            text: 'Ordenes',
+            text: 'Productos',
             typesAllow: [1],
           },
           {
-            text: 'Productos Publicados',
+            text: 'Ventas',
             typesAllow: [1],
           },
+          { text: 'Donaciones', typesAllow: [1, 2] },
           {
             text: 'Publicar Nuevo Lote',
             typesAllow: [1],
           },
-          { text: 'Usuarios', typesAllow: [1, 2] },
-
-          { text: 'Donaciones', typesAllow: [1, 2] },
         ].map(
           ({ text, typesAllow }, index) =>
             typesAllow.includes(company.company_type_id) && (
@@ -145,14 +136,15 @@ function ProfileTempleteCommerce(props) {
         )}
       </List>
       <Divider />
-      {/* <List>
-        {['All mail', 'Trash'].map((text) => (
-          <ListItem button key={text}>
-             <ListItemIcon>{index === 0 && <DetailsIcon />}</ListItemIcon> 
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>  */}
+      <List>
+        <ListItem
+          button
+          key="Eliminar cuenta"
+          onClick={() => handleDisplay(99)}
+        >
+          <ListItemText primary="Eliminar cuenta" sx={{ color: 'red' }} />
+        </ListItem>
+      </List>
     </div>
   );
 
@@ -242,15 +234,13 @@ function ProfileTempleteCommerce(props) {
         >
           <Toolbar display="inline" />
           {display === 0 && <CompanyDetail company={company} />}
-
-          {display === 2 && <PublishedProduct products={products} />}
-          {display === 3 && <PostNewBatch />}
-
-          {display === 1 && <Orders orders={orders} />}
-          {display === 4 && (
-            <Usuarios users={users} company={company} setUsers={setUsers} />
+          {display === 1 && (
+            // eslint-disable-next-line react/jsx-no-bind
+            <Usuarios company={company} />
           )}
-          {display === 5 && (
+          {display === 2 && <PublishedProduct/>}
+          {display === 3 && <Orders orders={orders} />}
+          {display === 4 && (
             <Donations
               donations={
                 company.company_type_id === 1 ? commerceDonations : ongDonations
@@ -258,6 +248,9 @@ function ProfileTempleteCommerce(props) {
               typeId={company.company_type_id}
             />
           )}
+          {display === 5 && <PostNewBatch />}
+
+          {display === 99 && <Delete company={company} />}
         </Box>
       </Box>
     </div>

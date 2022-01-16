@@ -8,6 +8,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import styles from './Usuarios.module.css';
 import { apiWithToken } from '../../services/api';
 
@@ -36,7 +37,7 @@ const columns = [
   },
   {
     id: 'eliminar',
-    label: 'ELIMINAR',
+    label: '',
     minWidth: 170,
     align: 'right',
     format: (value) => value.toFixed(2),
@@ -47,24 +48,31 @@ function createData(nombre, email, telefono, rol, eliminar) {
   return { nombre, email, telefono, rol, eliminar };
 }
 
-export default function Usuarios({ users, company }) {
+export default function Usuarios({ company }) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [rows, setRows] = React.useState([]);
   const [input, setInput] = React.useState('');
+  const [users, setUsers] = React.useState([])
 
   function handleOnChange(e) {
     setInput(e.target.value);
   }
 
   const handleDelete = (id) => {
-    apiWithToken.delete(`/companies/user/${id}`);
+    apiWithToken.delete(`/companies/user/${id}`).then(
+      ()=> {
+        apiWithToken.get('/companies/users').then((response) => {
+          setUsers(response.data);
+        });
+      }
+    );
+    
   };
 
-  React.useEffect(() => {
+  const handleRows =  () => {
     const finalRows = [];
     users.forEach((user) => {
-      console.log(user.name);
       finalRows.push(
         createData(
           user.name,
@@ -72,20 +80,31 @@ export default function Usuarios({ users, company }) {
           user.phone,
           user.id === company.ownerId ? 'Dueño' : 'Empleado',
           user.id !== company.ownerId && (
-            <button
-              type="button"
+            <HighlightOffIcon
+            sx={{color: 'red'}}
               onClick={() => {
-                handleDelete(user.id);
+                // eslint-disable-next-line no-alert
+                if (window.confirm('Queres eliminar este usuario?'))
+                  handleDelete(user.id);
               }}
-            >
-              X
-            </button>
+            />
           )
         )
       );
-      setRows(finalRows);
+    })
+    setRows(finalRows);
+  }
+
+  React.useEffect(() => {
+    apiWithToken.get('/companies/users').then((response) => {
+      setUsers(response.data);
     });
-  }, []);
+  },[])
+
+  React.useEffect(() => {
+    handleRows()
+  },[users])
+
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -99,16 +118,23 @@ export default function Usuarios({ users, company }) {
   // /companies/user?email=demo@demo.com
 
   function handleAddAcount() {
+    // eslint-disable-next-line no-alert
+    if (window.confirm(`Agregar a ${input} a la compania?`))
     apiWithToken
       .post(`/companies/user?email=${input}`)
-      .then((response) => console.log(response.data));
+      .then(() => 
+      {setInput('')
+      apiWithToken.get('/companies/users').then((response) => {
+        setUsers(response.data);
+      })}
+      );
   }
 
   return (
     <Paper className={styles.users} sx={{ width: '100%', overflow: 'hidden' }}>
       <div className={styles.contagregar}>
         <h2>Agregar nueva cuenta</h2>
-        <input type="text" name="email" onChange={(e) => handleOnChange(e)} />
+        <input type="text" name="email" onChange={(e) => handleOnChange(e)} value={input}/>
         <button
           type="button"
           onClick={() => {
@@ -139,7 +165,7 @@ export default function Usuarios({ users, company }) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows
+            {rows && rows
               /* .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage) */
               .map((row) => {
                 return (

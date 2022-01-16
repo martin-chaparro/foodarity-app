@@ -1,82 +1,105 @@
+
 .content {
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 100vh;
 }
 
 .landing {
   display: flex;
   flex-direction: column;
+  background-image: url(../../assets/gif_landing.gif);
+  background-size: cover;
+  object-fit: cover;
   height: 100vh;
-  background-color: #3e2463;
+  position: relative;
 }
 
 .btncontent {
   display: flex;
   justify-content: space-around;
 }
+.btncont{
+margin-top: 5px;
+margin-right: 25px;
+display: flex;
+justify-content: center;
+align-items: center;
 
-.btningresar {
-  background-color: #fdffb6;
-  width: 95px;
-  padding-top: 3px;
-  padding-bottom: 3px;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-left: 25px;
-  margin-top: 40px;
-
-  letter-spacing: 0.5px;
-
-  font-family: 'Baloo Bhaijaan 2', cursive;
-  font-family: 'Changa', sans-serif;
-  font-family: 'Roboto', sans-serif;
 }
 
-.btnreg {
-  background-color: #d68584;
-  width: 95px;
-  padding-top: 3px;
-  padding-bottom: 3px;
-  border-radius: 5px;
-  margin-top: 40px;
-  cursor: pointer;
-
-  letter-spacing: 0.5px;
-
-  font-family: 'Baloo Bhaijaan 2', cursive;
-  font-family: 'Changa', sans-serif;
-  font-family: 'Roboto', sans-serif;
+.logo{
+  position: relative;
+  top: 23px;
+  display: flex;
+  flex-direction: center;
+}
+.logo1 {
+  position: relative;
+  right: 25px;
+  top: 80px;
+  height: 95px;
 }
 
-.btncontinuar {
-  background-color: transparent;
-  border: 2px solid white;
-  color: white;
-  font-weight: 700;
-  width: 95px;
-  padding-top: 3px;
-  padding-bottom: 3px;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-bottom: 20px;
-  letter-spacing: 0.5px;
-
-  font-family: 'Baloo Bhaijaan 2', cursive;
-  font-family: 'Changa', sans-serif;
-  font-family: 'Roboto', sans-serif;
+.divImgLanding {
+  width: 400px;
+  height: 400px;
 }
 
 .imglogolanding {
-  width: 340px;
+  width: 400px;
+  height: 400px;
+  animation: fadeInDown;
+  animation-duration: 10s;
+ 
 }
 
-@media screen and (min-width: 576px) {
-  .btningresar {
+.goDown{
+  color: white;
+}
+
+.aboutCards{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 500px;
+  margin-top: 25px;
+}
+
+
+.containerAbouts{
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+}
+
+
+
+@media screen and (max-width: 576px) {
+.logo1 {
     display: none;
+  }
+.aboutCards{
+    display: flex;
+    flex-direction: column;
+    height:1200px;
+    width: 340px;
+    align-items: center;
+
+  }
+  .containerAbouts{
+    display: flex;
+    flex-direction: column;
+    height: 800px;
+    width: 340px;
+    align-items: center;
+  }
+}
+@media screen and (min-width: 576px) {
+  .logo {
+    visibility: hidden;
   }
 
-  .btnreg {
-    display: none;
-  }
+ 
 }
