@@ -77,7 +77,7 @@ class Server {
         case 'production':
           console.log('||--> Production mode setting in: authenticate<--||');
           // await connection.authenticate();
-          await connection.sync({ force: false });
+          await connection.sync({ force: true });
           break;
         case 'test':
           console.log('||--> Test mode setting in: force = false<--||');
