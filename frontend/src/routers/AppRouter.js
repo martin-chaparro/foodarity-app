@@ -11,7 +11,6 @@ import ProfileUser from '../Pages/ProfileUser/ProfileUser';
 // import AMyProfile from '../Pages/Profile User/AMyProfile';
 import CompanyVisualizer from '../Pages/CompanyVisualizer/CompanyVisualizer';
 import Navbar from '../Components/Navbar/Navbar';
-
 import { PrivateRoute } from './PrivateRoute';
 import { RollSelectorRouter } from './RollSelectorRouter';
 import { startCheking } from '../redux/actions/authActions';
@@ -34,7 +33,6 @@ export function AppRouter() {
         <Route exact path="/" element={<Landing />} />
         <Route path="*" element={<Navbar />} />
       </Routes>
-
       <Routes>
         <Route exact path="/mercadopagotest" element={<ConcreteRegister />} />
         <Route
@@ -71,7 +69,7 @@ export function AppRouter() {
             </PrivateRoute>
           }
         />
-        <Route path="*" element={<Landing />} />
+        {/* <Route path="*" element={<Navigate to="/" />} /> */}
       </Routes>
     </BrowserRouter>
   );

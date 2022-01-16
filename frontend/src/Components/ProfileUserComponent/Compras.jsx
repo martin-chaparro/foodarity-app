@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -49,7 +49,8 @@ const rows = [
   createData('Lote combo pasteleria/rotiseria', '6', 2547, '12/06/2022'),
 ];
 
-export default function Orders() {
+export default function Orders({ orders }) {
+  console.log(orders);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 

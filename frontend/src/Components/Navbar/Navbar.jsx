@@ -89,16 +89,16 @@ export default function Navbar() {
             aria-haspopup="true"
             color="secondary"
           >
-            <Avatar/>
+            <Avatar />
           </IconButton>
           <Link
             to="/profileuser"
             textDecoration="none"
             onClick={handleMenuClose}
           >
-            {user.name}
+            {user.name ? user.name : 'Mi Cuenta'}
           </Link>
-        </MenuItem> 
+        </MenuItem>
       )}
       {id && user.company && currentPath !== '/profilecompany' && (
         <MenuItem>

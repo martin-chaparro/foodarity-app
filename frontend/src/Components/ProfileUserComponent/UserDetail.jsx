@@ -1,7 +1,6 @@
 // eslint-disable-next-line import/no-duplicates
-import React from 'react';
+import React, { useState } from 'react';
 // eslint-disable-next-line import/no-duplicates
-import { useState } from 'react';
 import styles from './UserDetail.module.css';
 
 import RegisterUserFormEditable from './RegisterUserFormEditable';
