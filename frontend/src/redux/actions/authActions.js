@@ -45,7 +45,7 @@ export const startLogin = (email, password) => {
           name,
         })
       );
-      window.location.replace('/rollSelector');
+      window.location.replace('/home');
     } catch (error) {
       console.log(error);
       // eslint-disable-next-line no-alert
