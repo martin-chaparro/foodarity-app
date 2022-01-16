@@ -45,7 +45,7 @@ export const startLogin = (email, password) => {
           name,
         })
       );
-      window.location.replace('/rollSelector');
+      window.location.replace('/home');
     } catch (error) {
       console.log(error);
       // eslint-disable-next-line no-alert
@@ -109,7 +109,7 @@ export const startRegister = (input) => {
           name,
         })
       );
-      return window.location.replace('/rollSelector');
+      return window.location.replace('/rollselector');
     } catch (err) {
       console.log(err);
       return Swal.fire({
