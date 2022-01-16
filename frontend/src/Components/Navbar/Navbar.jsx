@@ -49,9 +49,6 @@ export default function Navbar() {
   },[id])
 
 
-  const handleLogOut = () => {
-    dispatch(startLogout())
-  }
 
 
 
@@ -72,6 +69,12 @@ export default function Navbar() {
     handleMobileMenuClose();
   };
 
+  
+  const handleLogOut = () => {
+    dispatch(startLogout())
+    handleMenuClose()
+  }
+
   const handleMobileMenuOpen = (event) => {
     if (isMenuOpen) {
       setAnchorEl(null);
@@ -91,7 +94,7 @@ export default function Navbar() {
     >
       <Avatar />
     </IconButton>
-    <Link to="/profileuser" textDecoration="none">
+    <Link to="/profileuser" textDecoration="none"  onClick={handleMenuClose}>
       Mi Cuenta
     </Link>
   </MenuItem>}
@@ -105,11 +108,11 @@ export default function Navbar() {
     >
       <StoreIcon />
     </IconButton>
-    <Link to="/profilecompany" textDecoration="none">
+    <Link to="/profilecompany" textDecoration="none"  onClick={handleMenuClose}>
       Portal Empresa
     </Link>
   </MenuItem>}
-  {id && !user.company && <MenuItem>
+  {id && !user.company && currentPath !== '/rollselector/registerformcommerce' &&  <MenuItem>
     <IconButton
       size="large"
       aria-label="account of current user"
@@ -119,11 +122,11 @@ export default function Navbar() {
     >
       <StoreIcon />
     </IconButton>
-    <Link to="/rollSelector/registerformcommerce" textDecoration="none">
+    <Link to="/rollSelector/registerformcommerce" textDecoration="none"  onClick={handleMenuClose}>
       Añadir comercio
     </Link>
   </MenuItem>}
-  {id && !user.company && <MenuItem>
+  {id && !user.company && currentPath !== '/rollselector/register_form_ong' && <MenuItem>
     <IconButton
       size="large"
       aria-label="account of current user"
@@ -133,7 +136,7 @@ export default function Navbar() {
     >
       <StoreIcon />
     </IconButton>
-    <Link to="/rollSelector/register_form_ong" textDecoration="none">
+    <Link to="/rollSelector/register_form_ong" textDecoration="none"  onClick={handleMenuClose}>
       Añadir ONG
     </Link>
   </MenuItem>}
@@ -162,11 +165,11 @@ export default function Navbar() {
       size="large"
       aria-label="show 17 new notifications"
       color="inherit"
-      href="/register"
+  
     >
       <AppRegistrationIcon color="secondary" />
     </IconButton>
-    <Link to="/register" textDecoration="none">
+    <Link to="/register" textDecoration="none"  onClick={handleMenuClose}>
       Registrarse
     </Link>
   </MenuItem>}
@@ -175,11 +178,10 @@ export default function Navbar() {
       size="large"
       aria-label="show 17 new notifications"
       color="inherit"
-      href="/"
     >
       <LoginIcon color="secondary" />
     </IconButton>
-    <Link to="/login" textDecoration="none">
+    <Link to="/login" textDecoration="none"  onClick={handleMenuClose}>
       Iniciar Sesión
     </Link>
   </MenuItem>}
@@ -212,7 +214,8 @@ export default function Navbar() {
 
   const menuId = 'web-vista-account-menu';
   const renderMenu = (
-    <Menu sx={{zIndex:10010, marginTop:5.3}}
+    <Menu
+      sx={{ zIndex: 10010, marginTop: 5.3 }}
       anchorEl={anchorEl}
       anchorOrigin={{
         vertical: 'top',
@@ -227,7 +230,7 @@ export default function Navbar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-        {menuItems}
+      {menuItems}
     </Menu>
   );
 
@@ -248,12 +251,12 @@ export default function Navbar() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-    {menuItems}
+      {menuItems}
     </Menu>
   );
 
   return (
-    <Box sx={{ flexGrow: 1, zIndex :10000, position:'absolute', top: 0}} >
+    <Box sx={{ flexGrow: 1, zIndex: 10000, position: 'absolute', top: 0 }}>
       <AppBar position="fixed">
         <Toolbar>
           <IconButton
@@ -297,7 +300,7 @@ export default function Navbar() {
               onClick={handleProfileMenuOpen}
               color="inherit"
             >
-              <Avatar />
+              <Avatar photo={user.photo} />
             </IconButton>
           </Box>
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>

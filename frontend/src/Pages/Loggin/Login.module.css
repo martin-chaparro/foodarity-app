@@ -23,12 +23,14 @@ a {
   align-items: center;
   background-color: #ffffff;
   background-size: cover;
-  height: 100%;
+  height: calc(100vh - 55px);
   width: 100%;
   overflow: hidden;
   margin-bottom: 0;
   margin-top: 2em;
-  background-color: #ECECEC;
+  background-color: #ececec;
+
+  padding-top: 55px;
 }
 
 .contener h3 {

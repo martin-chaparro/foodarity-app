@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 import { GoogleLogin } from 'react-google-login';
 import Swal from 'sweetalert2';
 import Button from '@mui/material/Button';
-import Header from '../../Components/Header/Header';
+// import Header from '../../Components/Header/Header';
 import style from './RegisterFormUser.module.css';
 
 import {
@@ -135,7 +135,6 @@ function Register() {
         password: '',
         validatePassword: '',
       });
-      navigate('/rollselector');
     } else {
       // eslint-disable-next-line no-alert
       alert('Complete el formulario');
@@ -152,7 +151,7 @@ function Register() {
   return (
     <div className={style.register}>
       <Link to="/">
-        <Header />
+        {/* <Header /> */}
       </Link>
       <form className={style.form} onSubmit={handleSubmit}>
         <div className={style.divInputs}>

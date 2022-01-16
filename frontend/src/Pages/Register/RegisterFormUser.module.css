@@ -1,5 +1,6 @@
 .register {
-  height: 100vh;
+  height: calc(100vh - 75px);
+  padding-top: 75px;
 }
 
 .form {

@@ -6,7 +6,7 @@ import ProfileUserTemplate from '../../Components/ProfileUserComponent/ProfileUs
 
 export default function ProfileUser() {
   return (
-    <div className={styles.profileusercontent}>
+    <div className={styles.profileuser}>
       <ProfileUserTemplate />
     </div>
   );

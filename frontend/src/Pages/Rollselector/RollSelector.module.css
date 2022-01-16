@@ -1,7 +1,8 @@
 .rollselector {
-  height: 100vh;
+  height: calc(100vh - 55px);
   background-color: #ffffff;
   background-color: #ececec;
+  padding-top: 55px;
 }
 
 .rollselector h1 {
