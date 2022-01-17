@@ -194,7 +194,7 @@
   height: 140px;
   left: 10px;
   margin: 0;
-  bottom: 18px;
+  bottom: 20px;
 }
 
 .DivPostData {
@@ -226,19 +226,6 @@
   align-items: flex-end;
 }
 
-.star {
-  color: rgba(255, 255, 255, 0.3);
-}
-
-.Rating {
-  position: relative;
-}
-
-.labelRating {
-  position: relative;
-  left: 0;
-}
-
 .divBtnReservar {
   width: 100px;
   height: 40px;
@@ -246,7 +233,7 @@
   justify-content: center;
   position: relative;
   left: 22px;
-  top: 20px;
+  top: 32px;
 }
 
 .btnReservar {
@@ -268,9 +255,10 @@
 
 .divFavButton {
   position: relative;
-  top: 164px;
+  top: 196px;
   display: flex;
   justify-content: flex-end;
+  height: 31px;
 }
 
 .favButton {
@@ -434,7 +422,10 @@
     right: 20px;
     top: 1px;
   }
-
+  .divStreet {
+    position: relative;
+    bottom: 10px;
+  }
   .titleTypographyStreet {
     font-size: 8px;
     width: 120px;
@@ -480,7 +471,7 @@
     width: 60px;
     height: 16px;
     position: relative;
-    bottom: 80px;
+    bottom: 90px;
   }
 
   .btnReservar {
@@ -489,18 +480,19 @@
     font-size: 9px;
     font-weight: 700;
     position: relative;
-    bottom: 80px;
+    bottom: 90px;
   }
 
   .divFavButton {
     position: relative;
-    top: 69px;
+    top: 82px;
     left: 25px;
     width: 100px;
   }
 
   .favButton {
     width: 100px;
+    height: 18px;
     font-size: 8px;
     font-weight: 700;
     position: relative;

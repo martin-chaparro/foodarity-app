@@ -3,31 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import Rating from '@mui/material/Rating';
-import StarIcon from '@mui/icons-material/Star';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import styles from './ProductCard.module.css';
-// import Company from '../../assets/SuperDia.png';
 
-const labels = {
-  1: 'Bajo',
-  2: 'Normal',
-  3: 'Bien',
-  4: 'Buenisimo',
-  5: 'Excelente',
-};
-
-
-// const style = {
-//   position: 'absolute',
-//   top: '50%',
-//   left: '50%',
-//   transform: 'translate(-50%, -50%)',
-//   width: 550,
-//   height: 300,
-//   p: 4,
-// };
 
 
 
@@ -38,8 +17,6 @@ export default function ProductCard({ product }) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const [value, setValue] = React.useState(5);
-  const [hover, setHover] = React.useState(-1);
   const ExpirationDate = product.expirationDate;
   const Date = ExpirationDate.split('-').reverse().join('/');
 
@@ -95,33 +72,8 @@ export default function ProductCard({ product }) {
                     >
                       {product.company.name}
                     </Typography>
-                    <Box
-                    className={styles.boxCompanyInfo}
-                    >
-                      <Rating
-                        className={styles.Rating}
-                        name="hover-feedback"
-                        defaultValue={5}
-                        precision={1}
-                        onChange={(event, newValue) => {
-                          setValue(newValue);
-                        }}
-                        onChangeActive={(event, newHover) => {
-                          setHover(newHover);
-                        }}
-                        emptyIcon={
-                          <StarIcon
-                            className={styles.star}
-                          />
-                        }
-                        />
-                        {value !== null && (
-                          <Box className={styles.labelRating} sx={{ ml: 2, }}>
-                            {labels[hover !== -1 ? hover : value]}
-                          </Box>
-                        )}
-                    </Box>
                   </div>
+                  <div className={styles.divStreet}>
                     <Typography
                       id="modal-modal-description"
                       sx={{ mt: 2,}}
@@ -129,6 +81,7 @@ export default function ProductCard({ product }) {
                     ><LocationOnIcon sx={{ position: 'relative', bottom: 5,}}/>
                       {product.company.address.state.name}, {product.company.address.city.name}
                     </Typography>
+                    </div>
                       <div className={styles.divFavButton}>
                         <button className={styles.favButton} type='submit'>
                         Añadir a favoritos
