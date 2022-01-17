@@ -27,7 +27,7 @@ const getAllUsers = async (request, response) => {
       attributes: {
         exclude: ['password', 'createdAt', 'updatedAt', 'RoleId', 'role_id'],
       },
-      where:{deleted:false},
+      where: { deleted: false },
       include: {
         model: Role,
         as: 'role',
@@ -162,34 +162,31 @@ const deleteUser = async (request, response) => {
 };
 
 const updateUser = async (request, response) => {
-  
-  const {id} = request.params;
+  const { id } = request.params;
 
   const errors = validationResult(request);
   if (!errors.isEmpty()) {
     return response.status(400).json({ errors: errors.array() });
   }
 
-
-  const { name, email,phone,role, status } = request.body;
+  const { name, email, phone, role, status } = request.body;
 
   try {
-
-    const user = await User.findByPk(id)
+    const user = await User.findByPk(id);
 
     await user.update(
       {
         name,
         email,
         phone,
-        status
+        status,
       },
       {
         where: { id },
       }
     );
 
-    await user.setRole(role)
+    await user.setRole(role);
 
     return response.status(200).json({ message: 'Actualizado correctamente' });
   } catch (error) {
@@ -198,9 +195,29 @@ const updateUser = async (request, response) => {
   }
 };
 
+const uploadPhotoUser = async (request, response) => {
+  
+  const { id } = request.params;
+  const user = await User.findByPk(id);
+
+  if (user.photo) {
+    cloudinary.uploader.destroy(user.photo.public_id);
+  }
+
+  const { tempFilePath } = request.files.file;
+
+  const { secure_url: secureUrl, public_id: publicId } =
+    await cloudinary.uploader.upload(tempFilePath);
+
+  await user.update({ photo: { public_id: publicId, url: secureUrl } });
+
+  return response.status(200).json({ message: 'Actualizado correctamente' });
+};
+
 module.exports = {
   getAllUsers,
   getUser,
   deleteUser,
   updateUser,
+  uploadPhotoUser,
 };
