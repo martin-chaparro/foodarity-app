@@ -246,7 +246,6 @@ export default function RegisterFormCommerce() {
       !errors.street &&
       !errors.number &&
       !errors.zipcode
-
       // eslint-disable-next-line no-empty
     ) {
       dispatch(registerComerce(input,formValues));
