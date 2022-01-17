@@ -27,10 +27,13 @@ code {
     height: 10px;
   }
 
-  svg.MuiSvgIcon-root.CompanyProductCard_heart__AfnN2.css-11admod-MuiSvgIcon-root {
-    font-size: 12px;
-    width: 10px;
-    height: 10px;
+  svg.MuiSvgIcon-root.MuiSvgIcon-fontSizeMedium.ProductCard_heart__4tzd0.css-i4bv87-MuiSvgIcon-root {
+    font-size: 10px;
+    width: 8px;
+    height: 8px;
+    position: relative;
+    bottom: 1px;
+    right: 4px;
   }
 
   svg.MuiSvgIcon-root.css-1fbempp-MuiSvgIcon-root {
@@ -47,6 +50,10 @@ code {
 
   p.css-ahj2mt-MuiTypography-root {
     font-size: 24px;
+  }
+  p.css-ahj2mt-MuiTypography-root:hover {
+    cursor: pointer;
+    color: rgb(96, 236, 107);
   }
 
   svg.MuiSvgIcon-root.css-1fbempp-MuiSvgIcon-root {

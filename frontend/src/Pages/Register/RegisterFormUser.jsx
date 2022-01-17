@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
 import Button from '@mui/material/Button';
 // import Header from '../../Components/Header/Header';
 import style from './RegisterFormUser.module.css';
+import logo from '../../assets/WEB-Full-Header-Logo.png';
 
 import {
   startCheking,
@@ -150,9 +151,11 @@ function Register() {
 
   return (
     <div className={style.register}>
-      <Link to="/">
-        {/* <Header /> */}
-      </Link>
+     <div className={style.contLogo}>
+        <Link to='/'>
+     <img className={style.logo}src={logo} alt="" />
+     </Link>
+     </div>
       <form className={style.form} onSubmit={handleSubmit}>
         <div className={style.divInputs}>
           <div className={style.title}>

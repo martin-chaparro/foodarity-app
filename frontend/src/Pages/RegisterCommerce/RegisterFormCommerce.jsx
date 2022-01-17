@@ -32,15 +32,15 @@ export default function RegisterFormCommerce() {
   const [formValues, setFormValues] = useState(initialFormValues);
   // const navigate = useNavigate();
   const [input, setInput] = useState({
-    name: 'Conga',
-    website: 'http://www.conga.com',
-    email: 'conga@conga.com',
-    description: 'Esto es alguna descripcion',
-    areaCode: '280',
-    phone: '4530813',
-    street: 'la calle',
-    number: '1234',
-    zipcode: '9120',
+    name: '',
+    website: '',
+    email: '',
+    description: '',
+    areaCode: '',
+    phone: '',
+    street: '',
+    number: '',
+    zipcode: '',
     type: 1
   });
 

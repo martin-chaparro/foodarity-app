@@ -97,7 +97,7 @@
 }
 
 .btnres:hover {
-  background-color: #6f2add6b;
+  background-color: rgba(47, 255, 168, 0.404);
 }
 
 .btndetdiv {
@@ -250,12 +250,12 @@
 }
 
 .btnReservar:hover {
-  background-color: rgba(221, 128, 51, 0.692);
+  background-color: rgba(47, 255, 168, 0.404);
 }
 
 .divFavButton {
   position: relative;
-  top: 196px;
+  top: 199px;
   display: flex;
   justify-content: flex-end;
   height: 31px;
@@ -476,23 +476,23 @@
 
   .btnReservar {
     width: 60px;
-    height: 15px;
+    height: 16px;
     font-size: 9px;
     font-weight: 700;
     position: relative;
-    bottom: 90px;
+    bottom: 91px;
   }
 
   .divFavButton {
     position: relative;
-    top: 82px;
+    top: 80px;
     left: 25px;
     width: 100px;
   }
 
   .favButton {
     width: 100px;
-    height: 18px;
+    height: 16px;
     font-size: 8px;
     font-weight: 700;
     position: relative;
