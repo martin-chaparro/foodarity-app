@@ -12,7 +12,6 @@ const checkingFinish = () => ({ type: types.authCheckingFinish });
 export const startCheking = () => {
   return async (dispatch) => {
     try {
-      console.log('startCheck')
       const token = localStorage.getItem('token') || '';
       const profile = localStorage.getItem('profile') || '';
       // console.log(JSON.parse(profile))
