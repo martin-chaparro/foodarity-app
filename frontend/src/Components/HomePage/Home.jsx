@@ -14,7 +14,7 @@ import BannerSearch from '../Searchbar/BannerSearch';
 export default function Home() {
   const dispatch = useDispatch();
   // eslint-disable-next-line no-unused-vars
-  const allProducts = useSelector((state) => state.product.products);
+  const allProducts = useSelector((state) => state.product.allProductsList);
   // TODO revisar si se actualiza
 
   // const [currentPage, setCurrentPage] = useState(1);
