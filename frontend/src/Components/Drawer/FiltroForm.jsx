@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import {useDispatch} from 'react-redux'
 import {getProducts} from '../../redux/actions/productActions'
 import { api } from '../../services/api';
+import styles from './FiltroForm.module.css'
 
 function FiltroForm({ filtrado }) {
   const dispatch = useDispatch()
@@ -57,12 +58,12 @@ function FiltroForm({ filtrado }) {
   };
 
   return (
-    <div>
+    <div className={styles.divInputGeneral}>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label>Ordenar por:</label>
-          <label>
-            <select name="order" onChange={handleChange} value={input.order}>
+        <div className={styles.OrderBy}>
+          <label>Ordenar por: </label>
+          <label >
+            <select className={styles.OrderByInput} name="order" onChange={handleChange} value={input.order}>
               <option value="recents">Mas recientes</option>
               <option value="priceASC">Precio minimo</option>
               <option value="priceDESC">Precio maximo</option>
@@ -71,10 +72,10 @@ function FiltroForm({ filtrado }) {
             </select>
           </label>
         </div>
-        <div>
-          <label>Filtrar por categoria:</label>
+        <div className={styles.filterByCategory}>
+          <label>Filtrar por categoria: </label>
           <label>
-            <select name="categoryName" onChange={handleChange} value={input.categoryName}>
+            <select className={styles.filterByInput} name="categoryName" onChange={handleChange} value={input.categoryName}>
               <option value="Todas">Todas</option>
               {categories &&
                 categories.map((category) => (
@@ -86,9 +87,10 @@ function FiltroForm({ filtrado }) {
           </label>
         </div>
         <div>
-          <div>
-            <label>Precio Minimo:</label>
+          <div className={styles.minPrice}>
+            <label >Precio Minimo:</label>
             <input
+            className={styles.minPriceInput}
               type="number"
               name="minPrice"
               min="0"
@@ -96,9 +98,10 @@ function FiltroForm({ filtrado }) {
               value={input.minPrice}
             />
           </div>
-          <div>
+          <div  className={styles.maxPrice}>
             <label>Precio Maximo:</label>
             <input
+            className={styles.maxPriceInput}
               type="number"
               name="maxPrice"
               min="0"
@@ -107,10 +110,10 @@ function FiltroForm({ filtrado }) {
             />
           </div>
         </div>
-        <div>
-          <label>Fecha limite de expiracion</label>
-          <label>(definir bien este nombre)</label>
+        <div className={styles.maxExp}>
+          <label>Fecha Max. Expiración de Lote:</label>
           <input
+          className={styles.maxExpInput}
             type="date"
             name="expirationDate"
             min={new Date().toLocaleDateString('en-ca')}
@@ -118,8 +121,10 @@ function FiltroForm({ filtrado }) {
             
           />
         </div>
-        <button type="submit">Aplicar filtros</button>
-        <button type="button" onClick={handleClear}>Limpiar</button>
+        <div className={styles.divButtons}>
+        <button className={styles.applyButton} type="submit">Aplicar filtros</button>
+        <button  className={styles.resetButton}type="button" onClick={handleClear}>Reiniciar filtros</button>
+        </div>
       </form>
     </div>
   );

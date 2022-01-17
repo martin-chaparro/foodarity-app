@@ -1,5 +1,4 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
@@ -12,7 +11,6 @@ import styles from './CompanyProductCard.module.css';
 
 export default function CompanyProductCard({ product }) {
 
-  const navigate = useNavigate()
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -21,9 +19,6 @@ export default function CompanyProductCard({ product }) {
   const Date = ExpirationDate.split('-').reverse().join('/');
 
 
-  const handleCompanyClick = (event, id)=>{
-    navigate(`company/${id}`, { replace: true })
-  }
   return (
     <div className={styles.productcard}>
       <div className={styles.divImg}>
@@ -64,15 +59,6 @@ export default function CompanyProductCard({ product }) {
             >
               <Box  className={styles.BoxGeneral}>
                 <Box className={styles.boxCompany} sx={{ width: 225,}}>
-                  <div className={styles.CompanyNameDiv}>
-                    <Typography
-                      id="modal-modal-description"
-                      className={styles.titleTypographyName}
-                      onClick={(e) => handleCompanyClick(e, product.company.id)}
-                    >
-                      {product.company.name}
-                    </Typography>
-                  </div>
                   <div className={styles.divStreet}>
                     <Typography
                       id="modal-modal-description"
