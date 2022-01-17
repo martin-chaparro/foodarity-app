@@ -51,11 +51,7 @@ export function AppRouter() {
             </PrivateRoute>
           }
         />
-        <Route
-          exact
-          path="/CompanyVisualizer"
-          element={<CompanyVisualizer />}
-        />
+        <Route exact path="/Home/Company/:id" element={<CompanyVisualizer />} />
         <Route exact path="/home" element={<Home />} />
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/register" element={<Register />} />
