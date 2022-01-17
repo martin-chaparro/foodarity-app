@@ -34,6 +34,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "BUILD_PATH='../deployfrontend/build' react-scripts build",
+    "deploy": "npm run build && cd .. && git subtree push --prefix deployfrontend heroku-foodarity-frontend master",
     "test": "react-scripts test",
     "lint": "eslint .",
     "format": "prettier . --check",
