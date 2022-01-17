@@ -37,14 +37,13 @@ const generalHeight = 58;
 function ProfileTempleteCommerce(props) {
   const navigate = useNavigate();
 
-  const [orders, setOrders] = useState({});
+  const [orders, setOrders] = useState([]);
 
   const [company, setCompany] = useState({});
 
+  const [commerceDonations, setCommerceDonations] = useState([]);
   
-  const [commerceDonations, setCommerceDonations] = useState({});
-  
-  const [ongDonations, setOngDonations] = useState({});
+  const [ongDonations, setOngDonations] = useState([]);
   
   const [logged, setLogged] = useState('loading');
   
