@@ -28,20 +28,14 @@ export function AppRouter() {
   }
   return (
     <BrowserRouter>
-<<<<<<< HEAD
       {/* <Routes>
-=======
       <Routes>
         <Route exact path="/" element={<Landing />} />
->>>>>>> 424fa2e0dc116ebf881c886244667bbde7e0bff6
         <Route path="*" element={<Navbar />} />
       </Routes> */}
 
       <Routes>
-<<<<<<< HEAD
         <Route path="/" element={<Landing />} />
-=======
->>>>>>> 424fa2e0dc116ebf881c886244667bbde7e0bff6
         <Route
           exact
           path="/profileuser"
