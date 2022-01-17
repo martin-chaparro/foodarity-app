@@ -27,6 +27,7 @@ const getAllUsers = async (request, response) => {
       attributes: {
         exclude: ['password', 'createdAt', 'updatedAt', 'RoleId', 'role_id'],
       },
+      where:{deleted:false},
       include: {
         model: Role,
         as: 'role',
@@ -54,6 +55,7 @@ const getAllUsers = async (request, response) => {
       [Op.or]: [
         { name: { [Op.iLike]: `%${search}%` } },
         { email: { [Op.iLike]: `%${search}%` } },
+        { deleted: false },
       ],
     },
     include: {
@@ -139,15 +141,8 @@ const getUser = async (request, response) => {
 };
 
 const deleteUser = async (request, response) => {
-  let id = null;
-
-  if (request.userRoleId === 2) {
-    id = request.params.id;
-    if (!id)
-      return response.status(400).json({ message: 'El id es requerido' });
-  } else {
-    id = request.userId;
-  }
+  console.log('delete');
+  const { id } = request.params;
 
   try {
     await User.update(
@@ -167,33 +162,34 @@ const deleteUser = async (request, response) => {
 };
 
 const updateUser = async (request, response) => {
-  let id = null;
+  
+  const {id} = request.params;
 
   const errors = validationResult(request);
   if (!errors.isEmpty()) {
     return response.status(400).json({ errors: errors.array() });
   }
 
-  if (request.userRoleId === 2) {
-    id = request.params.id;
-    if (!id)
-      return response.status(400).json({ message: 'El id es requerido' });
-  } else {
-    id = request.userId;
-  }
 
-  const { name, email } = request.body;
+  const { name, email,phone,role, status } = request.body;
 
   try {
-    await User.update(
+
+    const user = await User.findByPk(id)
+
+    await user.update(
       {
         name,
         email,
+        phone,
+        status
       },
       {
         where: { id },
       }
     );
+
+    await user.setRole(role)
 
     return response.status(200).json({ message: 'Actualizado correctamente' });
   } catch (error) {
