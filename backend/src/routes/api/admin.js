@@ -7,6 +7,7 @@ const {
   getUser,
   deleteUser,
   updateUser,
+  uploadPhotoUser
 } = require('../../controllers/admin/userController');
 
 const {
@@ -24,6 +25,7 @@ const ValidationsUser = require('../../middlewares/validations/validationUser');
 // const ValidationCompany = require('../../middlewares/validations/validationCompany');
 const ValidationAuth = require('../../middlewares/validations/validationAuth');
 const authMiddleware = require('../../middlewares/auth');
+const validationFiles = require('../../middlewares/validations/validationFiles');
 
 // Users Routes
 
@@ -36,6 +38,13 @@ router.put(
   ValidationAuth.isAdmin,
   ValidationsUser.withoutPassword,
   updateUser
+);
+router.patch(
+  '/users/upload/:id',
+  authMiddleware,
+  ValidationAuth.isAdmin,
+  validationFiles.fileExists,
+  uploadPhotoUser
 );
 
 // Companies Routes

@@ -175,7 +175,7 @@ export const UsersScreen = () => {
                             alignItems="center"
                             spacing={2}
                           >
-                            <Avatar alt="Remy Sharp" src={perfil} />
+                            <Avatar alt="Remy Sharp" src={user.photo ? user.photo.url : perfil} />
                             <Typography noWrap>{user.name}</Typography>
                           </Stack>
                         </TableCell>

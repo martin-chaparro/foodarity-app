@@ -26,7 +26,7 @@ export const UserUpdate = () => {
 
   const { id } = useParams();
   const [user, setUser] = useState();
-  const [file, setFile] = useState(null)
+  const [file, setFile] = useState(null);
 
   useEffect(async () => {
     if (id) {
@@ -57,26 +57,59 @@ export const UserUpdate = () => {
     }),
     onSubmit: () => {
       // console.log(formik.values);
-      console.log(file)
+      if (file) {
+        const formdata = new FormData();
+        formdata.append('file', file, file.name);
+        apiWithToken
+          .patch(`/admin/users/upload/${id}`, formdata)
+          .then(() => {
+            apiWithToken
+              .put(`/admin/users/${id}`, formik.values)
+              .then(() => {
+                Swal.fire({
+                  icon: 'success',
+                  title: 'Actualizado',
+                  text: 'Usuario actualizado correctamente.',
+                });
+                setFile(null)
+              })
+              .catch(() => {
+                Swal.fire({
+                  icon: 'error',
+                  title: 'No se pudo actualizar!',
+                  text: 'Consulte al administrador.',
+                });
+              });
+              setFile(null)
+          })
+          .catch(() => {
+            Swal.fire({
+              icon: 'error',
+              title: 'No se pudo actualizar!',
+              text: 'Consulte al administrador. Error al subir la imagen',
+            });
+            setFile(null)
+          });
+      }else{
 
-      apiWithToken.put(`/admin/users/${id}`,formik.values)
-      .then(() => {
-        Swal.fire({
-          icon: 'success',
-          title: 'Actualizado',
-          text: 'Usuario actualizado correctamente.'
-        })
-      })
-      .catch(()=>{
-        Swal.fire({
-          icon:'error',
-          title:'No se pudo actualizar!',
-          text:'Consulte al administrador.',
-        })
-      })
-      // const { email, password } = formik.values;
-      // return dispatch(startLogin(email, password));
-    }
+        apiWithToken
+          .put(`/admin/users/${id}`, formik.values)
+          .then(() => {
+            Swal.fire({
+              icon: 'success',
+              title: 'Actualizado',
+              text: 'Usuario actualizado correctamente.',
+            });
+          })
+          .catch(() => {
+            Swal.fire({
+              icon: 'error',
+              title: 'No se pudo actualizar!',
+              text: 'Consulte al administrador.',
+            });
+          });
+      }
+    },
   });
 
   let profilePhoto = defaultAvatar;
@@ -102,7 +135,6 @@ export const UserUpdate = () => {
   const handleChangeImage = ({ target }) => {
     const image = target.files[0];
     const preview = document.querySelector('#profilImage img');
-   
 
     if (image.type !== 'image/jpeg' && image.type !== 'image/png') {
       document.querySelector('#datosImagen').value = '';
@@ -128,7 +160,7 @@ export const UserUpdate = () => {
       };
 
       reader.readAsDataURL(image);
-      setFile(target.files[0])
+      setFile(target.files[0]);
     }
   };
 
