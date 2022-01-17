@@ -41,6 +41,7 @@ function ProfileTempleteCommerce(props) {
 
   const [company, setCompany] = useState({});
 
+  
   const [commerceDonations, setCommerceDonations] = useState([]);
   
   const [ongDonations, setOngDonations] = useState([]);
@@ -105,20 +106,20 @@ function ProfileTempleteCommerce(props) {
 
           {
             text: 'Productos',
-            typesAllow: [1],
+            typesAllow: [0, 1],
           },
           {
             text: 'Ventas',
-            typesAllow: [1],
+            typesAllow: [0, 1],
           },
-          { text: 'Donaciones', typesAllow: [1, 2] },
+          { text: 'Donaciones', typesAllow: [0, 1, 2] },
           {
             text: 'Publicar Nuevo Lote',
-            typesAllow: [1],
+            typesAllow: [0, 1],
           },
         ].map(
           ({ text, typesAllow }, index) =>
-            typesAllow.includes(company.company_type_id) && (
+            typesAllow.includes(company.company_type_id) && !typesAllow.includes(0) && (
               <ListItem
                 button
                 key={text}
