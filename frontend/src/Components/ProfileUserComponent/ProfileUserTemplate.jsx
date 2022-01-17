@@ -6,21 +6,23 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
-import FaceIcon from '@mui/icons-material/Face';
+// import FaceIcon from '@mui/icons-material/Face';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
+// import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import HelpIcon from '@mui/icons-material/Help';
-import DeleteSweepIcon from '@mui/icons-material/DeleteSweep';
+// import DeleteSweepIcon from '@mui/icons-material/DeleteSweep';
+import DragHandleIcon from '@mui/icons-material/DragHandle';
 import UserDetail from './UserDetail';
 import Compras from './Compras';
 import Bienvenida from './Bienvenida';
+import EliminarUser from './EliminarUser';
 import { apiWithToken } from '../../services/api';
+import estilos from './ProfileUserTemplate.module.css';
 
 const drawerWidth = 240;
 
@@ -62,16 +64,22 @@ function ProfileUserTemplate(props) {
     <div>
       {/* <Toolbar /> */}
       <Divider sx={{ height: generalHeight, border: 0, margin: 0 }} />
-      <List>
+      <List sx={{ color: '#8865b9' }}>
         {[
           {
             text: 'Bienvenid@',
           },
           {
-            text: 'Mis Compras',
+            text: 'Bienvenid@',
           },
           {
             text: 'Detalle de Cuenta',
+          },
+          {
+            text: 'Mis Compras',
+          },
+          {
+            text: 'Eliminar Cuenta',
           },
         ].map(({ text }, index) => (
           <ListItem
@@ -82,10 +90,12 @@ function ProfileUserTemplate(props) {
             }}
           >
             <ListItemIcon>
-              {index % 2 === 0 ? (
-                <FaceIcon />
+              {index % 4 === 0 ? (
+                <DragHandleIcon sx={{ color: '#7ED957' }} />
               ) : (
-                <ShoppingBasketIcon /> && <ShoppingBasketIcon />
+                <DragHandleIcon sx={{ color: '#7ED957' }} /> && (
+                  <DragHandleIcon sx={{ color: '#7ED957' }} />
+                )
               )}
             </ListItemIcon>
             <ListItemText primary={text} />
@@ -93,16 +103,16 @@ function ProfileUserTemplate(props) {
         ))}
       </List>
       <Divider />
-      <List>
-        {['Centro de Ayuda', 'Eliminar Cuenta'].map((text, index) => (
+      {/* <List>
+        {['Eliminar Cuenta'].map((text, index) => (
           <ListItem button key={text}>
             <ListItemIcon>
-              {index % 2 === 0 ? <HelpIcon /> : <DeleteSweepIcon />}
+              {index % 2 === 0 ? <DeleteSweepIcon /> : <DeleteSweepIcon />}
             </ListItemIcon>
             <ListItemText primary={text} />
           </ListItem>
         ))}
-      </List>
+      </List> */}
     </div>
   );
 
@@ -110,7 +120,7 @@ function ProfileUserTemplate(props) {
     window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <div sx={{ position: 'inherital' }}>
+    <div sx={{ position: 'inherital' }} className={estilos.body}>
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
         <AppBar
@@ -184,16 +194,14 @@ function ProfileUserTemplate(props) {
             flexGrow: 1,
             p: 3,
             width: { sm: `calc(100% - ${drawerWidth}px)` },
-            marginTop: 15,
+            marginTop: 14,
           }}
         >
           {display === 0 && <Bienvenida detail={userData} />}
-
-          {display === 1 && <Compras orders={orders} />}
+          {display === 1 && <Bienvenida detail={userData} />}
           {display === 2 && <UserDetail detail={userData} />}
-
-          {display === 3 && <h1>MIS PEDIDOS</h1>}
-          {display === 4 && <h1>MIS PEDIDOS</h1>}
+          {display === 3 && <Compras orders={orders} />}
+          {display === 4 && <EliminarUser />}
         </Box>
       </Box>
     </div>

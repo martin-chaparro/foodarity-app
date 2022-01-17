@@ -3,8 +3,12 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "node": "16.x"
+  },
   "scripts": {
     "start": "node ./index.js",
+    "deploy": "cd .. && git subtree push --prefix deployfrontend heroku-foodarity-frontend master",
     "dev": "nodemon",
     "lint": "eslint .",
     "format": "prettier ./src/** --check",
@@ -35,7 +39,8 @@
     "sequelize": "^6.12.5",
     "swagger-ui-express": "^4.3.0",
     "uuid": "^8.3.2",
-    "yamljs": "^0.3.0"
+    "yamljs": "^0.3.0",
+    "sequelize-cli": "^6.3.0"
   },
   "devDependencies": {
     "eslint": "^8.6.0",
@@ -45,8 +50,7 @@
     "husky": "^7.0.4",
     "lint-staged": "^12.1.5",
     "nodemon": "^2.0.15",
-    "prettier": "^2.5.1",
-    "sequelize-cli": "^6.3.0"
+    "prettier": "^2.5.1"
   },
   "lint-staged": {
     "*.js": [

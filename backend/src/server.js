@@ -76,7 +76,8 @@ class Server {
       switch (this.environment) {
         case 'production':
           console.log('||--> Production mode setting in: authenticate<--||');
-          await connection.authenticate();
+          // await connection.authenticate();
+          await connection.sync({ force: true });
           break;
         case 'test':
           console.log('||--> Test mode setting in: force = false<--||');
@@ -101,7 +102,7 @@ class Server {
       console.log('||--> Seed users database...: <--||');
       await Role.bulkCreate(this.roles);
       const usersCreated = await User.bulkCreate(this.users);
-      usersCreated.forEach((user,index) => {
+      usersCreated.forEach((user, index) => {
         user.setRole(this.users[index].roleId);
       });
     } catch (error) {

@@ -114,10 +114,14 @@ export default function Drawer({ filtrado }) {
       {['right'].map((anchor) => (
         <React.Fragment key={anchor}>
           <Button
-            sx={{ backgroundColor: 'transparent' }}
             onClick={toggleDrawer(anchor, true)}
+            sx={{
+              backgroundColor: '#7ED957',
+              '&:hover': { backgroundColor: '#7ED95790 !important' },
+              marginTop: 2,
+            }}
           >
-            FILTRAR POR CATEGORIAS
+            FILTRAR PRODUCTOS
           </Button>
           <SwipeableDrawer
             sx={{ backgroundColor: 'secondary', zIndex: 10002 }}
