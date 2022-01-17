@@ -11,6 +11,17 @@ a {
   align-items: center;
 }
 
+.contLogo {
+  width: 100vw;
+  background: #533c74;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.logo {
+  margin: 10px;
+}
+
 .contener img {
   justify-content: center;
   align-items: center;
