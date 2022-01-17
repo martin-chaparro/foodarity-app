@@ -37,14 +37,14 @@ const generalHeight = 58;
 function ProfileTempleteCommerce(props) {
   const navigate = useNavigate();
 
-  const [orders, setOrders] = useState({});
+  const [orders, setOrders] = useState([]);
 
   const [company, setCompany] = useState({});
 
   
-  const [commerceDonations, setCommerceDonations] = useState({});
+  const [commerceDonations, setCommerceDonations] = useState([]);
   
-  const [ongDonations, setOngDonations] = useState({});
+  const [ongDonations, setOngDonations] = useState([]);
   
   const [logged, setLogged] = useState('loading');
   
@@ -88,7 +88,6 @@ function ProfileTempleteCommerce(props) {
   useEffect(() => {
     setDisplay(0);
   }, []);
-
   const drawer = (
     <div>
       <Toolbar />
@@ -106,20 +105,20 @@ function ProfileTempleteCommerce(props) {
 
           {
             text: 'Productos',
-            typesAllow: [1],
+            typesAllow: [0, 1],
           },
           {
             text: 'Ventas',
-            typesAllow: [1],
+            typesAllow: [0, 1],
           },
-          { text: 'Donaciones', typesAllow: [1, 2] },
+          { text: 'Donaciones', typesAllow: [0, 1, 2] },
           {
             text: 'Publicar Nuevo Lote',
-            typesAllow: [1],
+            typesAllow: [0, 1],
           },
         ].map(
           ({ text, typesAllow }, index) =>
-            typesAllow.includes(company.company_type_id) && (
+          ((typesAllow.includes(0) && company.status === 'Habilitada' && typesAllow.includes(company.company_type_id)) || (!typesAllow.includes(0) && typesAllow.includes(company.company_type_id))) && (
               <ListItem
                 button
                 key={text}

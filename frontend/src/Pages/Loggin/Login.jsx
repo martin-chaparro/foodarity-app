@@ -9,6 +9,7 @@ import { GoogleLogin } from 'react-google-login';
 import { startGoogleLogin, startLogin } from '../../redux/actions/authActions';
 // import Header from '../../Components/Header/Header';
 import estilos from './Login.module.css';
+import logo from '../../assets/WEB-Full-Header-Logo.png';
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -93,9 +94,11 @@ export default function Login() {
 
   return (
     <div backgroundcolor="transparent">
-      {/* <Link to="/">
-        <Header /> 
-      </Link> */}
+      <div className={estilos.contLogo}>
+        <Link to='/'>
+     <img className={estilos.logo}src={logo} alt="" />
+     </Link>
+     </div>
       <div>
         <div className={estilos.contener}>
           <h3>Ingrese su Email</h3>

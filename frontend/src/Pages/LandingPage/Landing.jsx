@@ -1,8 +1,8 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Link as Scroll } from 'react-scroll';
-import { IconButton } from '@mui/material';
+import { IconButton ,Collapse } from '@mui/material';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import { useInView } from 'react-intersection-observer';
@@ -18,6 +18,8 @@ import './Cards.css';
 import logoLanding from '../../assets/Mobil-background-landing.png';
 import logo from '../../assets/Mobil-Full-Header-Logo.png';
 import logo1 from '../../assets/WEB-Logo-Combinado.png';
+import useWindowPosition from '../About/hook/useWindowPosition'
+
 
 export default function Landing() {
 
@@ -26,12 +28,26 @@ export default function Landing() {
   const { ref, inView } = useInView({
     threshold: 0.4,
   });
+/* eslint-disable react/jsx-props-no-spreading */
+  const checked = useWindowPosition('header')
+
+  const [check, setCheck] = useState(false);
+
+  useEffect(() => {
+    setCheck(true);
+  }, []);
+
   return (
     <div>
-      <div className={styles.landing}>
+      
+      <div className={styles.landing} id='header'>
+      
         <img className={styles.logo1} src={logo1} alt="" />
         <img className={styles.logo} src={logo} alt="" />
         <div className={styles.content}>
+        <Collapse in={check}
+        {...(check ? { timeout: 1000 } : {})}
+        collapsedHeight={50}>
           <div className={styles.divImgLanding}>
             <img
               className={styles.imglogolanding}
@@ -39,6 +55,7 @@ export default function Landing() {
               alt="logo"
             />
           </div>
+       </Collapse>
           <div>
             <div className={styles.btncont}>
               <IconButton>
@@ -60,6 +77,7 @@ export default function Landing() {
                   </Link>
                 </Stack>
               </IconButton>
+          
             </div>
           </div>
           <Scroll to="place-to-visit" smooth>
@@ -70,14 +88,21 @@ export default function Landing() {
               />
             </IconButton>
           </Scroll>
+
         </div>
       </div>
+     
+
       <div className={styles.aboutCards} id="place-to-visit" ref={ref}>
-        <div className={inView ? 'about' : 'about--zoom'}>
-          <AboutCard />
+        <div >
+        <Collapse in={checked} {...(checked ? {timeout: 1000}: {})}>
+          <AboutCard  />
+          </Collapse>
         </div>
-        <div className={inView ? 'about' : 'about--zoom'}>
+        <div >
+        <Collapse in={checked} {...(checked ? {timeout: 1000}: {})}>
           <AboutValores />
+          </Collapse>
         </div>
       </div>
       <div className={styles.containerAbouts} ref={ref}>

@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
@@ -30,17 +30,17 @@ export default function RegisterFormCommerce() {
   };
   const dispatch = useDispatch();
   const [formValues, setFormValues] = useState(initialFormValues);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [input, setInput] = useState({
-    name: 'Conga',
-    website: 'http://www.conga.com',
-    email: 'conga@conga.com',
-    description: 'Esto es alguna descripcion',
-    areaCode: '280',
-    phone: '4530813',
-    street: 'la calle',
-    number: '1234',
-    zipcode: '9120',
+    name: '',
+    website: '',
+    email: '',
+    description: '',
+    areaCode: '',
+    phone: '',
+    street: '',
+    number: '',
+    zipcode: '',
     type: 1
   });
 
@@ -254,7 +254,7 @@ export default function RegisterFormCommerce() {
          title: 'Bien',
          text: 'El Comercio fue registrado Correctamente',
        });
-      navigate('/home');
+      window.location.href = '/home'
     } else {
       // eslint-disable-next-line no-alert
       alert('Complete el formulario');
