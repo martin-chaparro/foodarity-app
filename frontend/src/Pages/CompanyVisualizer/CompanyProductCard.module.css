@@ -170,7 +170,10 @@
   font-size: 24;
   margin: 0;
 }
-
+.divStreet {
+  position: relative;
+  bottom: 35px;
+}
 .titleTypographyStreet {
   display: flex;
   justify-content: flex-end;
@@ -180,7 +183,7 @@
   margin: 0;
   position: relative;
   right: 5;
-  bottom: 40;
+  bottom: 60;
   font-size: 14;
 }
 
@@ -194,6 +197,7 @@
   height: 140px;
   left: 10px;
   margin: 0;
+  bottom: 20px;
 }
 
 .DivPostData {
@@ -254,7 +258,7 @@
 
 .divFavButton {
   position: relative;
-  top: 209px;
+  top: 236px;
   display: flex;
   justify-content: flex-end;
   height: 31px;

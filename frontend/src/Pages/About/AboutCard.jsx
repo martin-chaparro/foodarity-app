@@ -1,13 +1,18 @@
 import * as React from 'react';
 import Card from '@mui/material/Card';
+
 import Typography from '@mui/material/Typography';
 import CardContent from '@mui/material/CardContent';
 import styles from './About.module.css';
 
 
 export default function AboutCard() {
+
+  
+
   return (
-    <Card sx={{ background: '#6C698D', boxShadow: '4px 4px 10px rgba(0, 0, 0, 1)'}} className={styles.containerCard}>
+   
+    <Card sx={{ background: '#6C698D', boxShadow: '4px 4px 10px rgba(0, 0, 0, 1)'}} className={styles.containerCard} >
       <CardContent>
         <Typography sx={{ color: "black", background: 'white', borderRadius: 1, display: "flex", justifyContent: "center", alignItems: "center", }} variant="h5" component="div">
         Acerca de Nosotros

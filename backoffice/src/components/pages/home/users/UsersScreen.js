@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Grid';
@@ -32,6 +33,7 @@ export const UsersScreen = () => {
   const [size, setSize] = useState(5);
   const [totalUsers, settotalUsers] = useState(0);
   const [term, setTerm] = useState('');
+  const [update, setUpdate] = useState(false)
 
   const navigate = useNavigate();
 
@@ -49,7 +51,7 @@ export const UsersScreen = () => {
     );
     setUsers(response.data.users);
     settotalUsers(response.data.totalUsers);
-  }, [page, size]);
+  }, [page, size,update]);
 
   useEffect(async () => {
     clearTimeout(time);
@@ -79,7 +81,41 @@ export const UsersScreen = () => {
     navigate(`/users/${id}`, { replace: true });
   };
   const handleDelete = (event, id) => {
-    console.log(id);
+    Swal.fire({
+      title: 'Esta seguro?',
+      text: "Quizas no se puedan revertir estos cambios!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, eliminar!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+        
+          // TODO: Elminar companias y cosas que dependan del usuario
+          apiWithToken.delete(`/admin/users/${id}`)
+            .then(()=>{
+             
+              Swal.fire({
+                icon: 'success',
+                title: 'Eliminado',
+                text: 'Usuario eliminado correctamente.'
+              })
+              setUpdate(!update);
+            }).catch(()=>{
+
+              Swal.fire({
+                icon:'error',
+                title:'No se pudo eliminar!',
+                text:'consulte al administrador.',
+              })
+            })
+          
+       
+
+      }
+    })
   };
 
   const handleInputSearch = ({ target }) => {

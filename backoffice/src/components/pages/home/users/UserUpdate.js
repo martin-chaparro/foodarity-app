@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Grid';
@@ -25,6 +26,7 @@ export const UserUpdate = () => {
 
   const { id } = useParams();
   const [user, setUser] = useState();
+  const [file, setFile] = useState(null)
 
   useEffect(async () => {
     if (id) {
@@ -54,10 +56,27 @@ export const UserUpdate = () => {
       role: Yup.number(),
     }),
     onSubmit: () => {
-      console.log(formik.values);
+      // console.log(formik.values);
+      console.log(file)
+
+      apiWithToken.put(`/admin/users/${id}`,formik.values)
+      .then(() => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Actualizado',
+          text: 'Usuario actualizado correctamente.'
+        })
+      })
+      .catch(()=>{
+        Swal.fire({
+          icon:'error',
+          title:'No se pudo actualizar!',
+          text:'Consulte al administrador.',
+        })
+      })
       // const { email, password } = formik.values;
       // return dispatch(startLogin(email, password));
-    },
+    }
   });
 
   let profilePhoto = defaultAvatar;
@@ -80,6 +99,39 @@ export const UserUpdate = () => {
     navigate('/users', { replace: true });
   };
 
+  const handleChangeImage = ({ target }) => {
+    const image = target.files[0];
+    const preview = document.querySelector('#profilImage img');
+   
+
+    if (image.type !== 'image/jpeg' && image.type !== 'image/png') {
+      document.querySelector('#datosImagen').value = '';
+
+      Swal.fire({
+        icon: 'error',
+        title: 'Error al subir la imagen',
+        text: '¡La imagen debe estar en formato JPG o PNG!',
+      });
+    } else if (Number(image.size) > 2000000) {
+      document.querySelector('#datosImagen').value = '';
+
+      Swal.fire({
+        icon: 'error',
+        title: 'Error al subir la imagen',
+        text: '¡La imagen no debe pesar más de 2 MB!',
+      });
+    } else {
+      const reader = new FileReader();
+
+      reader.onloadend = () => {
+        preview.src = reader.result;
+      };
+
+      reader.readAsDataURL(image);
+      setFile(target.files[0])
+    }
+  };
+
   return (
     <Layout>
       <Typography variant="h4" gutterBottom component="div">
@@ -99,11 +151,21 @@ export const UserUpdate = () => {
           >
             <Grid container direction="row">
               <Grid container item xs={4} p={2} justifyContent="center">
-                <Avatar
-                  src={profilePhoto}
-                  alt="Perfil"
-                  sx={{ width: 200, height: 200 }}
-                />
+                <label htmlFor="datosImagen">
+                  <input
+                    type="file"
+                    name="file"
+                    id="datosImagen"
+                    hidden
+                    onChange={handleChangeImage}
+                  />
+                  <Avatar
+                    src={profilePhoto}
+                    alt="Perfil"
+                    id="profilImage"
+                    sx={{ width: 200, height: 200, cursor: 'pointer' }}
+                  />
+                </label>
               </Grid>
               <Grid container item xs={6} pl={3}>
                 <TextField
