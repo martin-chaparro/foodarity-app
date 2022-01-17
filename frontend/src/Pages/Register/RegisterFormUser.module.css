@@ -2,7 +2,18 @@
   height: calc(100vh - 75px);
   padding-top: 75px;
 }
-
+.contLogo {
+  position: relative;
+  bottom: 75px;
+  width: 100vw;
+  background: #533c74;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.logo {
+  margin: 10px;
+}
 .form {
   background: #ececec;
   height: 100vh;
