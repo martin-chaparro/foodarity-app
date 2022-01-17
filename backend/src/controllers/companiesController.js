@@ -348,11 +348,6 @@ const getUsers = async (req, res) => {
         message: 'El usuario no tiene compania',
       });
     }
-    if (user.company.status !== 'Habilitada') {
-      return res.status(400).json({
-        message: 'La compania no esta habilitada',
-      });
-    }
     const users = await User.findAll({
       where: { companyId: user.companyId },
       attributes: { exclude: ['password', 'createdAt', 'updatedAt', 'RoleId'] },
@@ -378,11 +373,6 @@ const addUser = async (req, res) => {
     }
     if (userId !== owner.company.ownerId) {
       return res.status(401).json({ message: 'Not owner' });
-    }
-    if (owner.company.status !== 'Habilitada') {
-      return res.status(400).json({
-        message: 'La compania no esta habilitada',
-      });
     }
     const user = await User.findOne({
       where: { email },
@@ -433,11 +423,6 @@ const deleteUser = async (req, res) => {
       if (userId !== id) {
         return res.status(401).json({ message: 'Not owner' });
       }
-    }
-    if (owner.company.status !== 'Habilitada') {
-      return res.status(400).json({
-        message: 'La compania no esta habilitada',
-      });
     }
     const user = await User.findOne({
       where: { id },
