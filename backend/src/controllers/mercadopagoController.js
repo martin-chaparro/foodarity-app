@@ -85,11 +85,8 @@ const config = {
 };
 axios(config)
 .then((response) => {
+  console.log(JSON.stringify(response.data))
   res.status(200).send(JSON.stringify(response.data));
-
-  
-
-
 
 })
 .catch((error) => {
