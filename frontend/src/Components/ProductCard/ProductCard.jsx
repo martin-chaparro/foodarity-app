@@ -22,7 +22,7 @@ export default function ProductCard({ product }) {
 
 
   const handleCompanyClick = (event, id)=>{
-    navigate(`company/${id}`, { replace: true })
+    navigate(`/company/${id}`, { replace: true })
   }
   return (
     <div className={styles.productcard}>
