@@ -189,7 +189,7 @@ const postProduct = async (req, res) => {
         .status(401)
         .json({ message: 'El usuaria no posee un comercio' });
     }
-    if (user.company.type_id !== 1) {
+    if (user.company.company_type_id !== 1) {
       return res.status(401).json({
         message: 'Solo las companias tipo comercio pueden publicar productos',
       });

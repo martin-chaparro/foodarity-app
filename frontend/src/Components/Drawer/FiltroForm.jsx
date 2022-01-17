@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import {useDispatch} from 'react-redux'
 import {getProducts} from '../../redux/actions/productActions'
+import { api } from '../../services/api';
 
 function FiltroForm({ filtrado }) {
   const dispatch = useDispatch()
@@ -21,9 +22,9 @@ function FiltroForm({ filtrado }) {
   }, [input.minPrice, input.maxPrice]);
 
   useEffect(() => {
-    fetch(`http://localhost:4000/api/v1/products/categories`)
+    api.get('/products/categories')
       .then((res) => {
-        return res.json();
+        return res.data
       })
       .then((res) => {
         setCategories(res);
