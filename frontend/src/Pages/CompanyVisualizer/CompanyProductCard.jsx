@@ -3,42 +3,20 @@ import { useNavigate } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import Rating from '@mui/material/Rating';
-import StarIcon from '@mui/icons-material/Star';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import styles from './CompanyProductCard.module.css';
-// import Company from '../../assets/SuperDia.png';
-
-const labels = {
-  1: 'Bajo',
-  2: 'Normal',
-  3: 'Bien',
-  4: 'Buenisimo',
-  5: 'Excelente',
-};
-
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 550,
-  height: 300,
-  p: 4,
-};
 
 
 
-export default function ProductCard({ product }) {
+
+export default function CompanyProductCard({ product }) {
 
   const navigate = useNavigate()
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const [value, setValue] = React.useState(5);
-  const [hover, setHover] = React.useState(-1);
   const ExpirationDate = product.expirationDate;
   const Date = ExpirationDate.split('-').reverse().join('/');
 
@@ -49,7 +27,7 @@ export default function ProductCard({ product }) {
   return (
     <div className={styles.productcard}>
       <div className={styles.divImg}>
-        <img src={product.photo} alt="food" className={styles.img} />
+        <img src={product.photo.url} alt="food" className={styles.img} />
       </div>
       <div className={styles.content}>
         <div className={styles.nameDiv}>
@@ -84,60 +62,30 @@ export default function ProductCard({ product }) {
               aria-labelledby="modal-modal-title"
               aria-describedby="modal-modal-description"
             >
-              <Box sx={style} className={styles.BoxGeneral}>
+              <Box  className={styles.BoxGeneral}>
                 <Box className={styles.boxCompany} sx={{ width: 225,}}>
                   <div className={styles.CompanyNameDiv}>
                     <Typography
                       id="modal-modal-description"
-                      sx={{ mt: 2, fontSize: 24, margin: 0 }}
                       className={styles.titleTypographyName}
                       onClick={(e) => handleCompanyClick(e, product.company.id)}
                     >
                       {product.company.name}
                     </Typography>
-                    <Box
-                      sx={{
-                        width: 200,
-                        display: 'flex',
-                        alignItems: 'center',
-                      }}
-                    >
-                      <Rating
-                        className={styles.Rating}
-                        name="hover-feedback"
-                        defaultValue={5}
-                        precision={1}
-                        onChange={(event, newValue) => {
-                          setValue(newValue);
-                        }}
-                        onChangeActive={(event, newHover) => {
-                          setHover(newHover);
-                        }}
-                        emptyIcon={
-                          <StarIcon
-                            className={styles.star}
-                            fontSize="inherit"
-                          />
-                        }
-                      />
-                      {value !== null && (
-                        <Box sx={{ ml: 2, position: 'relative', left: 0, }}>
-                          {labels[hover !== -1 ? hover : value]}
-                        </Box>
-                      )}
-                    </Box>
                   </div>
+                  <div className={styles.divStreet}>
                     <Typography
                       id="modal-modal-description"
-                      sx={{ mt: 2, margin: 0, position: 'relative', right: 5, bottom: 40, fontSize: 14, }}
+                      sx={{ mt: 2,}}
                       className={styles.titleTypographyStreet}
                     ><LocationOnIcon sx={{ position: 'relative', bottom: 5,}}/>
                       {product.company.address.state.name}, {product.company.address.city.name}
                     </Typography>
+                    </div>
                       <div className={styles.divFavButton}>
                         <button className={styles.favButton} type='submit'>
                         Añadir a favoritos
-                        <FavoriteIcon sx={{color: 'white',}}/>
+                        <FavoriteIcon className={styles.heart}/>
                         </button>
                       </div>
                 </Box>
@@ -146,22 +94,22 @@ export default function ProductCard({ product }) {
                     <div className={styles.PostImgDiv}>
                       <img
                         className={styles.PostImg}
-                        src={product.photo}
+                        src={product.photo.url}
                         alt="ProductPhoto"
                       />
                     </div>
                   <Typography
                     id="modal-modal-description"
-                    sx={{ mt: 2, margin: 0, fontSize: 12 }}
+                    sx={{ mt: 2, }}
                     className={styles.titleTypographyDesc}
                   >
                     {product.description}
                   </Typography>
                   </div>
-                  <div><h3>
+                  <div className={styles.expDate}><h3>
                     El lote expira: {Date}
                     </h3></div>
-                    <div><h3>
+                    <div className={styles.category}><h3>
                     Categoria: {product.category.name}
                     </h3></div>
                   <div className={styles.divBtnReservar}>

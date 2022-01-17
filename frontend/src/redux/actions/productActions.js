@@ -1,6 +1,5 @@
 /* eslint-disable func-names */
-import axios from 'axios';
-import { apiWithToken } from '../../services/api';
+import { api, apiWithToken } from '../../services/api';
 
 import types from '../types/productTypes';
 
@@ -41,8 +40,8 @@ export function getProducts(params = {}) {
   // eslint-disable-next-line func-names
   return async function (dispatch) {
     try {
-      const json = await axios.get(
-        `http://localhost:4000/api/v1/products?lote=${lote}&size=${size}&page=${page}&categoryName=${categoryName}&categoryId=${categoryId}&minPrice=${minPrice}&maxPrice=${maxPrice}&expirationDate=${expirationDate}&order=${order}`
+      const json = await api.get(
+        `/products?lote=${lote}&size=${size}&page=${page}&categoryName=${categoryName}&categoryId=${categoryId}&minPrice=${minPrice}&maxPrice=${maxPrice}&expirationDate=${expirationDate}&order=${order}`
       );
 
       return dispatch({
@@ -78,10 +77,7 @@ export function postProduct(payload, photo) {
       form.append('file', photo);
       form.append('data', JSON.stringify(payload));
 
-      const response = await apiWithToken.post(
-        'http://localhost:4000/api/v1/products',
-        form
-      );
+      const response = await apiWithToken.post('/products', form);
 
       return response;
     } catch (err) {
@@ -93,9 +89,7 @@ export function postProduct(payload, photo) {
 export function getCategories() {
   return async function (dispatch) {
     try {
-      const response = await axios.get(
-        'http://localhost:4000/api/v1/products/categories'
-      );
+      const response = await api.get('/products/categories');
 
       return dispatch({
         type: types.getCategories,

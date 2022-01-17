@@ -16,7 +16,7 @@ import logo from '../../assets/user-6.png';
 export default function PostNewBatch() {
   const dispatch = useDispatch();
 
-  const categories = useSelector((state) => state.product.categories);
+  const categories = useSelector(state => state.product.categories)
 
   const [photo, setPhoto] = useState({});
   // const [photoPrev, setPhotoPrev] = useState('');
@@ -30,6 +30,10 @@ export default function PostNewBatch() {
     expirationDate: '',
     category: '',
   });
+
+  useEffect(() => {
+    dispatch(getCategories())
+  },[])
 
   function validate(inputs) {
     const errors = {};
@@ -107,12 +111,10 @@ export default function PostNewBatch() {
 
   useEffect(() => {
     const date = input.expirationDate;
-
     const arr = date.split('-');
     const year = arr.shift();
     arr.push(year);
     const expirationDate = arr.join('/');
-    getCategories();
     setInput({ ...input, expirationDate });
   }, [input.expirationDate]);
 

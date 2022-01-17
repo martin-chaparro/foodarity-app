@@ -1,9 +1,10 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { Link as Scroll } from 'react-scroll';
 import { IconButton } from '@mui/material';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
-import { Link as Scroll } from 'react-scroll';
 import { useInView } from 'react-intersection-observer';
 // import 'animate.css'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
@@ -19,10 +20,12 @@ import logo from '../../assets/Mobil-Full-Header-Logo.png';
 import logo1 from '../../assets/WEB-Logo-Combinado.png';
 
 export default function Landing() {
+
+  const { id } = useSelector((state) => state.auth);
+
   const { ref, inView } = useInView({
     threshold: 0.4,
   });
-
   return (
     <div>
       <div className={styles.landing}>
@@ -40,16 +43,16 @@ export default function Landing() {
             <div className={styles.btncont}>
               <IconButton>
                 <Stack spacing={1} direction="row">
-                  <Link to="/login">
+                  {!id && <Link to="/login">
                     <Button variant="contained" size="small" type="submit">
                       Ingresar
                     </Button>
-                  </Link>
-                  <Link to="/register">
+                  </Link>}
+                  {!id && <Link to="/register">
                     <Button variant="contained" size="small" type="submit">
                       Registrarse
                     </Button>
-                  </Link>
+                  </Link>}
                   <Link to="/home">
                     <Button variant="contained" size="small" type="submit">
                       Continuar
@@ -59,7 +62,7 @@ export default function Landing() {
               </IconButton>
             </div>
           </div>
-          <Scroll to="place-to-visit">
+          <Scroll to="place-to-visit" smooth>
             <IconButton>
               <KeyboardArrowDownIcon
                 className={styles.goDown}
