@@ -2,7 +2,7 @@ import types from '../types/productTypes';
 
 const initialState = {
   products: [],
-  allProductsList: null,
+  allProductsList: [],
   totalProducts: null,
   page: null,
   pages: null,
