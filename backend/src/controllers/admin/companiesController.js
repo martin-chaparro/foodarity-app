@@ -40,8 +40,6 @@ const getCompanies = async (request, response) => {
         limit,
         order: [['id', 'ASC']],
       });
-      
-      console.log(companies.rows)
 
       if (companies.rows.length > 0) {
         return response.status(200).json({

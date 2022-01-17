@@ -29,7 +29,7 @@ const authMiddleware = require('../../middlewares/auth');
 
 router.get('/users', authMiddleware, ValidationAuth.isAdmin, getAllUsers);
 router.get('/users/:id', authMiddleware, ValidationAuth.isAdmin, getUser);
-router.delete('users/:id', authMiddleware, ValidationAuth.isAdmin, deleteUser);
+router.delete('/users/:id', authMiddleware, ValidationAuth.isAdmin, deleteUser);
 router.put(
   '/users/:id',
   authMiddleware,

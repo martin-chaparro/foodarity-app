@@ -57,6 +57,12 @@ export default function CompanyDetail({ company }) {
               <span>{company.address.zipcode}</span>
             </h3>
           </div>
+          <div className={styles.cont}>
+            <h3 className={styles.titulo}>Estado :</h3>
+            <h3 className={styles.descripcion}>
+              <span style={{color : company.status === 'Habilitada' ? 'green' : 'red'}}>{company.status}</span>
+            </h3>
+            </div>
           <div className={styles.btncont}>
             <button
               type="submit"
