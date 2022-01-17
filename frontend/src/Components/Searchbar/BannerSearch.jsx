@@ -15,16 +15,7 @@ export default function BannerSearch({ search, lote, filtrado }) {
           <div className={estilo.search}>
             <SearchBar sx={{ marginTop: '10em' }} search={search} lote={lote} />
             <div className={estilo.btn}>
-              <button
-                type="button"
-                sx={{
-                  display: { xs: 'flex', md: '1' },
-                  backgroundColor: 'primary',
-                  border: 'none',
-                }}
-              >
-                <Drawer filtrado={filtrado} />
-              </button>
+              <Drawer filtrado={filtrado} />
             </div>
           </div>
         </div>

@@ -1,14 +1,10 @@
 import React from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import ImageListItem from '@mui/material/ImageListItem';
-import bolsa1 from '../../assets/bolsa1.png';
+import Button from '@mui/material/Button';
 import estilos from './Bienvenida.module.css';
-import Ayuda from './Ayuda';
 
-export default function UserDetail({ detail }) {
-  const { name } = detail;
-
+export default function EliminarUser() {
   return (
     <div className={estilos.parent}>
       <div className={estilos.texto}>
@@ -25,7 +21,7 @@ export default function UserDetail({ detail }) {
               component="div"
               sx={{ color: '#7ED957', marginTop: 1 }}
             >
-              Hola {name}!
+              Eliminar la Cuenta
             </Typography>
           </div>
           <br />
@@ -35,10 +31,8 @@ export default function UserDetail({ detail }) {
               gutterBottom
               sx={{ align: 'justify', color: '#8865b9', marginTop: 7 }}
             >
-              Te damos la Bienvenida a tu
-              <span style={{ color: '#7ED957' }}> Portal de Usuario</span>, aquí
-              puedes ver tu información de cuenta, actualizar tus datos
-              generales o revisar el historial de tus compras anteriores.
+              Lamentamos que quieras
+              <span style={{ color: '#e63946' }}> eliminar </span> tu cuenta.
             </Typography>
             <br />
             <br />
@@ -47,12 +41,18 @@ export default function UserDetail({ detail }) {
               gutterBottom
               sx={{ align: 'justify', color: '#8865b9' }}
             >
-              En caso de requerir ayuda, tener dudas o sugerencias a nuestro
-              servicio, puedes ver nuestra información de contacto en el botón
-              de abajo.
+              Si te preocupa los cambios de nuestras Condiciones de Servicio,
+              puedes ponerte en contacto con alguno de nuestros asesores en
+              cualquiera de nuestros centros de atención, y con mucho gusto te
+              atenderemos.
+              <br />
+              <br />
+              Si estás seguro de eliminar tu cuenta, te recordamos que dispones
+              de 15 días posteriores de la eliminación para recuperar tus datos,
+              por lo que finalizando ese periodo, tus datos de cuenta quedarán
+              completamente eliminados.
             </Typography>
           </div>
-          <Ayuda />
         </Box>
       </div>
       <div className={estilos.texto2}>
@@ -70,7 +70,7 @@ export default function UserDetail({ detail }) {
               component="div"
               sx={{ color: '#7ED957', marginTop: 3 }}
             >
-              Hola {name}!
+              Eliminar Cuenta
             </Typography>
           </div>
           <br />
@@ -85,10 +85,8 @@ export default function UserDetail({ detail }) {
                 fontSize: 20,
               }}
             >
-              Te damos la Bienvenida a tu
-              <span style={{ color: '#7ED957' }}> Portal de Usuario</span>, aquí
-              puedes ver tu información de cuenta, actualizar tus datos
-              generales o revisar el historial de tus compras anteriores.
+              Lamentamos que quieras
+              <span style={{ color: '#e63946' }}> eliminar </span> tu cuenta.
             </Typography>
             <br />
             <br />
@@ -97,20 +95,28 @@ export default function UserDetail({ detail }) {
               gutterBottom
               sx={{ align: 'justify', color: '#8865b9', fontSize: 20 }}
             >
-              En caso de requerir ayuda, tener dudas o sugerencias a nuestro
-              servicio, puedes ver nuestra información de contacto en el botón
-              de abajo.
+              Si te preocupa los cambios de nuestras Condiciones de Servicio,
+              puedes ponerte en contacto con alguno de nuestros asesores en
+              cualquiera de nuestros Centros de Atención, y con mucho gusto te
+              atenderemos.
+              <br />
+              <br />
+              Si estás seguro de eliminar tu cuenta, te recordamos que dispones
+              de 15 días posteriores de la eliminación para recuperar tus datos,
+              por lo que finalizando ese periodo, tus datos de cuenta quedarán
+              completamente eliminados.
             </Typography>
           </div>
-          <div className={estilos.ayuda}>
-            <Ayuda />
-          </div>
+          <Button
+            sx={{
+              backgroundColor: '#e63946',
+              '&:hover': { backgroundColor: '#e6394690 !important' },
+              marginTop: 5,
+            }}
+          >
+            ELIMINAR
+          </Button>
         </Box>
-      </div>
-      <div className={estilos.imagen}>
-        <ImageListItem sx={{ width: 580, height: 500, marginTop: 4 }}>
-          <img src={bolsa1} alt="phot" loading="lazy" />
-        </ImageListItem>
       </div>
     </div>
   );
