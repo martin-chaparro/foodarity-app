@@ -14,7 +14,8 @@ import BannerSearch from '../Searchbar/BannerSearch';
 export default function Home() {
   const dispatch = useDispatch();
   // eslint-disable-next-line no-unused-vars
-  const allProducts = useSelector((state) => state.product.allProductsList);
+  const allProducts = useSelector((state) => state.product.products);
+  const allProductsList = useSelector((state) => state.product.allProductsList);
   // TODO revisar si se actualiza
 
   // const [currentPage, setCurrentPage] = useState(1);
@@ -85,7 +86,7 @@ export default function Home() {
         <Navbar filtrado={filtrado} /> 
         <BannerSearch
           search={search}
-          lote={allProducts}
+          lote={allProductsList}
           sx={{ marginBottom: '1em', width: '100%' }}
           filtrado={filtrado}
         />
