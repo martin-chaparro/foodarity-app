@@ -11,8 +11,8 @@ import ListItemText from '@mui/material/ListItemText';
 import CategoryIcon from '@mui/icons-material/Category';
 import ArrowBackIosTwoToneIcon from '@mui/icons-material/ArrowBackIosTwoTone';
 import LocalDiningIcon from '@mui/icons-material/LocalDining';
-import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
-import MailIcon from '@mui/icons-material/Mail';
+// import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
+// import MailIcon from '@mui/icons-material/Mail';
 
 export default function Drawer({ filtrado }) {
   const [state, setState] = React.useState({
@@ -89,7 +89,7 @@ export default function Drawer({ filtrado }) {
           </ListItem>
         ))}
       </List>
-      <Divider />
+{/*       <Divider />
       <List color="primary">
         {['Acerca de Foodarity', 'Contacto', 'Políticas de Uso'].map(
           (text2, index1) => (
@@ -105,7 +105,7 @@ export default function Drawer({ filtrado }) {
             </ListItem>
           )
         )}
-      </List>
+      </List> */}
     </Box>
   );
 
