@@ -33,8 +33,8 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
   },
 }));
 
-export default function BadgeAvatars({photo}) {
-  console.log(photo)
+export default function BadgeAvatars({ photo }) {
+  console.log(photo);
   return (
     <Stack direction="row" spacing={2}>
       <StyledBadge
@@ -44,7 +44,7 @@ export default function BadgeAvatars({photo}) {
       >
         <Avatar
           alt="profilePhoto"
-          src={photo ? photo.url : 'https://res.cloudinary.com/dp4nhvfgbd/image/upload/v1642298841/user_v3ucu6.jpg'}
+          src={photo ? photo.url : 'https://acortar.link/s829DX'}
         />
       </StyledBadge>
     </Stack>

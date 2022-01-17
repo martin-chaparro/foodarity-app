@@ -1,21 +1,19 @@
-.containerCard{
+.containerCard {
   min-width: 275;
 }
-.misionVision{
+.misionVision {
   min-width: 275;
 }
 
 @media screen and (max-width: 576px) {
-  .containerCard{
+  .containerCard {
     width: 300px;
     position: relative;
     right: 20px;
   }
-  .misionVision{
+  .misionVision {
     width: 200px;
     position: relative;
     right: 20px;
   }
 }
-  
-

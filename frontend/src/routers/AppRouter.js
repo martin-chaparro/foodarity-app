@@ -1,4 +1,4 @@
-import { Routes, Route, BrowserRouter, Navigate } from 'react-router-dom';
+import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import Login from '../Pages/Loggin/Login';
@@ -11,10 +11,10 @@ import ProfileUser from '../Pages/ProfileUser/ProfileUser';
 // import AMyProfile from '../Pages/Profile User/AMyProfile';
 import CompanyVisualizer from '../Pages/CompanyVisualizer/CompanyVisualizer';
 import Navbar from '../Components/Navbar/Navbar';
-
 import { PrivateRoute } from './PrivateRoute';
 import { RollSelectorRouter } from './RollSelectorRouter';
 import { startCheking } from '../redux/actions/authActions';
+// import ErrorPage from '../Pages/Error/ErrorPage';
 
 export function AppRouter() {
   const dispatch = useDispatch();
@@ -30,13 +30,14 @@ export function AppRouter() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route exact path="/" element={<Landing />} />
+        <Route path="/" element={<Landing />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         <Route path="*" element={<Navbar />} />
+        {/* <Route path="*" element={<ErrorPage/>} />  */}
       </Routes>
-
       <Routes>
         <Route
-          exact
           path="/profileuser"
           element={
             <PrivateRoute isAuisAuthenticated={!!id}>
@@ -45,7 +46,6 @@ export function AppRouter() {
           }
         />
         <Route
-          exact
           path="/profilecompany"
           element={
             <PrivateRoute isAuisAuthenticated={!!id}>
@@ -53,14 +53,8 @@ export function AppRouter() {
             </PrivateRoute>
           }
         />
-        <Route
-          exact
-          path="/CompanyVisualizer"
-          element={<CompanyVisualizer />}
-        />
-        <Route exact path="/home" element={<Home />} />
-        <Route exact path="/login" element={<Login />} />
-        <Route exact path="/register" element={<Register />} />
+        <Route path="/company/:id" element={<CompanyVisualizer />} />
+        <Route path="/home" element={<Home />} />
         <Route
           path="/rollselector/*"
           element={
@@ -69,7 +63,6 @@ export function AppRouter() {
             </PrivateRoute>
           }
         />
-        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </BrowserRouter>
   );
