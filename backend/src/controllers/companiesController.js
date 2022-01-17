@@ -14,8 +14,16 @@ cloudinary.config(process.env.CLOUDINARY_URL);
 
 // crear una empresa
 const createCompany = async (req, res) => {
+  const {userId} = req
+  const user = User.findByPk(userId)
+  if (user.status) {
+    res.status(400).json({message: 'el usuario esta deshabilitado'})
+  }
+  if (user.companyId) {
+    res.status(400).json({message: 'el usuario ya tiene una compania'})
+  }
   try {
-    const ownerId = req.userId;
+    const ownerId = userId;
 
     const {
       name,
@@ -24,26 +32,24 @@ const createCompany = async (req, res) => {
       phone,
       email,
       website,
-      status,
-      deleted,
       type,
       street,
       number,
       zipcode,
       cityId,
       stateId,
-    } = JSON.parse(req.body.data);
-
-    const errors = validationResult(JSON.parse(req.body.data));
+    } = req.body;
+    
+    const errors = validationResult(req.body);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    const { tempFilePath } = req.files.file;
+    /* const { tempFilePath } = req.files.file;
 
     const { secure_url: secureUrl, public_id: publicId } =
       await cloudinary.uploader.upload(tempFilePath);
 
-    const logo = { public_id: publicId, url: secureUrl };
+    const logo = { public_id: publicId, url: secureUrl }; */
 
     const newCompany = await Company.create({
       name,
@@ -52,9 +58,9 @@ const createCompany = async (req, res) => {
       phone,
       email,
       website,
-      logo,
-      status,
-      deleted,
+      type,
+      status : 'Pendiente',
+      deleted : false,
       ownerId,
     });
 
@@ -64,19 +70,16 @@ const createCompany = async (req, res) => {
       zipcode,
     });
     // primero me formo el objeto de address con state y city  y despues le paso el objeto a la compañia creada
-    await newAddress.setState(stateId);
+     await newAddress.setState(stateId);
     await newAddress.setCity(cityId);
     await newCompany.setType(type);
     await newCompany.setAddress(newAddress);
     const owner = await User.findByPk(ownerId);
     await owner.setCompany(newCompany.id);
-
+ 
     return res.status(200).json(newCompany);
   } catch (error) {
-    console.log(error);
-    return res.status(500).json({
-      msg: 'Error al crear la empresa. Revise que los tipos de datos ingresados sean correctos',
-    });
+    return res.status(500).json(error);
   }
 };
 
