@@ -2,7 +2,7 @@
 html {
   height: 100% margin 0;
   padding: 0;
-  background: #f1f1f1;
+  background: #ffffff;
 }
 
 .heroimage {
@@ -11,7 +11,7 @@ html {
   height: 470px;
   overflow: hidden;
   /* background-image: url(../../assets/gif3.gif); */
-  background-image: url(../../assets/gif5.gif);
+  background-image: url(../../assets/hero4.png);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -64,4 +64,14 @@ html {
   /* padding: 10px 24px; */
   font-size: 20px;
   margin-bottom: 1em;
+}
+
+.btn {
+  margin-top: 1em;
+}
+
+@media screen and (min-width: 576px) {
+  .btn {
+    display: none;
+  }
 }

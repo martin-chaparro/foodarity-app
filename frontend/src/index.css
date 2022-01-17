@@ -11,3 +11,58 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@media screen and (max-width: 576px) {
+  p.css-ix1f03-MuiTypography-root {
+    font-size: 8px;
+  }
+
+  p.css-ahj2mt-MuiTypography-root {
+    font-size: 15px;
+  }
+
+  svg.MuiSvgIcon-root.ProductCard_heart__4tzd0.css-11admod-MuiSvgIcon-root {
+    font-size: 12px;
+    width: 10px;
+    height: 10px;
+  }
+
+  svg.MuiSvgIcon-root.CompanyProductCard_heart__AfnN2.css-11admod-MuiSvgIcon-root {
+    font-size: 12px;
+    width: 10px;
+    height: 10px;
+  }
+
+  svg.MuiSvgIcon-root.css-1fbempp-MuiSvgIcon-root {
+    font-size: 8px;
+    width: 20px;
+    height: 20px;
+  }
+}
+
+@media screen and (min-width: 576px) {
+  p.css-ix1f03-MuiTypography-root {
+    font-size: 14px;
+  }
+
+  p.css-ahj2mt-MuiTypography-root {
+    font-size: 24px;
+  }
+
+  svg.MuiSvgIcon-root.css-1fbempp-MuiSvgIcon-root {
+    font-size: 10px;
+    width: 30px;
+    height: 30px;
+  }
+  svg.MuiSvgIcon-root.ProductCard_heart__4tzd0.css-11admod-MuiSvgIcon-root {
+    font-size: 12px;
+    width: 22px;
+    height: 22px;
+  }
+
+  svg.MuiSvgIcon-root.CompanyProductCard_heart__AfnN2.css-11admod-MuiSvgIcon-root {
+    font-size: 12px;
+    width: 22px;
+    height: 22px;
+  }
+}

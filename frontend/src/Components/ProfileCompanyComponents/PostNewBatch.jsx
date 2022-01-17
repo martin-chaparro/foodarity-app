@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './PostNewBatch.module.css';
@@ -16,10 +17,12 @@ import logo from '../../assets/user-6.png';
 export default function PostNewBatch() {
   const dispatch = useDispatch();
 
-  const categories = useSelector((state) => state.product.categories);
+  const categories = useSelector(state => state.product.categories)
 
   const [photo, setPhoto] = useState({});
   // const [photoPrev, setPhotoPrev] = useState('');
+  // eslint-disable-next-line no-unused-vars
+  const [errors, setErrors] = useState({})
 
   const [input, setInput] = useState({
     lote: '',
@@ -31,32 +34,36 @@ export default function PostNewBatch() {
     category: '',
   });
 
-  function validate(inputs) {
+  useEffect(() => {
+    dispatch(getCategories())
+  },[])
+
+  function validate(input) {
     const errors = {};
 
-    if (!inputs.lote) {
+    if (!input.lote) {
       errors.lote = 'Lote is required !';
     }
-    if (!inputs.description) {
+    if (!input.description) {
       errors.description = 'Descripcion is required ! ';
     }
-    if (!inputs.quantity) {
+    if (!input.quantity) {
       errors.quantity = 'Cantidad is required !';
     }
 
-    if (!inputs.price) {
+    if (!input.price && input.price < 1) {
       errors.price = 'Price is required';
     }
 
-    if (!inputs.expirationDate) {
+    if (!input.expirationDate) {
       errors.exprirationDate = 'Date is required';
     }
 
-    if (!inputs.category) {
+    if (!input.category) {
       errors.category = 'Category is required';
     }
 
-    if (inputs.photo === {}) {
+    if (input.photo === {}) {
       errors.photo = 'Photo is required';
     }
 
@@ -107,12 +114,10 @@ export default function PostNewBatch() {
 
   useEffect(() => {
     const date = input.expirationDate;
-
     const arr = date.split('-');
     const year = arr.shift();
     arr.push(year);
     const expirationDate = arr.join('/');
-    getCategories();
     setInput({ ...input, expirationDate });
   }, [input.expirationDate]);
 
@@ -129,6 +134,7 @@ export default function PostNewBatch() {
                   name="photo"
                   onChange={handlePhoto}
                 />
+                <p className={styles.errors}>{errors.photo}</p>
               </div>
               <div className={styles.logo}>
                 <img src={logo} alt="logo" />
@@ -143,6 +149,7 @@ export default function PostNewBatch() {
                 // eslint-disable-next-line react/jsx-no-bind
                 handleOnChange={handleOnChange}
               />
+              <p className={styles.errors}>{errors.category}</p>
             </div>
           </div>
 
@@ -156,6 +163,7 @@ export default function PostNewBatch() {
                   // eslint-disable-next-line react/jsx-no-bind
                   handleOnChange={handleOnChange}
                 />
+                <p className={styles.errors}>{errors.lote}</p>
               </div>
               <div>
                 <Fecha
@@ -164,6 +172,7 @@ export default function PostNewBatch() {
                   // eslint-disable-next-line react/jsx-no-bind
                   handleOnChange={handleOnChange}
                 />
+                <p className={styles.errors}>{errors.expirationDate}</p>
               </div>
             </div>
 
@@ -175,6 +184,7 @@ export default function PostNewBatch() {
                   // eslint-disable-next-line react/jsx-no-bind
                   handleOnChange={handleOnChange}
                 />
+                <p className={styles.errors}>{errors.quantity}</p>
               </div>
 
               <div>
@@ -184,6 +194,7 @@ export default function PostNewBatch() {
                   // eslint-disable-next-line react/jsx-no-bind
                   handleOnChange={handleOnChange}
                 />
+                <p className={styles.errors}>{errors.amount}</p>
               </div>
             </div>
           </div>
@@ -196,6 +207,7 @@ export default function PostNewBatch() {
               // eslint-disable-next-line react/jsx-no-bind
               handleOnChange={handleOnChange}
             />
+            <p className={styles.errors}>{errors.description}</p>
           </div>
           <button type="submit" className={styles.btn}>
             PUBLICAR PRODUCTO

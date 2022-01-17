@@ -25,7 +25,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "BUILD_PATH='../deploybackoffice/build' react-scripts build",
+    "deploy": "npm run build && cd .. && git subtree push --prefix deploybackoffice heroku-foodarity-backoffice master",
     "lint": "eslint .",
     "format": "prettier . --check",
     "format:write": "prettier . --write",

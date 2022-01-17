@@ -1,7 +1,6 @@
-import * as React from 'react';
+import React, {useEffect} from 'react';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
-import { useEffect } from 'react';
 
 export default function SearchBar({ search, lote }) {
   const options = lote.map((productos) => productos.lote);
@@ -27,6 +26,7 @@ export default function SearchBar({ search, lote }) {
         id="free-solo-2-demo"
         disableClearable
         freeSolo
+
         options={options || 'not found'}
         sx={{ width: '100%', backgroundColor: 'white', textColor: 'white' }}
         // eslint-disable-next-line react/jsx-props-no-spreading
