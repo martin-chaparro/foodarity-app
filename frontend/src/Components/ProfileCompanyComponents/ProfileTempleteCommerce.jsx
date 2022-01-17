@@ -88,7 +88,6 @@ function ProfileTempleteCommerce(props) {
   useEffect(() => {
     setDisplay(0);
   }, []);
-
   const drawer = (
     <div>
       <Toolbar />
@@ -119,7 +118,7 @@ function ProfileTempleteCommerce(props) {
           },
         ].map(
           ({ text, typesAllow }, index) =>
-            typesAllow.includes(company.company_type_id) && !typesAllow.includes(0) && (
+          ((typesAllow.includes(0) && company.status === 'Habilitada' && typesAllow.includes(company.company_type_id)) || (!typesAllow.includes(0) && typesAllow.includes(company.company_type_id))) && (
               <ListItem
                 button
                 key={text}
