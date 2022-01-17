@@ -97,7 +97,7 @@
 }
 
 .btnres:hover {
-  background-color: #6f2add6b;
+  background-color: rgba(47, 255, 168, 0.404);
 }
 
 .btndetdiv {
@@ -250,7 +250,7 @@
 }
 
 .btnReservar:hover {
-  background-color: rgba(221, 128, 51, 0.692);
+  background-color: rgba(47, 255, 168, 0.404);
 }
 
 .divFavButton {
