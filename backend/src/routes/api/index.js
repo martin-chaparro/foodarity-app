@@ -12,6 +12,7 @@ const productsRoutes = require('./products');
 const donationRoutes = require('./donation')
 const ordersRoutes = require('./orders');
 const mercadopagoRoutes = require('./mercadopago');
+const cartRoutes = require('./cart');
 
 const router = new Router();
 
@@ -31,5 +32,6 @@ router.use('/products', productsRoutes);
 router.use('/donation', donationRoutes);
 router.use('/orders', ordersRoutes);
 router.use('/mercadopago', mercadopagoRoutes);
+router.use('/cart', cartRoutes);
 
 module.exports = router;
