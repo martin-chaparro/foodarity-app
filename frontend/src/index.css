@@ -51,6 +51,7 @@ code {
   p.css-ahj2mt-MuiTypography-root {
     font-size: 24px;
   }
+
   p.css-ahj2mt-MuiTypography-root:hover {
     cursor: pointer;
     color: rgb(96, 236, 107);
@@ -61,6 +62,7 @@ code {
     width: 30px;
     height: 30px;
   }
+
   svg.MuiSvgIcon-root.ProductCard_heart__4tzd0.css-11admod-MuiSvgIcon-root {
     font-size: 12px;
     width: 22px;
