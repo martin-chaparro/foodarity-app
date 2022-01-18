@@ -58,10 +58,16 @@ class User extends Model {
 
   static associate(models) {
     this.belongsTo(models.Role, { foreignKey: 'role_id', as: 'role' });
-    this.belongsTo(models.Company, { as: 'company' });
-    this.hasMany(models.Product, { as: 'publications' });
-    this.hasMany(models.Donation);
-    this.hasMany(models.Order, {as : 'orders'})
+    this.belongsTo(models.Company, { as: 'company', foreignKey: 'company_id' });
+    this.hasMany(models.Product, {
+      as: 'publications',
+      foreignKey: 'publisher_id',
+    });
+    this.hasMany(models.Donation, {
+      as: 'donations',
+      foreignKey: 'publisher_id',
+    });
+    this.hasMany(models.Order, { as: 'orders', foreignKey: 'buyer_id' });
     this.hasMany(models.Cart,{ foreignKey: 'user_id', as: 'cart' })
   }
 }

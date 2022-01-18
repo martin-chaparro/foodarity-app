@@ -264,7 +264,7 @@ const deleteCompany = async (req, res) => {
 
     await Product.update(
       { status: 'canceled' },
-      { where: { [Op.and]: [{ Company_id: id }, { status: 'published' }] } }
+      { where: { [Op.and]: [{ company_id: id }, { status: 'published' }] } }
     );
 
     const users = await User.findAll({ where: { company_id: id } });

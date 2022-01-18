@@ -83,9 +83,10 @@ const attributes = {
 
 const getProducts = async (req, res) => {
   try {
-    const { lote, categoryName, categoryId, expirationDate, order, size } =
+    const { lote, categoryName, categoryId, expirationDate, size } =
       req.query;
-    let { minPrice, maxPrice } = req.query;
+    let { minPrice, maxPrice, order } = req.query;
+    order = order || 'recents';
     minPrice = parseInt(minPrice, 10) || 0;
     maxPrice = parseInt(maxPrice, 10) || 0;
     const page = parseInt(req.query.page, 10) || 1;
@@ -248,7 +249,7 @@ const deletePublication = async (req, res) => {
       return res.status(404).json({ msg: 'Not found' });
     }
 
-    if (product.company_id !== user.Company_id) {
+    if (product.company_id !== user.company_id) {
       return res
         .status(401)
         .json({ message: 'Tu compania no publico este producto' });
