@@ -191,13 +191,14 @@ const updateUser = async (request, response) => {
     id = request.userId;
   }
 
-  const { name, email } = request.body;
+  const { name, email, phone } = request.body;
 
   try {
     await User.update(
       {
         name,
         email,
+        phone,
       },
       {
         where: { id },

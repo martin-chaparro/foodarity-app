@@ -36,7 +36,7 @@ const getUrlRegister = async (req, res) => {
     const user = await User.findByPk(userId, {
       include: [{ model: Company, as: 'company' }],
     });
-    if (!user.companyId) {
+    if (!user.company_id) {
       return res
         .status(401)
         .json({ message: 'El usuaria no posee un comercio' });
@@ -54,7 +54,7 @@ const getUrlRegister = async (req, res) => {
     return res
       .status(200)
       .send(
-        `https://auth.mercadopago.com.ar/authorization?client_id=${APP_ID}&response_type=code&platform_id=mp&state=${user.companyId}&redirect_uri=${REDIRECT_PAGE}`
+        `https://auth.mercadopago.com.ar/authorization?client_id=${APP_ID}&response_type=code&platform_id=mp&state=${user.company_id}&redirect_uri=${REDIRECT_PAGE}`
       );
   } catch (error) {
     console.log(error);

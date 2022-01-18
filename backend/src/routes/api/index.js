@@ -1,7 +1,7 @@
 const { Router } = require('express');
 
 const docsRoutes = require('./docs');
-const adminRoutes = require('./admin')
+const adminRoutes = require('./admin');
 const companiesRoutes = require('./companies');
 const userRoutes = require('./user');
 const authRoutes = require('./auth');
@@ -9,7 +9,7 @@ const authSocialRoutes = require('./authSocial');
 const statesRoutes = require('./states');
 const citiesRoutes = require('./cities');
 const productsRoutes = require('./products');
-const donationRoutes = require('./donation')
+const donationRoutes = require('./donation');
 const ordersRoutes = require('./orders');
 const mercadopagoRoutes = require('./mercadopago');
 const cartRoutes = require('./cart');

@@ -83,9 +83,9 @@ const attributes = {
 
 const getProducts = async (req, res) => {
   try {
-    const { lote, categoryName, categoryId, expirationDate, order, size } =
-      req.query;
-    let { minPrice, maxPrice } = req.query;
+    const { lote, categoryName, categoryId, expirationDate, size } = req.query;
+    let { minPrice, maxPrice, order } = req.query;
+    order = order || 'recents';
     minPrice = parseInt(minPrice, 10) || 0;
     maxPrice = parseInt(maxPrice, 10) || 0;
     const page = parseInt(req.query.page, 10) || 1;
@@ -128,7 +128,7 @@ const getProducts = async (req, res) => {
     if (categoryName === '' || categoryName === 'Todas') {
       delete include[0].where;
     }
-console.log(minPrice, maxPrice)
+    console.log(minPrice, maxPrice);
     if (minPrice && maxPrice) {
       whereAttr.price = { [Op.between]: [minPrice, maxPrice] };
     } else if (minPrice) {
@@ -136,7 +136,7 @@ console.log(minPrice, maxPrice)
     } else if (maxPrice) {
       whereAttr.price = { [Op.lte]: maxPrice };
     } else {
-      delete whereAttr.price
+      delete whereAttr.price;
     }
 
     if (expirationDate) {
@@ -155,7 +155,7 @@ console.log(minPrice, maxPrice)
 
     // const allProducts = await Product.findAll(params);
     const allProducts = await Product.findAll(params);
-    
+
     if (size) {
       params.limit = size;
       params.offset = (page - 1) * size;
@@ -164,7 +164,7 @@ console.log(minPrice, maxPrice)
     const products = await Product.findAll(params);
 
     const count = await Product.count(params);
-    
+
     const totalCount = await Product.count(params);
     const pages = Math.ceil(count / size);
     res.status(200).json({
@@ -186,7 +186,7 @@ const postProduct = async (req, res) => {
     const user = await User.findByPk(userId, {
       include: [{ model: Company, as: 'company' }],
     });
-    if (!user.companyId) {
+    if (!user.company_id) {
       return res
         .status(401)
         .json({ message: 'El usuaria no posee un comercio' });
@@ -250,7 +250,7 @@ const deletePublication = async (req, res) => {
       return res.status(404).json({ msg: 'Not found' });
     }
 
-    if (product.companyId !== user.CompanyId) {
+    if (product.company_id !== user.company_id) {
       return res
         .status(401)
         .json({ message: 'Tu compania no publico este producto' });
@@ -284,7 +284,7 @@ const getCompanyProductsById = async (req, res) => {
       return res.status(404).json({ message: 'Not found' });
     }
     const products = await Product.findAll({
-      where: { CompanyId: id, status: 'published' },
+      where: { company_id: id, status: 'published' },
       order: [['id', 'DESC']],
       include,
       attributes,
@@ -299,7 +299,7 @@ const getCompanyProductsByAuth = async (req, res) => {
   try {
     const { userId } = req;
     const user = await User.findByPk(userId);
-    const id = user.CompanyId;
+    const id = user.company_id;
     const company = await Company.findByPk(id);
     if (!company) {
       return res.status(401).json({ message: 'No posees una compania' });
@@ -308,7 +308,7 @@ const getCompanyProductsByAuth = async (req, res) => {
       return res.status(401).json({ message: 'No posees un comercio' });
     }
     const products = await Product.findAll({
-      where: { CompanyId: id },
+      where: { company_id: id },
       order: [['id', 'DESC']],
       include,
       attributes,

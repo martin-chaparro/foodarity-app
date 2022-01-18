@@ -60,7 +60,7 @@ const addToCart = async (req, res) => {
       }
       await cartProduct.update({ quantity: finalQuantity });
       if (cartProduct.quantity <= 0) {
-        await cartProduct.destroy({force:true})
+        await cartProduct.destroy({ force: true });
       }
     }
 

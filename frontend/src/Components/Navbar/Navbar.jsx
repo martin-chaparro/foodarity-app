@@ -22,6 +22,8 @@ import { apiWithToken } from '../../services/api';
 import { startLogout } from '../../redux/actions/authActions';
 // import Drawer from '../Drawer/Drawer';
 
+import avatarDefault from '../../assets/avatar_default.png';
+
 export default function Navbar() {
   const dispatch = useDispatch();
   const { id } = useSelector((state) => state.auth);
@@ -35,6 +37,7 @@ export default function Navbar() {
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
 
   React.useEffect(() => {
     setCurrentPath(location.pathname);
@@ -338,7 +341,16 @@ export default function Navbar() {
               onClick={handleProfileMenuOpen}
               color="inherit"
             >
-              <Avatar photo={user.photo} />
+              <Avatar
+                photo={
+                  // eslint-disable-next-line no-nested-ternary
+                  user.photo
+                    ? user.photo.url
+                    : user.socialPhoto
+                    ? user.socialPhoto
+                    : avatarDefault
+                }
+              />
             </IconButton>
           </Box>
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
