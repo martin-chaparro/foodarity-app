@@ -1,5 +1,7 @@
 const { Router } = require('express');
 
+const authMiddleware = require('../../middlewares/auth');
+
 const router = new Router();
 const {
   validateCode,
@@ -7,6 +9,6 @@ const {
 } = require('../../controllers/mercadopagoController');
 
 router.post('/register', validateCode);
-router.get('/register/:companyId', getUrlRegister);
+router.get('/register/:companyId', authMiddleware, getUrlRegister);
 
 module.exports = router;

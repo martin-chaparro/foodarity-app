@@ -1,6 +1,7 @@
 const axios = require('axios');
 // const mercadopago = require('mercadopago')
 const qs = require('qs');
+const User = require('../models/User');
 /* const User = require("../models/User")
 */
 const APP_ID = process.env.MP_CLIENT_ID 
@@ -54,7 +55,9 @@ TODO COMPRADOR
 
 const getUrlRegister = (req, res) => {
   try {
-    const {companyId} = req.params
+    const {userId} = req
+    const user = User.findByPk(userId)
+    const {companyId} = user
   res.status(200).send(`https://auth.mercadopago.com.ar/authorization?client_id=${APP_ID}&response_type=code&platform_id=mp&state=${companyId}&redirect_uri=${REDIRECT}`)
 
   } catch (error) {
@@ -63,7 +66,8 @@ const getUrlRegister = (req, res) => {
   }
 
 const validateCode = async (req, res) => {
-  const { code } = req.query;
+  const { code, state } = req.query;
+  console.log(state, 'this is the company id')
 
   try {
 
