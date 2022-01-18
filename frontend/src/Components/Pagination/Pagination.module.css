@@ -2,7 +2,13 @@
   display: flex;
   justify-content: center;
   position: relative;
-  bottom: 10px;
+  background-color: #c3a7cc;
+  margin-bottom: 20px;
+  /* filter:drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.4)) */
+}
+.botones {
+  position: relative;
+  left: 12px;
 }
 
 .btn {
@@ -17,10 +23,13 @@
   right: 25px;
   z-index: 2;
   cursor: pointer;
+  border: 1px solid white;
 }
 
 /* modificar pagina actual */
 .btn:disabled {
   cursor: auto;
-  background-color: #8e6bbe;
+  background-color: #ffffff;
+  color: #8e6bbe;
+  border: 1px solid white;
 }
