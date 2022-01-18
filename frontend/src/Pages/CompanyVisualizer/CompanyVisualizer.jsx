@@ -61,12 +61,12 @@ export default function CompanyVisualizer() {
       <div className={styles.divh2}>
         <h2 className={styles.h2}>Publicaciones de la empresa</h2>
       </div>
-         <div className={styles.divRenderCards}>
+         {company.company_type_id === 1 && <div className={styles.divRenderCards}>
          {products && products.map((product, index) => (
                   // eslint-disable-next-line react/no-array-index-key
                   <CompanyProductCard key={index} product={product} />
          ))}
-        </div>
+        </div>}
       
     </div>
   );
