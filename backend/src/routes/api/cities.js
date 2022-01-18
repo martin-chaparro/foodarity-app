@@ -1,5 +1,4 @@
 const { Router } = require('express');
-const authMiddleware = require('../../middlewares/auth');
 
 const router = new Router();
 const {
@@ -8,6 +7,6 @@ const {
 } = require('../../controllers/locationsController');
 
 router.get('/', getCities);
-router.get('/:stateId',authMiddleware, getCitiesByState);
+router.get('/:stateId', getCitiesByState);
 
 module.exports = router;
