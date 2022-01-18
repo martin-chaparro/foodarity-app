@@ -8,11 +8,6 @@
   background: #ececec;
 }
 
-.imgLogo {
-  position: relative;
-  width: 70px;
-  height: 70px;
-}
 .containerLogo {
   display: flex;
   align-items: center;
@@ -534,4 +529,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.avatar {
+  margin-top: 30px;
+  margin-bottom: 20px;
 }

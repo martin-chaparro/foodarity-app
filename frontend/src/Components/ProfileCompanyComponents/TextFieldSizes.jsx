@@ -1,6 +1,10 @@
+/* eslint-disable prefer-arrow-callback */
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
+// import PropTypes from 'prop-types';
+
+// import NumberFormat from 'react-number-format';
 import FilledInput from '@mui/material/FilledInput';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
@@ -58,6 +62,29 @@ export function Cantidad({ handleOnChange, input }) {
   );
 }
 
+// const NumberFormatCustom = React.forwardRef(function NumberFormatCustom(
+//   props,
+//   ref
+// ) {
+//   const { onChange, ...other } = props;
+
+//   return (
+//     <NumberFormat
+//       // eslint-disable-next-line react/jsx-props-no-spreading
+//       {...other}
+//       getInputRef={ref}
+//       thousandSeparator
+//       isNumericString
+//       prefix="$"
+//     />
+//   );
+// });
+
+// NumberFormatCustom.propTypes = {
+//   name: PropTypes.string.isRequired,
+//   onChange: PropTypes.func.isRequired,
+// };
+
 export function Amount({ handleOnChange, input }) {
   // const [values, setValues] = React.useState({
   //   amount: '',
@@ -85,6 +112,8 @@ export function Amount({ handleOnChange, input }) {
             onChange={(e) => {
               handleOnChange(e);
             }}
+            step="0.1"
+            variant="standard"
             startAdornment={<InputAdornment position="start">$</InputAdornment>}
           />
         </FormControl>

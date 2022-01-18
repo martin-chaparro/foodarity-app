@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import Avatar from '@mui/material/Avatar';
+import Swal from 'sweetalert2';
 import styles from './PostNewBatch.module.css';
 
 import {
@@ -16,7 +18,7 @@ import logo from '../../assets/user-6.png';
 export default function PostNewBatch() {
   const dispatch = useDispatch();
 
-  const categories = useSelector(state => state.product.categories)
+  const categories = useSelector((state) => state.product.categories);
 
   const [photo, setPhoto] = useState({});
   // const [photoPrev, setPhotoPrev] = useState('');
@@ -32,8 +34,8 @@ export default function PostNewBatch() {
   });
 
   useEffect(() => {
-    dispatch(getCategories())
-  },[])
+    dispatch(getCategories());
+  }, []);
 
   function validate(inputs) {
     const errors = {};
@@ -67,11 +69,11 @@ export default function PostNewBatch() {
     return errors;
   }
 
-  function handlePhoto(e) {
-    e.preventDefault();
-    setPhoto(e.target.files[0]);
-    
-  }
+  // function handlePhoto(e) {
+  //   e.preventDefault();
+  //   setPhoto(e.target.files[0]);
+
+  // }
 
   function handleOnChange(e) {
     setInput({
@@ -80,6 +82,7 @@ export default function PostNewBatch() {
     });
   }
 
+  console.log(photo);
   function handleSubmit(e) {
     e.preventDefault();
 
@@ -95,7 +98,6 @@ export default function PostNewBatch() {
         description: '',
         quantity: 0,
         price: 0,
-        photo: {},
         publicationDate: new Date().toLocaleDateString('en-ca'),
         expirationDate: '',
         category: '',
@@ -118,6 +120,45 @@ export default function PostNewBatch() {
     setInput({ ...input, expirationDate });
   }, [input.expirationDate]);
 
+  // eslint-disable-next-line prefer-const
+  let productPhoto = logo;
+
+  const handleChangeImage = ({ target }) => {
+    const image = target.files[0];
+
+    const preview = document.querySelector('#productImage img');
+
+    if (image.type !== 'image/jpeg' && image.type !== 'image/png') {
+      document.querySelector('#datosImagen').value = '';
+
+      Swal.fire({
+        icon: 'error',
+        title: 'Error al subir la imagen',
+        text: '¡La imagen debe estar en formato JPG o PNG!',
+      });
+    } else if (Number(image.size) > 2000000) {
+      document.querySelector('#datosImagen').value = '';
+
+      Swal.fire({
+        icon: 'error',
+        title: 'Error al subir la imagen',
+        text: '¡La imagen no debe pesar más de 2 MB!',
+      });
+    } else {
+      const reader = new FileReader();
+      console.log(reader);
+
+      reader.onloadend = () => {
+        preview.src = reader.result;
+      };
+
+      reader.readAsDataURL(image);
+      // eslint-disable-next-line prefer-destructuring
+      // productPhoto = target.files[0];
+      setPhoto(target.files[0]);
+    }
+  };
+
   return (
     <div className={styles.formcont}>
       <form className={styles.formcont} onSubmit={handleSubmit}>
@@ -128,14 +169,34 @@ export default function PostNewBatch() {
                 <input
                   className={styles.btninput}
                   type="file"
-                  name="photo"
-                  onChange={handlePhoto}
+                  name="file"
+                  id="datosImagen"
+                  onChange={handleChangeImage}
                 />
               </div>
               <div className={styles.logo}>
-                <img src={logo} alt="logo" />
+                <Avatar
+                  src={productPhoto}
+                  alt="logo"
+                  id="productImage"
+                  sx={{ width: 75, height: 75, cursor: 'pointer' }}
+                />
+                {/* <img src={productPhoto} alt="logo" id="productImage" /> */}
               </div>
             </div>
+
+            {/* <label htmlFor="datosImagen" className={styles.divupload}>
+              <input
+                className={styles.btninput}
+                type="file"
+                name="file"
+                hidden
+                id="datosImagen"
+                onChange={handleChangeImage}
+              />
+
+              <img src={productPhoto} alt="logo" id="productImage" />
+            </label> */}
 
             <div className={styles.categorias}>
               <Categoria
@@ -151,7 +212,6 @@ export default function PostNewBatch() {
           <div className={styles.cont}>
             <div className={styles.contname}>
               <div>
-                
                 <NuevoLote
                   setInput={setInput}
                   input={input}
