@@ -83,6 +83,7 @@ const validateCode = async (req, res) => {
     };
     axios(config)
       .then((response) => {
+        // ACA ESTA EL TOKEN
         console.log(JSON.stringify(response.data));
         Company.update(
           { mp: JSON.stringify(response.data) },
