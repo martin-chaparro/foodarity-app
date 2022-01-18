@@ -7,8 +7,15 @@ module.exports = [
     roleId:1
   },
   {
-    name: 'demoOng',
+    name: 'demoOng1',
     email: 'demo@demoOng.com',
+    password: 'demo',
+    status: true,
+    roleId:1
+  },
+  {
+    name: 'demoOng2',
+    email: 'demo@demoOng2.com',
     password: 'demo',
     status: true,
     roleId:1

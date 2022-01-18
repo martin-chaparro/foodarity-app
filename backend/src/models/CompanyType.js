@@ -16,7 +16,10 @@ class CompanyType extends Model {
   }
 
   static associate(models) {
-    this.hasMany(models.Company );
+    this.hasMany(models.Company, {
+      as: 'company',
+      foreignKey: 'company_type_id',
+    });
   }
 }
 

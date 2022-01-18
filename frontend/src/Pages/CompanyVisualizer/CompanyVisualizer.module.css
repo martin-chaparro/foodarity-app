@@ -1,7 +1,11 @@
 .componentDiv {
   background-color: rgb(101, 81, 131);
   height: 520vh;
+  position: relative;
+  top: 64px;
 }
+
+
 
 .GeneralProfileImgs {
   /* display: flex;

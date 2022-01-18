@@ -15,6 +15,7 @@ const Category = require('../models/Category');
 const Order = require('../models/Order');
 const PaymentMethod = require('../models/PaymentMethod');
 const Donation = require('../models/Donation');
+const Cart = require('../models/Cart');
 
 // Models Init
 
@@ -30,6 +31,7 @@ Product.init(connection);
 Order.init(connection);
 PaymentMethod.init(connection);
 Donation.init(connection);
+Cart.init(connection);
 
 // Associate
 Company.associate(connection.models);
@@ -44,5 +46,6 @@ Product.associate(connection.models);
 Order.associate(connection.models);
 PaymentMethod.associate(connection.models);
 Donation.associate(connection.models);
+Cart.associate(connection.models);
 
 module.exports = connection;
