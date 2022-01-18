@@ -1,12 +1,12 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState, useEffect } from 'react';
-import {useDispatch} from 'react-redux'
-import {getProducts} from '../../redux/actions/productActions'
+// import {useDispatch} from 'react-redux'
+// import {getProducts} from '../../redux/actions/productActions'
 import { api } from '../../services/api';
 import styles from './FiltroForm.module.css'
 
 function FiltroForm({ filtrado }) {
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch()
   const [categories, setCategories] = useState();
   const [input, setInput] = useState({
     categoryName: '',
@@ -34,15 +34,16 @@ function FiltroForm({ filtrado }) {
 
   const handleClear = (e) => {
     e.preventDefault()
-    setInput({
+    const clearInput = {
       categoryName: 'Todas',
       categoryId: '',
       minPrice: 0,
       maxPrice: 0,
       expirationDate: '',
       order: '',
-    })
-    dispatch(getProducts())
+    }
+    setInput(clearInput)
+    filtrado(clearInput)
   }
 
   const handleSubmit = (e) => {
