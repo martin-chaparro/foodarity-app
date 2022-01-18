@@ -128,13 +128,15 @@ const getProducts = async (req, res) => {
     if (categoryName === '' || categoryName === 'Todas') {
       delete include[0].where;
     }
-
+console.log(minPrice, maxPrice)
     if (minPrice && maxPrice) {
       whereAttr.price = { [Op.between]: [minPrice, maxPrice] };
     } else if (minPrice) {
       whereAttr.price = { [Op.gte]: minPrice };
     } else if (maxPrice) {
       whereAttr.price = { [Op.lte]: maxPrice };
+    } else {
+      delete whereAttr.price
     }
 
     if (expirationDate) {
