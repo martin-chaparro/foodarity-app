@@ -14,6 +14,8 @@ import Navbar from '../Components/Navbar/Navbar';
 import { PrivateRoute } from './PrivateRoute';
 import { RollSelectorRouter } from './RollSelectorRouter';
 import { startCheking } from '../redux/actions/authActions';
+import MpTest from '../Components/MercadoPago/MpTest';
+import MpRedirect from '../Components/MercadoPago/MpRedirect';
 // import ErrorPage from '../Pages/Error/ErrorPage';
 
 export function AppRouter() {
@@ -37,6 +39,8 @@ export function AppRouter() {
         {/* <Route path="*" element={<ErrorPage/>} />  */}
       </Routes>
       <Routes>
+        <Route exact path="/mptest" element={<MpTest />} />
+        <Route exact path="/mpredirect" element={<MpRedirect />} />
         <Route
           path="/profileuser"
           element={
