@@ -68,6 +68,7 @@ class User extends Model {
       foreignKey: 'publisher_id',
     });
     this.hasMany(models.Order, { as: 'orders', foreignKey: 'buyer_id' });
+    this.hasMany(models.Cart, { foreignKey: 'user_id', as: 'cart' });
   }
 }
 
