@@ -2,6 +2,7 @@ import types from '../types/companiesTypes';
 
 const initialState = {
   comerce: [],
+  ongs: [],
 };
 
 export default (state = initialState, action) => {
@@ -13,6 +14,10 @@ export default (state = initialState, action) => {
     case types.registerComerce:
       return {
         comerce: action.payload,
+      };
+    case types.getOngs:
+      return {
+        ongs: action.payload,
       };
 
     default:

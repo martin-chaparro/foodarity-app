@@ -4,18 +4,22 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProducts } from '../../redux/actions/productActions';
+import { getOngs} from '../../redux/actions/CompaniesActions';
 import styles from './Home.module.css';
 import ProductCard from '../ProductCard/ProductCard';
 import Navbar from '../Navbar/Navbar';
 import FiltroWeb from '../Drawer/FiltroWeb';
 import Pagination from '../Pagination/BasicPagination';
 import BannerSearch from '../Searchbar/BannerSearch';
+import OngSeccion from '../ONGSeccion/OngSeccion';
+import { startGoogleLogin } from '../../redux/actions/authActions';
 
 export default function Home() {
   const dispatch = useDispatch();
   // eslint-disable-next-line no-unused-vars
   const allProducts = useSelector((state) => state.product.products);
   const allProductsList = useSelector((state) => state.product.allProductsList);
+  const allOngs = useSelector((state) => startGoogleLogin.ong.ongs);
   // TODO revisar si se actualiza
 
   // const [currentPage, setCurrentPage] = useState(1);
@@ -32,6 +36,7 @@ export default function Home() {
 
   useEffect(() => {
     dispatch(getProducts());
+    dispatch(getOngs());
   }, [dispatch]);
 
   const [allProductValues, setAllProductValues] = useState({
@@ -101,6 +106,9 @@ export default function Home() {
             // eslint-disable-next-line react/no-array-index-key
             <ProductCard key={index} product={product} />
           ))}
+        </div>
+        <div>
+          <OngSeccion ongs={allOngs}/>
         </div>
       </div>
     </div>
