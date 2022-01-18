@@ -1,9 +1,8 @@
-
 .botoneraContent {
   display: flex;
   justify-content: center;
   position: relative;
-  background-color: #c3a7cc;
+  background-color: #bf9eca;
   margin-bottom: 20px;
   /* filter:drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.4)) */
 }
@@ -33,4 +32,5 @@
   background-color: #ffffff;
   color: #8e6bbe;
   border: 1px solid white;
+  
 }
