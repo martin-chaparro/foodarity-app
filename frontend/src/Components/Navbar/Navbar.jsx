@@ -44,7 +44,6 @@ export default function Navbar() {
     if (id)
       apiWithToken.get(`/users/${id}`).then((res) => {
         setUser(res.data);
-        console.log(res.data);
       });
   }, [id]);
 

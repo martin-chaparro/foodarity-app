@@ -18,7 +18,7 @@
   width: 450px;
 }
 
-.btn {
+.btnready {
   margin-top: 20px;
   padding-top: 8px;
   padding-bottom: 8px;
@@ -31,11 +31,25 @@
   cursor: pointer;
 }
 
+.btnoff {
+  margin-top: 20px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 25px;
+  padding-right: 25px;
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
+  font-weight: 600;
+  background-color: gray;
+  cursor: pointer;
+}
+
 .divupload {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 240px;
+  margin: auto;
 }
 
 .inputfoto {
@@ -57,9 +71,41 @@
   left: 10px;
   height: 70px;
   cursor: pointer;
+  margin: auto;
 }
 
 .imagecontent {
   display: flex;
-  justify-content: flex-start;
+  flex-direction: column;
+  margin: auto;
+}
+
+.label {
+  margin: auto;
+  margin-bottom: 20px;
+}
+
+.error {
+  text-align: center;
+  color: red;
+
+  margin: 0;
+  font-size: smaller;
+  height: 1px;
+}
+
+.divnuevolote {
+  margin-bottom: 19px;
+}
+
+.divcantidad {
+  margin-bottom: 19px;
+}
+
+.divprecio {
+  margin-bottom: 19px;
+}
+
+.quantityError {
+  height: 1px;
 }

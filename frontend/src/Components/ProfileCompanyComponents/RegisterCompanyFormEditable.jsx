@@ -44,7 +44,7 @@ export default function RegisterCompanyFormEditable({ company, handleBack }) {
   const [photo, setPhoto] = useState({
     url: company.logo ? company.logo.url : '',
   });
-  console.log(company);
+
   const searchProvincia = (term) => {
     api.get(`/states?name=${term}`).then((response) => {
       setprovincia(response.data);

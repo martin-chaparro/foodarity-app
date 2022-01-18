@@ -36,7 +36,12 @@ export function NuevoLote({ handleOnChange, input }) {
   );
 }
 
-export function Cantidad({ handleOnChange, input }) {
+export function Cantidad({
+  handleOnChange,
+  input,
+  ValidateQuantity,
+  resetError,
+}) {
   return (
     <Box
       component="form"
@@ -56,6 +61,8 @@ export function Cantidad({ handleOnChange, input }) {
         variant="filled"
         onChange={(e) => {
           handleOnChange(e);
+          ValidateQuantity(e);
+          resetError(e);
         }}
       />
     </Box>
@@ -85,7 +92,7 @@ export function Cantidad({ handleOnChange, input }) {
 //   onChange: PropTypes.func.isRequired,
 // };
 
-export function Amount({ handleOnChange, input }) {
+export function Amount({ handleOnChange, input, validatePrice, resetError }) {
   // const [values, setValues] = React.useState({
   //   amount: '',
   //   password: '',
@@ -111,6 +118,8 @@ export function Amount({ handleOnChange, input }) {
             name="price"
             onChange={(e) => {
               handleOnChange(e);
+              validatePrice(e);
+              resetError(e);
             }}
             step="0.1"
             variant="standard"
@@ -165,6 +174,7 @@ export function Categoria({ setInput, input, categories }) {
         <Select
           labelId="demo-simple-select-filled-label"
           id="demo-simple-select-filled"
+          sx={{ width: 464 }}
           name="category"
           value={cat}
           label="Categoria"

@@ -13,15 +13,17 @@ import {
 } from './TextFieldSizes';
 import { postProduct, getCategories } from '../../redux/actions/productActions';
 import Descripcion from './MultiLineTextFields';
-import logo from '../../assets/user-6.png';
+import logo from '../../assets/foodAvatar.png';
 
 export default function PostNewBatch() {
   const dispatch = useDispatch();
 
   const categories = useSelector((state) => state.product.categories);
-
+  // const [errors, setErrors] = useState({});
   const [photo, setPhoto] = useState({});
   // const [photoPrev, setPhotoPrev] = useState('');
+
+  const [error, setError] = useState({});
 
   const [input, setInput] = useState({
     lote: '',
@@ -69,12 +71,6 @@ export default function PostNewBatch() {
     return errors;
   }
 
-  // function handlePhoto(e) {
-  //   e.preventDefault();
-  //   setPhoto(e.target.files[0]);
-
-  // }
-
   function handleOnChange(e) {
     setInput({
       ...input,
@@ -82,13 +78,12 @@ export default function PostNewBatch() {
     });
   }
 
-  console.log(photo);
   function handleSubmit(e) {
     e.preventDefault();
 
     const errors = validate(input);
 
-    if (!Object.keys(errors).length) {
+    if (!Object.keys(errors).length && !error.price && !error.quantity) {
       dispatch(postProduct(input, photo));
 
       // eslint-disable-next-line no-alert
@@ -103,11 +98,15 @@ export default function PostNewBatch() {
         category: '',
       });
 
-      console.log(input);
       setPhoto({});
     } else {
       // eslint-disable-next-line no-alert
-      alert('Complete todos los Campos');
+
+      Swal.fire({
+        icon: 'error',
+        title: 'Campos incompletos',
+        text: '¡Complete todos los campos!',
+      });
     }
   }
 
@@ -122,6 +121,63 @@ export default function PostNewBatch() {
 
   // eslint-disable-next-line prefer-const
   let productPhoto = logo;
+
+  function validatePrice(event) {
+    const { name, value } = event.target;
+
+    console.log(value);
+
+    setInput({
+      ...input,
+      [name]: value,
+    });
+    if (value < 0) {
+      setError({
+        ...error,
+        [name]: 'El numero debe ser > a 0',
+      });
+      // eslint-disable-next-line no-useless-escape
+    } else if (!/^[+]?([0-9]+(?:[\.][0-9]*)?|\.[0-9]+)$/.test(value)) {
+      setError({
+        ...error,
+        [name]: 'Solo Números',
+      });
+    } else {
+      setError({
+        ...error,
+        [name]: '',
+      });
+    }
+  }
+
+  function ValidateQuantity(event) {
+    const { name, value } = event.target;
+
+    setInput({
+      ...input,
+      [name]: value,
+    });
+
+    if (value < 0) {
+      setError({
+        error,
+        [name]: 'El numero debe ser > a 0',
+      });
+    } else {
+      setError({
+        ...error,
+        [name]: '',
+      });
+    }
+  }
+
+  function resetError(event) {
+    const { value } = event.target;
+
+    if (!value) {
+      setError({});
+    }
+  }
 
   const handleChangeImage = ({ target }) => {
     const image = target.files[0];
@@ -146,7 +202,6 @@ export default function PostNewBatch() {
       });
     } else {
       const reader = new FileReader();
-      console.log(reader);
 
       reader.onloadend = () => {
         preview.src = reader.result;
@@ -165,40 +220,26 @@ export default function PostNewBatch() {
         <div className={styles.generalcont}>
           <div className={styles.imagecontent}>
             <div className={styles.divupload}>
-              <div className={styles.inputfoto}>
+              <label htmlFor="datosImagen" className={styles.label}>
                 <input
                   className={styles.btninput}
                   type="file"
                   name="file"
                   id="datosImagen"
+                  hidden
                   onChange={handleChangeImage}
                 />
-              </div>
-              <div className={styles.logo}>
+
                 <Avatar
                   src={productPhoto}
                   alt="logo"
                   id="productImage"
-                  sx={{ width: 75, height: 75, cursor: 'pointer' }}
+                  sx={{ width: 150, height: 150, cursor: 'pointer' }}
                 />
-                {/* <img src={productPhoto} alt="logo" id="productImage" /> */}
-              </div>
+              </label>
             </div>
 
-            {/* <label htmlFor="datosImagen" className={styles.divupload}>
-              <input
-                className={styles.btninput}
-                type="file"
-                name="file"
-                hidden
-                id="datosImagen"
-                onChange={handleChangeImage}
-              />
-
-              <img src={productPhoto} alt="logo" id="productImage" />
-            </label> */}
-
-            <div className={styles.categorias}>
+            <div className={styles.divcategorias}>
               <Categoria
                 setInput={setInput}
                 input={input}
@@ -211,7 +252,7 @@ export default function PostNewBatch() {
 
           <div className={styles.cont}>
             <div className={styles.contname}>
-              <div>
+              <div className={styles.divnuevolote}>
                 <NuevoLote
                   setInput={setInput}
                   input={input}
@@ -219,7 +260,7 @@ export default function PostNewBatch() {
                   handleOnChange={handleOnChange}
                 />
               </div>
-              <div>
+              <div className={styles.divprecio}>
                 <Fecha
                   setInput={setInput}
                   input={input}
@@ -230,22 +271,40 @@ export default function PostNewBatch() {
             </div>
 
             <div className={styles.contamout}>
-              <div>
+              <div className={styles.divcantidad}>
                 <Cantidad
                   setInput={setInput}
                   input={input}
+                  name="quantity"
                   // eslint-disable-next-line react/jsx-no-bind
                   handleOnChange={handleOnChange}
+                  // eslint-disable-next-line react/jsx-no-bind
+                  ValidateQuantity={ValidateQuantity}
+                  // eslint-disable-next-line react/jsx-no-bind
+                  resetError={resetError}
                 />
+                <div classsName={styles.quantityError}>
+                  <p className={styles.error}>
+                    {error.quantity && error.quantity}
+                  </p>
+                </div>
               </div>
 
-              <div>
+              <div className={styles.divprecio}>
                 <Amount
                   setInput={setInput}
                   input={input}
+                  name="price"
                   // eslint-disable-next-line react/jsx-no-bind
                   handleOnChange={handleOnChange}
+                  // eslint-disable-next-line react/jsx-no-bind
+                  validatePrice={validatePrice}
+                  // eslint-disable-next-line react/jsx-no-bind
+                  resetError={resetError}
                 />
+                <div>
+                  <p className={styles.error}>{error.price && error.price}</p>
+                </div>
               </div>
             </div>
           </div>
@@ -259,7 +318,7 @@ export default function PostNewBatch() {
               handleOnChange={handleOnChange}
             />
           </div>
-          <button type="submit" className={styles.btn}>
+          <button type="submit" className={styles.btnready}>
             PUBLICAR PRODUCTO
           </button>
         </div>
