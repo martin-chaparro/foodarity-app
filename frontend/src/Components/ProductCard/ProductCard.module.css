@@ -138,6 +138,7 @@
   height: 180px;
   display: flex;
   position: relative;
+  margin-right: 30px;
 }
 
 .BoxGeneral {

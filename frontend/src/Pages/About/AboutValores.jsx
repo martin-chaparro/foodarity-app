@@ -14,7 +14,7 @@ export default function AboutValores() {
         <Typography sx={{ color: "black", background: 'white', borderRadius: 1, display: "flex", justifyContent: "center", alignItems: "center", }} variant="h5" component="div">
         Valores
         </Typography>
-        <Typography sx={{ color: "white", marginTop: 2}} variant="body2">
+        <Typography sx={{ color: "white", marginTop: 2}} variant="body2" component="div">
         <ul>
           <li>
             <b>Diversidad e Inclusión:</b> Somos un espacio al que todos podemos
