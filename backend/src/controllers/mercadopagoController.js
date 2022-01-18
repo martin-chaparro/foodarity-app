@@ -1,37 +1,14 @@
 const axios = require('axios');
-// const mercadopago = require('mercadopago')
+
 const qs = require('qs');
 const User = require('../models/User');
-/* const User = require("../models/User")
-*/
-const APP_ID = process.env.MP_CLIENT_ID 
-const SECRET_ID = process.env.MP_CLIENT_SECRET_ID
-const REDIRECT = process.env.MP_REDIRECT
+const Company = require('../models/Company');
 
-/* 
-const addSeller = async (req, res) => {
-  const redirectUrl = 'http://localhost:3000/mercadopagotest'
-  const {userId} = req
-  const user = User.findByPk(userId)
-  const {companyId} = user
-  console.log('test')
-  const url = `https://auth.mercadopago.com.ar/authorization?client_id=${APP_ID}&response_type=code&platform_id=mp&state=${companyId}&redirect_uri=${redirectUrl}`
-} */
+const APP_ID = process.env.MP_CLIENT_ID;
+const SECRET_ID = process.env.MP_CLIENT_SECRET_ID;
+const REDIRECT_PAGE = process.env.MP_REDIRECT;
 
-/* curl -X POST \
-     -H 'accept: application/json' \
-     -H 'content-type: application/x-www-form-urlencoded' \
-     'https://api.mercadopago.com/oauth/token' \
-     -d 'client_secret=CLIENT_SECRET' \
-     -d 'client_id=CLIENT_ID' \
-     -d 'grant_type=authorization_code' \
-     -d 'code=CODE' \
-     -d 'redirect_uri=REDIRECT_URI' 
-     
-     curl -X POST -d 'grant_type=password&client_id=8d3c1664-05ae-47e4-bcdb-477489590aa4&client_secret=4f771f6f-5c10-4104-bbc6-3333f5b11bf9&username=email&password=password' https://api.hello.is/v1/oauth2/token
-     */
-
- /*     
+/*  
  TODO VENDEDOR
  {
     "id": 1058268328,
@@ -53,60 +30,80 @@ TODO COMPRADOR
     "email": "test_user_17094870@testuser.com"
 } */
 
-const getUrlRegister = (req, res) => {
+const getUrlRegister = async (req, res) => {
   try {
-    const {userId} = req
-    const user = User.findByPk(userId)
-    const {companyId} = user
-  res.status(200).send(`https://auth.mercadopago.com.ar/authorization?client_id=${APP_ID}&response_type=code&platform_id=mp&state=${companyId}&redirect_uri=${REDIRECT}`)
-
+    const { userId } = req;
+    const user = await User.findByPk(userId, {
+      include: [{ model: Company, as: 'company' }],
+    });
+    if (!user.companyId) {
+      return res
+        .status(401)
+        .json({ message: 'El usuaria no posee un comercio' });
+    }
+    if (user.company.company_type_id !== 1) {
+      return res.status(401).json({
+        message: 'Solo las companias tipo comercio pueden publicar productos',
+      });
+    }
+    if (user.company.status !== 'Habilitada') {
+      return res.status(401).json({
+        message: 'Solo los comercios habilitados pueden publicar productos',
+      });
+    }
+    return res
+      .status(200)
+      .send(
+        `https://auth.mercadopago.com.ar/authorization?client_id=${APP_ID}&response_type=code&platform_id=mp&state=${user.companyId}&redirect_uri=${REDIRECT_PAGE}`
+      );
   } catch (error) {
-    console.log(error)
+    console.log(error);
+    return res.status(500).send({ message: error });
   }
-  }
+};
 
 const validateCode = async (req, res) => {
   const { code, state } = req.query;
-  console.log(state, 'this is the company id')
-
   try {
-
-const data = qs.stringify({
-  'client_id': APP_ID,
-  'client_secret': SECRET_ID,
-  'grant_type': 'authorization_code',
-  'code': code,
-  'redirect_uri': REDIRECT 
-});
-const config = {
-  method: 'post',
-  url: 'https://api.mercadopago.com/oauth/token',
-  headers: { 
-    'accept': 'application/json', 
-    'content-type': 'application/x-www-form-urlencoded'
-  },
-  data
-};
-axios(config)
-.then((response) => {
-  console.log(JSON.stringify(response.data))
-  res.status(200).send(JSON.stringify(response.data));
-
-})
-.catch((error) => {
-  console.log(error)
-  res.status(400).send({ message: error });
-});
+    const data = qs.stringify({
+      client_id: APP_ID,
+      client_secret: SECRET_ID,
+      grant_type: 'authorization_code',
+      code,
+      redirect_uri: REDIRECT_PAGE,
+    });
+    const config = {
+      method: 'post',
+      url: 'https://api.mercadopago.com/oauth/token',
+      headers: {
+        accept: 'application/json',
+        'content-type': 'application/x-www-form-urlencoded',
+      },
+      data,
+    };
+    axios(config)
+      .then((response) => {
+        console.log(JSON.stringify(response.data));
+        Company.update(
+          { mp: JSON.stringify(response.data) },
+          { where: { id: state } }
+        );
+        return res.status(200).send(JSON.stringify(response.data));
+      })
+      .catch((error) => {
+        console.log(error);
+        return res.status(400).send({ message: error });
+      });
+    return res.status(200).send({ message: 'success' });
   } catch (error) {
-    res.status(500).send({ message: error });
+    return res.status(500).send({ message: error });
   }
 };
 
 module.exports = {
   validateCode,
-  getUrlRegister
+  getUrlRegister,
 };
-
 
 /* 
 const preference = {}

@@ -1,8 +1,9 @@
+/* eslint-disable no-alert */
 import React from 'react'
 import {useSearchParams} from 'react-router-dom'
 import { api } from '../../services/api'
 
-function concreteRegister() {
+function MpRedirect() {
   const [params] = useSearchParams()
   const code = params.get('code') || ''
   const state = params.get('state') || ''
@@ -11,25 +12,13 @@ function concreteRegister() {
     api.post(`/mercadopago/register?code=${code}&state=${state}`)
   }
 
-  const handleOnClick = () => {
-    api.get(`/mercadopago/register/1`).then(res => {window.location.href =res.data})
-  }
+ 
 
   return (
     <div>
-     {handleRegister()}
-     <br/>
-     <br/>
-     <br/>
-     <br/>
-     <br/>
-     <br/>
-     <br/>
-     <br/>
-     <br/>
-     <button type='button' onClick={handleOnClick} >TEST</button>
+     {code ? handleRegister() : alert('Ocurrio algun error...')}
     </div>
   )
 }
 
-export default concreteRegister
+export default MpRedirect

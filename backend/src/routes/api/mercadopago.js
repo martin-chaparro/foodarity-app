@@ -9,6 +9,6 @@ const {
 } = require('../../controllers/mercadopagoController');
 
 router.post('/register', validateCode);
-router.get('/register/:companyId', authMiddleware, getUrlRegister);
+router.get('/register', authMiddleware, getUrlRegister);
 
 module.exports = router;
