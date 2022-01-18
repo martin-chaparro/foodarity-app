@@ -8,8 +8,8 @@ const {
 } = require('../../controllers/cartController')
 
 router.get('/',authMiddleware,getCart);
-router.post('/add',authMiddleware,addToCart);
-router.delete('/remove',authMiddleware,removeInCart);
-router.post('/clear',authMiddleware,clearCart);
+router.post('/',authMiddleware,addToCart);
+router.delete('/',authMiddleware,removeInCart);
+router.put('/clear',authMiddleware,clearCart);
 
 module.exports = router;

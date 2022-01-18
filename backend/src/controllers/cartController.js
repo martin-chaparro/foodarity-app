@@ -21,8 +21,8 @@ const getCart = async (req, res) => {
 const addToCart = async (req, res) => {
   try {
     const { userId } = req;
-    const { pid, quantity } = req.query;
-    const action = req.query.action || 'add';
+    const { pid } = req.query;
+    const quantity = parseInt(req.query.quantity, 10);
     if (!pid && !quantity) {
       return res
         .status(401)
@@ -40,46 +40,30 @@ const addToCart = async (req, res) => {
     const cartProduct = await Cart.findOne({
       where: { user_id: userId, product_id: pid },
     });
-    switch (action) {
-      case 'add':
-        if (!cartProduct) {
-          if (product.quantity < quantity) {
-            return res
-              .status(401)
-              .json({
-                message: 'El producto no tienen tantos lotes disponibles',
-              });
-          }
-          const finalProduct = await Cart.create({ quantity });
-          await finalProduct.setUser(userId);
-          await finalProduct.setProduct(pid);
-        } else {
-          const finalQuantity = cartProduct.quantity + quantity;
-          if (product.quantity < finalQuantity) {
-            return res
-              .status(401)
-              .json({
-                message: 'El producto no tienen tantos lotes disponibles',
-              });
-          }
-          await cartProduct.update({ quantity: finalQuantity });
-        }
-        break;
-      case 'modify':
-        // eslint-disable-next-line no-case-declarations
-        const finalQuantity = cartProduct.quantity + quantity;
-        if (product.quantity < finalQuantity) {
-          return res
-            .status(401)
-            .json({
-              message: 'El producto no tienen tantos lotes disponibles',
-            });
-        }
-        await cartProduct.update({ quantity: finalQuantity });
-        break;
-      default:
-        break;
+
+    if (!cartProduct) {
+      if (product.quantity < quantity) {
+        return res.status(401).json({
+          message: 'El producto no tienen tantos lotes disponibles',
+        });
+      }
+      const finalProduct = await Cart.create({ quantity });
+      await finalProduct.setUser(userId);
+      await finalProduct.setProduct(pid);
+    } else {
+      const finalQuantity = cartProduct.quantity + quantity;
+      console.log(finalQuantity);
+      if (product.quantity < finalQuantity) {
+        return res.status(401).json({
+          message: 'El producto no tienen tantos lotes disponibles',
+        });
+      }
+      await cartProduct.update({ quantity: finalQuantity });
+      if (cartProduct.quantity <= 0) {
+        await cartProduct.destroy({force:true})
+      }
     }
+
     const cart = await getCartProducts(userId);
     return res.status(200).json(cart);
   } catch (error) {
@@ -93,7 +77,7 @@ const removeInCart = async (req, res) => {
     if (!pid) {
       return res.status(401).json({ message: 'Debes ingresar un product id' });
     }
-    Cart.destroy({ where: { product_id: pid }, force: true });
+    await Cart.destroy({ where: { product_id: pid }, force: true });
     const cart = await getCartProducts(userId);
     return res.status(200).json(cart);
   } catch (error) {
@@ -103,7 +87,7 @@ const removeInCart = async (req, res) => {
 const clearCart = async (req, res) => {
   try {
     const { userId } = req;
-    Cart.destroy({ where: { user_id: userId }, force: true });
+    await Cart.destroy({ where: { user_id: userId }, force: true });
     const cart = await getCartProducts(userId);
     return res.status(200).json(cart);
   } catch (error) {
