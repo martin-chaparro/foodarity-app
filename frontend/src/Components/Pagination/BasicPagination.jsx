@@ -1,3 +1,4 @@
+/* eslint-disable react/self-closing-comp */
 import * as React from 'react';
 import { useSelector } from 'react-redux';
 import styles from './Pagination.module.css';
@@ -14,7 +15,7 @@ export default function Pagination({ paginado }) {
 
   return (
     <nav className={styles.botoneraContent}>
-      <ul>
+      <ul className={styles.botones}>
         {pageNumbers &&
           pageNumbers.map((number) => {
             return (
