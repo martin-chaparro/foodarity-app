@@ -19,7 +19,7 @@ const createCompany = async (req, res) => {
   if (user.status) {
     res.status(400).json({message: 'el usuario esta deshabilitado'})
   }
-  if (user.companyId) {
+  if (user.company_id) {
     res.status(400).json({message: 'el usuario ya tiene una compania'})
   }
   try {
@@ -173,7 +173,7 @@ const searchCompanyByUser = async (req, res) => {
         },
       ],
     });
-    if (!user.companyId || user.companyId === null) {
+    if (!user.company_id || user.company_id === null) {
       return res.json({ msg: 'El usuario no posee una compañia' });
     }
     return res.status(200).json(user.company);
@@ -264,10 +264,10 @@ const deleteCompany = async (req, res) => {
 
     await Product.update(
       { status: 'canceled' },
-      { where: { [Op.and]: [{ CompanyId: id }, { status: 'published' }] } }
+      { where: { [Op.and]: [{ Company_id: id }, { status: 'published' }] } }
     );
 
-    const users = await User.findAll({ where: { companyId: id } });
+    const users = await User.findAll({ where: { company_id: id } });
     users.forEach((user) => {
       user.setCompany(null);
     });
@@ -343,13 +343,13 @@ const getUsers = async (req, res) => {
     const user = await User.findByPk(userId, {
       include: [{ model: Company, as: 'company' }],
     });
-    if (!user.companyId) {
+    if (!user.company_id) {
       return res.status(400).json({
         message: 'El usuario no tiene compania',
       });
     }
     const users = await User.findAll({
-      where: { companyId: user.companyId },
+      where: { company_id: user.company_id },
       attributes: { exclude: ['password', 'createdAt', 'updatedAt', 'RoleId'] },
     });
     return res.status(200).json(users);
@@ -366,7 +366,7 @@ const addUser = async (req, res) => {
       include: { model: Company, as: 'company' },
     });
 
-    if (!owner.companyId) {
+    if (!owner.company_id) {
       return res.status(400).json({
         message: 'El usuario no tiene compania',
       });
@@ -388,17 +388,17 @@ const addUser = async (req, res) => {
         message: 'El usuario no esta habilitado',
       });
     }
-    if (user.companyId === owner.companyId) {
+    if (user.company_id === owner.company_id) {
       return res.status(400).json({
         message: 'El usuario ya pertenece a tu compania',
       });
     }
-    if (user.companyId) {
+    if (user.company_id) {
       return res.status(400).json({
         message: 'El usuario ya pertenece a otra compania',
       });
     }
-    user.setCompany(owner.companyId);
+    user.setCompany(owner.company_id);
     return res.status(200).send({ message: `${user.email} added` });
   } catch (error) {
     return res.status(500).send(error);
@@ -414,7 +414,7 @@ const deleteUser = async (req, res) => {
       include: { model: Company, as: 'company' },
     });
     console.log('id params', id, 'user id', userId);
-    if (!owner.companyId) {
+    if (!owner.company_id) {
       return res.status(400).json({
         message: 'El usuario no tiene compania',
       });
@@ -433,7 +433,7 @@ const deleteUser = async (req, res) => {
         message: 'El usuario no existe',
       });
     }
-    if (user.companyId !== owner.companyId) {
+    if (user.company_id !== owner.company_id) {
       return res.status(400).json({
         message: 'El usuario no pertenece a tu compania',
       });

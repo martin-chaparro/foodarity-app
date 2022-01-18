@@ -17,12 +17,12 @@ const postDonation = async (req, res) => {
   
   // verifica que sea un usuario registrado
     const user = await User.findByPk(userId)
-    if (!user.CompanyId) {
+    if (!user.company_id) {
       return res.status(401).json({ msg: 'El usuario no posee un comercio' });
     }
 
     // verifica que el usuario no sea una ONG
-    const commerce = await Company.findByPk(user.companyId)
+    const commerce = await Company.findByPk(user.company_id)
 
        if (commerce.company_type_id !== 1) {
       return res.status(401).json({

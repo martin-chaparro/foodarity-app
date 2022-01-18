@@ -78,7 +78,7 @@ const getOrdersByCompany = async (req, res) => {
       include: [{ model: Company, as: 'company' }],
     });
 
-    if (!user.companyId) {
+    if (!user.company_id) {
       return res.status(401).json({ msg: 'El usuaria no posee un comercio' });
     }
     if (user.company.company_type_id !== 1) {
@@ -92,7 +92,7 @@ const getOrdersByCompany = async (req, res) => {
       });
     }
     const orders = await Order.findAll({
-      where: { companyId: user.companyId },
+      where: { company_id: user.company_id },
       include,
       attributes,
       order: [['id', 'DESC']],
@@ -112,7 +112,7 @@ const postOrder = async (req, res) => {
   try {
     const user = await User.findByPk(userId);
     const product = await Product.findByPk(id);
-    const company = await Company.findByPk(product.companyId);
+    const company = await Company.findByPk(product.company_id);
 
     console.log(company);
     const productQuantity = product.quantity;

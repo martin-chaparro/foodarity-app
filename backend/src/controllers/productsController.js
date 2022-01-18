@@ -184,7 +184,7 @@ const postProduct = async (req, res) => {
     const user = await User.findByPk(userId, {
       include: [{ model: Company, as: 'company' }],
     });
-    if (!user.companyId) {
+    if (!user.company_id) {
       return res
         .status(401)
         .json({ message: 'El usuaria no posee un comercio' });
@@ -248,7 +248,7 @@ const deletePublication = async (req, res) => {
       return res.status(404).json({ msg: 'Not found' });
     }
 
-    if (product.companyId !== user.CompanyId) {
+    if (product.company_id !== user.Company_id) {
       return res
         .status(401)
         .json({ message: 'Tu compania no publico este producto' });
@@ -282,7 +282,7 @@ const getCompanyProductsById = async (req, res) => {
       return res.status(404).json({ message: 'Not found' });
     }
     const products = await Product.findAll({
-      where: { CompanyId: id, status: 'published' },
+      where: { company_id: id, status: 'published' },
       order: [['id', 'DESC']],
       include,
       attributes,
@@ -297,7 +297,7 @@ const getCompanyProductsByAuth = async (req, res) => {
   try {
     const { userId } = req;
     const user = await User.findByPk(userId);
-    const id = user.CompanyId;
+    const id = user.company_id;
     const company = await Company.findByPk(id);
     if (!company) {
       return res.status(401).json({ message: 'No posees una compania' });
@@ -306,7 +306,7 @@ const getCompanyProductsByAuth = async (req, res) => {
       return res.status(401).json({ message: 'No posees un comercio' });
     }
     const products = await Product.findAll({
-      where: { CompanyId: id },
+      where: { company_id: id },
       order: [['id', 'DESC']],
       include,
       attributes,
