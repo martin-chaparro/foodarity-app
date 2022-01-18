@@ -9,7 +9,7 @@ class Company extends Model {
           allowNull: false,
         },
         description: {
-          type: DataTypes.STRING,
+          type: DataTypes.TEXT,
           allowNull: false,
         },
         areaCode: {

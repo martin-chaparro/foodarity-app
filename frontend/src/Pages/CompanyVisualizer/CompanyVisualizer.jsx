@@ -71,7 +71,7 @@ export default function CompanyVisualizer() {
       <div className={styles.divh2}>
         <h2 className={styles.h2}>Publicaciones de la empresa</h2>
       </div>
-         <div className={styles.divRenderCards}>
+         < div className={styles.divRenderCards}>
          {products && products.map((product, index) => (
                   // eslint-disable-next-line react/no-array-index-key
                   <CompanyProductCard key={index} product={product} />
@@ -79,7 +79,7 @@ export default function CompanyVisualizer() {
         </div>
       </div>}
       {company && company.company_type_id === 2 && ((user && user.company && user.company.company_type_id === 1 && user.company.status === 'Habilitada') ?
-       <div>ACÁ VA EL COMPONENTE DEL FORMULARIO</div> : <div>ACA VA EL TEXTO QUE SE LE MUESTRA A UN USUARIO COMUN, SIN COMPANIA</div>)
+       <div ><h1>ACÁ VA EL COMPONENTE DEL FORMULARIO</h1></div> : <div ><h1>ACA VA EL TEXTO QUE SE LE MUESTRA A UN USUARIO COMUN, SIN COMPANIA</h1></div>)
       
       }
     </div>
