@@ -79,7 +79,7 @@ export default function CompanyVisualizer() {
         </div>
       </div>}
       {company && company.company_type_id === 2 && ((user && user.company && user.company.company_type_id === 1 && user.company.status === 'Habilitada') ?
-       <div>ACÁ VA EL COMPONENTE DEL FORMULARIO</div> : <div>ACA VA EL TEXTO QUE SE LE MUESTRA A UN USUARIO COMUN, SIN COMPANIA</div>)
+       <div ><h1>ACÁ VA EL COMPONENTE DEL FORMULARIO</h1></div> : <div ><h1>ACA VA EL TEXTO QUE SE LE MUESTRA A UN USUARIO COMUN, SIN COMPANIA</h1></div>)
       
       }
     </div>

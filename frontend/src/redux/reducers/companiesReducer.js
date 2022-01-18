@@ -17,6 +17,7 @@ export default (state = initialState, action) => {
       };
     case types.getOngs:
       return {
+        ...state,
         ongs: action.payload,
       };
 

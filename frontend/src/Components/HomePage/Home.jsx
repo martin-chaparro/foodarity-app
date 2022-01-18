@@ -2,6 +2,7 @@
 import React from 'react';
 // eslint-disable-next-line import/no-duplicates
 import { useEffect, useState } from 'react';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { getProducts } from '../../redux/actions/productActions';
 import { getOngs} from '../../redux/actions/CompaniesActions';
@@ -12,14 +13,14 @@ import FiltroWeb from '../Drawer/FiltroWeb';
 import Pagination from '../Pagination/BasicPagination';
 import BannerSearch from '../Searchbar/BannerSearch';
 import OngSeccion from '../ONGSeccion/OngSeccion';
-import { startGoogleLogin } from '../../redux/actions/authActions';
+
 
 export default function Home() {
   const dispatch = useDispatch();
   // eslint-disable-next-line no-unused-vars
   const allProducts = useSelector((state) => state.product.products);
   const allProductsList = useSelector((state) => state.product.allProductsList);
-  const allOngs = useSelector((state) => startGoogleLogin.ong.ongs);
+  const allOngs = useSelector((state) => state.companies.ongs);
   // TODO revisar si se actualiza
 
   // const [currentPage, setCurrentPage] = useState(1);
@@ -85,6 +86,8 @@ export default function Home() {
     handleSearch();
   }, [allProductValues]);
 
+
+
   return (
     <div>
       <div>
@@ -108,7 +111,14 @@ export default function Home() {
           ))}
         </div>
         <div>
-          <OngSeccion ongs={allOngs}/>
+          {allOngs?.map((ong) => {
+          return (
+            
+             <OngSeccion key={ong.id} ong={ong}  />
+           
+          )})
+         
+        }
         </div>
       </div>
     </div>

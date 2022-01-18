@@ -1,44 +1,43 @@
 import React from 'react';
-import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
 import styles from './OngSeccion.module.css';
 
 
 
 
-export default function OngSeccion({ongs}) {
+export default function OngSeccion( {ong}) {
 
-  const navigate = useNavigate()
-    console.log("CONSOLE LOG ONGS!", ongs)
-  
+const navigate = useNavigate(); 
+
 //   const [open, setOpen] = useState(false);
 //   const handleOpen = () => setOpen(true);
 //   const handleClose = () => setOpen(false);
-  
 
+
+
+const handleCompanyClick = (event, id)=>{
+  navigate(`/company/${id}`, { replace: true })
+}
 
     return (
+       
         <div>
-
-            {ongs.map((ong) => (
+        
+                
                 <div className={styles.cont}>
                     <div className={styles.divImg}>
-                        <img src={ong.photo.url} alt="food" className={styles.img} />
+                        <img src={ong.logo.url} alt="food" className={styles.img}
+                          
+                         />
                     </div>
+                    
                     <div className={styles.content}>
                         <div className={styles.nameDiv}>
-                            <h3 className={styles.name}>{ong.name}</h3>
+                            <h3 className={styles.name}>{ong.name} </h3>
                         </div>
-                        <p className={styles.description}>
-                            {ong.description.slice(0, 70)}...
-                        </p>
                     </div>
+                    <button type='button' onClick={(e)=>{ handleCompanyClick(e, ong.id)} }>VISITAR PERFIL</button>
                 </div>
-
-            ))}
+       
         </div>
     )}

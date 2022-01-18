@@ -62,7 +62,8 @@ export const getCompanies = () => async (dispatch) => {
 
 export const getOngs = () => async (dispatch) => {
   try {
-    const response = await api.get('/companies/ong');
+    const response = await api.get('/companies/ongs');
+    console.log("DATA ONGS", response.data);
     return dispatch({
       type: types.getOngs,
       payload: response.data,
