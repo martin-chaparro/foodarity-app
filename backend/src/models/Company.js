@@ -59,8 +59,8 @@ class Company extends Model {
         },
         mp: {
           type: DataTypes.JSON,
-          allowNull:true
-        }
+          allowNull: true,
+        },
       },
       {
         sequelize,
@@ -69,12 +69,18 @@ class Company extends Model {
   }
 
   static associate(models) {
-    this.belongsTo(models.CompanyType, { foreignKey: 'company_type_id', as: 'type' });
-    this.hasMany(models.User, {as: 'user'});
-    this.hasOne(models.Address, { as: 'address' });
-    this.hasMany(models.Product);
-    this.hasMany(models.Donation);
-    this.hasMany(models.Order);
+    this.belongsTo(models.CompanyType, {
+      as: 'type',
+      foreignKey: 'company_type_id',
+    });
+    this.hasMany(models.User, { as: 'user', foreignKey: 'company_id' });
+    this.belongsTo(models.Address, { as: 'address', foreignKey: 'address_id' });
+    this.hasMany(models.Product, { as: 'product', foreignKey: 'company_id' });
+    this.hasMany(models.Donation, {
+      as: 'donation',
+      foreignKey: 'commerce_id',
+    });
+    this.hasMany(models.Order, { as: 'order', foreignKey: 'company_id' });
   }
 }
 

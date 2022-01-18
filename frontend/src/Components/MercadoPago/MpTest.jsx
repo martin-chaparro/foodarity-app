@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react'
 import { apiWithToken } from '../../services/api'
 
@@ -5,7 +6,7 @@ function MpTest() {
   const handleOnClick = () => {
     apiWithToken.get(`/mercadopago/register`).then(res => {window.location.href = res.data})
   }
-
+  
   return (
     <div>
      <br/>

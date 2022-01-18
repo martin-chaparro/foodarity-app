@@ -22,6 +22,8 @@ import { apiWithToken } from '../../services/api';
 import { startLogout } from '../../redux/actions/authActions';
 // import Drawer from '../Drawer/Drawer';
 
+import avatarDefault from '../../assets/avatar_default.png';
+
 export default function Navbar() {
   const dispatch = useDispatch();
   const { id } = useSelector((state) => state.auth);
@@ -35,6 +37,7 @@ export default function Navbar() {
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
 
   React.useEffect(() => {
     setCurrentPath(location.pathname);
@@ -81,6 +84,13 @@ export default function Navbar() {
     <span>
       {id && currentPath !== '/profileuser' && (
         <MenuItem>
+        <Link
+            to="/profileuser"
+            textDecoration="none"
+            onClick={handleMenuClose}
+          >
+            {user.name ? user.name : 'Mi Cuenta'}
+          </Link>
           <IconButton
             size="large"
             aria-label="account of current user"
@@ -90,17 +100,19 @@ export default function Navbar() {
           >
             <Avatar />
           </IconButton>
-          <Link
-            to="/profileuser"
-            textDecoration="none"
-            onClick={handleMenuClose}
-          >
-            {user.name ? user.name : 'Mi Cuenta'}
-          </Link>
+          
         </MenuItem>
       )}
       {id && user.company && currentPath !== '/profilecompany' && (
         <MenuItem>
+        <Link
+            to="/profilecompany"
+            textDecoration="none"
+            onClick={handleMenuClose}
+          >
+            {/* {user.company && (user.company.company_type_id === 1 ? 'Mi comercio' : 'Mi ONG')} */}
+            {user.company.name}
+          </Link>
           <IconButton
             size="large"
             aria-label="account of current user"
@@ -110,42 +122,20 @@ export default function Navbar() {
           >
             <StoreIcon />
           </IconButton>
-          <Link
-            to="/profilecompany"
-            textDecoration="none"
-            onClick={handleMenuClose}
-          >
-            {/* {user.company && (user.company.company_type_id === 1 ? 'Mi comercio' : 'Mi ONG')} */}
-            {user.company.name}
-          </Link>
+          
         </MenuItem>
       )}
       {id &&
         !user.company &&
         currentPath !== '/rollselector/registerformcommerce' && (
           <MenuItem>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="vista-mobile"
-              aria-haspopup="true"
-              color="secondary"
-            >
-              <StoreIcon />
-            </IconButton>
-            <Link
+           <Link
               to="/rollSelector/registerformcommerce"
               textDecoration="none"
               onClick={handleMenuClose}
             >
               Añadir comercio
             </Link>
-          </MenuItem>
-        )}
-      {id &&
-        !user.company &&
-        currentPath !== '/rollselector/register_form_ong' && (
-          <MenuItem>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -155,13 +145,30 @@ export default function Navbar() {
             >
               <StoreIcon />
             </IconButton>
-            <Link
+           
+          </MenuItem>
+        )}
+      {id &&
+        !user.company &&
+        currentPath !== '/rollselector/register_form_ong' && (
+          <MenuItem>
+          <Link
               to="/rollSelector/register_form_ong"
               textDecoration="none"
               onClick={handleMenuClose}
             >
               Añadir ONG
             </Link>
+            <IconButton
+              size="large"
+              aria-label="account of current user"
+              aria-controls="vista-mobile"
+              aria-haspopup="true"
+              color="secondary"
+            >
+              <StoreIcon />
+            </IconButton>
+            
           </MenuItem>
         )}
       {id && currentPath === '/home' && (
@@ -194,34 +201,35 @@ export default function Navbar() {
       )}
       {!id && (
         <MenuItem>
+        <Link to="/register" textDecoration="none" onClick={handleMenuClose}>
           <IconButton
             size="large"
             aria-label="show 17 new notifications"
             color="inherit"
           >
             <AppRegistrationIcon color="secondary" />
-          </IconButton>
-          <Link to="/register" textDecoration="none" onClick={handleMenuClose}>
+          </IconButton>         
             Registrarse
           </Link>
         </MenuItem>
       )}
       {!id && (
         <MenuItem>
+        <Link to="/login" textDecoration="none" onClick={handleMenuClose}>
           <IconButton
             size="large"
             aria-label="show 17 new notifications"
             color="inherit"
           >
             <LoginIcon color="secondary" />
-          </IconButton>
-          <Link to="/login" textDecoration="none" onClick={handleMenuClose}>
+          </IconButton>          
             Iniciar Sesión
           </Link>
         </MenuItem>
       )}
       {id && (
         <MenuItem>
+        <Link to="/" onClick={handleLogOut} textDecoration="none">
           <IconButton
             size="large"
             aria-label="show 17 new notifications"
@@ -229,8 +237,7 @@ export default function Navbar() {
             href="/"
           >
             <LogoutIcon color="secondary" />
-          </IconButton>
-          <Link to="/" onClick={handleLogOut} textDecoration="none">
+          </IconButton> 
             Cerrar Sesión
           </Link>
         </MenuItem>
@@ -338,7 +345,16 @@ export default function Navbar() {
               onClick={handleProfileMenuOpen}
               color="inherit"
             >
-              <Avatar photo={user.photo} />
+              <Avatar
+                photo={
+                  // eslint-disable-next-line no-nested-ternary
+                  user.photo
+                    ? user.photo.url
+                    : user.socialPhoto
+                    ? user.socialPhoto
+                    : avatarDefault
+                }
+              />
             </IconButton>
           </Box>
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>

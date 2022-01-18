@@ -128,7 +128,7 @@
 
 .img {
   position: relative;
-  left: 13px;
+  left: 12px;
   width: 160px;
   height: 180px;
 }
@@ -138,6 +138,7 @@
   height: 180px;
   display: flex;
   position: relative;
+  margin-right: 30px;
 }
 
 .BoxGeneral {

@@ -29,8 +29,8 @@ class State extends Model {
   }
 
   static associate(models) {
-    this.hasMany(models.Address);
-    this.hasMany(models.City, { foreignKey: 'state_id', as: 'state' });
+    this.hasMany(models.Address, { as: 'address', foreignKey: 'state_id' });
+    this.hasMany(models.City, { as: 'state', foreignKey: 'state_id' });
   }
 }
 

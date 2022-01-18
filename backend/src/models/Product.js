@@ -49,10 +49,16 @@ class Product extends Model {
   }
 
   static associate(models) {
-    this.belongsTo(models.Category, { as: 'category' });
-    this.belongsTo(models.Company, { as: 'company' });
-    this.belongsTo(models.User, { as: 'publisher' });
-    this.hasMany(models.Order, { as: 'orders' });
+    this.belongsTo(models.Category, {
+      as: 'category',
+      foreignKey: 'category_id',
+    });
+    this.belongsTo(models.Company, { as: 'company', foreignKey: 'company_id' });
+    this.belongsTo(models.User, {
+      as: 'publisher',
+      foreignKey: 'publisher_id',
+    });
+    this.hasMany(models.Order, { as: 'orders', foreignKey: 'product_id' });
     this.hasMany(models.Cart, { as: 'cart', foreignKey: 'product_id' });
   }
 }
