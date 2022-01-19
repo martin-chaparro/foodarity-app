@@ -6,8 +6,10 @@ import Home from '../Components/HomePage/Home';
 import Landing from '../Pages/LandingPage/Landing';
 import Register from '../Pages/Register/RegisterFormUser';
 import Loading from '../Components/Loading/Loading';
+
 import ProfileCompany from '../Pages/ProfileCompany/ProfileCompany';
 import ProfileUser from '../Pages/ProfileUser/ProfileUser';
+import ShopCart from '../Pages/ShopCart/ShopCart';
 // import AMyProfile from '../Pages/Profile User/AMyProfile';
 import CompanyVisualizer from '../Pages/CompanyVisualizer/CompanyVisualizer';
 import Navbar from '../Components/Navbar/Navbar';
@@ -54,6 +56,14 @@ export function AppRouter() {
           element={
             <PrivateRoute isAuisAuthenticated={!!id}>
               <ProfileCompany />
+            </PrivateRoute>
+          }
+        />
+             <Route
+          path="/cart"
+          element={
+            <PrivateRoute isAuisAuthenticated={!!id}>
+              <ShopCart />
             </PrivateRoute>
           }
         />
