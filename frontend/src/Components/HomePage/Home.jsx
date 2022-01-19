@@ -110,7 +110,8 @@ export default function Home() {
             <ProductCard key={index} product={product} />
           ))}
         </div>
-        <div>
+        <div className={styles.contOngs}>
+        <h2 className={styles.titleOng}>¡Conoce nuestras ONGs!</h2>
           {allOngs?.map((ong) => {
           return (
             
