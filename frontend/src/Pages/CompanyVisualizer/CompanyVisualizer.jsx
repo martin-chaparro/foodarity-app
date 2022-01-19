@@ -66,6 +66,9 @@ export default function CompanyVisualizer() {
             <p>Cód. Postal: {company?.address.zipcode}</p>
           </div>
       </div>
+      <div className={styles.description}>
+        <p>{company?.description}</p> 
+      </div>
       {company && company.company_type_id === 1 && 
       <div className={styles.renderContainer}>
       <div className={styles.divh2}>
