@@ -108,7 +108,7 @@ export default function UserDetail({ detail }) {
         </Box>
       </div>
       <div className={estilos.imagen}>
-        <ImageListItem sx={{ width: 580, height: 500, marginTop: 4 }}>
+        <ImageListItem sx={{ width: 580, height: 500, marginTop: 2 }}>
           <img src={bolsa1} alt="phot" loading="lazy" />
         </ImageListItem>
       </div>

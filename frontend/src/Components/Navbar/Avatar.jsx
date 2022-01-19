@@ -43,7 +43,11 @@ export default function BadgeAvatars({ photo }) {
       >
         <Avatar
           alt="profilePhoto"
-          src={photo ? photo.url : 'https://acortar.link/s829DX'}
+          src={
+            photo
+              ? photo.url
+              : 'https://res.cloudinary.com/dxbtqclyu/image/upload/v1642367029/Captura_de_pantalla_2022-01-16_150126_l0f8w3.png'
+          }
         />
       </StyledBadge>
     </Stack>
