@@ -1,11 +1,12 @@
 const Cart = require('../models/Cart');
 const Product = require('../models/Product');
+const Company = require('../models/Company');
 
 async function getCartProducts(userId) {
   const cart = await Cart.findAll({
     where: { user_id: userId },
     attributes: { exclude: ['createdAt', 'updatedAt'] },
-    include: [{ model: Product, as: 'product' }],
+    include: [{ model: Product, as: 'product' , include: [{model: Company, as: 'company'}]}],
   });
   return cart;
 }

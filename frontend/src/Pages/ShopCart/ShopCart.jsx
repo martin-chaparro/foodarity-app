@@ -21,7 +21,12 @@ export default function ShopCart() {
   useEffect(() =>{
     const byCommerce = []
     cart.forEach(item => {
-      byCommerce[item.product.company_id] = {...byCommerce[item.product.company_id], item}
+      if (!byCommerce[item.product.company_id]) {
+        byCommerce[item.product.company_id] = [item]
+      } else {
+        byCommerce[item.product.company_id].push(item)
+      }
+      
     })
     console.log(byCommerce)
     console.log(cartByCommerce)
