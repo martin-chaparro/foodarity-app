@@ -7,7 +7,7 @@ class PaymentMethod extends Model {
         method: {
           type: DataTypes.STRING,
           allowNull: false,
-        }
+        },
       },
       {
         sequelize,
@@ -16,7 +16,10 @@ class PaymentMethod extends Model {
   }
 
   static associate(models) {
-    this.hasMany(models.Order)
+    this.hasMany(models.Order, {
+      as: 'order',
+      foreignKey: 'payment_method_id',
+    });
   }
 }
 

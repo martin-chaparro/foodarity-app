@@ -29,10 +29,19 @@ class Donation extends Model {
 
   static associate(models) {
     // se agrega una ForeingKey categoriId a la tabla Donation
-    this.belongsTo(models.Category, { as: 'category' });
-    this.belongsTo(models.Company, { as: 'ong' });
-    this.belongsTo(models.Company, { as: 'commerce' });
-    this.belongsTo(models.User, { as: 'publisher' });
+    this.belongsTo(models.Category, {
+      as: 'category',
+      foreignKey: 'category_id',
+    });
+    this.belongsTo(models.Company, { as: 'ong', foreignKey: 'ong_id' });
+    this.belongsTo(models.Company, {
+      as: 'company',
+      foreignKey: 'commerce_id',
+    });
+    this.belongsTo(models.User, {
+      as: 'publisher',
+      foreignKey: 'publisher_id',
+    });
   }
 }
 

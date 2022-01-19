@@ -33,8 +33,8 @@ class City extends Model {
   }
 
   static associate(models) {
-    this.hasMany(models.Address);
-    this.belongsTo(models.State, { foreignKey: 'state_id', as: 'state' });
+    this.hasMany(models.Address, { as: 'address', foreignKey: 'city_id' });
+    this.belongsTo(models.State, { as: 'state', foreignKey: 'state_id' });
   }
 }
 

@@ -6,7 +6,7 @@ import Drawer from '../Drawer/Drawer';
 
 export default function BannerSearch({ search, lote, filtrado }) {
   return (
-    <body className={estilo.body}>
+    <div className={estilo.body}>
       <div className={estilo.heroimage}>
         <div className={estilo.container}>
           <h1>
@@ -20,6 +20,6 @@ export default function BannerSearch({ search, lote, filtrado }) {
           </div>
         </div>
       </div>
-    </body>
+    </div>
   );
 }

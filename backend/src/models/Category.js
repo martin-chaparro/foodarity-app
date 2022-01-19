@@ -16,9 +16,12 @@ class Category extends Model {
   }
 
   static associate(models) {
-    this.hasMany(models.Product);
+    this.hasMany(models.Product, { as: 'products', foreignKey: 'category_id' });
     // se agrega una ForeingKey donationId a la tabla Donation
-    this.hasMany(models.Donation);
+    this.hasMany(models.Donation, {
+      as: 'donation',
+      foreignKey: 'category_id',
+    });
   }
 }
 

@@ -13,15 +13,15 @@ function FiltroForm({ filtrado }) {
     categoryId: '',
     minPrice: 0,
     maxPrice: 0,
-    expirationDate: '',
-    order: '',
+    expirationDate: 'clear',
+    order: 'recents',
   });
 
   useEffect(() => {
     if (!input.minPrice) setInput({ ...input, minPrice: '0' });
     if (!input.maxPrice) setInput({ ...input, maxPrice: '0' });
   }, [input.minPrice, input.maxPrice]);
-
+ 
   useEffect(() => {
     api.get('/products/categories')
       .then((res) => {
@@ -37,10 +37,10 @@ function FiltroForm({ filtrado }) {
     const clearInput = {
       categoryName: 'Todas',
       categoryId: '',
-      minPrice: 0,
-      maxPrice: 0,
-      expirationDate: '',
-      order: '',
+      minPrice: '0',
+      maxPrice: '0',
+      expirationDate: 'clear',
+      order: 'recents',
     }
     setInput(clearInput)
     filtrado(clearInput)
