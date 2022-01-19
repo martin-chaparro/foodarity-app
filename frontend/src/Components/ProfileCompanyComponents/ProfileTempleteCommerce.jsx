@@ -12,8 +12,9 @@ import IconButton from '@mui/material/IconButton';
 
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
-// import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
+import DragHandleIcon from '@mui/icons-material/DragHandle';
 
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
@@ -134,9 +135,9 @@ function ProfileTempleteCommerce(props) {
                   handleDisplay(index);
                 }}
               >
-                {/* <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon> */}
+                <ListItemIcon>
+                  <DragHandleIcon sx={{ color: '#7ED957' }} />
+                </ListItemIcon>
                 <ListItemText primary={text} />
               </ListItem>
             )
@@ -240,7 +241,7 @@ function ProfileTempleteCommerce(props) {
           }}
         >
           <Toolbar display="inline" />
-          {display === 0 && <PortalCompania />}
+          {display === 0 && <PortalCompania company={company} />}
           {display === 1 && <CompanyDetail company={company} />}
           {display === 2 && (
             // eslint-disable-next-line react/jsx-no-bind

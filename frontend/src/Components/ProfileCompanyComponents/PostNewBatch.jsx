@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Avatar from '@mui/material/Avatar';
+import Typography from '@mui/material/Typography';
 import Swal from 'sweetalert2';
 import styles from './PostNewBatch.module.css';
 
@@ -67,9 +68,9 @@ export default function PostNewBatch() {
       errors.category = 'Category is required';
     }
 
-    if (inputs.photo === {}) {
-      errors.photo = 'Photo is required';
-    }
+    // if (inputs.photo === {}) {
+    //   errors.photo = 'Photo is required';
+    // }
 
     return errors;
   }
@@ -82,12 +83,15 @@ export default function PostNewBatch() {
     setCheckFullField();
   }
 
+  console.log(Object.keys(validate(input)).length);
+
   function handleSubmit(e) {
     e.preventDefault();
 
     const errors = validate(input);
+    console.log(errors);
 
-    if (!Object.keys(errors).length) {
+    if (Object.keys(errors).length) {
       Swal.fire({
         icon: 'error',
         title: 'Campos incompletos',
@@ -233,6 +237,14 @@ export default function PostNewBatch() {
 
   return (
     <div className={styles.formcont}>
+      <Typography
+        variant="h4"
+        gutterBottom
+        component="div"
+        sx={{ color: '#7ED957', marginBottom: 1, textAlign: 'center' }}
+      >
+        Publique un nuevo producto !
+      </Typography>
       <form className={styles.formcont} onSubmit={handleSubmit}>
         <div className={styles.generalcont}>
           <div className={styles.imagecontent}>
