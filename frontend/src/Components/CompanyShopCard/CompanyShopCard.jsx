@@ -3,7 +3,9 @@ import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
 import ProductShopCard from '../ProductShopCard/ProductShopCard';
 import styles from './CompanyShopCard.module.css';
 
+
 export default function CompanyShopCard() {
+
   return (
     <div className={styles.generalDiv}>
       <div className={styles.productShopCardDiv}>
@@ -11,7 +13,7 @@ export default function CompanyShopCard() {
           <p className={styles.titleCompany}>Nombre de compania</p>
         </div>
       </div>
-      <ProductShopCard />
+      <ProductShopCard/>
       <div className={styles.TotalDiv}>
           <p className={styles.total}>
               Total $000.000
@@ -24,6 +26,7 @@ export default function CompanyShopCard() {
             sx={{ widht: 15, height: 15, position: 'relative', left: 2 }}
           />
         </button>
+       
       </div>
     </div>
   );
