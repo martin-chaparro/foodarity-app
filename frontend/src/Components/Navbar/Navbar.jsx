@@ -28,6 +28,7 @@ import avatarDefault from '../../assets/avatar_default.png';
 export default function Navbar() {
   const dispatch = useDispatch();
   const { id } = useSelector((state) => state.auth);
+  const {cart} = useSelector((state) => state.cart)
   const location = useLocation();
 
   const [currentPath, setCurrentPath] = React.useState('');
@@ -199,11 +200,11 @@ export default function Navbar() {
           <IconButton
             size="large"
             aria-label="show 17 new notifications"
-            color="inherit"
+            color="secondary"
           >
-            <Badge>
-              <ShoppingCartIcon color="secondary" />
-            </Badge>
+            <Badge badgeContent={cart.length} color="primary">
+                <ShoppingCartIcon />
+                </Badge>
           </IconButton>
           <p>Mi Carrito</p>
         </MenuItem>
@@ -349,17 +350,18 @@ export default function Navbar() {
           </Link>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            {id && (
+            {/* {id && (
               <IconButton
                 size="large"
                 aria-label="show 4 new mails"
                 color="inherit"
               >
-                <Badge badgeContent={4} color="secondary">
+                <Badge badgeContent={3} color="secondary">
                   <FavoriteIcon />
                 </Badge>
+              
               </IconButton>
-            )}
+            )} */}
             {id && (
               <IconButton
                 size="large"
@@ -368,8 +370,8 @@ export default function Navbar() {
                 aria-controls={cartId}
                 onClick={handleCartMenuOpen}
               >
-                <Badge badgeContent={3} color="secondary">
-                  <ShoppingCartIcon />
+                <Badge badgeContent={cart.length} color="secondary">
+                <ShoppingCartIcon />
                 </Badge>
               </IconButton>
             )}
