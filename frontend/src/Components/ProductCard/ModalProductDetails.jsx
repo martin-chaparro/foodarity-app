@@ -30,7 +30,7 @@ function ModalProductDetails({ product, open, handleClose }) {
   }, [location]);
 
   const handleAddToCart = () => {
-    dispatch(addToCart(product.id,input));
+    dispatch(addToCart(product.id,quantity));
     handleClose()
   };
 
