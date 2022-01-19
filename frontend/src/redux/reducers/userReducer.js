@@ -10,6 +10,10 @@ export default (state = initialState, action) => {
       return {
         user: action.payload,
       };
+    case types.updateUser:
+      return {
+        user: action.payload,
+      };
     default:
       return state;
   }
