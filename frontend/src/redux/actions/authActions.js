@@ -39,6 +39,8 @@ export const startLogin = (email, password) => {
       const response = await api.post('/auth', { email, password });
       const { id, name, token } = response.data;
       localStorage.setItem('token', token);
+      localStorage.setItem('id', id);
+      localStorage.setItem('name', name);
       dispatch(
         login({
           id,
@@ -66,6 +68,8 @@ export const startGoogleLogin = (tokenId) => {
       const response = await api.post('/auth/social/google', { tokenId });
       const { id, name, token } = response.data;
       localStorage.setItem('token', token);
+      localStorage.setItem('id', id);
+      localStorage.setItem('name', name);
       dispatch(
         login({
           id,
@@ -127,6 +131,8 @@ export const startGoogleRegister = (tokenId) => {
       const response = await api.post('/auth/social/google', { tokenId });
       const { id, name, token } = response.data;
       localStorage.setItem('token', token);
+      localStorage.setItem('id', id);
+      localStorage.setItem('name', name);
 
       dispatch(
         login({
