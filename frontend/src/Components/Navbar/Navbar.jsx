@@ -197,6 +197,7 @@ export default function Navbar() {
       )}
       {id && currentPath === '/home' && (
         <MenuItem>
+        <Link to='/cart'>
           <IconButton
             size="large"
             aria-label="show 17 new notifications"
@@ -206,7 +207,8 @@ export default function Navbar() {
                 <ShoppingCartIcon />
                 </Badge>
           </IconButton>
-          <p>Mi Carrito</p>
+          Mi Carrito
+          </Link>
         </MenuItem>
       )}
       {!id && (

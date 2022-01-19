@@ -24,7 +24,7 @@ const addToCart = async (req, res) => {
     const { userId } = req;
     const { pid } = req.query;
     const quantity = parseInt(req.query.quantity, 10);
-    if (!pid && !quantity) {
+    if (!pid || !quantity) {
       return res
         .status(401)
         .json({ message: 'Debes ingresar un product id y/o una cantidad' });
