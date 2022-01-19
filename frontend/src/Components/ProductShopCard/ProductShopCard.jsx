@@ -19,7 +19,7 @@ export default function ProductShopCard({item}) {
         <div className={styles.generalContainerDiv}>
             <div className={styles.subGeneralContainerDiv}>
                 <div className={styles.divImg}>
-                    <img className={styles.img} src="" alt="" />
+                    <img className={styles.img} src={item.product.photo.url} alt="" />
                 </div>
                 <div className={styles.lote}>
            <p>{item.product.lote}</p>
@@ -37,7 +37,7 @@ export default function ProductShopCard({item}) {
            </div>
            <div className={styles.icon}>
                <button className={styles.deleteButton} type='submit'>
-           <DeleteIcon color='error'
+           <DeleteIcon
            />
            </button>
            </div>
