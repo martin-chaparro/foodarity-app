@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 const { Op } = require('sequelize');
 const Order = require('../models/Order');
 const Product = require('../models/Product');
@@ -109,15 +110,11 @@ const getOrdersByCompany = async (req, res) => {
 const postOrder = async (req, res) => {
   // TODO AGREGAR CHECKEO DE COMPANY y USER
   const { userId } = req;
-  const { id } = req.params;
-  const { date, quantity, paymentMethod } = req.body;
+  const { date, quantityByProduct, paymentMethod, company_id } = req.body;
   try {
     const user = await User.findByPk(userId);
-    const product = await Product.findByPk(id);
-    const company = await Company.findByPk(product.company_id);
+    const company = await Company.findByPk(company_id);
 
-    console.log(company);
-    const productQuantity = product.quantity;
     if (!user.status) {
       return res.json({
         message: 'El usuario esta deshabilitado',
@@ -133,43 +130,51 @@ const postOrder = async (req, res) => {
         message: 'El comercio no esta habilitado',
       });
     }
-    if (product.status !== 'published') {
-      return res.json({
-        message: 'El producto no esta publicado',
-      });
-    }
-    if (productQuantity < quantity) {
-      return res.json({
-        message: 'El producto no tiene esa cantidad de lotes',
-      });
-    }
-    if (productQuantity > quantity) {
-      await Product.update(
-        { quantity: productQuantity - quantity },
-        { where: { id } }
-      );
-      await Cart.update(
-        { quantity: productQuantity - quantity },
-        {
-          where: {
-            product_id: id,
-            quantity: { [Op.gte]: productQuantity - quantity },
-          },
-        }
-      );
-    }
-    if (productQuantity === quantity) {
-      await Product.update(
-        { quantity: productQuantity - quantity, status: 'finished' },
-        { where: { id } }
-      );
-      await Cart.destroy({ where: { product_id: id } });
-    }
+    // aca
+    // eslint-disable-next-line consistent-return
+    quantityByProduct.forEach(async (data) => {
+      const { product_id, quantity } = data;
+      const product = await Product.findByPk(product_id);
 
-    const order = await Order.create({ date, quantity });
+      const productQuantity = product.quantity;
+      if (product.status !== 'published') {
+        return res.json({
+          message: 'El producto no esta publicado',
+        });
+      }
+      if (productQuantity < quantity) {
+        return res.json({
+          message: 'El producto no tiene esa cantidad de lotes',
+        });
+      }
+      if (productQuantity > quantity) {
+        await Product.update(
+          { quantity: productQuantity - quantity },
+          { where: { id: product_id } }
+        );
+        await Cart.update(
+          { quantity: productQuantity - quantity },
+          {
+            where: {
+              product_id,
+              quantity: { [Op.gte]: productQuantity - quantity },
+            },
+          }
+        );
+      }
+      if (productQuantity === quantity) {
+        await Product.update(
+          { quantity: productQuantity - quantity, status: 'finished' },
+          { where: { id: product_id } }
+        );
+        await Cart.destroy({ where: { product_id } });
+      }
+    });
+    // aca
+
+    const order = await Order.create({ date, quantityByProduct });
     await order.setCompany(1);
     await order.setBuyer(userId);
-    await order.setProduct(id);
     await order.setPaymentMethod(paymentMethod);
 
     return res.status(200).json(order);
