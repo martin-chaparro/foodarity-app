@@ -25,6 +25,9 @@ export default function PostNewBatch() {
 
   const [error, setError] = useState({});
 
+  // eslint-disable-next-line no-unused-vars
+  const [checkFullField, setCheckFullField] = useState(false);
+
   const [input, setInput] = useState({
     lote: '',
     description: '',
@@ -76,6 +79,7 @@ export default function PostNewBatch() {
       ...input,
       [e.target.name]: e.target.value,
     });
+    setCheckFullField();
   }
 
   function handleSubmit(e) {
@@ -83,11 +87,40 @@ export default function PostNewBatch() {
 
     const errors = validate(input);
 
-    if (!Object.keys(errors).length && !error.price && !error.quantity) {
+    if (!Object.keys(errors).length) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Campos incompletos',
+        text: '¡Complete todos los campos!',
+      });
+    } else if (!photo.name) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Foto del Producto Requerida !',
+        text: '¡Subí una foto de tu producto haciendo click sobre la misma !',
+      });
+    } else if (error.price === 'El numero debe ser > a 0') {
+      Swal.fire({
+        icon: 'error',
+        title: 'Precio incorrecto!',
+        text: '¡El número debe ser mayor a cero!',
+      });
+    } else if (error.price === 'Solo Números') {
+      Swal.fire({
+        icon: 'error',
+        title: 'Precio incorrecto!',
+        text: '¡Solo se aceptan numeros, utilice una coma para los decimales!',
+      });
+    } else if (error.quantity) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Cantidad incorrecta!',
+        text: '¡El número debe ser mayor a cero!',
+      });
+    } else {
       dispatch(postProduct(input, photo));
 
       // eslint-disable-next-line no-alert
-      alert('Producto Publicado con Exito');
       setInput({
         lote: '',
         description: '',
@@ -99,14 +132,8 @@ export default function PostNewBatch() {
       });
 
       setPhoto({});
-    } else {
       // eslint-disable-next-line no-alert
-
-      Swal.fire({
-        icon: 'error',
-        title: 'Campos incompletos',
-        text: '¡Complete todos los campos!',
-      });
+      alert('Producto Publicado con Exito');
     }
   }
 
@@ -124,8 +151,6 @@ export default function PostNewBatch() {
 
   function validatePrice(event) {
     const { name, value } = event.target;
-
-    console.log(value);
 
     setInput({
       ...input,
@@ -168,14 +193,6 @@ export default function PostNewBatch() {
         ...error,
         [name]: '',
       });
-    }
-  }
-
-  function resetError(event) {
-    const { value } = event.target;
-
-    if (!value) {
-      setError({});
     }
   }
 
@@ -236,6 +253,9 @@ export default function PostNewBatch() {
                   id="productImage"
                   sx={{ width: 150, height: 150, cursor: 'pointer' }}
                 />
+                <p className={styles.subifoto} id="datosImagen">
+                  Subi una foto !
+                </p>
               </label>
             </div>
 
@@ -281,7 +301,6 @@ export default function PostNewBatch() {
                   // eslint-disable-next-line react/jsx-no-bind
                   ValidateQuantity={ValidateQuantity}
                   // eslint-disable-next-line react/jsx-no-bind
-                  resetError={resetError}
                 />
                 <div classsName={styles.quantityError}>
                   <p className={styles.error}>
@@ -300,7 +319,6 @@ export default function PostNewBatch() {
                   // eslint-disable-next-line react/jsx-no-bind
                   validatePrice={validatePrice}
                   // eslint-disable-next-line react/jsx-no-bind
-                  resetError={resetError}
                 />
                 <div>
                   <p className={styles.error}>{error.price && error.price}</p>

@@ -240,15 +240,15 @@ function ProfileTempleteCommerce(props) {
           }}
         >
           <Toolbar display="inline" />
-          {display === 7 && <PortalCompania />}
-          {display === 0 && <CompanyDetail company={company} />}
-          {display === 1 && (
+          {display === 0 && <PortalCompania />}
+          {display === 1 && <CompanyDetail company={company} />}
+          {display === 2 && (
             // eslint-disable-next-line react/jsx-no-bind
             <Usuarios company={company} />
           )}
-          {display === 2 && <PublishedProduct />}
-          {display === 3 && <Orders orders={orders} />}
-          {display === 4 && (
+          {display === 3 && <PublishedProduct />}
+          {display === 4 && <Orders orders={orders} />}
+          {display === 5 && (
             <Donations
               donations={
                 company.company_type_id === 1 ? commerceDonations : ongDonations
@@ -256,7 +256,7 @@ function ProfileTempleteCommerce(props) {
               typeId={company.company_type_id}
             />
           )}
-          {display === 5 && <PostNewBatch />}
+          {display === 6 && <PostNewBatch />}
 
           {display === 99 && <Delete company={company} />}
         </Box>

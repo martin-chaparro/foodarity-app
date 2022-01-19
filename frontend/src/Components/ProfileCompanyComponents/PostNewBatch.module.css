@@ -109,3 +109,13 @@
 .quantityError {
   height: 1px;
 }
+
+.subifoto {
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: smaller;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-weight: 500;
+  cursor: pointer;
+}
