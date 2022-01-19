@@ -14,10 +14,6 @@ export default function UserDetail({ detail }) {
   // email, id, phone, photo, deleted, socialPhoto, status;
   const { name, email, phone, status } = detail;
 
-  // function handleOnclick() {
-  //   setDisplayDetail(false);
-  // }
-
   return (
     <div className={styles.parent}>
       {displayDetail ? (
@@ -71,17 +67,6 @@ export default function UserDetail({ detail }) {
               <span style={{ color: '#8865b9' }}>
                 {phone || ' No registrado aún'}{' '}
               </span>
-            </Typography>
-          </div>
-          <div>
-            <Typography
-              variant="h6"
-              gutterBottom
-              component="div"
-              sx={{ color: '#7ED957', marginTop: '0' }}
-            >
-              Dirección:
-              <span style={{ color: '#8865b9' }}> No registrado aún</span>
             </Typography>
           </div>
           <div>

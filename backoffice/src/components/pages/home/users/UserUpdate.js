@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+// eslint-disable-next-line import/no-unresolved
 import Swal from 'sweetalert2';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
@@ -71,7 +72,7 @@ export const UserUpdate = () => {
                   title: 'Actualizado',
                   text: 'Usuario actualizado correctamente.',
                 });
-                setFile(null)
+                setFile(null);
               })
               .catch(() => {
                 Swal.fire({
@@ -80,7 +81,7 @@ export const UserUpdate = () => {
                   text: 'Consulte al administrador.',
                 });
               });
-              setFile(null)
+            setFile(null);
           })
           .catch(() => {
             Swal.fire({
@@ -88,10 +89,9 @@ export const UserUpdate = () => {
               title: 'No se pudo actualizar!',
               text: 'Consulte al administrador. Error al subir la imagen',
             });
-            setFile(null)
+            setFile(null);
           });
-      }else{
-
+      } else {
         apiWithToken
           .put(`/admin/users/${id}`, formik.values)
           .then(() => {

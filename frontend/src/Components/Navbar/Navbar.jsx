@@ -20,11 +20,15 @@ import Logo from '../../assets/Mobil-Full-Header-Logo.png';
 import Avatar from './Avatar';
 import { apiWithToken } from '../../services/api';
 import { startLogout } from '../../redux/actions/authActions';
+import CartMenu from './CartMenu';
 // import Drawer from '../Drawer/Drawer';
+
+import avatarDefault from '../../assets/avatar_default.png';
 
 export default function Navbar() {
   const dispatch = useDispatch();
   const { id } = useSelector((state) => state.auth);
+  const {cart} = useSelector((state) => state.cart)
   const location = useLocation();
 
   const [currentPath, setCurrentPath] = React.useState('');
@@ -55,6 +59,19 @@ export default function Navbar() {
     }
   };
 
+  const [cartAnchorEl, setCartAnchorEl] = React.useState(null);
+  const isCartOpen = Boolean(cartAnchorEl);
+  const handleCartMenuOpen = (event) => {
+    if (isCartOpen) {
+      setCartAnchorEl(null);
+    } else {
+      setCartAnchorEl(event.currentTarget);
+    }
+  };
+  const handleCartMenuClose = () => {
+    setCartAnchorEl(null);
+  };
+
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
   };
@@ -81,40 +98,40 @@ export default function Navbar() {
     <span>
       {id && currentPath !== '/profileuser' && (
         <MenuItem>
-          <IconButton
-            size="large"
-            aria-label="account of current user"
-            aria-controls="vista-mobile"
-            aria-haspopup="true"
-            color="secondary"
-          >
-            <Avatar />
-          </IconButton>
           <Link
             to="/profileuser"
             textDecoration="none"
             onClick={handleMenuClose}
           >
+            <IconButton
+              size="large"
+              aria-label="account of current user"
+              aria-controls="vista-mobile"
+              aria-haspopup="true"
+              color="secondary"
+            >
+              <Avatar />
+            </IconButton>
             {user.name ? user.name : 'Mi Cuenta'}
           </Link>
         </MenuItem>
       )}
       {id && user.company && currentPath !== '/profilecompany' && (
         <MenuItem>
-          <IconButton
-            size="large"
-            aria-label="account of current user"
-            aria-controls="vista-mobile"
-            aria-haspopup="true"
-            color="secondary"
-          >
-            <StoreIcon />
-          </IconButton>
           <Link
             to="/profilecompany"
             textDecoration="none"
             onClick={handleMenuClose}
           >
+            <IconButton
+              size="large"
+              aria-label="account of current user"
+              aria-controls="vista-mobile"
+              aria-haspopup="true"
+              color="secondary"
+            >
+              <StoreIcon />
+            </IconButton>
             {/* {user.company && (user.company.company_type_id === 1 ? 'Mi comercio' : 'Mi ONG')} */}
             {user.company.name}
           </Link>
@@ -124,15 +141,6 @@ export default function Navbar() {
         !user.company &&
         currentPath !== '/rollselector/registerformcommerce' && (
           <MenuItem>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="vista-mobile"
-              aria-haspopup="true"
-              color="secondary"
-            >
-              <StoreIcon />
-            </IconButton>
             <Link
               to="/rollSelector/registerformcommerce"
               textDecoration="none"
@@ -140,12 +148,6 @@ export default function Navbar() {
             >
               Añadir comercio
             </Link>
-          </MenuItem>
-        )}
-      {id &&
-        !user.company &&
-        currentPath !== '/rollselector/register_form_ong' && (
-          <MenuItem>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -155,6 +157,12 @@ export default function Navbar() {
             >
               <StoreIcon />
             </IconButton>
+          </MenuItem>
+        )}
+      {id &&
+        !user.company &&
+        currentPath !== '/rollselector/register_form_ong' && (
+          <MenuItem>
             <Link
               to="/rollSelector/register_form_ong"
               textDecoration="none"
@@ -162,6 +170,15 @@ export default function Navbar() {
             >
               Añadir ONG
             </Link>
+            <IconButton
+              size="large"
+              aria-label="account of current user"
+              aria-controls="vista-mobile"
+              aria-haspopup="true"
+              color="secondary"
+            >
+              <StoreIcon />
+            </IconButton>
           </MenuItem>
         )}
       {id && currentPath === '/home' && (
@@ -180,57 +197,59 @@ export default function Navbar() {
       )}
       {id && currentPath === '/home' && (
         <MenuItem>
+        <Link to='/cart'>
           <IconButton
             size="large"
             aria-label="show 17 new notifications"
-            color="inherit"
+            color="secondary"
           >
-            <Badge>
-              <ShoppingCartIcon color="secondary" />
-            </Badge>
+            <Badge badgeContent={cart.length} color="primary">
+                <ShoppingCartIcon />
+                </Badge>
           </IconButton>
-          <p>Mi Carrito</p>
+          Mi Carrito
+          </Link>
         </MenuItem>
       )}
       {!id && (
         <MenuItem>
-          <IconButton
-            size="large"
-            aria-label="show 17 new notifications"
-            color="inherit"
-          >
-            <AppRegistrationIcon color="secondary" />
-          </IconButton>
           <Link to="/register" textDecoration="none" onClick={handleMenuClose}>
+            <IconButton
+              size="large"
+              aria-label="show 17 new notifications"
+              color="inherit"
+            >
+              <AppRegistrationIcon color="secondary" />
+            </IconButton>
             Registrarse
           </Link>
         </MenuItem>
       )}
       {!id && (
         <MenuItem>
-          <IconButton
-            size="large"
-            aria-label="show 17 new notifications"
-            color="inherit"
-          >
-            <LoginIcon color="secondary" />
-          </IconButton>
           <Link to="/login" textDecoration="none" onClick={handleMenuClose}>
+            <IconButton
+              size="large"
+              aria-label="show 17 new notifications"
+              color="inherit"
+            >
+              <LoginIcon color="secondary" />
+            </IconButton>
             Iniciar Sesión
           </Link>
         </MenuItem>
       )}
       {id && (
         <MenuItem>
-          <IconButton
-            size="large"
-            aria-label="show 17 new notifications"
-            color="inherit"
-            href="/"
-          >
-            <LogoutIcon color="secondary" />
-          </IconButton>
           <Link to="/" onClick={handleLogOut} textDecoration="none">
+            <IconButton
+              size="large"
+              aria-label="show 17 new notifications"
+              color="inherit"
+              href="/"
+            >
+              <LogoutIcon color="secondary" />
+            </IconButton>
             Cerrar Sesión
           </Link>
         </MenuItem>
@@ -293,6 +312,28 @@ export default function Navbar() {
     </Menu>
   );
 
+  const cartId = 'web-vista-account-cart';
+  const renderCart = (
+    <Menu
+      sx={{ zIndex: 10010, marginTop: 5.3 }}
+      anchorEl={cartAnchorEl}
+      anchorOrigin={{
+        vertical: 'top',
+        horizontal: 'right',
+      }}
+      id={cartId}
+      keepMounted
+      transformOrigin={{
+        vertical: 'top',
+        horizontal: 'right',
+      }}
+      open={isCartOpen}
+      onClose={handleCartMenuClose}
+    >
+      <CartMenu />
+    </Menu>
+  );
+
   return (
     <Box sx={{ flexGrow: 1, zIndex: 10000, position: 'absolute', top: 0 }}>
       <AppBar position="fixed">
@@ -311,24 +352,31 @@ export default function Navbar() {
           </Link>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <IconButton
-              size="large"
-              aria-label="show 4 new mails"
-              color="inherit"
-            >
-              <Badge badgeContent={4} color="secondary">
-                <FavoriteIcon />
-              </Badge>
-            </IconButton>
-            <IconButton
-              size="large"
-              aria-label="show 17 new notifications"
-              color="inherit"
-            >
-              <Badge badgeContent={3} color="secondary">
+            {/* {id && (
+              <IconButton
+                size="large"
+                aria-label="show 4 new mails"
+                color="inherit"
+              >
+                <Badge badgeContent={3} color="secondary">
+                  <FavoriteIcon />
+                </Badge>
+              
+              </IconButton>
+            )} */}
+            {id && currentPath === '/home'  && (
+              <IconButton
+                size="large"
+                aria-label="cart"
+                color="inherit"
+                aria-controls={cartId}
+                onClick={handleCartMenuOpen}
+              >
+                <Badge badgeContent={cart.length} color="secondary">
                 <ShoppingCartIcon />
-              </Badge>
-            </IconButton>
+                </Badge>
+              </IconButton>
+            )}
             <IconButton
               size="large"
               edge="end"
@@ -338,7 +386,16 @@ export default function Navbar() {
               onClick={handleProfileMenuOpen}
               color="inherit"
             >
-              <Avatar photo={user.photo} />
+              <Avatar
+                photo={
+                  // eslint-disable-next-line no-nested-ternary
+                  user.photo
+                    ? user.photo.url
+                    : user.socialPhoto
+                    ? user.socialPhoto
+                    : avatarDefault
+                }
+              />
             </IconButton>
           </Box>
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
@@ -357,6 +414,7 @@ export default function Navbar() {
       </AppBar>
       {renderMobileMenu}
       {renderMenu}
+      {renderCart}
     </Box>
   );
 }

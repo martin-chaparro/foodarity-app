@@ -128,9 +128,10 @@
 
 .img {
   position: relative;
-  left: 13px;
+  left: 12px;
   width: 160px;
   height: 180px;
+  object-fit: cover;
 }
 
 .divImg {
@@ -138,6 +139,7 @@
   height: 180px;
   display: flex;
   position: relative;
+  margin-right: 30px;
 }
 
 .BoxGeneral {
@@ -185,6 +187,20 @@
 
 .heart {
   color: white;
+}
+
+.cartOptionsCont {
+  position: relative;
+  top: 150px;
+  display: flex;
+  justify-content: end;
+  gap: 15px;
+  align-items: center;
+  font-weight: bold;
+}
+
+.cartOptions {
+  height: 30px;
 }
 
 .titleTypographyDesc {
@@ -254,7 +270,7 @@
 
 .divFavButton {
   position: relative;
-  top: 199px;
+  top: 170px;
   display: flex;
   justify-content: flex-end;
   height: 31px;

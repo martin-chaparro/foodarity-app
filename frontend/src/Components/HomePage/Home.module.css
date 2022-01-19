@@ -1,4 +1,3 @@
-
 .parent {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -67,8 +66,30 @@
 
 .divContainerCards {
   height: 120vh;
+}
+
+/* ONG SECCION */
+.contOngs{
+  width: 80%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  margin-left: 3 0px;
+  margin-bottom: 100px;
 
 }
+.titleOng{
+  text-shadow: 1px 3px 0 #969696, 1px 13px 5px #aba8a8;
+  font-size: 30px;
+  color: rgb(146, 17, 146);
+  font-weight: bold;
+  text-align: center;
+  
+}
+
 
 @media screen and (max-width: 576px) {
   .contweb {

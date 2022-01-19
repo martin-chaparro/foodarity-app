@@ -23,6 +23,7 @@ import { apiWithToken } from '../../services/api';
 import CompanyDetail from './CompanyDetail';
 import PostNewBatch from './PostNewBatch';
 import PublishedProduct from './PublishedProduct';
+import PortalCompania from './PortalCompania';
 // import PrimarySearchAppBar from '../Navbar/NavbarCommerce';
 import Orders from './Orders';
 import Usuarios from './Usuarios';
@@ -41,13 +42,11 @@ function ProfileTempleteCommerce(props) {
 
   const [company, setCompany] = useState({});
 
-  
   const [commerceDonations, setCommerceDonations] = useState([]);
-  
+
   const [ongDonations, setOngDonations] = useState([]);
-  
+
   const [logged, setLogged] = useState('loading');
-  
 
   useEffect(() => {
     apiWithToken
@@ -98,6 +97,11 @@ function ProfileTempleteCommerce(props) {
       <List className={styles.barra}>
         {[
           {
+            text: 'Portal de compania',
+            typesAllow: [0, 1],
+          },
+
+          {
             text: 'Detalles de Cuenta',
             typesAllow: [1, 2],
           },
@@ -118,7 +122,11 @@ function ProfileTempleteCommerce(props) {
           },
         ].map(
           ({ text, typesAllow }, index) =>
-          ((typesAllow.includes(0) && company.status === 'Habilitada' && typesAllow.includes(company.company_type_id)) || (!typesAllow.includes(0) && typesAllow.includes(company.company_type_id))) && (
+            ((typesAllow.includes(0) &&
+              company.status === 'Habilitada' &&
+              typesAllow.includes(company.company_type_id)) ||
+              (!typesAllow.includes(0) &&
+                typesAllow.includes(company.company_type_id))) && (
               <ListItem
                 button
                 key={text}
@@ -232,12 +240,13 @@ function ProfileTempleteCommerce(props) {
           }}
         >
           <Toolbar display="inline" />
+          {display === 7 && <PortalCompania />}
           {display === 0 && <CompanyDetail company={company} />}
           {display === 1 && (
             // eslint-disable-next-line react/jsx-no-bind
             <Usuarios company={company} />
           )}
-          {display === 2 && <PublishedProduct/>}
+          {display === 2 && <PublishedProduct />}
           {display === 3 && <Orders orders={orders} />}
           {display === 4 && (
             <Donations

@@ -2,21 +2,24 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { useEffect, useState } from 'react';
+import Avatar from '@mui/material/Avatar';
+import Swal from 'sweetalert2';
 // import { useNavigate } from 'react-router-dom';
 import styles from './RegisterCompanyFormEditable.module.css';
 import CommerceLogo from '../../assets/Mask-Group.png';
 import { api, apiWithToken } from '../../services/api';
-
 
 // import AlertOng from '../Alertas/AlertEnviarSolicitud';
 
 let time = null;
 let time2 = null;
 
-export default function RegisterCompanyFormEditable({company, handleBack}) {
+export default function RegisterCompanyFormEditable({ company, handleBack }) {
   const [provincia, setprovincia] = useState([]);
   const [ciudad, setCiudad] = useState([]);
-  const [termProvincia, setTermProvincia] = useState(company.address.state.name);
+  const [termProvincia, setTermProvincia] = useState(
+    company.address.state.name
+  );
   const [termCiudad, setTermCiudad] = useState(company.address.state.name);
   const [errors, setErrors] = useState({});
   const initialFormValues = {
@@ -25,7 +28,7 @@ export default function RegisterCompanyFormEditable({company, handleBack}) {
   };
 
   const [formValues, setFormValues] = useState(initialFormValues);
- // const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [input, setInput] = useState({
     name: company.name,
     website: company.website,
@@ -39,13 +42,12 @@ export default function RegisterCompanyFormEditable({company, handleBack}) {
   });
 
   const [photo, setPhoto] = useState({
-    url: company.logo ? company.logo.url : ''
-  })
-  console.log(company)
+    url: company.logo ? company.logo.url : '',
+  });
+
   const searchProvincia = (term) => {
     api.get(`/states?name=${term}`).then((response) => {
       setprovincia(response.data);
-      
     });
   };
 
@@ -117,28 +119,26 @@ export default function RegisterCompanyFormEditable({company, handleBack}) {
     setTermCiudad(target.value);
   };
 
-  const handlePhoto = async (e) => {
-    try {
-      const form = new FormData();
-      form.append('file', e.target.files[0]);
-      console.log(e.target.files) 
-      await apiWithToken.patch(`/companies/${company.id}/upload/logo`, form)
-      .then(res => { 
-        setPhoto(res.data.logo)
-        console.log(photo)
-      return res})
-      .then(res => {
-        if (res.status === 200) {
-          // eslint-disable-next-line no-alert
-          alert('Logo actualizado con exito')
-        }
-      })
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
- 
+  // const handlePhoto = async (e) => {
+  //   try {
+  //     const form = new FormData();
+  //     form.append('file', e.target.files[0]);
+  //     console.log(e.target.files)
+  //     await apiWithToken.patch(`/companies/${company.id}/upload/logo`, form)
+  //     .then(res => {
+  //       setPhoto(res.data.logo)
+  //       console.log(photo)
+  //     return res})
+  //     .then(res => {
+  //       if (res.status === 200) {
+  //         // eslint-disable-next-line no-alert
+  //         alert('Logo actualizado con exito')
+  //       }
+  //     })
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
 
   const validateEmail = (e) => {
     const { name, value } = e.target;
@@ -229,9 +229,8 @@ export default function RegisterCompanyFormEditable({company, handleBack}) {
   };
 
   const handleSubmit = (e) => {
-    
     e.preventDefault();
-    
+
     if (
       !errors.name &&
       !errors.website &&
@@ -244,40 +243,100 @@ export default function RegisterCompanyFormEditable({company, handleBack}) {
 
       // eslint-disable-next-line no-empty
     ) {
-      apiWithToken.put(`/companies/${company.id}`, {...input, ...formValues})
-      .then(res => {
-        if (res.status === 200) {
-          window.location.reload()
-        } else {
-          // eslint-disable-next-line no-alert
-          alert(res.data)
-        }
-      })
-      
-       
+      apiWithToken
+        .put(`/companies/${company.id}`, { ...input, ...formValues })
+        .then((res) => {
+          if (res.status === 200) {
+            window.location.reload();
+          } else {
+            // eslint-disable-next-line no-alert
+            alert(res.data);
+          }
+        });
     } else {
       // eslint-disable-next-line no-alert
       alert('Complete el formulario');
     }
   };
+
+  const handleChangeImage = async ({ target }) => {
+    const image = target.files[0];
+
+    const preview = document.querySelector('#commerceImage img');
+
+    if (image.type !== 'image/jpeg' && image.type !== 'image/png') {
+      document.querySelector('#datosImagen').value = '';
+
+      Swal.fire({
+        icon: 'error',
+        title: 'Error al subir la imagen',
+        text: '¡La imagen debe estar en formato JPG o PNG!',
+      });
+    } else if (Number(image.size) > 2000000) {
+      document.querySelector('#datosImagen').value = '';
+
+      Swal.fire({
+        icon: 'error',
+        title: 'Error al subir la imagen',
+        text: '¡La imagen no debe pesar más de 2 MB!',
+      });
+    } else {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        preview.src = reader.result;
+      };
+
+      reader.readAsDataURL(image);
+
+      try {
+        const form = new FormData();
+        form.append('file', target.files[0]);
+        console.log(target.files);
+        await apiWithToken
+          .patch(`/companies/${company.id}/upload/logo`, form)
+          .then((res) => {
+            setPhoto(res.data.logo);
+            console.log(photo);
+            return res;
+          })
+          .then((res) => {
+            if (res.status === 200) {
+              // eslint-disable-next-line no-alert
+              alert('Logo actualizado con exito');
+            }
+          });
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  };
+
   return (
     <div className={styles.RegisterFormCommerce}>
       <form autoComplete="off" className={styles.form} onSubmit={handleSubmit}>
         <div className={styles.containerLogo}>
-          <div className={styles.commerceLogo}>
-            <div className={styles.inputcontenedor}>
-              <input className={styles.btninput} type="file"
-                  name="photo"
-                  onChange={handlePhoto} />
-            </div>
-            <div className={styles.logocomercio}>
-              <img
-                className={styles.imgLogo}
-                src={photo.url ? photo.url : CommerceLogo}
-                alt="CommerLogo"
-              />
-            </div>
-          </div>
+          <label htmlFor="datosImagen">
+            <input
+              className={styles.btninput}
+              type="file"
+              name="photo"
+              id="datosImagen"
+              hidden
+              onChange={handleChangeImage}
+            />
+            <Avatar
+              className={styles.avatar}
+              src={photo.url ? photo.url : CommerceLogo}
+              alt="Commercelogo"
+              id="commerceImage"
+              sx={{
+                width: 120,
+                height: 120,
+                cursor: 'pointer',
+                marginTop: '20',
+              }}
+            />
+          </label>
         </div>
         <div className={styles.divsInputs}>
           <div className={styles.labelNombre}>
@@ -501,7 +560,11 @@ export default function RegisterCompanyFormEditable({company, handleBack}) {
           <button type="submit" className={styles.btnactulizar}>
             ACTUALIZAR CAMBIOS
           </button>
-          <button type='button' onClick={handleBack} className={styles.btnactulizar}>
+          <button
+            type="button"
+            onClick={handleBack}
+            className={styles.btnactulizar}
+          >
             CANCELAR
           </button>
           {/* BOTON DE ENVIAR SOLICITUD: Dicho botón se encuentra 

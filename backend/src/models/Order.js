@@ -9,9 +9,9 @@ class Order extends Model {
           allowNull: false,
         },
         quantity: {
-          type:INTEGER,
-          allowNull: false
-        }
+          type: INTEGER,
+          allowNull: false,
+        },
       },
       {
         sequelize,
@@ -20,10 +20,13 @@ class Order extends Model {
   }
 
   static associate(models) {
-    this.belongsTo(models.User, {as: 'buyer'})
-    this.belongsTo(models.Company, {as: 'company'})
-    this.belongsTo(models.Product, {as: 'product'})
-    this.belongsTo(models.PaymentMethod, {as: 'paymentMethod'})
+    this.belongsTo(models.User, { as: 'buyer', foreignKey: 'buyer_id' });
+    this.belongsTo(models.Company, { as: 'company', foreignKey: 'company_id' });
+    this.belongsTo(models.Product, { as: 'product', foreignKey: 'product_id' });
+    this.belongsTo(models.PaymentMethod, {
+      as: 'paymentMethod',
+      foreignKey: 'payment_method_id',
+    });
   }
 }
 

@@ -21,16 +21,17 @@
     "ownerId": 1
 },
 {
-	"name": "Comedor barrial",
-	"description": "comedor barrial",
+	"name": "Fundación Leon",
+	"description": "En Fundación León conectamos comunidades para erradicar todas las formas de pobreza en Tucumán, Argentina. Nuestra mision es promover el voluntariado y la responsabilidad social para un mundo justo y equitativo.",
 	"areaCode": "123",
 	"phone": "3764202020",
-	"email": "comedir@gmail.com",
+	"email": "comunicacion@fundacionleon.org.ar",
 	"status": "Habilitada",
+	"website": "https://www.fundacionleon.org.ar",
 	"deleted": false,
-	"logo": {
-		"public_id": "fkkjowmukqs5crisblk9",
-		"url": "https://res.cloudinary.com/dpsxxuslt/image/upload/v1642014699/fkkjowmukqs5crisblk9.jpg"
+	"logo":  {
+		"public_id": "vvbnrv2gcccxaeuaptlj",
+		"url": "https://res.cloudinary.com/dpsxxuslt/image/upload/v1642519206/vvbnrv2gcccxaeuaptlj.jpg"
 	},
 	"type" : 2,
 	"street": "rodriguez peña",
@@ -39,5 +40,26 @@
 	"cityId": "60854",
 	"stateId" : "6" ,
 	"ownerId": 2
+},
+{
+	"name": "SonRisas",
+	"description": "SonRisas es una Asociación Civil sin fines de lucro que centra su acción en niños en situación de riesgo que enfrentan las consecuencias de la pobreza y la exclusión y desarrolla sus actividades en distintos barrios de la localidad de Esteban Echeverría. Está constituida por voluntarios de distintas formaciones profesionales, comprometidos con la realidad y que asumen la tarea de combatir la injusticia social. SonRisas no responde a ningún partido político, ningún interés económico, ni creencia religiosa. Es una agrupación consolidada por el interés hacia el prójimo y con la convicción de que la solidaridad es el camino correcto.",
+	"areaCode": "123",
+	"phone": "3764202020",
+	"email": " info@creasonrisas.org.ar ",
+	"website": "http://www.creasonrisas.org.ar",
+	"status": "Habilitada",
+	"deleted": false,
+	"logo": {
+		"public_id": "brucfqogwyv6aohsc83o",
+		"url": "https://res.cloudinary.com/dpsxxuslt/image/upload/v1642548209/brucfqogwyv6aohsc83o.png"
+	},
+	"type" : 2,
+	"street": "rodriguez peña",
+	"number": "123",
+	"zipcode": "1640",
+	"cityId": "60854",
+	"stateId" : "6" ,
+	"ownerId": 3
 }
 ]
