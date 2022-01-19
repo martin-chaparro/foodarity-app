@@ -69,7 +69,7 @@ export default function CompanyVisualizer() {
         </div>
       </div>
       <div className={styles.description}>
-        <p>{company?.description}</p> 
+        <p className={styles.descripText}>{company?.description}</p> 
       </div>
       {company && company.company_type_id === 1 && (
         <div className={styles.renderContainer}>
