@@ -80,17 +80,6 @@ export default function UserDetail({ detail }) {
               component="div"
               sx={{ color: '#7ED957', marginTop: '0' }}
             >
-              Dirección:
-              <span style={{ color: '#8865b9' }}> No registrado aún</span>
-            </Typography>
-          </div>
-          <div>
-            <Typography
-              variant="h6"
-              gutterBottom
-              component="div"
-              sx={{ color: '#7ED957', marginTop: '0' }}
-            >
               Método de Pago:
               <span style={{ color: '#8865b9' }}> No registrado aún</span>
             </Typography>
