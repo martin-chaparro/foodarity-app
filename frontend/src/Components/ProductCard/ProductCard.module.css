@@ -131,6 +131,7 @@
   left: 12px;
   width: 160px;
   height: 180px;
+  object-fit: cover;
 }
 
 .divImg {

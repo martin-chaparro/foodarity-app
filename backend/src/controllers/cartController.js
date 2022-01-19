@@ -5,9 +5,7 @@ async function getCartProducts(userId) {
   const cart = await Cart.findAll({
     where: { user_id: userId },
     attributes: { exclude: ['createdAt', 'updatedAt'] },
-    include: [
-      {model: Product, as:'product'}
-    ]
+    include: [{ model: Product, as: 'product' }],
   });
   return cart;
 }

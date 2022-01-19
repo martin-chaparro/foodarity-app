@@ -7,6 +7,7 @@ import styles from './CompanyVisualizer.module.css';
 import Banner from '../../assets/Banner.jpg';
 import { api, apiWithToken } from '../../services/api';
 import OngForm from '../../Components/ONGSeccion/OngForm/OngForm';
+import OngInfo from '../../Components/ONGSeccion/OngInfo';
 
 export default function CompanyVisualizer() {
   const [company, setcompany] = useState();
@@ -68,6 +69,9 @@ export default function CompanyVisualizer() {
           <p>Cód. Postal: {company?.address.zipcode}</p>
         </div>
       </div>
+      <div className={styles.description}>
+        <p>{company?.description}</p> 
+      </div>
       {company && company.company_type_id === 1 && (
         <div className={styles.renderContainer}>
           <div className={styles.divh2}>
@@ -93,11 +97,10 @@ export default function CompanyVisualizer() {
           </div>
         ) : (
           <div>
-            <h1>
-              ACA VA EL TEXTO QUE SE LE MUESTRA A UN USUARIO COMUN, SIN COMPANIA
-            </h1>
+            <OngInfo />
           </div>
-        ))}
+          ))}
     </div>
+
   );
 }

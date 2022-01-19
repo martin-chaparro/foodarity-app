@@ -8,20 +8,85 @@ import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
+import { useDispatch } from 'react-redux';
+import Swal from 'sweetalert2';
 import estilos from './RegisterUserFormEditable.module.css';
+import { updateUser } from '../../redux/actions/userActions';
+// import { apiWithToken } from '../../services/api';
 
 const Input = styled('input')({
   display: 'none',
 });
 
 export default function RegisterUserFormEditable() {
+  const dispatch = useDispatch();
+  // const [photo, setPhoto] = React.useState();
   const [open, setOpen] = React.useState(false);
+  const [data, setData] = React.useState({
+    id: localStorage.getItem('id'),
+    name: '',
+    email: '',
+    phone: '',
+  });
+  const [preview, setPreview] = React.useState(null);
+
+  const form = new FormData();
+  form.append('userId', localStorage.getItem('id'));
+
+  const handleChange = (e) => {
+    setData({
+      ...data,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  // const handleImageSubmit = async () => {
+  //   try {
+  //     const formPhoto = new FormData();
+  //     formPhoto.append('file', photo);
+
+  //     await apiWithToken.patch(`/users/upload`, formPhoto);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(updateUser(data, form));
+    // if (photo) handleImageSubmit();
+    Swal.fire({
+      icon: 'success',
+      title: 'Actualizado',
+      text: 'Usuario actualizado correctamente.',
+    }).then(() => {
+      window.location.reload(false);
+    });
+  };
+
   const handleOpen = () => {
     setOpen(true);
   };
+
   const handleClose = () => {
     setOpen(false);
+    // window.location.reload(false);
   };
+
+  const imgHandler = (e) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (reader.readyState === 2) {
+        setPreview(reader.result);
+      }
+    };
+    reader.readAsDataURL(e.target.files[0]);
+    // setPhoto(e.target.files[0]);
+  };
+
+  const imageNull =
+    'https://res.cloudinary.com/dxbtqclyu/image/upload/v1642367029/Captura_de_pantalla_2022-01-16_150126_l0f8w3.png';
+
   return (
     <div>
       <Button
@@ -66,12 +131,24 @@ export default function RegisterUserFormEditable() {
                 <div>
                   <img
                     className={estilos.imgLogo}
-                    src="https://acortar.link/s829DX"
+                    src={preview || imageNull}
                     alt="img"
                   />
                 </div>
                 <label htmlFor="icon-button-file">
-                  <Input accept="image/*" id="icon-button-file" type="file" />
+                  <Input
+                    accept="image/*"
+                    id="icon-button-file"
+                    type="file"
+                    onChange={(e) => {
+                      form.append(
+                        'file',
+                        e.target.files[0],
+                        e.target.files[0].name
+                      );
+                      imgHandler(e);
+                    }}
+                  />
                   <IconButton
                     color="primary"
                     aria-label="upload picture"
@@ -87,13 +164,29 @@ export default function RegisterUserFormEditable() {
             {/* INPUTS: NOMBRE, EMAIL Y CONTRASEÑA */}
             <div className={estilos.inputs1}>
               <h5>Nombre</h5>
-              <input type="text" name="name" autoComplete="off" />
+              <input
+                type="text"
+                name="name"
+                autoComplete="off"
+                onChange={(e) => handleChange(e)}
+                value={data.name}
+              />
               <h5>Email</h5>
-              <input type="text" name="name" autoComplete="off" />
-              <h5>Contraseña</h5>
-              <input type="text" name="name" autoComplete="off" />
+              <input
+                type="text"
+                name="email"
+                autoComplete="off"
+                onChange={(e) => handleChange(e)}
+                value={data.email}
+              />
               <h5>Número Celular</h5>
-              <input type="text" name="name" autoComplete="off" />
+              <input
+                type="text"
+                name="phone"
+                autoComplete="off"
+                onChange={(e) => handleChange(e)}
+                value={data.phone}
+              />
             </div>
           </FormGroup>
 
@@ -102,7 +195,6 @@ export default function RegisterUserFormEditable() {
             <div>
               <Button
                 onClick={handleClose}
-                type="submit"
                 sx={{
                   backgroundColor: '#7ED957',
                   '&:hover': { backgroundColor: '#7ED95790 !important' },
@@ -115,15 +207,17 @@ export default function RegisterUserFormEditable() {
             </div>
             <div>
               <Button
-                onClick={handleClose}
-                type="submit"
+                onClick={(e) => {
+                  handleSubmit(e);
+                  handleClose();
+                }}
                 sx={{
                   backgroundColor: '#7ED957',
                   '&:hover': { backgroundColor: '#7ED95790 !important' },
                   marginTop: 5,
                 }}
               >
-                ACEPTAR
+                GUARDAR
               </Button>
             </div>
           </div>
