@@ -6,8 +6,8 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import Swal from 'sweetalert2';
 // import Header from '../../Components/Header/Header';
+import Swal from 'sweetalert2';
 import styles from './RegisterFormCommerce.module.css';
 import CommerceLogo from '../../assets/Mask-Group.png';
 import { api } from '../../services/api';
@@ -244,20 +244,19 @@ export default function RegisterFormCommerce() {
       !errors.areaCode &&
       !errors.phone &&
       !errors.street &&
-      !errors.number &&
+      !errors.number  &&
       !errors.zipcode
       // eslint-disable-next-line no-empty
     ) {
       dispatch(registerComerce(input,formValues));
-       Swal.fire({
-         icon: 'success',
-         title: 'Bien',
-         text: 'El Comercio fue registrado Correctamente',
-       });
       window.location.href = '/home'
     } else {
       // eslint-disable-next-line no-alert
-      alert('Complete el formulario');
+      Swal.fire({
+        icon: 'error',
+        title: 'Oppss!',
+        text: 'Por favor ingrese los datos correctamente',
+      });
     }
   };
   return (
@@ -282,6 +281,7 @@ export default function RegisterFormCommerce() {
               className={styles.inputNombre}
               type="text"
               name="name"
+              required
               value={input.name}
               autoComplete="off"
               onChange={(e) => {
@@ -302,6 +302,7 @@ export default function RegisterFormCommerce() {
               type="texto"
               autoComplete="off"
               name="email"
+              required
               value={input.email}
               onChange={(e) => {
                 handleOnChange(e);
@@ -320,6 +321,7 @@ export default function RegisterFormCommerce() {
               className={styles.inputNombre}
               type="text"
               name="website"
+              required
               value={input.website}
               autoComplete="off"
               onChange={(e) => {
@@ -339,6 +341,7 @@ export default function RegisterFormCommerce() {
               className={styles.inputDescripcion}
               type="text"
               name="description"
+              required
               value={input.description}
               onChange={handleOnChange}
             />
@@ -352,6 +355,7 @@ export default function RegisterFormCommerce() {
                 className={styles.areacod}
                 type="text"
                 name="areaCode"
+                required
                 value={input.areaCode}
                 placeholder="Cód. Área"
                 onChange={(e) => {
@@ -368,6 +372,7 @@ export default function RegisterFormCommerce() {
                 className={styles.phonenumber}
                 type="text"
                 name="phone"
+                required
                 value={input.phone}
                 placeholder="Número"
                 onChange={(e) => {
@@ -389,6 +394,7 @@ export default function RegisterFormCommerce() {
                 className={styles.calle}
                 type="text"
                 name="street"
+                required
                 value={input.street}
                 placeholder="Calle"
                 onChange={(e) => {
@@ -405,6 +411,7 @@ export default function RegisterFormCommerce() {
                 className={styles.numCalle}
                 type="text"
                 name="number"
+                required
                 value={input.number}
                 placeholder="Número de calle"
                 onChange={(e) => {
@@ -424,6 +431,7 @@ export default function RegisterFormCommerce() {
               className={styles.inputCodPostal}
               type="text"
               name="zipcode"
+              required
               value={input.zipcode}
               placeholder="Cód. Postal"
               onChange={(e) => {

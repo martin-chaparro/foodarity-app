@@ -22,7 +22,7 @@ export default function PostNewBatch() {
   const [photo, setPhoto] = useState({});
   // const [photoPrev, setPhotoPrev] = useState('');
   // eslint-disable-next-line no-unused-vars
-  const [errors, setErrors] = useState({})
+  
 
   const [input, setInput] = useState({
     lote: '',
@@ -51,7 +51,7 @@ export default function PostNewBatch() {
       errors.quantity = 'Cantidad is required !';
     }
 
-    if (!input.price && input.price < 1) {
+    if (!input.price) {
       errors.price = 'Price is required';
     }
 
@@ -134,7 +134,7 @@ export default function PostNewBatch() {
                   name="photo"
                   onChange={handlePhoto}
                 />
-                <p className={styles.errors}>{errors.photo}</p>
+               
               </div>
               <div className={styles.logo}>
                 <img src={logo} alt="logo" />
@@ -149,7 +149,7 @@ export default function PostNewBatch() {
                 // eslint-disable-next-line react/jsx-no-bind
                 handleOnChange={handleOnChange}
               />
-              <p className={styles.errors}>{errors.category}</p>
+             
             </div>
           </div>
 
@@ -163,7 +163,7 @@ export default function PostNewBatch() {
                   // eslint-disable-next-line react/jsx-no-bind
                   handleOnChange={handleOnChange}
                 />
-                <p className={styles.errors}>{errors.lote}</p>
+               
               </div>
               <div>
                 <Fecha
@@ -172,7 +172,7 @@ export default function PostNewBatch() {
                   // eslint-disable-next-line react/jsx-no-bind
                   handleOnChange={handleOnChange}
                 />
-                <p className={styles.errors}>{errors.expirationDate}</p>
+               
               </div>
             </div>
 
@@ -184,7 +184,7 @@ export default function PostNewBatch() {
                   // eslint-disable-next-line react/jsx-no-bind
                   handleOnChange={handleOnChange}
                 />
-                <p className={styles.errors}>{errors.quantity}</p>
+                
               </div>
 
               <div>
@@ -194,7 +194,7 @@ export default function PostNewBatch() {
                   // eslint-disable-next-line react/jsx-no-bind
                   handleOnChange={handleOnChange}
                 />
-                <p className={styles.errors}>{errors.amount}</p>
+               
               </div>
             </div>
           </div>
@@ -207,7 +207,7 @@ export default function PostNewBatch() {
               // eslint-disable-next-line react/jsx-no-bind
               handleOnChange={handleOnChange}
             />
-            <p className={styles.errors}>{errors.description}</p>
+           
           </div>
           <button type="submit" className={styles.btn}>
             PUBLICAR PRODUCTO

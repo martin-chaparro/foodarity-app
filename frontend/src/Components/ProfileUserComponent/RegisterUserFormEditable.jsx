@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React from 'react';
+import React, { useState } from 'react';
 import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
 import FormGroup from '@mui/material/FormGroup';
@@ -15,13 +15,91 @@ const Input = styled('input')({
 });
 
 export default function RegisterUserFormEditable() {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [errors, setErrors] = useState({});
+  const [input, setInput] = useState({
+    name: '',
+    email: '',
+    phone: '',
+  });
+
+  const handleOnChange = (e) => {
+    e.preventDefault();
+    setInput({
+      ...input,
+      [e.target.name]: e.target.value,
+    });
+  };
+
   const handleOpen = () => {
     setOpen(true);
   };
   const handleClose = () => {
     setOpen(false);
   };
+
+  const validateLetters = (e) => {
+    const { name, value } = e.target;
+    setInput({
+      ...input,
+      [name]: value,
+    });
+    if (!/[a-zA-Z ]+$/.test(value)) {
+      setErrors({
+        ...errors,
+        [name]: 'Solo letras',
+      });
+    } else {
+      setErrors({
+        ...errors,
+        [name]: '',
+      });
+    }
+  };
+
+
+  const validateEmail = (e) => {
+    const { name, value } = e.target;
+    const expresion =
+      // eslint-disable-next-line no-useless-escape
+      /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+    setInput({
+      ...input,
+      [name]: value,
+    });
+    if (!expresion.test(value)) {
+      setErrors({
+        ...errors,
+        [name]: 'No es un email valido!',
+      });
+    } else {
+      setErrors({
+        ...errors,
+        [name]: '',
+      });
+    }
+  };
+
+  const validateNum = (e) => {
+    const { name, value } = e.target;
+    setInput({
+      ...input,
+      [name]: value,
+    });
+    // eslint-disable-next-line no-useless-escape
+    if (!/^[+]?([0-9]+(?:[\.][0-9]*)?|\.[0-9]+)$/.test(value)) {
+      setErrors({
+        ...errors,
+        [name]: 'Solo numeros',
+      });
+    } else {
+      setErrors({
+        ...errors,
+        [name]: '',
+      });
+    }
+  };
+
   return (
     <div>
       <Button
@@ -87,13 +165,50 @@ export default function RegisterUserFormEditable() {
             {/* INPUTS: NOMBRE, EMAIL Y CONTRASEÑA */}
             <div className={estilos.inputs1}>
               <h5>Nombre</h5>
-              <input type="text" name="name" autoComplete="off" />
+              <input
+                required 
+                value={input.name}
+                type="text"
+                name="name"
+                autoComplete="off"
+                onChange={(e) => {
+                  handleOnChange(e);
+                  validateLetters(e);
+                }}
+              />
+              <div>
+              <p className={estilos.errors}>{errors.name}</p>
+              </div>
               <h5>Email</h5>
-              <input type="text" name="name" autoComplete="off" />
-              <h5>Contraseña</h5>
-              <input type="text" name="name" autoComplete="off" />
+              <input
+                required
+                value={input.email}
+                type="text"
+                name="email"
+                autoComplete="off"
+                onChange={(e) => {
+                  handleOnChange(e);
+                  validateEmail(e);
+                }}
+              />
+              <div>
+              <p className={estilos.errors}>{errors.email}</p>
+              </div>
               <h5>Número Celular</h5>
-              <input type="text" name="name" autoComplete="off" />
+              <input
+                required
+                value={input.phone}
+                type="text"
+                name="phone"
+                autoComplete="off"
+                onChange={(e) => {
+                  handleOnChange(e);
+                  validateNum(e);
+                }}
+              />
+              <div>
+              <p className={estilos.errors}>{errors.phone}</p>
+              </div>
             </div>
           </FormGroup>
 
