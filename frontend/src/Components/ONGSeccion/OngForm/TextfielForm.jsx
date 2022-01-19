@@ -2,13 +2,13 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 
-// import MenuItem from '@mui/material/MenuItem';
+import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 
 import FormControl from '@mui/material/FormControl';
 
-export function NuevoLote() {
+export function NuevoLote({ handleOnChange, input }) {
   return (
     <Box
       component="form"
@@ -22,17 +22,17 @@ export function NuevoLote() {
         label="Nombre Nuevo Lote"
         id="filled-size-normal"
         name="lote"
-        // value={input.lote}
+        value={input.lote}
         variant="filled"
-        //   onChange={(e) => {
-        //     handleOnChange(e);
-        //   }}
+        onChange={(e) => {
+          handleOnChange(e);
+        }}
       />
     </Box>
   );
 }
 
-export function Cantidad() {
+export function Cantidad({ handleOnChange, input }) {
   return (
     <Box
       component="form"
@@ -47,20 +47,18 @@ export function Cantidad() {
         type="number"
         name="quantity"
         id="filled-size-normal"
-        // defaultValue=""
-        //   value={input.quantity}
+        defaultValue=""
+        value={input.quantity}
         variant="filled"
-        //   onChange={(e) => {
-        //     handleOnChange(e);
-        //     ValidateQuantity(e);
-        //     resetError(e);
-        //   }}
+        onChange={(e) => {
+          handleOnChange(e);
+        }}
       />
     </Box>
   );
 }
 
-export function Fecha() {
+export function Fecha({ handleOnChange, input }) {
   return (
     <Box
       component="form"
@@ -76,24 +74,24 @@ export function Fecha() {
         variant="filled"
         type="date"
         name="expirationDate"
-        //   value={input.publicationDate}
-        //   onChange={(e) => {
-        //     handleOnChange(e);
-        //   }}
+        value={input.publicationDate}
+        onChange={(e) => {
+          handleOnChange(e);
+        }}
       />
     </Box>
   );
 }
 
-export function Categoria() {
+export function Categoria({ categories, setInput, input }) {
   const [cat, setCat] = React.useState('');
 
   const handleChange = (event) => {
     setCat(event.target.value);
-    //   setInput({
-    //     ...input,
-    //     [event.target.name]: event.target.value,
-    //   });
+    setInput({
+      ...input,
+      [event.target.name]: event.target.value,
+    });
   };
 
   return (
@@ -109,18 +107,18 @@ export function Categoria() {
           label="Categoria"
           onChange={handleChange}
         >
-          {/* {categories.map((el) => (
-              <MenuItem key={el.id} value={el.id}>
-                {el.name}
-              </MenuItem>
-            ))} */}
+          {categories.map((el) => (
+            <MenuItem key={el.id} value={el.id}>
+              {el.name}
+            </MenuItem>
+          ))}
         </Select>
       </FormControl>
     </div>
   );
 }
 
-export function Descripcion() {
+export function Descripcion({ handleOnChange, input }) {
   // eslint-disable-next-line no-unused-vars
   const [value, setValue] = React.useState('Controlled');
 
@@ -143,10 +141,10 @@ export function Descripcion() {
         label="Descripcion"
         multiline
         rows={4}
-        //   onChange={(e) => {
-        //     handleOnChange(e);
-        //   }}
-        //   value={input.description}
+        onChange={(e) => {
+          handleOnChange(e);
+        }}
+        value={input.description}
         variant="filled"
         name="description"
       />

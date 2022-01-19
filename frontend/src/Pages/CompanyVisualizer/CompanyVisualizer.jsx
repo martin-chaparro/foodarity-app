@@ -10,7 +10,6 @@ import { api, apiWithToken } from '../../services/api';
 import OngForm from '../../Components/ONGSeccion/OngForm/OngForm';
 import OngInfo from '../../Components/ONGSeccion/OngInfo';
 
-
 export default function CompanyVisualizer() {
   const [company, setcompany] = useState();
   // eslint-disable-next-line no-unused-vars
@@ -77,9 +76,9 @@ export default function CompanyVisualizer() {
         component="div"
         sx={{ color: '#7ED957', marginBottom: 1, textAlign: 'center' }}
       >
-       {company?.description}
+        {company?.description}
       </Typography>
-      
+
       {company && company.company_type_id === 1 && (
         <div className={styles.renderContainer}>
           <div className={styles.divh2}>
@@ -101,14 +100,13 @@ export default function CompanyVisualizer() {
         user.company.company_type_id === 1 &&
         user.company.status === 'Habilitada' ? (
           <div>
-            <OngForm />
+            <OngForm id={id} />
           </div>
         ) : (
           <div>
             <OngInfo />
           </div>
-          ))}
+        ))}
     </div>
-
   );
 }
