@@ -14,10 +14,6 @@ export default function UserDetail({ detail }) {
   // email, id, phone, photo, deleted, socialPhoto, status;
   const { name, email, phone, status } = detail;
 
-  // function handleOnclick() {
-  //   setDisplayDetail(false);
-  // }
-
   return (
     <div className={styles.parent}>
       {displayDetail ? (

@@ -12,6 +12,7 @@ import { useDispatch } from 'react-redux';
 import Swal from 'sweetalert2';
 import estilos from './RegisterUserFormEditable.module.css';
 import { updateUser } from '../../redux/actions/userActions';
+// import { apiWithToken } from '../../services/api';
 
 const Input = styled('input')({
   display: 'none',
@@ -19,6 +20,7 @@ const Input = styled('input')({
 
 export default function RegisterUserFormEditable() {
   const dispatch = useDispatch();
+  // const [photo, setPhoto] = React.useState();
   const [open, setOpen] = React.useState(false);
   const [data, setData] = React.useState({
     id: localStorage.getItem('id'),
@@ -38,9 +40,21 @@ export default function RegisterUserFormEditable() {
     });
   };
 
+  // const handleImageSubmit = async () => {
+  //   try {
+  //     const formPhoto = new FormData();
+  //     formPhoto.append('file', photo);
+
+  //     await apiWithToken.patch(`/users/upload`, formPhoto);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(updateUser(data, form));
+    // if (photo) handleImageSubmit();
     Swal.fire({
       icon: 'success',
       title: 'Actualizado',
@@ -67,6 +81,7 @@ export default function RegisterUserFormEditable() {
       }
     };
     reader.readAsDataURL(e.target.files[0]);
+    // setPhoto(e.target.files[0]);
   };
 
   const imageNull =
@@ -154,6 +169,7 @@ export default function RegisterUserFormEditable() {
                 name="name"
                 autoComplete="off"
                 onChange={(e) => handleChange(e)}
+                value={data.name}
               />
               <h5>Email</h5>
               <input
@@ -161,6 +177,7 @@ export default function RegisterUserFormEditable() {
                 name="email"
                 autoComplete="off"
                 onChange={(e) => handleChange(e)}
+                value={data.email}
               />
               <h5>Número Celular</h5>
               <input
@@ -168,6 +185,7 @@ export default function RegisterUserFormEditable() {
                 name="phone"
                 autoComplete="off"
                 onChange={(e) => handleChange(e)}
+                value={data.phone}
               />
             </div>
           </FormGroup>
