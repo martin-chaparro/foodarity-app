@@ -191,7 +191,7 @@
 
 .cartOptionsCont {
   position: relative;
-  top: 150px;
+  top: 175px;
   display: flex;
   justify-content: end;
   gap: 15px;
@@ -201,6 +201,22 @@
 
 .cartOptions {
   height: 30px;
+}
+
+.divFavButton {
+  position: relative;
+  top: 190px;
+  display: flex;
+  justify-content: flex-end;
+  height: 31px;
+}
+
+.priceCont {
+  margin-top: 38px;
+}
+
+.price {
+  margin: 0;
 }
 
 .titleTypographyDesc {
@@ -266,14 +282,6 @@
 
 .btnReservar:hover {
   background-color: rgba(47, 255, 168, 0.404);
-}
-
-.divFavButton {
-  position: relative;
-  top: 170px;
-  display: flex;
-  justify-content: flex-end;
-  height: 31px;
 }
 
 .favButton {

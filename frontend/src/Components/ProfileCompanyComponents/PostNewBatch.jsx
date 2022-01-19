@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Avatar from '@mui/material/Avatar';
+import Typography from '@mui/material/Typography';
 import Swal from 'sweetalert2';
 import styles from './PostNewBatch.module.css';
 
@@ -24,6 +25,9 @@ export default function PostNewBatch() {
   // const [photoPrev, setPhotoPrev] = useState('');
 
   const [error, setError] = useState({});
+
+  // eslint-disable-next-line no-unused-vars
+  const [checkFullField, setCheckFullField] = useState(false);
 
   const [input, setInput] = useState({
     lote: '',
@@ -64,9 +68,9 @@ export default function PostNewBatch() {
       errors.category = 'Category is required';
     }
 
-    if (inputs.photo === {}) {
-      errors.photo = 'Photo is required';
-    }
+    // if (inputs.photo === {}) {
+    //   errors.photo = 'Photo is required';
+    // }
 
     return errors;
   }
@@ -76,18 +80,51 @@ export default function PostNewBatch() {
       ...input,
       [e.target.name]: e.target.value,
     });
+    setCheckFullField();
   }
+
+  console.log(Object.keys(validate(input)).length);
 
   function handleSubmit(e) {
     e.preventDefault();
 
     const errors = validate(input);
+    console.log(errors);
 
-    if (!Object.keys(errors).length && !error.price && !error.quantity) {
+    if (Object.keys(errors).length) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Campos incompletos',
+        text: '¡Complete todos los campos!',
+      });
+    } else if (!photo.name) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Foto del Producto Requerida !',
+        text: '¡Subí una foto de tu producto haciendo click sobre la misma !',
+      });
+    } else if (error.price === 'El numero debe ser > a 0') {
+      Swal.fire({
+        icon: 'error',
+        title: 'Precio incorrecto!',
+        text: '¡El número debe ser mayor a cero!',
+      });
+    } else if (error.price === 'Solo Números') {
+      Swal.fire({
+        icon: 'error',
+        title: 'Precio incorrecto!',
+        text: '¡Solo se aceptan numeros, utilice una coma para los decimales!',
+      });
+    } else if (error.quantity) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Cantidad incorrecta!',
+        text: '¡El número debe ser mayor a cero!',
+      });
+    } else {
       dispatch(postProduct(input, photo));
 
       // eslint-disable-next-line no-alert
-      alert('Producto Publicado con Exito');
       setInput({
         lote: '',
         description: '',
@@ -99,14 +136,8 @@ export default function PostNewBatch() {
       });
 
       setPhoto({});
-    } else {
       // eslint-disable-next-line no-alert
-
-      Swal.fire({
-        icon: 'error',
-        title: 'Campos incompletos',
-        text: '¡Complete todos los campos!',
-      });
+      alert('Producto Publicado con Exito');
     }
   }
 
@@ -124,8 +155,6 @@ export default function PostNewBatch() {
 
   function validatePrice(event) {
     const { name, value } = event.target;
-
-    console.log(value);
 
     setInput({
       ...input,
@@ -171,14 +200,6 @@ export default function PostNewBatch() {
     }
   }
 
-  function resetError(event) {
-    const { value } = event.target;
-
-    if (!value) {
-      setError({});
-    }
-  }
-
   const handleChangeImage = ({ target }) => {
     const image = target.files[0];
 
@@ -216,6 +237,14 @@ export default function PostNewBatch() {
 
   return (
     <div className={styles.formcont}>
+      <Typography
+        variant="h4"
+        gutterBottom
+        component="div"
+        sx={{ color: '#7ED957', marginBottom: 1, textAlign: 'center' }}
+      >
+        Publique un nuevo producto !
+      </Typography>
       <form className={styles.formcont} onSubmit={handleSubmit}>
         <div className={styles.generalcont}>
           <div className={styles.imagecontent}>
@@ -236,6 +265,9 @@ export default function PostNewBatch() {
                   id="productImage"
                   sx={{ width: 150, height: 150, cursor: 'pointer' }}
                 />
+                <p className={styles.subifoto} id="datosImagen">
+                  Subi una foto !
+                </p>
               </label>
             </div>
 
@@ -281,7 +313,6 @@ export default function PostNewBatch() {
                   // eslint-disable-next-line react/jsx-no-bind
                   ValidateQuantity={ValidateQuantity}
                   // eslint-disable-next-line react/jsx-no-bind
-                  resetError={resetError}
                 />
                 <div classsName={styles.quantityError}>
                   <p className={styles.error}>
@@ -300,7 +331,6 @@ export default function PostNewBatch() {
                   // eslint-disable-next-line react/jsx-no-bind
                   validatePrice={validatePrice}
                   // eslint-disable-next-line react/jsx-no-bind
-                  resetError={resetError}
                 />
                 <div>
                   <p className={styles.error}>{error.price && error.price}</p>

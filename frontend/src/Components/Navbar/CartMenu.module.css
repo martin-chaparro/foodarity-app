@@ -7,6 +7,13 @@
   color: #3e2463;
 }
 
+.myCart {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  margin-right: -14px;
+}
+
 .name {
   text-align: start !important;
   text-overflow: ellipsis;

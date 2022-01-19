@@ -1,11 +1,39 @@
 const Cart = require('../models/Cart');
 const Product = require('../models/Product');
+const Company = require('../models/Company');
+const Address = require('../models/Address');
+const State = require('../models/State');
+const City = require('../models/City');
+const Category = require('../models/Category');
 
 async function getCartProducts(userId) {
   const cart = await Cart.findAll({
     where: { user_id: userId },
     attributes: { exclude: ['createdAt', 'updatedAt'] },
-    include: [{ model: Product, as: 'product' }],
+    include: [
+      {
+        model: Product,
+        as: 'product',
+        include: [
+          { model: Category, as: 'category' },
+          {
+            model: Company,
+            as: 'company',
+            include: [
+              {
+                model: Address,
+                as: 'address',
+                include: [
+                  { model: State, as: 'state' },
+                  { model: City, as: 'city' },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    ],
+    order: [['product_id', 'ASC']],
   });
   return cart;
 }
@@ -53,13 +81,12 @@ const addToCart = async (req, res) => {
       await finalProduct.setProduct(pid);
     } else {
       const finalQuantity = cartProduct.quantity + quantity;
-      console.log(finalQuantity);
       if (product.quantity < finalQuantity) {
-        return res.status(401).json({
-          message: 'El producto no tienen tantos lotes disponibles',
-        });
+        await cartProduct.update({ quantity: product.quantity });
+      } else {
+        await cartProduct.update({ quantity: finalQuantity });
       }
-      await cartProduct.update({ quantity: finalQuantity });
+
       if (cartProduct.quantity <= 0) {
         await cartProduct.destroy({ force: true });
       }

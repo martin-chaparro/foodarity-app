@@ -11,30 +11,35 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import styles from './ProductCard.module.css';
 import { addToCart } from '../../redux/actions/cartActions';
 
-function ModalProductDetails({ product, open, handleClose }) {
+function ModalProductDetails({ product, open, handleClose , item}) {
+  
   // const [input, setInput] = React.useState();
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
   const [currentPath, setCurrentPath] = React.useState('');
+  
 
   const ExpirationDate = product.expirationDate;
   const Date = ExpirationDate.split('-').reverse().join('/');
 
-  let input = 0
+  let input = 1
+  const [quantity, setQuantity] = React.useState(input)
 
   React.useEffect(() => {
     setCurrentPath(location.pathname);
   }, [location]);
 
   const handleAddToCart = () => {
-    dispatch(addToCart(product.id,input));
+    dispatch(addToCart(product.id,quantity));
+    handleClose()
   };
 
   const handleOnChange = (e) => {
     e.preventDefault();
     input = e.target.value
     console.log(input);
+    setQuantity(input)
   };
 
   const handleCompanyClick = (event, id) => {
@@ -79,7 +84,7 @@ function ModalProductDetails({ product, open, handleClose }) {
                   onChange={handleOnChange}
                 >
                   {Array.from(Array(product.quantity), (e, i) => {
-                    return <option key={i} value={i}>{i}</option>;
+                    return <option key={i+1} value={i+1}>{i+1}</option>;
                   })}
                 </select>
               </div>
@@ -119,6 +124,10 @@ function ModalProductDetails({ product, open, handleClose }) {
           <div className={styles.category}>
             <h3>Categoria: {product.category.name}</h3>
           </div>
+          <div className={styles.priceCont}>
+                <label>${Intl.NumberFormat("de-DE").format(product.price)},00 x{item ? item.quantity : quantity}</label>
+                <h2 className={styles.price}>${Intl.NumberFormat("de-DE").format(product.price * (item ? item.quantity : quantity))},00</h2>
+              </div>
           {/*                   <div className={styles.divBtnReservar}>
         <button className={styles.btnReservar} type="submit">
           Reservar
