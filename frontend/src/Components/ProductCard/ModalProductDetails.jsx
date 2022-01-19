@@ -17,18 +17,20 @@ function ModalProductDetails({ product, open, handleClose }) {
   const location = useLocation();
   const dispatch = useDispatch();
   const [currentPath, setCurrentPath] = React.useState('');
+  
 
   const ExpirationDate = product.expirationDate;
   const Date = ExpirationDate.split('-').reverse().join('/');
 
-  let input = 0
+  let input = 1
+  const [quantity, setQuantity] = React.useState(input)
 
   React.useEffect(() => {
     setCurrentPath(location.pathname);
   }, [location]);
 
   const handleAddToCart = () => {
-    dispatch(addToCart(product.id,input));
+    dispatch(addToCart(product.id,quantity));
     handleClose()
   };
 
@@ -36,6 +38,7 @@ function ModalProductDetails({ product, open, handleClose }) {
     e.preventDefault();
     input = e.target.value
     console.log(input);
+    setQuantity(input)
   };
 
   const handleCompanyClick = (event, id) => {
@@ -80,7 +83,9 @@ function ModalProductDetails({ product, open, handleClose }) {
                   onChange={handleOnChange}
                 >
                   {Array.from(Array(product.quantity), (e, i) => {
+                    if (i !== 0) 
                     return <option key={i} value={i}>{i}</option>;
+                    return null
                   })}
                 </select>
               </div>
@@ -120,6 +125,10 @@ function ModalProductDetails({ product, open, handleClose }) {
           <div className={styles.category}>
             <h3>Categoria: {product.category.name}</h3>
           </div>
+          <div className={styles.priceCont}>
+                <label>${product.price}.00 x{quantity}</label>
+                <h2 className={styles.price}>${product.price * quantity}.00</h2>
+              </div>
           {/*                   <div className={styles.divBtnReservar}>
         <button className={styles.btnReservar} type="submit">
           Reservar
