@@ -7,10 +7,16 @@
     height: 95%;
     left: 25px;
     bottom: 20px;
+
 }
 
 .titleCompanyDiv {
-    height: 30px;
+    height: 40px;
+    display: flex;
+    width: 250px;
+    align-items: center;
+    position: relative;
+    top: 10px;
 }
 
 .titleCompany {
@@ -18,6 +24,20 @@
     font-size: 22px;
     font-weight: 700;
     margin-top:  10px;
+}
+
+
+.titleCompany:hover {
+    color: rgb(111, 20, 172);
+    cursor: pointer;
+}
+
+.companyPhoto{
+    width: 30px;
+    height: 30px;
+    position: relative;
+    bottom: 3px;
+
 }
 
 .buttonContainer {

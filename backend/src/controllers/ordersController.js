@@ -1,8 +1,10 @@
+const { Op } = require('sequelize');
 const Order = require('../models/Order');
 const Product = require('../models/Product');
 const User = require('../models/User');
 const Company = require('../models/Company');
 const PaymentMethod = require('../models/PaymentMethod');
+const Cart = require('../models/Cart');
 
 const include = [
   {
@@ -142,23 +144,33 @@ const postOrder = async (req, res) => {
       });
     }
     if (productQuantity > quantity) {
-      Product.update(
+      await Product.update(
         { quantity: productQuantity - quantity },
         { where: { id } }
       );
+      await Cart.update(
+        { quantity: productQuantity - quantity },
+        {
+          where: {
+            product_id: id,
+            quantity: { [Op.gte]: productQuantity - quantity },
+          },
+        }
+      );
     }
     if (productQuantity === quantity) {
-      Product.update(
+      await Product.update(
         { quantity: productQuantity - quantity, status: 'finished' },
         { where: { id } }
       );
+      await Cart.destroy({ where: { product_id: id } });
     }
 
     const order = await Order.create({ date, quantity });
     await order.setCompany(1);
     await order.setBuyer(userId);
     await order.setProduct(id);
-    order.setPaymentMethod(paymentMethod);
+    await order.setPaymentMethod(paymentMethod);
 
     return res.status(200).json(order);
   } catch (error) {

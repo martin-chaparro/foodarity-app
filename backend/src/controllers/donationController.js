@@ -69,7 +69,6 @@ const postDonation = async (req, res) => {
 
     return res.status(200).json(newDonation);
   } catch (error) {
-    console.log(error);
     return res.status(500).send({ message: error });
   }
 };
@@ -90,17 +89,18 @@ const getDonationsByOng = async (req, res) => {
     }
     const listDonations = await Donation.findAll({
       include: [
-        { model: Company, as: 'commerce', attributes: ['id', 'name'] },
+        { model: Company, as: 'company', attributes: ['id', 'name'] },
         { model: Category, as: 'category', attributes: ['name'] },
       ],
       attributes: { exclude: ['createdAt', 'updatedAt'] },
       order: [['lote', 'ASC']],
       where: {
-        ongId: ownerId,
+        ong_id: ownerId,
       },
     });
     return res.status(200).json(listDonations);
   } catch (error) {
+    console.log('ERORRR', error);
     return res.status(500).json({ message: error });
   }
 };
@@ -129,7 +129,7 @@ const getDonationsByCommerce = async (req, res) => {
       attributes: { exclude: ['createdAt', 'updatedAt'] },
       order: [['lote', 'ASC']],
       where: {
-        commerceId: ownerId,
+        commerce_id: ownerId,
       },
     });
     return res.status(200).json(listDonations);

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import Typography from '@mui/material/Typography';
 // import Navbar from '../../Components/Navbar/NavbarCommerce';
 import CompanyProductCard from './CompanyProductCard';
 import styles from './CompanyVisualizer.module.css';
@@ -69,9 +70,15 @@ export default function CompanyVisualizer() {
           <p>Cód. Postal: {company?.address.zipcode}</p>
         </div>
       </div>
-      <div className={styles.description}>
-        <p>{company?.description}</p>
-      </div>
+      <Typography
+        variant="h4"
+        gutterBottom
+        component="div"
+        sx={{ color: '#7ED957', marginBottom: 1, textAlign: 'center' }}
+      >
+        {company?.description}
+      </Typography>
+
       {company && company.company_type_id === 1 && (
         <div className={styles.renderContainer}>
           <div className={styles.divh2}>

@@ -11,7 +11,8 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import styles from './ProductCard.module.css';
 import { addToCart } from '../../redux/actions/cartActions';
 
-function ModalProductDetails({ product, open, handleClose }) {
+function ModalProductDetails({ product, open, handleClose , item}) {
+  
   // const [input, setInput] = React.useState();
   const navigate = useNavigate();
   const location = useLocation();
@@ -83,9 +84,7 @@ function ModalProductDetails({ product, open, handleClose }) {
                   onChange={handleOnChange}
                 >
                   {Array.from(Array(product.quantity), (e, i) => {
-                    if (i !== 0) 
-                    return <option key={i} value={i}>{i}</option>;
-                    return null
+                    return <option key={i+1} value={i+1}>{i+1}</option>;
                   })}
                 </select>
               </div>
@@ -126,8 +125,8 @@ function ModalProductDetails({ product, open, handleClose }) {
             <h3>Categoria: {product.category.name}</h3>
           </div>
           <div className={styles.priceCont}>
-                <label>${product.price}.00 x{quantity}</label>
-                <h2 className={styles.price}>${product.price * quantity}.00</h2>
+                <label>${Intl.NumberFormat("de-DE").format(product.price)},00 x{item ? item.quantity : quantity}</label>
+                <h2 className={styles.price}>${Intl.NumberFormat("de-DE").format(product.price * (item ? item.quantity : quantity))},00</h2>
               </div>
           {/*                   <div className={styles.divBtnReservar}>
         <button className={styles.btnReservar} type="submit">
