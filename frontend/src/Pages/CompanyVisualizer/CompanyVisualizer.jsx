@@ -70,7 +70,7 @@ export default function CompanyVisualizer() {
         </div>
       </div>
       <div className={styles.description}>
-        <p>{company?.description}</p> 
+        <p>{company?.description}</p>
       </div>
       {company && company.company_type_id === 1 && (
         <div className={styles.renderContainer}>
@@ -93,14 +93,13 @@ export default function CompanyVisualizer() {
         user.company.company_type_id === 1 &&
         user.company.status === 'Habilitada' ? (
           <div>
-            <OngForm />
+            <OngForm id={id} />
           </div>
         ) : (
           <div>
             <OngInfo />
           </div>
-          ))}
+        ))}
     </div>
-
   );
 }
