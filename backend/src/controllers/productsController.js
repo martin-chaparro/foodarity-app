@@ -8,6 +8,7 @@ const Company = require('../models/Company');
 const Address = require('../models/Address');
 const State = require('../models/State');
 const City = require('../models/City');
+const Cart = require('../models/Cart');
 
 cloudinary.config(process.env.CLOUDINARY_URL);
 
@@ -267,6 +268,7 @@ const deletePublication = async (req, res) => {
         where: { id },
       }
     );
+    await Cart.destroy({ where: { product_id: id } });
     product = await Product.findByPk(id);
     return res.status(200).json({ msg: 'success', data: product });
   } catch (error) {
