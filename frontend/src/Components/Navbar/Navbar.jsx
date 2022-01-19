@@ -362,7 +362,7 @@ export default function Navbar() {
               
               </IconButton>
             )} */}
-            {id && (
+            {id && currentPath === '/home'  && (
               <IconButton
                 size="large"
                 aria-label="cart"
