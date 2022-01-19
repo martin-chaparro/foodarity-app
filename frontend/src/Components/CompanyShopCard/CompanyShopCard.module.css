@@ -4,7 +4,9 @@
     border-top: 1px solid #c2aadd;
     border-bottom: 1px solid #c2aadd;
     width: 95%;
-    left: 25px;   
+    height: 95%;
+    left: 25px;
+    bottom: 20px;
 }
 
 .titleCompanyDiv {

@@ -3,7 +3,6 @@
     position: relative;
     top: 46px;
     background-color: rgb(68, 8, 83);
-    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -17,10 +16,10 @@
     
     background-color: rgb(255, 255, 255);
     position: relative;
-    top: 10px;
-    width: 80vw;
-    height: 85%;
+    width: 90%;
     border-radius: 4px;
+    margin-top: 50px;
+    margin-bottom: 50px;
 }
 
 .divStringCart {
