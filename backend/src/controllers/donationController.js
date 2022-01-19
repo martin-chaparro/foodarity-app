@@ -62,8 +62,8 @@ const postDonation = async (req, res) => {
       photo,
     });
 
-    await newDonation.setCommerce(commerce);
-    await newDonation.setOng(ongId);
+    await newDonation.setCompany(commerce);
+    await newDonation.setOng(ong);
     await newDonation.setPublisher(userId);
     await newDonation.setCategory(category);
 
