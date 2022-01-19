@@ -1,6 +1,10 @@
+/* eslint-disable prefer-arrow-callback */
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
+// import PropTypes from 'prop-types';
+
+// import NumberFormat from 'react-number-format';
 import FilledInput from '@mui/material/FilledInput';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
@@ -32,7 +36,12 @@ export function NuevoLote({ handleOnChange, input }) {
   );
 }
 
-export function Cantidad({ handleOnChange, input }) {
+export function Cantidad({
+  handleOnChange,
+  input,
+  ValidateQuantity,
+  resetError,
+}) {
   return (
     <Box
       component="form"
@@ -52,13 +61,38 @@ export function Cantidad({ handleOnChange, input }) {
         variant="filled"
         onChange={(e) => {
           handleOnChange(e);
+          ValidateQuantity(e);
+          resetError(e);
         }}
       />
     </Box>
   );
 }
 
-export function Amount({ handleOnChange, input }) {
+// const NumberFormatCustom = React.forwardRef(function NumberFormatCustom(
+//   props,
+//   ref
+// ) {
+//   const { onChange, ...other } = props;
+
+//   return (
+//     <NumberFormat
+//       // eslint-disable-next-line react/jsx-props-no-spreading
+//       {...other}
+//       getInputRef={ref}
+//       thousandSeparator
+//       isNumericString
+//       prefix="$"
+//     />
+//   );
+// });
+
+// NumberFormatCustom.propTypes = {
+//   name: PropTypes.string.isRequired,
+//   onChange: PropTypes.func.isRequired,
+// };
+
+export function Amount({ handleOnChange, input, validatePrice, resetError }) {
   // const [values, setValues] = React.useState({
   //   amount: '',
   //   password: '',
@@ -84,7 +118,11 @@ export function Amount({ handleOnChange, input }) {
             name="price"
             onChange={(e) => {
               handleOnChange(e);
+              validatePrice(e);
+              resetError(e);
             }}
+            step="0.1"
+            variant="standard"
             startAdornment={<InputAdornment position="start">$</InputAdornment>}
           />
         </FormControl>
@@ -136,6 +174,7 @@ export function Categoria({ setInput, input, categories }) {
         <Select
           labelId="demo-simple-select-filled-label"
           id="demo-simple-select-filled"
+          sx={{ width: 464 }}
           name="category"
           value={cat}
           label="Categoria"

@@ -6,6 +6,7 @@ import Home from '../Components/HomePage/Home';
 import Landing from '../Pages/LandingPage/Landing';
 import Register from '../Pages/Register/RegisterFormUser';
 import Loading from '../Components/Loading/Loading';
+
 import ProfileCompany from '../Pages/ProfileCompany/ProfileCompany';
 import ProfileUser from '../Pages/ProfileUser/ProfileUser';
 // import AMyProfile from '../Pages/Profile User/AMyProfile';

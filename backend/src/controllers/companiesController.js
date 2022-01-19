@@ -12,6 +12,8 @@ const Product = require('../models/Product');
 
 cloudinary.config(process.env.CLOUDINARY_URL);
 
+//IMPORTANTE: company_id se reemplaza por commerce_id y ong_id, user_id se reemplaza por publisher_id
+
 // crear una empresa
 const createCompany = async (req, res) => {
   const { userId } = req;
@@ -107,6 +109,37 @@ const getCompanies = async (req, res) => {
       return res.status(200).json(listCompanies);
     }
     return res.status(404).json({ msg: 'No se encontraron compañias' });
+  } catch (error) {
+    return res.status(500);
+  }
+};
+
+//Obtener todas las company del tipo 2, ONGs
+
+const getAllOngs = async (req, res) => {
+  try {
+    const listOngs = await Company.findAll({
+      include: [
+        { model: CompanyType, as: 'type', attributes: ['type'] },
+        {
+          model: Address,
+          as: 'address',
+          include: [
+            { model: City, as: 'city', attributes: ['name'] },
+            { model: State, as: 'state', attributes: ['name'] },
+          ],
+        },
+      ],
+      attributes: {
+        exclude: ['createdAt', 'updatedAt'],
+      },
+      where: { company_type_id: 2}
+    });
+
+    if (listOngs.length > 0) {
+      return res.status(200).json(listOngs);
+    }
+    return res.status(404).json({ msg: 'No se encontraron ONGs' });
   } catch (error) {
     return res.status(500);
   }
@@ -466,4 +499,5 @@ module.exports = {
   addUser,
   deleteUser,
   getUsers,
+  getAllOngs,
 };
