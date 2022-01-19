@@ -1,11 +1,12 @@
 const Cart = require('../models/Cart');
 const Product = require('../models/Product');
+const Company = require('../models/Company');
 
 async function getCartProducts(userId) {
   const cart = await Cart.findAll({
     where: { user_id: userId },
     attributes: { exclude: ['createdAt', 'updatedAt'] },
-    include: [{ model: Product, as: 'product' }],
+    include: [{ model: Product, as: 'product' , include: [{model: Company, as: 'company'}]}],
   });
   return cart;
 }
@@ -24,7 +25,7 @@ const addToCart = async (req, res) => {
     const { userId } = req;
     const { pid } = req.query;
     const quantity = parseInt(req.query.quantity, 10);
-    if (!pid && !quantity) {
+    if (!pid || !quantity) {
       return res
         .status(401)
         .json({ message: 'Debes ingresar un product id y/o una cantidad' });

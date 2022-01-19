@@ -18,15 +18,17 @@ const Input = styled('input')({
   display: 'none',
 });
 
-export default function RegisterUserFormEditable() {
+export default function RegisterUserFormEditable({ detail }) {
   const dispatch = useDispatch();
+  console.log(detail);
+
   // const [photo, setPhoto] = React.useState();
   const [open, setOpen] = React.useState(false);
   const [data, setData] = React.useState({
     id: localStorage.getItem('id'),
-    name: '',
-    email: '',
-    phone: '',
+    name: detail.name,
+    email: detail.email,
+    phone: detail.phone,
   });
   const [preview, setPreview] = React.useState(null);
 

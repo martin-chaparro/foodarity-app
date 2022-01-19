@@ -146,8 +146,7 @@ export default function Navbar() {
               textDecoration="none"
               onClick={handleMenuClose}
             >
-              Añadir comercio
-            </Link>
+             
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -157,6 +156,8 @@ export default function Navbar() {
             >
               <StoreIcon />
             </IconButton>
+            Añadir comercio
+            </Link>
           </MenuItem>
         )}
       {id &&
@@ -168,8 +169,7 @@ export default function Navbar() {
               textDecoration="none"
               onClick={handleMenuClose}
             >
-              Añadir ONG
-            </Link>
+           
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -179,6 +179,8 @@ export default function Navbar() {
             >
               <StoreIcon />
             </IconButton>
+            Añadir ONG
+            </Link>
           </MenuItem>
         )}
       {id && currentPath === '/home' && (
@@ -197,6 +199,7 @@ export default function Navbar() {
       )}
       {id && currentPath === '/home' && (
         <MenuItem>
+        <Link to='/cart'>
           <IconButton
             size="large"
             aria-label="show 17 new notifications"
@@ -206,7 +209,8 @@ export default function Navbar() {
                 <ShoppingCartIcon />
                 </Badge>
           </IconButton>
-          <p>Mi Carrito</p>
+          Mi Carrito
+          </Link>
         </MenuItem>
       )}
       {!id && (
