@@ -10,6 +10,7 @@ import RegisterUserFormEditable from './RegisterUserFormEditable';
 
 export default function UserDetail({ detail }) {
   const [displayDetail] = useState(true);
+
   // setDisplayDetail;
   // email, id, phone, photo, deleted, socialPhoto, status;
   const { name, email, phone, status } = detail;
@@ -94,10 +95,10 @@ export default function UserDetail({ detail }) {
             </Typography>
           </div>
 
-          <RegisterUserFormEditable />
+          <RegisterUserFormEditable detail={detail} />
         </div>
       ) : (
-        <RegisterUserFormEditable />
+        <RegisterUserFormEditable detail={detail} />
       )}
     </div>
   );
