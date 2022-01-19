@@ -68,6 +68,9 @@ export default function CompanyVisualizer() {
           <p>Cód. Postal: {company?.address.zipcode}</p>
         </div>
       </div>
+      <div className={styles.description}>
+        <p>{company?.description}</p> 
+      </div>
       {company && company.company_type_id === 1 && (
         <div className={styles.renderContainer}>
           <div className={styles.divh2}>
@@ -97,26 +100,8 @@ export default function CompanyVisualizer() {
               ACA VA EL TEXTO QUE SE LE MUESTRA A UN USUARIO COMUN, SIN COMPANIA
             </h1>
           </div>
-      </div>
-      <div className={styles.description}>
-        <p>{company?.description}</p> 
-      </div>
-      {company && company.company_type_id === 1 && 
-      <div className={styles.renderContainer}>
-      <div className={styles.divh2}>
-        <h2 className={styles.h2}>Publicaciones de la empresa</h2>
-      </div>
-         < div className={styles.divRenderCards}>
-         {products && products.map((product, index) => (
-                  // eslint-disable-next-line react/no-array-index-key
-                  <CompanyProductCard key={index} product={product} />
-         ))}
-        </div>
-      </div>}
-      {company && company.company_type_id === 2 && ((user && user.company && user.company.company_type_id === 1 && user.company.status === 'Habilitada') ?
-       <div ><h1>ACÁ VA EL COMPONENTE DEL FORMULARIO</h1></div> : <div ><h1>ACA VA EL TEXTO QUE SE LE MUESTRA A UN USUARIO COMUN, SIN COMPANIA</h1></div>)
-      
-      }
+          ))}
     </div>
+
   );
 }
