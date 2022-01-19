@@ -8,6 +8,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import styles from './Usuarios.module.css';
 import { apiWithToken } from '../../services/api';
@@ -53,24 +55,21 @@ export default function Usuarios({ company }) {
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [rows, setRows] = React.useState([]);
   const [input, setInput] = React.useState('');
-  const [users, setUsers] = React.useState([])
+  const [users, setUsers] = React.useState([]);
 
   function handleOnChange(e) {
     setInput(e.target.value);
   }
 
   const handleDelete = (id) => {
-    apiWithToken.delete(`/companies/user/${id}`).then(
-      ()=> {
-        apiWithToken.get('/companies/users').then((response) => {
-          setUsers(response.data);
-        });
-      }
-    );
-    
+    apiWithToken.delete(`/companies/user/${id}`).then(() => {
+      apiWithToken.get('/companies/users').then((response) => {
+        setUsers(response.data);
+      });
+    });
   };
 
-  const handleRows =  () => {
+  const handleRows = () => {
     const finalRows = [];
     users.forEach((user) => {
       finalRows.push(
@@ -81,7 +80,7 @@ export default function Usuarios({ company }) {
           user.id === company.ownerId ? 'Dueño' : 'Empleado',
           user.id !== company.ownerId && (
             <HighlightOffIcon
-            sx={{color: 'red'}}
+              sx={{ color: 'red' }}
               onClick={() => {
                 // eslint-disable-next-line no-alert
                 if (window.confirm('Queres eliminar este usuario?'))
@@ -91,20 +90,19 @@ export default function Usuarios({ company }) {
           )
         )
       );
-    })
+    });
     setRows(finalRows);
-  }
+  };
 
   React.useEffect(() => {
     apiWithToken.get('/companies/users').then((response) => {
       setUsers(response.data);
     });
-  },[])
+  }, []);
 
   React.useEffect(() => {
-    handleRows()
-  },[users])
-
+    handleRows();
+  }, [users]);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -120,29 +118,46 @@ export default function Usuarios({ company }) {
   function handleAddAcount() {
     // eslint-disable-next-line no-alert
     if (window.confirm(`Agregar a ${input} a la compania?`))
-    apiWithToken
-      .post(`/companies/user?email=${input}`)
-      .then(() => 
-      {setInput('')
-      apiWithToken.get('/companies/users').then((response) => {
-        setUsers(response.data);
-      })}
-      );
+      apiWithToken.post(`/companies/user?email=${input}`).then(() => {
+        setInput('');
+        apiWithToken.get('/companies/users').then((response) => {
+          setUsers(response.data);
+        });
+      });
   }
 
   return (
     <Paper className={styles.users} sx={{ width: '100%', overflow: 'hidden' }}>
       <div className={styles.contagregar}>
-        <h2>Agregar nueva cuenta</h2>
-        <input type="text" name="email" onChange={(e) => handleOnChange(e)} value={input}/>
-        <button
-          type="button"
-          onClick={() => {
-            handleAddAcount();
-          }}
-        >
-          AGREGAR
-        </button>
+        <div>
+          <Typography
+            variant="h4"
+            gutterBottom
+            component="div"
+            sx={{ color: '#7ED957', marginBottom: 3 }}
+          >
+            Agregar nueva cuenta
+          </Typography>
+        </div>
+        <div>
+          <input
+            className={styles.input}
+            type="text"
+            name="email"
+            onChange={(e) => handleOnChange(e)}
+            value={input}
+          />
+          <Button
+            onClick={() => handleAddAcount()}
+            sx={{
+              backgroundColor: '#7ED957',
+              '&:hover': { backgroundColor: '#7ED95790 !important' },
+              marginLeft: 1,
+            }}
+          >
+            AGREGAR
+          </Button>
+        </div>
       </div>
 
       <TableContainer sx={{ maxHeight: 440 }}>
@@ -165,24 +180,30 @@ export default function Usuarios({ company }) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows && rows
-              /* .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage) */
-              .map((row) => {
-                return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                    {columns.map((column) => {
-                      const value = row[column.id];
-                      return (
-                        <TableCell key={column.id} align={column.align}>
-                          {column.format && typeof value === 'number'
-                            ? column.format(value)
-                            : value}
-                        </TableCell>
-                      );
-                    })}
-                  </TableRow>
-                );
-              })}
+            {rows &&
+              rows
+                /* .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage) */
+                .map((row) => {
+                  return (
+                    <TableRow
+                      hover
+                      role="checkbox"
+                      tabIndex={-1}
+                      key={row.code}
+                    >
+                      {columns.map((column) => {
+                        const value = row[column.id];
+                        return (
+                          <TableCell key={column.id} align={column.align}>
+                            {column.format && typeof value === 'number'
+                              ? column.format(value)
+                              : value}
+                          </TableCell>
+                        );
+                      })}
+                    </TableRow>
+                  );
+                })}
           </TableBody>
         </Table>
       </TableContainer>
