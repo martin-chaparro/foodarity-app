@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState } from 'react';
+import React from 'react';
 import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
 import FormGroup from '@mui/material/FormGroup';
@@ -19,14 +19,17 @@ const Input = styled('input')({
   display: 'none',
 });
 
-export default function RegisterUserFormEditable() {
-  const dispatch = useDispatch()
-  const [open, setOpen] = useState(false);
-  const [errors, setErrors] = useState({});
-  const [input, setInput] = useState({
-    name: '',
-    email: '',
-    phone: '',
+export default function RegisterUserFormEditable({ detail }) {
+  const dispatch = useDispatch();
+  console.log(detail);
+
+  // const [photo, setPhoto] = React.useState();
+  const [open, setOpen] = React.useState(false);
+  const [data, setData] = React.useState({
+    id: localStorage.getItem('id'),
+    name: detail.name,
+    email: detail.email,
+    phone: detail.phone,
   });
 
   const handleOnChange = (e) => {
@@ -83,8 +86,8 @@ export default function RegisterUserFormEditable() {
 
   const validateLetters = (e) => {
     const { name, value } = e.target;
-    setInput({
-      ...input,
+    setData({
+      ...data,
       [name]: value,
     });
     if (!/[a-zA-Z ]+$/.test(value)) {
@@ -106,8 +109,8 @@ export default function RegisterUserFormEditable() {
     const expresion =
       // eslint-disable-next-line no-useless-escape
       /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-    setInput({
-      ...input,
+    setData({
+      ...data,
       [name]: value,
     });
     if (!expresion.test(value)) {
@@ -125,8 +128,8 @@ export default function RegisterUserFormEditable() {
 
   const validateNum = (e) => {
     const { name, value } = e.target;
-    setInput({
-      ...input,
+    setData({
+      ...data,
       [name]: value,
     });
     // eslint-disable-next-line no-useless-escape
@@ -222,7 +225,7 @@ export default function RegisterUserFormEditable() {
               <h5>Nombre</h5>
               <input
                 required 
-                value={input.name}
+                value={data.name}
                 type="text"
                 name="name"
                 autoComplete="off"
@@ -237,7 +240,7 @@ export default function RegisterUserFormEditable() {
               <h5>Email</h5>
               <input
                 required
-                value={input.email}
+                value={data.email}
                 type="text"
                 name="email"
                 autoComplete="off"
@@ -252,7 +255,7 @@ export default function RegisterUserFormEditable() {
               <h5>Número Celular</h5>
               <input
                 required
-                value={input.phone}
+                value={data.phone}
                 type="text"
                 name="phone"
                 autoComplete="off"
