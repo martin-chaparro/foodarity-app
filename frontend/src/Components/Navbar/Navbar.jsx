@@ -197,7 +197,7 @@ export default function Navbar() {
           <p>Favoritos</p>
         </MenuItem>
       )}
-      {id && currentPath === '/home' && (
+      {id && currentPath !== '/profilecompany' && currentPath !== '/profileuser' && (
         <MenuItem>
         <Link to='/cart'>
           <IconButton
@@ -366,7 +366,7 @@ export default function Navbar() {
               
               </IconButton>
             )} */}
-            {id && currentPath === '/home'  && (
+            {id && currentPath !== '/profilecompany' && currentPath !== '/profileuser'  && (
               <IconButton
                 size="large"
                 aria-label="cart"
