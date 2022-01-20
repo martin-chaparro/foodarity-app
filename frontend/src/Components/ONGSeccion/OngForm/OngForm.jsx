@@ -7,6 +7,8 @@ import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
 import Swal from 'sweetalert2';
 import styles from './OngForm.module.css';
+import Steps from '../OngPageInfo/Steps';
+import CarreteImg from '../OngPageInfo/CarreteImg';
 
 import { NuevoLote, Cantidad, Descripcion, Categoria } from './TextfielForm';
 import { getCategories } from '../../../redux/actions/productActions';
@@ -227,106 +229,114 @@ export default function OngForm() {
   };
 
   return (
-    <div className={styles.formcont}>
-      <form className={styles.formcont} onSubmit={handleSubmit}>
-        <div className={styles.generalcont}>
-          <Typography
-            variant="h4"
-            gutterBottom
-            component="div"
-            sx={{ color: '#7ED957', marginBottom: 0, textAlign: 'center' }}
-          >
-            Realice una donación!
-          </Typography>
-          <div className={styles.imagecontent}>
-            <div className={styles.divupload}>
-              <label htmlFor="datosImagen" className={styles.label}>
-                <input
-                  className={styles.btninput}
-                  type="file"
-                  name="file"
-                  id="datosImagen"
-                  hidden
-                  onChange={handleChangeImage}
-                />
+    <div>
+      <div style={{ textAlign: 'center' }}>
+        <Steps />
+      </div>
 
-                <Avatar
-                  src={productPhoto}
-                  alt="logo"
-                  id="productImage"
-                  sx={{ width: 150, height: 150, cursor: 'pointer' }}
-                />
-              </label>
-            </div>
+      <div className={styles.patern}>
+        <div className={styles.carrete}>
+          <CarreteImg />
+        </div>
+        <div>
+          {/* AQUI INICIA EL FORM DE JAVI */}
+          <div className={styles.formcont}>
+            <form className={styles.formcont} onSubmit={handleSubmit}>
+              <div className={styles.generalcont}>
+                <Typography
+                  variant="h4"
+                  gutterBottom
+                  component="div"
+                  sx={{
+                    color: '#7ED957',
+                    marginBottom: 0,
+                    textAlign: 'center',
+                  }}
+                >
+                  Realice una donación!
+                </Typography>
 
-            <div className={styles.divcategorias}>
-              <Categoria
-                setInput={setInput}
-                input={input}
-                categories={categories}
-                // eslint-disable-next-line react/jsx-no-bind
-                handleOnChange={handleOnChange}
-              />
-            </div>
-          </div>
+                <div className={styles.imagecontent}>
+                  <div className={styles.divupload}>
+                    <label htmlFor="datosImagen" className={styles.label}>
+                      <input
+                        className={styles.btninput}
+                        type="file"
+                        name="file"
+                        id="datosImagen"
+                        hidden
+                        onChange={handleChangeImage}
+                      />
 
-          <div className={styles.cont}>
-            <div className={styles.contname}>
-              <div className={styles.divnuevolote}>
-                <NuevoLote
-                  setInput={setInput}
-                  input={input}
-                  // eslint-disable-next-line react/jsx-no-bind
-                  handleOnChange={handleOnChange}
-                  // />
-                />
-              </div>
-              {/* <div className={styles.divprecio}>
-                <Fecha
-                  setInput={setInput}
-                  input={input}
-                  // eslint-disable-next-line react/jsx-no-bind
-                  handleOnChange={handleOnChange}
-                />
-              </div> */}
-            </div>
+                      <Avatar
+                        src={productPhoto}
+                        alt="logo"
+                        id="productImage"
+                        sx={{ width: 150, height: 150, cursor: 'pointer' }}
+                      />
+                    </label>
+                  </div>
 
-            <div className={styles.contamout}>
-              <div className={styles.divcantidad}>
-                <Cantidad
-                  setInput={setInput}
-                  input={input}
-                  name="quantity"
-                  // eslint-disable-next-line react/jsx-no-bind
-                  handleOnChange={handleOnChange}
-                  // // eslint-disable-next-line react/jsx-no-bind
-                  // ValidateQuantity={ValidateQuantity}
-                  // // eslint-disable-next-line react/jsx-no-bind
-                  // resetError={resetError}
-                />
-                <div classsName={styles.quantityError}>
-                  {/* <p className={styles.error}>
+                  <div className={styles.divcategorias}>
+                    <Categoria
+                      setInput={setInput}
+                      input={input}
+                      categories={categories} // eslint-disable-next-line react/jsx-no-bind
+                      handleOnChange={handleOnChange}
+                    />
+                  </div>
+                </div>
+
+                <div className={styles.cont}>
+                  <div className={styles.contname}>
+                    <div className={styles.divnuevolote}>
+                      <NuevoLote
+                        setInput={setInput}
+                        input={input} // eslint-disable-next-line react/jsx-no-bind
+                        handleOnChange={handleOnChange} // />
+                      />
+                    </div>
+                  </div>
+                  <div className={styles.contamout}>
+                    <div className={styles.divcantidad}>
+                      <Cantidad
+                        setInput={setInput}
+                        input={input}
+                        name="quantity"
+                        // eslint-disable-next-line react/jsx-no-bind
+                        handleOnChange={handleOnChange}
+                        // // eslint-disable-next-line react/jsx-no-bind
+                        // ValidateQuantity={ValidateQuantity}
+                        // // eslint-disable-next-line react/jsx-no-bind
+                        // resetError={resetError}
+                      />
+                      <div classsName={styles.quantityError}>
+                        {/* <p className={styles.error}>
                     {error.quantity && error.quantity}
                   </p> */}
+                      </div>
+                    </div>
+                  </div>
                 </div>
+                <div>
+                  <Descripcion
+                    className={styles.description}
+                    setInput={setInput}
+                    input={input}
+                    // eslint-disable-next-line react/jsx-no-bind
+                    handleOnChange={handleOnChange}
+                  />
+                </div>
+                <button type="submit" className={styles.btnready}>
+                  DONAR PRODUCTO !!
+                </button>
               </div>
-            </div>
+            </form>
           </div>
 
-          <div>
-            <Descripcion
-              className={styles.description}
-              setInput={setInput}
-              input={input}
-              // eslint-disable-next-line react/jsx-no-bind
-              handleOnChange={handleOnChange}
-            />
-          </div>
-          <button type="submit" className={styles.btnready}>
-            DONAR PRODUCTO !!
-          </button>
+          {/* AQUI ACABA LO DE JAVI */}
         </div>
-      </form>
+      </div>
     </div>
   );
 }
