@@ -12,6 +12,11 @@ class Order extends Model {
           type: DataTypes.ARRAY(DataTypes.JSON),
           allowNull: false,
         },
+        status: {
+          type: DataTypes.ENUM('pendiente', 'pagado'),
+          allowNull: false,
+          defaultValue: 'pendiente',
+        },
       },
       {
         sequelize,
