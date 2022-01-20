@@ -13,6 +13,7 @@ import FiltroWeb from '../Drawer/FiltroWeb';
 import Pagination from '../Pagination/BasicPagination';
 import BannerSearch from '../Searchbar/BannerSearch';
 import OngSeccion from '../ONGSeccion/OngSeccion';
+import NotFound from './NotFound';
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -89,16 +90,15 @@ export default function Home() {
           <FiltroWeb filtrado={filtrado} />
         </div>
         <div className={styles.divContainerCards}>
-          {allProducts.map((product, index) => (
+          {allProducts.length >0 ? ( allProducts.map((product, index) => (
             // eslint-disable-next-line react/no-array-index-key
             <ProductCard key={index} product={product} />
-          ))}
+          ))): <NotFound />}
         </div>
         <div className={styles.contOngs}>
         <h2 className={styles.titleOng}>¡Conoce nuestras ONGs!</h2>
-          {allOngs?.map((ong) => {
-            return <OngSeccion key={ong.id} ong={ong} />;
-          })}
+          {allOngs.length > 0 ?
+           ( allOngs.map((ong) => { return <OngSeccion key={ong.id} ong={ong} />;})): <h2>No hay ONGs</h2>}
         </div>
       </div>
     </div>

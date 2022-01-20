@@ -13,7 +13,7 @@ const steps = [
   'NOSOTROS RECOGEMOS O CANALIZAMOS EL DONATIVO',
 ];
 
-export default function InfoDonativo() {
+export default function InfoDonativo({nombre}) {
   return (
     <div>
       <Box
@@ -53,7 +53,7 @@ export default function InfoDonativo() {
           >
             Es por ello, que recaudamos alimentos donados por comercios, para
             que podamos entregarlos a ONGs como{' '}
-            <span style={{ color: '#7ED957' }}>SONRISAS</span>, que buscan
+            <span style={{ color: '#7ED957' }}>{nombre.name}</span>, que buscan
             aliviar el hambre y la inseguridad alimentaria en nuestras
             comunidades.
           </Typography>

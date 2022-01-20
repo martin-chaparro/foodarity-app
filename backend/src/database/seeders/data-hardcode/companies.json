@@ -38,7 +38,7 @@
 	"number": "123",
 	"zipcode": "1640",
 	"cityId": "60854",
-	"stateId" : "6" ,
+	"stateId" : "90" ,
 	"ownerId": 2
 },
 {
@@ -61,5 +61,26 @@
 	"cityId": "60854",
 	"stateId" : "6" ,
 	"ownerId": 3
+},
+{
+	"name": "Aldeas Infantiles SOS",
+	"description": "Desarrollamos estrategias de intervención para prevenir la pérdida del cuidado familiar de niños y niñas. Cuando no es posible evitarlo, y la autoridad estatal así lo determina, brindamos alternativas de cuidado sin separar a los hermanos, garantizando la presencia de un referente afectivo que los acompañe en sus actividades cotidianas y trabajando para que se reintegren a sus familias y comunidades, o para que tengan otras posibilidades de vivir en familia",
+	"areaCode": "54 9 ",
+	"phone": "01115202083",
+	"email": "info@aldeasinfantiles.org.ar",
+	"status": "Habilitada",
+	"website": "https://www.aldeasinfantiles.org.ar/",
+	"deleted": false,
+	"logo":  {
+		"public_id": "aqzhvnddgtrgxstdz7md",
+		"url": "https://res.cloudinary.com/dpsxxuslt/image/upload/v1642691877/aqzhvnddgtrgxstdz7md.jpg"
+	},
+	"type" : 2,
+	"street": "Moreno ",
+	"number": "1850",
+	"zipcode": "1094",
+	"cityId": "60854",
+	"stateId" : "6" ,
+	"ownerId": 10
 }
 ]
