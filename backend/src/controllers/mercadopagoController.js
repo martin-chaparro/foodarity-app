@@ -1,5 +1,6 @@
 const axios = require('axios');
 const mercadopago = require('mercadopago');
+const { v4: uuidv4 } = require('uuid');
 
 const User = require('../models/User');
 const Company = require('../models/Company');
@@ -31,10 +32,13 @@ const getUrlRegister = async (req, res) => {
         message: 'Solo los comercios habilitados pueden publicar productos',
       });
     }
+  
+    const company = await Company.findOne({where:{id:user.company_id}})
+    await company.update({mpCode:uuidv4()})
     return res
       .status(200)
       .send(
-        `https://auth.mercadopago.com.ar/authorization?client_id=${APP_ID}&response_type=code&platform_id=mp&state=${user.company_id}&redirect_uri=${REDIRECT_PAGE}`
+        `https://auth.mercadopago.com.ar/authorization?client_id=${APP_ID}&response_type=code&platform_id=mp&state=${company.mpCode}&redirect_uri=${REDIRECT_PAGE}`
       );
   } catch (error) {
     console.log(error);
@@ -52,6 +56,13 @@ const validateCode = async (request, response) => {
 
   try {
     const data = `client_secret=${SECRET_ID}&client_id=${APP_ID}&grant_type=authorization_code&code=${code}&redirect_uri=${REDIRECT_PAGE}`;
+    
+    const company = await Company.findOne({ where: { ownerId: userId } });
+    if (company.mp_credential_id) {
+      return response
+        .status(400)
+        .send({ message: 'Compania con credenciales activa' });
+    }
 
     const config = {
       method: 'post',
@@ -75,13 +86,7 @@ const validateCode = async (request, response) => {
 
     console.log(resultado.data); // TODO: Eliminar despues de Probar
 
-    const company = await Company.findOne({ where: { ownerId: userId } });
 
-    if (company.mp_credential_id) {
-      return response
-        .status(400)
-        .send({ message: 'Compania con credenciales activa' });
-    }
 
     const credential = await MpCredential.create({
       accessToken,
