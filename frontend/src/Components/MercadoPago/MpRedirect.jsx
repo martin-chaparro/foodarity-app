@@ -48,7 +48,7 @@ function MpRedirect() {
           <br />
           <br />
           <br />
-          <h1>Cargando</h1>
+          <h1>Algo Fallo</h1>
         </>
       )}
     </div>
