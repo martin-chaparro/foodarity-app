@@ -70,21 +70,23 @@
 
 /* ONG SECCION */
 .contOngs {
-  width: 80%;
-  height: 80%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.541);
+  border: 2px solid darkslateblue;
+  position: relative;
+  left: 40px;
+  width: 360px;
+
 }
 .titleOng {
   /* text-shadow: 1px 3px 0 #969696; */
   font-size: 25px;
-  color: rgb(146, 17, 146);
+  color: rgb(99, 37, 180);
   font-weight: bold;
-  margin-top: 70px;
-  margin-left: 20px;
+  margin-top: 10px;
 }
 
 @media screen and (max-width: 576px) {
