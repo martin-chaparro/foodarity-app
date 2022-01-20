@@ -18,6 +18,8 @@ export default function Donations({ donations, typeId }) {
     setPage(newPage);
   };
 
+  console.log(donations);
+
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
@@ -50,12 +52,16 @@ export default function Donations({ donations, typeId }) {
   const rows = donations.map((donation) => {
     return createData(
       donation.lote,
-      typeId === 1 ? donation.ong.name : donation.commerce.name,
+      typeId === 1 ? donation.ong.name : donation.company.name,
       donation.quantity,
       donation.fecha
     );
   });
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> 14f75dc1f9e25686d2a8db6e58c38d4a33d5fbc6
   return (
     <Paper
       className={styles.content}
