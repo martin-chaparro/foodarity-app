@@ -18,6 +18,7 @@ import { RollSelectorRouter } from './RollSelectorRouter';
 import { startCheking } from '../redux/actions/authActions';
 import MpTest from '../Components/MercadoPago/MpTest';
 import MpRedirect from '../Components/MercadoPago/MpRedirect';
+import OrderPage from '../Pages/Order/OrderPage';
 // import ErrorPage from '../Pages/Error/ErrorPage';
 
 export function AppRouter() {
@@ -48,6 +49,14 @@ export function AppRouter() {
           element={
             <PrivateRoute isAuisAuthenticated={!!id}>
               <ProfileUser />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/order/:id"
+          element={
+            <PrivateRoute isAuisAuthenticated={!!id}>
+              <OrderPage />
             </PrivateRoute>
           }
         />
