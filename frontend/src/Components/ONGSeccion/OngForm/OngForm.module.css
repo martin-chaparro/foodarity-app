@@ -1,3 +1,25 @@
+@media screen and (max-width: 576px) {
+  .patern .carrete {
+    display: none;
+  }
+}
+
+.patern {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr;
+  grid-column-gap: -1em;
+  grid-row-gap: 0;
+}
+
+.carrete {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+/* ----------ABAJO INICIA CSS DE FORMULARIO---------- */
+
 .formcont {
   margin-top: 80px;
   background-color: aliceblue;
