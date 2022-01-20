@@ -16,6 +16,7 @@ import {
 import { postProduct, getCategories } from '../../redux/actions/productActions';
 import Descripcion from './MultiLineTextFields';
 import logo from '../../assets/foodAvatar.png';
+import Loading from '../Loading/Loading';
 
 export default function PostNewBatch() {
   const dispatch = useDispatch();
@@ -27,6 +28,8 @@ export default function PostNewBatch() {
 
   const [error, setError] = useState({});
 
+  const [isLoading, setIsloading] = useState(false);
+
   const [preview1, setPreview1] = useState(null);
 
   const [input, setInput] = useState({
@@ -35,7 +38,7 @@ export default function PostNewBatch() {
     quantity: 0,
     price: 0,
     publicationDate: new Date().toLocaleDateString('en-ca'),
-    expirationDate: '',
+    expirationDate: new Date().toLocaleDateString('en-ca'),
     category: '',
   });
 
@@ -84,7 +87,6 @@ export default function PostNewBatch() {
     e.preventDefault();
 
     const errors = validate(input);
-    console.log(errors);
 
     if (Object.keys(errors).length) {
       Swal.fire({
@@ -108,7 +110,7 @@ export default function PostNewBatch() {
       Swal.fire({
         icon: 'error',
         title: 'Precio incorrecto!',
-        text: '¡Solo se aceptan numeros, utilice una coma para los decimales!',
+        text: '¡Solo se aceptan numeros, utilice un "." para los decimales!',
       });
     } else if (error.quantity) {
       Swal.fire({
@@ -117,38 +119,53 @@ export default function PostNewBatch() {
         text: '¡El número debe ser mayor a cero!',
       });
     } else {
-      dispatch(postProduct(input, photo));
+      setIsloading(true);
+      dispatch(postProduct(input, photo)).then((res) => {
+        if (res.status === 200) {
+          setIsloading(false);
+          Swal.fire({
+            icon: 'success',
+            title: 'Producto Publicado con exito!',
+            text: 'Ahora podrá verlo en la seccion de PRODUCTOS y cancelarlo si así lo desea',
+          });
 
-      // eslint-disable-next-line no-alert
-      setInput({
-        lote: '',
-        description: '',
-        quantity: 0,
-        price: 0,
-        publicationDate: new Date().toLocaleDateString('en-ca'),
-        expirationDate: '',
-        category: '',
-      });
+          // eslint-disable-next-line no-alert
+          setInput({
+            lote: '',
+            description: '',
+            quantity: 0,
+            price: 0,
+            publicationDate: new Date().toLocaleDateString('en-ca'),
+            expirationDate: new Date().toLocaleDateString('en-ca'),
+            category: '',
+          });
 
-      setPhoto({});
-      setPreview1(null);
-      // eslint-disable-next-line no-alert
-      Swal.fire({
-        icon: 'success',
-        title: 'Producto Publicado con exito!',
-        text: 'Ahora podrá verlo en la seccion de PRODUCTOS y cancelarlo si así lo desea',
+          setPhoto({});
+          setPreview1(null);
+          // eslint-disable-next-line no-alert
+        } else if (res.status !== 200) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error en la publicación!',
+            text: 'Disculpe en este momento no es posible realizar la publicación favor intente nuevamente mas tarde comuniquse con nuestro centro de atención',
+          });
+
+          setInput({
+            lote: '',
+            description: '',
+            quantity: 0,
+            price: 0,
+            publicationDate: new Date().toLocaleDateString('en-ca'),
+            expirationDate: new Date().toLocaleDateString('en-ca'),
+            category: '',
+          });
+
+          setPhoto({});
+          setPreview1(null);
+        }
       });
     }
   }
-
-  // useEffect(() => {
-  //   const date = input.expirationDate;
-  //   const arr = date.split('-');
-  //   const year = arr.shift();
-  //   arr.push(year);
-  //   const expirationDate = arr.join('/');
-  //   setInput({ ...input, expirationDate });
-  // }, [input.expirationDate]);
 
   // eslint-disable-next-line prefer-const
   let productPhoto = logo;
@@ -245,6 +262,7 @@ export default function PostNewBatch() {
       >
         Publique un nuevo producto !
       </Typography>
+
       <form className={styles.formcont} onSubmit={handleSubmit}>
         <div className={styles.generalcont}>
           <div className={styles.imagecontent}>
@@ -361,6 +379,7 @@ export default function PostNewBatch() {
           >
             PUBLICAR PRODUCTO
           </Button>
+          {isLoading && <Loading />}
         </div>
       </form>
     </div>
