@@ -16,6 +16,7 @@ const Order = require('../models/Order');
 const PaymentMethod = require('../models/PaymentMethod');
 const Donation = require('../models/Donation');
 const Cart = require('../models/Cart');
+const MpCredential = require('../models/MpCredential');
 
 // Models Init
 
@@ -32,6 +33,7 @@ Order.init(connection);
 PaymentMethod.init(connection);
 Donation.init(connection);
 Cart.init(connection);
+MpCredential.init(connection);
 
 // Associate
 Company.associate(connection.models);
@@ -47,5 +49,6 @@ Order.associate(connection.models);
 PaymentMethod.associate(connection.models);
 Donation.associate(connection.models);
 Cart.associate(connection.models);
+MpCredential.associate(connection.models);
 
 module.exports = connection;
