@@ -165,7 +165,7 @@ const createPreference = async (request, response) => {
           email: userPayer.email,
         },
         back_urls: {
-          success: 'http://localhost:3000/mpsucess',
+          success: 'http://localhost:3000/mpsuccess',
           pending: 'http://localhost:3000/mppending',
           failure: 'http://localhost:3000/mpfail',
         },
