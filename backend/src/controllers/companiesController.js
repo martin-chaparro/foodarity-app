@@ -9,10 +9,11 @@ const City = require('../models/City');
 const State = require('../models/State');
 const User = require('../models/User');
 const Product = require('../models/Product');
+const Cart = require('../models/Cart');
 
 cloudinary.config(process.env.CLOUDINARY_URL);
 
-//IMPORTANTE: company_id se reemplaza por commerce_id y ong_id, user_id se reemplaza por publisher_id
+// IMPORTANTE: company_id se reemplaza por commerce_id y ong_id, user_id se reemplaza por publisher_id
 
 // crear una empresa
 const createCompany = async (req, res) => {
@@ -114,7 +115,7 @@ const getCompanies = async (req, res) => {
   }
 };
 
-//Obtener todas las company del tipo 2, ONGs
+// Obtener todas las company del tipo 2, ONGs
 
 const getAllOngs = async (req, res) => {
   try {
@@ -133,7 +134,7 @@ const getAllOngs = async (req, res) => {
       attributes: {
         exclude: ['createdAt', 'updatedAt'],
       },
-      where: { company_type_id: 2}
+      where: { company_type_id: 2 },
     });
 
     if (listOngs.length > 0) {
@@ -299,6 +300,10 @@ const deleteCompany = async (req, res) => {
       { status: 'canceled' },
       { where: { [Op.and]: [{ company_id: id }, { status: 'published' }] } }
     );
+    const products = await Product.findAll({ where: { company_id: id } });
+    products.forEach(async (product) => {
+      await Cart.destroy({ where: { product_id: product.id } });
+    });
 
     const users = await User.findAll({ where: { company_id: id } });
     users.forEach((user) => {

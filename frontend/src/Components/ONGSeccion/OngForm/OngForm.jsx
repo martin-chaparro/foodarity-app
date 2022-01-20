@@ -1,46 +1,47 @@
-import React from 'react';
-// import { useDispatch, useSelector } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+
+import { useDispatch, useSelector } from 'react-redux';
+import Typography from '@mui/material/Typography';
+
 import Avatar from '@mui/material/Avatar';
-// import Swal from 'sweetalert2';
+import Swal from 'sweetalert2';
 import styles from './OngForm.module.css';
 import Steps from '../OngPageInfo/Steps';
 import CarreteImg from '../OngPageInfo/CarreteImg';
 
-import {
-  NuevoLote,
-  Cantidad,
-  Descripcion,
-  Fecha,
-  Categoria,
-} from './TextfielForm';
-// import { getCategories } from '../../../redux/actions/productActions';
+import { NuevoLote, Cantidad, Descripcion, Categoria } from './TextfielForm';
+import { getCategories } from '../../../redux/actions/productActions';
+import { postDonations } from '../../../redux/actions/CompaniesActions';
 
-// import logo from '../../../assets/foodAvatar.png';
+import logo from '../../../assets/foodAvatar.png';
 
 export default function OngForm() {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-  // // const categories = useSelector((state) => state.product.categories);
+  const params = useParams();
+
+  // const { id } = useSelector((state) => state.auth);
+
+  const categories = useSelector((state) => state.product.categories);
+
   // // const [errors, setErrors] = useState({});
   // // eslint-disable-next-line no-unused-vars
-  // const [photo, setPhoto] = useState({});
+  const [photo, setPhoto] = useState({});
   // // const [photoPrev, setPhotoPrev] = useState('');
 
   // const [error, setError] = useState({});
 
-  // const [input, setInput] = useState({
-  //   lote: '',
-  //   description: '',
-  //   quantity: 0,
-  //   price: 0,
-  //   publicationDate: new Date().toLocaleDateString('en-ca'),
-  //   expirationDate: '',
-  //   category: '',
-  // });
+  const [input, setInput] = useState({
+    lote: '',
+    description: '',
+    quantity: 0,
+    category: '',
+  });
 
-  // useEffect(() => {
-  //   dispatch(getCategories());
-  // }, []);
+  useEffect(() => {
+    dispatch(getCategories());
+  }, []);
 
   // function validate(inputs) {
   //   const errors = {};
@@ -70,12 +71,12 @@ export default function OngForm() {
   //   return errors;
   // }
 
-  // function handleOnChange(e) {
-  //   setInput({
-  //     ...input,
-  //     [e.target.name]: e.target.value,
-  //   });
-  // }
+  function handleOnChange(e) {
+    setInput({
+      ...input,
+      [e.target.name]: e.target.value,
+    });
+  }
 
   // function handleSubmit(e) {
   //   e.preventDefault();
@@ -109,14 +110,54 @@ export default function OngForm() {
   //   }
   // }
 
-  // useEffect(() => {
-  //   const date = input.expirationDate;
-  //   const arr = date.split('-');
-  //   const year = arr.shift();
-  //   arr.push(year);
-  //   const expirationDate = arr.join('/');
-  //   setInput({ ...input, expirationDate });
-  // }, [input.expirationDate]);
+  function handleSubmit(e) {
+    e.preventDefault();
+    dispatch(postDonations(input, photo, params.id));
+    console.log(params.id);
+  }
+
+  // function handleSubmit(e) {
+  //   e.preventDefault();
+
+  //   const errors = validate(input);
+  //   console.log(errors);
+
+  //   if (Object.keys(errors).length) {
+  //     Swal.fire({
+  //       icon: 'error',
+  //       title: 'Campos incompletos',
+  //       text: '¡Complete todos los campos!',
+  //     });
+  //   } else if (!photo.name) {
+  //     Swal.fire({
+  //       icon: 'error',
+  //       title: 'Foto del Producto Requerida !',
+  //       text: '¡Subí una foto de tu producto haciendo click sobre la misma !',
+  //     });
+  //   } else if (error.quantity) {
+  //     Swal.fire({
+  //       icon: 'error',
+  //       title: 'Cantidad incorrecta!',
+  //       text: '¡El número debe ser mayor a cero!',
+  //     });
+  //   } else {
+
+  //     dispatch(postDonations(input, photo, id));
+
+  //     // eslint-disable-next-line no-alert
+  //     setInput({
+  //       lote: '',
+  //       description: '',
+  //       quantity: 0,
+  //       expirationDate: '',
+  //       category: '',
+  //     });
+
+  //     setPhoto({});
+  //     // eslint-disable-next-line no-alert
+  //     alert('Producto Publicado con Exito');
+  //   }
+  // }
 
   // // eslint-disable-next-line prefer-const
   // let productPhoto = logo;
@@ -150,40 +191,42 @@ export default function OngForm() {
   //   }
   // }
 
-  // const handleChangeImage = ({ target }) => {
-  //   const image = target.files[0];
+  const productPhoto = logo;
 
-  //   const preview = document.querySelector('#productImage img');
+  const handleChangeImage = ({ target }) => {
+    const image = target.files[0];
 
-  //   if (image.type !== 'image/jpeg' && image.type !== 'image/png') {
-  //     document.querySelector('#datosImagen').value = '';
+    const preview = document.querySelector('#productImage img');
 
-  //     Swal.fire({
-  //       icon: 'error',
-  //       title: 'Error al subir la imagen',
-  //       text: '¡La imagen debe estar en formato JPG o PNG!',
-  //     });
-  //   } else if (Number(image.size) > 2000000) {
-  //     document.querySelector('#datosImagen').value = '';
+    if (image.type !== 'image/jpeg' && image.type !== 'image/png') {
+      document.querySelector('#datosImagen').value = '';
 
-  //     Swal.fire({
-  //       icon: 'error',
-  //       title: 'Error al subir la imagen',
-  //       text: '¡La imagen no debe pesar más de 2 MB!',
-  //     });
-  //   } else {
-  //     const reader = new FileReader();
+      Swal.fire({
+        icon: 'error',
+        title: 'Error al subir la imagen',
+        text: '¡La imagen debe estar en formato JPG o PNG!',
+      });
+    } else if (Number(image.size) > 2000000) {
+      document.querySelector('#datosImagen').value = '';
 
-  //     reader.onloadend = () => {
-  //       preview.src = reader.result;
-  //     };
+      Swal.fire({
+        icon: 'error',
+        title: 'Error al subir la imagen',
+        text: '¡La imagen no debe pesar más de 2 MB!',
+      });
+    } else {
+      const reader = new FileReader();
 
-  //     reader.readAsDataURL(image);
-  //     // eslint-disable-next-line prefer-destructuring
-  //     // productPhoto = target.files[0];
-  //     setPhoto(target.files[0]);
-  //   }
-  // };
+      reader.onloadend = () => {
+        preview.src = reader.result;
+      };
+
+      reader.readAsDataURL(image);
+      // eslint-disable-next-line prefer-destructuring
+      // productPhoto = target.files[0];
+      setPhoto(target.files[0]);
+    }
+  };
 
   return (
     <div>
@@ -196,9 +239,23 @@ export default function OngForm() {
           <CarreteImg />
         </div>
         <div>
+          {/* AQUI INICIA EL FORM DE JAVI */}
           <div className={styles.formcont}>
-            <form className={styles.formcont}>
+            <form className={styles.formcont} onSubmit={handleSubmit}>
               <div className={styles.generalcont}>
+                <Typography
+                  variant="h4"
+                  gutterBottom
+                  component="div"
+                  sx={{
+                    color: '#7ED957',
+                    marginBottom: 0,
+                    textAlign: 'center',
+                  }}
+                >
+                  Realice una donación!
+                </Typography>
+
                 <div className={styles.imagecontent}>
                   <div className={styles.divupload}>
                     <label htmlFor="datosImagen" className={styles.label}>
@@ -208,11 +265,11 @@ export default function OngForm() {
                         name="file"
                         id="datosImagen"
                         hidden
-                        // onChange={handleChangeImage}
+                        onChange={handleChangeImage}
                       />
 
                       <Avatar
-                        // src={productPhoto}
+                        src={productPhoto}
                         alt="logo"
                         id="productImage"
                         sx={{ width: 150, height: 150, cursor: 'pointer' }}
@@ -222,11 +279,10 @@ export default function OngForm() {
 
                   <div className={styles.divcategorias}>
                     <Categoria
-                    // setInput={setInput}
-                    // input={input}
-                    // // categories={categories}
-                    // // eslint-disable-next-line react/jsx-no-bind
-                    // handleOnChange={handleOnChange}
+                      setInput={setInput}
+                      input={input}
+                      categories={categories} // eslint-disable-next-line react/jsx-no-bind
+                      handleOnChange={handleOnChange}
                     />
                   </div>
                 </div>
@@ -235,35 +291,24 @@ export default function OngForm() {
                   <div className={styles.contname}>
                     <div className={styles.divnuevolote}>
                       <NuevoLote
-                      //   setInput={setInput}
-                      //   input={input}
-                      //   // eslint-disable-next-line react/jsx-no-bind
-                      //   handleOnChange={handleOnChange}
-                      // />
-                      />
-                    </div>
-                    <div className={styles.divprecio}>
-                      <Fecha
-                      // setInput={setInput}
-                      // input={input}
-                      // // eslint-disable-next-line react/jsx-no-bind
-                      // handleOnChange={handleOnChange}
+                        setInput={setInput}
+                        input={input} // eslint-disable-next-line react/jsx-no-bind
+                        handleOnChange={handleOnChange} // />
                       />
                     </div>
                   </div>
-
                   <div className={styles.contamout}>
                     <div className={styles.divcantidad}>
                       <Cantidad
-                      // setInput={setInput}
-                      // input={input}
-                      // name="quantity"
-                      // // eslint-disable-next-line react/jsx-no-bind
-                      // handleOnChange={handleOnChange}
-                      // // eslint-disable-next-line react/jsx-no-bind
-                      // ValidateQuantity={ValidateQuantity}
-                      // // eslint-disable-next-line react/jsx-no-bind
-                      // resetError={resetError}
+                        setInput={setInput}
+                        input={input}
+                        name="quantity"
+                        // eslint-disable-next-line react/jsx-no-bind
+                        handleOnChange={handleOnChange}
+                        // // eslint-disable-next-line react/jsx-no-bind
+                        // ValidateQuantity={ValidateQuantity}
+                        // // eslint-disable-next-line react/jsx-no-bind
+                        // resetError={resetError}
                       />
                       <div classsName={styles.quantityError}>
                         {/* <p className={styles.error}>
@@ -273,14 +318,13 @@ export default function OngForm() {
                     </div>
                   </div>
                 </div>
-
                 <div>
                   <Descripcion
-                  // className={styles.description}
-                  // setInput={setInput}
-                  // input={input}
-                  // // eslint-disable-next-line react/jsx-no-bind
-                  // handleOnChange={handleOnChange}
+                    className={styles.description}
+                    setInput={setInput}
+                    input={input}
+                    // eslint-disable-next-line react/jsx-no-bind
+                    handleOnChange={handleOnChange}
                   />
                 </div>
                 <button type="submit" className={styles.btnready}>
@@ -289,6 +333,8 @@ export default function OngForm() {
               </div>
             </form>
           </div>
+
+          {/* AQUI ACABA LO DE JAVI */}
         </div>
       </div>
     </div>

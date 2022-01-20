@@ -7,12 +7,11 @@
 
 .subGeneralContainerDiv {
     display: flex;
-    justify-content: space-between;
+
     align-items: center;
 }
 
 .divImg {
-background-color:yellow;
 width: 40px;
 height: 40px;
 position: relative;
@@ -24,30 +23,39 @@ border-radius: 2px;
     width: 40px;
     height: 40px;
     border-radius: 2px;
+    object-fit: cover;
 }
 
 .lote {
     position: relative;
-    right: 110px;
+    left: 20px;
+    width: 200px;
+
 }
 
 .precio {
+
 position: relative;
-left: 20px;
+
+left: 400px;
+width: 80px;
 }
 
 .details {
 position: relative;
-left: 40px
+
+left: 150px;
+width: 65px;
 }
 
 .buttonDetails{
-    position: relative;
-    right: 100px;
+    position: relative; 
     border: none;
     background-color: transparent;
     transition: 0.5s;
     font-size: 15px;
+    border: 1px solid rgba(55, 6, 65, 0.411);
+    border-radius: 2px;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
@@ -63,36 +71,71 @@ cursor: pointer;
     background-color: transparent;
     border: none;
     transition: 0.4s;
+    color: rgb(226, 50, 50);
+    position: relative;
+    width: 40px;
+    right: 15px;
 }
 
 .deleteButton:hover{
     background-color: rgb(226, 50, 50);
-    color: white;
+    color: rgb(255, 255, 255);
     border-radius: 3px;
     cursor: pointer;
 }
 
 .icon {
     position: relative;
-    right: 25px;
+ 
+    left: 600px;
 }
 
 .divInput {
-   
+   width: 90px;
     height: 35px;
     display: flex;
     flex-direction: column;
     align-items: center;
     position: relative;
+    /* left: 600px; */
+}
+
+.inputContainer {
+    display: flex;
     top: 6px;
-    left: 80px;
+    position: relative;
+    left: 550px;
 }
 
 .input {
 width: 80px;
+height: 35px;
 }
 
 .stock{
     margin-top:  2px;
     font-size: 10px;
+}
+
+.divSumRest {
+display: flex;
+flex-direction: column;
+position: relative;
+bottom: 2px;
+}
+
+.sumButton, .restButton {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10px;
+    background-color: transparent;
+    border: none;
+    color: rgb(55, 6, 65);
+}
+
+.sumButton:disabled, .restButton:disabled {
+    color: rgba(55, 6, 65, 0.274);
 }
