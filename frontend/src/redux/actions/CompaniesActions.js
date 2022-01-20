@@ -75,9 +75,6 @@ export const getOngs = () => async (dispatch) => {
 };
 
 export function postDonations(payload, photo, id) {
-  console.log(payload);
-  console.log(id);
-  console.log(photo);
   // eslint-disable-next-line func-names
   // eslint-disable-next-line no-unused-vars
   // eslint-disable-next-line func-names

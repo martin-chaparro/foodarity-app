@@ -20,6 +20,8 @@ import MpTest from '../Components/MercadoPago/MpTest';
 import MpRedirect from '../Components/MercadoPago/MpRedirect';
 import OrderPage from '../Pages/Order/OrderPage';
 import MpCheckout from '../Components/MercadoPago/MpCheckout';
+import Success from '../Components/MercadoPago/Success';
+import Fail from '../Components/MercadoPago/Fail';
 // import ErrorPage from '../Pages/Error/ErrorPage';
 
 export function AppRouter() {
@@ -47,6 +49,8 @@ export function AppRouter() {
         <Route exact path="/mpredirect" element={<MpRedirect />} />
          {/* TODO:Es de test elimar esta ruta despues */}
          <Route exact path="/mpcheckout" element={<MpCheckout />} />
+         <Route path='/mpsuccess' element={<Success/>}/>
+         <Route path='/mpfail' element={<Fail/>}/>
         <Route
           path="/profileuser"
           element={

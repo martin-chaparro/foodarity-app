@@ -1,3 +1,5 @@
+/* eslint-disable no-alert */
+/* eslint-disable no-case-declarations */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -11,6 +13,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { getCart } from '../../redux/actions/cartActions';
 import { apiWithToken } from '../../services/api';
+import styles from './OrderPage.module.css';
 
 function createData(lote, quantity, price, totalPrice) {
   return { lote, quantity, price, totalPrice };
@@ -64,11 +67,7 @@ function OrderPage() {
 
   const handleSelect = (e) => {
     setSelect({ [e.target.id]: true });
-    if (e.target.id === '1') {
       setAllowSubmit(true)
-    } else {
-      setAllowSubmit(false)
-    }
   };
 
   const handleSubmit = () => {
@@ -81,31 +80,67 @@ function OrderPage() {
         quantity: item.quantity
       }))
     }
-    apiWithToken.post('/orders', finalOrder).then(res => {
-      if (res.status === 200) {
-        // eslint-disable-next-line no-alert
-        alert('COMPRA REALIZADA CON EXITO')
-        navigate('/home')
-      } else {
-        // eslint-disable-next-line no-alert
-        alert(res.data)
-      }
-    })
+
+    switch (Object.keys(select)[0]) {
+      // acordar con el vendedor
+      case '1':
+        apiWithToken.post('/orders', finalOrder).then(res => {
+          apiWithToken.put(`/orders/${res.data.id}`).then(response => {
+            if (response.status === 200) {
+              alert('COMPRA REALIZADA CON EXITO')
+              navigate('/home')
+            } else {
+              alert('ALGO FALLO...')
+            }
+          })
+        })
+        break
+        // mercadopago
+      case '2':
+        apiWithToken.post('/orders', finalOrder).then(res => {
+          if (res.status === 200) {
+            const preference = {
+              items : cart.map(item => ({
+                title: item.product.lote,
+                description:item.product.description,
+                // picture_url:item.product.photo.url,
+                category_id: item.product.category.name,
+                quantity: item.quantity,
+                currency_id: 'ARS',
+                unit_price: item.product.price,
+                id: `${item.product_id}`
+              })),
+              company_id: cart[0].product.company_id,
+              external_reference:`${res.data.id}`
+            }
+            apiWithToken.post('/mercadopago/preference', preference).then(response => {
+              const url = response.data.preferenceCreated.init_point
+              window.location.href = url
+            })
+          } else {
+            alert('ALGO FALLO...')
+          }
+        })
+        break
+        default:
+          break;
+    }
   }
 
   return (
-    <div>
-      <br />
-      <br />
-      <br />
+    <div className={styles.divGenrelContainer}>
       {cart && (
-        <div>
-          <p>Vendedor</p>
-          <h2>{cart[0]?.product.company.name}</h2>
+        <div className={styles.generalHeader}>
+        <div className={styles.purchaseDetail}>
+          <p>Detalle de su compra:</p>
         </div>
+        <div className={styles.divCompanyName}>
+          <h2 className={styles.companyName}>{cart[0]?.product.company.name}</h2>
+          </div>
+          </div>
       )}
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+      <TableContainer className={styles.tableContainer}component={Paper}>
+        <Table aria-label="simple table">
           <TableHead>
             <TableRow>
               <TableCell>LOTE</TableCell>
@@ -146,7 +181,11 @@ function OrderPage() {
           </TableBody>
         </Table>
       </TableContainer>
-      <div>
+      <div className={styles.agreementDiv}>
+        <div className={styles.payMethod}>
+          <p>Seleccione metodo de pago:</p>
+        </div>
+        <div className={styles.methodsContainer}>
         <label>
           <input
             type="radio"
@@ -157,18 +196,23 @@ function OrderPage() {
           />
           <span>Acordar con el vendedor</span>
         </label>
-        <label>
+        <label className={styles.mp}>
           <input
             type="radio"
             checked={select && select[2]}
             id="2"
             onChange={handleSelect}
+            onClick={handleSelect}
           />
           <span>Mercado Pago</span>
         </label>
       </div>
-       <div>
-        <button type='submit' disabled={!allowSubmit} onClick={handleSubmit}>COMPRAR</button>
+      <div className={styles.separator}>
+        separator
+      </div>
+       <div className={styles.buyButtonDiv}>
+        <button className={styles.buyButton} type='submit' disabled={!allowSubmit} onClick={handleSubmit}>COMPRAR</button>
+      </div>
       </div> 
     </div>
   );

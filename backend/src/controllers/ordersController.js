@@ -69,7 +69,7 @@ const getOrdersByUser = async (req, res) => {
       });
     });
     const products = await Product.findAll({
-      where: { id: ids }
+      where: { id: ids },
     });
 
     const finalOrders = orders.map((order) => {
@@ -127,7 +127,7 @@ const getOrdersByCompany = async (req, res) => {
       });
     });
     const products = await Product.findAll({
-      where: { id: ids }
+      where: { id: ids },
     });
     return res.status(200).json({ orders, products });
   } catch (error) {
@@ -182,50 +182,11 @@ const postOrder = async (req, res) => {
     });
 
     if (ids.length !== products_ids.length) {
-      return res
-        .status(400)
-        .json({
-          message:
-            'Alguno de los productos ya no esta publicado, o no tiene suficientes lotes',
-        });
+      return res.status(400).json({
+        message:
+          'Alguno de los productos ya no esta publicado, o no tiene suficientes lotes',
+      });
     }
-
-
-    products.forEach(async (product) => {
-      try {
-        const qBp = quantityByProduct.find(
-          (item) => item.product_id === product.id
-        );
-        const { product_id, quantity } = qBp;
-        const productQuantity = product.quantity;
-          await Cart.destroy({where: {user_id: userId, product_id}})
-        if (productQuantity > quantity) {
-          await Product.update(
-            { quantity: productQuantity - quantity },
-            { where: { id: product_id } }
-          );
-          await Cart.update(
-            { quantity: productQuantity - quantity },
-            {
-              where: {
-                product_id,
-                quantity: { [Op.gte]: productQuantity - quantity },
-              },
-            }
-          );
-        }
-        if (productQuantity === quantity) {
-          await Product.update(
-            { quantity: productQuantity - quantity, status: 'finished' },
-            { where: { id: product_id } }
-          );
-          await Cart.destroy({ where: { product_id } });
-        }
-        return 'producto y carrito actualizado';
-      } catch (error) {
-        return res.status(500).json({ message: error });
-      }
-    });
 
     const order = await Order.create({ date, quantityByProduct });
     await order.setCompany(1);
@@ -238,4 +199,77 @@ const postOrder = async (req, res) => {
   }
 };
 
-module.exports = { getOrdersByUser, getOrdersByCompany, postOrder };
+const concreteOrder = async (req, res) => {
+  const { userId } = req;
+  const { orderId } = req.params;
+  const { fail } = req.query;
+  try {
+    const order = await Order.findByPk(orderId);
+    if (fail) {
+      await order.destroy();
+      return res.status(200).json({ message: 'orden fallida' });
+    }
+    const ids = [];
+
+    order.quantityByProduct.forEach((item) => {
+      if (!ids.includes(item.product_id)) {
+        ids.push(item.product_id);
+      }
+    });
+
+    const products = await Product.findAll({ where: { id: ids } });
+
+    products.forEach(async (product) => {
+      try {
+        const qBp = order.quantityByProduct.find(
+          (item) => item.product_id === product.id
+        );
+        const { product_id, quantity } = qBp;
+        const productQuantity = product.quantity;
+        // borra el producto del carrito del comprador
+        await Cart.destroy({ where: { user_id: userId, product_id } });
+        if (productQuantity > quantity) {
+          // actualiza la cantidad de los productos publicados
+          await Product.update(
+            { quantity: productQuantity - quantity },
+            { where: { id: product_id } }
+          );
+          // actualiza la cantidad en los demas carritos que tengan este producto
+          await Cart.update(
+            { quantity: productQuantity - quantity },
+            {
+              where: {
+                product_id,
+                quantity: { [Op.gte]: productQuantity - quantity },
+              },
+            }
+          );
+        }
+        if (productQuantity === quantity) {
+          // finaliza las publicaciones que ya no tienen stock
+          await Product.update(
+            { quantity: productQuantity - quantity, status: 'finished' },
+            { where: { id: product_id } }
+          );
+          // y las borra de los carritos
+          await Cart.destroy({ where: { product_id } });
+        }
+        return 'producto y carrito actualizado';
+      } catch (error) {
+        return res.status(500).json({ message: error });
+      }
+    });
+
+    order.update({ status: 'pagado' });
+    return res.status(200).json(order);
+  } catch (error) {
+    return res.status(500).json({ message: error });
+  }
+};
+
+module.exports = {
+  getOrdersByUser,
+  getOrdersByCompany,
+  postOrder,
+  concreteOrder,
+};
