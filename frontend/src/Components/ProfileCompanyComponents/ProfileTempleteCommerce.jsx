@@ -29,8 +29,10 @@ import PortalCompania from './PortalCompania';
 import Orders from './Orders';
 import Usuarios from './Usuarios';
 import Donations from './Donations';
+import MpTest from '../MercadoPago/MpTest';
 import styles from './ProfileTempleteCommerce.module.css';
 import Delete from './Delete';
+
 
 const drawerWidth = 240;
 
@@ -119,6 +121,10 @@ function ProfileTempleteCommerce(props) {
           { text: 'Donaciones', typesAllow: [0, 1, 2] },
           {
             text: 'Publicar Nuevo Lote',
+            typesAllow: [0, 1],
+          },
+          {
+            text: 'Vincular Mercado Pago',
             typesAllow: [0, 1],
           },
         ].map(
@@ -258,6 +264,7 @@ function ProfileTempleteCommerce(props) {
             />
           )}
           {display === 6 && <PostNewBatch />}
+          {display === 7 && <MpTest />}
 
           {display === 99 && <Delete company={company} />}
         </Box>

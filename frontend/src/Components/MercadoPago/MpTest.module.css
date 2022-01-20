@@ -1,0 +1,17 @@
+.img {
+width: 100x;
+height: 100px;
+object-fit: cover;
+box-shadow: 6px 7px 10px 0px rgba(0, 0, 0, 0.7);
+border-radius: 20px;
+  }
+
+.container{
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    margin-top: 100px;
+}
