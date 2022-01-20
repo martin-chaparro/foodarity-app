@@ -17,6 +17,7 @@ import { getCategories } from '../../../redux/actions/productActions';
 import { postDonations } from '../../../redux/actions/CompaniesActions';
 
 import logo from '../../../assets/foodAvatar.png';
+import Loading from '../../Loading/Loading';
 
 export default function OngForm() {
   const dispatch = useDispatch();
@@ -28,6 +29,8 @@ export default function OngForm() {
   const [error, setError] = useState({});
   // // eslint-disable-next-line no-unused-vars
   const [photo, setPhoto] = useState({});
+
+  const [isLoading, setIsloading] = useState(false);
 
   const [preview1, setPreview1] = useState(null);
 
@@ -111,20 +114,28 @@ export default function OngForm() {
         text: '¡El número debe ser mayor a cero!',
       });
     } else {
-      dispatch(postDonations(input, photo, params.id));
-
-      // eslint-disable-next-line no-alert
-      setInput({
-        lote: '',
-        description: '',
-        quantity: 0,
-        category: '',
+      setIsloading(true);
+      dispatch(postDonations(input, photo, params.id)).then((res) => {
+        if (res.status === 200) {
+          // eslint-disable-next-line no-alert
+          setIsloading(false);
+          setInput({
+            lote: '',
+            description: '',
+            quantity: 0,
+            category: '',
+          });
+          setPhoto({});
+          setPreview1(null);
+          setOpen(true);
+        } else if (res.status !== 200) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Fallo la donación',
+            text: 'Disculpe en este momento no es posible realizar la donacion, favor contactenos a nuestro centro de atención!',
+          });
+        }
       });
-      setPhoto({});
-      setPreview1(null);
-      setOpen(true);
-      // eslint-disable-next-line no-alert
-      // alert('Producto Publicado con Exito');
     }
   }
 
@@ -328,6 +339,7 @@ export default function OngForm() {
                     </Typography>
                   </Box>
                 </Modal>
+                {isLoading && <Loading />}
               </div>
             </form>
           </div>

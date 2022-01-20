@@ -4,6 +4,7 @@
 import { useEffect, useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Swal from 'sweetalert2';
+import Button from '@mui/material/Button';
 // import { useNavigate } from 'react-router-dom';
 import styles from './RegisterCompanyFormEditable.module.css';
 import CommerceLogo from '../../assets/Mask-Group.png';
@@ -557,20 +558,31 @@ export default function RegisterCompanyFormEditable({ company, handleBack }) {
         </div>
 
         <div className={styles.divButton}>
-          <button type="submit" className={styles.btnactulizar}>
+          <Button
+            type="submit"
+            sx={{
+              backgroundColor: '#7ED957',
+              '&:hover': { backgroundColor: '#7ED95790 !important' },
+              marginTop: 4,
+              paddingLeft: 5,
+              paddingRight: 5,
+            }}
+          >
             ACTUALIZAR CAMBIOS
-          </button>
-          <button
-            type="button"
+          </Button>
+
+          <Button
             onClick={handleBack}
-            className={styles.btnactulizar}
+            sx={{
+              backgroundColor: '#8865b9',
+              '&:hover': { backgroundColor: '#7ED95790 !important' },
+              marginTop: 4,
+              paddingLeft: 5,
+              paddingRight: 5,
+            }}
           >
             CANCELAR
-          </button>
-          {/* BOTON DE ENVIAR SOLICITUD: Dicho botón se encuentra 
-          dentro del componente Alert Ong y para conectar el submit 
-          con el backend debe configurarse en ese mismo componente AlertOng */}
-          {/* <AlertOng /> */}
+          </Button>
         </div>
       </form>
     </div>
