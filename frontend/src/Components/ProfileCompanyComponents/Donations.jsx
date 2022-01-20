@@ -55,7 +55,7 @@ export default function Donations({ donations, typeId }) {
       donation.fecha
     );
   });
-  console.log(donations[0]);
+  
   return (
     <Paper
       className={styles.content}
