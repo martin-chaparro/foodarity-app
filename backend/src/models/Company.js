@@ -81,6 +81,10 @@ class Company extends Model {
       foreignKey: 'commerce_id',
     });
     this.hasMany(models.Order, { as: 'order', foreignKey: 'company_id' });
+    this.belongsTo(models.MpCredential, {
+      as: 'mpcredential',
+      foreignKey: 'mp_credential_id',
+    });
   }
 }
 

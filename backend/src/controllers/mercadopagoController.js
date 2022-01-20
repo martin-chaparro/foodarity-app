@@ -1,34 +1,12 @@
 const axios = require('axios');
 
-const qs = require('qs');
 const User = require('../models/User');
 const Company = require('../models/Company');
+const MpCredential = require('../models/MpCredential');
 
 const APP_ID = process.env.MP_CLIENT_ID;
 const SECRET_ID = process.env.MP_CLIENT_SECRET_ID;
 const REDIRECT_PAGE = process.env.MP_REDIRECT;
-
-/*  
- TODO VENDEDOR
- {
-    "id": 1058268328,
-    "nickname": "TETE2528727",
-    "password": "qatest45",
-    "site_status": "active",
-    "email": "test_user_88765220@testuser.com"
-}
-  */
-/*  
-
-TODO COMPRADOR
-
-{
-    "id": 1058272890,
-    "nickname": "TETE8690572",
-    "password": "qatest6058",
-    "site_status": "active",
-    "email": "test_user_17094870@testuser.com"
-} */
 
 const getUrlRegister = async (req, res) => {
   try {
@@ -62,16 +40,17 @@ const getUrlRegister = async (req, res) => {
   }
 };
 
-const validateCode = async (req, res) => {
-  const { code, state } = req.query;
+const validateCode = async (request, response) => {
+  const { code, state } = request.query;
+  const { userId } = request;
+
+  if (!code && !state) {
+    return response.status(400).json({ message: 'Faltan datos' });
+  }
+
   try {
-    const data = qs.stringify({
-      client_id: APP_ID,
-      client_secret: SECRET_ID,
-      grant_type: 'authorization_code',
-      code,
-      redirect_uri: REDIRECT_PAGE,
-    });
+    const data = `client_secret=${SECRET_ID}&client_id=${APP_ID}&grant_type=authorization_code&code=${code}&redirect_uri=${REDIRECT_PAGE}`;
+
     const config = {
       method: 'post',
       url: 'https://api.mercadopago.com/oauth/token',
@@ -81,23 +60,41 @@ const validateCode = async (req, res) => {
       },
       data,
     };
-    axios(config)
-      .then((response) => {
-        // ACA ESTA EL TOKEN
-        console.log(JSON.stringify(response.data));
-        Company.update(
-          { mp: JSON.stringify(response.data) },
-          { where: { id: state } }
-        );
-        return res.status(200).send(JSON.stringify(response.data));
-      })
-      .catch((error) => {
-        console.log(error);
-        return res.status(400).send({ message: error });
-      });
-    return res.status(200).send({ message: 'success' });
+
+    const resultado = await axios(config);
+
+    const {
+      access_token: accessToken,
+      expires_in: expireIn,
+      user_id: mpUserId,
+      refresh_token: refreshToken,
+      public_key: publicKey,
+    } = resultado.data;
+
+    console.log(resultado.data); // TODO: Eliminar despues de Probar
+
+    const company = await Company.findOne({ where: { ownerId: userId } });
+
+    if (company.mp_credential_id) {
+      return response
+        .status(400)
+        .send({ message: 'Compania con credenciales activa' });
+    }
+
+    const credential = await MpCredential.create({
+      accessToken,
+      expireIn,
+      mpUserId,
+      refreshToken,
+      publicKey,
+    });
+
+    await company.setMpcredential(credential);
+
+    return response.status(200).json({ message: 'Credenciales Registradas' });
   } catch (error) {
-    return res.status(500).send({ message: error });
+    console.log(error);
+    return response.status(500).send({ message: error });
   }
 };
 

@@ -13,6 +13,7 @@ const Product = require('./models/Product');
 const Company = require('./models/Company');
 const Address = require('./models/Address');
 const PaymentMethod = require('./models/PaymentMethod');
+const MpCredential = require('./models/MpCredential');
 
 class Server {
   constructor() {
@@ -166,9 +167,19 @@ class Server {
           number,
           zipcode,
         });
+        const mpcredential = await MpCredential.create({
+          accessToken:
+            'APP_USR-7715134214824898-011919-e2175d05f3711a95f1172b96a5d1b01d-1059801669',
+          expireIn: 15552000,
+          mpUserId: 1059801669,
+          refreshToken: 'TG-61e868c14218d7001acee5d5-1059801669',
+          publicKey: 'APP_USR-d66e33c0-c91a-4dc6-a7ab-9b410cad240b',
+        });
         const findType = await CompanyType.findByPk(type);
+
         await newCompany.setType(findType);
         await newCompany.setAddress(newAddress);
+        await newCompany.setMpcredential(mpcredential);
         await newAddress.setCity(cityId);
         await newAddress.setState(stateId);
         const owner = await User.findByPk(ownerId);

@@ -5,10 +5,10 @@ const authMiddleware = require('../../middlewares/auth');
 const router = new Router();
 const {
   validateCode,
-  getUrlRegister
+  getUrlRegister,
 } = require('../../controllers/mercadopagoController');
 
-router.post('/register', validateCode);
+router.post('/register', authMiddleware, validateCode);
 router.get('/register', authMiddleware, getUrlRegister);
 
 module.exports = router;
