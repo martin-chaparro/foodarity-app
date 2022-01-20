@@ -11,7 +11,8 @@
   display: flex;
   align-items: center;
   justify-content: end;
-  margin-right: -14px;
+  margin-right: -13px;
+  margin-bottom:-8px;
 }
 
 .name {

@@ -33,7 +33,7 @@ export default function UserDetail({ detail }) {
             <Typography
               variant="body"
               gutterBottom
-              sx={{ align: 'justify', color: '#8865b9', marginTop: 7 }}
+              sx={{ textAlign: 'justify', color: '#8865b9', marginTop: 7 }}
             >
               Te damos la Bienvenida a tu
               <span style={{ color: '#7ED957' }}> Portal de Usuario</span>, aquí
@@ -45,7 +45,7 @@ export default function UserDetail({ detail }) {
             <Typography
               variant="body"
               gutterBottom
-              sx={{ align: 'justify', color: '#8865b9' }}
+              sx={{ textAlign: 'justify', color: '#8865b9' }}
             >
               En caso de requerir ayuda, tener dudas o sugerencias a nuestro
               servicio, puedes ver nuestra información de contacto en el botón
@@ -79,7 +79,7 @@ export default function UserDetail({ detail }) {
               variant="body"
               gutterBottom
               sx={{
-                align: 'justify',
+                textAlign: 'justify',
                 color: '#8865b9',
                 marginTop: 7,
                 fontSize: 20,
@@ -95,7 +95,7 @@ export default function UserDetail({ detail }) {
             <Typography
               variant="body"
               gutterBottom
-              sx={{ align: 'justify', color: '#8865b9', fontSize: 20 }}
+              sx={{ textAlign: 'justify', color: '#8865b9', fontSize: 20 }}
             >
               En caso de requerir ayuda, tener dudas o sugerencias a nuestro
               servicio, puedes ver nuestra información de contacto en el botón

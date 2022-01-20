@@ -11,6 +11,6 @@ const {
 
 router.get('/user', authMiddleware, getOrdersByUser);
 router.get('/company', authMiddleware, getOrdersByCompany);
-router.post('/:id', authMiddleware, validationOrder.post, postOrder);
+router.post('/', authMiddleware, validationOrder.post, postOrder);
 
 module.exports = router;

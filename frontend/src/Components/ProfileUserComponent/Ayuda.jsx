@@ -38,7 +38,7 @@ export default function NestedModal() {
           marginTop: 5,
         }}
       >
-        ATENCIÓN AL CLIENTE
+        CENTRO DE ATENCIÓN
       </Button>
       <Modal
         open={open}

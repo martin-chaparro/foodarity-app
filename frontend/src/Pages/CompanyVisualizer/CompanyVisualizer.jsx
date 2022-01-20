@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
+import OngForm from '../../Components/ONGSeccion/OngForm/OngForm';
 // import Navbar from '../../Components/Navbar/NavbarCommerce';
 import CompanyProductCard from './CompanyProductCard';
 import styles from './CompanyVisualizer.module.css';
 import Banner from '../../assets/Banner.jpg';
 import { api, apiWithToken } from '../../services/api';
-import OngForm from '../../Components/ONGSeccion/OngForm/OngForm';
-import OngInfo from '../../Components/ONGSeccion/OngInfo';
+import OngInfo from '../../Components/ONGSeccion/OngPageInfo/OngInfo';
 
 export default function CompanyVisualizer() {
   const [company, setcompany] = useState();

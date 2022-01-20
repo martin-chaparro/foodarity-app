@@ -23,23 +23,23 @@ function ModalProductDetails({ product, open, handleClose , item}) {
   const ExpirationDate = product.expirationDate;
   const Date = ExpirationDate.split('-').reverse().join('/');
 
-  let input = 1
-  const [quantity, setQuantity] = React.useState(input)
+
+  const [quantity, setQuantity] = React.useState(1)
 
   React.useEffect(() => {
     setCurrentPath(location.pathname);
   }, [location]);
 
+
   const handleAddToCart = () => {
     dispatch(addToCart(product.id,quantity));
+    setQuantity(1)
     handleClose()
   };
 
   const handleOnChange = (e) => {
     e.preventDefault();
-    input = e.target.value
-    console.log(input);
-    setQuantity(input)
+    setQuantity(e.target.value)
   };
 
   const handleCompanyClick = (event, id) => {

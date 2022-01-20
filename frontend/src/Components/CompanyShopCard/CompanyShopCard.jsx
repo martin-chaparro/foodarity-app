@@ -32,12 +32,13 @@ export default function CompanyShopCard({cart}) {
           </p>
       </div>
       <div className={styles.buttonContainer}>
-        <button className={styles.buyButton} type="submit">
+        <Link to={`/order/${cart[0].product.company_id}`}><button className={styles.buyButton} type="submit">
           Comprar{' '}
           <ShoppingCartCheckoutIcon
             sx={{ widht: 15, height: 15, position: 'relative', left: 2 }}
           />
         </button>
+        </Link>
        
       </div>
     </div>
