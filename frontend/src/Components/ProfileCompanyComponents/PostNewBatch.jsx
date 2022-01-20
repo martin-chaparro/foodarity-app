@@ -68,7 +68,7 @@ export default function PostNewBatch() {
     }
 
     if (!inputs.category) {
-      errors.category = 'Category is required';
+      errors.category = 'Category is required!';
     }
 
     // if (inputs.photo === {}) {
