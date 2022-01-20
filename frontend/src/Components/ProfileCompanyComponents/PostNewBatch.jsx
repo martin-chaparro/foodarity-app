@@ -29,9 +29,6 @@ export default function PostNewBatch() {
 
   const [preview1, setPreview1] = useState(null);
 
-  // eslint-disable-next-line no-unused-vars
-  const [checkFullField, setCheckFullField] = useState(false);
-
   const [input, setInput] = useState({
     lote: '',
     description: '',
@@ -71,10 +68,6 @@ export default function PostNewBatch() {
       errors.category = 'Category is required!';
     }
 
-    // if (inputs.photo === {}) {
-    //   errors.photo = 'Photo is required';
-    // }
-
     return errors;
   }
 
@@ -83,7 +76,6 @@ export default function PostNewBatch() {
       ...input,
       [e.target.name]: e.target.value,
     });
-    setCheckFullField();
   }
 
   console.log(Object.keys(validate(input)).length);
@@ -141,18 +133,22 @@ export default function PostNewBatch() {
       setPhoto({});
       setPreview1(null);
       // eslint-disable-next-line no-alert
-      alert('Producto Publicado con Exito');
+      Swal.fire({
+        icon: 'success',
+        title: 'Producto Publicado con exito!',
+        text: 'Ahora podrá verlo en la seccion de PRODUCTOS y cancelarlo si así lo desea',
+      });
     }
   }
 
-  useEffect(() => {
-    const date = input.expirationDate;
-    const arr = date.split('-');
-    const year = arr.shift();
-    arr.push(year);
-    const expirationDate = arr.join('/');
-    setInput({ ...input, expirationDate });
-  }, [input.expirationDate]);
+  // useEffect(() => {
+  //   const date = input.expirationDate;
+  //   const arr = date.split('-');
+  //   const year = arr.shift();
+  //   arr.push(year);
+  //   const expirationDate = arr.join('/');
+  //   setInput({ ...input, expirationDate });
+  // }, [input.expirationDate]);
 
   // eslint-disable-next-line prefer-const
   let productPhoto = logo;
@@ -234,8 +230,7 @@ export default function PostNewBatch() {
       };
 
       reader.readAsDataURL(image);
-      // eslint-disable-next-line prefer-destructuring
-      // productPhoto = target.files[0];
+
       setPhoto(target.files[0]);
     }
   };
