@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Swal from 'sweetalert2';
 import styles from './PostNewBatch.module.css';
@@ -25,6 +26,8 @@ export default function PostNewBatch() {
   // const [photoPrev, setPhotoPrev] = useState('');
 
   const [error, setError] = useState({});
+
+  const [preview1, setPreview1] = useState(null);
 
   // eslint-disable-next-line no-unused-vars
   const [checkFullField, setCheckFullField] = useState(false);
@@ -136,6 +139,7 @@ export default function PostNewBatch() {
       });
 
       setPhoto({});
+      setPreview1(null);
       // eslint-disable-next-line no-alert
       alert('Producto Publicado con Exito');
     }
@@ -226,6 +230,7 @@ export default function PostNewBatch() {
 
       reader.onloadend = () => {
         preview.src = reader.result;
+        setPreview1(reader.result);
       };
 
       reader.readAsDataURL(image);
@@ -260,7 +265,7 @@ export default function PostNewBatch() {
                 />
 
                 <Avatar
-                  src={productPhoto}
+                  src={preview1 || productPhoto}
                   alt="logo"
                   id="productImage"
                   sx={{ width: 150, height: 150, cursor: 'pointer' }}
@@ -348,9 +353,19 @@ export default function PostNewBatch() {
               handleOnChange={handleOnChange}
             />
           </div>
-          <button type="submit" className={styles.btnready}>
+          <Button
+            // onClick={() => handleOnclick()}
+            type="submit"
+            sx={{
+              backgroundColor: '#7ED957',
+              '&:hover': { backgroundColor: '#7ED95790 !important' },
+              marginTop: 5,
+              paddingLeft: 5,
+              paddingRight: 5,
+            }}
+          >
             PUBLICAR PRODUCTO
-          </button>
+          </Button>
         </div>
       </form>
     </div>
