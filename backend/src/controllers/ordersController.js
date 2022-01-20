@@ -202,9 +202,13 @@ const postOrder = async (req, res) => {
 const concreteOrder = async (req, res) => {
   const { userId } = req;
   const { orderId } = req.params;
+  const { fail } = req.query;
   try {
     const order = await Order.findByPk(orderId);
-
+    if (fail) {
+      await order.destroy();
+      return res.status(200).json({ message: 'orden fallida' });
+    }
     const ids = [];
 
     order.quantityByProduct.forEach((item) => {
@@ -257,9 +261,9 @@ const concreteOrder = async (req, res) => {
     });
 
     order.update({ status: 'pagado' });
-    res.status(200).json(order);
+    return res.status(200).json(order);
   } catch (error) {
-    res.status(500).json({ message: error });
+    return res.status(500).json({ message: error });
   }
 };
 
