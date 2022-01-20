@@ -163,7 +163,7 @@ function OrderPage() {
           />
           <span>Acordar con el vendedor</span>
         </label>
-        <label>
+        <label className={styles.mp}>
           <input
             type="radio"
             checked={select && select[2]}
@@ -173,6 +173,9 @@ function OrderPage() {
           />
           <span>Mercado Pago</span>
         </label>
+      </div>
+      <div className={styles.separator}>
+        separator
       </div>
        <div className={styles.buyButtonDiv}>
         <button className={styles.buyButton} type='submit' disabled={!allowSubmit} onClick={handleSubmit}>COMPRAR</button>
