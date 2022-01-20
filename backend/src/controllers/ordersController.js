@@ -9,13 +9,6 @@ const Cart = require('../models/Cart');
 
 const include = [
   {
-    model: Product,
-    as: 'product',
-    attributes: {
-      exclude: ['createdAt', 'updatedAt', 'CompanyId', 'CategoryId'],
-    },
-  },
-  {
     model: Company,
     as: 'company',
     attributes: { exclude: ['createdAt', 'updatedAt', 'CompanyTypeId'] },
@@ -67,8 +60,34 @@ const getOrdersByUser = async (req, res) => {
       attributes,
       order: [['id', 'DESC']],
     });
-    return res.status(200).json(orders);
+    const ids = [];
+    orders.forEach((order) => {
+      order.quantityByProduct.forEach((item) => {
+        if (!ids.includes(item.product_id)) {
+          ids.push(item.product_id);
+        }
+      });
+    });
+    const products = await Product.findAll({
+      where: { id: ids },
+      include: [{ model: Company, as: 'company' }],
+    });
+
+    const finalOrders = orders.map((order) => {
+      const finalOrder = order;
+      finalOrder.quantityByProduct = order.quantityByProduct.map((item) => {
+        const finalItem = item;
+        finalItem.product = products.find(
+          (producto) => producto.id === item.product_id
+        );
+        return finalItem;
+      });
+      return finalOrder;
+    });
+
+    return res.status(200).json(finalOrders);
   } catch (error) {
+    console.log(error);
     return res.status(500).send(error);
   }
 };
@@ -100,7 +119,19 @@ const getOrdersByCompany = async (req, res) => {
       attributes,
       order: [['id', 'DESC']],
     });
-    return res.status(200).json(orders);
+    const ids = [];
+    orders.forEach((order) => {
+      order.quantityByProduct.forEach((item) => {
+        if (!ids.includes(item.product_id)) {
+          ids.push(item.product_id);
+        }
+      });
+    });
+    const products = await Product.findAll({
+      where: { id: ids },
+      include: [{ model: Company, as: 'company' }],
+    });
+    return res.status(200).json({ orders, products });
   } catch (error) {
     console.log(error);
     return res.status(500).send(error);
@@ -131,46 +162,72 @@ const postOrder = async (req, res) => {
       });
     }
     // aca
-    // eslint-disable-next-line consistent-return
-    quantityByProduct.forEach(async (data) => {
-      const { product_id, quantity } = data;
-      const product = await Product.findByPk(product_id);
 
-      const productQuantity = product.quantity;
-      if (product.status !== 'published') {
-        return res.json({
-          message: 'El producto no esta publicado',
-        });
-      }
-      if (productQuantity < quantity) {
-        return res.json({
-          message: 'El producto no tiene esa cantidad de lotes',
-        });
-      }
-      if (productQuantity > quantity) {
-        await Product.update(
-          { quantity: productQuantity - quantity },
-          { where: { id: product_id } }
-        );
-        await Cart.update(
-          { quantity: productQuantity - quantity },
-          {
-            where: {
-              product_id,
-              quantity: { [Op.gte]: productQuantity - quantity },
-            },
-          }
-        );
-      }
-      if (productQuantity === quantity) {
-        await Product.update(
-          { quantity: productQuantity - quantity, status: 'finished' },
-          { where: { id: product_id } }
-        );
-        await Cart.destroy({ where: { product_id } });
+    const ids = [];
+
+    quantityByProduct.forEach((item) => {
+      if (!ids.includes(item.product_id)) {
+        ids.push(item.product_id);
       }
     });
-    // aca
+
+    const products = await Product.findAll({ where: { id: ids } });
+
+    const products_ids = [];
+    products.forEach((product) => {
+      const qBp = quantityByProduct.find(
+        (item) => item.product_id === product.id
+      );
+      if (product.status === 'published' && product.quantity >= qBp.quantity) {
+        products_ids.push(product);
+      }
+    });
+
+    if (ids.length !== products_ids.length) {
+      return res
+        .status(400)
+        .json({
+          message:
+            'Alguno de los productos ya no esta publicado, o no tiene suficientes lotes',
+        });
+    }
+
+    // eslint-disable-next-line consistent-return
+
+    products.forEach(async (product) => {
+      try {
+        const qBp = quantityByProduct.find(
+          (item) => item.product_id === product.id
+        );
+        const { product_id, quantity } = qBp;
+        const productQuantity = product.quantity;
+        if (productQuantity > quantity) {
+          await Product.update(
+            { quantity: productQuantity - quantity },
+            { where: { id: product_id } }
+          );
+          await Cart.update(
+            { quantity: productQuantity - quantity },
+            {
+              where: {
+                product_id,
+                quantity: { [Op.gte]: productQuantity - quantity },
+              },
+            }
+          );
+        }
+        if (productQuantity === quantity) {
+          await Product.update(
+            { quantity: productQuantity - quantity, status: 'finished' },
+            { where: { id: product_id } }
+          );
+          await Cart.destroy({ where: { product_id } });
+        }
+        return 'producto y carrito actualizado';
+      } catch (error) {
+        return res.status(500).json({ message: error });
+      }
+    });
 
     const order = await Order.create({ date, quantityByProduct });
     await order.setCompany(1);
