@@ -7,7 +7,7 @@ import styles from './CompanyVisualizer.module.css';
 import Banner from '../../assets/Banner.jpg';
 import { api, apiWithToken } from '../../services/api';
 import OngForm from '../../Components/ONGSeccion/OngForm/OngForm';
-import OngInfo from '../../Components/ONGSeccion/OngInfo';
+import OngInfo from '../../Components/ONGSeccion/OngPageInfo/OngInfo';
 
 export default function CompanyVisualizer() {
   const [company, setcompany] = useState();
@@ -70,7 +70,7 @@ export default function CompanyVisualizer() {
         </div>
       </div>
       <div className={styles.description}>
-        <p>{company?.description}</p> 
+        <p>{company?.description}</p>
       </div>
       {company && company.company_type_id === 1 && (
         <div className={styles.renderContainer}>
@@ -99,8 +99,7 @@ export default function CompanyVisualizer() {
           <div>
             <OngInfo />
           </div>
-          ))}
+        ))}
     </div>
-
   );
 }
