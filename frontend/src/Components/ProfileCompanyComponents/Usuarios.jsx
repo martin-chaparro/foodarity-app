@@ -153,6 +153,8 @@ export default function Usuarios({ company }) {
               backgroundColor: '#7ED957',
               '&:hover': { backgroundColor: '#7ED95790 !important' },
               marginLeft: 1,
+              paddingLeft: 5,
+              paddingRight: 5,
             }}
           >
             AGREGAR
