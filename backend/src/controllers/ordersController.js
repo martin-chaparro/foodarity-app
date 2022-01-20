@@ -190,7 +190,6 @@ const postOrder = async (req, res) => {
         });
     }
 
-    // eslint-disable-next-line consistent-return
 
     products.forEach(async (product) => {
       try {
@@ -199,6 +198,7 @@ const postOrder = async (req, res) => {
         );
         const { product_id, quantity } = qBp;
         const productQuantity = product.quantity;
+          await Cart.destroy({where: {user_id: userId, product_id}})
         if (productQuantity > quantity) {
           await Product.update(
             { quantity: productQuantity - quantity },
