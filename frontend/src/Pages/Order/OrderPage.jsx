@@ -11,6 +11,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { getCart } from '../../redux/actions/cartActions';
 import { apiWithToken } from '../../services/api';
+import styles from './OrderPage.module.css';
 
 function createData(lote, quantity, price, totalPrice) {
   return { lote, quantity, price, totalPrice };
@@ -94,18 +95,19 @@ function OrderPage() {
   }
 
   return (
-    <div>
-      <br />
-      <br />
-      <br />
+    <div className={styles.divGenrelContainer}>
       {cart && (
-        <div>
-          <p>Vendedor</p>
-          <h2>{cart[0]?.product.company.name}</h2>
+        <div className={styles.generalHeader}>
+        <div className={styles.purchaseDetail}>
+          <p>Detalle de su compra:</p>
         </div>
+        <div className={styles.divCompanyName}>
+          <h2 className={styles.companyName}>{cart[0]?.product.company.name}</h2>
+          </div>
+          </div>
       )}
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+      <TableContainer className={styles.tableContainer}component={Paper}>
+        <Table aria-label="simple table">
           <TableHead>
             <TableRow>
               <TableCell>LOTE</TableCell>
@@ -146,7 +148,11 @@ function OrderPage() {
           </TableBody>
         </Table>
       </TableContainer>
-      <div>
+      <div className={styles.agreementDiv}>
+        <div className={styles.payMethod}>
+          <p>Seleccione metodo de pago:</p>
+        </div>
+        <div className={styles.methodsContainer}>
         <label>
           <input
             type="radio"
@@ -163,12 +169,14 @@ function OrderPage() {
             checked={select && select[2]}
             id="2"
             onChange={handleSelect}
+            onClick={handleSelect}
           />
           <span>Mercado Pago</span>
         </label>
       </div>
-       <div>
-        <button type='submit' disabled={!allowSubmit} onClick={handleSubmit}>COMPRAR</button>
+       <div className={styles.buyButtonDiv}>
+        <button className={styles.buyButton} type='submit' disabled={!allowSubmit} onClick={handleSubmit}>COMPRAR</button>
+      </div>
       </div> 
     </div>
   );
