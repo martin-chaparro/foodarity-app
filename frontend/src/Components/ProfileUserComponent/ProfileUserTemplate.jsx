@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+// import React, { useEffect, useState } from 'react'; COMENTE ESTO PARA QUITAR HISTORIAL DE COMPRAS TEMPORAL
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -6,19 +7,16 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
-// import FaceIcon from '@mui/icons-material/Face';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-// import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-// import DeleteSweepIcon from '@mui/icons-material/DeleteSweep';
 import DragHandleIcon from '@mui/icons-material/DragHandle';
 import UserDetail from './UserDetail';
-import Compras from './Compras';
+// import Compras from './Compras';
 import Bienvenida from './Bienvenida';
 import EliminarUser from './EliminarUser';
 import { apiWithToken } from '../../services/api';
@@ -34,7 +32,7 @@ function ProfileUserTemplate(props) {
   const id = localStorage.getItem('id');
 
   const [userData, setUserData] = React.useState({});
-  const [orders, setOrders] = useState({});
+  // const [orders, setOrders] = useState({});
 
   // eslint-disable-next-line no-unused-vars
   const [display, setDisplay] = React.useState(0);
@@ -54,11 +52,11 @@ function ProfileUserTemplate(props) {
   }, []);
   console.log(userData);
 
-  useEffect(() => {
-    apiWithToken
-      .get(`/orders/users/${id}`)
-      .then((response) => setOrders(response.data));
-  });
+  // useEffect(() => {       COMENTE ESTO PARA QUITAR HISTORIAL DE COMPRAS TEMPORAL
+  //   apiWithToken
+  //     .get(`/orders/users/${id}`)
+  //     .then((response) => setOrders(response.data));
+  // });
 
   const drawer = (
     <div>
@@ -103,16 +101,6 @@ function ProfileUserTemplate(props) {
         ))}
       </List>
       <Divider />
-      {/* <List>
-        {['Eliminar Cuenta'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <DeleteSweepIcon /> : <DeleteSweepIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List> */}
     </div>
   );
 
@@ -200,7 +188,7 @@ function ProfileUserTemplate(props) {
           {display === 0 && <Bienvenida detail={userData} />}
           {display === 1 && <Bienvenida detail={userData} />}
           {display === 2 && <UserDetail detail={userData} />}
-          {display === 3 && <Compras orders={orders} />}
+          {display === 3 && <h1>Historial de Compras</h1>}
           {display === 4 && <EliminarUser />}
         </Box>
       </Box>

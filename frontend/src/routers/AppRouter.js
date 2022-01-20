@@ -9,6 +9,7 @@ import Loading from '../Components/Loading/Loading';
 
 import ProfileCompany from '../Pages/ProfileCompany/ProfileCompany';
 import ProfileUser from '../Pages/ProfileUser/ProfileUser';
+import ShopCart from '../Pages/ShopCart/ShopCart';
 // import AMyProfile from '../Pages/Profile User/AMyProfile';
 import CompanyVisualizer from '../Pages/CompanyVisualizer/CompanyVisualizer';
 import Navbar from '../Components/Navbar/Navbar';
@@ -17,6 +18,7 @@ import { RollSelectorRouter } from './RollSelectorRouter';
 import { startCheking } from '../redux/actions/authActions';
 import MpTest from '../Components/MercadoPago/MpTest';
 import MpRedirect from '../Components/MercadoPago/MpRedirect';
+import OrderPage from '../Pages/Order/OrderPage';
 // import ErrorPage from '../Pages/Error/ErrorPage';
 
 export function AppRouter() {
@@ -51,10 +53,26 @@ export function AppRouter() {
           }
         />
         <Route
+          path="/order/:id"
+          element={
+            <PrivateRoute isAuisAuthenticated={!!id}>
+              <OrderPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
           path="/profilecompany"
           element={
             <PrivateRoute isAuisAuthenticated={!!id}>
               <ProfileCompany />
+            </PrivateRoute>
+          }
+        />
+             <Route
+          path="/cart"
+          element={
+            <PrivateRoute isAuisAuthenticated={!!id}>
+              <ShopCart />
             </PrivateRoute>
           }
         />

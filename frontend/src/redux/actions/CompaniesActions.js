@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable consistent-return */
 // import axios from 'axios';
 import { api, apiWithToken } from '../../services/api';
@@ -63,7 +64,7 @@ export const getCompanies = () => async (dispatch) => {
 export const getOngs = () => async (dispatch) => {
   try {
     const response = await api.get('/companies/ongs');
-    console.log("DATA ONGS", response.data);
+    console.log('DATA ONGS', response.data);
     return dispatch({
       type: types.getOngs,
       payload: response.data,
@@ -72,3 +73,26 @@ export const getOngs = () => async (dispatch) => {
     console.log(error);
   }
 };
+
+export function postDonations(payload, photo, id) {
+  console.log(payload);
+  console.log(id);
+  console.log(photo);
+  // eslint-disable-next-line func-names
+  // eslint-disable-next-line no-unused-vars
+  // eslint-disable-next-line func-names
+  return async function (dispatch) {
+    try {
+      const form = new FormData();
+
+      form.append('file', photo);
+      form.append('data', JSON.stringify(payload));
+
+      const response = await apiWithToken.post(`/donation/${id}`, form);
+
+      return response;
+    } catch (err) {
+      console.log(err);
+    }
+  };
+}

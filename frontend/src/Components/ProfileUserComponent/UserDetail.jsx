@@ -10,13 +10,10 @@ import RegisterUserFormEditable from './RegisterUserFormEditable';
 
 export default function UserDetail({ detail }) {
   const [displayDetail] = useState(true);
+
   // setDisplayDetail;
   // email, id, phone, photo, deleted, socialPhoto, status;
   const { name, email, phone, status } = detail;
-
-  // function handleOnclick() {
-  //   setDisplayDetail(false);
-  // }
 
   return (
     <div className={styles.parent}>
@@ -80,17 +77,6 @@ export default function UserDetail({ detail }) {
               component="div"
               sx={{ color: '#7ED957', marginTop: '0' }}
             >
-              Dirección:
-              <span style={{ color: '#8865b9' }}> No registrado aún</span>
-            </Typography>
-          </div>
-          <div>
-            <Typography
-              variant="h6"
-              gutterBottom
-              component="div"
-              sx={{ color: '#7ED957', marginTop: '0' }}
-            >
               Método de Pago:
               <span style={{ color: '#8865b9' }}> No registrado aún</span>
             </Typography>
@@ -109,10 +95,10 @@ export default function UserDetail({ detail }) {
             </Typography>
           </div>
 
-          <RegisterUserFormEditable />
+          <RegisterUserFormEditable detail={detail} />
         </div>
       ) : (
-        <RegisterUserFormEditable />
+        <RegisterUserFormEditable detail={detail} />
       )}
     </div>
   );
