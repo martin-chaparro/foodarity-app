@@ -305,7 +305,7 @@ export default function OngForm() {
                     paddingRight: 5,
                   }}
                 >
-                  PUBLICAR PRODUCTO
+                  REALIZAR DONACION !
                 </Button>
                 <Modal
                   open={open}
