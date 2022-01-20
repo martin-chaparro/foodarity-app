@@ -57,10 +57,10 @@ class Company extends Model {
           type: DataTypes.INTEGER,
           allowNull: false,
         },
-        mp: {
-          type: DataTypes.JSON,
-          allowNull: true,
-        },
+        mpCode: {
+					type: DataTypes.UUID,
+					allowNull: true,
+				},
       },
       {
         sequelize,
@@ -81,6 +81,10 @@ class Company extends Model {
       foreignKey: 'commerce_id',
     });
     this.hasMany(models.Order, { as: 'order', foreignKey: 'company_id' });
+    this.belongsTo(models.MpCredential, {
+      as: 'mpcredential',
+      foreignKey: 'mp_credential_id',
+    });
   }
 }
 
