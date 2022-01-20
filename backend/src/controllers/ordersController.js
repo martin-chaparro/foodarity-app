@@ -62,7 +62,7 @@ const getOrdersByUser = async (req, res) => {
   try {
     const { userId } = req;
     const orders = await Order.findAll({
-      where: { buyerId: userId },
+      where: { buyer_id: userId },
       include,
       attributes,
       order: [['id', 'DESC']],
