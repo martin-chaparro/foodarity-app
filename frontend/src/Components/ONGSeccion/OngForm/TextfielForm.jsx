@@ -32,7 +32,7 @@ export function NuevoLote({ handleOnChange, input }) {
   );
 }
 
-export function Cantidad({ handleOnChange, input }) {
+export function Cantidad({ handleOnChange, input, ValidateQuantity }) {
   return (
     <Box
       component="form"
@@ -52,6 +52,7 @@ export function Cantidad({ handleOnChange, input }) {
         variant="filled"
         onChange={(e) => {
           handleOnChange(e);
+          ValidateQuantity(e);
         }}
       />
     </Box>
@@ -83,17 +84,7 @@ export function Fecha({ handleOnChange, input }) {
   );
 }
 
-export function Categoria({ categories, setInput, input }) {
-  const [cat, setCat] = React.useState('');
-
-  const handleChange = (event) => {
-    setCat(event.target.value);
-    setInput({
-      ...input,
-      [event.target.name]: event.target.value,
-    });
-  };
-
+export function Categoria({ categories, input, handleOnChange }) {
   return (
     <div>
       <FormControl variant="filled" sx={{ m: 1, minWidth: '25ch' }}>
@@ -103,9 +94,10 @@ export function Categoria({ categories, setInput, input }) {
           id="demo-simple-select-filled"
           sx={{ width: 464 }}
           name="category"
-          value={cat}
+          defaultValue=""
+          value={input.category}
           label="Categoria"
-          onChange={handleChange}
+          onChange={handleOnChange}
         >
           {categories.map((el) => (
             <MenuItem key={el.id} value={el.id}>

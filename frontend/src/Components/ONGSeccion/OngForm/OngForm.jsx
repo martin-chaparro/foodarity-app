@@ -3,13 +3,15 @@ import { useParams } from 'react-router-dom';
 
 import { useDispatch, useSelector } from 'react-redux';
 import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import Modal from '@mui/material/Modal';
+import Box from '@mui/material/Box';
 
 import Avatar from '@mui/material/Avatar';
 import Swal from 'sweetalert2';
 import styles from './OngForm.module.css';
 import Steps from '../OngPageInfo/Steps';
 import CarreteImg from '../OngPageInfo/CarreteImg';
-
 import { NuevoLote, Cantidad, Descripcion, Categoria } from './TextfielForm';
 import { getCategories } from '../../../redux/actions/productActions';
 import { postDonations } from '../../../redux/actions/CompaniesActions';
@@ -21,16 +23,13 @@ export default function OngForm() {
 
   const params = useParams();
 
-  // const { id } = useSelector((state) => state.auth);
-
   const categories = useSelector((state) => state.product.categories);
 
-  // // const [errors, setErrors] = useState({});
+  const [error, setError] = useState({});
   // // eslint-disable-next-line no-unused-vars
   const [photo, setPhoto] = useState({});
-  // // const [photoPrev, setPhotoPrev] = useState('');
 
-  // const [error, setError] = useState({});
+  const [preview1, setPreview1] = useState(null);
 
   const [input, setInput] = useState({
     lote: '',
@@ -43,33 +42,42 @@ export default function OngForm() {
     dispatch(getCategories());
   }, []);
 
-  // function validate(inputs) {
-  //   const errors = {};
+  const [open, setOpen] = React.useState(false);
+  // const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
-  //   if (!inputs.lote) {
-  //     errors.lote = 'Lote is required !';
-  //   }
-  //   if (!inputs.description) {
-  //     errors.description = 'Descripcion is required ! ';
-  //   }
-  //   if (!inputs.quantity) {
-  //     errors.quantity = 'Cantidad is required !';
-  //   }
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 500,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    borderRadius: 5,
+    boxShadow: 24,
+    p: 4,
+  };
 
-  //   if (!inputs.expirationDate) {
-  //     errors.exprirationDate = 'Date is required';
-  //   }
+  function validate(inputs) {
+    const errors = {};
 
-  //   if (!inputs.category) {
-  //     errors.category = 'Category is required';
-  //   }
+    if (!inputs.lote) {
+      errors.lote = 'Lote is required !';
+    }
+    if (!inputs.description) {
+      errors.description = 'Descripcion is required ! ';
+    }
+    if (!inputs.quantity) {
+      errors.quantity = 'Cantidad is required !';
+    }
 
-  //   if (inputs.photo === {}) {
-  //     errors.photo = 'Photo is required';
-  //   }
+    if (!inputs.category) {
+      errors.category = 'Category is required';
+    }
 
-  //   return errors;
-  // }
+    return errors;
+  }
 
   function handleOnChange(e) {
     setInput({
@@ -78,120 +86,71 @@ export default function OngForm() {
     });
   }
 
-  // function handleSubmit(e) {
-  //   e.preventDefault();
-
-  //   const errors = validate(input);
-
-  //   if (!Object.keys(errors).length && !error.price && !error.quantity) {
-  //     // dispatch(postProduct(input, photo));
-
-  //     // eslint-disable-next-line no-alert
-  //     alert('Producto Publicado con Exito');
-  //     setInput({
-  //       lote: '',
-  //       description: '',
-  //       quantity: 0,
-  //       price: 0,
-  //       publicationDate: new Date().toLocaleDateString('en-ca'),
-  //       expirationDate: '',
-  //       category: '',
-  //     });
-
-  //     setPhoto({});
-  //   } else {
-  //     // eslint-disable-next-line no-alert
-
-  //     Swal.fire({
-  //       icon: 'error',
-  //       title: 'Campos incompletos',
-  //       text: '¡Complete todos los campos!',
-  //     });
-  //   }
-  // }
-
   function handleSubmit(e) {
     e.preventDefault();
-    dispatch(postDonations(input, photo, params.id));
-    console.log(params.id);
+
+    const errors = validate(input);
+    console.log(errors);
+
+    if (Object.keys(errors).length) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Campos incompletos',
+        text: '¡Complete todos los campos!',
+      });
+    } else if (!photo.name) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Foto del Producto Requerida !',
+        text: '¡Subí una foto de tu producto haciendo click sobre la misma !',
+      });
+    } else if (error.quantity) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Cantidad incorrecta!',
+        text: '¡El número debe ser mayor a cero!',
+      });
+    } else {
+      dispatch(postDonations(input, photo, params.id));
+
+      // eslint-disable-next-line no-alert
+      setInput({
+        lote: '',
+        description: '',
+        quantity: 0,
+        category: '',
+      });
+      setPhoto({});
+      setPreview1(null);
+      setOpen(true);
+      // eslint-disable-next-line no-alert
+      // alert('Producto Publicado con Exito');
+    }
   }
 
-  // function handleSubmit(e) {
-  //   e.preventDefault();
+  function ValidateQuantity(event) {
+    const { name, value } = event.target;
 
-  //   const errors = validate(input);
-  //   console.log(errors);
+    setInput({
+      ...input,
+      [name]: value,
+    });
 
-  //   if (Object.keys(errors).length) {
-  //     Swal.fire({
-  //       icon: 'error',
-  //       title: 'Campos incompletos',
-  //       text: '¡Complete todos los campos!',
-  //     });
-  //   } else if (!photo.name) {
-  //     Swal.fire({
-  //       icon: 'error',
-  //       title: 'Foto del Producto Requerida !',
-  //       text: '¡Subí una foto de tu producto haciendo click sobre la misma !',
-  //     });
-  //   } else if (error.quantity) {
-  //     Swal.fire({
-  //       icon: 'error',
-  //       title: 'Cantidad incorrecta!',
-  //       text: '¡El número debe ser mayor a cero!',
-  //     });
-  //   } else {
+    if (value < 0) {
+      setError({
+        error,
+        [name]: 'El numero debe ser > a 0',
+      });
+    } else {
+      setError({
+        ...error,
+        [name]: '',
+      });
+    }
+  }
 
-  //     dispatch(postDonations(input, photo, id));
-
-  //     // eslint-disable-next-line no-alert
-  //     setInput({
-  //       lote: '',
-  //       description: '',
-  //       quantity: 0,
-  //       expirationDate: '',
-  //       category: '',
-  //     });
-
-  //     setPhoto({});
-  //     // eslint-disable-next-line no-alert
-  //     alert('Producto Publicado con Exito');
-  //   }
-  // }
-
-  // // eslint-disable-next-line prefer-const
-  // let productPhoto = logo;
-
-  // function ValidateQuantity(event) {
-  //   const { name, value } = event.target;
-
-  //   setInput({
-  //     ...input,
-  //     [name]: value,
-  //   });
-
-  //   if (value < 0) {
-  //     setError({
-  //       error,
-  //       [name]: 'El numero debe ser > a 0',
-  //     });
-  //   } else {
-  //     setError({
-  //       ...error,
-  //       [name]: '',
-  //     });
-  //   }
-  // }
-
-  // function resetError(event) {
-  //   const { value } = event.target;
-
-  //   if (!value) {
-  //     setError({});
-  //   }
-  // }
-
-  const productPhoto = logo;
+  // eslint-disable-next-line prefer-const
+  let productPhoto = logo;
 
   const handleChangeImage = ({ target }) => {
     const image = target.files[0];
@@ -219,11 +178,10 @@ export default function OngForm() {
 
       reader.onloadend = () => {
         preview.src = reader.result;
+        setPreview1(reader.result);
       };
 
       reader.readAsDataURL(image);
-      // eslint-disable-next-line prefer-destructuring
-      // productPhoto = target.files[0];
       setPhoto(target.files[0]);
     }
   };
@@ -239,7 +197,6 @@ export default function OngForm() {
           <CarreteImg />
         </div>
         <div>
-          {/* AQUI INICIA EL FORM DE JAVI */}
           <div className={styles.formcont}>
             <form className={styles.formcont} onSubmit={handleSubmit}>
               <div className={styles.generalcont}>
@@ -249,7 +206,7 @@ export default function OngForm() {
                   component="div"
                   sx={{
                     color: '#7ED957',
-                    marginBottom: 0,
+                    marginBottom: 2,
                     textAlign: 'center',
                   }}
                 >
@@ -269,7 +226,7 @@ export default function OngForm() {
                       />
 
                       <Avatar
-                        src={productPhoto}
+                        src={preview1 || productPhoto}
                         alt="logo"
                         id="productImage"
                         sx={{ width: 150, height: 150, cursor: 'pointer' }}
@@ -305,15 +262,13 @@ export default function OngForm() {
                         name="quantity"
                         // eslint-disable-next-line react/jsx-no-bind
                         handleOnChange={handleOnChange}
-                        // // eslint-disable-next-line react/jsx-no-bind
-                        // ValidateQuantity={ValidateQuantity}
-                        // // eslint-disable-next-line react/jsx-no-bind
-                        // resetError={resetError}
+                        // eslint-disable-next-line react/jsx-no-bind
+                        ValidateQuantity={ValidateQuantity}
                       />
                       <div classsName={styles.quantityError}>
-                        {/* <p className={styles.error}>
-                    {error.quantity && error.quantity}
-                  </p> */}
+                        <p className={styles.error}>
+                          {error.quantity && error.quantity}
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -327,14 +282,55 @@ export default function OngForm() {
                     handleOnChange={handleOnChange}
                   />
                 </div>
-                <button type="submit" className={styles.btnready}>
-                  DONAR PRODUCTO !!
-                </button>
+                <Button
+                  // onClick={() => handleOnclick()}
+                  type="submit"
+                  sx={{
+                    backgroundColor: '#7ED957',
+                    '&:hover': { backgroundColor: '#7ED95790 !important' },
+                    marginTop: 5,
+                    paddingLeft: 5,
+                    marginBottom: 7,
+                    paddingRight: 5,
+                  }}
+                >
+                  PUBLICAR PRODUCTO
+                </Button>
+                <Modal
+                  open={open}
+                  onClose={handleClose}
+                  aria-labelledby="modal-modal-title"
+                  aria-describedby="modal-modal-description"
+                >
+                  <Box sx={style}>
+                    <Typography
+                      id="modal-modal-title"
+                      variant="h4"
+                      gutterBottom
+                      component="div"
+                      sx={{
+                        color: '#7ED957',
+                        marginBottom: 2,
+                        textAlign: 'center',
+                      }}
+                    >
+                      Donación realizada con Exito !!
+                    </Typography>
+                    <Typography
+                      id="modal-modal-description"
+                      variant="h6"
+                      gutterBottom
+                      component="div"
+                      sx={{ color: '#8865b9', marginTop: '1em' }}
+                    >
+                      Muchas gracias por tu colaboración, es un gran aporte para
+                      construir un mundo mejor !
+                    </Typography>
+                  </Box>
+                </Modal>
               </div>
             </form>
           </div>
-
-          {/* AQUI ACABA LO DE JAVI */}
         </div>
       </div>
     </div>
