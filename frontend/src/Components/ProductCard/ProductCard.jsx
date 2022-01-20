@@ -8,7 +8,7 @@ import ModalProductDetails from './ModalProductDetails';
 
 export default function ProductCard({ product }) {
 
-
+  console.log(product)
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
