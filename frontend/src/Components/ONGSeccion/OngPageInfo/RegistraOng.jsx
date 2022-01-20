@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import estilos from './RegistraOng.module.css';
 import Ayuda from '../../ProfileUserComponent/Ayuda';
 
-export default function RegistraOng() {
+export default function RegistraOng({nombre}) {
   return (
     <div>
       <Box
@@ -40,7 +40,7 @@ export default function RegistraOng() {
             }}
           >
             Si eres una ONG como{' '}
-            <span style={{ color: '#7ED957' }}>SONRISAS</span>, puedes
+            <span style={{ color: '#7ED957' }}>{nombre.name}</span>, puedes
             registrate{' '}
             <Link
               to="/rollSelector/registerformcommerce"

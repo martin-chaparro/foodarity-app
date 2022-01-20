@@ -167,6 +167,7 @@ class Server {
           zipcode,
         });
         const findType = await CompanyType.findByPk(type);
+
         await newCompany.setType(findType);
         await newCompany.setAddress(newAddress);
         await newAddress.setCity(cityId);

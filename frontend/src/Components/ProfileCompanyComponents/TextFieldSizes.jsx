@@ -104,7 +104,7 @@ export function Fecha({ handleOnChange, input }) {
         variant="filled"
         type="date"
         name="expirationDate"
-        value={input.publicationDate}
+        value={input.expirationDate}
         onChange={(e) => {
           handleOnChange(e);
         }}
@@ -113,17 +113,7 @@ export function Fecha({ handleOnChange, input }) {
   );
 }
 
-export function Categoria({ setInput, input, categories }) {
-  const [cat, setCat] = React.useState('');
-
-  const handleChange = (event) => {
-    setCat(event.target.value);
-    setInput({
-      ...input,
-      [event.target.name]: event.target.value,
-    });
-  };
-
+export function Categoria({ input, categories, handleOnChange }) {
   return (
     <div>
       <FormControl variant="filled" sx={{ m: 1, minWidth: '25ch' }}>
@@ -133,9 +123,9 @@ export function Categoria({ setInput, input, categories }) {
           id="demo-simple-select-filled"
           sx={{ width: 464 }}
           name="category"
-          value={cat}
+          value={input.category}
           label="Categoria"
-          onChange={handleChange}
+          onChange={handleOnChange}
         >
           {categories.map((el) => (
             <MenuItem key={el.id} value={el.id}>
