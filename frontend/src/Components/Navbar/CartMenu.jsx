@@ -46,7 +46,7 @@ function CartMenu() {
       </div>}
       {cart.length > 0 && <div  className={styles.btnToCart} >
       <Divider/>
-        <Link to='/cart'>
+        <Link to='/cart' className={styles.myCart}>
       <MenuItem className={styles.myCart}>
         <p>Mi Carrito</p>
           <IconButton
