@@ -69,8 +69,7 @@ const getOrdersByUser = async (req, res) => {
       });
     });
     const products = await Product.findAll({
-      where: { id: ids },
-      include: [{ model: Company, as: 'company' }],
+      where: { id: ids }
     });
 
     const finalOrders = orders.map((order) => {
@@ -128,8 +127,7 @@ const getOrdersByCompany = async (req, res) => {
       });
     });
     const products = await Product.findAll({
-      where: { id: ids },
-      include: [{ model: Company, as: 'company' }],
+      where: { id: ids }
     });
     return res.status(200).json({ orders, products });
   } catch (error) {
