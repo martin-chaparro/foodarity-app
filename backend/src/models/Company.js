@@ -57,10 +57,10 @@ class Company extends Model {
           type: DataTypes.INTEGER,
           allowNull: false,
         },
-        mp: {
-          type: DataTypes.JSON,
-          allowNull: true,
-        },
+        mpCode: {
+					type: DataTypes.UUID,
+					allowNull: true,
+				},
       },
       {
         sequelize,
