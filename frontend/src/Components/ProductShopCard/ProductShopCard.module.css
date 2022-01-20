@@ -74,7 +74,7 @@ cursor: pointer;
     color: rgb(226, 50, 50);
     position: relative;
     width: 40px;
-    left: 45px;
+    right: 15px;
 }
 
 .deleteButton:hover{
@@ -104,7 +104,7 @@ cursor: pointer;
     display: flex;
     top: 6px;
     position: relative;
-    left: 600px;
+    left: 550px;
 }
 
 .input {
