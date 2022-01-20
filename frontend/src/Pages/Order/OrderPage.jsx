@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 /* eslint-disable no-case-declarations */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useEffect } from 'react';
@@ -81,18 +82,20 @@ function OrderPage() {
     }
 
     switch (Object.keys(select)[0]) {
+      // acordar con el vendedor
       case '1':
         apiWithToken.post('/orders', finalOrder).then(res => {
-          if (res.status === 200) {
-            // eslint-disable-next-line no-alert
-            alert('COMPRA REALIZADA CON EXITO')
-            navigate('/home')
-          } else {
-            // eslint-disable-next-line no-alert
-            alert(res.data)
-          }
+          apiWithToken.put(`/orders/${res.data.id}`).then(response => {
+            if (response.status === 200) {
+              alert('COMPRA REALIZADA CON EXITO')
+              navigate('/home')
+            } else {
+              alert('ALGO FALLO...')
+            }
+          })
         })
         break
+        // mercadopago
       case '2':
         apiWithToken.post('/orders', finalOrder).then(res => {
           if (res.status === 200) {
@@ -115,7 +118,7 @@ function OrderPage() {
               window.location.href = url
             })
           } else {
-            console.log('algo fallo')
+            alert('ALGO FALLO...')
           }
         })
         break
