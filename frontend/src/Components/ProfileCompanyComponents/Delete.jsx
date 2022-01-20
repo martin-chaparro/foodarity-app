@@ -73,6 +73,8 @@ function Delete({ company }) {
             backgroundColor: '#e63946',
             '&:hover': { backgroundColor: '#e6394690 !important' },
             marginTop: 5,
+            paddingLeft: 5,
+            paddingRight: 5,
           }}
           onClick={() => {
             handleDelete();

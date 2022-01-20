@@ -20,7 +20,6 @@ const Input = styled('input')({
 
 export default function RegisterUserFormEditable({ detail }) {
   const dispatch = useDispatch();
-  console.log(detail);
 
   // const [photo, setPhoto] = React.useState();
   const [open, setOpen] = React.useState(false);

@@ -164,6 +164,8 @@ export default function CompanyDetail({ company }) {
                 backgroundColor: '#7ED957',
                 '&:hover': { backgroundColor: '#7ED95790 !important' },
                 marginTop: 5,
+                paddingLeft: 5,
+                paddingRight: 5,
               }}
             >
               EDITAR DATOS
