@@ -29,6 +29,7 @@ export default function OngSeccion({ong}) {
   const ImageButton = styled(ButtonBase)(({ theme }) => ({
   position: 'relative',
   height: 200,
+  margin: 8,
   [theme.breakpoints.down('sm')]: {
     width: '100% !important', // Overrides inline-style
     height: 100,

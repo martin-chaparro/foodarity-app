@@ -71,10 +71,10 @@ export default function CompanyVisualizer() {
         </div>
       </div>
       <Typography
-        variant="h4"
+        variant="h6"
         gutterBottom
         component="div"
-        sx={{ color: '#7ED957', marginBottom: 1, textAlign: 'center' }}
+        sx={{ color: '#7ED957', margin: 3, textAlign: 'center' }}
       >
         {company?.description}
       </Typography>

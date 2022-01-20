@@ -57,11 +57,7 @@ export default function Donations({ donations, typeId }) {
       donation.fecha
     );
   });
-<<<<<<< HEAD
-  
-=======
 
->>>>>>> 14f75dc1f9e25686d2a8db6e58c38d4a33d5fbc6
   return (
     <Paper
       className={styles.content}
