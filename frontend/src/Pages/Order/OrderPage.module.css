@@ -17,6 +17,7 @@
 }
 
 .purchaseDetail {
+    margin-top: 20px;
   color: rgb(255, 255, 255);
   font-size: 18px;
   font-weight: 100;
@@ -57,6 +58,7 @@
   width: 100%;
   border-radius: 5px;
   padding-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .payMethod {
