@@ -1,3 +1,5 @@
+/* eslint-disable no-alert */
+/* eslint-disable no-case-declarations */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -65,11 +67,7 @@ function OrderPage() {
 
   const handleSelect = (e) => {
     setSelect({ [e.target.id]: true });
-    if (e.target.id === '1') {
       setAllowSubmit(true)
-    } else {
-      setAllowSubmit(false)
-    }
   };
 
   const handleSubmit = () => {
@@ -82,16 +80,51 @@ function OrderPage() {
         quantity: item.quantity
       }))
     }
-    apiWithToken.post('/orders', finalOrder).then(res => {
-      if (res.status === 200) {
-        // eslint-disable-next-line no-alert
-        alert('COMPRA REALIZADA CON EXITO')
-        navigate('/home')
-      } else {
-        // eslint-disable-next-line no-alert
-        alert(res.data)
-      }
-    })
+
+    switch (Object.keys(select)[0]) {
+      // acordar con el vendedor
+      case '1':
+        apiWithToken.post('/orders', finalOrder).then(res => {
+          apiWithToken.put(`/orders/${res.data.id}`).then(response => {
+            if (response.status === 200) {
+              alert('COMPRA REALIZADA CON EXITO')
+              navigate('/home')
+            } else {
+              alert('ALGO FALLO...')
+            }
+          })
+        })
+        break
+        // mercadopago
+      case '2':
+        apiWithToken.post('/orders', finalOrder).then(res => {
+          if (res.status === 200) {
+            const preference = {
+              items : cart.map(item => ({
+                title: item.product.lote,
+                description:item.product.description,
+                // picture_url:item.product.photo.url,
+                category_id: item.product.category.name,
+                quantity: item.quantity,
+                currency_id: 'ARS',
+                unit_price: item.product.price,
+                id: `${item.product_id}`
+              })),
+              company_id: cart[0].product.company_id,
+              external_reference:`${res.data.id}`
+            }
+            apiWithToken.post('/mercadopago/preference', preference).then(response => {
+              const url = response.data.preferenceCreated.init_point
+              window.location.href = url
+            })
+          } else {
+            alert('ALGO FALLO...')
+          }
+        })
+        break
+        default:
+          break;
+    }
   }
 
   return (
