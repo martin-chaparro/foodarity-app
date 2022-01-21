@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 const axios = require('axios');
 const mercadopago = require('mercadopago');
 const { v4: uuidv4 } = require('uuid');
@@ -32,9 +33,9 @@ const getUrlRegister = async (req, res) => {
         message: 'Solo los comercios habilitados pueden publicar productos',
       });
     }
-  
-    const company = await Company.findOne({where:{id:user.company_id}})
-    await company.update({mpCode:uuidv4()})
+
+    const company = await Company.findOne({ where: { id: user.company_id } });
+    await company.update({ mpCode: uuidv4() });
     return res
       .status(200)
       .send(
@@ -56,7 +57,7 @@ const validateCode = async (request, response) => {
 
   try {
     const data = `client_secret=${SECRET_ID}&client_id=${APP_ID}&grant_type=authorization_code&code=${code}&redirect_uri=${REDIRECT_PAGE}`;
-    
+
     const company = await Company.findOne({ where: { ownerId: userId } });
     if (company.mp_credential_id) {
       return response
@@ -86,8 +87,6 @@ const validateCode = async (request, response) => {
 
     console.log(resultado.data); // TODO: Eliminar despues de Probar
 
-
-
     const credential = await MpCredential.create({
       accessToken,
       expireIn,
@@ -107,7 +106,7 @@ const validateCode = async (request, response) => {
 
 const createPreference = async (request, response) => {
   const { userId } = request;
-  const { commerceId } = request.body;
+  const { items, company_id: commerceId, external_reference } = request.body;
 
   console.log(commerceId, userId);
   if (!commerceId) {
@@ -160,29 +159,18 @@ const createPreference = async (request, response) => {
 
     try {
       const preference = {
-        items: [
-          {
-            title: 'Quesos Mix',
-            description:
-              'En este paquete podrás encontrar diferentes tipos de quesos : 2kg queso sardo , 1kg queso muzzarella, 400gr queso azul, 500gr queso pategras, 1kg queso mar del plata',
-            picture_url:
-              'https://www.lacucanyaportsitges.es/img/los-mejores-10-tipos-de-queso-419.jpg',
-            category_id: '1',
-            quantity: 1,
-            currency_id: 'ARS',
-            unit_price: 2100,
-          },
-        ],
+        items,
         payer: {
           name: userPayer.name,
           email: userPayer.email,
         },
         back_urls: {
-          success: 'http://localhost:3000/mpsucess',
+          success: 'http://localhost:3000/mpsuccess',
           pending: 'http://localhost:3000/mppending',
           failure: 'http://localhost:3000/mpfail',
         },
         marketplace_fee: Number(MARKETPLACE_FEE),
+        external_reference,
         binary_mode: true,
       };
       mercadopago.configure({
@@ -210,28 +198,3 @@ module.exports = {
   getUrlRegister,
   createPreference,
 };
-
-/* 
-const preference = {}
-
-  const item = {
-    title: 'Blue shirt',
-    quantity: 10,
-    currency_id: 'ARS',
-    unit_price: 150
-  }
-
-  const payer = {
-    email: "john@yourdomain.com"
-  }
-
-  preference.items = [item]
-  preference.payer = payer
-  preference.marketplace_fee = 2.56
-  preference.notification_url = "http://urlmarketplace.com/notification_ipn";
-
-  mercadopago.preferences.create(preference).then((data) => {
-     // Do Stuff...
-   }).catch((error) => {
-     // Do Stuff...
-   }); */

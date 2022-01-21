@@ -25,7 +25,7 @@ class Product extends Model {
           allowNull: true,
         },
         price: {
-          type: DataTypes.DOUBLE,
+          type: DataTypes.INTEGER,
           allowNull: false,
         },
         publicationDate: {

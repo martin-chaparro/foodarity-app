@@ -391,11 +391,7 @@ export default function Navbar() {
               <Avatar
                 photo={
                   // eslint-disable-next-line no-nested-ternary
-                  user.photo
-                    ? user.photo.url
-                    : user.socialPhoto
-                    ? user.socialPhoto
-                    : avatarDefault
+                   user.photo ? user.photo.url : (user.socialPhoto ? user.socialPhoto : avatarDefault)  
                 }
               />
             </IconButton>
