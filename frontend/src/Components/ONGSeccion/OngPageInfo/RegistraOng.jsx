@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import estilos from './RegistraOng.module.css';
 import Ayuda from '../../ProfileUserComponent/Ayuda';
 
-export default function RegistraOng({nombre}) {
+export default function RegistraOng({ nombre }) {
   return (
     <div>
       <Box
@@ -37,6 +37,7 @@ export default function RegistraOng({nombre}) {
               width: '100%',
               fontStyle: 'bold',
               marginTop: 2,
+              marginBottom: 2,
             }}
           >
             Si eres una ONG como{' '}
