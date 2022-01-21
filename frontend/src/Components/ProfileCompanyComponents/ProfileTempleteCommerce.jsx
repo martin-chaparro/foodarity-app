@@ -29,7 +29,7 @@ import PortalCompania from './PortalCompania';
 import Orders from './Orders';
 import Usuarios from './Usuarios';
 import Donations from './Donations';
-import MpTest from '../MercadoPago/MpTest';
+import MpTest from './MpTest';
 import styles from './ProfileTempleteCommerce.module.css';
 import Delete from './Delete';
 

@@ -194,7 +194,7 @@
   top: 165px;
   right: 5px;
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   gap: 15px;
   align-items: center;
   font-weight: bold;
