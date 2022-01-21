@@ -172,6 +172,7 @@ const createPreference = async (request, response) => {
         marketplace_fee: Number(MARKETPLACE_FEE),
         external_reference,
         binary_mode: true,
+        auto_return: "approved",
       };
       mercadopago.configure({
         access_token: commerce.mpcredential.accessToken,
