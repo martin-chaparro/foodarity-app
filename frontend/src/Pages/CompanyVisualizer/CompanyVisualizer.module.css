@@ -1,11 +1,10 @@
 .componentDiv {
   background-color: rgb(101, 81, 131);
-  height: 520vh;
+  min-height: 100vh;
+  height: 100%;
   position: relative;
   top: 64px;
 }
-
-
 
 .GeneralProfileImgs {
   /* display: flex;
@@ -136,7 +135,7 @@
   margin-left: 100px;
 }
 
-.description{
+.description {
   width: 80vw;
   height: 200px;
   margin-top: 10px;
@@ -148,8 +147,8 @@
   background-color: rgba(255, 255, 255, 0.425);
 }
 
-.descripText{
+.descripText {
   font-size: medium;
-  color:whitesmoke;
+  color: whitesmoke;
   text-align: center;
 }
