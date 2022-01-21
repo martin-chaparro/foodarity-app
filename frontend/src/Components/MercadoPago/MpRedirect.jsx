@@ -1,14 +1,14 @@
 /* eslint-disable no-alert */
 import React, { useEffect, useState } from 'react';
-
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import { apiWithToken } from '../../services/api';
 
 function MpRedirect() {
+  const navigate = useNavigate()
   const [params] = useSearchParams();
   const code = params.get('code') || '';
   const state = params.get('state') || '';
-  const [enabled, setenabled] = useState(false);
+  const [enabled, setenabled] = useState();
   // const navigate = useNavigate();
 
   // const handleRegister = () => {
@@ -35,21 +35,13 @@ function MpRedirect() {
 
   return (
     <div>
-      {enabled ? (
-        <>
-          <br />
-          <br />
-          <br />
-          <h1>Comercio registrado correctamente</h1>
-          <p>Aca va el boton para redireccionar o volver</p>
-        </>
-      ) : (
-        <>
-          <br />
-          <br />
-          <br />
-          <h1>Algo Fallo</h1>
-        </>
+      {enabled === true && (
+        alert('Comercio registrado correctamente'),
+        navigate('/profilecompany')
+      )}
+      {enabled === false && (
+        alert('Hubo un error, vuelva a intentarlo'),
+        navigate('/home')
       )}
     </div>
   );
