@@ -227,6 +227,7 @@ function Register() {
             type='submit'
             variant="contained"
             style={{ marginBottom: '1em' }}
+            onClick={(e) => handleSubmit(e)}
           >
             Ingresar
           </Button>

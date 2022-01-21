@@ -15,9 +15,9 @@ function MpTest() {
   return (
     <div className={styles.container}>
      <h1>Registrar comercio</h1>
+     <button  type='button' onClick={handleOnClick} className={styles.buttonImg}>
       <img src={logoMercadoPago} alt='logo Mercado Pago' className={styles.img} />
-     <p>Solo se tiene que mostrar si aun no activo Mercadopago</p>
-     <button type='button' onClick={handleOnClick}  >Registrar comercio</button>
+      </button>
     </div>
   )
 }
