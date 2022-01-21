@@ -2,12 +2,12 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   padding-left: 280px;
   padding-top: 50px;
   padding-right: 280px;
   background-color: rgb(117, 82, 156);
-  min-height: 100vh;
+  min-height: calc(100vh - 50px);
   height: 100%;
   position: relative;
 }
@@ -17,7 +17,7 @@
 }
 
 .purchaseDetail {
-    margin-top: 20px;
+  margin-top: 20px;
   color: rgb(255, 255, 255);
   font-size: 18px;
   font-weight: 100;
