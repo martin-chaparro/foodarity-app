@@ -3,8 +3,22 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import estilos from './Bienvenida.module.css';
+// import { apiWithToken } from '../../services/api';
 
-export default function EliminarUser() {
+
+export default function EliminarUser(/* {detail} */) {
+
+ /*  const handleDelete = () => {
+    apiWithToken.delete(`/users/${detail.id}`).then(res => {
+      if (res.status === 200) {
+        console.log('borrado')
+      } else {
+        console.log('algo fallo')
+      }
+    })
+  }
+   */
+
   return (
     <div className={estilos.parent}>
       <div className={estilos.texto}>

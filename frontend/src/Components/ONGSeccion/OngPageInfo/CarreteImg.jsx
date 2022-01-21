@@ -69,14 +69,13 @@ function CarreteImg() {
     fontWeight: 'bold',
   };
   return (
+      <div >
     <div>
-      <div>
         <div className={estilos.titulo}>
           <Box
             sx={{
               width: 500,
               // maxWidth: 100,
-              marginTop: 10,
             }}
           >
             <Typography
@@ -119,9 +118,9 @@ function CarreteImg() {
             thumbnailWidth="100px"
             style={{
               textAlign: 'center',
-              maxWidth: '850px',
-              maxHeight: '500px',
+              
               // margin: '5.8em auto',
+              marginBottom:'30px'
             }}
           />
         </div>
