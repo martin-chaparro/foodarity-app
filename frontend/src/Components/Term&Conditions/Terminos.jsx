@@ -5,6 +5,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import styles from './Terminos.module.css'
 
 export default function Terminos() {
   const [open, setOpen] = React.useState(false);
@@ -30,10 +31,12 @@ export default function Terminos() {
   }, [open]);
 
   return (
-    <div>
-      <Button
+    <span>
+      <button
+      type='button'
         onClick={handleClickOpen('paper')}
-        variant="outlined"
+        className={styles.terms}
+       /*  variant="outlined"
         backgroundColor="primary"
         color="primary"
         fontStyle="bold"
@@ -43,11 +46,10 @@ export default function Terminos() {
           fontSize: '.75em',
           margin: '.5em 2em 2em',
           hover: false,
-        }}
+        }} */
       >
-        MAS INFORMACION
-      </Button>
-
+        TERMINOS Y CONDICIONES
+      </button>
       <Dialog
         open={open}
         onClose={handleClose}
@@ -110,6 +112,6 @@ Dado que Foodarity es un punto de encuentro entre comprador y vendedor y no part
           <Button onClick={handleClose}>Cerrar</Button>
         </DialogActions>
       </Dialog>
-    </div>
+    </span>
   );
 }
