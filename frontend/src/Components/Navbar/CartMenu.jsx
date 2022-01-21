@@ -46,10 +46,11 @@ function CartMenu() {
       </div>}
       {cart.length > 0 && <div  className={styles.btnToCart} >
       <Divider/>
-        <Link to='/cart' className={styles.myCart}>
+        <Link to='/cart' className={styles.myCartCont}>
       <MenuItem className={styles.myCart}>
-        <p>Mi Carrito</p>
+        <p className={styles.p}>Mi Carrito</p>
           <IconButton
+          className={styles.icon}
             size="large"
             aria-label="show 17 new notifications"
             color="secondary"

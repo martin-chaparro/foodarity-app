@@ -8,7 +8,7 @@ html {
 .heroimage {
   margin-top: 3em;
   position: relative;
-  height: 470px;
+  height: calc(100vh - 48px);
   overflow: hidden;
   /* background-image: url(../../assets/gif3.gif); */
   background-image: url(../../assets/hero4.png);
@@ -69,9 +69,31 @@ html {
 .btn {
   margin-top: 1em;
 }
+.arrowDiv {
+  position: absolute;
+  height: calc(100vh - 50px);
+  width: 100vw;
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
+  align-items: center;
+
+}
+.arrowDiv p {
+  color: rgb(255, 255, 255);
+  position: relative;
+  top: 20px;
+ user-select: none;
+}
+.goDown {
+  color: white;    
+
+}
 
 @media screen and (min-width: 576px) {
   .btn {
     display: none;
   }
+
+  
 }

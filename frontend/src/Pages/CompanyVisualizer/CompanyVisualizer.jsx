@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
 import OngForm from '../../Components/ONGSeccion/OngForm/OngForm';
 // import Navbar from '../../Components/Navbar/NavbarCommerce';
-import CompanyProductCard from './CompanyProductCard';
+import ProductCard from '../../Components/ProductCard/ProductCard';
 import styles from './CompanyVisualizer.module.css';
 import Banner from '../../assets/Banner.jpg';
 import { api, apiWithToken } from '../../services/api';
@@ -88,7 +88,8 @@ export default function CompanyVisualizer() {
             {products &&
               products.map((product, index) => (
                 // eslint-disable-next-line react/no-array-index-key
-                <CompanyProductCard key={index} product={product} />
+                <ProductCard key={index} product={product} />
+                
               ))}
           </div>
         </div>

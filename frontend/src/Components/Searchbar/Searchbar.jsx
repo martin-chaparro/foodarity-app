@@ -9,24 +9,34 @@ export default function SearchBar({ search, lote }) {
   useEffect(() => {
     search(inputValue);
   }, [inputValue]);
-
+  
+  const goDown =  (e) => {
+    if (e.key=== 'Enter' || Number.isInteger(e.target.value) ) {
+    window.scrollTo({top: (window.innerHeight - 64), behavior: 'smooth'})
+    }
+  }
   return (
     <div>
       <Autocomplete
         // value={value}
+        ListboxProps={{style: {maxHeight: '20vh',}}}
+        onKeyPress={goDown}
         onChange={() => {
           search(inputValue);
           const elmnt = document.getElementById('card');
           elmnt.scrollIntoView();
+          
         }}
         inputValue={inputValue}
         onInputChange={(event, newInputValue) => {
           setInputValue(newInputValue);
+          goDown(event);
+          
         }}
         id="free-solo-2-demo"
         disableClearable
         freeSolo
-
+        size='small'
         options={options || 'not found'}
         sx={{ width: '100%', backgroundColor: 'white', textColor: 'white' }}
         // eslint-disable-next-line react/jsx-props-no-spreading
