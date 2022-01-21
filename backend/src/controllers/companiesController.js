@@ -97,7 +97,7 @@ const getCompanies = async (req, res) => {
           as: 'address',
           include: [
             { model: City, as: 'city', attributes: ['name'] },
-            { model: State, as: 'state', attributes: ['name'] },
+            { model: State, as: 'state', attributes: ['name', 'lat', 'lon'] },
           ],
         },
       ],
