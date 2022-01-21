@@ -1,24 +1,7 @@
-// import React from 'react';
-// import { Link } from 'react-router-dom';
-// import styles from './OngSeccion.module.css';
-
-// export default function OngSeccion({ ong }) {
-//   return (
-//     <div>
-//       <div className={styles.container}>
-//         <Link to={`/company/${ong.id}`}>
-//           <div className={styles.divImg}>
-//             <img src={ong.logo.url} alt="food" className={styles.img} />
-//           </div>
-//         </Link>
-//       </div>
-//     </div>
-//   );
-// }
-
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
+
 import Box from '@mui/material/Box';
 import ButtonBase from '@mui/material/ButtonBase';
 import Typography from '@mui/material/Typography';
@@ -31,7 +14,7 @@ export default function OngSeccion({ong}) {
   height: 200,
   margin: 8,
   [theme.breakpoints.down('sm')]: {
-    width: '100% !important', // Overrides inline-style
+    width: '100% !important', 
     height: 100,
   },
   '&:hover, &.Mui-focusVisible': {
@@ -84,6 +67,7 @@ const ImageMarked = styled('span')(({ theme }) => ({
 
 
   return (
+    
     <Box sx={{ display: 'flex', flexWrap: 'wrap', minWidth: 300, width: '100%', marginRight: '-150px' }}>
      <Link to={`/company/${ong.id}`}>
         <ImageButton
@@ -112,6 +96,7 @@ const ImageMarked = styled('span')(({ theme }) => ({
         </ImageButton>
         </Link>
     </Box>
+
   );
 }
 

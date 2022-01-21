@@ -124,7 +124,7 @@ function ProfileTempleteCommerce(props) {
             typesAllow: [0, 1],
           },
           {
-            text: 'Vincular Mercado Pago',
+            text: 'Mercado Pago',
             typesAllow: [0, 1],
           },
         ].map(
@@ -264,7 +264,7 @@ function ProfileTempleteCommerce(props) {
             />
           )}
           {display === 6 && <PostNewBatch />}
-          {display === 7 && <MpTest />}
+          {display === 7 && ( company.mp_credential_id ? 'desvicular Mercado pago' :<MpTest /> ) }
 
           {display === 99 && <Delete company={company} />}
         </Box>
