@@ -11,35 +11,31 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import styles from './ProductCard.module.css';
 import { addToCart } from '../../redux/actions/cartActions';
 
-function ModalProductDetails({ product, open, handleClose , item}) {
-  
+function ModalProductDetails({ product, open, handleClose, item }) {
   // const [input, setInput] = React.useState();
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
   const [currentPath, setCurrentPath] = React.useState('');
-  
 
   const ExpirationDate = product.expirationDate;
   const Date = ExpirationDate.split('-').reverse().join('/');
 
-
-  const [quantity, setQuantity] = React.useState(1)
+  const [quantity, setQuantity] = React.useState(1);
 
   React.useEffect(() => {
     setCurrentPath(location.pathname);
   }, [location]);
 
-
   const handleAddToCart = () => {
-    dispatch(addToCart(product.id,quantity));
-    setQuantity(1)
-    handleClose()
+    dispatch(addToCart(product.id, quantity));
+    setQuantity(1);
+    handleClose();
   };
 
   const handleOnChange = (e) => {
     e.preventDefault();
-    setQuantity(e.target.value)
+    setQuantity(e.target.value);
   };
 
   const handleCompanyClick = (event, id) => {
@@ -55,7 +51,7 @@ function ModalProductDetails({ product, open, handleClose , item}) {
     >
       <Box className={styles.BoxGeneral}>
         <Box className={styles.boxCompany} sx={{ width: 225 }}>
-          <div className={styles.CompanyNameDiv}>
+         {!currentPath.startsWith('/company') && (<div className={styles.CompanyNameDiv}>
             <Typography
               id="modal-modal-description"
               className={styles.titleTypographyName}
@@ -63,11 +59,11 @@ function ModalProductDetails({ product, open, handleClose , item}) {
             >
               {product.company.name}
             </Typography>
-          </div>
-          <div className={styles.divStreet}>
+          </div>)}
+          <div className={styles.divStreet} style={currentPath.startsWith('/company')? {position: 'relative', bottom: 35, marginBottom: 35} : {}}>
             <Typography
               id="modal-modal-description"
-              sx={{ mt: 2 }}
+              sx={{ mt: 2,}}
               className={styles.titleTypographyStreet}
             >
               <LocationOnIcon sx={{ position: 'relative', bottom: 5 }} />
@@ -75,7 +71,7 @@ function ModalProductDetails({ product, open, handleClose , item}) {
               {product.company.address.city.name}
             </Typography>
           </div>
-          {currentPath === '/home' && (
+          {currentPath !== '/cart' && (
             <div>
               <div className={styles.cartOptionsCont}>
                 <label>Cantidad:</label>
@@ -84,7 +80,11 @@ function ModalProductDetails({ product, open, handleClose , item}) {
                   onChange={handleOnChange}
                 >
                   {Array.from(Array(product.quantity), (e, i) => {
-                    return <option key={i+1} value={i+1}>{i+1}</option>;
+                    return (
+                      <option key={i + 1} value={i + 1}>
+                        {i + 1}
+                      </option>
+                    );
                   })}
                 </select>
               </div>
@@ -125,9 +125,18 @@ function ModalProductDetails({ product, open, handleClose , item}) {
             <h3>Categoria: {product.category.name}</h3>
           </div>
           <div className={styles.priceCont}>
-                <label>${Intl.NumberFormat("de-DE").format(product.price)},00 x{item ? item.quantity : quantity}</label>
-                <h2 className={styles.price}>${Intl.NumberFormat("de-DE").format(product.price * (item ? item.quantity : quantity))},00</h2>
-              </div>
+            <label>
+              ${Intl.NumberFormat('de-DE').format(product.price)},00 x
+              {item ? item.quantity : quantity}
+            </label>
+            <h2 className={styles.price}>
+              $
+              {Intl.NumberFormat('de-DE').format(
+                product.price * (item ? item.quantity : quantity)
+              )}
+              ,00
+            </h2>
+          </div>
           {/*                   <div className={styles.divBtnReservar}>
         <button className={styles.btnReservar} type="submit">
           Reservar

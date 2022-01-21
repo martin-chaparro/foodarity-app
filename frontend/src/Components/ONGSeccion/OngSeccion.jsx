@@ -67,8 +67,7 @@ const ImageMarked = styled('span')(({ theme }) => ({
 
 
   return (
-    
-    <Box sx={{ display: 'flex', flexWrap: 'wrap', minWidth: 300, width: '100%', marginRight: '-150px' }}>
+    <Box sx={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', minWidth: 200, width: '100%', }}>
      <Link to={`/company/${ong.id}`}>
         <ImageButton
           focusRipple

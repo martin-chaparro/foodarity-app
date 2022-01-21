@@ -47,10 +47,10 @@ export function AppRouter() {
       <Routes>
         <Route exact path="/mptest" element={<MpTest />} />
         <Route exact path="/mpredirect" element={<MpRedirect />} />
-         {/* TODO:Es de test elimar esta ruta despues */}
-         <Route exact path="/mpcheckout" element={<MpCheckout />} />
-         <Route path='/mpsuccess' element={<Success/>}/>
-         <Route path='/mpfail' element={<Fail/>}/>
+        {/* TODO:Es de test elimar esta ruta despues */}
+        <Route exact path="/mpcheckout" element={<MpCheckout />} />
+        <Route path="/mpsuccess" element={<Success />} />
+        <Route path="/mpfail" element={<Fail />} />
         <Route
           path="/profileuser"
           element={
@@ -75,7 +75,7 @@ export function AppRouter() {
             </PrivateRoute>
           }
         />
-             <Route
+        <Route
           path="/cart"
           element={
             <PrivateRoute isAuisAuthenticated={!!id}>

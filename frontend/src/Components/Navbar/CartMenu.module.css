@@ -7,12 +7,25 @@
   color: #3e2463;
 }
 
-.myCart {
+.myCartCont {
   display: flex;
   align-items: center;
-  justify-content: end;
-  margin-right: -13px;
+  justify-content: flex-end;
+  padding: 0;
+  
+  width: 100%;
+}
+.myCart {
+margin: 0;
+/* margin-right: -15px; */
   margin-bottom:-8px;
+  width: 100%;  
+  justify-content: flex-end;
+} 
+
+.p, .icon {
+  position: relative;
+  left: 15px;
 }
 
 .name {
