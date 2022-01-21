@@ -5,13 +5,12 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
+import Typography from '@mui/material/Typography';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import styles from './PublishedProduct.module.css';
 
-
-
-export default function Donations ({donations , typeId}) {
+export default function Donations({ donations, typeId }) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -25,7 +24,7 @@ export default function Donations ({donations , typeId}) {
   };
   const columns = [
     { id: 'lote', label: 'LOTE', minWidth: 170 },
-    { id: 'ong', label: (typeId ===  1? 'ONG' : 'COMERCIO') , minWidth: 100 },
+    { id: 'ong', label: typeId === 1 ? 'ONG' : 'COMERCIO', minWidth: 100 },
     {
       id: 'cantidad',
       label: 'CANTIDAD',
@@ -41,25 +40,36 @@ export default function Donations ({donations , typeId}) {
       format: (value) => value.toFixed(2),
     },
   ];
-  
 
-  function createData(lote, ong,  cantidad, fecha) {
+  function createData(lote, ong, cantidad, fecha) {
     // const density = population / size;
- 
-    return { lote, ong, cantidad, fecha }; 
-  }
-  
-  
-  const rows = donations.map(donation => {
 
-    return createData(donation.lote, ( typeId ===  1? donation.ong.name : donation.commerce.name), donation.quantity, donation.fecha, )
-  })
- console.log(donations[0])
+    return { lote, ong, cantidad, fecha };
+  }
+
+  const rows = donations.map((donation) => {
+    return createData(
+      donation.lote,
+      typeId === 1 ? donation.ong.name : donation.commerce.name,
+      donation.quantity,
+      donation.fecha
+    );
+  });
+  console.log(donations[0]);
   return (
     <Paper
       className={styles.content}
       sx={{ width: '100%', overflow: 'hidden' }}
     >
+      <Typography
+        variant="h4"
+        gutterBottom
+        component="div"
+        sx={{ color: '#7ED957', marginBottom: 3 }}
+      >
+        Donaciones Realizadas
+      </Typography>
+
       <TableContainer sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>

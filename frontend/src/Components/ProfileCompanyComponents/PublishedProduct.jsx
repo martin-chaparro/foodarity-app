@@ -7,6 +7,7 @@ import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
+import Typography from '@mui/material/Typography';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import { apiWithToken } from '../../services/api';
@@ -55,11 +56,8 @@ const columns = [
 export default function PublishedProduct() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-   const [products, setProducts] = React.useState([]);
-   const [rows, setRows] = React.useState([]);
-
-  
- 
+  const [products, setProducts] = React.useState([]);
+  const [rows, setRows] = React.useState([]);
 
   function createData(lote, estado, cantidad, precio, fecha, eliminar) {
     // const density = population / size;
@@ -78,7 +76,7 @@ export default function PublishedProduct() {
     apiWithToken.get('/products/byauth').then((response) => {
       setProducts(response.data);
     });
-  }, [])
+  }, []);
 
   React.useEffect(() => {
     const finalRows = products.map((producto) => {
@@ -89,21 +87,21 @@ export default function PublishedProduct() {
         producto.price,
         producto.publicationDate,
         // eslint-disable-next-line no-alert
-        producto.status === 'published' && <HighlightOffIcon
-        sx={{color: 'red'}}
-          onClick={() => {
-            // eslint-disable-next-line no-alert
-            if (window.confirm('Queres cancelar esta publicacion?'))
-              handleDelete(producto.id);
-          }}
-        />
+        producto.status === 'published' && (
+          <HighlightOffIcon
+            sx={{ color: 'red' }}
+            onClick={() => {
+              // eslint-disable-next-line no-alert
+              if (window.confirm('Queres cancelar esta publicacion?'))
+                handleDelete(producto.id);
+            }}
+          />
+        )
         // <button type="button">eliminar</button>
       );
     });
-    setRows(finalRows)
-  }, [products])
-
-  
+    setRows(finalRows);
+  }, [products]);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -119,6 +117,14 @@ export default function PublishedProduct() {
       className={styles.content}
       sx={{ width: '100%', overflow: 'hidden' }}
     >
+      <Typography
+        variant="h4"
+        gutterBottom
+        component="div"
+        sx={{ color: '#7ED957', marginBottom: 3 }}
+      >
+        Productos Publicados
+      </Typography>
       <TableContainer sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>

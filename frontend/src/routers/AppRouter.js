@@ -18,6 +18,7 @@ import { RollSelectorRouter } from './RollSelectorRouter';
 import { startCheking } from '../redux/actions/authActions';
 import MpTest from '../Components/MercadoPago/MpTest';
 import MpRedirect from '../Components/MercadoPago/MpRedirect';
+import EnviarMail from '../Pages/EnviarMail/EnviarMail';
 // import ErrorPage from '../Pages/Error/ErrorPage';
 
 export function AppRouter() {
@@ -36,6 +37,7 @@ export function AppRouter() {
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/enviarMail" element={<EnviarMail />} />
         <Route path="/register" element={<Register />} />
         <Route path="*" element={<Navbar />} />
         {/* <Route path="*" element={<ErrorPage/>} />  */}
