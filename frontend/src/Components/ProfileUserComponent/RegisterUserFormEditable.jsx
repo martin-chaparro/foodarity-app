@@ -131,7 +131,7 @@ export default function RegisterUserFormEditable({ detail }) {
                 <div>
                   <img
                     className={estilos.imgLogo}
-                    src={preview || imageNull}
+                    src={detail.photo ? detail.photo.url : (preview || imageNull)}
                     alt="img"
                   />
                 </div>
