@@ -49,7 +49,7 @@ export default function Navbar() {
       apiWithToken.get(`/users/${id}`).then((res) => {
         setUser(res.data);
       });
-  }, [id, user]);
+  }, [id, user.photo]);
 
   const handleProfileMenuOpen = (event) => {
     if (isMenuOpen) {

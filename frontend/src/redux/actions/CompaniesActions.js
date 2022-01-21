@@ -51,7 +51,6 @@ export const registerComerce = (inputForm, select) => async (dispatch) => {
 export const getCompanies = () => async (dispatch) => {
   try {
     const response = await api.get('/companies');
-    console.log('DATAAAA1', response.data);
     return dispatch({
       type: types.getCompanies,
       payload: response.data,
