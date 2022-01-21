@@ -1,23 +1,28 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import estilos from './Bienvenida.module.css';
-// import { apiWithToken } from '../../services/api';
+import { apiWithToken } from '../../services/api';
+import { startLogout } from '../../redux/actions/authActions';
 
-
-export default function EliminarUser(/* {detail} */) {
-
- /*  const handleDelete = () => {
-    apiWithToken.delete(`/users/${detail.id}`).then(res => {
-      if (res.status === 200) {
-        console.log('borrado')
-      } else {
-        console.log('algo fallo')
-      }
-    })
-  }
-   */
+export default function EliminarUser({ detail }) {
+  const dispatch = useDispatch();
+  const handleDelete = () => {
+    // eslint-disable-next-line no-alert
+    if (window.confirm('Queres eliminar esta compania?')) {
+      apiWithToken.delete(`/users/${detail.id}`).then((res) => {
+        if (res.status === 200) {
+          console.log('borrado');
+          dispatch(startLogout());
+          window.location.reload();
+        } else {
+          console.log('algo fallo');
+        }
+      });
+    }
+  };
 
   return (
     <div className={estilos.parent}>
@@ -122,6 +127,9 @@ export default function EliminarUser(/* {detail} */) {
             </Typography>
           </div>
           <Button
+            onClick={() => {
+              handleDelete();
+            }}
             sx={{
               backgroundColor: '#e63946',
               '&:hover': { backgroundColor: '#e6394690 !important' },
