@@ -110,7 +110,12 @@ export default function Navbar() {
               aria-haspopup="true"
               color="secondary"
             >
-              <Avatar />
+              <Avatar
+                photo={
+                  // eslint-disable-next-line no-nested-ternary
+                   user.photo ? user.photo.url : (user.socialPhoto ? user.socialPhoto : avatarDefault)  
+                }
+              />
             </IconButton>
             {user.name ? user.name : 'Mi Cuenta'}
           </Link>

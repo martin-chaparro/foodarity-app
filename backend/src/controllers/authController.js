@@ -24,6 +24,12 @@ const userLogin = async (request, response) => {
       });
     }
 
+    if (user.deleted) {
+      return response.status(400).json({
+        message: 'El usuario fue borrado',
+      });
+    }
+
     // Confirmar los passwords
     const validPassword = await comparePassword(password, user.password);
 

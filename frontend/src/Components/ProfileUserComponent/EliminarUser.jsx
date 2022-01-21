@@ -3,20 +3,21 @@ import { useDispatch } from 'react-redux';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import { useNavigate } from 'react-router-dom';
 import estilos from './Bienvenida.module.css';
 import { apiWithToken } from '../../services/api';
 import { startLogout } from '../../redux/actions/authActions';
 
 export default function EliminarUser({ detail }) {
   const dispatch = useDispatch();
+  const navigate = useNavigate()
   const handleDelete = () => {
     // eslint-disable-next-line no-alert
     if (window.confirm('Queres eliminar esta compania?')) {
       apiWithToken.delete(`/users/${detail.id}`).then((res) => {
         if (res.status === 200) {
-          console.log('borrado');
           dispatch(startLogout());
-          window.location.reload();
+          navigate('/')
         } else {
           console.log('algo fallo');
         }
