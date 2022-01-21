@@ -3,26 +3,37 @@ import { useDispatch } from 'react-redux';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import estilos from './Bienvenida.module.css';
 import { apiWithToken } from '../../services/api';
 import { startLogout } from '../../redux/actions/authActions';
 
 export default function EliminarUser({ detail }) {
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  // const navigate = useNavigate();
   const handleDelete = () => {
-    // eslint-disable-next-line no-alert
-    if (window.confirm('Queres eliminar esta compania?')) {
-      apiWithToken.delete(`/users/${detail.id}`).then((res) => {
-        if (res.status === 200) {
-          dispatch(startLogout());
-          navigate('/')
-        } else {
-          console.log('algo fallo');
-        }
-      });
-    }
+    Swal.fire({
+      title: '¿Estás seguro de querer eliminar la cuenta?',
+      text: 'No podrás revertir los cambios',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#e63946',
+      cancelButtonColor: 'gray',
+      confirmButtonText: 'Continuar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        apiWithToken.delete(`/users/${detail.id}`).then((res) => {
+          if (res.status === 200) {
+            Swal.fire('Cuenta Eliminada');
+            dispatch(startLogout());
+            // navigate('/');
+          } else {
+            console.log('algo fallo');
+          }
+        });
+      }
+    });
   };
 
   return (

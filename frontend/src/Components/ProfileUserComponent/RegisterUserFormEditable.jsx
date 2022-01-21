@@ -31,7 +31,7 @@ export default function RegisterUserFormEditable({ detail }) {
   });
   const [preview, setPreview] = React.useState(null);
 
- /*  const form = new FormData();
+  /*  const form = new FormData();
   form.append('userId', localStorage.getItem('id'));
  */
   const handleChange = (e) => {
@@ -41,7 +41,7 @@ export default function RegisterUserFormEditable({ detail }) {
     });
   };
 
- /*  const handleImageSubmit = async () => {
+  /*  const handleImageSubmit = async () => {
      try {
        await apiWithToken.patch(`/users/upload`, photo);
      } catch (err) {
@@ -52,13 +52,13 @@ export default function RegisterUserFormEditable({ detail }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(updateUser(data, photo));
-   // if (photo) handleImageSubmit();
+    // if (photo) handleImageSubmit();
     Swal.fire({
       icon: 'success',
       title: 'Actualizado',
       text: 'Usuario actualizado correctamente.',
     }).then(() => {
-     //  window.location.reload(false);
+      window.location.reload(false);
     });
   };
 
@@ -80,7 +80,7 @@ export default function RegisterUserFormEditable({ detail }) {
     };
     reader.readAsDataURL(e.target.files[0]);
     const formPhoto = new FormData();
-       formPhoto.append('file', e.target.files[0]);
+    formPhoto.append('file', e.target.files[0]);
     setPhoto(formPhoto);
   };
 
@@ -131,7 +131,7 @@ export default function RegisterUserFormEditable({ detail }) {
                 <div>
                   <img
                     className={estilos.imgLogo}
-                    src={detail.photo ? detail.photo.url : (preview || imageNull)}
+                    src={detail.photo ? detail.photo.url : preview || imageNull}
                     alt="img"
                   />
                 </div>

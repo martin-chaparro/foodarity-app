@@ -28,7 +28,7 @@ import avatarDefault from '../../assets/avatar_default.png';
 export default function Navbar() {
   const dispatch = useDispatch();
   const { id } = useSelector((state) => state.auth);
-  const {cart} = useSelector((state) => state.cart)
+  const { cart } = useSelector((state) => state.cart);
   const location = useLocation();
 
   const [currentPath, setCurrentPath] = React.useState('');
@@ -49,7 +49,7 @@ export default function Navbar() {
       apiWithToken.get(`/users/${id}`).then((res) => {
         setUser(res.data);
       });
-  }, [id, user]);
+  }, [id, user.photo]);
 
   const handleProfileMenuOpen = (event) => {
     if (isMenuOpen) {
@@ -113,7 +113,11 @@ export default function Navbar() {
               <Avatar
                 photo={
                   // eslint-disable-next-line no-nested-ternary
-                   user.photo ? user.photo.url : (user.socialPhoto ? user.socialPhoto : avatarDefault)  
+                  user.photo
+                    ? user.photo.url
+                    : user.socialPhoto
+                    ? user.socialPhoto
+                    : avatarDefault
                 }
               />
             </IconButton>
@@ -151,17 +155,16 @@ export default function Navbar() {
               textDecoration="none"
               onClick={handleMenuClose}
             >
-             
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="vista-mobile"
-              aria-haspopup="true"
-              color="secondary"
-            >
-              <StoreIcon />
-            </IconButton>
-            Añadir comercio
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="vista-mobile"
+                aria-haspopup="true"
+                color="secondary"
+              >
+                <StoreIcon />
+              </IconButton>
+              Añadir comercio
             </Link>
           </MenuItem>
         )}
@@ -174,17 +177,16 @@ export default function Navbar() {
               textDecoration="none"
               onClick={handleMenuClose}
             >
-           
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="vista-mobile"
-              aria-haspopup="true"
-              color="secondary"
-            >
-              <StoreIcon />
-            </IconButton>
-            Añadir ONG
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="vista-mobile"
+                aria-haspopup="true"
+                color="secondary"
+              >
+                <StoreIcon />
+              </IconButton>
+              Añadir ONG
             </Link>
           </MenuItem>
         )}
@@ -202,22 +204,24 @@ export default function Navbar() {
           <p>Favoritos</p>
         </MenuItem>
       )} */}
-      {id && currentPath !== '/profilecompany' && currentPath !== '/profileuser' && (
-        <MenuItem>
-        <Link to='/cart'>
-          <IconButton
-            size="large"
-            aria-label="show 17 new notifications"
-            color="secondary"
-          >
-            <Badge badgeContent={cart.length} color="primary">
-                <ShoppingCartIcon />
+      {id &&
+        currentPath !== '/profilecompany' &&
+        currentPath !== '/profileuser' && (
+          <MenuItem>
+            <Link to="/cart">
+              <IconButton
+                size="large"
+                aria-label="show 17 new notifications"
+                color="secondary"
+              >
+                <Badge badgeContent={cart.length} color="primary">
+                  <ShoppingCartIcon />
                 </Badge>
-          </IconButton>
-          Mi Carrito
-          </Link>
-        </MenuItem>
-      )}
+              </IconButton>
+              Mi Carrito
+            </Link>
+          </MenuItem>
+        )}
       {!id && (
         <MenuItem>
           <Link to="/register" textDecoration="none" onClick={handleMenuClose}>
@@ -371,19 +375,21 @@ export default function Navbar() {
               
               </IconButton>
             )} */}
-            {id && currentPath !== '/profilecompany' && currentPath !== '/profileuser'  && (
-              <IconButton
-                size="large"
-                aria-label="cart"
-                color="inherit"
-                aria-controls={cartId}
-                onClick={handleCartMenuOpen}
-              >
-                <Badge badgeContent={cart.length} color="secondary">
-                <ShoppingCartIcon />
-                </Badge>
-              </IconButton>
-            )}
+            {id &&
+              currentPath !== '/profilecompany' &&
+              currentPath !== '/profileuser' && (
+                <IconButton
+                  size="large"
+                  aria-label="cart"
+                  color="inherit"
+                  aria-controls={cartId}
+                  onClick={handleCartMenuOpen}
+                >
+                  <Badge badgeContent={cart.length} color="secondary">
+                    <ShoppingCartIcon />
+                  </Badge>
+                </IconButton>
+              )}
             <IconButton
               size="large"
               edge="end"
@@ -396,7 +402,11 @@ export default function Navbar() {
               <Avatar
                 photo={
                   // eslint-disable-next-line no-nested-ternary
-                   user.photo ? user.photo.url : (user.socialPhoto ? user.socialPhoto : avatarDefault)  
+                  user.photo
+                    ? user.photo.url
+                    : user.socialPhoto
+                    ? user.socialPhoto
+                    : avatarDefault
                 }
               />
             </IconButton>
