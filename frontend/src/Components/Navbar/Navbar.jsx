@@ -11,6 +11,7 @@ import Menu from '@mui/material/Menu';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 // import FavoriteIcon from '@mui/icons-material/Favorite';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
 import LogoutIcon from '@mui/icons-material/Logout';
 import HelpIcon from '@mui/icons-material/Help';
 import LoginIcon from '@mui/icons-material/Login';
@@ -190,20 +191,7 @@ export default function Navbar() {
             </Link>
           </MenuItem>
         )}
-      {/* {id && currentPath === '/home' && (
-        <MenuItem>
-          <IconButton
-            size="large"
-            aria-label="show 4 new mails"
-            color="inherit"
-          >
-            <Badge>
-              <FavoriteIcon fontSize="small" color="secondary" />
-            </Badge>
-          </IconButton>
-          <p>Favoritos</p>
-        </MenuItem>
-      )} */}
+      
       {id &&
         currentPath !== '/profilecompany' &&
         currentPath !== '/profileuser' && (
@@ -363,18 +351,20 @@ export default function Navbar() {
           </Link>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            {/* {id && (
-              <IconButton
-                size="large"
-                aria-label="show 4 new mails"
-                color="inherit"
-              >
-                <Badge badgeContent={3} color="secondary">
-                  <FavoriteIcon />
-                </Badge>
-              
-              </IconButton>
-            )} */}
+          {id && currentPath === '/home' && (
+            <Link to='/googlemaps'style={{color:"white", position:'relative', top: '1vh'}}>
+         <IconButton
+            size="large"
+            aria-label="show 4 new mails"
+            color="inherit"
+            textDecoration="none"
+          >
+            <Badge>
+              <LocationOnIcon fontSize="medium" color="inherit"  />
+            </Badge>
+          </IconButton>
+            </Link>
+      )}
             {id &&
               currentPath !== '/profilecompany' &&
               currentPath !== '/profileuser' && (
