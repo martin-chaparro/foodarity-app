@@ -16,10 +16,11 @@
     display: none;
   }
   .texto2 {
-    display: none;
+    font-display: 100;
   }
 }
 
+/* 
 @media screen and (min-width: 576px) {
   .texto {
     display: none;
@@ -27,4 +28,4 @@
   .texto2 {
     font-display: 100;
   }
-}
+} */

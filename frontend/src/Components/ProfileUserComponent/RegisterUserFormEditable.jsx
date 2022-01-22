@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
 import Modal from '@mui/material/Modal';

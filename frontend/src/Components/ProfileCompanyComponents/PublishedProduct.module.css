@@ -6,3 +6,7 @@
   background-color: lightgray;
   font-weight: 700;
 }
+
+@media screen and (max-width: 576px) {
+  margin-top: 60px;
+}

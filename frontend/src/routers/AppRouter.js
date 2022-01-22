@@ -17,10 +17,12 @@ import { PrivateRoute } from './PrivateRoute';
 import { RollSelectorRouter } from './RollSelectorRouter';
 import { startCheking } from '../redux/actions/authActions';
 import MpRedirect from '../Components/MercadoPago/MpRedirect';
+import EnviarMail from '../Pages/EnviarMail/EnviarMail';
+import RecuperarPassword from '../Pages/RecuperarPassword/RecuperarPassword';
 import OrderPage from '../Pages/Order/OrderPage';
 import Success from '../Components/MercadoPago/Success';
 import Fail from '../Components/MercadoPago/Fail';
-import GoogleMapsTest from '../Components/GoogleMaps/GoogleMapsTest';
+import GoogleMaps from '../Components/GoogleMaps/GoogleMaps';
 // import ErrorPage from '../Pages/Error/ErrorPage';
 
 export function AppRouter() {
@@ -39,6 +41,8 @@ export function AppRouter() {
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/enviarMail" element={<EnviarMail />} />
+        <Route path="/recuperarPassword" element={<RecuperarPassword />} />
         <Route path="/register" element={<Register />} />
         <Route path="*" element={<Navbar />} />
         {/* <Route path="*" element={<ErrorPage/>} />  */}
@@ -47,7 +51,7 @@ export function AppRouter() {
         <Route exact path="/mpredirect" element={<MpRedirect />} />
         <Route path="/mpsuccess" element={<Success />} />
         <Route path="/mpfail" element={<Fail />} />
-        <Route path="/googlemapstest" element={<GoogleMapsTest />} />
+        <Route path="/googlemaps" element={<GoogleMaps />} />
         <Route
           path="/profileuser"
           element={

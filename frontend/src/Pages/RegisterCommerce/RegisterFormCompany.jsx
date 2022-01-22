@@ -21,11 +21,11 @@ import AlertOng from '../../Components/Alertas/AlertEnviarSolicitud';
 let time = null;
 let time2 = null;
 
-const GOOGLE_API_KEY = process.env.REACT_APP_GOOGLE_API_KEY
+const GOOGLE_API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
 
-console.log(GOOGLE_API_KEY)
+console.log(GOOGLE_API_KEY);
 
-export default function RegisterFormCompany({type}) {
+export default function RegisterFormCompany({ type }) {
   const [provincia, setprovincia] = useState([]);
   const [ciudad, setCiudad] = useState([]);
   const [termProvincia, setTermProvincia] = useState('');
@@ -71,18 +71,21 @@ export default function RegisterFormCompany({type}) {
       setShowMap(false);
       api.get(`/cities/id/${formValues.cityId}`).then((res) => {
         const loc = { lat: res.data.lat, lng: res.data.lon };
-        const city = res.data.name
-        const state = res.data.state.name
+        const city = res.data.name;
+        const state = res.data.state.name;
         if (city && state && input.street && input.number) {
-          const address = `${input.street} ${input.number}, ${city}, ${state}`
-          axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${GOOGLE_API_KEY}`)
-          .then(resp => {
-            if (resp.data.status === 'OK') {
-              const newLoc = resp.data.results[0].geometry.location
-              setDefaultLocation(newLoc);
-            } 
-          })
-        }else {
+          const address = `${input.street} ${input.number}, ${city}, ${state}`;
+          axios
+            .get(
+              `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${GOOGLE_API_KEY}`
+            )
+            .then((resp) => {
+              if (resp.data.status === 'OK') {
+                const newLoc = resp.data.results[0].geometry.location;
+                setDefaultLocation(newLoc);
+              }
+            });
+        } else {
           setDefaultLocation(loc);
         }
         setShowMap(true);
@@ -314,26 +317,23 @@ export default function RegisterFormCompany({type}) {
     <div className={styles.RegisterFormCommerce}>
       {/* <Header /> */}
       <form autoComplete="off" className={styles.form} onSubmit={handleSubmit}>
-      {type === 1 ?
-        <div className={styles.containerLogo}>
-          <div className={styles.commerceLogo}>
-            <img
-              className={styles.imgLogo}
-              src={CommerceLogo}
-              alt="CommerLogo"
-            />
-            </div> 
-        </div> : 
-        <div className={styles.containerLogo}>
-        <div className={styles.ongLogo}>
-          <img
-            className={styles.imgLogo}
-            src={ONGLogo}
-            alt="CommerLogo"
-          />
-          </div> 
-      </div>
-            }
+        {type === 1 ? (
+          <div className={styles.containerLogo}>
+            <div className={styles.commerceLogo}>
+              <img
+                className={styles.imgLogo}
+                src={CommerceLogo}
+                alt="CommerLogo"
+              />
+            </div>
+          </div>
+        ) : (
+          <div className={styles.containerLogo}>
+            <div className={styles.ongLogo}>
+              <img className={styles.imgLogo} src={ONGLogo} alt="CommerLogo" />
+            </div>
+          </div>
+        )}
         <div className={styles.divsInputs}>
           <div className={styles.labelNombre}>
             <label>Nombre del comercio</label>
