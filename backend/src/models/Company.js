@@ -58,9 +58,9 @@ class Company extends Model {
           allowNull: false,
         },
         mpCode: {
-					type: DataTypes.UUID,
-					allowNull: true,
-				},
+          type: DataTypes.UUID,
+          allowNull: true,
+        },
       },
       {
         sequelize,
