@@ -22,13 +22,13 @@ function GoogleMaps() {
 
     return (<div style={{ height: '700px', width: '100vh' }}>
         <GoogleMapReact
-          bootstrapURLKeys={{ key:'AIzaSyAK6-FWy_86TiAVL2bGrma095wFqWs8sXY', language: 'es', region: 'arg'}}
+          bootstrapURLKeys={{ key:'AIzaSyCZaTTobUoIp1bTtbe3gG0usPNKztx6lwI', language: 'es', region: 'arg'}}
           defaultCenter={{
             lat: -36.6769415180527,
             lng:-60.5588319815719,
             
           }}
-          defaultZoom={6}
+          defaultZoom={6.7}
           
         >      
         {companies && companies.map(company => (<Marker

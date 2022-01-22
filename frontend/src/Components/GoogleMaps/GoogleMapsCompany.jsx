@@ -12,7 +12,7 @@ function GoogleMapsCompany({company}) {
     console.log(company)
     return (<div style={{ height: '100%', width: '100%' }}>
         <GoogleMapReact
-          bootstrapURLKeys={{ key:'AIzaSyAK6-FWy_86TiAVL2bGrma095wFqWs8sXY', language: 'es', region: 'arg'}}
+          bootstrapURLKeys={{ key:'AIzaSyCZaTTobUoIp1bTtbe3gG0usPNKztx6lwI', language: 'es', region: 'arg'}}
           defaultCenter={{
             lat:company.address.city.lat,
             lng:company.address.city.lon,

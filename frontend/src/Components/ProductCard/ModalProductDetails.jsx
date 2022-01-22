@@ -10,6 +10,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import styles from './ProductCard.module.css';
 import { addToCart } from '../../redux/actions/cartActions';
+import GoogleMapsCompany from '../GoogleMaps/GoogleMapsCompany';
 
 function ModalProductDetails({ product, open, handleClose, item }) {
   // const [input, setInput] = React.useState();
@@ -69,8 +70,13 @@ function ModalProductDetails({ product, open, handleClose, item }) {
               <LocationOnIcon sx={{ position: 'relative', bottom: 5 }} />
               {product.company.address.state.name},{' '}
               {product.company.address.city.name}
+            
             </Typography>
           </div>
+          <div>
+          <GoogleMapsCompany company={product.company}/>
+          </div>
+      
           {currentPath !== '/cart' && (
             <div>
               <div className={styles.cartOptionsCont}>
