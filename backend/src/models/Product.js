@@ -25,7 +25,7 @@ class Product extends Model {
           allowNull: true,
         },
         price: {
-          type: DataTypes.DOUBLE,
+          type: DataTypes.INTEGER,
           allowNull: false,
         },
         publicationDate: {
@@ -58,7 +58,6 @@ class Product extends Model {
       as: 'publisher',
       foreignKey: 'publisher_id',
     });
-    this.hasMany(models.Order, { as: 'orders', foreignKey: 'product_id' });
     this.hasMany(models.Cart, { as: 'cart', foreignKey: 'product_id' });
   }
 }

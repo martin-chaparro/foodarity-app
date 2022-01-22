@@ -21,9 +21,8 @@ const Input = styled('input')({
 
 export default function RegisterUserFormEditable({ detail }) {
   const dispatch = useDispatch();
-  console.log(detail);
 
-  // const [photo, setPhoto] = React.useState();
+  const [photo, setPhoto] = React.useState();
   const [open, setOpen] = React.useState(false);
   const [data, setData] = React.useState({
     id: localStorage.getItem('id'),
@@ -40,27 +39,24 @@ export default function RegisterUserFormEditable({ detail }) {
     });
   };
 
-  // const handleImageSubmit = async () => {
-  //   try {
-  //     const formPhoto = new FormData();
-  //     formPhoto.append('file', photo);
-
-  //     await apiWithToken.patch(`/users/upload`, formPhoto);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
+ /*  const handleImageSubmit = async () => {
+     try {
+       await apiWithToken.patch(`/users/upload`, photo);
+     } catch (err) {
+       console.log(err);
+     }
+   }; */
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(updateUser());
-    // if (photo) handleImageSubmit();
+    dispatch(updateUser(data, photo));
+   // if (photo) handleImageSubmit();
     Swal.fire({
       icon: 'success',
       title: 'Actualizado',
       text: 'Usuario actualizado correctamente.',
     }).then(() => {
-      window.location.reload(false);
+     //  window.location.reload(false);
     });
   };
 
@@ -81,7 +77,9 @@ export default function RegisterUserFormEditable({ detail }) {
       }
     };
     reader.readAsDataURL(e.target.files[0]);
-    // setPhoto(e.target.files[0]);
+    const formPhoto = new FormData();
+       formPhoto.append('file', e.target.files[0]);
+    setPhoto(formPhoto);
   };
 
   const validateLetters = (e) => {
@@ -200,11 +198,6 @@ export default function RegisterUserFormEditable({ detail }) {
                     id="icon-button-file"
                     type="file"
                     onChange={(e) => {
-                      form.append(
-                        'file',
-                        e.target.files[0],
-                        e.target.files[0].name
-                      );
                       imgHandler(e);
                     }}
                   />

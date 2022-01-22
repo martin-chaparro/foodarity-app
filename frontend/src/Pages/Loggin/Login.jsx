@@ -15,6 +15,8 @@ export default function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  window.scroll(0, 0)
+
   const [errors, setErrors] = useState({});
 
   const [input, setInput] = useState({
@@ -99,6 +101,7 @@ export default function Login() {
      <img className={estilos.logo}src={logo} alt="" />
      </Link>
      </div>
+     <form onSubmit={handleSubmit}>
       <div>
         <div className={estilos.contener}>
           <h3>Ingrese su Email</h3>
@@ -144,8 +147,8 @@ export default function Login() {
               fontStyle: 'bold',
               margin: '3em 2em 2em',
             }}
-            // onClick={(e) => handleSubmit(e)}
             onClick={(e) => handleSubmit(e)}
+       
           >
             Ingresar
           </Button>
@@ -161,6 +164,7 @@ export default function Login() {
             <p>  Olvidaste tu contraseña? <Link to="/enviarMail">Cambiala ahora</Link></p>
         </div>
       </div>
+    </form>
     </div>
   );
 }

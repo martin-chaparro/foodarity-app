@@ -16,9 +16,11 @@ import Navbar from '../Components/Navbar/Navbar';
 import { PrivateRoute } from './PrivateRoute';
 import { RollSelectorRouter } from './RollSelectorRouter';
 import { startCheking } from '../redux/actions/authActions';
-import MpTest from '../Components/MercadoPago/MpTest';
 import MpRedirect from '../Components/MercadoPago/MpRedirect';
 import EnviarMail from '../Pages/EnviarMail/EnviarMail';
+import OrderPage from '../Pages/Order/OrderPage';
+import Success from '../Components/MercadoPago/Success';
+import Fail from '../Components/MercadoPago/Fail';
 // import ErrorPage from '../Pages/Error/ErrorPage';
 
 export function AppRouter() {
@@ -43,13 +45,22 @@ export function AppRouter() {
         {/* <Route path="*" element={<ErrorPage/>} />  */}
       </Routes>
       <Routes>
-        <Route exact path="/mptest" element={<MpTest />} />
         <Route exact path="/mpredirect" element={<MpRedirect />} />
+        <Route path="/mpsuccess" element={<Success />} />
+        <Route path="/mpfail" element={<Fail />} />
         <Route
           path="/profileuser"
           element={
             <PrivateRoute isAuisAuthenticated={!!id}>
               <ProfileUser />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/order/:id"
+          element={
+            <PrivateRoute isAuisAuthenticated={!!id}>
+              <OrderPage />
             </PrivateRoute>
           }
         />
@@ -61,7 +72,7 @@ export function AppRouter() {
             </PrivateRoute>
           }
         />
-             <Route
+        <Route
           path="/cart"
           element={
             <PrivateRoute isAuisAuthenticated={!!id}>

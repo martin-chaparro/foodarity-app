@@ -3,6 +3,7 @@ import MenuItem from '@mui/material/MenuItem';
 import {useSelector, useDispatch} from 'react-redux'
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { Link } from 'react-router-dom';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Divider from '@mui/material/Divider';
 import { getCart, removeInCart} from '../../redux/actions/cartActions'
@@ -45,16 +46,19 @@ function CartMenu() {
       </div>}
       {cart.length > 0 && <div  className={styles.btnToCart} >
       <Divider/>
-      <MenuItem>
+        <Link to='/cart' className={styles.myCartCont}>
+      <MenuItem className={styles.myCart}>
+        <p className={styles.p}>Mi Carrito</p>
           <IconButton
+          className={styles.icon}
             size="large"
             aria-label="show 17 new notifications"
             color="secondary"
-          >
+            >
                 <ShoppingCartIcon />
           </IconButton>
-          <p>Mi Carrito</p>
         </MenuItem>
+            </Link>
       </div>}
       
     </span>

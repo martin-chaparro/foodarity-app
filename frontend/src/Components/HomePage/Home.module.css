@@ -69,27 +69,24 @@
 }
 
 /* ONG SECCION */
-.contOngs{
-  width: 80%;
-  height: 80%;
+.contOngs {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  border-radius: 10px;
-  margin-left: 3 0px;
-  margin-bottom: 100px;
-
+  background-color: rgba(255, 255, 255, 0.541);
+  border: 2px solid darkslateblue;
+  position: relative;
+  left: 40px;
+  width: 360px;
 }
-.titleOng{
-  text-shadow: 1px 3px 0 #969696, 1px 13px 5px #aba8a8;
-  font-size: 30px;
-  color: rgb(146, 17, 146);
+.titleOng {
+  /* text-shadow: 1px 3px 0 #969696; */
+  font-size: 25px;
+  color: rgb(99, 37, 180);
   font-weight: bold;
-  text-align: center;
-  
+  margin-top: 10px;
 }
-
 
 @media screen and (max-width: 576px) {
   .contweb {

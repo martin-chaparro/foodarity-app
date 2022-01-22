@@ -517,14 +517,13 @@ export default function RegisterFormCommerce() {
 
           <FormControlLabel
             control={<Checkbox color="secondary" />}
-            label="ACEPTAR TERMINOS Y CONDICIONES"
+            label={<span><span>ACEPTAR </span><span><Terminos /></span></span>}
             sx={{
               color: 'secondary',
               fontStyle: 'bold',
             }}
             onChange={(e) => handleCheck(e)}
           />
-          <Terminos />
         </div>
 
         <div className={styles.divButton}>

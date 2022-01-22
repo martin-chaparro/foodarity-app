@@ -15,7 +15,6 @@ const enviarMail = async (req, res) => {
   const { CLIENT_ID, REFRESH_TOKEN, CLIENT_SECRET, REDIRECT_URI } = process.env;
   const { email } = req.body;
   try {
-    //voy a recibir el email por body para verificar si existe user.
     if (email) {
       // const link =   "http://localhost:3000/user/login/password";
       const OAuthClient = google.auth.OAuth2;

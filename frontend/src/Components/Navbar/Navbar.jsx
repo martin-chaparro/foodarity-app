@@ -10,7 +10,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import FavoriteIcon from '@mui/icons-material/Favorite';
+// import FavoriteIcon from '@mui/icons-material/Favorite';
 import LogoutIcon from '@mui/icons-material/Logout';
 import HelpIcon from '@mui/icons-material/Help';
 import LoginIcon from '@mui/icons-material/Login';
@@ -183,7 +183,7 @@ export default function Navbar() {
             </Link>
           </MenuItem>
         )}
-      {id && currentPath === '/home' && (
+      {/* {id && currentPath === '/home' && (
         <MenuItem>
           <IconButton
             size="large"
@@ -196,8 +196,8 @@ export default function Navbar() {
           </IconButton>
           <p>Favoritos</p>
         </MenuItem>
-      )}
-      {id && currentPath === '/home' && (
+      )} */}
+      {id && currentPath !== '/profilecompany' && currentPath !== '/profileuser' && (
         <MenuItem>
         <Link to='/cart'>
           <IconButton
@@ -366,7 +366,7 @@ export default function Navbar() {
               
               </IconButton>
             )} */}
-            {id && currentPath === '/home'  && (
+            {id && currentPath !== '/profilecompany' && currentPath !== '/profileuser'  && (
               <IconButton
                 size="large"
                 aria-label="cart"
@@ -391,11 +391,7 @@ export default function Navbar() {
               <Avatar
                 photo={
                   // eslint-disable-next-line no-nested-ternary
-                  user.photo
-                    ? user.photo.url
-                    : user.socialPhoto
-                    ? user.socialPhoto
-                    : avatarDefault
+                   user.photo ? user.photo.url : (user.socialPhoto ? user.socialPhoto : avatarDefault)  
                 }
               />
             </IconButton>

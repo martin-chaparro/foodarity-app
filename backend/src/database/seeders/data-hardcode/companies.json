@@ -16,9 +16,72 @@
 		"street": "rodriguez peña",
 		"number": "123",
 		"zipcode": "1640",
-		"cityId": "60854",
+		"cityId": "060357",
 		"stateId" : "6" ,
     "ownerId": 1
+},
+{
+	"name": "Cafe Martinez",
+	"description": "Lo cuidamos desde la selección de sus granos, hasta la taza, conservando el amor y el respeto que tenemos por lo que hacemos, desde el primer día. Por eso nuestro café es ÚNICO. A través de nuestro proceso exclusivo de tostación, logramos resaltar las notas y características propias de los diferentes granos. Un aroma pleno, con notas de chocolate, pan tostado, miel y caramelo y un sabor con cuerpo, con un toque de frescura, es lo que hace inconfundible a un Café Martínez, siempre.",
+	"areaCode": "549",
+	"phone": "11202046",
+	"email": "info@cafemartinez.com",
+	"website": "www.cafemartinez.com",
+	"status": "Habilitada",
+	"deleted": false,
+	"logo": {
+		"public_id": "a1rnxpuukwgvegrmp1bn",
+		"url": "https://res.cloudinary.com/dpsxxuslt/image/upload/v1642775299/a1rnxpuukwgvegrmp1bn.png"
+	},
+	"type" : 1,
+	"street": "Av. Corrientes ",
+	"number": "3301",
+	"zipcode": "1640",
+	"cityId": "060280",
+	"stateId" : "6" ,
+    "ownerId": 2
+},
+{
+	"name": "Al Natural",
+	"description": "Somos una familia que trabajamos en el rubro de las frutas & verduras hace más de 60 años dedicándonos a la producción, venta mayorista, importación, exportación. Hoy queremos llegar directamente a cada hogar con alimentos naturales, frescos, de primera calidad y fundamentales en una sana alimentación. Al Natural nos mantiene en el camino del crecimiento, con esfuerzo, trabajo y mucho amor propio por lo que hacemos, siguiendo el legado que nos inculco toda su vida Don Bernardo.",
+	"areaCode": "549",
+	"phone": "11544653",
+	"email": "info@alnatural.com",
+	"website": "www.alnatural.com",
+	"status": "Habilitada",
+	"deleted": false,
+	"logo": {
+		"public_id": "gtlfymbe1b5xoa43bajv",
+		"url": "https://res.cloudinary.com/dpsxxuslt/image/upload/v1642775414/gtlfymbe1b5xoa43bajv.jpg"
+	},
+	"type" : 1,
+	"street": "Av. Los Lapachos ",
+	"number": "2500",
+	"zipcode": "1640",
+	"cityId": "060455",
+	"stateId" : "6" ,
+    "ownerId": 3
+},
+{
+	"name": "Piu Belo",
+	"description": "Rotiseria",
+	"areaCode": "549",
+	"phone": "11544653",
+	"email": "info@piubelo.com",
+	"website": "www.piubelo.com",
+	"status": "Habilitada",
+	"deleted": false,
+	"logo": {
+		"public_id": "reroe2qs31qifkgrukor",
+		"url": "https://res.cloudinary.com/dpsxxuslt/image/upload/v1642775336/reroe2qs31qifkgrukor.jpg"
+	},
+	"type" : 1,
+	"street": "Calle Los Alcarceles ",
+	"number": "2500",
+	"zipcode": "1640",
+	"cityId": "060455",
+	"stateId" : "6" ,
+    "ownerId": 4
 },
 {
 	"name": "Fundación Leon",
@@ -38,8 +101,8 @@
 	"number": "123",
 	"zipcode": "1640",
 	"cityId": "60854",
-	"stateId" : "6" ,
-	"ownerId": 2
+	"stateId" : "90" ,
+	"ownerId": 5
 },
 {
 	"name": "SonRisas",
@@ -60,6 +123,27 @@
 	"zipcode": "1640",
 	"cityId": "60854",
 	"stateId" : "6" ,
-	"ownerId": 3
+	"ownerId": 6
+},
+{
+	"name": "Aldeas Infantiles SOS",
+	"description": "Desarrollamos estrategias de intervención para prevenir la pérdida del cuidado familiar de niños y niñas. Cuando no es posible evitarlo, y la autoridad estatal así lo determina, brindamos alternativas de cuidado sin separar a los hermanos, garantizando la presencia de un referente afectivo que los acompañe en sus actividades cotidianas y trabajando para que se reintegren a sus familias y comunidades, o para que tengan otras posibilidades de vivir en familia",
+	"areaCode": "54 9 ",
+	"phone": "01115202083",
+	"email": "info@aldeasinfantiles.org.ar",
+	"status": "Habilitada",
+	"website": "https://www.aldeasinfantiles.org.ar/",
+	"deleted": false,
+	"logo":  {
+		"public_id": "aqzhvnddgtrgxstdz7md",
+		"url": "https://res.cloudinary.com/dpsxxuslt/image/upload/v1642691877/aqzhvnddgtrgxstdz7md.jpg"
+	},
+	"type" : 2,
+	"street": "Moreno ",
+	"number": "1850",
+	"zipcode": "1094",
+	"cityId": "60854",
+	"stateId" : "6" ,
+	"ownerId": 13
 }
 ]

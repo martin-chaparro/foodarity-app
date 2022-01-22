@@ -9,6 +9,7 @@ const City = require('../models/City');
 const State = require('../models/State');
 const User = require('../models/User');
 const Product = require('../models/Product');
+const Cart = require('../models/Cart');
 
 cloudinary.config(process.env.CLOUDINARY_URL);
 
@@ -96,7 +97,7 @@ const getCompanies = async (req, res) => {
           as: 'address',
           include: [
             { model: City, as: 'city', attributes: ['name'] },
-            { model: State, as: 'state', attributes: ['name'] },
+            { model: State, as: 'state', attributes: ['name', 'lat', 'lon'] },
           ],
         },
       ],
@@ -299,6 +300,10 @@ const deleteCompany = async (req, res) => {
       { status: 'canceled' },
       { where: { [Op.and]: [{ company_id: id }, { status: 'published' }] } }
     );
+    const products = await Product.findAll({ where: { company_id: id } });
+    products.forEach(async (product) => {
+      await Cart.destroy({ where: { product_id: product.id } });
+    });
 
     const users = await User.findAll({ where: { company_id: id } });
     users.forEach((user) => {

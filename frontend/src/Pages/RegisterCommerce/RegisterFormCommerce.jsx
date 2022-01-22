@@ -505,21 +505,21 @@ export default function RegisterFormCommerce() {
 
           <FormControlLabel
             control={<Checkbox color="secondary" />}
-            label="ACEPTAR TERMINOS Y CONDICIONES"
+            label={<span><span>ACEPTAR </span><span><Terminos /></span></span>}
             sx={{
               color: 'secondary',
               fontStyle: 'bold',
             }}
             onChange={(e) => handleCheck(e)}
           />
-          <Terminos />
+          
         </div>
 
         <div className={styles.divButton}>
           {/* BOTON DE ENVIAR SOLICITUD: Dicho botón se encuentra 
           dentro del componente Alert Ong y para conectar el submit 
           con el backend debe configurarse en ese mismo componente AlertOng */}
-          <AlertOng display={checked} />
+          <AlertOng display={checked}/>
         </div>
       </form>
     </div>

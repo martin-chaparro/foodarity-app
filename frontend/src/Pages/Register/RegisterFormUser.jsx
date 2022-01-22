@@ -150,7 +150,7 @@ function Register() {
     dispatch(startGoogleRegister(tokenId));
   };
   const responseGoogleFail = () => {
-    navigate('/login', { replace: true });
+    navigate('/register', { replace: true });
   };
 
   return (
@@ -231,6 +231,7 @@ function Register() {
             type='submit'
             variant="contained"
             style={{ marginBottom: '1em' }}
+            onClick={(e) => handleSubmit(e)}
           >
             Ingresar
           </Button>

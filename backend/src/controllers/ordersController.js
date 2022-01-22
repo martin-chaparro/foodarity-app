@@ -1,17 +1,13 @@
+/* eslint-disable camelcase */
+const { Op } = require('sequelize');
 const Order = require('../models/Order');
 const Product = require('../models/Product');
 const User = require('../models/User');
 const Company = require('../models/Company');
 const PaymentMethod = require('../models/PaymentMethod');
+const Cart = require('../models/Cart');
 
 const include = [
-  {
-    model: Product,
-    as: 'product',
-    attributes: {
-      exclude: ['createdAt', 'updatedAt', 'CompanyId', 'CategoryId'],
-    },
-  },
   {
     model: Company,
     as: 'company',
@@ -59,13 +55,38 @@ const getOrdersByUser = async (req, res) => {
   try {
     const { userId } = req;
     const orders = await Order.findAll({
-      where: { buyerId: userId },
+      where: { buyer_id: userId },
       include,
       attributes,
       order: [['id', 'DESC']],
     });
-    return res.status(200).json(orders);
+    const ids = [];
+    orders.forEach((order) => {
+      order.quantityByProduct.forEach((item) => {
+        if (!ids.includes(item.product_id)) {
+          ids.push(item.product_id);
+        }
+      });
+    });
+    const products = await Product.findAll({
+      where: { id: ids },
+    });
+
+    const finalOrders = orders.map((order) => {
+      const finalOrder = order;
+      finalOrder.quantityByProduct = order.quantityByProduct.map((item) => {
+        const finalItem = item;
+        finalItem.product = products.find(
+          (producto) => producto.id === item.product_id
+        );
+        return finalItem;
+      });
+      return finalOrder;
+    });
+
+    return res.status(200).json(finalOrders);
   } catch (error) {
+    console.log(error);
     return res.status(500).send(error);
   }
 };
@@ -97,7 +118,18 @@ const getOrdersByCompany = async (req, res) => {
       attributes,
       order: [['id', 'DESC']],
     });
-    return res.status(200).json(orders);
+    const ids = [];
+    orders.forEach((order) => {
+      order.quantityByProduct.forEach((item) => {
+        if (!ids.includes(item.product_id)) {
+          ids.push(item.product_id);
+        }
+      });
+    });
+    const products = await Product.findAll({
+      where: { id: ids },
+    });
+    return res.status(200).json({ orders, products });
   } catch (error) {
     console.log(error);
     return res.status(500).send(error);
@@ -107,15 +139,11 @@ const getOrdersByCompany = async (req, res) => {
 const postOrder = async (req, res) => {
   // TODO AGREGAR CHECKEO DE COMPANY y USER
   const { userId } = req;
-  const { id } = req.params;
-  const { date, quantity, paymentMethod } = req.body;
+  const { date, quantityByProduct, paymentMethod, company_id } = req.body;
   try {
     const user = await User.findByPk(userId);
-    const product = await Product.findByPk(id);
-    const company = await Company.findByPk(product.company_id);
+    const company = await Company.findByPk(company_id);
 
-    console.log(company);
-    const productQuantity = product.quantity;
     if (!user.status) {
       return res.json({
         message: 'El usuario esta deshabilitado',
@@ -131,34 +159,39 @@ const postOrder = async (req, res) => {
         message: 'El comercio no esta habilitado',
       });
     }
-    if (product.status !== 'published') {
-      return res.json({
-        message: 'El producto no esta publicado',
-      });
-    }
-    if (productQuantity < quantity) {
-      return res.json({
-        message: 'El producto no tiene esa cantidad de lotes',
-      });
-    }
-    if (productQuantity > quantity) {
-      Product.update(
-        { quantity: productQuantity - quantity },
-        { where: { id } }
+    // aca
+
+    const ids = [];
+
+    quantityByProduct.forEach((item) => {
+      if (!ids.includes(item.product_id)) {
+        ids.push(item.product_id);
+      }
+    });
+
+    const products = await Product.findAll({ where: { id: ids } });
+
+    const products_ids = [];
+    products.forEach((product) => {
+      const qBp = quantityByProduct.find(
+        (item) => item.product_id === product.id
       );
-    }
-    if (productQuantity === quantity) {
-      Product.update(
-        { quantity: productQuantity - quantity, status: 'finished' },
-        { where: { id } }
-      );
+      if (product.status === 'published' && product.quantity >= qBp.quantity) {
+        products_ids.push(product);
+      }
+    });
+
+    if (ids.length !== products_ids.length) {
+      return res.status(400).json({
+        message:
+          'Alguno de los productos ya no esta publicado, o no tiene suficientes lotes',
+      });
     }
 
-    const order = await Order.create({ date, quantity });
+    const order = await Order.create({ date, quantityByProduct });
     await order.setCompany(1);
     await order.setBuyer(userId);
-    await order.setProduct(id);
-    order.setPaymentMethod(paymentMethod);
+    await order.setPaymentMethod(paymentMethod);
 
     return res.status(200).json(order);
   } catch (error) {
@@ -166,4 +199,77 @@ const postOrder = async (req, res) => {
   }
 };
 
-module.exports = { getOrdersByUser, getOrdersByCompany, postOrder };
+const concreteOrder = async (req, res) => {
+  const { userId } = req;
+  const { orderId } = req.params;
+  const { fail } = req.query;
+  try {
+    const order = await Order.findByPk(orderId);
+    if (fail) {
+      await order.destroy();
+      return res.status(200).json({ message: 'orden fallida' });
+    }
+    const ids = [];
+
+    order.quantityByProduct.forEach((item) => {
+      if (!ids.includes(item.product_id)) {
+        ids.push(item.product_id);
+      }
+    });
+
+    const products = await Product.findAll({ where: { id: ids } });
+
+    products.forEach(async (product) => {
+      try {
+        const qBp = order.quantityByProduct.find(
+          (item) => item.product_id === product.id
+        );
+        const { product_id, quantity } = qBp;
+        const productQuantity = product.quantity;
+        // borra el producto del carrito del comprador
+        await Cart.destroy({ where: { user_id: userId, product_id } });
+        if (productQuantity > quantity) {
+          // actualiza la cantidad de los productos publicados
+          await Product.update(
+            { quantity: productQuantity - quantity },
+            { where: { id: product_id } }
+          );
+          // actualiza la cantidad en los demas carritos que tengan este producto
+          await Cart.update(
+            { quantity: productQuantity - quantity },
+            {
+              where: {
+                product_id,
+                quantity: { [Op.gte]: productQuantity - quantity },
+              },
+            }
+          );
+        }
+        if (productQuantity === quantity) {
+          // finaliza las publicaciones que ya no tienen stock
+          await Product.update(
+            { quantity: productQuantity - quantity, status: 'finished' },
+            { where: { id: product_id } }
+          );
+          // y las borra de los carritos
+          await Cart.destroy({ where: { product_id } });
+        }
+        return 'producto y carrito actualizado';
+      } catch (error) {
+        return res.status(500).json({ message: error });
+      }
+    });
+
+    order.update({ status: 'pagado' });
+    return res.status(200).json(order);
+  } catch (error) {
+    return res.status(500).json({ message: error });
+  }
+};
+
+module.exports = {
+  getOrdersByUser,
+  getOrdersByCompany,
+  postOrder,
+  concreteOrder,
+};

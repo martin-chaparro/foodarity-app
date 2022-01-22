@@ -14,6 +14,10 @@ export default (state = initialState, action) => {
       return {
         user: action.payload,
       };
+    case types.enviarMail:
+      return {
+        user: action.payload,
+      };
     default:
       return state;
   }

@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import Typography from '@mui/material/Typography';
+import OngForm from '../../Components/ONGSeccion/OngForm/OngForm';
 // import Navbar from '../../Components/Navbar/NavbarCommerce';
-import CompanyProductCard from './CompanyProductCard';
+import ProductCard from '../../Components/ProductCard/ProductCard';
 import styles from './CompanyVisualizer.module.css';
 import Banner from '../../assets/Banner.jpg';
 import { api, apiWithToken } from '../../services/api';
-import OngForm from '../../Components/ONGSeccion/OngForm/OngForm';
-import OngInfo from '../../Components/ONGSeccion/OngInfo';
+import OngInfo from '../../Components/ONGSeccion/OngPageInfo/OngInfo';
 
 export default function CompanyVisualizer() {
   const [company, setcompany] = useState();
@@ -69,9 +70,15 @@ export default function CompanyVisualizer() {
           <p>Cód. Postal: {company?.address.zipcode}</p>
         </div>
       </div>
-      <div className={styles.description}>
-        <p>{company?.description}</p> 
-      </div>
+      <Typography
+        variant="h6"
+        gutterBottom
+        component="div"
+        sx={{ color: '#7ED957', margin: 3, textAlign: 'center' }}
+      >
+        {company?.description}
+      </Typography>
+
       {company && company.company_type_id === 1 && (
         <div className={styles.renderContainer}>
           <div className={styles.divh2}>
@@ -81,7 +88,8 @@ export default function CompanyVisualizer() {
             {products &&
               products.map((product, index) => (
                 // eslint-disable-next-line react/no-array-index-key
-                <CompanyProductCard key={index} product={product} />
+                <ProductCard key={index} product={product} />
+                
               ))}
           </div>
         </div>
@@ -93,14 +101,13 @@ export default function CompanyVisualizer() {
         user.company.company_type_id === 1 &&
         user.company.status === 'Habilitada' ? (
           <div>
-            <OngForm />
+            <OngForm id={id} />
           </div>
         ) : (
           <div>
-            <OngInfo />
+            <OngInfo info={company}/>
           </div>
-          ))}
+        ))}
     </div>
-
   );
 }

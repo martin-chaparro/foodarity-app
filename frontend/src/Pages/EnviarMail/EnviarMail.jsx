@@ -3,8 +3,11 @@
 /* eslint-disable no-undef */
  import React, { useState } from "react";
  import { useDispatch } from "react-redux";
+ import Swal from 'sweetalert2';
+ import { enviarMail } from "../../redux/actions/userActions";
 
 export default function RecuperarPassword() {
+  const dispatch = useDispatch();
   const [input, setInput] = useState({
       email: ''
   });
@@ -16,11 +19,23 @@ export default function RecuperarPassword() {
           [e.target.name] : e.target.value
       })
   }
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(enviarMail(input))
+    Swal.fire({
+      icon: 'success',
+      title: 'Bien!',
+      text: 'Te registraste Correctamente',
+    });
+  }
+
   return (
     <div>
       <h1>Recuperacion de contraseña</h1>
       <p>Por favor para poder recuperar su contraseña introduzca su email</p>
-      <form>
+      <form onSubmit={handleSubmit}> 
         <div>
           <input
             type="text"
@@ -32,7 +47,7 @@ export default function RecuperarPassword() {
               }}
           />
         </div>
-        <button>Enviar</button>
+        <button type="submit">Enviar</button>
       </form>
     </div>
   );
