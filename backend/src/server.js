@@ -153,6 +153,7 @@ class Server {
           cityId,
           stateId,
           ownerId,
+          location
         } = company;
         const newCompany = await Company.create({
           name,
@@ -169,6 +170,7 @@ class Server {
           street,
           number,
           zipcode,
+          location
         });
         const findType = await CompanyType.findByPk(type);
 
@@ -196,6 +198,8 @@ class Server {
           publicationDate,
           expirationDate,
           category,
+         /*  publisher, 
+          company */
         } = product;
         const newProduct = await Product.create({
           lote,

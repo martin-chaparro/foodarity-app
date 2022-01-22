@@ -16,6 +16,10 @@ class Address extends Model {
           type: DataTypes.STRING,
           allowNull: false,
         },
+        location: {
+          type: DataTypes.JSON,
+          allowNull: true
+        }
       },
       {
         sequelize,
