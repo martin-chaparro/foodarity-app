@@ -559,6 +559,7 @@ export default function RegisterCompanyFormEditable({ company, handleBack }) {
 
         <div className={styles.divButton}>
           <Button
+            className={styles.buttons}
             type="submit"
             sx={{
               backgroundColor: '#7ED957',
@@ -572,6 +573,7 @@ export default function RegisterCompanyFormEditable({ company, handleBack }) {
           </Button>
 
           <Button
+            className={styles.buttons}
             onClick={handleBack}
             sx={{
               backgroundColor: '#8865b9',
