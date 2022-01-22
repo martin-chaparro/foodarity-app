@@ -167,6 +167,23 @@
   margin-bottom: 20px;
 }
 
+.mapContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.mapContainer label {
+  text-align: center;
+}
+
+.map {
+  width: 500px;
+  height: 500px;
+}
+
 .button {
   margin-bottom: 20px;
   font-weight: 700;
