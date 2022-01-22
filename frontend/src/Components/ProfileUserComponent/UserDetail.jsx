@@ -1,19 +1,11 @@
-// eslint-disable-next-line import/no-duplicates
 import React, { useState } from 'react';
-// eslint-disable-next-line import/no-duplicates
-// import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import styles from './UserDetail.module.css';
 import RegisterUserFormEditable from './RegisterUserFormEditable';
 
-// const [displayForm, setDisplayForm] = useState(false);
-
 export default function UserDetail({ detail }) {
   const [displayDetail] = useState(true);
-
-  // setDisplayDetail;
-  // email, id, phone, photo, deleted, socialPhoto, status;
-  const { name, email, phone, status } = detail;
+  const { name, email, phone } = detail;
 
   return (
     <div className={styles.parent}>
@@ -79,19 +71,6 @@ export default function UserDetail({ detail }) {
             >
               Método de Pago:
               <span style={{ color: '#8865b9' }}> No registrado aún</span>
-            </Typography>
-          </div>
-          <div>
-            <Typography
-              variant="h6"
-              gutterBottom
-              component="div"
-              sx={{ color: '#7ED957', marginTop: '0' }}
-            >
-              Status de la Cuenta:
-              <span style={{ color: '#8865b9' }}>
-                {status || 'En proceso de confirmación'}{' '}
-              </span>
             </Typography>
           </div>
 
