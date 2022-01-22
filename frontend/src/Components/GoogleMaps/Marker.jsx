@@ -4,6 +4,7 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import styles from './Maker.module.css';
 
 function Marker({company}) {
+  window.scroll(0, 0)
   return(  
   <div >
     <Link to={`/company/${company.id}`} textDecoration="none">
