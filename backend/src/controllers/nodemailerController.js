@@ -16,7 +16,6 @@ const enviarMail = async (req, res) => {
   const { email } = req.body;
   try {
     if (email) {
-      // const link =   "http://localhost:3000/user/login/password";
       const OAuthClient = google.auth.OAuth2;
       const oAuth2Client = new OAuthClient(
         CLIENT_ID,
@@ -43,7 +42,7 @@ const enviarMail = async (req, res) => {
             from: 'Foodarity <foodarityapp@gmail.com>',
             to: email,
             subject: 'Ingresa al siguiente link para recuperar su contraseña',
-            text: 'http://localhost:3000/user/login/password ',
+            text: 'http://localhost:3000/recuperarPassword ',
           };
 
           const result = await transporter.sendMail(mailOptions);

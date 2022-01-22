@@ -27,7 +27,7 @@ export default function RecuperarPassword() {
     Swal.fire({
       icon: 'success',
       title: 'Bien!',
-      text: 'Te registraste Correctamente',
+      text: 'Por favor revise su email!',
     });
   }
 
