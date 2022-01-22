@@ -137,7 +137,7 @@ const getStates = async (req, res) => {
 const getCityById = async (req, res) => {
   try {
     const {id} = req.params
-    const city = await City.findByPk(id)
+    const city = await City.findByPk(id, {include: [{model:State, as: 'state'}]})
     res.status(200).json(city)
   } catch (error) {
     res.status(500).json({message: error})

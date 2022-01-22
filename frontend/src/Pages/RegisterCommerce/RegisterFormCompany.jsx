@@ -7,10 +7,12 @@ import { useDispatch } from 'react-redux';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Swal from 'sweetalert2';
+import axios from 'axios';
 import MapPicker from 'react-google-map-picker';
 // import Header from '../../Components/Header/Header';
 import styles from './RegisterFormCommerce.module.css';
 import CommerceLogo from '../../assets/Mask-Group.png';
+import ONGLogo from '../../assets/caridad-1.png';
 import { api } from '../../services/api';
 import { registerComerce } from '../../redux/actions/CompaniesActions';
 import Terminos from '../../Components/Term&Conditions/Terminos';
@@ -19,7 +21,11 @@ import AlertOng from '../../Components/Alertas/AlertEnviarSolicitud';
 let time = null;
 let time2 = null;
 
-export default function RegisterFormCommerce() {
+const GOOGLE_API_KEY = process.env.REACT_APP_GOOGLE_API_KEY
+
+console.log(GOOGLE_API_KEY)
+
+export default function RegisterFormCompany({type}) {
   const [provincia, setprovincia] = useState([]);
   const [ciudad, setCiudad] = useState([]);
   const [termProvincia, setTermProvincia] = useState('');
@@ -42,14 +48,14 @@ export default function RegisterFormCommerce() {
     street: '',
     number: '',
     zipcode: '',
-    type: 1,
+    type,
   });
 
   // GOOGLE MAPS
 
   const [defaultLocation, setDefaultLocation] = useState();
   const [location, setLocation] = useState(defaultLocation);
-  const [zoom, setZoom] = useState(12);
+  const [zoom, setZoom] = useState(17);
   const [showMap, setShowMap] = useState(false);
 
   const handleChangeLocation = (latt, lonn) => {
@@ -65,7 +71,20 @@ export default function RegisterFormCommerce() {
       setShowMap(false);
       api.get(`/cities/id/${formValues.cityId}`).then((res) => {
         const loc = { lat: res.data.lat, lng: res.data.lon };
-        setDefaultLocation(loc);
+        const city = res.data.name
+        const state = res.data.state.name
+        if (city && state && input.street && input.number) {
+          const address = `${input.street} ${input.number}, ${city}, ${state}`
+          axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${GOOGLE_API_KEY}`)
+          .then(resp => {
+            if (resp.data.status === 'OK') {
+              const newLoc = resp.data.results[0].geometry.location
+              setDefaultLocation(newLoc);
+            } 
+          })
+        }else {
+          setDefaultLocation(loc);
+        }
         setShowMap(true);
       });
     }
@@ -295,6 +314,7 @@ export default function RegisterFormCommerce() {
     <div className={styles.RegisterFormCommerce}>
       {/* <Header /> */}
       <form autoComplete="off" className={styles.form} onSubmit={handleSubmit}>
+      {type === 1 ?
         <div className={styles.containerLogo}>
           <div className={styles.commerceLogo}>
             <img
@@ -302,8 +322,18 @@ export default function RegisterFormCommerce() {
               src={CommerceLogo}
               alt="CommerLogo"
             />
-          </div>
-        </div>
+            </div> 
+        </div> : 
+        <div className={styles.containerLogo}>
+        <div className={styles.ongLogo}>
+          <img
+            className={styles.imgLogo}
+            src={ONGLogo}
+            alt="CommerLogo"
+          />
+          </div> 
+      </div>
+            }
         <div className={styles.divsInputs}>
           <div className={styles.labelNombre}>
             <label>Nombre del comercio</label>
@@ -475,6 +505,7 @@ export default function RegisterFormCommerce() {
               placeholder="Provincia"
               value={termProvincia}
               onChange={handleInputProvincia}
+              disabled={!input.street && !input.number && !input.zipcode}
             />
             {provincia.length > 0 && (
               <div className={styles.containerResult}>
@@ -533,7 +564,7 @@ export default function RegisterFormCommerce() {
                 mapTypeId="roadmap"
                 onChangeLocation={handleChangeLocation}
                 onChangeZoom={handleChangeZoom}
-                apiKey="AIzaSyDBwkO3pZqZv8iqwhXVapOwxwLf2Z3Y9tk"
+                apiKey={GOOGLE_API_KEY}
               />
             </div>
           </div>
