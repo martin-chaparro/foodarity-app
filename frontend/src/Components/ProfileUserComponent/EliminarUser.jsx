@@ -1,23 +1,40 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+// import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import estilos from './Bienvenida.module.css';
-// import { apiWithToken } from '../../services/api';
+import { apiWithToken } from '../../services/api';
+import { startLogout } from '../../redux/actions/authActions';
 
-
-export default function EliminarUser(/* {detail} */) {
-
- /*  const handleDelete = () => {
-    apiWithToken.delete(`/users/${detail.id}`).then(res => {
-      if (res.status === 200) {
-        console.log('borrado')
-      } else {
-        console.log('algo fallo')
+export default function EliminarUser({ detail }) {
+  const dispatch = useDispatch();
+  // const navigate = useNavigate();
+  const handleDelete = () => {
+    Swal.fire({
+      title: '¿Estás seguro de querer eliminar la cuenta?',
+      text: 'No podrás revertir los cambios',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#e63946',
+      cancelButtonColor: 'gray',
+      confirmButtonText: 'Continuar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        apiWithToken.delete(`/users/${detail.id}`).then((res) => {
+          if (res.status === 200) {
+            Swal.fire('Cuenta Eliminada');
+            dispatch(startLogout());
+            // navigate('/');
+          } else {
+            console.log('algo fallo');
+          }
+        });
       }
-    })
-  }
-   */
+    });
+  };
 
   return (
     <div className={estilos.parent}>
@@ -53,7 +70,7 @@ export default function EliminarUser(/* {detail} */) {
             <Typography
               variant="body"
               gutterBottom
-              sx={{ align: 'justify', color: '#8865b9' }}
+              sx={{ textAlign: 'justify', color: '#8865b9' }}
             >
               Si te preocupa los cambios de nuestras Condiciones de Servicio,
               puedes ponerte en contacto con alguno de nuestros asesores en
@@ -122,6 +139,9 @@ export default function EliminarUser(/* {detail} */) {
             </Typography>
           </div>
           <Button
+            onClick={() => {
+              handleDelete();
+            }}
             sx={{
               backgroundColor: '#e63946',
               '&:hover': { backgroundColor: '#e6394690 !important' },

@@ -7,57 +7,67 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import estilos from './Compras.module.css';
 
 const columns = [
-  { id: 'name', label: 'Name', minWidth: 170 },
-  { id: 'code', label: 'ISO\u00a0Code', minWidth: 100 },
   {
-    id: 'population',
-    label: 'Population',
+    id: 'ordenid',
+    label: 'ORDEN NO.',
     minWidth: 170,
-    align: 'right',
-    format: (value) => value.toLocaleString('en-US'),
+    align: 'center',
+  },
+  { id: 'vendedor', label: 'VENDEDOR', minWidth: 170, align: 'center' },
+  { id: 'lote', label: 'LOTE', minWidth: 170, align: 'center' },
+  {
+    id: 'unidades',
+    label: 'UNIDADES',
+    minWidth: 170,
+    align: 'center',
+  },
+  // {
+  //   id: 'precio',
+  //   label: 'PRECIO UNITARIO',
+  //   minWidth: 170,
+  //   align: 'center',
+  // },
+  {
+    id: 'total',
+    label: 'TOTAL',
+    minWidth: 170,
+    align: 'center',
   },
   {
-    id: 'size',
-    label: 'Size\u00a0(km\u00b2)',
+    id: 'metodo',
+    label: 'METODO DE PAGO',
     minWidth: 170,
-    align: 'right',
-    format: (value) => value.toLocaleString('en-US'),
+    align: 'center',
   },
   {
-    id: 'density',
-    label: 'Density',
+    id: 'fecha',
+    label: 'FECHA COMPRA',
     minWidth: 170,
-    align: 'right',
-    format: (value) => value.toFixed(2),
+    align: 'center',
   },
 ];
 
-function createData(name, code, population, size) {
-  const density = population / size;
-  return { name, code, population, size, density };
+function createData(
+  ordenid,
+  vendedor,
+  lote,
+  unidades,
+  precio,
+  total,
+  metodo,
+  fecha
+) {
+  // const total = precio * unidades;
+  return { ordenid, vendedor, lote, unidades, precio, total, metodo, fecha };
 }
 
-const rows = [
-  createData('India', 'IN', 1324171354, 3287263),
-  createData('China', 'CN', 1403500365, 9596961),
-  createData('Italy', 'IT', 60483973, 301340),
-  createData('United States', 'US', 327167434, 9833520),
-  createData('Canada', 'CA', 37602103, 9984670),
-  createData('Australia', 'AU', 25475400, 7692024),
-  createData('Germany', 'DE', 83019200, 357578),
-  createData('Ireland', 'IE', 4857000, 70273),
-  createData('Mexico', 'MX', 126577691, 1972550),
-  createData('Japan', 'JP', 126317000, 377973),
-  createData('France', 'FR', 67022000, 640679),
-  createData('United Kingdom', 'GB', 67545757, 242495),
-  createData('Russia', 'RU', 146793744, 17098246),
-  createData('Nigeria', 'NG', 200962417, 923768),
-  createData('Brazil', 'BR', 210147125, 8515767),
-];
-
-export default function StickyHeadTable() {
+export default function Compras({ orders }) {
+  console.log(orders);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -70,54 +80,117 @@ export default function StickyHeadTable() {
     setPage(0);
   };
 
+  const rows = orders.map((order) =>
+    createData(
+      order.id,
+      order.company.name,
+      order.quantityByProduct[0].product.lote,
+      order.quantityByProduct[0].quantity,
+      `$ ${order.quantityByProduct[0].product.price}`,
+      `$ ${
+        order.quantityByProduct[0].product.price *
+        order.quantityByProduct[0].quantity
+      }`,
+      order.paymentMethod.method,
+      order.date
+    )
+  );
+
   return (
-    <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-      <TableContainer sx={{ maxHeight: 440 }}>
-        <Table stickyHeader aria-label="sticky table">
-          <TableHead>
-            <TableRow>
-              {columns.map((column) => (
-                <TableCell
-                  key={column.id}
-                  align={column.align}
-                  style={{ minWidth: column.minWidth }}
-                >
-                  {column.label}
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row) => {
-                return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                    {columns.map((column) => {
-                      const value = row[column.id];
-                      return (
-                        <TableCell key={column.id} align={column.align}>
-                          {column.format && typeof value === 'number'
-                            ? column.format(value)
-                            : value}
-                        </TableCell>
-                      );
-                    })}
-                  </TableRow>
-                );
-              })}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      <TablePagination
-        rowsPerPageOptions={[10, 25, 100]}
-        component="div"
-        count={rows.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-      />
-    </Paper>
+    <div className={estilos.parent}>
+      <Box
+        sx={{
+          marginTop: 1,
+        }}
+      >
+        <div className={estilos.titulo}>
+          <Typography
+            variant="h5"
+            gutterBottom
+            component="div"
+            marginBottom="1em"
+            sx={{ color: '#7ED957', marginTop: 1 }}
+          >
+            HISTORIAL DE COMPRAS
+          </Typography>
+        </div>
+        <Paper sx={{ width: '50%', overflow: 'hidden' }}>
+          <TableContainer sx={{ maxHeight: 440 }}>
+            <Table stickyHeader aria-label="sticky table">
+              <TableHead>
+                <TableRow>
+                  {columns.map((column) => (
+                    <TableCell
+                      key={column.id}
+                      align={column.align}
+                      style={{
+                        minWidth: column.minWidth,
+                        backgroundColor: '#7ED957',
+                        color: '#3E2463',
+                        fontWeight: '700',
+                      }}
+                    >
+                      {column.label}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {rows
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((row) => {
+                    return (
+                      <TableRow
+                        hover
+                        role="checkbox"
+                        tabIndex={-1}
+                        key={row.code}
+                        style={{
+                          backgroundColor: 'white',
+                          color: '#3E2463',
+                          fontWeight: '700',
+                        }}
+                      >
+                        {columns.map((column) => {
+                          const value = row[column.id];
+                          return (
+                            <TableCell
+                              key={column.id}
+                              align={column.align}
+                              style={{
+                                backgroundColor: 'white',
+                                color: '#8865b9',
+                                fontWeight: '700',
+                              }}
+                            >
+                              {column.format && typeof value === 'number'
+                                ? column.format(value)
+                                : value}
+                            </TableCell>
+                          );
+                        })}
+                      </TableRow>
+                    );
+                  })}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <TablePagination
+            rowsPerPageOptions={[10, 25, 100]}
+            component="div"
+            count={rows.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+            style={{
+              backgroundColor: 'white',
+              color: '#8865b9',
+              fontWeight: '700',
+            }}
+          />
+        </Paper>
+      </Box>
+    </div>
   );
 }
