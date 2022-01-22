@@ -70,6 +70,7 @@ function ModalProductDetails({ product, open, handleClose, item }) {
               <LocationOnIcon sx={{ position: 'relative', bottom: 5 }} />
               {product.company.address.state.name},{' '}
               {product.company.address.city.name}
+            
             </Typography>
           </div>
           <div className={styles.googleMap}>

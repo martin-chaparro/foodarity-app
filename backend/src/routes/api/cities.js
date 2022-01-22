@@ -4,11 +4,11 @@ const router = new Router();
 const {
   getCities,
   getCitiesByState,
-  getCityById
+  getCityById,
 } = require('../../controllers/locationsController');
 
 router.get('/', getCities);
 router.get('/:stateId', getCitiesByState);
-router.get('/id/:id', getCityById)
+router.get('/id/:id', getCityById);
 
 module.exports = router;
