@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
 import Modal from '@mui/material/Modal';
@@ -28,9 +29,9 @@ export default function RegisterUserFormEditable({ detail }) {
     email: detail.email,
     phone: detail.phone,
   });
-  const [preview, setPreview] = React.useState(null);
 
-  const handleChange = (e) => {
+  const handleOnChange = (e) => {
+    e.preventDefault();
     setData({
       ...data,
       [e.target.name]: e.target.value,
@@ -70,8 +71,67 @@ export default function RegisterUserFormEditable({ detail }) {
     setPhoto(formPhoto);
   };
 
-  const imageNull =
-    'https://res.cloudinary.com/dxbtqclyu/image/upload/v1642367029/Captura_de_pantalla_2022-01-16_150126_l0f8w3.png';
+  const validateLetters = (e) => {
+    const { name, value } = e.target;
+    setData({
+      ...data,
+      [name]: value,
+    });
+    if (!/[a-zA-Z ]+$/.test(value)) {
+      setErrors({
+        ...errors,
+        [name]: 'Solo letras',
+      });
+    } else {
+      setErrors({
+        ...errors,
+        [name]: '',
+      });
+    }
+  };
+
+
+  const validateEmail = (e) => {
+    const { name, value } = e.target;
+    const expresion =
+      // eslint-disable-next-line no-useless-escape
+      /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+    setData({
+      ...data,
+      [name]: value,
+    });
+    if (!expresion.test(value)) {
+      setErrors({
+        ...errors,
+        [name]: 'No es un email valido!',
+      });
+    } else {
+      setErrors({
+        ...errors,
+        [name]: '',
+      });
+    }
+  };
+
+  const validateNum = (e) => {
+    const { name, value } = e.target;
+    setData({
+      ...data,
+      [name]: value,
+    });
+    // eslint-disable-next-line no-useless-escape
+    if (!/^[+]?([0-9]+(?:[\.][0-9]*)?|\.[0-9]+)$/.test(value)) {
+      setErrors({
+        ...errors,
+        [name]: 'Solo numeros',
+      });
+    } else {
+      setErrors({
+        ...errors,
+        [name]: '',
+      });
+    }
+  };
 
   return (
     <div>
@@ -146,28 +206,49 @@ export default function RegisterUserFormEditable({ detail }) {
             <div className={estilos.inputs1}>
               <h5>Nombre</h5>
               <input
+                required 
+                value={data.name}
                 type="text"
                 name="name"
                 autoComplete="off"
-                onChange={(e) => handleChange(e)}
-                value={data.name}
+                onChange={(e) => {
+                  handleOnChange(e);
+                  validateLetters(e);
+                }}
               />
+              <div>
+              <p className={estilos.errors}>{errors.name}</p>
+              </div>
               <h5>Email</h5>
               <input
+                required
+                value={data.email}
                 type="text"
                 name="email"
                 autoComplete="off"
-                onChange={(e) => handleChange(e)}
-                value={data.email}
+                onChange={(e) => {
+                  handleOnChange(e);
+                  validateEmail(e);
+                }}
               />
+              <div>
+              <p className={estilos.errors}>{errors.email}</p>
+              </div>
               <h5>Número Celular</h5>
               <input
+                required
+                value={data.phone}
                 type="text"
                 name="phone"
                 autoComplete="off"
-                onChange={(e) => handleChange(e)}
-                value={data.phone}
+                onChange={(e) => {
+                  handleOnChange(e);
+                  validateNum(e);
+                }}
               />
+              <div>
+              <p className={estilos.errors}>{errors.phone}</p>
+              </div>
             </div>
           </FormGroup>
 

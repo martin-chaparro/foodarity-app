@@ -161,6 +161,7 @@ export default function Login() {
             cookiePolicy="single_host_origin"
             style={{ width: '100%' }}
           />
+            <p>  Olvidaste tu contraseña? <Link to="/enviarMail">Cambiala ahora</Link></p>
         </div>
       </div>
     </form>

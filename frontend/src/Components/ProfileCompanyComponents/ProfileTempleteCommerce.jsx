@@ -33,7 +33,6 @@ import MpTest from './MpTest';
 import styles from './ProfileTempleteCommerce.module.css';
 import Delete from './Delete';
 
-
 const drawerWidth = 240;
 
 const generalHeight = 58;
@@ -264,7 +263,8 @@ function ProfileTempleteCommerce(props) {
             />
           )}
           {display === 6 && <PostNewBatch />}
-          {display === 7 && ( company.mp_credential_id ? 'desvicular Mercado pago' : <MpTest /> ) }
+          {display === 7 &&
+            (company.mp_credential_id ? 'desvicular Mercado pago' : <MpTest />)}
 
           {display === 99 && <Delete company={company} />}
         </Box>

@@ -138,7 +138,11 @@ function Register() {
       });
     } else {
       // eslint-disable-next-line no-alert
-      alert('Complete el formulario');
+      Swal.fire({
+        icon: 'error',
+        title: 'Oppss!',
+        text: 'Por favor ingrese los datos correctamente',
+      });
     }
   };
 

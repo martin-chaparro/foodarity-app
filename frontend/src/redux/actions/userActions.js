@@ -16,3 +16,18 @@ export const updateUser = (data, form) => {
     });
   };
 };
+
+export const enviarMail = (input) => async (dispatch) => {
+  try {
+    const response = await axios.post(
+      'http://localhost:4000/api/v1/users/nodemailer',
+      input
+    );
+    return dispatch({
+      type: types.enviarMail,
+      payload: response.data,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
