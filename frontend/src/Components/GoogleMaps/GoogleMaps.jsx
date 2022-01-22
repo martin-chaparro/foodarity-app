@@ -33,8 +33,8 @@ function GoogleMaps() {
         >      
         {companies && companies.map(company => (<Marker
         key={company.id}
-        lat={company.address.city.lat}
-        lng={company.address.city.lon}
+        lat={company.address.lat}
+        lng={company.address.lng}
         company={company}
         style={{
             position: 'absolute',
