@@ -77,23 +77,19 @@ html {
   justify-content: flex-end;
   flex-direction: column;
   align-items: center;
-
 }
 .arrowDiv p {
   color: rgb(255, 255, 255);
   position: relative;
   top: 20px;
- user-select: none;
+  user-select: none;
 }
 .goDown {
-  color: white;    
-
+  color: white;
 }
 
 @media screen and (min-width: 576px) {
   .btn {
     display: none;
   }
-
-  
 }
