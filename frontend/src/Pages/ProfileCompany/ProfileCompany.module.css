@@ -3,6 +3,6 @@
 }
 
 .profilecompany {
-  background-color: white;
+  background-color: white !important;
   height: 100vh;
 }

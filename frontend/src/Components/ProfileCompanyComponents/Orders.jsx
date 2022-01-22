@@ -81,29 +81,63 @@ export default function Orders({ orders }) {
     };
   }
 
-  const rows = orders.map((order) =>
-    createData(
+  const rows = orders.map((order) => {
+    // const total = order.quantityByProduct.map((item) => (
+    //   <div>{item.quantity * item.product.price}</div>
+    // ));
+    // order.quantityByProduct.map((item) => <div>{item.product.price}</div>),
+
+    return createData(
       order.buyer.name,
       order.paymentMethod.method,
-      order.quantityByProduct[0].product.lote,
-      order.quantityByProduct[0].quantity,
-      order.quantityByProduct[0].product.price,
-      order.quantityByProduct[0].quantity *
-        order.quantityByProduct[0].product.price,
-
+      order.quantityByProduct.map((item) => <div>{item.product.lote}</div>),
+      order.quantityByProduct.map((item) => <div>{item.quantity}</div>),
+      order.quantityByProduct.map((item) => <div>{item.product.price}</div>),
+      order.quantityByProduct.map((item) => (
+        <div>{item.quantity * item.product.price}</div>
+      )),
       order.status,
       order.date
-    )
-  );
+    );
+  });
 
   // // eslint-disable-next-line prefer-const
+
   // let rows = [];
 
   // // eslint-disable-next-line no-plusplus
   // for (let i = 0; i < orders.length; i++) {
-  //   while (orders[i].quantityByProduct.length) {
-  //     let j = orders[i].quantityByProduct.length;
+  //   let j = orders[i].quantityByProduct.length;
 
+  //   while (j >= 1) {
+  //     rows.push(
+  //       createData(
+  //         orders[i].buyer.name,
+  //         orders[i].paymentMethod.method,
+  //         orders[i].quantityByProduct[j].product.lote,
+  //         orders[i].quantityByProduct[j].quantity,
+  //         orders[i].quantityByProduct[j].product.price,
+  //         orders[i].quantityByProduct[j].quantity *
+  //           orders[i].quantityByProduct[j].product.price,
+  //         orders[i].status,
+  //         orders[i].date
+  //       )
+  //     );
+
+  //     // eslint-disable-next-line no-plusplus
+  //     j--;
+  //   }
+  // }
+
+  // eslint-disable-next-line prefer-const
+  // let rows = [];
+
+  // console.log(rows);
+
+  // // eslint-disable-next-line no-plusplus
+  // for (let i = 0; i < orders.length; i++) {
+  //   // eslint-disable-next-line no-plusplus
+  //   for (let j = 0; j < orders[i].quantityByProduct[j]; j++) {
   //     rows.push(
   //       createData(
   //         orders[i].buyer.name,
@@ -118,9 +152,6 @@ export default function Orders({ orders }) {
   //         orders[i].date
   //       )
   //     );
-
-  //     // eslint-disable-next-line no-plusplus
-  //     j--;
   //   }
   // }
 
