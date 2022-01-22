@@ -3,7 +3,7 @@ import types from '../types/companiesTypes';
 const initialState = {
   comerce: [],
   ongs: [],
-  companies: []
+  companies: [],
 };
 
 export default (state = initialState, action) => {

@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Avatar from '@mui/material/Avatar';
@@ -25,6 +26,8 @@ export default function PostNewBatch() {
   // const [errors, setErrors] = useState({});
   const [photo, setPhoto] = useState({});
   // const [photoPrev, setPhotoPrev] = useState('');
+  // eslint-disable-next-line no-unused-vars
+  
 
   const [error, setError] = useState({});
 
@@ -46,29 +49,33 @@ export default function PostNewBatch() {
     dispatch(getCategories());
   }, []);
 
-  function validate(inputs) {
+  function validate(input) {
     const errors = {};
 
-    if (!inputs.lote) {
+    if (!input.lote) {
       errors.lote = 'Lote is required !';
     }
-    if (!inputs.description) {
+    if (!input.description) {
       errors.description = 'Descripcion is required ! ';
     }
-    if (!inputs.quantity) {
+    if (!input.quantity) {
       errors.quantity = 'Cantidad is required !';
     }
 
-    if (!inputs.price) {
+    if (!input.price) {
       errors.price = 'Price is required';
     }
 
-    if (!inputs.expirationDate) {
+    if (!input.expirationDate) {
       errors.exprirationDate = 'Date is required';
     }
 
-    if (!inputs.category) {
-      errors.category = 'Category is required!';
+    if (!input.category) {
+      errors.category = 'Category is required';
+    }
+
+    if (input.photo === {}) {
+      errors.photo = 'Photo is required';
     }
 
     return errors;
@@ -297,6 +304,7 @@ export default function PostNewBatch() {
                 // eslint-disable-next-line react/jsx-no-bind
                 handleOnChange={handleOnChange}
               />
+             
             </div>
           </div>
 
@@ -309,6 +317,7 @@ export default function PostNewBatch() {
                   // eslint-disable-next-line react/jsx-no-bind
                   handleOnChange={handleOnChange}
                 />
+               
               </div>
               <div className={styles.divprecio}>
                 <Fecha
@@ -317,6 +326,7 @@ export default function PostNewBatch() {
                   // eslint-disable-next-line react/jsx-no-bind
                   handleOnChange={handleOnChange}
                 />
+               
               </div>
             </div>
 
@@ -365,6 +375,7 @@ export default function PostNewBatch() {
               // eslint-disable-next-line react/jsx-no-bind
               handleOnChange={handleOnChange}
             />
+           
           </div>
           <Button
             // onClick={() => handleOnclick()}
