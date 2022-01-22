@@ -7,6 +7,10 @@
   grid-row-gap: 0;
 }
 
+.bodyParent {
+  background-color: white !important;
+}
+
 .image {
   height: 826px;
 }
@@ -19,13 +23,3 @@
     font-display: 100;
   }
 }
-
-/* 
-@media screen and (min-width: 576px) {
-  .texto {
-    display: none;
-  }
-  .texto2 {
-    font-display: 100;
-  }
-} */
