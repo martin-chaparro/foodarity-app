@@ -41,7 +41,7 @@ const createCompany = async (req, res) => {
       zipcode,
       cityId,
       stateId,
-      location
+      location,
     } = req.body;
 
     const errors = validationResult(req.body);
@@ -72,7 +72,7 @@ const createCompany = async (req, res) => {
       street,
       number,
       zipcode,
-      location
+      location,
     });
     // primero me formo el objeto de address con state y city  y despues le paso el objeto a la compañia creada
     await newAddress.setState(stateId);
@@ -98,7 +98,7 @@ const getCompanies = async (req, res) => {
           model: Address,
           as: 'address',
           include: [
-            { model: City, as: 'city', attributes: ['name', 'lat', 'lon'] },
+            { model: City, as: 'city', attributes: ['name','lat', 'lon'] },
             { model: State, as: 'state', attributes: ['name', 'lat', 'lon'] },
           ],
         },

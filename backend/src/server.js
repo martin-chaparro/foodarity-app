@@ -112,7 +112,7 @@ class Server {
     try {
       console.log('||--> Seed location database...: <--||');
       await State.bulkCreate(this.provincias);
-      await City.bulkCreate(this.municipios)
+      await City.bulkCreate(this.municipios);
     } catch (error) {
       console.log('||--> Seed locations not completed...: <--||');
     }
@@ -153,7 +153,7 @@ class Server {
           cityId,
           stateId,
           ownerId,
-          location
+          location,
         } = company;
         const newCompany = await Company.create({
           name,
@@ -170,7 +170,7 @@ class Server {
           street,
           number,
           zipcode,
-          location
+          location,
         });
         const findType = await CompanyType.findByPk(type);
 
@@ -184,8 +184,7 @@ class Server {
     } catch (error) {
       console.log('||--> Seed companies not completed...: <--||');
     }
-    
-    
+
     try {
       console.log('||--> Seed products(HARDCODE) database...: <--||');
       this.products.forEach(async (product) => {
@@ -198,7 +197,7 @@ class Server {
           publicationDate,
           expirationDate,
           category,
-         /*  publisher, 
+          /*  publisher, 
           company */
         } = product;
         const newProduct = await Product.create({
@@ -219,7 +218,6 @@ class Server {
     } catch (error) {
       console.log('||--> Seed products(HARDCODE) not completed...: <--||');
     }
-    
   }
 
   start() {

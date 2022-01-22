@@ -18,8 +18,8 @@ class Address extends Model {
         },
         location: {
           type: DataTypes.JSON,
-          allowNull: true
-        }
+          allowNull: true,
+        },
       },
       {
         sequelize,
