@@ -67,7 +67,7 @@ export default function PortalCompania({ company }) {
       <div className={styles.imagen}>
         <ImageListItem sx={{ width: 580, height: 500, marginTop: 2 }}>
           <img
-            className={styles.image}
+            className={styles.imagen}
             src={bolsa1}
             alt="phot"
             loading="lazy"

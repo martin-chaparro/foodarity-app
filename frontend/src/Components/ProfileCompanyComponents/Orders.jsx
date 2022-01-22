@@ -44,11 +44,6 @@ const columns = [
   },
 ];
 
-function createData(comprador , pago,lote, vendidos, total, precio, fecha ) {
-  // const density = population / size;
-  return { comprador, pago ,lote, vendidos, total, precio, fecha };
-}
-
 /* const rows = [
   createData('Lote pre-pizzas', 2, 120, '12/06/2022'),
   createData('Lote facturas', '3', 400, '12/06/2022'),
@@ -58,14 +53,35 @@ function createData(comprador , pago,lote, vendidos, total, precio, fecha ) {
   createData('Lote combo pasteleria/rotiseria', '6', 2547, '12/06/2022'),
 ]; */
 
-export default function Orders({orders}) {
+export default function Orders({ orders }) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  console.log(orders)
-  const rows = orders.map(order => 
-    
-    createData(order.buyer.name, order.paymentMethod.method, order.product.lote, order.quantity, order.product.totalQuantity, order.product.price, order.date),
-  )
+  console.log(orders.orders);
+
+  function createData(
+    comprador,
+    pago,
+    lote,
+    vendidos,
+
+    status,
+    fecha
+  ) {
+    // const density = population / size;
+    return { comprador, pago, lote, vendidos, status, fecha };
+  }
+
+  const rows = orders.orders.map((order) =>
+    createData(
+      order.buyer.name,
+      order.paymentMethod.method,
+      order.quantityByProduct[0].product_id,
+      order.quantityByProduct[0].quantity,
+
+      order.status,
+      order.date
+    )
+  );
 
   const handleChangePage = (newPage) => {
     setPage(newPage);
@@ -98,24 +114,25 @@ export default function Orders({orders}) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows && rows
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row) => {
-                return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                    {columns.map((column) => {
-                      const value = row[column.id];
-                      return (
-                        <TableCell key={column.id} align={column.align}>
-                          {column.format && typeof value === 'number'
-                            ? column.format(value)
-                            : value}
-                        </TableCell>
-                      );
-                    })}
-                  </TableRow>
-                );
-              })}
+            {rows &&
+              rows
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map((row) => {
+                  return (
+                    <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
+                      {columns.map((column) => {
+                        const value = row[column.id];
+                        return (
+                          <TableCell key={column.id} align={column.align}>
+                            {column.format && typeof value === 'number'
+                              ? column.format(value)
+                              : value}
+                          </TableCell>
+                        );
+                      })}
+                    </TableRow>
+                  );
+                })}
           </TableBody>
         </Table>
       </TableContainer>

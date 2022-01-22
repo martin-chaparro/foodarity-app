@@ -32,3 +32,19 @@
   background-color: #d68584;
   cursor: pointer;
 }
+
+@media screen and (max-width: 576px) {
+  .companydetailFont {
+    font-size: x-large;
+  }
+
+  .companydetailFont1 {
+    font-size: large;
+    margin: 10px 0px 5px;
+  }
+
+  .btn {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}

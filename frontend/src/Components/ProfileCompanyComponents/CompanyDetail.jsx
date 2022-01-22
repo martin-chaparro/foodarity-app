@@ -28,6 +28,7 @@ export default function CompanyDetail({ company }) {
           <div>
             <Typography
               variant="h4"
+              className={styles.companydetailFont}
               gutterBottom
               component="div"
               sx={{ color: '#7ED957', marginTop: 4 }}
@@ -37,13 +38,17 @@ export default function CompanyDetail({ company }) {
           </div>
           <div>
             <Typography
+              className={styles.companydetailFont1}
               variant="h6"
               gutterBottom
               component="div"
               sx={{ color: '#7ED957', marginTop: '1em' }}
             >
               Nombre comercio:
-              <span style={{ color: '#8865b9' }}>
+              <span
+                style={{ color: '#8865b9' }}
+                className={styles.companydetailFont1}
+              >
                 {' '}
                 {company.name || 'Usuario no registrado'}{' '}
               </span>
@@ -51,12 +56,16 @@ export default function CompanyDetail({ company }) {
           </div>
           <Typography
             variant="h6"
+            className={styles.companydetailFont1}
             gutterBottom
             component="div"
             sx={{ color: '#7ED957', marginTop: '1em' }}
           >
             Descripción:
-            <span style={{ color: '#8865b9' }}>
+            <span
+              style={{ color: '#8865b9' }}
+              className={styles.companydetailFont1}
+            >
               {' '}
               {company.description || 'Usuario no registrado'}{' '}
             </span>
@@ -67,13 +76,17 @@ export default function CompanyDetail({ company }) {
             <h3 className={styles.descripcion}>{company.description}</h3>
           </div> */}
           <Typography
+            className={styles.companydetailFont1}
             variant="h6"
             gutterBottom
             component="div"
             sx={{ color: '#7ED957', marginTop: '1em' }}
           >
             Email:
-            <span style={{ color: '#8865b9' }}>
+            <span
+              style={{ color: '#8865b9' }}
+              className={styles.companydetailFont1}
+            >
               {' '}
               {company.email || 'email no registrado'}{' '}
             </span>
@@ -83,13 +96,17 @@ export default function CompanyDetail({ company }) {
             <h3 className={styles.descripcion}>{company.email}</h3>
           </div> */}
           <Typography
+            className={styles.companydetailFont1}
             variant="h6"
             gutterBottom
             component="div"
             sx={{ color: '#7ED957', marginTop: '1em' }}
           >
             Url sitio Web:
-            <span style={{ color: '#8865b9' }}>
+            <span
+              style={{ color: '#8865b9' }}
+              className={styles.companydetailFont1}
+            >
               {' '}
               {company.website || 'Sitio no registrado'}{' '}
             </span>
@@ -102,40 +119,60 @@ export default function CompanyDetail({ company }) {
 
           <Typography
             variant="h6"
+            className={styles.companydetailFont1}
             gutterBottom
             component="div"
             sx={{ color: '#7ED957', marginTop: '1em' }}
           >
             Teléfono:
-            <span style={{ color: '#8865b9' }}>
+            <span
+              style={{ color: '#8865b9' }}
+              className={styles.companydetailFont1}
+            >
               {' '}
               {company.phone || 'Telefono no registrado'}{' '}
             </span>
           </Typography>
           <Typography
+            className={styles.companydetailFont1}
             variant="h6"
             gutterBottom
             component="div"
             sx={{ color: '#7ED957', marginTop: '1em' }}
           >
             Dirección:
-            <span style={{ color: '#8865b9' }}>
+            <span
+              style={{ color: '#8865b9' }}
+              className={styles.companydetailFont1}
+            >
               {' '}
               Calle: {company.address.street}{' '}
             </span>
-            <span style={{ color: '#8865b9' }}>
+            <span
+              style={{ color: '#8865b9' }}
+              className={styles.companydetailFont1}
+            >
               {' '}
               Altura: {company.address.number},{' '}
             </span>
-            <span style={{ color: '#8865b9' }}>
+            <span
+              style={{ color: '#8865b9' }}
+              className={styles.companydetailFont1}
+            >
               {' '}
               Ciudad: {company.address.city.name},{' '}
             </span>
-            <span style={{ color: '#8865b9' }}>
+            <span
+              style={{ color: '#8865b9' }}
+              className={styles.companydetailFont1}
+            >
               {' '}
               {company.address.state.name},{' '}
             </span>
-            <span style={{ color: '#8865b9' }}>
+            <span
+              style={{ color: '#8865b9' }}
+              className={styles.companydetailFont1}
+            >
               {' '}
               Código Postal: {company.address.zipcode}.{' '}
             </span>
@@ -143,6 +180,7 @@ export default function CompanyDetail({ company }) {
 
           <Typography
             variant="h6"
+            className={styles.companydetailFont1}
             gutterBottom
             component="div"
             sx={{ color: '#7ED957', marginTop: '1em' }}
@@ -152,6 +190,7 @@ export default function CompanyDetail({ company }) {
               style={{
                 color: company.status === 'Habilitada' ? '#8865b9' : 'red',
               }}
+              className={styles.companydetailFont1}
             >
               {company.status}
             </span>
