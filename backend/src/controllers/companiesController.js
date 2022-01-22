@@ -41,6 +41,7 @@ const createCompany = async (req, res) => {
       zipcode,
       cityId,
       stateId,
+      location,
     } = req.body;
 
     const errors = validationResult(req.body);
@@ -71,6 +72,7 @@ const createCompany = async (req, res) => {
       street,
       number,
       zipcode,
+      location,
     });
     // primero me formo el objeto de address con state y city  y despues le paso el objeto a la compañia creada
     await newAddress.setState(stateId);

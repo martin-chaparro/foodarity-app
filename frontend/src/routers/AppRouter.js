@@ -20,7 +20,7 @@ import MpRedirect from '../Components/MercadoPago/MpRedirect';
 import OrderPage from '../Pages/Order/OrderPage';
 import Success from '../Components/MercadoPago/Success';
 import Fail from '../Components/MercadoPago/Fail';
-import GoogleMaps from '../Components/GoogleMaps/GoogleMaps';
+import GoogleMapsTest from '../Components/GoogleMaps/GoogleMapsTest';
 // import ErrorPage from '../Pages/Error/ErrorPage';
 
 export function AppRouter() {
@@ -47,7 +47,7 @@ export function AppRouter() {
         <Route exact path="/mpredirect" element={<MpRedirect />} />
         <Route path="/mpsuccess" element={<Success />} />
         <Route path="/mpfail" element={<Fail />} />
-        <Route path='/googlemapstest' element={<GoogleMaps />} />
+        <Route path="/googlemapstest" element={<GoogleMapsTest />} />
         <Route
           path="/profileuser"
           element={

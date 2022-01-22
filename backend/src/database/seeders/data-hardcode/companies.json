@@ -18,7 +18,11 @@
 		"zipcode": "1640",
 		"cityId": "060357",
 		"stateId" : "6" ,
-    "ownerId": 1
+    "ownerId": 1,
+	"location": {
+		"lat":-37.9656760017008,
+		"lng:": -57.743144039076
+	}
 },
 {
 	"name": "Cafe Martinez",
@@ -39,7 +43,11 @@
 	"zipcode": "1640",
 	"cityId": "060280",
 	"stateId" : "6" ,
-    "ownerId": 2
+    "ownerId": 2,
+	"location": {
+		"lat":-38.2027130466249,
+		"lng:": -58.0722485722111
+	}
 },
 {
 	"name": "Al Natural",
@@ -60,7 +68,11 @@
 	"zipcode": "1640",
 	"cityId": "060455",
 	"stateId" : "6" ,
-    "ownerId": 3
+    "ownerId": 3,
+	"location": {
+		"lat":-36.0157017377305,
+		"lng:": -59.1769657671576
+	}
 },
 {
 	"name": "Piu Belo",
@@ -81,7 +93,11 @@
 	"zipcode": "1640",
 	"cityId": "060455",
 	"stateId" : "6" ,
-    "ownerId": 4
+    "ownerId": 4,
+	"location": {
+		"lat":-36.0157017377305,
+		"lng:": -59.1769657671576
+	}
 },
 {
 	"name": "Fundación Leon",
@@ -102,7 +118,11 @@
 	"zipcode": "1640",
 	"cityId": "60854",
 	"stateId" : "90" ,
-	"ownerId": 5
+	"ownerId": 5,
+	"location": {
+		"lat":-35.5265113228112,
+		"lng:": -60.2301576569223
+	}
 },
 {
 	"name": "SonRisas",
@@ -123,7 +143,11 @@
 	"zipcode": "1640",
 	"cityId": "60854",
 	"stateId" : "6" ,
-	"ownerId": 6
+	"ownerId": 6,
+	"location": {
+		"lat":-35.5265113228112,
+		"lng:": -60.2301576569223
+	}
 },
 {
 	"name": "Aldeas Infantiles SOS",
@@ -144,6 +168,10 @@
 	"zipcode": "1094",
 	"cityId": "60854",
 	"stateId" : "6" ,
-	"ownerId": 13
+	"ownerId": 13,
+	"location": {
+		"lat":-35.5265113228112,
+		"lng:": -60.2301576569223
+	}
 }
 ]

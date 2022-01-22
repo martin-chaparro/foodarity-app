@@ -316,6 +316,12 @@
 .favButton:focus-within {
   background-color: rgb(243, 67, 67);
 }
+.googleMap {
+  height: 150px;
+  width: 150px;
+  margin-left: 50px;
+  margin-top: 50px;
+}
 
 @media screen and (max-width: 576px) {
   .productcard {

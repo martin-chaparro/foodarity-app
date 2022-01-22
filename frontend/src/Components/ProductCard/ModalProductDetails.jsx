@@ -73,10 +73,9 @@ function ModalProductDetails({ product, open, handleClose, item }) {
             
             </Typography>
           </div>
-          <div>
-          <GoogleMapsCompany company={product.company}/>
+          <div className={styles.googleMap}>
+         < GoogleMapsCompany company={product.company}/>
           </div>
-      
           {currentPath !== '/cart' && (
             <div>
               <div className={styles.cartOptionsCont}>
