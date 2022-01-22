@@ -1,4 +1,3 @@
-// import React, { useEffect, useState } from 'react'; COMENTE ESTO PARA QUITAR HISTORIAL DE COMPRAS TEMPORAL
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@mui/material/AppBar';
@@ -30,10 +29,8 @@ function ProfileUserTemplate(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const id = localStorage.getItem('id');
-
   const [userData, setUserData] = React.useState({});
-  const [orders, setOrders] = React.useState({});
-
+  const [orders, setOrders] = React.useState([]);
   // eslint-disable-next-line no-unused-vars
   const [display, setDisplay] = React.useState(0);
 
@@ -49,12 +46,11 @@ function ProfileUserTemplate(props) {
     apiWithToken
       .get(`/users/${id}`)
       .then((response) => setUserData(response.data));
-      apiWithToken
+    apiWithToken
       .get(`/orders/user/`)
       .then((response) => setOrders(response.data));
   }, []);
   console.log(userData);
-
 
   const drawer = (
     <div>
@@ -66,13 +62,13 @@ function ProfileUserTemplate(props) {
             text: 'Bienvenid@',
           },
           {
-            text: 'Bienvenid@',
+            text: 'Portal de Usuario',
           },
           {
             text: 'Detalle de Cuenta',
           },
           {
-            text: 'Mis Compras',
+            text: 'Historial de Compras',
           },
           {
             text: 'Eliminar Cuenta',
@@ -186,8 +182,8 @@ function ProfileUserTemplate(props) {
           {display === 0 && <Bienvenida detail={userData} />}
           {display === 1 && <Bienvenida detail={userData} />}
           {display === 2 && <UserDetail detail={userData} />}
-          {display === 3 && <Compras orders={orders}/>}
-          {display === 4 && <EliminarUser detail={userData}/>}
+          {display === 3 && <Compras orders={orders} />}
+          {display === 4 && <EliminarUser detail={userData} />}
         </Box>
       </Box>
     </div>

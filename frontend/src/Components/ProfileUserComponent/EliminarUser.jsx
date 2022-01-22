@@ -70,7 +70,7 @@ export default function EliminarUser({ detail }) {
             <Typography
               variant="body"
               gutterBottom
-              sx={{ align: 'justify', color: '#8865b9' }}
+              sx={{ textAlign: 'justify', color: '#8865b9' }}
             >
               Si te preocupa los cambios de nuestras Condiciones de Servicio,
               puedes ponerte en contacto con alguno de nuestros asesores en
