@@ -10,7 +10,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import FavoriteIcon from '@mui/icons-material/Favorite';
+// import FavoriteIcon from '@mui/icons-material/Favorite';
 import LogoutIcon from '@mui/icons-material/Logout';
 import HelpIcon from '@mui/icons-material/Help';
 import LoginIcon from '@mui/icons-material/Login';
@@ -28,7 +28,7 @@ import avatarDefault from '../../assets/avatar_default.png';
 export default function Navbar() {
   const dispatch = useDispatch();
   const { id } = useSelector((state) => state.auth);
-  const {cart} = useSelector((state) => state.cart)
+  const { cart } = useSelector((state) => state.cart);
   const location = useLocation();
 
   const [currentPath, setCurrentPath] = React.useState('');
@@ -110,7 +110,16 @@ export default function Navbar() {
               aria-haspopup="true"
               color="secondary"
             >
-              <Avatar />
+              <Avatar
+                photo={
+                  // eslint-disable-next-line no-nested-ternary
+                  user.photo
+                    ? user.photo.url
+                    : user.socialPhoto
+                    ? user.socialPhoto
+                    : avatarDefault
+                }
+              />
             </IconButton>
             {user.name ? user.name : 'Mi Cuenta'}
           </Link>
@@ -146,17 +155,16 @@ export default function Navbar() {
               textDecoration="none"
               onClick={handleMenuClose}
             >
-             
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="vista-mobile"
-              aria-haspopup="true"
-              color="secondary"
-            >
-              <StoreIcon />
-            </IconButton>
-            Añadir comercio
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="vista-mobile"
+                aria-haspopup="true"
+                color="secondary"
+              >
+                <StoreIcon />
+              </IconButton>
+              Añadir comercio
             </Link>
           </MenuItem>
         )}
@@ -169,21 +177,20 @@ export default function Navbar() {
               textDecoration="none"
               onClick={handleMenuClose}
             >
-           
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="vista-mobile"
-              aria-haspopup="true"
-              color="secondary"
-            >
-              <StoreIcon />
-            </IconButton>
-            Añadir ONG
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="vista-mobile"
+                aria-haspopup="true"
+                color="secondary"
+              >
+                <StoreIcon />
+              </IconButton>
+              Añadir ONG
             </Link>
           </MenuItem>
         )}
-      {id && currentPath === '/home' && (
+      {/* {id && currentPath === '/home' && (
         <MenuItem>
           <IconButton
             size="large"
@@ -196,23 +203,25 @@ export default function Navbar() {
           </IconButton>
           <p>Favoritos</p>
         </MenuItem>
-      )}
-      {id && currentPath !== '/profilecompany' && currentPath !== '/profileuser' && (
-        <MenuItem>
-        <Link to='/cart'>
-          <IconButton
-            size="large"
-            aria-label="show 17 new notifications"
-            color="secondary"
-          >
-            <Badge badgeContent={cart.length} color="primary">
-                <ShoppingCartIcon />
+      )} */}
+      {id &&
+        currentPath !== '/profilecompany' &&
+        currentPath !== '/profileuser' && (
+          <MenuItem>
+            <Link to="/cart">
+              <IconButton
+                size="large"
+                aria-label="show 17 new notifications"
+                color="secondary"
+              >
+                <Badge badgeContent={cart.length} color="primary">
+                  <ShoppingCartIcon />
                 </Badge>
-          </IconButton>
-          Mi Carrito
-          </Link>
-        </MenuItem>
-      )}
+              </IconButton>
+              Mi Carrito
+            </Link>
+          </MenuItem>
+        )}
       {!id && (
         <MenuItem>
           <Link to="/register" textDecoration="none" onClick={handleMenuClose}>
@@ -366,19 +375,21 @@ export default function Navbar() {
               
               </IconButton>
             )} */}
-            {id && currentPath !== '/profilecompany' && currentPath !== '/profileuser'  && (
-              <IconButton
-                size="large"
-                aria-label="cart"
-                color="inherit"
-                aria-controls={cartId}
-                onClick={handleCartMenuOpen}
-              >
-                <Badge badgeContent={cart.length} color="secondary">
-                <ShoppingCartIcon />
-                </Badge>
-              </IconButton>
-            )}
+            {id &&
+              currentPath !== '/profilecompany' &&
+              currentPath !== '/profileuser' && (
+                <IconButton
+                  size="large"
+                  aria-label="cart"
+                  color="inherit"
+                  aria-controls={cartId}
+                  onClick={handleCartMenuOpen}
+                >
+                  <Badge badgeContent={cart.length} color="secondary">
+                    <ShoppingCartIcon />
+                  </Badge>
+                </IconButton>
+              )}
             <IconButton
               size="large"
               edge="end"
@@ -391,7 +402,11 @@ export default function Navbar() {
               <Avatar
                 photo={
                   // eslint-disable-next-line no-nested-ternary
-                   user.photo ? user.photo.url : (user.socialPhoto ? user.socialPhoto : avatarDefault)  
+                  user.photo
+                    ? user.photo.url
+                    : user.socialPhoto
+                    ? user.socialPhoto
+                    : avatarDefault
                 }
               />
             </IconButton>

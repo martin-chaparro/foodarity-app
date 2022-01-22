@@ -34,12 +34,13 @@ class Server {
     // Datos seeders
     this.roles = require('./database/seeders/data/roles');
     this.users = require('./database/seeders/data/users');
-    this.provincias = require('./database/seeders/data/provincias.json');
-    this.municipios = require('./database/seeders/data/municipios.json');
-    this.products = require('./database/seeders/data-hardcode/products.json');
-    this.categories = require('./database/seeders/data/categories.json');
+    this.provincias = require('./database/seeders/data/states');
+    this.municipios = require('./database/seeders/data/cities');
+    this.companyTypes = require('./database/seeders/data/companyTypes');
+    this.categories = require('./database/seeders/data/categories');
+    this.paymentMethods = require('./database/seeders/data/paymentMethods');
     this.companies = require('./database/seeders/data-hardcode/companies.json');
-    this.paymentMethods = require('./database/seeders/data/paymentMethods.json');
+    this.products = require('./database/seeders/data-hardcode/products.json');
   }
 
   // express instance
@@ -110,25 +111,28 @@ class Server {
     }
     try {
       console.log('||--> Seed location database...: <--||');
-      this.provincias.provincias.forEach(async (prov) => {
-        await State.create({
-          id: prov.id,
-          name: prov.nombre,
-          lat: prov.centroide.lat,
-          lon: prov.centroide.lon,
-        });
-      });
-      this.municipios.municipios.forEach(async (muni) => {
-        await City.create({
-          id: muni.id,
-          name: muni.nombre,
-          lat: muni.centroide.lat,
-          lon: muni.centroide.lon,
-          state_id: muni.provincia.id,
-        });
-      });
+      await State.bulkCreate(this.provincias);
+      await City.bulkCreate(this.municipios)
     } catch (error) {
       console.log('||--> Seed locations not completed...: <--||');
+    }
+    try {
+      console.log('||--> Seed Company types database...: <--||');
+      await CompanyType.bulkCreate(this.companyTypes);
+    } catch (error) {
+      console.log('||--> Seed Company types not completed...: <--||');
+    }
+    try {
+      console.log('||--> Seed categories database...: <--||');
+      await Category.bulkCreate(this.categories);
+    } catch (error) {
+      console.log('||--> Seed categories not completed...: <--||');
+    }
+    try {
+      console.log('||--> Seed payment methods database...: <--||');
+      await PaymentMethod.bulkCreate(this.paymentMethods);
+    } catch (error) {
+      console.log('||--> Seed payment methods not completed...: <--||');
     }
     try {
       console.log('||--> Seed companies database...: <--||');
@@ -178,18 +182,8 @@ class Server {
     } catch (error) {
       console.log('||--> Seed companies not completed...: <--||');
     }
-    try {
-      console.log('||--> Seed types database...: <--||');
-      await CompanyType.bulkCreate([{ type: 'Comercio' }, { type: 'ONG' }]);
-    } catch (error) {
-      console.log('||--> Seed types not completed...: <--||');
-    }
-    try {
-      console.log('||--> Seed categories database...: <--||');
-      await Category.bulkCreate(this.categories);
-    } catch (error) {
-      console.log('||--> Seed categories not completed...: <--||');
-    }
+    
+    
     try {
       console.log('||--> Seed products(HARDCODE) database...: <--||');
       this.products.forEach(async (product) => {
@@ -221,12 +215,7 @@ class Server {
     } catch (error) {
       console.log('||--> Seed products(HARDCODE) not completed...: <--||');
     }
-    try {
-      console.log('||--> Seed payment methods database...: <--||');
-      await PaymentMethod.bulkCreate(this.paymentMethods);
-    } catch (error) {
-      console.log('||--> Seed payment methods not completed...: <--||');
-    }
+    
   }
 
   start() {

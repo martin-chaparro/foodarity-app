@@ -12,7 +12,6 @@ import { useDispatch } from 'react-redux';
 import Swal from 'sweetalert2';
 import estilos from './RegisterUserFormEditable.module.css';
 import { updateUser } from '../../redux/actions/userActions';
-// import { apiWithToken } from '../../services/api';
 
 const Input = styled('input')({
   display: 'none',
@@ -31,9 +30,6 @@ export default function RegisterUserFormEditable({ detail }) {
   });
   const [preview, setPreview] = React.useState(null);
 
- /*  const form = new FormData();
-  form.append('userId', localStorage.getItem('id'));
- */
   const handleChange = (e) => {
     setData({
       ...data,
@@ -41,24 +37,15 @@ export default function RegisterUserFormEditable({ detail }) {
     });
   };
 
- /*  const handleImageSubmit = async () => {
-     try {
-       await apiWithToken.patch(`/users/upload`, photo);
-     } catch (err) {
-       console.log(err);
-     }
-   }; */
-
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(updateUser(data, photo));
-   // if (photo) handleImageSubmit();
     Swal.fire({
       icon: 'success',
       title: 'Actualizado',
       text: 'Usuario actualizado correctamente.',
     }).then(() => {
-     //  window.location.reload(false);
+      window.location.reload(false);
     });
   };
 
@@ -68,7 +55,6 @@ export default function RegisterUserFormEditable({ detail }) {
 
   const handleClose = () => {
     setOpen(false);
-    // window.location.reload(false);
   };
 
   const imgHandler = (e) => {
@@ -80,7 +66,7 @@ export default function RegisterUserFormEditable({ detail }) {
     };
     reader.readAsDataURL(e.target.files[0]);
     const formPhoto = new FormData();
-       formPhoto.append('file', e.target.files[0]);
+    formPhoto.append('file', e.target.files[0]);
     setPhoto(formPhoto);
   };
 
@@ -131,7 +117,7 @@ export default function RegisterUserFormEditable({ detail }) {
                 <div>
                   <img
                     className={estilos.imgLogo}
-                    src={preview || imageNull}
+                    src={detail.photo ? detail.photo.url : preview || imageNull}
                     alt="img"
                   />
                 </div>

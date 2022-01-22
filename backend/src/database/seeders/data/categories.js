@@ -1,4 +1,4 @@
-[
+module.exports = [
   { "name": "Almacén" },
   { "name": "Restorant/Rotiseria" },
   { "name": "Frutas y verduras" },

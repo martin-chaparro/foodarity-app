@@ -196,7 +196,7 @@ function OrderPage() {
           />
           <span>Acordar con el vendedor</span>
         </label>
-        <label className={styles.mp}>
+        {cart && cart[0].product.company.mp_credential_id && <label className={styles.mp}>
           <input
             type="radio"
             checked={select && select[2]}
@@ -205,7 +205,7 @@ function OrderPage() {
             onClick={handleSelect}
           />
           <span>Mercado Pago</span>
-        </label>
+        </label>}
       </div>
       <div className={styles.separator}>
         separator

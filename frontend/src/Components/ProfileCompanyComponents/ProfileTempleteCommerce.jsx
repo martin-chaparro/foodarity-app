@@ -29,7 +29,7 @@ import PortalCompania from './PortalCompania';
 import Orders from './Orders';
 import Usuarios from './Usuarios';
 import Donations from './Donations';
-import MpTest from '../MercadoPago/MpTest';
+import MpTest from './MpTest';
 import styles from './ProfileTempleteCommerce.module.css';
 import Delete from './Delete';
 
@@ -264,7 +264,7 @@ function ProfileTempleteCommerce(props) {
             />
           )}
           {display === 6 && <PostNewBatch />}
-          {display === 7 && ( company.mp_credential_id ? 'desvicular Mercado pago' :<MpTest /> ) }
+          {display === 7 && ( company.mp_credential_id ? 'desvicular Mercado pago' : <MpTest /> ) }
 
           {display === 99 && <Delete company={company} />}
         </Box>

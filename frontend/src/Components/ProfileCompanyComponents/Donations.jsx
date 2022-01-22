@@ -63,14 +63,28 @@ export default function Donations({ donations, typeId }) {
       className={styles.content}
       sx={{ width: '100%', overflow: 'hidden' }}
     >
-      <Typography
-        variant="h4"
-        gutterBottom
-        component="div"
-        sx={{ color: '#7ED957', marginBottom: 3 }}
-      >
-        Donaciones Realizadas
-      </Typography>
+      {
+        typeId === 1 ? ( 
+          <Typography
+          variant="h4"
+          gutterBottom
+          component="div"
+          sx={{ color: '#7ED957', marginBottom: 3 }}
+        >
+          Donaciones Realizadas
+        </Typography>
+        ) : (
+          <Typography
+          variant="h4"
+          gutterBottom
+          component="div"
+          sx={{ color: '#7ED957', marginBottom: 3 }}
+        >
+          Donaciones Obtenidas
+        </Typography>
+        )
+      }
+      
 
       <TableContainer sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
