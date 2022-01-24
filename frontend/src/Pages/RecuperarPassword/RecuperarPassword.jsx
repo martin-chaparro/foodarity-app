@@ -1,3 +1,4 @@
+/* eslint-disable react/button-has-type */
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,8 +12,6 @@ export default function RecuperarPassword () {
         password: '',
         passwordDos: ''
     })
-
-
 
     const handleOnChange = (e) => {
         e.preventDefault();
@@ -40,14 +39,21 @@ export default function RecuperarPassword () {
                 <h4>Contraseña</h4>
                 <input type="text"
                        name="password"
-                       value={input.password} />
+                       value={input.password}
+                       onChange={(e) => {
+                        handleOnChange(e);
+                      }} />
             </div>
             <div>
                 <h4>Vuelva a introducir su contraseña</h4>
                 <input type="text"
                        name="passwordDos"
-                       value={input.passwordDos} />
+                       value={input.passwordDos}
+                       onChange={(e) => {
+                        handleOnChange(e);
+                      }} />
             </div>
+            <button>Enviar</button>
             </form>
         </div>
     )
