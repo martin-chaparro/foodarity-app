@@ -100,6 +100,12 @@ export default function RegisterFormCompany({ type }) {
   // GOOGLE MAPS
 
   const [checked, setChecked] = React.useState(true);
+  const [isAllow, setIsAllow] = React.useState(false);
+
+  useEffect(() => {
+    if (!checked && !Object.keys(errors).length) setIsAllow(true);
+    else setIsAllow(false);
+  }, [checked, errors]);
 
   const handleCheck = (e) => {
     e.preventDefault();
@@ -597,7 +603,7 @@ export default function RegisterFormCompany({ type }) {
           {/* BOTON DE ENVIAR SOLICITUD: Dicho botón se encuentra 
           dentro del componente Alert Ong y para conectar el submit 
           con el backend debe configurarse en ese mismo componente AlertOng */}
-          <AlertOng display={checked} />
+          <AlertOng display={!isAllow} />
         </div>
       </form>
     </div>

@@ -13,7 +13,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 // import FavoriteIcon from '@mui/icons-material/Favorite';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import LogoutIcon from '@mui/icons-material/Logout';
-import HelpIcon from '@mui/icons-material/Help';
+// import HelpIcon from '@mui/icons-material/Help';
 import LoginIcon from '@mui/icons-material/Login';
 import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
 import StoreIcon from '@mui/icons-material/Store';
@@ -23,6 +23,8 @@ import { apiWithToken } from '../../services/api';
 import { startLogout } from '../../redux/actions/authActions';
 import CartMenu from './CartMenu';
 // import Drawer from '../Drawer/Drawer';
+import Ayuda from '../ProfileUserComponent/Ayuda';
+import estilos from './Navbar.module.css';
 
 import avatarDefault from '../../assets/avatar_default.png';
 
@@ -50,7 +52,7 @@ export default function Navbar() {
       apiWithToken.get(`/users/${id}`).then((res) => {
         setUser(res.data);
       });
-  }, [id, user.photo]);
+  }, [id]);
 
   const handleProfileMenuOpen = (event) => {
     if (isMenuOpen) {
@@ -191,7 +193,7 @@ export default function Navbar() {
             </Link>
           </MenuItem>
         )}
-      
+
       {id &&
         currentPath !== '/profilecompany' &&
         currentPath !== '/profileuser' && (
@@ -253,18 +255,11 @@ export default function Navbar() {
           </Link>
         </MenuItem>
       )}
-      <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="account of current user"
-          aria-controls="web-vista-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <HelpIcon color="secondary" />
-        </IconButton>
-        <p>Ayuda</p>
-      </MenuItem>
+      <div className={estilos.ayuda}>
+        <MenuItem>
+          <Ayuda />
+        </MenuItem>
+      </div>
     </span>
   );
 
@@ -351,20 +346,25 @@ export default function Navbar() {
           </Link>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-          {id && currentPath === '/home' && (
-            <Link to='/googlemaps'style={{color:"white", position:'relative', top: '1vh'}}>
-         <IconButton
-            size="large"
-            aria-label="show 4 new mails"
-            color="inherit"
-            textDecoration="none"
-          >
-            <Badge>
-              <LocationOnIcon fontSize="medium" color="inherit"  />
-            </Badge>
-          </IconButton>
-            </Link>
-      )}
+            {id && currentPath === '/home' && (
+              <Link
+                to="/googlemaps"
+                style={{ color: 'white', position: 'relative', top: '1vh' }}
+              >
+                <IconButton
+                  size="large"
+                  aria-label="show 4 new mails"
+                  color="inherit"
+                  textDecoration="none"
+                >
+                  <Badge>
+                    <LocationOnIcon fontSize="medium" color="inherit" />
+                  </Badge>
+                </IconButton>
+              </Link>
+            )}
+
+            {/* aqui */}
             {id &&
               currentPath !== '/profilecompany' &&
               currentPath !== '/profileuser' && (
