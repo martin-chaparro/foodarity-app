@@ -101,9 +101,14 @@ export default function RegisterFormCompany({ type }) {
   const [isAllow, setIsAllow] = React.useState(false);
 
   useEffect(() => {
-    if (!checked && !Object.keys(errors).length) setIsAllow(true);
+    if (
+      !checked &&
+      !Object.keys(errors).length &&
+      Object.values(input).filter((e, i) => e === '' && i !== 1).length === 7
+    )
+      setIsAllow(true);
     else setIsAllow(false);
-  }, [checked, errors]);
+  }, [checked, errors, input]);
 
   const handleCheck = (e) => {
     e.preventDefault();
@@ -294,8 +299,8 @@ export default function RegisterFormCompany({ type }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const finalAddress = {...formValues, location}
-      console.log(finalAddress)
+    const finalAddress = { ...formValues, location };
+    console.log(finalAddress);
     if (
       !errors.name &&
       !errors.website &&
@@ -307,7 +312,6 @@ export default function RegisterFormCompany({ type }) {
       !errors.zipcode
       // eslint-disable-next-line no-empty
     ) {
-      
       dispatch(registerComerce(input, { ...formValues, location }));
       Swal.fire({
         icon: 'success',
