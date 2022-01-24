@@ -9,6 +9,7 @@ import styles from './CompanyVisualizer.module.css';
 import Banner from '../../assets/Banner.jpg';
 import { api, apiWithToken } from '../../services/api';
 import OngInfo from '../../Components/ONGSeccion/OngPageInfo/OngInfo';
+import avatarDefault from '../../assets/avatar_default.png';
 
 export default function CompanyVisualizer() {
   const [company, setcompany] = useState();
@@ -41,9 +42,10 @@ export default function CompanyVisualizer() {
       <div className={styles.GeneralProfileImgs}>
         <div className={styles.BannerDiv}>
           <div className={styles.LogoDiv}>
+
             <img
               className={styles.logoImg}
-              src={company?.logo.url}
+              src={company ? company.log?.url :  avatarDefault }
               alt="CompanyLogo"
             />
           </div>

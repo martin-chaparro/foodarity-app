@@ -30,7 +30,7 @@ function OrderPage() {
   const [select, setSelect] = React.useState();
   const [allowSubmit, setAllowSubmit] = React.useState(false)
 
-
+console.log("CONSOLE LOOOOG", initialCart)
   useEffect(() => {
     if (!params.id) {
       navigate('/home');

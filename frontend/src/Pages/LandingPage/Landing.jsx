@@ -21,6 +21,7 @@ import logo1 from '../../assets/WEB-Logo-Combinado.png';
 import useWindowPosition from '../About/hook/useWindowPosition';
 
 export default function Landing() {
+  window.scroll(0, 0);
   const { id } = useSelector((state) => state.auth);
 
   const { ref, inView } = useInView({
