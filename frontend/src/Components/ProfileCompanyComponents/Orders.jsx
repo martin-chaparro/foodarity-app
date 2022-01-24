@@ -23,14 +23,14 @@ const columns = [
 
   {
     id: 'total',
-    label: 'PRECIO',
+    label: 'TOTAL',
     minWidth: 170,
     align: 'right',
     format: (value) => value.toLocaleString('en-US'),
   },
   {
     id: 'precio',
-    label: 'TOTAL',
+    label: 'PRECIO UNITARIO',
     minWidth: 170,
     align: 'right',
     format: (value) => value.toLocaleString('en-US'),
@@ -81,11 +81,6 @@ export default function Orders({ orders }) {
   }
 
   const rows = orders.map((order) => {
-    // const total = order.quantityByProduct.map((item) => (
-    //   <div>{item.quantity * item.product.price}</div>
-    // ));
-    // order.quantityByProduct.map((item) => <div>{item.product.price}</div>),
-
     return createData(
       order.buyer.name,
       order.paymentMethod.method,
@@ -99,60 +94,6 @@ export default function Orders({ orders }) {
       order.date
     );
   });
-
-  // // eslint-disable-next-line prefer-const
-
-  // let rows = [];
-
-  // // eslint-disable-next-line no-plusplus
-  // for (let i = 0; i < orders.length; i++) {
-  //   let j = orders[i].quantityByProduct.length;
-
-  //   while (j >= 1) {
-  //     rows.push(
-  //       createData(
-  //         orders[i].buyer.name,
-  //         orders[i].paymentMethod.method,
-  //         orders[i].quantityByProduct[j].product.lote,
-  //         orders[i].quantityByProduct[j].quantity,
-  //         orders[i].quantityByProduct[j].product.price,
-  //         orders[i].quantityByProduct[j].quantity *
-  //           orders[i].quantityByProduct[j].product.price,
-  //         orders[i].status,
-  //         orders[i].date
-  //       )
-  //     );
-
-  //     // eslint-disable-next-line no-plusplus
-  //     j--;
-  //   }
-  // }
-
-  // eslint-disable-next-line prefer-const
-  // let rows = [];
-
-  // console.log(rows);
-
-  // // eslint-disable-next-line no-plusplus
-  // for (let i = 0; i < orders.length; i++) {
-  //   // eslint-disable-next-line no-plusplus
-  //   for (let j = 0; j < orders[i].quantityByProduct[j]; j++) {
-  //     rows.push(
-  //       createData(
-  //         orders[i].buyer.name,
-  //         orders[i].paymentMethod.method,
-  //         orders[i].quantityByProduct[j].product.lote,
-  //         orders[i].quantityByProduct[j].quantity,
-  //         orders[i].quantityByProduct[j].product.price,
-  //         orders[i].quantityByProduct[j].quantity *
-  //           orders[i].quantityByProduct[j].product.price,
-
-  //         orders[i].status,
-  //         orders[i].date
-  //       )
-  //     );
-  //   }
-  // }
 
   const handleChangePage = (newPage) => {
     setPage(newPage);
@@ -175,7 +116,8 @@ export default function Orders({ orders }) {
                   align={column.align}
                   style={{
                     minWidth: column.minWidth,
-                    backgroundColor: 'lightgray',
+                    backgroundColor: '#7ED957',
+                    color: '#3E2463',
                     fontWeight: '700',
                   }}
                 >
@@ -194,7 +136,15 @@ export default function Orders({ orders }) {
                       {columns.map((column) => {
                         const value = row[column.id];
                         return (
-                          <TableCell key={column.id} align={column.align}>
+                          <TableCell
+                            key={column.id}
+                            style={{
+                              backgroundColor: 'white',
+                              color: '#3E2463',
+                              fontWeight: '700',
+                            }}
+                            align={column.align}
+                          >
                             {column.format && typeof value === 'number'
                               ? column.format(value)
                               : value}
