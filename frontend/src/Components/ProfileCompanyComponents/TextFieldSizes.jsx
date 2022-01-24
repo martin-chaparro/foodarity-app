@@ -102,6 +102,7 @@ export function Fecha({ handleOnChange, input }) {
         label="Fecha Expiracion"
         id="filled-size-normal"
         variant="filled"
+        inputProps={{ min: new Date().toLocaleDateString('en-ca') }}
         type="date"
         name="expirationDate"
         value={input.expirationDate}

@@ -22,12 +22,10 @@ import RecuperarPassword from '../Pages/RecuperarPassword/RecuperarPassword';
 import OrderPage from '../Pages/Order/OrderPage';
 import Success from '../Components/MercadoPago/Success';
 import Fail from '../Components/MercadoPago/Fail';
-<<<<<<< HEAD
+// eslint-disable-next-line no-unused-vars
 import GoogleMapsTest from '../Components/GoogleMaps/GoogleMapsTest';
 import ConfirmarEmail from '../Components/ConfirmarEmail/ConfirmarEmail';
-=======
 import GoogleMaps from '../Components/GoogleMaps/GoogleMaps';
->>>>>>> 647007343c6f556f896aef62f1796f244612a29f
 // import ErrorPage from '../Pages/Error/ErrorPage';
 
 export function AppRouter() {

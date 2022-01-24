@@ -41,7 +41,7 @@ export default function RegisterFormCommerce() {
     street: '',
     number: '',
     zipcode: '',
-    type: 1
+    type: 1,
   });
 
   const [checked, setChecked] = React.useState(true);
@@ -225,8 +225,6 @@ export default function RegisterFormCommerce() {
     }
   };
 
-
-
   const handleOnChange = (e) => {
     e.preventDefault();
     setInput({
@@ -244,12 +242,12 @@ export default function RegisterFormCommerce() {
       !errors.areaCode &&
       !errors.phone &&
       !errors.street &&
-      !errors.number  &&
+      !errors.number &&
       !errors.zipcode
       // eslint-disable-next-line no-empty
     ) {
-      dispatch(registerComerce(input,formValues));
-      window.location.href = '/home'
+      dispatch(registerComerce(input, formValues));
+      window.location.href = '/home';
     } else {
       // eslint-disable-next-line no-alert
       Swal.fire({
@@ -505,21 +503,27 @@ export default function RegisterFormCommerce() {
 
           <FormControlLabel
             control={<Checkbox color="secondary" />}
-            label={<span><span>ACEPTAR </span><span><Terminos /></span></span>}
+            label={
+              <span>
+                <span>ACEPTAR </span>
+                <span>
+                  <Terminos />
+                </span>
+              </span>
+            }
             sx={{
               color: 'secondary',
               fontStyle: 'bold',
             }}
             onChange={(e) => handleCheck(e)}
           />
-          
         </div>
 
         <div className={styles.divButton}>
           {/* BOTON DE ENVIAR SOLICITUD: Dicho botón se encuentra 
           dentro del componente Alert Ong y para conectar el submit 
           con el backend debe configurarse en ese mismo componente AlertOng */}
-          <AlertOng display={checked}/>
+          <AlertOng display={checked} />
         </div>
       </form>
     </div>

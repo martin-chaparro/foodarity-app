@@ -301,16 +301,32 @@ export default function RegisterFormCompany({ type }) {
       !errors.zipcode
       // eslint-disable-next-line no-empty
     ) {
-      dispatch(registerComerce(input, { ...formValues, location }));
-      Swal.fire({
-        icon: 'success',
-        title: 'Bien',
-        text: 'El Comercio fue registrado Correctamente',
-      });
-      window.location.href = '/home';
+      dispatch(registerComerce(input, { ...formValues, location })).then(
+        (res) => {
+          if (res.status === 200) {
+            Swal.fire({
+              icon: 'success',
+              title: 'Bien',
+              text: 'El Comercio fue registrado Correctamente',
+            });
+            window.location.href = '/home';
+          } else if (res.status !== 200) {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oppss!',
+              text: 'Disculpe en estos momentos no es posible resgistrarse favor intente de nuevo mas tarde o comuniquese con nuestro centro de atención.',
+            });
+          }
+        }
+      );
     } else {
       // eslint-disable-next-line no-alert
-      alert('Complete el formulario');
+
+      Swal.fire({
+        icon: 'error',
+        title: 'Oppss!',
+        text: 'Favor complete todos los campos !',
+      });
     }
   };
   return (
