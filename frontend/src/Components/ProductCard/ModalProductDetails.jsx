@@ -124,10 +124,12 @@ function ModalProductDetails({ product, open, handleClose, item }) {
             </Typography>
           </div>
           <div className={styles.expDate}>
-            <h3>El lote expira: {Date}</h3>
+            <p>El lote expira:</p>
+            <p className={styles.date}> {Date}</p>
           </div>
           <div className={styles.category}>
-            <h3>Categoria: {product.category.name}</h3>
+            <p>Categoria: </p>
+            <p className={styles.categoryName}>{product.category.name}</p>
           </div>
           <div className={styles.priceCont}>
             <label>
