@@ -83,23 +83,32 @@ export default function RegisterFormCompany({ type }) {
               if (resp.data.status === 'OK') {
                 const newLoc = resp.data.results[0].geometry.location;
                 setDefaultLocation(newLoc);
+                setLocation(newLoc);
               }
             });
         } else {
           setDefaultLocation(loc);
+          setLocation(loc);
         }
         setShowMap(true);
       });
     }
   }, [formValues.cityId]);
 
-  useEffect(() => {
-    console.log(location);
-  }, [location]);
-
   // GOOGLE MAPS
 
   const [checked, setChecked] = React.useState(true);
+  const [isAllow, setIsAllow] = React.useState(false);
+
+  useEffect(() => {
+    if (
+      !checked &&
+      !Object.keys(errors).length &&
+      Object.values(input).filter((e, i) => e === '' && i !== 1).length === 7
+    )
+      setIsAllow(true);
+    else setIsAllow(false);
+  }, [checked, errors, input]);
 
   const handleCheck = (e) => {
     e.preventDefault();
@@ -290,6 +299,8 @@ export default function RegisterFormCompany({ type }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const finalAddress = { ...formValues, location };
+    console.log(finalAddress);
     if (
       !errors.name &&
       !errors.website &&
@@ -307,7 +318,7 @@ export default function RegisterFormCompany({ type }) {
         title: 'Bien',
         text: 'El Comercio fue registrado Correctamente',
       });
-      window.location.href = '/home';
+/*       window.location.href = '/home'; */
     } else {
       // eslint-disable-next-line no-alert
       alert('Complete el formulario');
@@ -597,7 +608,7 @@ export default function RegisterFormCompany({ type }) {
           {/* BOTON DE ENVIAR SOLICITUD: Dicho botón se encuentra 
           dentro del componente Alert Ong y para conectar el submit 
           con el backend debe configurarse en ese mismo componente AlertOng */}
-          <AlertOng display={checked} />
+          <AlertOng displays={!isAllow}  display={false}/>
         </div>
       </form>
     </div>

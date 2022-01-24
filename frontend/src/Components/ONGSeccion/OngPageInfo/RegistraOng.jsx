@@ -44,7 +44,7 @@ export default function RegistraOng({ nombre }) {
             <span style={{ color: '#7ED957' }}>{nombre.name}</span>, puedes
             registrate{' '}
             <Link
-              to="/rollSelector/registerformcommerce"
+              to="/rollSelector/register_form_ong"
               style={{ color: '#7ED957' }}
             >
               AQUI
