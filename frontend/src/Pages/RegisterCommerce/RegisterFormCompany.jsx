@@ -318,7 +318,7 @@ export default function RegisterFormCompany({ type }) {
         title: 'Bien',
         text: 'El Comercio fue registrado Correctamente',
       });
-      window.location.href = '/home';
+/*       window.location.href = '/home'; */
     } else {
       // eslint-disable-next-line no-alert
       alert('Complete el formulario');
@@ -608,7 +608,7 @@ export default function RegisterFormCompany({ type }) {
           {/* BOTON DE ENVIAR SOLICITUD: Dicho botón se encuentra 
           dentro del componente Alert Ong y para conectar el submit 
           con el backend debe configurarse en ese mismo componente AlertOng */}
-          <AlertOng display={!isAllow} />
+          <AlertOng displays={!isAllow}  display={false}/>
         </div>
       </form>
     </div>

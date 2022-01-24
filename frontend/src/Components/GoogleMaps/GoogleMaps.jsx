@@ -14,16 +14,17 @@ function GoogleMaps() {
  
   const companies = useSelector(state => state.companies.companies)
   const dispatch = useDispatch()
+
   const [allCompanies , setAllCompanies] = useState()
+
 
   useEffect(() => {
     dispatch(getCompanies())
   },[])
 
-
-useEffect(() => {
-  setAllCompanies(companies.filter(company => company.deleted === false && company.status === "Habilitada"))
-},[companies])
+  useEffect(() => {
+    setAllCompanies(companies.filter(company => company.deleted === false && company.status === "Habilitada"))
+  },[companies])
 
     return (
     <div className={styles.container}>

@@ -40,7 +40,7 @@ console.log("CONSOLE LOOOOG", initialCart)
 
   useEffect(() => {
     const data = initialCart.filter(
-      (item) => item.product.company_id !== params.id
+      (item) => item.product.company_id === Number(params.id)
     );
     setCart(data);
   }, [initialCart]);

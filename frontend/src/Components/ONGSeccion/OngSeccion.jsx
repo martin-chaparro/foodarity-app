@@ -111,7 +111,7 @@ const ImageMarked = styled('span')(({ theme }) => ({
           key={ong.id}
           sx={{width:'100%'}}
         >
-           <img src={ong.logo.url} alt='' className={styles.imgOngs}/>
+           <img src={ong.logo ? ong.logo.url : ''} alt='' className={styles.imgOngs}/>
           <ImageBackdrop className="MuiImageBackdrop-root" />
           <Image>
             <Typography
