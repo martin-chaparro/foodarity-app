@@ -91,6 +91,12 @@ export default function Login() {
     dispatch(startLogin(input.email, input.password));
   };
 
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleSubmit(e)
+    }
+  }
+
   // Fin
 
   return (
@@ -133,6 +139,7 @@ export default function Login() {
               handleOnChange(e);
               validatePassword(e);
             }}
+            onKeyPress={handleKeyPress}
           />
           <div className={estilos.divErrorContraseña}>
             <p className={estilos.errors}>{errors.password}</p>
