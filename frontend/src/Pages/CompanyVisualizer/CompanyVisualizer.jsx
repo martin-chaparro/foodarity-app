@@ -84,7 +84,7 @@ export default function CompanyVisualizer() {
         variant="h6"
         gutterBottom
         component="div"
-        sx={{ color: '#7ED957', margin: 3, textAlign: 'center' }}
+        className={styles.descriptionText}
       >
         {company?.description}
       </Typography>
