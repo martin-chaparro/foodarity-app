@@ -9,8 +9,8 @@
 		"status": "Habilitada",
 		"deleted": false,
 		"logo": {
-			"public_id": "fkkjowmukqs5crisblk9",
-			"url": "https://res.cloudinary.com/dpsxxuslt/image/upload/v1642014699/fkkjowmukqs5crisblk9.jpg"
+			"public_id": "Makro-2_cn2bo7",
+			"url": "https://res.cloudinary.com/dm7fla3lz/image/upload/v1642968565/logos/Makro-2_cn2bo7.gif"
 		},
 		"type" : 1,
 		"street": "rodriguez peña",
@@ -30,8 +30,8 @@
 	"status": "Habilitada",
 	"deleted": false,
 	"logo": {
-		"public_id": "a1rnxpuukwgvegrmp1bn",
-		"url": "https://res.cloudinary.com/dpsxxuslt/image/upload/v1642775299/a1rnxpuukwgvegrmp1bn.png"
+		"public_id": "cafemartinez_ibm5vp",
+		"url": "https://res.cloudinary.com/dm7fla3lz/image/upload/v1642968811/logos/cafemartinez_ibm5vp.jpg"
 	},
 	"type" : 1,
 	"street": "Av. Corrientes ",
@@ -72,8 +72,8 @@
 	"status": "Habilitada",
 	"deleted": false,
 	"logo": {
-		"public_id": "reroe2qs31qifkgrukor",
-		"url": "https://res.cloudinary.com/dpsxxuslt/image/upload/v1642775336/reroe2qs31qifkgrukor.jpg"
+		"public_id": "piubello_h2zeqb",
+		"url": "https://res.cloudinary.com/dm7fla3lz/image/upload/v1642968959/logos/piubello_h2zeqb.jpg"
 	},
 	"type" : 1,
 	"street": "Calle Los Alcarceles ",

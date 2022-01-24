@@ -12,7 +12,10 @@ const {
 
 const {
   getCompanies,
-  searchCompany,
+  getCompanyById,
+  deleteCompany,
+  updateCompany,
+  uploadImageCompany
 } = require('../../controllers/admin/companiesController');
 
 const {
@@ -49,8 +52,11 @@ router.patch(
 
 // Companies Routes
 
-router.get('/companies', getCompanies);
-router.get('/companies/id/:id', searchCompany);
+router.get('/companies',authMiddleware, ValidationAuth.isAdmin, getCompanies);
+router.get('/companies/id/:id',authMiddleware, ValidationAuth.isAdmin, getCompanyById);
+router.delete('/companies/:id',authMiddleware, ValidationAuth.isAdmin, deleteCompany);
+router.put('/companies/:id',authMiddleware, ValidationAuth.isAdmin, updateCompany);
+router.patch('/companies/:id/upload/:field',authMiddleware, ValidationAuth.isAdmin,validationFiles.fileExists,uploadImageCompany );
 
 // Products Routes
 router.get('/products',authMiddleware, ValidationAuth.isAdmin, getProducts);
