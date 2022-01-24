@@ -35,10 +35,10 @@ export default function NestedModal() {
         sx={{
           backgroundColor: '#7ED957',
           '&:hover': { backgroundColor: '#7ED95790 !important' },
-          marginTop: 5,
+          marginTop: 1,
         }}
       >
-        CENTRO DE ATENCIÓN
+        CONTACTO
       </Button>
       <Modal
         open={open}

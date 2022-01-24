@@ -98,6 +98,17 @@ export default function RegisterFormCompany({ type }) {
   // GOOGLE MAPS
 
   const [checked, setChecked] = React.useState(true);
+  const [isAllow, setIsAllow] = React.useState(false);
+
+  useEffect(() => {
+    if (
+      !checked &&
+      !Object.keys(errors).length &&
+      Object.values(input).filter((e, i) => e === '' && i !== 1).length === 7
+    )
+      setIsAllow(true);
+    else setIsAllow(false);
+  }, [checked, errors, input]);
 
   const handleCheck = (e) => {
     e.preventDefault();
@@ -288,8 +299,8 @@ export default function RegisterFormCompany({ type }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const finalAddress = {...formValues, location}
-      console.log(finalAddress)
+    const finalAddress = { ...formValues, location };
+    console.log(finalAddress);
     if (
       !errors.name &&
       !errors.website &&
@@ -301,8 +312,7 @@ export default function RegisterFormCompany({ type }) {
       !errors.zipcode
       // eslint-disable-next-line no-empty
     ) {
-      
-      dispatch(registerComerce(input, { ...formValues, location })).then(res => console.log(res))
+      dispatch(registerComerce(input, { ...formValues, location }));
       Swal.fire({
         icon: 'success',
         title: 'Bien',
@@ -598,7 +608,7 @@ export default function RegisterFormCompany({ type }) {
           {/* BOTON DE ENVIAR SOLICITUD: Dicho botón se encuentra 
           dentro del componente Alert Ong y para conectar el submit 
           con el backend debe configurarse en ese mismo componente AlertOng */}
-          <AlertOng display={checked} />
+          <AlertOng displays={!isAllow}  display={false}/>
         </div>
       </form>
     </div>
