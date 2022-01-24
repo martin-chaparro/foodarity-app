@@ -30,7 +30,7 @@ const userLogin = async (request, response) => {
       });
     }
     if (!user.validated) {
-      return response.status(400).json({
+      return response.status(401).json({
         message: 'El usuario aun no fue validado',
       });
     }
