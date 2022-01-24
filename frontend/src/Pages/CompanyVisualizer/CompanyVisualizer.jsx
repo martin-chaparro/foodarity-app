@@ -53,6 +53,7 @@ export default function CompanyVisualizer() {
             <img
               className={styles.logoImg}
               src={company && (company.logo ? company.logo.url :  avatarDefault )}
+
               alt="CompanyLogo"
             />
           </div>
