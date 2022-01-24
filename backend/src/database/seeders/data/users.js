@@ -6,6 +6,7 @@ module.exports = [
     status: true,
     roleId: 1,
     validated: true,
+    firstLogin: true,
   },
   {
     name: 'democomercio',
@@ -14,7 +15,6 @@ module.exports = [
     status: true,
     roleId: 1,
     validated: true,
-    firstLogin: true,
   },
   {
     name: 'democomercio',
