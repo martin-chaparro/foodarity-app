@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Grid';
@@ -31,6 +32,7 @@ export const CompaniesScreen = () => {
   const [size, setSize] = useState(5);
   const [totalCompanies, setTotalCompanies] = useState(0);
   const [term, setTerm] = useState('');
+  const [update, setUpdate] = useState(false);
 
   const navigate = useNavigate();
 
@@ -40,7 +42,7 @@ export const CompaniesScreen = () => {
     );
     setCompanies(response.data.companies);
     setTotalCompanies(response.data.totalCompanies);
-  }, [page, size]);
+  }, [page, size,update]);
 
   useEffect(async () => {
     clearTimeout(time);
@@ -75,10 +77,41 @@ export const CompaniesScreen = () => {
   };
 
   const handleEdit = (event, id) => {
-    navigate(`/users/${id}`, { replace: true });
+    navigate(`/companies/${id}`, { replace: true });
   };
   const handleDelete = (event, id) => {
-    console.log(id);
+    
+      Swal.fire({
+        title: 'Esta seguro?',
+        text: 'Quizas no se puedan revertir estos cambios!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, eliminar!',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // TODO: Elminar companias y cosas que dependan del usuario
+          apiWithToken
+            .delete(`/admin/companies/${id}`)
+            .then(() => {
+              Swal.fire({
+                icon: 'success',
+                title: 'Eliminado',
+                text: 'La compania se elimino correctamente.',
+              });
+              setUpdate(!update);
+            })
+            .catch(() => {
+              Swal.fire({
+                icon: 'error',
+                title: 'No se pudo eliminar!',
+                text: 'consulte al administrador.',
+              });
+            });
+        }
+      });
+    
   };
 
   const handleInputSearch = ({ target }) => {
@@ -115,7 +148,6 @@ export const CompaniesScreen = () => {
               <Table mt={20}>
                 <TableHead>
                   <TableRow>
-                    <TableCell>id</TableCell>
                     <TableCell>Logo</TableCell>
                     <TableCell>Nombre</TableCell>
                     <TableCell>Email</TableCell>
@@ -129,9 +161,6 @@ export const CompaniesScreen = () => {
                   {companies ? (
                     companies.map((company) => (
                       <TableRow key={company.id}>
-                        <TableCell>
-                          <Typography noWrap>{company.id}</Typography>
-                        </TableCell>
                         <TableCell>
                           <Avatar
                             alt="Logo"
