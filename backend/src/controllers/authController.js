@@ -59,7 +59,7 @@ const userLogin = async (request, response) => {
         socialPhoto: user.socialPhoto,
         roleId: user.role_id,
         token,
-        firstLogin: true,
+        isFirstLogin : true
       });
     }
     return response.status(200).json({
@@ -69,6 +69,7 @@ const userLogin = async (request, response) => {
       socialPhoto: user.socialPhoto,
       roleId: user.role_id,
       token,
+      isFirstLogin : false
     });
   } catch (error) {
     console.log(error);

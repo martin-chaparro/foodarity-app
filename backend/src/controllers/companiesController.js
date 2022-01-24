@@ -495,6 +495,8 @@ const deleteUser = async (req, res) => {
   }
 };
 
+
+
 module.exports = {
   getCompanies,
   createCompany,
@@ -506,5 +508,5 @@ module.exports = {
   addUser,
   deleteUser,
   getUsers,
-  getAllOngs,
+  getAllOngs
 };

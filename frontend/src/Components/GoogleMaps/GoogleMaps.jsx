@@ -24,6 +24,9 @@ function GoogleMaps() {
   },[companies])
 
 
+useEffect(() => {
+  setAllCompanies(companies.filter(company => company.deleted === false && company.status === "Habilitada"))
+},[companies])
 
     return (
     <div className={styles.container}>

@@ -49,6 +49,7 @@ export default function CompanyVisualizer() {
       <div className={styles.GeneralProfileImgs}>
         <div className={styles.BannerDiv}>
           <div className={styles.LogoDiv}>
+
             <img
               className={styles.logoImg}
               src={company && (company.logo ? company.logo.url :  avatarDefault )}
