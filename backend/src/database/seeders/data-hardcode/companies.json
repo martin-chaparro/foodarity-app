@@ -1,8 +1,8 @@
 [
   {
 		"name": "Mayorista Mackro",
-		"description": "supermercado",
-		"areaCode": "123",
+		"description": "En el año 1988 Makro inicia sus actividades en Argentina abriendo su primera sucursal en la localidad de Olivos, Provincia de Buenos Aires,  y ubicándose rápidamente como un referente comercial indiscutido en el sector mayorista. Desde aquella primera apertura hasta el presente, con 24 sucursales distribuidas en 10 provincias, el éxito de Makro se ha basado en ofrecer la mayor variedad de productos de calidad para satisfacer las necesidades de todo tipo de clientes, con los precios más competitivos. La misión de Makro es liderar el abastecimiento mayorista en la Argentina, orientado a clientes profesionales de alimentos, ofreciéndoles el más amplio surtido de alimentos secos y perecederos, complementado por una oferta de productos no alimenticios.",
+		"areaCode": "549",
 		"phone": "3764202020",
 		"email": "mackros@gmail.com",
 		"website": "www.mackro.com",
@@ -13,33 +13,42 @@
 			"url": "https://res.cloudinary.com/dm7fla3lz/image/upload/v1642968565/logos/Makro-2_cn2bo7.gif"
 		},
 		"type" : 1,
-		"street": "rodriguez peña",
-		"number": "123",
+		"street": "Rodriguez Peña",
+		"number": "1100",
 		"zipcode": "1640",
-		"cityId": "060357",
+		"cityId": "60028",
 		"stateId" : "6" ,
-    "ownerId": 1
-},
+    "ownerId": 1,
+	"location": {
+		"lat":-35.04977093680686,
+		"lng":-58.756103970703236
+	}
+}, 
 {
 	"name": "Cafe Martinez",
-	"description": "Lo cuidamos desde la selección de sus granos, hasta la taza, conservando el amor y el respeto que tenemos por lo que hacemos, desde el primer día. Por eso nuestro café es ÚNICO. A través de nuestro proceso exclusivo de tostación, logramos resaltar las notas y características propias de los diferentes granos. Un aroma pleno, con notas de chocolate, pan tostado, miel y caramelo y un sabor con cuerpo, con un toque de frescura, es lo que hace inconfundible a un Café Martínez, siempre.",
+	"description": "Lo cuidamos desde la selección de sus granos, hasta la taza, conservando el amor y el respeto que tenemos por lo que hacemos, desde el primer día. Por eso nuestro café es ÚNICO. A través de nuestras variadas sucursales ofrecemos desayunos, almuerzos y meriendas, logrando una diferenciada calidad en productos. Veni a conocernos dentro de nuestros horarios comerciales.",
 	"areaCode": "549",
 	"phone": "11202046",
 	"email": "info@cafemartinez.com",
 	"website": "www.cafemartinez.com",
+	
 	"status": "Habilitada",
 	"deleted": false,
 	"logo": {
-		"public_id": "cafemartinez_ibm5vp",
-		"url": "https://res.cloudinary.com/dm7fla3lz/image/upload/v1642968811/logos/cafemartinez_ibm5vp.jpg"
+		"public_id": "chpxi4xdn5ezuwowfbmw",
+		"url": "https://res.cloudinary.com/dpsxxuslt/image/upload/v1642889031/chpxi4xdn5ezuwowfbmw.jpg"
 	},
 	"type" : 1,
 	"street": "Av. Corrientes ",
 	"number": "3301",
 	"zipcode": "1640",
-	"cityId": "060280",
+	"cityId": "60301",
 	"stateId" : "6" ,
-    "ownerId": 2
+    "ownerId": 2,
+	"location": {
+		"lat":-35.8349745328235,
+		"lng":-58.6980461310919
+	}
 },
 {
 	"name": "Al Natural",
@@ -60,32 +69,40 @@
 	"zipcode": "1640",
 	"cityId": "060455",
 	"stateId" : "6" ,
-    "ownerId": 3
+    "ownerId": 3,
+	"location": {
+		"lat":-36.0157017377305,
+		"lng": -59.1769657671576
+	}
 },
 {
-	"name": "Piu Belo",
-	"description": "Rotiseria",
+	"name": "El Buen Gusto",
+	"description": " Somos el Buen Gusto, un emprendimiento familiar,  de gran prestigio en el sector gastronómico y atendido por sus dueños.",
 	"areaCode": "549",
 	"phone": "11544653",
-	"email": "info@piubelo.com",
-	"website": "www.piubelo.com",
+	"email": "info@elbuengusto.com",
+	"website": "www.elbuengusto.com",
 	"status": "Habilitada",
 	"deleted": false,
 	"logo": {
-		"public_id": "piubello_h2zeqb",
-		"url": "https://res.cloudinary.com/dm7fla3lz/image/upload/v1642968959/logos/piubello_h2zeqb.jpg"
+		"public_id": "tkjgfpbpa1xrd0w2qhrc",
+		"url": "https://res.cloudinary.com/dpsxxuslt/image/upload/v1642888627/tkjgfpbpa1xrd0w2qhrc.png"
 	},
 	"type" : 1,
-	"street": "Calle Los Alcarceles ",
+	"street": "Av. Directorio ",
 	"number": "2500",
 	"zipcode": "1640",
-	"cityId": "060455",
+	"cityId": "60588",
 	"stateId" : "6" ,
-    "ownerId": 4
+    "ownerId": 4,
+	"location": {
+		"lat":-34.46898246465332,
+		"lng":-58.757374310106776
+	}
 },
 {
 	"name": "Fundación Leon",
-	"description": "En Fundación León conectamos comunidades para erradicar todas las formas de pobreza en Tucumán, Argentina. Nuestra mision es promover el voluntariado y la responsabilidad social para un mundo justo y equitativo.",
+	"description": "En Fundación León conectamos comunidades para erradicar todas las formas de pobreza en Buenos Aires, Argentina. Nuestra mision es promover el voluntariado y la responsabilidad social para un mundo justo y equitativo.",
 	"areaCode": "123",
 	"phone": "3764202020",
 	"email": "comunicacion@fundacionleon.org.ar",
@@ -93,16 +110,20 @@
 	"website": "https://www.fundacionleon.org.ar",
 	"deleted": false,
 	"logo":  {
-		"public_id": "vvbnrv2gcccxaeuaptlj",
-		"url": "https://res.cloudinary.com/dpsxxuslt/image/upload/v1642519206/vvbnrv2gcccxaeuaptlj.jpg"
+		"public_id": "pofd3dq8sxnqbow3b14l",
+		"url": "https://res.cloudinary.com/dpsxxuslt/image/upload/v1642889526/pofd3dq8sxnqbow3b14l.jpg"
 	},
 	"type" : 2,
-	"street": "rodriguez peña",
-	"number": "123",
-	"zipcode": "1640",
+	"street": "Av. Pres. Figueroa Alcorta",
+	"number": "549",
+	"zipcode": "11636569",
 	"cityId": "60854",
-	"stateId" : "90" ,
-	"ownerId": 5
+	"stateId" : "6" ,
+	"ownerId": 5,
+	"location": {
+		"lat":-34.5777348501661,
+		"lng":-58.40280749460438
+	}
 },
 {
 	"name": "SonRisas",
@@ -118,12 +139,16 @@
 		"url": "https://res.cloudinary.com/dpsxxuslt/image/upload/v1642548209/brucfqogwyv6aohsc83o.png"
 	},
 	"type" : 2,
-	"street": "rodriguez peña",
-	"number": "123",
-	"zipcode": "1640",
+	"street": "Luis de Sarro",
+	"number": "1226",
+	"zipcode": "1428",
 	"cityId": "60854",
 	"stateId" : "6" ,
-	"ownerId": 6
+	"ownerId": 6,
+	"location": {
+		"lat":-34.79418371252113,
+		"lng": -58.466566929933805
+	} 
 },
 {
 	"name": "Aldeas Infantiles SOS",
@@ -139,11 +164,15 @@
 		"url": "https://res.cloudinary.com/dpsxxuslt/image/upload/v1642691877/aqzhvnddgtrgxstdz7md.jpg"
 	},
 	"type" : 2,
-	"street": "Moreno ",
+	"street": "Av. San Martin ",
 	"number": "1850",
-	"zipcode": "1094",
+	"zipcode": "6700",
 	"cityId": "60854",
 	"stateId" : "6" ,
-	"ownerId": 13
-}
+	"ownerId": 13,
+	"location": {
+		"lat":-34.56796141405723,
+		"lng": -59.086831593268265
+	}
+} 
 ]

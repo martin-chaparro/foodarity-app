@@ -29,6 +29,11 @@ const userLogin = async (request, response) => {
         message: 'El usuario fue borrado',
       });
     }
+    if (!user.validated) {
+      return response.status(400).json({
+        message: 'El usuario aun no fue validado',
+      });
+    }
 
     // Confirmar los passwords
     const validPassword = await comparePassword(password, user.password);
@@ -45,11 +50,23 @@ const userLogin = async (request, response) => {
       roleId: user.role_id,
     });
 
-    return response.json({
+    if (!user.firstLogin) {
+      user.update({ firstLogin: true });
+      return response.status(201).json({
+        id: user.id,
+        name: user.name,
+        photo: user.photo,
+        socialPhoto: user.socialPhoto,
+        roleId: user.role_id,
+        token,
+        firstLogin: true,
+      });
+    }
+    return response.status(200).json({
       id: user.id,
       name: user.name,
-      photo:user.photo,
-      socialPhoto:user.socialPhoto,
+      photo: user.photo,
+      socialPhoto: user.socialPhoto,
       roleId: user.role_id,
       token,
     });

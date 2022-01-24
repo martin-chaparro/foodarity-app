@@ -23,18 +23,25 @@ const columns = [
 
   {
     id: 'total',
-    label: 'TOTAL',
+    label: 'PRECIO',
     minWidth: 170,
     align: 'right',
     format: (value) => value.toLocaleString('en-US'),
   },
   {
     id: 'precio',
-    label: 'PRECIO',
+    label: 'TOTAL',
     minWidth: 170,
     align: 'right',
     format: (value) => value.toLocaleString('en-US'),
   },
+  {
+    id: 'status',
+    label: 'ESTADO',
+    minWidth: 170,
+    align: 'right',
+  },
+
   {
     id: 'fecha',
     label: 'FECHA COMPRA',
@@ -44,28 +51,109 @@ const columns = [
   },
 ];
 
-function createData(comprador , pago,lote, vendidos, total, precio, fecha ) {
-  // const density = population / size;
-  return { comprador, pago ,lote, vendidos, total, precio, fecha };
-}
-
-/* const rows = [
-  createData('Lote pre-pizzas', 2, 120, '12/06/2022'),
-  createData('Lote facturas', '3', 400, '12/06/2022'),
-  createData('Lote tortas', '1', 100, '12/06/2022'),
-  createData('Lote panes', '4', 327, '12/06/2022'),
-  createData('Lote pan Rayado', '4', 376, '12/06/2022'),
-  createData('Lote combo pasteleria/rotiseria', '6', 2547, '12/06/2022'),
-]; */
-
-export default function Orders({orders}) {
+export default function Orders({ orders }) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  console.log(orders)
-  const rows = orders.map(order => 
-    
-    createData(order.buyer.name, order.paymentMethod.method, order.product.lote, order.quantity, order.product.totalQuantity, order.product.price, order.date),
-  )
+  console.log(orders);
+  console.log(orders[0].quantityByProduct[0].product);
+
+  function createData(
+    comprador,
+    pago,
+    lote,
+    vendidos,
+    precio,
+    total,
+    status,
+
+    fecha
+  ) {
+    // const density = population / size;
+    return {
+      comprador,
+      pago,
+      lote,
+      vendidos,
+      precio,
+      total,
+      status,
+      fecha,
+    };
+  }
+
+  const rows = orders.map((order) => {
+    // const total = order.quantityByProduct.map((item) => (
+    //   <div>{item.quantity * item.product.price}</div>
+    // ));
+    // order.quantityByProduct.map((item) => <div>{item.product.price}</div>),
+
+    return createData(
+      order.buyer.name,
+      order.paymentMethod.method,
+      order.quantityByProduct.map((item) => <div>{item.product.lote}</div>),
+      order.quantityByProduct.map((item) => <div>{item.quantity}</div>),
+      order.quantityByProduct.map((item) => <div>{item.product.price}</div>),
+      order.quantityByProduct.map((item) => (
+        <div>{item.quantity * item.product.price}</div>
+      )),
+      order.status,
+      order.date
+    );
+  });
+
+  // // eslint-disable-next-line prefer-const
+
+  // let rows = [];
+
+  // // eslint-disable-next-line no-plusplus
+  // for (let i = 0; i < orders.length; i++) {
+  //   let j = orders[i].quantityByProduct.length;
+
+  //   while (j >= 1) {
+  //     rows.push(
+  //       createData(
+  //         orders[i].buyer.name,
+  //         orders[i].paymentMethod.method,
+  //         orders[i].quantityByProduct[j].product.lote,
+  //         orders[i].quantityByProduct[j].quantity,
+  //         orders[i].quantityByProduct[j].product.price,
+  //         orders[i].quantityByProduct[j].quantity *
+  //           orders[i].quantityByProduct[j].product.price,
+  //         orders[i].status,
+  //         orders[i].date
+  //       )
+  //     );
+
+  //     // eslint-disable-next-line no-plusplus
+  //     j--;
+  //   }
+  // }
+
+  // eslint-disable-next-line prefer-const
+  // let rows = [];
+
+  // console.log(rows);
+
+  // // eslint-disable-next-line no-plusplus
+  // for (let i = 0; i < orders.length; i++) {
+  //   // eslint-disable-next-line no-plusplus
+  //   for (let j = 0; j < orders[i].quantityByProduct[j]; j++) {
+  //     rows.push(
+  //       createData(
+  //         orders[i].buyer.name,
+  //         orders[i].paymentMethod.method,
+  //         orders[i].quantityByProduct[j].product.lote,
+  //         orders[i].quantityByProduct[j].quantity,
+  //         orders[i].quantityByProduct[j].product.price,
+  //         orders[i].quantityByProduct[j].quantity *
+  //           orders[i].quantityByProduct[j].product.price,
+
+  //         orders[i].status,
+  //         orders[i].date
+  //       )
+  //     );
+  //   }
+  // }
 
   const handleChangePage = (newPage) => {
     setPage(newPage);
@@ -98,24 +186,25 @@ export default function Orders({orders}) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows && rows
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row) => {
-                return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                    {columns.map((column) => {
-                      const value = row[column.id];
-                      return (
-                        <TableCell key={column.id} align={column.align}>
-                          {column.format && typeof value === 'number'
-                            ? column.format(value)
-                            : value}
-                        </TableCell>
-                      );
-                    })}
-                  </TableRow>
-                );
-              })}
+            {rows &&
+              rows
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map((row) => {
+                  return (
+                    <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
+                      {columns.map((column) => {
+                        const value = row[column.id];
+                        return (
+                          <TableCell key={column.id} align={column.align}>
+                            {column.format && typeof value === 'number'
+                              ? column.format(value)
+                              : value}
+                          </TableCell>
+                        );
+                      })}
+                    </TableRow>
+                  );
+                })}
           </TableBody>
         </Table>
       </TableContainer>

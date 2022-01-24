@@ -12,18 +12,19 @@
   align-items: center;
   justify-content: flex-end;
   padding: 0;
-  
+
   width: 100%;
 }
 .myCart {
-margin: 0;
-/* margin-right: -15px; */
-  margin-bottom:-8px;
-  width: 100%;  
+  margin: 0;
+  /* margin-right: -15px; */
+  margin-bottom: -8px;
+  width: 100%;
   justify-content: flex-end;
-} 
+}
 
-.p, .icon {
+.p,
+.icon {
   position: relative;
   left: 15px;
 }

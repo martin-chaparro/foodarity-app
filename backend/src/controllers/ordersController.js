@@ -129,7 +129,20 @@ const getOrdersByCompany = async (req, res) => {
     const products = await Product.findAll({
       where: { id: ids },
     });
-    return res.status(200).json({ orders, products });
+
+    const finalOrders = orders.map((order) => {
+      const finalOrder = order;
+      finalOrder.quantityByProduct = order.quantityByProduct.map((item) => {
+        const finalItem = item;
+        finalItem.product = products.find(
+          (producto) => producto.id === item.product_id
+        );
+        return finalItem;
+      });
+      return finalOrder;
+    });
+
+    return res.status(200).json(finalOrders);
   } catch (error) {
     console.log(error);
     return res.status(500).send(error);

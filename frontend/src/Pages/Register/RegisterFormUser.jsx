@@ -10,11 +10,11 @@ import Button from '@mui/material/Button';
 // import Header from '../../Components/Header/Header';
 import style from './RegisterFormUser.module.css';
 import logo from '../../assets/WEB-Full-Header-Logo.png';
+import {api}from '../../services/api'
 
 import {
   startCheking,
-  startGoogleRegister,
-  startRegister,
+  startGoogleLogin,
 } from '../../redux/actions/authActions';
 
 function Register() {
@@ -123,13 +123,18 @@ function Register() {
       !errors.password &&
       !errors.validatePassword
     ) {
-      dispatch(startRegister(input));
+      api.post('/users', input).then(res => {
+        const {id} = res.data
+        const {email} = input
+        api.post('users/validate', {id, email})
+      })
       dispatch(startCheking());
        Swal.fire({
         icon: 'success',
         title: 'Bien!',
-        text: 'Te registraste Correctamente',
+        text: 'Te registraste Correctamente! Te enviamos un email para poder activar tu cuenta.',
       });
+      navigate('/')
       setInput({
         name: '',
         email: '',
@@ -138,12 +143,16 @@ function Register() {
       });
     } else {
       // eslint-disable-next-line no-alert
-      alert('Complete el formulario');
+      Swal.fire({
+        icon: 'error',
+        title: 'Oppss!',
+        text: 'Por favor ingrese los datos correctamente',
+      });
     }
   };
 
   const responseGoogleSucces = ({ tokenId }) => {
-    dispatch(startGoogleRegister(tokenId));
+    dispatch(startGoogleLogin(tokenId));
   };
   const responseGoogleFail = () => {
     navigate('/register', { replace: true });
@@ -234,7 +243,7 @@ function Register() {
 
           <GoogleLogin
             clientId="327655390134-3dkok4tsgubva7v5gj7drncddv260lor.apps.googleusercontent.com"
-            buttonText="Registrarse con Google"
+            buttonText="Continuar con Google"
             onSuccess={responseGoogleSucces}
             onFailure={responseGoogleFail}
             cookiePolicy="single_host_origin"

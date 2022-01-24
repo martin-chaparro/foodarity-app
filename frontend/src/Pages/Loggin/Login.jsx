@@ -88,7 +88,6 @@ export default function Login() {
   // };
   const handleSubmit = (e) => {
     e.preventDefault(e);
-
     dispatch(startLogin(input.email, input.password));
   };
 
@@ -161,6 +160,7 @@ export default function Login() {
             cookiePolicy="single_host_origin"
             style={{ width: '100%' }}
           />
+            <p>  Olvidaste tu contraseña? <Link to="/enviarMail">Cambiala ahora</Link></p>
         </div>
       </div>
     </form>
