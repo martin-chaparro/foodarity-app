@@ -176,7 +176,7 @@
   display: flex;
   justify-content: flex-end;
   position: relative;
-  bottom: 5px;
+  bottom: 20px;
   right: 5px;
   margin: 0;
   position: relative;
@@ -192,7 +192,6 @@
 
 .cartOptionsCont {
   position: relative;
-  top: 15px;
   right: 15px;
   display: flex;
   justify-content: flex-end;
@@ -216,7 +215,7 @@
 
 .divFavButton {
   position: relative;
-  top: 30px;
+  top: 15px;
   display: flex;
   justify-content: flex-end;
   height: 31px;
@@ -240,7 +239,7 @@
   height: 140px;
   left: 10px;
   margin: 0;
-  bottom: 5px;
+  bottom: 20px;
   user-select: none;
 }
 
@@ -355,17 +354,17 @@
 }
 
 .favButton:hover {
-  background-color: rgb(78, 204, 126);
+  background-color: #4cc75e;
 }
 
 .favButton:focus-within {
-  background-color: rgb(78, 204, 126);
+  background-color: #4cc75e;
 }
 .googleMap {
   height: 150px;
   width: 200px;
   position: relative;
-  bottom: 0px;
+  bottom: 15px;
   left: 25px;
 }
 
