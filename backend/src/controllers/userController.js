@@ -229,6 +229,21 @@ const uploadPhotoUser = async (request, response) => {
   return response.status(200).json(user);
 };
 
+const validate = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const user = await User.findByPk(id);
+    if (!user.validated) {
+      await user.update({ validated: true });
+    } else {
+      return res.status(201).json({ message: 'ya esta validado' });
+    }
+    return res.status(200).json({ message: 'success' });
+  } catch (error) {
+    return res.status(500).json({ message: error });
+  }
+};
+
 module.exports = {
   createUser,
   getAllUsers,
@@ -236,4 +251,5 @@ module.exports = {
   deleteUser,
   updateUser,
   uploadPhotoUser,
+  validate,
 };

@@ -276,7 +276,7 @@ function ProfileTempleteCommerce(props) {
   const loading = <div>CARGANDO...</div>;
 
   return (
-    <div>
+    <div className={styles.bodyBig}>
       {logged === 'true' && loggedRender}
       {logged === 'false' && navigate('/home')}
       {logged === 'loading' && loading}

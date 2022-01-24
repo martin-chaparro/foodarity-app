@@ -5,6 +5,7 @@ module.exports = [
     password: 'demo',
     status: true,
     roleId: 1,
+    validated: true,
   },
   {
     name: 'democomercio',
@@ -12,6 +13,8 @@ module.exports = [
     password: 'demo',
     status: true,
     roleId: 1,
+    validated: true,
+    firstLogin: true,
   },
   {
     name: 'democomercio',
@@ -19,6 +22,8 @@ module.exports = [
     password: 'demo',
     status: true,
     roleId: 1,
+    validated: true,
+    firstLogin: true,
   },
   {
     name: 'democomercio',
@@ -26,6 +31,8 @@ module.exports = [
     password: 'demo',
     status: true,
     roleId: 1,
+    validated: true,
+    firstLogin: true,
   },
   {
     name: 'demoOng1',
@@ -33,6 +40,8 @@ module.exports = [
     password: 'demo',
     status: true,
     roleId: 1,
+    validated: true,
+    firstLogin: true,
   },
   {
     name: 'demoOng2',
@@ -40,6 +49,8 @@ module.exports = [
     password: 'demo',
     status: true,
     roleId: 1,
+    validated: true,
+    firstLogin: true,
   },
   {
     name: 'admin',
@@ -47,6 +58,8 @@ module.exports = [
     password: 'admin',
     status: true,
     roleId: 2,
+    validated: true,
+    firstLogin: true,
   },
   {
     name: 'Martin Chaparro',
@@ -54,6 +67,8 @@ module.exports = [
     password: '123456',
     status: true,
     roleId: 2,
+    validated: true,
+    firstLogin: true,
   },
   {
     name: 'Karen Derkach',
@@ -61,6 +76,8 @@ module.exports = [
     password: '123456',
     status: true,
     roleId: 2,
+    validated: true,
+    firstLogin: true,
   },
   {
     name: 'Manuel Mauro',
@@ -68,6 +85,8 @@ module.exports = [
     password: '123456',
     status: true,
     roleId: 2,
+    validated: true,
+    firstLogin: true,
   },
   {
     name: 'Augusto Iphar',
@@ -75,6 +94,8 @@ module.exports = [
     password: '123456',
     status: true,
     roleId: 2,
+    validated: true,
+    firstLogin: true,
   },
 
   {
@@ -83,6 +104,8 @@ module.exports = [
     password: '123456',
     status: true,
     roleId: 2,
+    validated: true,
+    firstLogin: true,
   },
   {
     name: 'Common user',
@@ -90,6 +113,8 @@ module.exports = [
     password: 'user',
     status: true,
     roleId: 1,
+    validated: true,
+    firstLogin: true,
   },
   {
     name: 'Common user 2',
@@ -97,5 +122,7 @@ module.exports = [
     password: 'user',
     status: true,
     roleId: 1,
+    validated: true,
+    firstLogin: true,
   },
 ];
