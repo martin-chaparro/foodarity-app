@@ -176,7 +176,7 @@
   display: flex;
   justify-content: flex-end;
   position: relative;
-  top: 20px;
+  bottom: 15px;
   right: 5px;
   margin: 0;
   position: relative;
@@ -191,8 +191,8 @@
 
 .cartOptionsCont {
   position: relative;
-  top: 165px;
-  right: 5px;
+  top: 15px;
+  right: 15px;
   display: flex;
   justify-content: flex-end;
   gap: 15px;
@@ -215,10 +215,12 @@
 
 .divFavButton {
   position: relative;
-  top: 182px;
+  top: 30px;
   display: flex;
   justify-content: flex-end;
   height: 31px;
+  position: relative;
+  right: 10px;
 }
 
 .priceCont {
@@ -318,9 +320,10 @@
 }
 .googleMap {
   height: 150px;
-  width: 150px;
-  margin-left: 50px;
-  margin-top: 50px;
+  width: 190px;
+  position: relative;
+  bottom: 10px;
+  left: 30px;
 }
 
 @media screen and (max-width: 576px) {
