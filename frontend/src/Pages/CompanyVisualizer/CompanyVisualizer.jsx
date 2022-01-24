@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
 import OngForm from '../../Components/ONGSeccion/OngForm/OngForm';
 // import Navbar from '../../Components/Navbar/NavbarCommerce';
@@ -12,6 +12,7 @@ import OngInfo from '../../Components/ONGSeccion/OngPageInfo/OngInfo';
 import avatarDefault from '../../assets/avatar_default.png';
 
 export default function CompanyVisualizer() {
+  const navigate = useNavigate()
   const [company, setcompany] = useState();
   // eslint-disable-next-line no-unused-vars
   const [products, setproducts] = useState();
@@ -25,6 +26,12 @@ export default function CompanyVisualizer() {
       .get(`/products/company/${params.id}`)
       .then((res) => setproducts(res.data));
   }, []);
+
+  useEffect(() => {
+    if (company && (company.status !== 'Habilitada' || company.deleted)) {
+      navigate('/home')
+    }
+  },[company])
 
   useEffect(() => {
     if (id)
@@ -45,7 +52,8 @@ export default function CompanyVisualizer() {
 
             <img
               className={styles.logoImg}
-              src={company ? company.log?.url :  avatarDefault }
+              src={company && (company.logo ? company.logo.url :  avatarDefault )}
+
               alt="CompanyLogo"
             />
           </div>

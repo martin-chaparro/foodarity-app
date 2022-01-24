@@ -55,7 +55,6 @@ export default function Orders({ orders }) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   console.log(orders);
-  console.log(orders[0].quantityByProduct[0].product);
 
   function createData(
     comprador,
