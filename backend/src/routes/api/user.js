@@ -8,7 +8,9 @@ const {
   deleteUser,
   updateUser,
   uploadPhotoUser,
+  validate,
 } = require('../../controllers/userController');
+const { confirmarMail } = require('../../controllers/nodemailerController');
 const ValidationsUser = require('../../middlewares/validations/validationUser');
 const validationFiles = require('../../middlewares/validations/validationFiles');
 const authMiddleware = require('../../middlewares/auth');
@@ -27,5 +29,7 @@ router.patch(
   validationFiles.fileExists,
   uploadPhotoUser
 );
+router.post('/validate/:id', validate);
+router.post('/validate/', confirmarMail);
 
 module.exports = router;
