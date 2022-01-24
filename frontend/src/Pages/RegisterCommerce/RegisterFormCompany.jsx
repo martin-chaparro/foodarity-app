@@ -302,13 +302,13 @@ export default function RegisterFormCompany({ type }) {
       // eslint-disable-next-line no-empty
     ) {
       
-      dispatch(registerComerce(input, { ...formValues, location }));
+      dispatch(registerComerce(input, { ...formValues, location })).then(res => console.log(res))
       Swal.fire({
         icon: 'success',
         title: 'Bien',
         text: 'El Comercio fue registrado Correctamente',
       });
-      window.location.href = '/home';
+/*       window.location.href = '/home'; */
     } else {
       // eslint-disable-next-line no-alert
       alert('Complete el formulario');
