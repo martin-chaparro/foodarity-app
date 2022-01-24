@@ -49,6 +49,20 @@ class User extends Model {
           allowNull: false,
           defaultValue: false,
         },
+        validated: {
+          type: DataTypes.BOOLEAN,
+          allowNull: false,
+          defaultValue: false,
+        },
+        firstLogin: {
+          type: DataTypes.BOOLEAN,
+          allowNull: false,
+          defaultValue: false,
+        },
+        mailCode:{
+          type: DataTypes.STRING,
+          allowNull:true
+        }
       },
       {
         sequelize,

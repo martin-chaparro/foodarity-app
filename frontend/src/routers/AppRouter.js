@@ -17,12 +17,15 @@ import { PrivateRoute } from './PrivateRoute';
 import { RollSelectorRouter } from './RollSelectorRouter';
 import { startCheking } from '../redux/actions/authActions';
 import MpRedirect from '../Components/MercadoPago/MpRedirect';
-import EnviarMail from '../Pages/EnviarMail/EnviarMail';
+// import EnviarMail from '../Pages/EnviarMail/EnviarMail';
 import RecuperarPassword from '../Pages/RecuperarPassword/RecuperarPassword';
 import OrderPage from '../Pages/Order/OrderPage';
 import Success from '../Components/MercadoPago/Success';
 import Fail from '../Components/MercadoPago/Fail';
-import GoogleMapsTest from '../Components/GoogleMaps/GoogleMapsTest';
+// import GoogleMapsTest from '../Components/GoogleMaps/GoogleMapsTest';
+import ConfirmarEmail from '../Components/ConfirmarEmail/ConfirmarEmail';
+import GoogleMaps from '../Components/GoogleMaps/GoogleMaps';
+import ActualizarPassword from '../Pages/ActualizarPassword/ActualizarPassword';
 // import ErrorPage from '../Pages/Error/ErrorPage';
 
 export function AppRouter() {
@@ -41,17 +44,22 @@ export function AppRouter() {
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/enviarMail" element={<EnviarMail />} />
-        <Route path="/recuperarPassword" element={<RecuperarPassword />} />
-        <Route path="/register" element={<Register />} />
         <Route path="*" element={<Navbar />} />
+        {/* <Route path="/enviarMail" element={<EnviarMail />} /> */}
+        <Route path="/recuperarPassword" element={<RecuperarPassword />} />
+        <Route
+          path="/actualizarpassword/:id"
+          element={<ActualizarPassword />}
+        />
+        <Route path="/register" element={<Register />} />
         {/* <Route path="*" element={<ErrorPage/>} />  */}
       </Routes>
       <Routes>
+        <Route path="/confirm/:id" element={<ConfirmarEmail />} />
         <Route exact path="/mpredirect" element={<MpRedirect />} />
         <Route path="/mpsuccess" element={<Success />} />
         <Route path="/mpfail" element={<Fail />} />
-        <Route path="/googlemapstest" element={<GoogleMapsTest />} />
+        <Route path="/googlemaps" element={<GoogleMaps />} />
         <Route
           path="/profileuser"
           element={

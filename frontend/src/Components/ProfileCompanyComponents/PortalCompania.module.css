@@ -7,21 +7,16 @@
   grid-row-gap: 0;
 }
 
+.bodyParent {
+  background-color: white !important;
+}
+
 .image {
-  height: 826px;
+  height: 100%;
 }
 
 @media screen and (max-width: 576px) {
   .imagen {
-    display: none;
-  }
-  .texto2 {
-    display: none;
-  }
-}
-
-@media screen and (min-width: 576px) {
-  .texto {
     display: none;
   }
   .texto2 {

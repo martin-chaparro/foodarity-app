@@ -2,6 +2,7 @@ import { types } from '../types/ui';
 
 const initialState = {
   asidemenu: true,
+  loading: false,
 };
 
 export const uiReducer = (state = initialState, action) => {
@@ -10,6 +11,16 @@ export const uiReducer = (state = initialState, action) => {
       return {
         ...state,
         asidemenu: action.payload,
+      };
+    case types.showLoading:
+      return {
+        ...state,
+        loading: true,
+      };
+    case types.removeLoading:
+      return {
+        ...state,
+        loading: false,
       };
 
     default:

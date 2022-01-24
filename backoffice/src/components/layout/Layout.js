@@ -11,6 +11,7 @@ import Container from '@mui/material/Container';
 import { Header } from './header/Header';
 import { Aside } from './aside/Aside';
 import { startLogout } from '../../redux/actions/authActions';
+import { Loading } from '../ui/Loading';
 
 const mdTheme = createTheme();
 
@@ -18,6 +19,7 @@ export const Layout = ({ children }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { roleId } = useSelector((state) => state.auth);
+  const { loading } = useSelector((state) => state.ui);
 
   useEffect(() => {
     if (roleId !== 2) {
@@ -50,6 +52,7 @@ export const Layout = ({ children }) => {
           </Container>
         </Box>
       </Box>
+      {loading && <Loading />}
     </ThemeProvider>
   );
 };

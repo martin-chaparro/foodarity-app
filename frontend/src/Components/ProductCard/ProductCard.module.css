@@ -4,7 +4,7 @@
   height: 180px;
   width: 450px;
   background-color: rgba(38, 5, 41, 0.527);
-  margin-bottom: 10px;
+  margin-bottom: 3vw;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
@@ -176,13 +176,13 @@
   display: flex;
   justify-content: flex-end;
   position: relative;
-  top: 20px;
+  bottom: 15px;
   right: 5px;
   margin: 0;
   position: relative;
   right: 5;
   bottom: 40;
-  font-size: 14;
+  font-size: 10;
 }
 
 .heart {
@@ -191,8 +191,8 @@
 
 .cartOptionsCont {
   position: relative;
-  top: 165px;
-  right: 5px;
+  top: 15px;
+  right: 15px;
   display: flex;
   justify-content: flex-end;
   gap: 15px;
@@ -215,10 +215,12 @@
 
 .divFavButton {
   position: relative;
-  top: 182px;
+  top: 30px;
   display: flex;
   justify-content: flex-end;
   height: 31px;
+  position: relative;
+  right: 10px;
 }
 
 .priceCont {
@@ -318,9 +320,10 @@
 }
 .googleMap {
   height: 150px;
-  width: 150px;
-  margin-left: 50px;
-  margin-top: 50px;
+  width: 190px;
+  position: relative;
+  bottom: 10px;
+  left: 30px;
 }
 
 @media screen and (max-width: 576px) {

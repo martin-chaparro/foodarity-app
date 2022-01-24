@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-// eslint-disable-next-line import/no-unresolved
+import { useDispatch } from 'react-redux';
 import Swal from 'sweetalert2';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
@@ -21,9 +21,11 @@ import defaultAvatar from '../../../../assets/avatar_default.png';
 
 import { Layout } from '../../../layout/Layout';
 import { apiWithToken } from '../../../../services/api';
+import { finishLoading, startLoading } from '../../../../redux/actions/ui';
 
 export const UserUpdate = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const { id } = useParams();
   const [user, setUser] = useState();
@@ -61,12 +63,14 @@ export const UserUpdate = () => {
       if (file) {
         const formdata = new FormData();
         formdata.append('file', file, file.name);
+        dispatch(startLoading());
         apiWithToken
           .patch(`/admin/users/upload/${id}`, formdata)
           .then(() => {
             apiWithToken
               .put(`/admin/users/${id}`, formik.values)
               .then(() => {
+                dispatch(finishLoading())
                 Swal.fire({
                   icon: 'success',
                   title: 'Actualizado',
@@ -84,6 +88,7 @@ export const UserUpdate = () => {
             setFile(null);
           })
           .catch(() => {
+            dispatch(finishLoading())
             Swal.fire({
               icon: 'error',
               title: 'No se pudo actualizar!',
@@ -92,9 +97,11 @@ export const UserUpdate = () => {
             setFile(null);
           });
       } else {
+        dispatch(startLoading());
         apiWithToken
           .put(`/admin/users/${id}`, formik.values)
           .then(() => {
+            dispatch(finishLoading())
             Swal.fire({
               icon: 'success',
               title: 'Actualizado',
@@ -102,6 +109,7 @@ export const UserUpdate = () => {
             });
           })
           .catch(() => {
+            dispatch(finishLoading())
             Swal.fire({
               icon: 'error',
               title: 'No se pudo actualizar!',

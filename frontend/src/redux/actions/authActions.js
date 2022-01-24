@@ -47,7 +47,11 @@ export const startLogin = (email, password) => {
           name,
         })
       );
-      window.location.replace('/home');
+      if (response.data.firstLogin) {
+        window.location.replace('/rollselector');
+      } else {
+        window.location.replace('/home');
+      }
     } catch (error) {
       console.log(error);
       // eslint-disable-next-line no-alert
@@ -56,7 +60,7 @@ export const startLogin = (email, password) => {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: 'Lo sentimos, el email y/o contraseña no existen o son incorrectos.',
+        text: 'Lo sentimos, el email y/o contraseña no existen o son incorrectos. Revisa tu email para validar tu cuenta.',
       });
     }
   };
