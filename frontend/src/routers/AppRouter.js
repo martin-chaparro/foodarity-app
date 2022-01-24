@@ -25,6 +25,7 @@ import Fail from '../Components/MercadoPago/Fail';
 // import GoogleMapsTest from '../Components/GoogleMaps/GoogleMapsTest';
 import ConfirmarEmail from '../Components/ConfirmarEmail/ConfirmarEmail';
 import GoogleMaps from '../Components/GoogleMaps/GoogleMaps';
+import ActualizarPassword from '../Pages/ActualizarPassword/ActualizarPassword';
 // import ErrorPage from '../Pages/Error/ErrorPage';
 
 export function AppRouter() {
@@ -46,6 +47,10 @@ export function AppRouter() {
         <Route path="*" element={<Navbar />} />
         <Route path="/enviarMail" element={<EnviarMail />} />
         <Route path="/recuperarPassword" element={<RecuperarPassword />} />
+        <Route
+          path="/actualizarpassword/:id"
+          element={<ActualizarPassword />}
+        />
         <Route path="/register" element={<Register />} />
         {/* <Route path="*" element={<ErrorPage/>} />  */}
       </Routes>

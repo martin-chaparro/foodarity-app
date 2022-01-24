@@ -59,6 +59,10 @@ class User extends Model {
           allowNull: false,
           defaultValue: false,
         },
+        mailCode:{
+          type: DataTypes.STRING,
+          allowNull:true
+        }
       },
       {
         sequelize,
