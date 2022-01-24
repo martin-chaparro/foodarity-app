@@ -1,9 +1,12 @@
 const { Op } = require('sequelize');
+const cloudinary = require('cloudinary').v2;
 const Company = require('../../models/Company');
 const CompanyType = require('../../models/CompanyType');
 const Address = require('../../models/Address');
 const City = require('../../models/City');
 const State = require('../../models/State');
+
+cloudinary.config(process.env.CLOUDINARY_URL);
 
 // obtner info de todas las compañias
 const getCompanies = async (request, response) => {
@@ -19,9 +22,9 @@ const getCompanies = async (request, response) => {
   const { limit, offset } = getPagination(page, size);
 
   if (!search) {
-    
     try {
       const companies = await Company.findAndCountAll({
+        where: { deleted: false },
         include: [
           { model: CompanyType, as: 'type', attributes: ['type'] },
           {
@@ -59,9 +62,14 @@ const getCompanies = async (request, response) => {
   try {
     const companies = await Company.findAndCountAll({
       where: {
-        [Op.or]: [
-          { name: { [Op.iLike]: `%${search}%` } },
-          { email: { [Op.iLike]: `%${search}%` } },
+        [Op.and]: [
+          {
+            [Op.or]: [
+              { name: { [Op.iLike]: `%${search}%` } },
+              { email: { [Op.iLike]: `%${search}%` } },
+            ],
+          },
+          { deleted: false },
         ],
       },
       include: [
@@ -96,20 +104,14 @@ const getCompanies = async (request, response) => {
   } catch (error) {
     return response.status(500);
   }
-
-
-
-
-
 };
 
-// buscar empresa/ong por id
-const searchCompany = async (request, response) => {
+const getCompanyById = async (request, response) => {
   try {
     const { id } = request.params;
     const company = await Company.findByPk(id, {
       include: [
-        { model: CompanyType, as: 'type', attributes: ['type'] },
+        { model: CompanyType, as: 'type', attributes: ['id', 'type'] },
         {
           model: Address,
           as: 'address',
@@ -133,7 +135,141 @@ const searchCompany = async (request, response) => {
   }
 };
 
+const deleteCompany = async (request, response) => {
+  try {
+    const { id } = request.params;
+    const company = await Company.findByPk(id);
+    if (company) {
+      // TODO: Verificar demas temas de la compania para elimnar
+      company.update({ deleted: true });
+
+      response.status(200).json({ message: 'Compania Eliminada' });
+    } else {
+      response.status(404).json({ msg: 'Not found' });
+    }
+  } catch (error) {
+    response.status(500).send({ msg: error });
+  }
+};
+
+const updateCompany = async (request, response) => {
+  try {
+    const { id } = request.params;
+    const {
+      name,
+      description,
+      areaCode,
+      phone,
+      email,
+      website,
+      type,
+      street,
+      number,
+      zipcode,
+      cityId,
+      stateId,
+      status,
+    } = request.body;
+
+    const company = await Company.findByPk(id);
+    if (company) {
+      // TODO: Actualizo los datos, verificar mas validaciones
+
+      await company.update({
+        name,
+        description,
+        areaCode,
+        phone,
+        email,
+        website,
+        status,
+      });
+
+      // const updatedType = await CompanyType.findByPk(type)
+      // console.log(type);
+      // console.log(updatedType);
+      await company.setType(type);
+
+      const address = await Address.findByPk(company.id);
+      if (address) {
+        await address.update({
+          street,
+          number,
+          zipcode,
+        });
+      }
+
+      await address.setState(stateId);
+      await address.setCity(cityId);
+      await company.setAddress(address);
+
+      response.status(200).json({ message: 'Compania Actualizada' });
+    } else {
+      response.status(404).json({ msg: 'Not found company' });
+    }
+  } catch (error) {
+    console.log(error);
+    response.status(500).send({ msg: error });
+  }
+};
+
+const uploadImageCompany = async (request, response) => {
+  const { id, field } = request.params;
+
+  try {
+    const company = await Company.findByPk(id);
+    if (!company) {
+      return response.status(400).json({
+        message: 'Company not found',
+      });
+    }
+
+    const { tempFilePath } = request.files.file;
+
+    switch (field) {
+      case 'logo': {
+        if (company.logo) {
+          cloudinary.uploader.destroy(company.logo.public_id);
+        }
+
+        const { secure_url: secureUrl, public_id: publicId } =
+          await cloudinary.uploader.upload(tempFilePath);
+
+        await company.update({ logo: { public_id: publicId, url: secureUrl } });
+
+        return response.status(200).json(company);
+      }
+
+      case 'banner': {
+        if (company.banner) {
+          cloudinary.uploader.destroy(company.banner.public_id);
+        }
+        const { secure_url: secureUrl, public_id: publicId } =
+          await cloudinary.uploader.upload(tempFilePath);
+
+        await company.update({
+          banner: { public_id: publicId, url: secureUrl },
+        });
+        return response.status(200).json(company);
+      }
+
+      default:
+        return response.status(400).json({
+          message: 'El parametro field debe tener el valor  "logo" o "banner"',
+        });
+    }
+  } catch (error) {
+    console.log(error);
+    return response.status(500).json({
+      message: 'Fatal Error',
+    });
+  }
+};
+
 module.exports = {
   getCompanies,
-  searchCompany,
+  getCompanyById,
+  deleteCompany,
+  updateCompany,
+  uploadImageCompany,
 };

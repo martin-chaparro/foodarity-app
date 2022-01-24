@@ -231,16 +231,43 @@ const uploadPhotoUser = async (request, response) => {
 
 const validate = async (req, res) => {
   try {
-    const { id } = req.params;
-    const user = await User.findByPk(id);
+    const { id, usercode } = req.params;
+    const user = await User.findOne({
+      where: { [Op.and]: [{ id }, { mailCode: usercode }] },
+    });
     if (!user.validated) {
       await user.update({ validated: true });
+      await user.update({ mailCode: null });
     } else {
       return res.status(201).json({ message: 'ya esta validado' });
     }
     return res.status(200).json({ message: 'success' });
   } catch (error) {
     return res.status(500).json({ message: error });
+  }
+};
+
+const updatePassword = async (request, response) => {
+  const { input, emailCode } = request.body;
+  const { password, passwordDos } = input;
+  console.log(input, emailCode);
+
+  try {
+    const user = await User.findOne({ where: { mailCode: emailCode } });
+
+    if (!user) {
+      return response.status(400).json({ message: 'Verifique los datos' });
+    }
+
+    if (password !== passwordDos) {
+      return response.status(400).json({ message: 'Verifique los datos' });
+    }
+
+    user.update({ password: passwordDos, mailCode: null });
+    return response.status(200).json({ message: 'Datos Actulizados' });
+  } catch (error) {
+    console.log(error);
+    return response.status(500).json({ message: 'Server Error' });
   }
 };
 
@@ -252,4 +279,5 @@ module.exports = {
   updateUser,
   uploadPhotoUser,
   validate,
+  updatePassword,
 };

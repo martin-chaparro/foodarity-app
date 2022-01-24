@@ -143,7 +143,13 @@ const getUser = async (request, response) => {
 const deleteUser = async (request, response) => {
   console.log('delete');
   const { id } = request.params;
+  const { userId } = request;
 
+  if (id === userId) {
+    return response
+      .status(401)
+      .json({ message: 'No te puedes elimnar a ti mismo' });
+  }
   try {
     await User.update(
       {
@@ -196,7 +202,6 @@ const updateUser = async (request, response) => {
 };
 
 const uploadPhotoUser = async (request, response) => {
-  
   const { id } = request.params;
   const user = await User.findByPk(id);
 

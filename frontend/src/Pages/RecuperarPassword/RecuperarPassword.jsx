@@ -1,30 +1,36 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+// import { useDispatch, useSelector } from "react-redux";
+import { api } from "../../services/api";
 
 
 
 export default function RecuperarPassword () { 
-    const dispatch = useDispatch()
+    
     const [input, setInput] = useState({
         email: '',
-        password: '',
-        passwordDos: ''
     })
 
 
 
     const handleOnChange = (e) => {
-        e.preventDefault();
+        e.preventDefault()
         setInput({
             ...input,
             [e.target.name] : e.target.value
         })
     }
+    const handleSubmit = (e)=>{
+        e.preventDefault();
+        api.post('/users/reset',input)
+        // eslint-disable-next-line no-alert
+        .then((response)=>alert('Se envio el correo'))
+        .catch((error)=>console.log(error))
+    }
 
     return (
         <div>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <h1>Formulario para recuparar Contraseña</h1>
             <div>
                 <h4>Email</h4>
@@ -36,7 +42,7 @@ export default function RecuperarPassword () {
                       }} />
                      
             </div>
-            <div>
+            {/* <div>
                 <h4>Contraseña</h4>
                 <input type="text"
                        name="password"
@@ -47,6 +53,10 @@ export default function RecuperarPassword () {
                 <input type="text"
                        name="passwordDos"
                        value={input.passwordDos} />
+            </div> */}
+            <div>
+                <br />
+                <button type="submit">Reset Password</button>
             </div>
             </form>
         </div>

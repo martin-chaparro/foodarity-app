@@ -1,4 +1,5 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
+
 import {useSelector, useDispatch} from 'react-redux'
 import GoogleMapReact from 'google-map-react'
 import Marker from './Marker'
@@ -14,11 +15,16 @@ function GoogleMaps() {
   const companies = useSelector(state => state.companies.companies)
   const dispatch = useDispatch()
 
+  const [allCompanies , setAllCompanies] = useState()
+
+
   useEffect(() => {
     dispatch(getCompanies())
   },[])
 
-
+  useEffect(() => {
+    setAllCompanies(companies.filter(company => company.deleted === false && company.status === "Habilitada"))
+  },[companies])
 
     return (
     <div className={styles.container}>
@@ -35,7 +41,7 @@ function GoogleMaps() {
           defaultZoom={7.5}
           
         >      
-        {companies && companies.map(company => (<Marker
+        {allCompanies && allCompanies.map(company => (<Marker
         key={company.id}
         lat={company.address.location.lat}
         lng={company.address.location.lng}

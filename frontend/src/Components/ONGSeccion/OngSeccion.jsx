@@ -1,3 +1,40 @@
+// import React from 'react';
+// import { Link } from 'react-router-dom';
+// import { styles } from './OngSeccion.style';
+
+// function OngSeccion({ong}) {
+//   return <div>
+//     <Link to={`/company/${ong.id}`}>
+//    <img src={ong.logo.url} alt='' className={styles.imgOngs}/> 
+//     </Link>
+//   </div>;
+// }
+
+// export default OngSeccion
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
@@ -74,7 +111,7 @@ const ImageMarked = styled('span')(({ theme }) => ({
           key={ong.id}
           sx={{width:'100%'}}
         >
-           <img src={ong.logo.url} alt='' className={styles.imgOngs}/>
+           <img src={ong.logo ? ong.logo.url : ''} alt='' className={styles.imgOngs}/>
           <ImageBackdrop className="MuiImageBackdrop-root" />
           <Image>
             <Typography

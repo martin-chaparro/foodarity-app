@@ -99,10 +99,10 @@ export function Fecha({ handleOnChange, input }) {
       autoComplete="off"
     >
       <TextField
+        inputProps={{ min: new Date().toLocaleDateString('en-ca') }}
         label="Fecha Expiracion"
         id="filled-size-normal"
         variant="filled"
-        inputProps={{ min: new Date().toLocaleDateString('en-ca') }}
         type="date"
         name="expirationDate"
         value={input.expirationDate}

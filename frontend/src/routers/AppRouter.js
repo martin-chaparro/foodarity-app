@@ -22,10 +22,10 @@ import RecuperarPassword from '../Pages/RecuperarPassword/RecuperarPassword';
 import OrderPage from '../Pages/Order/OrderPage';
 import Success from '../Components/MercadoPago/Success';
 import Fail from '../Components/MercadoPago/Fail';
-// eslint-disable-next-line no-unused-vars
-import GoogleMapsTest from '../Components/GoogleMaps/GoogleMapsTest';
+// import GoogleMapsTest from '../Components/GoogleMaps/GoogleMapsTest';
 import ConfirmarEmail from '../Components/ConfirmarEmail/ConfirmarEmail';
 import GoogleMaps from '../Components/GoogleMaps/GoogleMaps';
+import ActualizarPassword from '../Pages/ActualizarPassword/ActualizarPassword';
 // import ErrorPage from '../Pages/Error/ErrorPage';
 
 export function AppRouter() {
@@ -47,6 +47,10 @@ export function AppRouter() {
         <Route path="*" element={<Navbar />} />
         <Route path="/enviarMail" element={<EnviarMail />} />
         <Route path="/recuperarPassword" element={<RecuperarPassword />} />
+        <Route
+          path="/actualizarpassword/:id"
+          element={<ActualizarPassword />}
+        />
         <Route path="/register" element={<Register />} />
         {/* <Route path="*" element={<ErrorPage/>} />  */}
       </Routes>

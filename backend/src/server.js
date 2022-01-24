@@ -197,8 +197,8 @@ class Server {
           publicationDate,
           expirationDate,
           category,
-          /*  publisher, 
-          company */
+          publisher,
+          company,
         } = product;
         const newProduct = await Product.create({
           lote,
@@ -211,9 +211,9 @@ class Server {
           expirationDate,
           status: 'published',
         });
+        await newProduct.setPublisher(publisher);
+        await newProduct.setCompany(company);
         await newProduct.setCategory(category);
-        await newProduct.setCompany(1);
-        await newProduct.setPublisher(1);
       });
     } catch (error) {
       console.log('||--> Seed products(HARDCODE) not completed...: <--||');

@@ -10,7 +10,8 @@
     "expirationDate":"01/08/2022",
     "quantity":5,
     "category":4,
-    "publisher":2
+    "publisher":2,
+    "company":2
 
   },
   {
@@ -24,7 +25,8 @@
     "expirationDate":"01/11/2022",
     "quantity":3,
     "category":4,
-    "publisher":2
+    "publisher":2,
+    "company":2
 
     
   },
@@ -37,7 +39,8 @@
     "expirationDate":"01/25/2022",
     "quantity":5,
     "category":4,
-    "publisher":2
+    "publisher":2,
+    "company":2
     
   },
   {
@@ -49,7 +52,8 @@
     "expirationDate":"01/25/2022",
     "quantity":6,
     "category":4,
-    "publisher":2
+    "publisher":2,
+    "company":2
     
   },
   {
@@ -61,7 +65,8 @@
     "expirationDate":"01/28/2022",
     "quantity":10,
     "category":5,
-    "publisher":4
+    "publisher":4,
+    "company":4
     
   },
   {
@@ -73,7 +78,8 @@
     "expirationDate":"01/05/2022",
     "quantity":6,
     "category":5,
-    "publisher":4
+    "publisher":4,
+    "company":4
     
   },
   {
@@ -85,7 +91,8 @@
     "expirationDate":"01/05/2022",
     "quantity":6,
     "category":6,
-    "publisher":4
+    "publisher":4,
+    "company":4
 
   },
   {
@@ -97,7 +104,8 @@
     "expirationDate":"01/13/2022",
     "quantity":15,
     "category":6,
-    "publisher":4
+    "publisher":4,
+    "company":4
     
   },
   {
@@ -109,7 +117,8 @@
     "expirationDate":"01/21/2022",
     "quantity":15,
     "category":1,
-    "publisher":1
+    "publisher":1,
+    "company":1
     
   },
   {
@@ -121,7 +130,8 @@
     "expirationDate":"01/06/2022",
     "quantity":10,
     "category":1,
-    "publisher":1
+    "publisher":1,
+    "company":1
     
   },
   {
@@ -133,7 +143,8 @@
     "expirationDate":"01/16/2022",
     "quantity":10,
     "category":1,
-    "publisher":1
+    "publisher":1,
+    "company":1
     
   },
   {
@@ -145,7 +156,8 @@
     "expirationDate":"01/26/2022",
     "quantity":10,
     "category":2,
-    "publisher":1
+    "publisher":1,
+    "company":1
     
   },
   {
@@ -157,7 +169,8 @@
     "expirationDate":"01/30/2022",
     "quantity":30,
     "category":2,
-    "publisher":1
+    "publisher":1,
+    "company":1
     
   },
   {
@@ -169,7 +182,9 @@
     "expirationDate":"01/30/2022",
     "quantity":50,
     "category":3,
-    "publisher":3
+    "publisher":3,
+    "company":3
+
     
   },
   {
@@ -181,7 +196,8 @@
     "expirationDate":"01/19/2022",
     "quantity":30,
     "category":3,
-    "publisher":3
+    "publisher":3,
+    "company":3
     
   },
   {
@@ -193,7 +209,8 @@
     "expirationDate":"01/15/2022",
     "quantity":20,
     "category":3,
-    "publisher":3
+    "publisher":3,
+    "company":3
     
   },
   {
@@ -205,7 +222,8 @@
     "expirationDate":"01/04/2022",
     "quantity":5,
     "category":7,
-    "publisher":3
+    "publisher":3,
+    "company":3
     
   },
   {
@@ -217,7 +235,8 @@
     "expirationDate":"01/24/2022",
     "quantity":8,
     "category":7,
-    "publisher":4
+    "publisher":4,
+    "company":4
 
     
   },
@@ -230,7 +249,9 @@
     "expirationDate":"01/11/2022",
     "quantity":20,
     "category":8,
-    "publisher":4
+    "publisher":4,
+    "company":4
+
     
   },
   {
@@ -242,7 +263,8 @@
     "expirationDate":"01/13/2022",
     "quantity":20,
     "category":8,
-    "publisher":3
+    "publisher":3,
+    "company":3
     
   },
   {
@@ -254,7 +276,8 @@
     "expirationDate":"01/28/2022",
     "quantity":20,
     "category":9,
-    "publisher":1
+    "publisher":1,
+    "company":1
     
   },
   {
@@ -266,7 +289,8 @@
     "expirationDate":"01/13/2022",
     "quantity":25,
     "category":2,
-    "publisher":4
+    "publisher":4,
+    "company":4
     
   },
   {
@@ -278,7 +302,9 @@
     "expirationDate":"01/12/2022",
     "quantity":25,
     "category":9,
-    "publisher":2
+    "publisher":2,
+    "company":2
+
     
   },
   {
@@ -290,7 +316,8 @@
     "expirationDate":"01/13/2022",
     "quantity":25,
     "category":2,
-    "publisher":1
+    "publisher":1,
+    "company":1
     
   },
   {
@@ -302,7 +329,8 @@
     "expirationDate":"01/23/2022",
     "quantity":30,
     "category":3,
-    "publisher":4
+    "publisher":4,
+    "company":4
     
   },
   {
@@ -314,7 +342,8 @@
     "expirationDate":"01/30/2022",
     "quantity":29,
     "category":2,
-    "publisher":4
+    "publisher":4,
+    "company":4
     
   },
   {
@@ -326,7 +355,8 @@
     "expirationDate":"01/06/2022",
     "quantity":10,
     "category":1,
-    "publisher":1
+    "publisher":1,
+    "company":1
     
   }
  
