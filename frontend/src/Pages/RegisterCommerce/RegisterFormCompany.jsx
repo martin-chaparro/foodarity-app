@@ -83,19 +83,17 @@ export default function RegisterFormCompany({ type }) {
               if (resp.data.status === 'OK') {
                 const newLoc = resp.data.results[0].geometry.location;
                 setDefaultLocation(newLoc);
+                setLocation(newLoc);
               }
             });
         } else {
           setDefaultLocation(loc);
+          setLocation(loc);
         }
         setShowMap(true);
       });
     }
   }, [formValues.cityId]);
-
-  useEffect(() => {
-    console.log(location);
-  }, [location]);
 
   // GOOGLE MAPS
 
@@ -296,6 +294,8 @@ export default function RegisterFormCompany({ type }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const finalAddress = {...formValues, location}
+      console.log(finalAddress)
     if (
       !errors.name &&
       !errors.website &&
@@ -307,6 +307,7 @@ export default function RegisterFormCompany({ type }) {
       !errors.zipcode
       // eslint-disable-next-line no-empty
     ) {
+      
       dispatch(registerComerce(input, { ...formValues, location }));
       Swal.fire({
         icon: 'success',
