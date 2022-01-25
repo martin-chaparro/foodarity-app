@@ -8,9 +8,11 @@ import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import Box from '@mui/material/Box';
 
 import { mainListItems } from './listItems';
 import { toggleAsideMenu } from '../../../redux/actions/ui';
+import fodarityLogo from '../../../assets/WEB-header.png';
 
 const drawerWidth = 240;
 
@@ -58,7 +60,7 @@ export const Aside = () => {
           px: [1],
         }}
       >
-        <Typography
+        {/* <Typography
           component="h1"
           variant="h6"
           color="inherit"
@@ -66,6 +68,31 @@ export const Aside = () => {
           sx={{ flexGrow: 1 }}
         >
           Foodarity
+        </Typography> */}
+        <Box
+          noWrap
+          sx={{
+            flexGrow: 1,
+            height: 40,
+            overflow: 'hidden',
+            position: 'relative',
+          }}
+          component="div"
+        >
+          <img
+            src={fodarityLogo}
+            alt="Fodarity Logo"
+            style={{ width: 'auto', height: '40px' }}
+          />
+        </Box>
+           <Typography
+          component="h1"
+          variant="h6"
+          color="inherit"
+          noWrap
+          sx={{ flexGrow: 1, fontWeight:'bold' }}
+        >
+          Back Office
         </Typography>
         <IconButton onClick={toggleDrawer}>
           <ChevronLeftIcon />
