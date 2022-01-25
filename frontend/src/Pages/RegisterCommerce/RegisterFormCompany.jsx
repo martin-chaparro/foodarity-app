@@ -237,10 +237,10 @@ export default function RegisterFormCompany({ type }) {
       ...input,
       [name]: value,
     });
-    if (value !== '' && !/^(ftp|http|https):\/\/[^ "]+$/.test(value)) {
+    if (value !== '' && !/^(www)[^ "]+$/.test(value)) {
       setErrors({
         ...errors,
-        [name]: 'La URL no es valida! - Debe contener https://www',
+        [name]: 'La URL no es valida!',
       });
     } else {
       setErrors({
