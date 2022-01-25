@@ -93,7 +93,6 @@ export default function OngForm() {
     e.preventDefault();
 
     const errors = validate(input);
-    console.log(errors);
 
     if (Object.keys(errors).length) {
       Swal.fire({
@@ -276,7 +275,7 @@ export default function OngForm() {
                         // eslint-disable-next-line react/jsx-no-bind
                         ValidateQuantity={ValidateQuantity}
                       />
-                      <div classsName={styles.quantityError}>
+                      <div classsname={styles.quantityError}>
                         <p className={styles.error}>
                           {error.quantity && error.quantity}
                         </p>

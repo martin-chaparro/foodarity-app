@@ -87,8 +87,7 @@ export default function PostNewBatch() {
       [e.target.name]: e.target.value,
     });
   }
-
-  console.log(Object.keys(validate(input)).length);
+  
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -342,7 +341,7 @@ export default function PostNewBatch() {
                   ValidateQuantity={ValidateQuantity}
                   // eslint-disable-next-line react/jsx-no-bind
                 />
-                <div classsName={styles.quantityError}>
+                <div classsname={styles.quantityError}>
                   <p className={styles.error}>
                     {error.quantity && error.quantity}
                   </p>

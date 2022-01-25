@@ -195,7 +195,7 @@ export default function Usuarios({ company }) {
             {rows &&
               rows
                 /* .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage) */
-                .map((row) => {
+                .map((row,index) => {
                   return (
                     <TableRow
                       hover
@@ -206,7 +206,8 @@ export default function Usuarios({ company }) {
                         fontWeight: '700',
                       }}
                       tabIndex={-1}
-                      key={row.code}
+                      // eslint-disable-next-line react/no-array-index-key
+                      key={index}
                     >
                       {columns.map((column) => {
                         const value = row[column.id];

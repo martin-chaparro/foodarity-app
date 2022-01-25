@@ -54,7 +54,7 @@ const columns = [
 export default function Orders({ orders }) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  console.log(orders);
+
 
   function createData(
     comprador,
