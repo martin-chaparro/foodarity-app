@@ -108,6 +108,15 @@ module.exports = [
     firstLogin: true,
   },
   {
+    name: 'Javier Rostagno',
+    email: 'javier.rostagno@gmail.com',
+    password: '123456',
+    status: true,
+    roleId: 2,
+    validated: true,
+    firstLogin: true,
+  },
+  {
     name: 'Common user',
     email: 'user@user.com',
     password: 'user',

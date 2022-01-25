@@ -27,7 +27,6 @@ export default function PostNewBatch() {
   const [photo, setPhoto] = useState({});
   // const [photoPrev, setPhotoPrev] = useState('');
   // eslint-disable-next-line no-unused-vars
-  
 
   const [error, setError] = useState({});
 
@@ -87,7 +86,6 @@ export default function PostNewBatch() {
       [e.target.name]: e.target.value,
     });
   }
-  
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -116,7 +114,7 @@ export default function PostNewBatch() {
       Swal.fire({
         icon: 'error',
         title: 'Precio incorrecto!',
-        text: '¡Solo se aceptan numeros, utilice un "." para los decimales!',
+        text: '¡Solo se aceptan numeros!',
       });
     } else if (error.quantity) {
       Swal.fire({
@@ -303,7 +301,6 @@ export default function PostNewBatch() {
                 // eslint-disable-next-line react/jsx-no-bind
                 handleOnChange={handleOnChange}
               />
-             
             </div>
           </div>
 
@@ -316,7 +313,6 @@ export default function PostNewBatch() {
                   // eslint-disable-next-line react/jsx-no-bind
                   handleOnChange={handleOnChange}
                 />
-               
               </div>
               <div className={styles.divprecio}>
                 <Fecha
@@ -325,7 +321,6 @@ export default function PostNewBatch() {
                   // eslint-disable-next-line react/jsx-no-bind
                   handleOnChange={handleOnChange}
                 />
-               
               </div>
             </div>
 
@@ -374,7 +369,6 @@ export default function PostNewBatch() {
               // eslint-disable-next-line react/jsx-no-bind
               handleOnChange={handleOnChange}
             />
-           
           </div>
           <Button
             // onClick={() => handleOnclick()}

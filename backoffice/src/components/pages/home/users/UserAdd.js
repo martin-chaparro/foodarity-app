@@ -15,7 +15,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Button from '@mui/material/Button';
 
-import { Formik, useFormik } from 'formik';
+import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
 import defaultAvatar from '../../../../assets/avatar_default.png';
@@ -72,9 +72,9 @@ export const UserAdd = () => {
           .post(`/admin/users`, formik.values)
           .then((response) => {
             apiWithToken
-              .patch(`/admin/users/upload/${response.data.id}`, formdata)          
+              .patch(`/admin/users/upload/${response.data.id}`, formdata)
               .then(() => {
-                dispatch(finishLoading())
+                dispatch(finishLoading());
                 Swal.fire({
                   icon: 'success',
                   title: 'Creado',
@@ -92,7 +92,7 @@ export const UserAdd = () => {
             setFile(null);
           })
           .catch(() => {
-            dispatch(finishLoading())
+            dispatch(finishLoading());
             Swal.fire({
               icon: 'error',
               title: 'No se pudo crear!',
@@ -105,7 +105,7 @@ export const UserAdd = () => {
         apiWithToken
           .post(`/admin/users`, formik.values)
           .then(() => {
-            dispatch(finishLoading())
+            dispatch(finishLoading());
             Swal.fire({
               icon: 'success',
               title: 'Creado',
@@ -113,7 +113,7 @@ export const UserAdd = () => {
             });
           })
           .catch(() => {
-            dispatch(finishLoading())
+            dispatch(finishLoading());
             Swal.fire({
               icon: 'error',
               title: 'No se pudo crear!',
@@ -329,7 +329,11 @@ export const UserAdd = () => {
                 </Button>
               </Grid>
               <Grid item ml={2}>
-                <Button variant="outlined" type="submit" disabled={!formik.isValid}>
+                <Button
+                  variant="outlined"
+                  type="submit"
+                  disabled={!formik.isValid}
+                >
                   Guardar
                 </Button>
               </Grid>

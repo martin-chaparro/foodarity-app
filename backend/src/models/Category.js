@@ -8,6 +8,11 @@ class Category extends Model {
           type: DataTypes.STRING,
           allowNull: false,
         },
+        deleted: {
+          type: DataTypes.BOOLEAN,
+          allowNull: false,
+          defaultValue: false,
+        },
       },
       {
         sequelize,
