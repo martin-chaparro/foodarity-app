@@ -144,7 +144,7 @@ const deleteUser = async (request, response) => {
   console.log('delete');
   const { id } = request.params;
   const { userId } = request;
-  
+
   if (id === userId) {
     return response
       .status(401)

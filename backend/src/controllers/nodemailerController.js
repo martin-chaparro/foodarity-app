@@ -80,11 +80,11 @@ const confirmarMail = async (req, res) => {
       );
       oAuth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
 
-      const user = await User.findByPk(id)
+      const user = await User.findByPk(id);
       if (!user) {
-        return res.status(400).json({ message:'Verifique los datos'  });
+        return res.status(400).json({ message: 'Verifique los datos' });
       }
-      await user.update({mailCode:uuidv4()})
+      await user.update({ mailCode: uuidv4() });
 
       async function sendMail() {
         try {
@@ -139,11 +139,11 @@ const resetPassword = async (req, res) => {
       );
       oAuth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
 
-      const user = await User.findOne({where:{email}})
+      const user = await User.findOne({ where: { email } });
       if (!user) {
-        return res.status(400).json({ message:'Verifique los datos'  });
+        return res.status(400).json({ message: 'Verifique los datos' });
       }
-      await user.update({mailCode:uuidv4()})
+      await user.update({ mailCode: uuidv4() });
       async function sendMail() {
         try {
           const accessToken = await oAuth2Client.getAccessToken();
@@ -183,10 +183,8 @@ const resetPassword = async (req, res) => {
   }
 };
 
-
-
 module.exports = {
   enviarMail,
   confirmarMail,
-  resetPassword
+  resetPassword,
 };

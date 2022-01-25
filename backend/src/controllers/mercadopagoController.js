@@ -194,8 +194,37 @@ const createPreference = async (request, response) => {
   }
 };
 
+const unlinkMercadopago = async (req, res) => {
+  const {userId} = req
+  try {
+    const user = await User.findByPk(userId)
+  if (!user) {
+    return res.status(400).json({message: 'el usuario no existe'})
+  }
+  if (!user.status) {
+    return res.status(400).json({message: 'el usuario no esta habilitadop'})
+  } 
+  if (user.deleted) {
+    return res.status(400).json({message: 'el usuario no existe'})
+  }
+  if (!user.validated) {
+    return res.status(400).json({message: 'el usuario no esta validado'})
+  }
+  const company = await Company.findByPk(user.company_id)
+  if (!company) {
+    return res.status(400).json({message: 'la compania no existe'})
+  }
+  company.update({mpCode: null})
+  return res.status(200).json(company)
+  } catch (error) {
+    return res.status(500).json({message: error})
+  }
+  
+}
+
 module.exports = {
   validateCode,
   getUrlRegister,
   createPreference,
+  unlinkMercadopago
 };

@@ -15,7 +15,7 @@ export default function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  window.scroll(0, 0)
+  window.scroll(0, 0);
 
   const [errors, setErrors] = useState({});
 
@@ -45,6 +45,17 @@ export default function Login() {
       });
     }
   };
+
+  const [isAllow, setIsAllow] = React.useState(false);
+
+  useEffect(() => {
+    if (
+      Object.values(errors).filter((e) => e !== '').length === 0 &&
+      Object.values(input).filter((e) => e === '').length === 0
+    )
+      setIsAllow(true);
+    else setIsAllow(false);
+  }, [errors, input]);
 
   const validatePassword = (e) => {
     const { name, value } = e.target;
@@ -93,84 +104,88 @@ export default function Login() {
 
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
-      handleSubmit(e)
+      handleSubmit(e);
     }
-  }
+  };
 
   // Fin
 
   return (
     <div backgroundcolor="transparent">
       <div className={estilos.contLogo}>
-        <Link to='/'>
-     <img className={estilos.logo}src={logo} alt="" />
-     </Link>
-     </div>
-     <form onSubmit={handleSubmit}>
-      <div>
-        <div className={estilos.contener}>
-          <h3>Ingrese su Email</h3>
-          <input
-            type="text"
-            name="email"
-            value={input.email}
-            autoComplete="off"
-            title="Email requerido"
-            pattern="[a-zA-Z ]{2,254}"
-            required
-            placeholder="Email..."
-            onChange={(e) => {
-              handleOnChange(e);
-              validateEmail(e);
-            }}
-          />
-          <div className={estilos.divErrorEmail}>
-            <p className={estilos.errors}>{errors.email}</p>
-          </div>
-          <h3>Ingrese su Contraseña</h3>
-          <input
-            type="password"
-            name="password"
-            value={input.password}
-            title="Contraseña requerida"
-            required
-            placeholder="Contraseña..."
-            onChange={(e) => {
-              handleOnChange(e);
-              validatePassword(e);
-            }}
-            onKeyPress={handleKeyPress}
-          />
-          <div className={estilos.divErrorContraseña}>
-            <p className={estilos.errors}>{errors.password}</p>
-          </div>
-          <Button
-            variant="contained"
-            sx={{
-              backgroundColor: '#FDFFB6',
-              height: '2.5em',
-              color: '#3e2463',
-              fontStyle: 'bold',
-              margin: '3em 2em 2em',
-            }}
-            onClick={(e) => handleSubmit(e)}
-       
-          >
-            Ingresar
-          </Button>
-
-          <GoogleLogin
-            clientId="327655390134-3dkok4tsgubva7v5gj7drncddv260lor.apps.googleusercontent.com"
-            buttonText="Continuar con Google"
-            onSuccess={responseGoogleSucces}
-            onFailure={responseGoogleFail}
-            cookiePolicy="single_host_origin"
-            style={{ width: '100%' }}
-          />
-            <p>  Olvidaste tu contraseña? <Link to="/enviarMail">Cambiala ahora</Link></p>
-        </div>
+        <Link to="/">
+          <img className={estilos.logo} src={logo} alt="" />
+        </Link>
       </div>
-    </form>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <div className={estilos.contener}>
+            <h3>Ingrese su Email</h3>
+            <input
+              type="text"
+              name="email"
+              value={input.email}
+              autoComplete="off"
+              title="Email requerido"
+              pattern="[a-zA-Z ]{2,254}"
+              required
+              placeholder="Email..."
+              onChange={(e) => {
+                handleOnChange(e);
+                validateEmail(e);
+              }}
+            />
+            <div className={estilos.divErrorEmail}>
+              <p className={estilos.errors}>{errors.email}</p>
+            </div>
+            <h3>Ingrese su Contraseña</h3>
+            <input
+              type="password"
+              name="password"
+              value={input.password}
+              title="Contraseña requerida"
+              required
+              placeholder="Contraseña..."
+              onChange={(e) => {
+                handleOnChange(e);
+                validatePassword(e);
+              }}
+              onKeyPress={handleKeyPress}
+            />
+            <div className={estilos.divErrorContraseña}>
+              <p className={estilos.errors}>{errors.password}</p>
+            </div>
+            <Button
+              variant="contained"
+              sx={{
+                backgroundColor: '#FDFFB6',
+                height: '2.5em',
+                color: '#3e2463',
+                fontStyle: 'bold',
+                margin: '3em 2em 2em',
+              }}
+              disabled={!isAllow}
+              onClick={(e) => handleSubmit(e)}
+            >
+              Ingresar
+            </Button>
+
+            <GoogleLogin
+              clientId="327655390134-3dkok4tsgubva7v5gj7drncddv260lor.apps.googleusercontent.com"
+              buttonText="Continuar con Google"
+              onSuccess={responseGoogleSucces}
+              onFailure={responseGoogleFail}
+              cookiePolicy="single_host_origin"
+              style={{ width: '100%' }}
+            />
+            <p>
+              {' '}
+              Olvidaste tu contraseña?{' '}
+              <Link to="/enviarMail">Cambiala ahora</Link>
+            </p>
+          </div>
+        </div>
+      </form>
     </div>
   );
 }

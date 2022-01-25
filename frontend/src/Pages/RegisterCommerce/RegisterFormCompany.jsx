@@ -103,12 +103,13 @@ export default function RegisterFormCompany({ type }) {
   useEffect(() => {
     if (
       !checked &&
-      !Object.keys(errors).length &&
-      Object.values(input).filter((e, i) => e === '' && i !== 1).length === 7
+      Object.values(errors).filter((e) => e !== '').length === 0 &&
+      Object.values(input).filter((e, i) => e === '' && i !== 1).length === 0 &&
+      Object.values(formValues).filter((e) => e === null).length === 0
     )
       setIsAllow(true);
     else setIsAllow(false);
-  }, [checked, errors, input]);
+  }, [checked, errors, input, formValues]);
 
   const handleCheck = (e) => {
     e.preventDefault();
@@ -236,10 +237,10 @@ export default function RegisterFormCompany({ type }) {
       ...input,
       [name]: value,
     });
-    if (!/^(ftp|http|https):\/\/[^ "]+$/.test(value)) {
+    if (value !== '' && !/^(www)[^ "]+$/.test(value)) {
       setErrors({
         ...errors,
-        [name]: 'La URL no es valida! - Debe contener https://www',
+        [name]: 'La URL no es valida!',
       });
     } else {
       setErrors({
@@ -318,10 +319,15 @@ export default function RegisterFormCompany({ type }) {
         title: 'Bien',
         text: 'El Comercio fue registrado Correctamente',
       });
-/*       window.location.href = '/home'; */
+      /*       window.location.href = '/home'; */
     } else {
       // eslint-disable-next-line no-alert
-      alert('Complete el formulario');
+
+      Swal.fire({
+        icon: 'error',
+        title: 'Oppss!',
+        text: 'Favor complete todos los campos !',
+      });
     }
   };
   return (
@@ -608,7 +614,7 @@ export default function RegisterFormCompany({ type }) {
           {/* BOTON DE ENVIAR SOLICITUD: Dicho botón se encuentra 
           dentro del componente Alert Ong y para conectar el submit 
           con el backend debe configurarse en ese mismo componente AlertOng */}
-          <AlertOng displays={!isAllow}  display={false}/>
+          <AlertOng display={!isAllow} />
         </div>
       </form>
     </div>

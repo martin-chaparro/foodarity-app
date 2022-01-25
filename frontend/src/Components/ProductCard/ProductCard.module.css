@@ -176,13 +176,14 @@
   display: flex;
   justify-content: flex-end;
   position: relative;
-  bottom: 15px;
+  bottom: 20px;
   right: 5px;
   margin: 0;
   position: relative;
   right: 5;
   bottom: 40;
   font-size: 10;
+  user-select: none;
 }
 
 .heart {
@@ -191,7 +192,6 @@
 
 .cartOptionsCont {
   position: relative;
-  top: 15px;
   right: 15px;
   display: flex;
   justify-content: flex-end;
@@ -215,7 +215,7 @@
 
 .divFavButton {
   position: relative;
-  top: 30px;
+  top: 15px;
   display: flex;
   justify-content: flex-end;
   height: 31px;
@@ -224,11 +224,13 @@
 }
 
 .priceCont {
-  margin-top: 38px;
+  position: relative;
+  top: 50px;
 }
 
 .price {
   margin: 0;
+  user-select: none;
 }
 
 .titleTypographyDesc {
@@ -238,6 +240,7 @@
   left: 10px;
   margin: 0;
   bottom: 20px;
+  user-select: none;
 }
 
 .DivPostData {
@@ -261,6 +264,7 @@
 
 .CompanyNameDiv {
   position: relative;
+  bottom: 5px;
   left: 20px;
   width: 200px;
   display: flex;
@@ -268,6 +272,44 @@
   justify-content: center;
   align-items: flex-end;
 }
+
+.expDate {
+  height: 16px;
+  position: relative;
+  top:25px;
+    display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 16px;
+  user-select: none;
+}
+
+.date {
+  position: relative;
+  bottom: 30px;
+  font-weight: 400;
+ 
+}
+
+.category {
+  height: 35px;
+  position: relative;
+  top: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 16px;
+  user-select: none;
+}
+
+.categoryName {
+  position: relative;
+  bottom: 30px;
+  font-weight: 400;
+}
+
 
 .divBtnReservar {
   width: 100px;
@@ -312,18 +354,18 @@
 }
 
 .favButton:hover {
-  background-color: rgb(243, 67, 67);
+  background-color: #4cc75e;
 }
 
 .favButton:focus-within {
-  background-color: rgb(243, 67, 67);
+  background-color: #4cc75e;
 }
 .googleMap {
   height: 150px;
-  width: 190px;
+  width: 200px;
   position: relative;
-  bottom: 10px;
-  left: 30px;
+  bottom: 15px;
+  left: 25px;
 }
 
 @media screen and (max-width: 576px) {
