@@ -313,11 +313,11 @@ export default function RegisterFormCompany({ type }) {
       // eslint-disable-next-line no-empty
     ) {
       dispatch(registerComerce(input, { ...formValues, location }));
-      Swal.fire({
+      /* Swal.fire({
         icon: 'success',
         title: 'Bien',
         text: 'El Comercio fue registrado Correctamente',
-      });
+      }); */
       /*       window.location.href = '/home'; */
     } else {
       // eslint-disable-next-line no-alert
