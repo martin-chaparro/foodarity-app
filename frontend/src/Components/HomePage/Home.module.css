@@ -1,9 +1,8 @@
 .parent {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   grid-template-rows: 1fr;
-  grid-column-gap: 1em;
-  grid-row-gap: 0px;
+  column-gap: 2em;
   min-height: 100vh;
   height: 100%;
 }
@@ -64,11 +63,19 @@
 }
 
 .filtroWeb {
-  padding: 1em 2em;
+  padding: 1em;
+  margin-right: 1em;
 }
 
 .divContainerCards {
   height: 100%;
+   display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(3, 5fr);
+  grid-column-gap: 2em;
+  position: relative;
+  right: 5.5em;
+  
 }
 
 /* ONG SECCION */
@@ -111,10 +118,35 @@
     display: flex;
     justify-content: center;
   }
+  .divContainerCards {
+    grid-template-columns: repeat(1, 1fr);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0;
+  }
 }
 
 @media screen and (min-width: 576px) {
   .header {
     display: none;
+  }
+}
+
+@media screen and (min-width: 576px) {
+
+  .filtroWeb {
+    width: 400px;
+  }
+}
+
+@media screen and (min-width: 1900px) {
+  .divContainerCards {
+  position: relative;
+  right: 29.5em;
+  grid-template-rows: repeat(3, 0.26fr);
+  }
+  .filtroWeb {
+    width: 500px;
   }
 }

@@ -23,7 +23,7 @@ export default function BannerSearch({ search, lote, filtrado }) {
             variant="h6"
             gutterBottom
             component="div"
-            sx={{ color: 'white', marginTop: 1, textStyle: 'bold' }}
+            sx={{ color: 'white', marginTop: 1, textStyle: 'bold', userSelect: 'none', }}
           >
             PRODUCTOS
           </Typography>
