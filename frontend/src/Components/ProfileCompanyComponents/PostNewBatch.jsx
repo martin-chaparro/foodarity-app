@@ -341,7 +341,7 @@ export default function PostNewBatch() {
                   ValidateQuantity={ValidateQuantity}
                   // eslint-disable-next-line react/jsx-no-bind
                 />
-                <div classsname={styles.quantityError}>
+                <div classsName={styles.quantityError}>
                   <p className={styles.error}>
                     {error.quantity && error.quantity}
                   </p>
