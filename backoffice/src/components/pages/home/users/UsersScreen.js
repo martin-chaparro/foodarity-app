@@ -80,7 +80,7 @@ export const UsersScreen = () => {
   }, [term]);
 
   const handleEdit = (event, id) => {
-    navigate(`/users/${id}`, { replace: true });
+    navigate(`/users/update/${id}`, { replace: true });
   };
 
   const handleDelete = (event, id) => {
@@ -125,9 +125,14 @@ export const UsersScreen = () => {
     }
   };
 
+
   const handleInputSearch = ({ target }) => {
     setTerm(target.value);
   };
+
+  const handleAddUser = ()=>{
+    navigate(`/users/add`, { replace: true });
+  }
 
   return (
     <Layout>
@@ -138,7 +143,7 @@ export const UsersScreen = () => {
       </Grid>
       <Divider />
       <Grid mt={2}>
-        <Button variant="outlined">Agregar Usuario</Button>
+        <Button variant="outlined" onClick={handleAddUser}>Agregar Usuario</Button>
       </Grid>
       <Grid container spacing={3} pt={2}>
         <Grid item xs={12} lg={12}>

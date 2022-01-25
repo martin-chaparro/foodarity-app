@@ -3,6 +3,7 @@ const Donation = require('../models/Donation');
 const User = require('../models/User');
 const Company = require('../models/Company');
 const Category = require('../models/Category');
+const {send} = require('./nodemailerController')
 
 cloudinary.config(process.env.CLOUDINARY_URL);
 
@@ -66,7 +67,16 @@ const postDonation = async (req, res) => {
     await newDonation.setOng(ong);
     await newDonation.setPublisher(userId);
     await newDonation.setCategory(category);
-
+    await send(ong.email, 'Recibiste una donación!', `Acabas de recibir una donacion de ${commerce.name}. Te dejamos sus datos para que se puedan ponen en contacto.\n
+    web: ${commerce.website}\n
+    email: ${commerce.email}\n
+    telefono: ${commerce.areaCode} ${commerce.phone}\n\n
+    Podes ver el detalle de tu compra en tu perfil de usuario.`)
+    await send(commerce.email, 'Realizaste una donación', `Acabas de realizar una donacion a ${ong.name}. Te dejamos sus datos para que se puedan ponen en contacto.\n
+    web: ${ong.website}\n
+    email: ${ong.email}\n
+    telefono: ${ong.areaCode} ${ong.phone}\n\n
+    Podes ver el detalle de tu compra en tu perfil de usuario.`)
     return res.status(200).json(newDonation);
   } catch (error) {
     return res.status(500).send({ message: error });
@@ -95,7 +105,7 @@ const getDonationsByOng = async (req, res) => {
       attributes: { exclude: ['createdAt', 'updatedAt'] },
       order: [['lote', 'ASC']],
       where: {
-        ong_id: ownerId,
+        ong_id: ong.id ,
       },
     });
     return res.status(200).json(listDonations);

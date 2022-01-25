@@ -1,5 +1,6 @@
 /* eslint-disable no-alert */
 import React, { useEffect, useState } from 'react';
+import Swal from 'sweetalert2'
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { apiWithToken } from '../../services/api';
 
@@ -14,17 +15,30 @@ function MpRedirect() {
   // const handleRegister = () => {
   //   api.post(`/mercadopago/register?code=${code}&state=${state}`);
   // };
+  const success = () => {
+    Swal.fire({
+      icon: 'success',
+      title: 'Bien',
+      text: 'Comercio registrado correctamente.'})
+      navigate('/profilecompany')
+  }
+  const error = () => {
+    Swal.fire({
+      icon: 'error',
+      title: 'Bien',
+      text: 'Hubo un error, vuelva a intentarlo.'})
+    navigate('/home')
+  }
 
   useEffect(() => {
     if (code !== '' && state !== '') {
       apiWithToken
         .post(`/mercadopago/register?code=${code}&state=${state}`)
-        .then((response) => {
-          console.log(response.data);
+        .then(() => {
           setenabled(true);
         })
-        .catch((error) => {
-          console.log(error);
+        .catch((err) => {
+          console.log(err);
           // navigate('/', { replace: true });
         });
     } else {
@@ -35,14 +49,12 @@ function MpRedirect() {
 
   return (
     <div>
-      {enabled === true && (
-        alert('Comercio registrado correctamente'),
-        navigate('/profilecompany')
-      )}
-      {enabled === false && (
-        alert('Hubo un error, vuelva a intentarlo'),
-        navigate('/home')
-      )}
+      {enabled === true && 
+        success()
+      }
+      {enabled === false && 
+         error()
+      }
     </div>
   );
 }

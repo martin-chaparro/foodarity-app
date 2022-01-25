@@ -80,16 +80,13 @@
 
 /* ONG SECCION */
 
-
 .ongAndTitleContainer {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
 }
 .ongAndTitleContainer h2 {
-  
   margin: 10px;
   position: relative;
 }
@@ -107,7 +104,6 @@
   font-size: 25px;
   color: rgb(99, 37, 180);
   font-weight: bold;
-
 }
 
 @media screen and (max-width: 576px) {
