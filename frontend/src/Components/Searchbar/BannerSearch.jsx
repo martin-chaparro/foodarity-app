@@ -8,7 +8,7 @@ import Drawer from '../Drawer/Drawer';
 // import hero1 from '../../assets/hero1.jpg';
 
 function goDown () {
-  window.scrollTo({top: (window.innerHeight + 200), behavior: 'smooth'})
+  window.scrollTo({top: (window.innerHeight + 210), behavior: 'smooth'})
 }
 
 export default function BannerSearch({ search, lote, filtrado }) {
