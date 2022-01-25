@@ -3,7 +3,6 @@ import React from 'react';
 // eslint-disable-next-line import/no-duplicates
 import { useEffect, useState } from 'react';
 import Typography from '@mui/material/Typography';
-
 import { useDispatch, useSelector } from 'react-redux';
 import { getProducts } from '../../redux/actions/productActions';
 import { getOngs } from '../../redux/actions/CompaniesActions';

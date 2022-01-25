@@ -71,7 +71,7 @@
   height: 100%;
    display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(3, 2fr);
+  grid-template-rows: repeat(3, 5fr);
   grid-column-gap: 2em;
   position: relative;
   right: 5.5em;
@@ -143,7 +143,10 @@
 @media screen and (min-width: 1900px) {
   .divContainerCards {
   position: relative;
-  right: 30em;
+  right: 29.5em;
   grid-template-rows: repeat(3, 0.26fr);
+  }
+  .filtroWeb {
+    width: 500px;
   }
 }
