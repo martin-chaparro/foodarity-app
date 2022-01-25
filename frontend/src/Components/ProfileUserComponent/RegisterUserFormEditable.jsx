@@ -24,9 +24,9 @@ export default function RegisterUserFormEditable({ detail }) {
   const [open, setOpen] = React.useState(false);
   const [data, setData] = React.useState({
     id: localStorage.getItem('id'),
-    name: detail.name,
-    email: detail.email,
-    phone: detail.phone,
+    name: detail.name || '',
+    email: detail.email || '',
+    phone: detail.phone || '',
   });
   const [preview, setPreview] = React.useState(null);
 
@@ -159,6 +159,7 @@ export default function RegisterUserFormEditable({ detail }) {
                 autoComplete="off"
                 onChange={(e) => handleChange(e)}
                 value={data.email}
+                disabled
               />
               <h5>Número Celular</h5>
               <input

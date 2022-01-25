@@ -18,7 +18,7 @@ export default function Donations({ donations, typeId }) {
     setPage(newPage);
   };
 
-  console.log(donations);
+
 
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value);
@@ -35,18 +35,16 @@ export default function Donations({ donations, typeId }) {
       format: (value) => value.toLocaleString('en-US'),
     },
     {
-      id: 'fecha',
-      label: 'FECHA DONACION',
+      id: 'category',
+      label: 'CATEGORIA',
       minWidth: 170,
       align: 'right',
       format: (value) => value.toFixed(2),
     },
   ];
 
-  function createData(lote, ong, cantidad, fecha) {
-    // const density = population / size;
-
-    return { lote, ong, cantidad, fecha };
+  function createData(lote, ong, cantidad, category) {
+    return { lote, ong, cantidad, category };
   }
 
   const rows = donations.map((donation) => {
@@ -54,7 +52,7 @@ export default function Donations({ donations, typeId }) {
       donation.lote,
       typeId === 1 ? donation.ong.name : donation.company.name,
       donation.quantity,
-      donation.fecha
+      donation.category.name
     );
   });
 
@@ -106,9 +104,11 @@ export default function Donations({ donations, typeId }) {
           <TableBody>
             {rows
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row) => {
+              .map((row,index) => {
                 return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                  
+                  // eslint-disable-next-line react/no-array-index-key
+                  <TableRow hover role="checkbox" tabIndex={-1} key={index}>
                     {columns.map((column) => {
                       const value = row[column.id];
                       return (

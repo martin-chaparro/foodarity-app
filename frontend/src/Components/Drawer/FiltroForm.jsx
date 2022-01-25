@@ -2,8 +2,9 @@
 import React, { useState, useEffect } from 'react';
 // import {useDispatch} from 'react-redux'
 // import {getProducts} from '../../redux/actions/productActions'
+import Button from '@mui/material/Button';
 import { api } from '../../services/api';
-import styles from './FiltroForm.module.css'
+import styles from './FiltroForm.module.css';
 
 function FiltroForm({ filtrado }) {
   // const dispatch = useDispatch()
@@ -21,11 +22,12 @@ function FiltroForm({ filtrado }) {
     if (!input.minPrice) setInput({ ...input, minPrice: '0' });
     if (!input.maxPrice) setInput({ ...input, maxPrice: '0' });
   }, [input.minPrice, input.maxPrice]);
- 
+
   useEffect(() => {
-    api.get('/products/categories')
+    api
+      .get('/products/categories')
       .then((res) => {
-        return res.data
+        return res.data;
       })
       .then((res) => {
         setCategories(res);
@@ -33,7 +35,7 @@ function FiltroForm({ filtrado }) {
   }, []);
 
   const handleClear = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     const clearInput = {
       categoryName: 'Todas',
       categoryId: '',
@@ -41,10 +43,10 @@ function FiltroForm({ filtrado }) {
       maxPrice: '0',
       expirationDate: 'clear',
       order: 'recents',
-    }
-    setInput(clearInput)
-    filtrado(clearInput)
-  }
+    };
+    setInput(clearInput);
+    filtrado(clearInput);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -63,8 +65,13 @@ function FiltroForm({ filtrado }) {
       <form onSubmit={handleSubmit}>
         <div className={styles.OrderBy}>
           <label>Ordenar por: </label>
-          <label >
-            <select className={styles.OrderByInput} name="order" onChange={handleChange} value={input.order}>
+          <label>
+            <select
+              className={styles.OrderByInput}
+              name="order"
+              onChange={handleChange}
+              value={input.order}
+            >
               <option value="recents">Mas recientes</option>
               <option value="priceASC">Precio minimo</option>
               <option value="priceDESC">Precio maximo</option>
@@ -76,7 +83,12 @@ function FiltroForm({ filtrado }) {
         <div className={styles.filterByCategory}>
           <label>Filtrar por categoria: </label>
           <label>
-            <select className={styles.filterByInput} name="categoryName" onChange={handleChange} value={input.categoryName}>
+            <select
+              className={styles.filterByInput}
+              name="categoryName"
+              onChange={handleChange}
+              value={input.categoryName}
+            >
               <option value="Todas">Todas</option>
               {categories &&
                 categories.map((category) => (
@@ -89,9 +101,9 @@ function FiltroForm({ filtrado }) {
         </div>
         <div>
           <div className={styles.minPrice}>
-            <label >Precio Minimo:</label>
+            <label>Precio Minimo:</label>
             <input
-            className={styles.minPriceInput}
+              className={styles.minPriceInput}
               type="number"
               name="minPrice"
               min="0"
@@ -99,10 +111,10 @@ function FiltroForm({ filtrado }) {
               value={input.minPrice}
             />
           </div>
-          <div  className={styles.maxPrice}>
+          <div className={styles.maxPrice}>
             <label>Precio Maximo:</label>
             <input
-            className={styles.maxPriceInput}
+              className={styles.maxPriceInput}
               type="number"
               name="maxPrice"
               min="0"
@@ -114,17 +126,49 @@ function FiltroForm({ filtrado }) {
         <div className={styles.maxExp}>
           <label>Fecha Max. Expiración de Lote:</label>
           <input
-          className={styles.maxExpInput}
+            className={styles.maxExpInput}
             type="date"
             name="expirationDate"
             min={new Date().toLocaleDateString('en-ca')}
             onChange={handleChange}
-            
           />
         </div>
         <div className={styles.divButtons}>
-        <button className={styles.applyButton} type="submit">Aplicar filtros</button>
-        <button  className={styles.resetButton}type="button" onClick={handleClear}>Reiniciar filtros</button>
+          <Button
+            type="submit"
+            // onClick={handleOpen}
+            sx={{
+              color: 'white',
+              backgroundColor: '#3E2463',
+              '&:hover': { backgroundColor: '#3E246390 !important' },
+              marginTop: 1,
+            }}
+          >
+            Aplicar filtros
+          </Button>
+          {/* <button className={styles.applyButton} type="submit">
+            Aplicar filtros
+          </button> */}
+          <Button
+            // type="submit"
+            type="button"
+            onClick={handleClear}
+            sx={{
+              color: 'white',
+              backgroundColor: '#7ED957',
+              '&:hover': { backgroundColor: '#7ED95790 !important' },
+              marginTop: 1,
+            }}
+          >
+            Reiniciar filtros
+          </Button>
+          {/* <button
+            className={styles.resetButton}
+            type="button"
+            onClick={handleClear}
+          >
+            Reiniciar filtros
+          </button> */}
         </div>
       </form>
     </div>

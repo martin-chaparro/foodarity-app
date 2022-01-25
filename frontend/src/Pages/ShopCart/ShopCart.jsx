@@ -25,8 +25,7 @@ export default function ShopCart() {
         byCommerce[item.product.company_id].push(item);
       }
     });
-    console.log(byCommerce);
-    console.log(cartByCommerce);
+
     setCartByCommerce(byCommerce);
   }, [cart]);
 

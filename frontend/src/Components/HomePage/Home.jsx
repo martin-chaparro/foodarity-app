@@ -96,6 +96,14 @@ export default function Home() {
         </div>
         <Pagination paginado={paginado} />
       </div>
+      <div className={styles.ongAndTitleContainer}>
+        <h2 className={styles.titleOng}>¡Conoce nuestras ONGs!</h2>
+        <div className={styles.contOngs}>
+          {allOngs.length > 0 ?
+           ( allOngs.map((ong) => { return <OngSeccion key={ong.id} ong={ong} />;})): <h2>No hay ONGs</h2>}
+        </div>
+        </div>
+        <Pagination paginado={paginado} />
       <div className={styles.parent}>
         <div className={styles.filtroWeb}>
           <FiltroWeb filtrado={filtrado} />
@@ -106,7 +114,6 @@ export default function Home() {
             <ProductCard key={index} product={product} />
           ))): <NotFound />}
         </div>
-       
       </div>
     </div>
   );
