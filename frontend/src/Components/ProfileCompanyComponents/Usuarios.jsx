@@ -181,7 +181,8 @@ export default function Usuarios({ company }) {
                   align={column.align}
                   style={{
                     minWidth: column.minWidth,
-                    backgroundColor: 'lightgray',
+                    backgroundColor: '#7ED957',
+                    color: '#3E2463',
                     fontWeight: '700',
                   }}
                 >
@@ -199,13 +200,26 @@ export default function Usuarios({ company }) {
                     <TableRow
                       hover
                       role="checkbox"
+                      style={{
+                        backgroundColor: 'white',
+                        color: '#3E2463',
+                        fontWeight: '700',
+                      }}
                       tabIndex={-1}
                       key={row.code}
                     >
                       {columns.map((column) => {
                         const value = row[column.id];
                         return (
-                          <TableCell key={column.id} align={column.align}>
+                          <TableCell
+                            key={column.id}
+                            style={{
+                              backgroundColor: 'white',
+                              color: '#3E2463',
+                              fontWeight: '700',
+                            }}
+                            align={column.align}
+                          >
                             {column.format && typeof value === 'number'
                               ? column.format(value)
                               : value}
