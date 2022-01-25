@@ -29,6 +29,7 @@ import PortalCompania from './PortalCompania';
 import Orders from './Orders';
 import Usuarios from './Usuarios';
 import Donations from './Donations';
+import Desvincular from './Desvincular';
 import MpTest from './MpTest';
 import styles from './ProfileTempleteCommerce.module.css';
 import Delete from './Delete';
@@ -264,7 +265,11 @@ function ProfileTempleteCommerce(props) {
           )}
           {display === 6 && <PostNewBatch />}
           {display === 7 &&
+<<<<<<< HEAD
             (company.mp_credential_id ? <h1>desvicular Mercado pago </h1>: <MpTest />)}
+=======
+            (company.mp_credential_id ? <Desvincular/> : <MpTest />)}
+>>>>>>> 154dd0b216e0c8fac061b210be9bccb5fd54bd1b
 
           {display === 99 && <Delete company={company} />}
         </Box>

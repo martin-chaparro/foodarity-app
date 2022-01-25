@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-no-undef */
 /* eslint-disable react/button-has-type */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { GoogleLogin } from 'react-google-login';
@@ -10,7 +10,7 @@ import Button from '@mui/material/Button';
 // import Header from '../../Components/Header/Header';
 import style from './RegisterFormUser.module.css';
 import logo from '../../assets/WEB-Full-Header-Logo.png';
-import {api}from '../../services/api'
+import { api } from '../../services/api';
 
 import {
   startCheking,
@@ -123,18 +123,30 @@ function Register() {
       !errors.password &&
       !errors.validatePassword
     ) {
-      api.post('/users', input).then(res => {
-        const {id} = res.data
-        const {email} = input
-        api.post('users/validate', {id, email})
-      })
-      dispatch(startCheking());
-       Swal.fire({
-        icon: 'success',
-        title: 'Bien!',
-        text: 'Te registraste Correctamente! Te enviamos un email para poder activar tu cuenta.',
-      });
-      navigate('/')
+      api
+        .post('/users', input)
+        .then((res) => {
+          const { id } = res.data;
+          const { email } = input;
+          api.post('users/validate', { id, email });
+          dispatch(startCheking());
+          navigate('/');
+        })
+        .catch((error) => {
+          if (error.response.status === 400) {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'El email ya esta en uso.',
+            });
+          } else {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Disculpe, estamos teniendo problemas con el servidor. Intente nuevamente mas tarde.',
+            });
+          }
+        });
       setInput({
         name: '',
         email: '',
@@ -158,13 +170,24 @@ function Register() {
     navigate('/register', { replace: true });
   };
 
+  const [isAllow, setIsAllow] = React.useState(false);
+
+  useEffect(() => {
+    if (
+      Object.values(errors).filter((e) => e !== '').length === 0 &&
+      Object.values(input).filter((e) => e === '').length === 0
+    )
+      setIsAllow(true);
+    else setIsAllow(false);
+  }, [errors, input]);
+
   return (
     <div className={style.register}>
-     <div className={style.contLogo}>
-        <Link to='/'>
-     <img className={style.logo}src={logo} alt="" />
-     </Link>
-     </div>
+      <div className={style.contLogo}>
+        <Link to="/">
+          <img className={style.logo} src={logo} alt="" />
+        </Link>
+      </div>
       <form className={style.form} onSubmit={handleSubmit}>
         <div className={style.divInputs}>
           <div className={style.title}>
@@ -233,10 +256,11 @@ function Register() {
         <div className={style.buttonsDiv}>
           <Button
             className={style.btn}
-            type='submit'
+            type="submit"
             variant="contained"
             style={{ marginBottom: '1em' }}
             onClick={(e) => handleSubmit(e)}
+            disabled={!isAllow}
           >
             Ingresar
           </Button>

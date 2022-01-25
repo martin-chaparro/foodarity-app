@@ -77,9 +77,7 @@ const postDonation = async (req, res) => {
 const getDonationsByOng = async (req, res) => {
   const ownerId = req.userId;
   try {
-    const ong = await Company.findOnefindOne({
-      where: ownerId
-    });
+    const ong = await Company.findOne({where:{ownerId}})
 
     if (!ong) {
       return res.status(401).json({ msg: 'La ONG no existe' });
@@ -110,11 +108,9 @@ const getDonationsByOng = async (req, res) => {
 // un comercio puede ver las donaciones hechas
 const getDonationsByCommerce = async (req, res) => {
   const ownerId = req.userId;
-
+  
   try {
-    const commerce = await Company.findOne({
-      where: ownerId
-    });
+    const commerce = await Company.findOne({where:{ownerId}})
     if (!commerce) {
       return res.status(401).json({ msg: 'La empresa no existe' });
     }
