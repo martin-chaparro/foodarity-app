@@ -8,6 +8,8 @@ const Company = require('../models/Company');
 const City = require('../models/City');
 const State = require('../models/State');
 const Address = require('../models/Address');
+const Product = require('../models/Product');
+const Cart = require('../models/Cart');
 
 cloudinary.config(process.env.CLOUDINARY_URL);
 
@@ -160,34 +162,41 @@ const deleteUser = async (request, response) => {
 
   try {
     const user = await User.findByPk(id);
-    if (user.company) {
-      const company = await User.findByPk(user.company_id);
-      if (company.ownerId === id) {
+    if (user.company_id) {
+      const company = await Company.findByPk(user.company_id);
+      if (Number(company.ownerId) === Number(id)) {
+        let products = await Product.findAll({where : {company_id : user.company_id}})
         await User.update(
           {
             company_id: null,
           },
           { where: { company_id: user.company_id } }
         );
-        await company.update(
-          {deleted: true}
-        )
+        await company.update({ deleted: true });
         await user.update({
           deleted: true,
-          company_id: true
-        })
+          company_id: null,
+        });
+        products = products.map(product => product.id)
+        await Product.update(
+          { status: 'canceled' },
+          { where: { id : products } }
+        );
+        await Cart.destroy(
+          {
+            where : {product_id : products}
+          }
+        );
       } else {
         await user.update({
           deleted: true,
-          company_id: true
-        })
+          company_id: null,
+        });
       }
     } else {
-      await user.update(
-        {
-          deleted: true,
-        }
-      );
+      await user.update({
+        deleted: true,
+      });
     }
 
     return response.status(200).json({ message: 'Eliminado correctamente' });

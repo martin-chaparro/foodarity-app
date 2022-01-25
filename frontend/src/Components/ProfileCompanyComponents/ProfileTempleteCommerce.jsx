@@ -1,5 +1,6 @@
 /* eslint-disable no-undef */
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 // import DetailsIcon from '@mui/icons-material/Details';
 // import InventoryIcon from '@mui/icons-material/Inventory';
 import PropTypes from 'prop-types';
@@ -40,6 +41,8 @@ const generalHeight = 58;
 
 function ProfileTempleteCommerce(props) {
   const navigate = useNavigate();
+
+  const { id } = useSelector((state) => state.auth);
 
   const [orders, setOrders] = useState([]);
 
@@ -150,7 +153,7 @@ function ProfileTempleteCommerce(props) {
         )}
       </List>
       <Divider />
-      <List>
+      {id === company.ownerId && <List>
         <ListItem
           button
           key="Eliminar cuenta"
@@ -158,7 +161,7 @@ function ProfileTempleteCommerce(props) {
         >
           <ListItemText primary="Eliminar cuenta" sx={{ color: 'red' }} />
         </ListItem>
-      </List>
+      </List>}
     </div>
   );
 
