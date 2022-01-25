@@ -105,7 +105,7 @@ const getDonationsByOng = async (req, res) => {
       attributes: { exclude: ['createdAt', 'updatedAt'] },
       order: [['lote', 'ASC']],
       where: {
-        ong_id: ong.id,
+        ong_id: ong.id ,
       },
     });
     return res.status(200).json(listDonations);

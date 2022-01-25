@@ -5,6 +5,7 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
+import Typography from '@mui/material/Typography';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import styles from './Orders.module.css';
@@ -106,6 +107,14 @@ export default function Orders({ orders }) {
 
   return (
     <Paper className={styles.orders} sx={{ width: '100%', overflow: 'hidden' }}>
+      <Typography
+          variant="h4"
+          gutterBottom
+          component="div"
+          sx={{ color: '#7ED957', marginBottom: 3}}
+        >
+          Ventas realizadas
+        </Typography>
       <TableContainer sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>

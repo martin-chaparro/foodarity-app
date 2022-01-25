@@ -217,6 +217,7 @@ const unlinkMercadopago = async (req, res) => {
     return res.status(400).json({message: 'la compania no existe'})
   }
   company.update({mpCode: null, mp_credential_id: null})
+  company.setMpcredential(null)
   return res.status(200).json(company)
   } catch (error) {
     return res.status(500).json({message: error})

@@ -1,4 +1,5 @@
 import React from 'react';
+import {useSelector} from 'react-redux'
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Stepper from '@mui/material/Stepper';
@@ -14,6 +15,7 @@ const steps = [
 ];
 
 export default function InfoDonativo({nombre}) {
+  const {id} = useSelector(state => state.auth)
   return (
     <div>
       <Box
@@ -80,7 +82,7 @@ export default function InfoDonativo({nombre}) {
             recolección de excedentes de alimentos, nosotros hacemos la
             recolección.
           </Typography>
-          <Typography
+          {id ? <Typography
             variant="h5"
             gutterBottom
             sx={{
@@ -104,7 +106,32 @@ export default function InfoDonativo({nombre}) {
                 REGISTRAR COMERCIO
               </Button>
             </form>
-          </Typography>
+          </Typography> :
+          <Typography
+          variant="h5"
+          gutterBottom
+          sx={{
+            textAlign: 'normal',
+            color: 'white',
+            width: '90%',
+            fontStyle: 'bold',
+            marginTop: 2,
+          }}
+        >
+          Debes ser un usuario registrador para registrar un comercio:
+          <form method="get" action="/register">
+            <Button
+              type="submit"
+              sx={{
+                backgroundColor: '#7ED957',
+                '&:hover': { backgroundColor: '#7ED95790 !important' },
+                marginTop: 3,
+              }}
+            >
+              REGISTRARSE
+            </Button>
+          </form>
+        </Typography>}
           <Typography
             variant="h5"
             gutterBottom

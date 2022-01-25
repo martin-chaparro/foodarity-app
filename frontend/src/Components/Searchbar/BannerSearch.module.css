@@ -12,7 +12,7 @@ html {
   overflow: hidden;
   /* background-image: url(../../assets/gif3.gif); */
   /* background-image: url(../../assets/hero4.png); */
-  background-image: url(https://res.cloudinary.com/dxbtqclyu/image/upload/v1643070058/15_jidvgd.png);
+  background-image: url(https://res.cloudinary.com/dxbtqclyu/image/upload/v1643123411/Copia_de_Sin_t%C3%ADtulo_800_x_800_px_1200_433_px_1200_500_px_ssucs5.png);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -78,9 +78,10 @@ html {
   justify-content: flex-end;
   flex-direction: column;
   align-items: center;
+  color: #44b700;
 }
 .arrowDiv p {
-  color: rgb(255, 255, 255);
+  color: #44b700;
   position: relative;
   top: 20px;
   user-select: none;
@@ -93,4 +94,30 @@ html {
   .btn {
     display: none;
   }
+}
+
+.contOngs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 10px;
+  position: relative;
+  width: 50%;
+  height: 200px;
+  background-color: transparent;
+}
+
+.ongAndTitleContainer {
+  margin-top: 2em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.titleOng {
+  /* text-shadow: 1px 3px 0 #969696; */
+  font-size: 25px;
+  color: rgb(99, 37, 180);
+  font-weight: bold;
 }

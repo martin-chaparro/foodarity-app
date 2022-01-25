@@ -2,7 +2,6 @@
 import React from 'react';
 // eslint-disable-next-line import/no-duplicates
 import { useEffect, useState } from 'react';
-
 import { useDispatch, useSelector } from 'react-redux';
 import { getProducts } from '../../redux/actions/productActions';
 import { getOngs } from '../../redux/actions/CompaniesActions';
@@ -12,7 +11,7 @@ import Navbar from '../Navbar/Navbar';
 import FiltroWeb from '../Drawer/FiltroWeb';
 import Pagination from '../Pagination/BasicPagination';
 import BannerSearch from '../Searchbar/BannerSearch';
-import OngSeccion from '../ONGSeccion/OngSeccion';
+// import OngSeccion from '../ONGSeccion/OngSeccion';
 import NotFound from './NotFound';
 
 export default function Home() {
@@ -20,12 +19,18 @@ export default function Home() {
   // eslint-disable-next-line no-unused-vars
   const allProducts = useSelector((state) => state.product.products);
   const allProductsList = useSelector((state) => state.product.allProductsList);
-  const allOngs = useSelector((state) => state.companies.ongs);
+  // const allOngs = useSelector((state) => state.companies.ongs);
+
+  // const [filterOngs , setFilterOngs] = useState()
 
   useEffect(() => {
     dispatch(getProducts());
     dispatch(getOngs());
   }, [dispatch]);
+
+  // useEffect(() => {
+  //   setFilterOngs(allOngs.filter(ongs => ongs.deleted === false && ongs.status === "Habilitada"))
+  // },[allOngs])
 
   const [allProductValues, setAllProductValues] = useState({
     lote: '',
@@ -75,32 +80,28 @@ export default function Home() {
 
   return (
     <div>
-      <div>
-        <Navbar filtrado={filtrado} />
-        <BannerSearch
-          search={search}
-          lote={allProductsList}
-          sx={{ marginBottom: '1em', width: '100%' }}
-          filtrado={filtrado}
-        />
-      </div>
-      <div className={styles.ongAndTitleContainer}>
-        <h2 className={styles.titleOng}>¡Conoce nuestras ONGs!</h2>
-        <div className={styles.contOngs}>
-          {allOngs.length > 0 ?
-           ( allOngs.map((ong) => { return <OngSeccion key={ong.id} ong={ong} />;})): <h2>No hay ONGs</h2>}
-        </div>
-        </div>
-        <Pagination paginado={paginado} />
+      <Navbar filtrado={filtrado} />
+      <BannerSearch
+        search={search}
+        lote={allProductsList}
+        sx={{ marginBottom: '1em', width: '100%' }}
+        filtrado={filtrado}
+      />
+
+      <Pagination paginado={paginado} />
       <div className={styles.parent}>
         <div className={styles.filtroWeb}>
           <FiltroWeb filtrado={filtrado} />
         </div>
         <div className={styles.divContainerCards}>
-          {allProducts.length >0 ? ( allProducts.map((product, index) => (
-            // eslint-disable-next-line react/no-array-index-key
-            <ProductCard key={index} product={product} />
-          ))): <NotFound />}
+          {allProducts.length > 0 ? (
+            allProducts.map((product, index) => (
+              // eslint-disable-next-line react/no-array-index-key
+              <ProductCard key={index} product={product} />
+            ))
+          ) : (
+            <NotFound />
+          )}
         </div>
       </div>
     </div>
