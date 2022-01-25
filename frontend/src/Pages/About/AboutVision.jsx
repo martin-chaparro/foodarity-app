@@ -8,12 +8,12 @@ import styles from './About.module.css';
 
 export default function AboutVision() {
   return (
-    <Card sx={{ width: 400 , height: 250, background: '#6C698D', boxShadow: '4px 4px 10px rgba(0, 0, 0, 1)'}} className={styles.misionVision}>
+    <Card sx={{ width: 400 , height: 250, background: '#6C698D95', boxShadow: '4px 4px 10px rgba(0, 0, 0, 1)'}} className={styles.misionVision}>
       <CardContent>
-        <Typography sx={{ color: "black", background: 'white', borderRadius: 1, display: "flex", justifyContent: "center", alignItems: "center", }} variant="h5" component="div">
+        <Typography sx={{ color: '#304543',fontWeight: 700, fontSize:'25px', borderRadius: 1, display: "flex", justifyContent: "center", alignItems: "center", textShadow: '1px 3px 0 #969696, 1px 13px 5px #aba8a8' }} variant="h5" component="div">
         Vision
         </Typography>
-        <Typography sx={{ color: "white", marginTop: 5}} variant="body2">
+        <Typography sx={{ color: "#304543", marginTop: 3, fontSize:'15px', fontFamily: 'Tahoma'}} variant="body2">
         Crear conciencia sobre la delicada situación alimentaria mundial y ser
         fuente de inspiración para dirigirnos a un futuro sustentable.
           <br />
