@@ -24,9 +24,9 @@ export default function RegisterUserFormEditable({ detail }) {
   const [open, setOpen] = React.useState(false);
   const [data, setData] = React.useState({
     id: localStorage.getItem('id'),
-    name: detail.name,
-    email: detail.email,
-    phone: detail.phone,
+    name: detail.name || '',
+    email: detail.email || '',
+    phone: detail.phone || '',
   });
   const [preview, setPreview] = React.useState(null);
 

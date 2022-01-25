@@ -112,6 +112,7 @@ export default function Navbar() {
               aria-controls="vista-mobile"
               aria-haspopup="true"
               color="secondary"
+              component='div'
             >
               <Avatar
                 photo={
@@ -141,6 +142,7 @@ export default function Navbar() {
               aria-controls="vista-mobile"
               aria-haspopup="true"
               color="secondary"
+              component='div'
             >
               <StoreIcon />
             </IconButton>
@@ -164,6 +166,7 @@ export default function Navbar() {
                 aria-controls="vista-mobile"
                 aria-haspopup="true"
                 color="secondary"
+                component='div'
               >
                 <StoreIcon />
               </IconButton>
@@ -186,6 +189,7 @@ export default function Navbar() {
                 aria-controls="vista-mobile"
                 aria-haspopup="true"
                 color="secondary"
+                component='div'
               >
                 <StoreIcon />
               </IconButton>
@@ -203,6 +207,7 @@ export default function Navbar() {
                 size="large"
                 aria-label="show 17 new notifications"
                 color="secondary"
+                component='div'
               >
                 <Badge badgeContent={cart.length} color="primary">
                   <ShoppingCartIcon />
@@ -233,6 +238,7 @@ export default function Navbar() {
               size="large"
               aria-label="show 17 new notifications"
               color="inherit"
+              component='div'
             >
               <LoginIcon color="secondary" />
             </IconButton>
@@ -248,6 +254,7 @@ export default function Navbar() {
               aria-label="show 17 new notifications"
               color="inherit"
               href="/"
+              component='div'
             >
               <LogoutIcon color="secondary" />
             </IconButton>
