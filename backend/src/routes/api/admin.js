@@ -26,6 +26,8 @@ const {
   getCategories,
 } = require('../../controllers/admin/productsController');
 
+const { getAllCategories, getCategory, updateCategory, deleteCategory, createCategory } = require('../../controllers/admin/categoriesController');
+
 const ValidationsUser = require('../../middlewares/validations/validationUser');
 // const ValidationCompany = require('../../middlewares/validations/validationCompany');
 const ValidationAuth = require('../../middlewares/validations/validationAuth');
@@ -102,5 +104,14 @@ router.get(
   ValidationAuth.isAdmin,
   getCategories
 );
+
+
+// Categories Routes
+router.get('/categories', authMiddleware, ValidationAuth.isAdmin, getAllCategories);
+router.post('/categories', authMiddleware, ValidationAuth.isAdmin, createCategory);
+router.get('/category/:id', authMiddleware, ValidationAuth.isAdmin, getCategory);
+router.put('/category/:id', authMiddleware, ValidationAuth.isAdmin, updateCategory);
+router.delete('/category/:id', authMiddleware, ValidationAuth.isAdmin, deleteCategory);
+
 
 module.exports = router;
