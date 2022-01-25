@@ -188,10 +188,10 @@ export default function RegisterCompanyFormEditable({ company, handleBack }) {
       ...input,
       [name]: value,
     });
-    if (!/^(ftp|http|https):\/\/[^ "]+$/.test(value)) {
+    if (value !== '' && !/^(www)[^ "]+$/.test(value)) {
       setErrors({
         ...errors,
-        [name]: 'La URL no es valida! - Debe contener https://www',
+        [name]: 'La URL no es valida! - Debe contener wwww',
       });
     } else {
       setErrors({
