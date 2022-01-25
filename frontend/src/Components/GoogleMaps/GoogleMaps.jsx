@@ -28,16 +28,16 @@ function GoogleMaps() {
 
     return (
     <div className={styles.container}>
-      <h1 className={styles.title}>Encontralas en el mapa!</h1>
+      <h1 className={styles.title}>Estamos en todo el pais</h1>
     
     <div className={styles.map}>
         <GoogleMapReact
           bootstrapURLKeys={{ key: GOOGLE_API_KEY, language: 'es', region: 'arg'}}
           defaultCenter={{
-            lat: -36.6769415180527,
-            lng:-60.5588319815719,
-            
-          }}
+            lat: -35.65647600357001,
+            lng:-58.857827012037816,
+             
+          }} 
           defaultZoom={7.5}
           
         >      
