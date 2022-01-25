@@ -115,7 +115,7 @@ export default function Landing() {
         </div>
       </div>
       </div>
-      <div>
+      <div className={styles.footer}>
         <Footer />
       </div>
     </div>

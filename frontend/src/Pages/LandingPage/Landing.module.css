@@ -84,6 +84,10 @@
   .logo1 {
     display: none;
   }
+
+  .imglogolanding {
+    margin-left: 5px;
+  }
   .aboutCards {
     display: flex;
     flex-direction: column;
@@ -91,12 +95,28 @@
     width: 340px;
     align-items: center;
   }
-  .containerAbouts {
+  .aboutCards {
     display: flex;
     flex-direction: column;
     height: 800px;
     width: 340px;
+  }
+  .imgAbout {
+    visibility: hidden;
+  }
+
+  .footer {
+    visibility: hidden;
+  }
+  .containerAbouts {
+    display: flex;
+    flex-direction: column;
+    height: 700px;
     align-items: center;
+  }
+
+  .goDown {
+    visibility: hidden;
   }
 }
 @media screen and (min-width: 576px) {
