@@ -1,20 +1,40 @@
 import React from 'react';
 import Button from '@mui/material/Button';
+import Swal from 'sweetalert2';
+import Typography from '@mui/material/Typography';
 import { apiWithToken } from '../../services/api';
 import styles from './Desvincular.module.css';
 // import logoMercadoPago from '../../assets/mercado_pago_png.png'
 
 function Desvincular() {
   const handleOnClick = () => {
-    apiWithToken.get(`/mercadopago/unlink`).then((res) => {
+    apiWithToken.delete(`/mercadopago/unlink`).then((res) => {
       console.log(res.data);
-      window.location.href = res.data;
-    });
+      Swal.fire({
+        icon: 'success',
+        title: 'Bien',
+        text: 'Te desvinculaste con exito.'}).then(()=> {
+          window.location.href = '/profilecompany'; 
+        })
+      
+    }).catch(()=> {
+      Swal.fire({
+        icon: 'error',
+        title: 'Ups...',
+        text: 'Algo fallo. Vuelva a intentar.'})
+    })
   };
 
   return (
     <div className={styles.container}>
-      <h1>Vinculado con Mercado de PAGO</h1>
+      <Typography
+          variant="h4"
+          gutterBottom
+          component="div"
+          sx={{ color: '#7ED957', marginBottom: 3, marginTop:10 }}
+        >
+          Vinculado con Mercado de PAGO
+        </Typography>
 
       <Button
         onClick={handleOnClick}
