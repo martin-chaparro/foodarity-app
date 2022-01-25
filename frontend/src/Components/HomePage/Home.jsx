@@ -2,6 +2,7 @@
 import React from 'react';
 // eslint-disable-next-line import/no-duplicates
 import { useEffect, useState } from 'react';
+import Typography from '@mui/material/Typography';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { getProducts } from '../../redux/actions/productActions';
@@ -81,7 +82,6 @@ export default function Home() {
 
   return (
     <div>
-      <div>
         <Navbar filtrado={filtrado} />
         <BannerSearch
           search={search}
@@ -89,18 +89,18 @@ export default function Home() {
           sx={{ marginBottom: '1em', width: '100%' }}
           filtrado={filtrado}
         />
-      <div className={styles.contOngs}>
-        <h2 className={styles.titleOng}>¡Conoce nuestras ONGs!</h2>
+      <div className={styles.ongAndTitleContainer}>
+      <Typography
+          variant="h5"
+          gutterBottom
+          component="div"
+          sx={{ color: '#7ED957', margin: 2 , fontWeight: '700'}}
+        >
+          Conoce nuestras ONGs
+        </Typography>
+        <div className={styles.contOngs}>
           {filterOngs?
            ( filterOngs.map((ong) => { return <OngSeccion key={ong.id} ong={ong} />;})): <h2>No hay ONGs</h2>}
-        </div>
-        <Pagination paginado={paginado} />
-      </div>
-      <div className={styles.ongAndTitleContainer}>
-        <h2 className={styles.titleOng}>¡Conoce nuestras ONGs!</h2>
-        <div className={styles.contOngs}>
-          {allOngs.length > 0 ?
-           ( allOngs.map((ong) => { return <OngSeccion key={ong.id} ong={ong} />;})): <h2>No hay ONGs</h2>}
         </div>
         </div>
         <Pagination paginado={paginado} />
@@ -117,4 +117,4 @@ export default function Home() {
       </div>
     </div>
   );
-}
+          }
