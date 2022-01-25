@@ -9,6 +9,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import Typography from '@mui/material/Typography';
 import TablePagination from '@mui/material/TablePagination';
+import Swal from 'sweetalert2';
 import TableRow from '@mui/material/TableRow';
 import { apiWithToken } from '../../services/api';
 import styles from './PublishedProduct.module.css';
@@ -64,11 +65,66 @@ export default function PublishedProduct() {
     return { lote, estado, cantidad, precio, fecha, eliminar };
   }
 
+  // Swal.fire({
+  //   incon: 'info',
+  //   title: 'ATENCION !! ',
+  //   text: 'Queres agregar este usuario a tu cuenta ?',
+  // })
+  //   .then(() => {
+  //     apiWithToken.post(`/companies/user?email=${input}`);
+  //     handleRows();
+  //   })
+
+  // Swal.fire({
+  //   title: '¿Estás seguro de querer eliminar la cuenta?',
+  //   text: 'No podrás revertir los cambios',
+  //   icon: 'warning',
+  //   showCancelButton: true,
+  //   confirmButtonColor: '#e63946',
+  //   cancelButtonColor: 'gray',
+  //   confirmButtonText: 'Continuar',
+  // })
+
+  // const handleDelete = () => {
+  //   Swal.fire({
+  //     title: '¿Estás seguro de querer eliminar la cuenta?',
+  //     text: 'No podrás revertir los cambios',
+  //     icon: 'warning',
+  //     showCancelButton: true,
+  //     confirmButtonColor: '#e63946',
+  //     cancelButtonColor: 'gray',
+  //     confirmButtonText: 'Continuar',
+  //   }).then((result) => {
+  //     if (result.isConfirmed) {
+  //       apiWithToken.delete(`/users/${detail.id}`).then((res) => {
+  //         if (res.status === 200) {
+  //           Swal.fire('Cuenta Eliminada');
+  //           dispatch(startLogout());
+  //           // navigate('/');
+  //         } else {
+  //           console.log('algo fallo');
+  //         }
+  //       });
+  //     }
+  //   });
+  // };
+
   async function handleDelete(id) {
-    apiWithToken.delete(`/products/id/${id}`).then(() => {
-      apiWithToken.get('/products/byauth').then((response) => {
-        setProducts(response.data);
-      });
+    Swal.fire({
+      title: '¿Estás seguro de querer eliminar el producto?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#e63946',
+      cancelButtonColor: 'gray',
+      confirmButtonText: 'Continuar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        apiWithToken.delete(`/products/id/${id}`).then(() => {
+          apiWithToken.get('/products/byauth').then((response) => {
+            setProducts(response.data);
+          });
+        });
+      }
     });
   }
 
@@ -92,8 +148,8 @@ export default function PublishedProduct() {
             sx={{ color: 'red' }}
             onClick={() => {
               // eslint-disable-next-line no-alert
-              if (window.confirm('Queres cancelar esta publicacion?'))
-                handleDelete(producto.id);
+
+              handleDelete(producto.id);
             }}
           />
         )
@@ -149,7 +205,7 @@ export default function PublishedProduct() {
           <TableBody>
             {rows
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row,index) => {
+              .map((row, index) => {
                 return (
                   // eslint-disable-next-line react/no-array-index-key
                   <TableRow hover role="checkbox" tabIndex={-1} key={index}>

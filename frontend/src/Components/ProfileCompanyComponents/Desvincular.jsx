@@ -8,33 +8,48 @@ import styles from './Desvincular.module.css';
 
 function Desvincular() {
   const handleOnClick = () => {
-    apiWithToken.delete(`/mercadopago/unlink`).then((res) => {
-      console.log(res.data);
-      Swal.fire({
-        icon: 'success',
-        title: 'Bien',
-        text: 'Te desvinculaste con exito.'}).then(()=> {
-          window.location.href = '/profilecompany'; 
-        })
-      
-    }).catch(()=> {
-      Swal.fire({
-        icon: 'error',
-        title: 'Ups...',
-        text: 'Algo fallo. Vuelva a intentar.'})
-    })
+    Swal.fire({
+      title: '¿Estás seguro de querer desvincular tu cuenta ?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#e63946',
+      cancelButtonColor: 'gray',
+      confirmButtonText: 'Continuar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        apiWithToken
+          .delete(`/mercadopago/unlink`)
+          .then((res) => {
+            console.log(res.data);
+            Swal.fire({
+              icon: 'success',
+              title: 'Bien',
+              text: 'Te desvinculaste con exito.',
+            }).then(() => {
+              window.location.href = '/profilecompany';
+            });
+          })
+          .catch(() => {
+            Swal.fire({
+              icon: 'error',
+              title: 'Ups...',
+              text: 'Algo fallo. Vuelva a intentar.',
+            });
+          });
+      }
+    });
   };
 
   return (
     <div className={styles.container}>
       <Typography
-          variant="h4"
-          gutterBottom
-          component="div"
-          sx={{ color: '#7ED957', marginBottom: 3, marginTop:10 }}
-        >
-          Vinculado con Mercado de PAGO
-        </Typography>
+        variant="h4"
+        gutterBottom
+        component="div"
+        sx={{ color: '#7ED957', marginBottom: 3, marginTop: 10 }}
+      >
+        Vinculado con Mercado de PAGO
+      </Typography>
 
       <Button
         onClick={handleOnClick}

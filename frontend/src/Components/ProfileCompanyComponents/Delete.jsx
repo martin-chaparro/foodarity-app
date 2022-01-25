@@ -4,6 +4,7 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import Swal from 'sweetalert2';
 
 import { apiWithToken } from '../../services/api';
 import styles from './CompanyDetail.module.css';
@@ -11,10 +12,26 @@ import styles from './CompanyDetail.module.css';
 function Delete({ company }) {
   function handleDelete() {
     // eslint-disable-next-line no-alert
-    if (window.confirm('Queres eliminar esta compania?')) {
-      apiWithToken.delete(`/companies/disabled/${company.id}`);
-      window.location.reload();
-    }
+
+    Swal.fire({
+      title: '¿Estás seguro de querer Eliminar la cuenta ?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#e63946',
+      cancelButtonColor: 'gray',
+      confirmButtonText: 'Continuar',
+    }).then((result) => {
+      if (result.IsConfirmed) {
+        apiWithToken.delete(`/companies/disabled/${company.id}`);
+        window.location.reload();
+        window.location.href = '/profilecompany';
+      }
+    });
+
+    // if (window.confirm('Queres eliminar esta compania?')) {
+    //   apiWithToken.delete(`/companies/disabled/${company.id}`);
+    //   window.location.reload();
+    // }
   }
 
   return (
