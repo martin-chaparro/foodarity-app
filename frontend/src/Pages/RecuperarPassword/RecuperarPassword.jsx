@@ -30,7 +30,7 @@ export default function RecuperarPassword () {
         // .catch((error)=>console.log(error))
         .then(() => {
           Swal.fire({
-            icon: 'succes',
+            icon: 'success',
             title: 'El correo se envio correctamente',
             text: 'por favor revisa tu Mail',
           });
@@ -104,7 +104,7 @@ export default function RecuperarPassword () {
             onClick={(e) => handleSubmit(e)}
        
           >
-            Ingresar
+            Enviar
           </Button>
             </div>
             </form>

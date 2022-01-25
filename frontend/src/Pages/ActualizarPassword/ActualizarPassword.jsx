@@ -56,7 +56,7 @@ function ActualizarPassword() {
       // eslint-disable-next-line no-alert
       .then(() => {
         Swal.fire({
-          icon: 'Succes',
+          icon: 'success',
           title: 'Bien',
           text: 'Tu contraseña se cambio correctamente',
         });
@@ -119,7 +119,7 @@ function ActualizarPassword() {
         <div>
           <h4>Contraseña</h4>
           <input
-            type="text"
+            type="password"
             name="password"
             required
             value={input.password}
@@ -133,7 +133,7 @@ function ActualizarPassword() {
         <div>
           <h4>Vuelva a introducir su contraseña</h4>
           <input
-            type="text"
+            type="password"
             name="passwordDos"
             required
             value={input.passwordDos}
