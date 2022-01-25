@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 // import deleteLogo from '../../assets/deleteIcon';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
@@ -11,6 +12,7 @@ import TableRow from '@mui/material/TableRow';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import { useSelector } from 'react-redux';
 import styles from './Usuarios.module.css';
 import { apiWithToken } from '../../services/api';
 
@@ -51,6 +53,10 @@ function createData(nombre, email, telefono, rol, eliminar) {
 }
 
 export default function Usuarios({ company }) {
+  const { id } = useSelector((state) => state.auth);
+  const navigate = useNavigate()
+
+
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [rows, setRows] = React.useState([]);
@@ -61,12 +67,15 @@ export default function Usuarios({ company }) {
     setInput(e.target.value);
   }
 
-  const handleDelete = (id) => {
-    apiWithToken.delete(`/companies/user/${id}`).then(() => {
+  const handleDelete = (ID) => {
+    apiWithToken.delete(`/companies/user/${ID}`).then(() => {
       apiWithToken.get('/companies/users').then((response) => {
         setUsers(response.data);
       });
     });
+    if (id !== company.ownerId) {
+      navigate('/home')
+    }
   };
 
   const handleRows = () => {
@@ -78,7 +87,7 @@ export default function Usuarios({ company }) {
           user.email,
           user.phone,
           user.id === company.ownerId ? 'Dueño' : 'Empleado',
-          user.id !== company.ownerId && (
+          (user.id !== company.ownerId && (id === company.ownerId || user.id === id && user.id)) &&(
             <HighlightOffIcon
               sx={{ color: 'red' }}
               onClick={() => {
@@ -128,7 +137,7 @@ export default function Usuarios({ company }) {
 
   return (
     <Paper className={styles.users} sx={{ width: '100%', overflow: 'hidden' }}>
-      <div className={styles.contagregar}>
+      {id === company.ownerId && <div className={styles.contagregar}>
         <div>
           <Typography
             variant="h4"
@@ -160,7 +169,7 @@ export default function Usuarios({ company }) {
             AGREGAR
           </Button>
         </div>
-      </div>
+      </div>}
 
       <TableContainer sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">

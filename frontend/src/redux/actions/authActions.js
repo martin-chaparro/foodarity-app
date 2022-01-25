@@ -49,10 +49,11 @@ export const startLogin = (email, password) => {
               name,
             })
           );
-          if (response.data.firstLogin) {
+          if (response.data.isFirstLogin) {
             window.location.replace('/rollselector');
+          } else {
+            window.location.replace('/home');
           }
-          window.location.replace('/home');
         })
         .catch((error) => {
           if (error.response.status === 401) {
