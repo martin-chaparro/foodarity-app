@@ -53,7 +53,7 @@ export const CategoryUpdate = () => {
       apiWithToken
         .put(`/admin/category/${id}`, formik.values)
         .then(() => {
-          dispatch(finishLoading())
+          dispatch(finishLoading());
           Swal.fire({
             icon: 'success',
             title: 'Actualizada',
@@ -61,7 +61,7 @@ export const CategoryUpdate = () => {
           });
         })
         .catch(() => {
-          dispatch(finishLoading())
+          dispatch(finishLoading());
           Swal.fire({
             icon: 'error',
             title: 'No se pudo Actualizar!',

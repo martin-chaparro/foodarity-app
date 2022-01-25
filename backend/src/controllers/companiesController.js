@@ -462,11 +462,11 @@ const deleteUser = async (req, res) => {
       include: { model: Company, as: 'company' },
     });
     console.log('id params', id, 'user id', userId);
-    if (!owner.company_id) {
+     if (!owner.company_id) {
       return res.status(400).json({
         message: 'El usuario no tiene compania',
       });
-    }
+    } 
     if (userId !== owner.company.ownerId) {
       if (userId !== id) {
         return res.status(401).json({ message: 'Not owner' });

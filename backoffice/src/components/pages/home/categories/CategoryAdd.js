@@ -28,8 +28,6 @@ export const CategoryAdd = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-
-
   const initialFormValues = {
     name: '',
   };
@@ -45,7 +43,7 @@ export const CategoryAdd = () => {
       apiWithToken
         .post(`/admin/categories`, formik.values)
         .then(() => {
-          dispatch(finishLoading())
+          dispatch(finishLoading());
           Swal.fire({
             icon: 'success',
             title: 'Creada',
@@ -53,7 +51,7 @@ export const CategoryAdd = () => {
           });
         })
         .catch(() => {
-          dispatch(finishLoading())
+          dispatch(finishLoading());
           Swal.fire({
             icon: 'error',
             title: 'No se pudo Crear!',
@@ -70,7 +68,7 @@ export const CategoryAdd = () => {
   return (
     <Layout>
       <Typography variant="h4" gutterBottom component="div">
-       Crear Categoria
+        Crear Categoria
       </Typography>
       <Divider />
       <Grid container spacing={3} pt={2}>

@@ -272,7 +272,10 @@ export const UserUpdate = () => {
                       <MenuItem value={false}>Inactivo</MenuItem>
                     </Select>
                   </FormControl>
-                  <FormControl variant="standard" sx={{ minWidth: 120, marginBottom:'1em' }}>
+                  <FormControl
+                    variant="standard"
+                    sx={{ minWidth: 120, marginBottom: '1em' }}
+                  >
                     <InputLabel id="role-label-id">Role</InputLabel>
                     <Select
                       labelId="role-label-id"

@@ -12,9 +12,10 @@ export default function ShopCart() {
 
   useEffect(() => {
     dispatch(getCart());
+    window.scroll(0, 0);
   }, []);
 
-  window.scroll(0, 0);
+
 
   useEffect(() => {
     const byCommerce = [];

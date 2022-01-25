@@ -4,12 +4,12 @@ import CarreteImg from './CarreteImg';
 import InfoDonativo from './InfoDonativo';
 import RegistraOng from './RegistraOng';
 
-export default function OngInfo({info}) {
+export default function OngInfo({info, user}) {
   return (
     <div>
       <div className={estilos.patern}>
         <div className={estilos.info}>
-          <InfoDonativo nombre={info}/>
+          <InfoDonativo nombre={info} user={user}/>
         </div>
         <div className={estilos.carrete}>
           <CarreteImg />
