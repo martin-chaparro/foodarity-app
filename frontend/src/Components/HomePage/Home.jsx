@@ -22,10 +22,16 @@ export default function Home() {
   const allProductsList = useSelector((state) => state.product.allProductsList);
   const allOngs = useSelector((state) => state.companies.ongs);
 
+  const [filterOngs , setFilterOngs] = useState()
+
   useEffect(() => {
     dispatch(getProducts());
     dispatch(getOngs());
   }, [dispatch]);
+
+  useEffect(() => {
+    setFilterOngs(allOngs.filter(ongs => ongs.deleted === false && ongs.status === "Habilitada"))
+  },[allOngs])
 
   const [allProductValues, setAllProductValues] = useState({
     lote: '',
@@ -97,8 +103,8 @@ export default function Home() {
         </div>
         <div className={styles.contOngs}>
         <h2 className={styles.titleOng}>¡Conoce nuestras ONGs!</h2>
-          {allOngs.length > 0 ?
-           ( allOngs.map((ong) => { return <OngSeccion key={ong.id} ong={ong} />;})): <h2>No hay ONGs</h2>}
+          {filterOngs?
+           ( filterOngs.map((ong) => { return <OngSeccion key={ong.id} ong={ong} />;})): <h2>No hay ONGs</h2>}
         </div>
       </div>
     </div>

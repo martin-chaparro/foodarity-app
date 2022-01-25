@@ -264,7 +264,7 @@ function ProfileTempleteCommerce(props) {
           )}
           {display === 6 && <PostNewBatch />}
           {display === 7 &&
-            (company.mp_credential_id ? 'desvicular Mercado pago' : <MpTest />)}
+            (company.mp_credential_id ? <h1>desvicular Mercado pago </h1>: <MpTest />)}
 
           {display === 99 && <Delete company={company} />}
         </Box>
