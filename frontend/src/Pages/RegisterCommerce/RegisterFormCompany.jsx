@@ -23,7 +23,6 @@ let time2 = null;
 
 const GOOGLE_API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
 
-
 export default function RegisterFormCompany({ type }) {
   const [provincia, setprovincia] = useState([]);
   const [ciudad, setCiudad] = useState([]);
@@ -300,7 +299,6 @@ export default function RegisterFormCompany({ type }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     const finalAddress = { ...formValues, location };
-    console.log(finalAddress);
     if (
       !errors.name &&
       !errors.website &&
@@ -312,13 +310,13 @@ export default function RegisterFormCompany({ type }) {
       !errors.zipcode
       // eslint-disable-next-line no-empty
     ) {
-      dispatch(registerComerce(input, { ...formValues, location }));
-      Swal.fire({
+      dispatch(registerComerce(input, finalAddress));
+      /* Swal.fire({
         icon: 'success',
         title: 'Bien',
         text: 'El Comercio fue registrado Correctamente',
-      });
-      /*       window.location.href = '/home'; */
+      }); */
+      window.location.href = '/home';
     } else {
       // eslint-disable-next-line no-alert
 

@@ -7,6 +7,7 @@ const Company = require('../../models/Company');
 const City = require('../../models/City');
 const State = require('../../models/State');
 const Address = require('../../models/Address');
+const {send} = require('../nodemailerController')
 
 cloudinary.config(process.env.CLOUDINARY_URL);
 
@@ -192,15 +193,13 @@ const deleteUser = async (request, response) => {
       .json({ message: 'No te puedes elimnar a ti mismo' });
   }
   try {
-    await User.update(
+    const user = User.findByPk(id)
+    await user.update(
       {
         deleted: true,
-      },
-      {
-        where: { id },
       }
     );
-
+   await send(user.email, 'Tu usuario fue eliminado', `Hola, ${user.name}. Tu cuenta fue eliminada por incumplir los reglamentos de Foodarity.`)
     return response.status(200).json({ message: 'Eliminado correctamente' });
   } catch (error) {
     console.log(error);
@@ -232,7 +231,6 @@ const updateUser = async (request, response) => {
         where: { id },
       }
     );
-
     await user.setRole(role);
 
     return response.status(200).json({ message: 'Actualizado correctamente' });

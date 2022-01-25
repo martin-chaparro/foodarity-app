@@ -6,6 +6,7 @@ const { v4: uuidv4 } = require('uuid');
 const User = require('../models/User');
 const Company = require('../models/Company');
 const MpCredential = require('../models/MpCredential');
+const {send} = require('./nodemailerController')
 
 const APP_ID = process.env.MP_CLIENT_ID;
 const SECRET_ID = process.env.MP_CLIENT_SECRET_ID;
@@ -60,6 +61,7 @@ const validateCode = async (request, response) => {
 
     const company = await Company.findOne({ where: { ownerId: userId } });
     if (company.mp_credential_id) {
+      send (company.email, 'Ya podes comprar con Mercado Pago', 'La vinculación de tu compania con Mercado Pago fue exitosa.')
       return response
         .status(400)
         .send({ message: 'Compania con credenciales activa' });
@@ -214,7 +216,7 @@ const unlinkMercadopago = async (req, res) => {
   if (!company) {
     return res.status(400).json({message: 'la compania no existe'})
   }
-  company.update({mpCode: null})
+  company.update({mpCode: null, mp_credential_id: null})
   return res.status(200).json(company)
   } catch (error) {
     return res.status(500).json({message: error})

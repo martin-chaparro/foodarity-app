@@ -100,12 +100,12 @@ export default function Navbar() {
   const menuItems = (
     <span>
       {id && currentPath !== '/profileuser' && (
-        <MenuItem>
-          <Link
-            to="/profileuser"
-            textDecoration="none"
-            onClick={handleMenuClose}
-          >
+        <Link
+        to="/profileuser"
+        textDecoration="none"
+        onClick={handleMenuClose}
+        >
+            <MenuItem>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -126,16 +126,16 @@ export default function Navbar() {
               />
             </IconButton>
             {user.name ? user.name : 'Mi Cuenta'}
-          </Link>
         </MenuItem>
+          </Link>
       )}
       {id && user.company && currentPath !== '/profilecompany' && (
-        <MenuItem>
-          <Link
-            to="/profilecompany"
-            textDecoration="none"
-            onClick={handleMenuClose}
-          >
+        <Link
+        to="/profilecompany"
+        textDecoration="none"
+        onClick={handleMenuClose}
+        >
+            <MenuItem>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -148,18 +148,18 @@ export default function Navbar() {
             </IconButton>
             {/* {user.company && (user.company.company_type_id === 1 ? 'Mi comercio' : 'Mi ONG')} */}
             {user.company.name}
-          </Link>
         </MenuItem>
+          </Link>
       )}
       {id &&
         !user.company &&
         currentPath !== '/rollselector/registerformcommerce' && (
-          <MenuItem>
-            <Link
-              to="/rollSelector/registerformcommerce"
-              textDecoration="none"
-              onClick={handleMenuClose}
-            >
+          <Link
+          to="/rollSelector/registerformcommerce"
+          textDecoration="none"
+          onClick={handleMenuClose}
+          >
+              <MenuItem>
               <IconButton
                 size="large"
                 aria-label="account of current user"
@@ -171,18 +171,18 @@ export default function Navbar() {
                 <StoreIcon />
               </IconButton>
               Añadir comercio
-            </Link>
           </MenuItem>
+            </Link>
         )}
       {id &&
         !user.company &&
         currentPath !== '/rollselector/register_form_ong' && (
-          <MenuItem>
-            <Link
-              to="/rollSelector/register_form_ong"
-              textDecoration="none"
-              onClick={handleMenuClose}
-            >
+          <Link
+          to="/rollSelector/register_form_ong"
+          textDecoration="none"
+          onClick={handleMenuClose}
+          >
+              <MenuItem>
               <IconButton
                 size="large"
                 aria-label="account of current user"
@@ -194,61 +194,61 @@ export default function Navbar() {
                 <StoreIcon />
               </IconButton>
               Añadir ONG
-            </Link>
           </MenuItem>
+            </Link>
         )}
 
       {id &&
         currentPath !== '/profilecompany' &&
         currentPath !== '/profileuser' && (
-          <MenuItem>
-            <Link to="/cart">
+          <Link to="/cart">
+            <MenuItem>
               <IconButton
                 size="large"
                 aria-label="show 17 new notifications"
                 color="secondary"
                 component='div'
-              >
+                >
                 <Badge badgeContent={cart.length} color="primary">
                   <ShoppingCartIcon />
                 </Badge>
               </IconButton>
               Mi Carrito
-            </Link>
           </MenuItem>
+            </Link>
         )}
       {!id && (
-        <MenuItem>
-          <Link to="/register" textDecoration="none" onClick={handleMenuClose}>
+        <Link to="/register" textDecoration="none" onClick={handleMenuClose}>
+          <MenuItem>
             <IconButton
               size="large"
               aria-label="show 17 new notifications"
               color="inherit"
-            >
+              >
               <AppRegistrationIcon color="secondary" />
             </IconButton>
             Registrarse
-          </Link>
         </MenuItem>
+          </Link>
       )}
       {!id && (
-        <MenuItem>
-          <Link to="/login" textDecoration="none" onClick={handleMenuClose}>
+        <Link to="/login" textDecoration="none" onClick={handleMenuClose}>
+          <MenuItem>
             <IconButton
               size="large"
               aria-label="show 17 new notifications"
               color="inherit"
               component='div'
-            >
+              >
               <LoginIcon color="secondary" />
             </IconButton>
             Iniciar Sesión
-          </Link>
         </MenuItem>
+          </Link>
       )}
       {id && (
-        <MenuItem>
-          <Link to="/" onClick={handleLogOut} textDecoration="none">
+        <Link to="/" onClick={handleLogOut} textDecoration="none">
+          <MenuItem>
             <IconButton
               size="large"
               aria-label="show 17 new notifications"
@@ -259,8 +259,8 @@ export default function Navbar() {
               <LogoutIcon color="secondary" />
             </IconButton>
             Cerrar Sesión
-          </Link>
         </MenuItem>
+          </Link>
       )}
       <div className={estilos.ayuda}>
         <MenuItem>
