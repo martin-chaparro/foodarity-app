@@ -3,11 +3,13 @@ const { Router } = require('express');
 const router = new Router();
 
 const {
+  createUser,
   getAllUsers,
   getUser,
   deleteUser,
   updateUser,
   uploadPhotoUser,
+  updateUserPassword
 } = require('../../controllers/admin/userController');
 
 const {
@@ -33,6 +35,7 @@ const validationFiles = require('../../middlewares/validations/validationFiles')
 // Users Routes
 
 router.get('/users', authMiddleware, ValidationAuth.isAdmin, getAllUsers);
+router.post('/users', authMiddleware, ValidationAuth.isAdmin, createUser);
 router.get('/users/:id', authMiddleware, ValidationAuth.isAdmin, getUser);
 router.delete('/users/:id', authMiddleware, ValidationAuth.isAdmin, deleteUser);
 router.put(
@@ -48,6 +51,12 @@ router.patch(
   ValidationAuth.isAdmin,
   validationFiles.fileExists,
   uploadPhotoUser
+);
+router.patch(
+  '/users/password/:id',
+  authMiddleware,
+  ValidationAuth.isAdmin,
+  updateUserPassword
 );
 
 // Companies Routes
