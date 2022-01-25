@@ -3,7 +3,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useEffect, useState } from 'react';
 // import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Swal from 'sweetalert2';
@@ -13,7 +13,7 @@ import MapPicker from 'react-google-map-picker';
 import styles from './RegisterFormCommerce.module.css';
 import CommerceLogo from '../../assets/Mask-Group.png';
 import ONGLogo from '../../assets/caridad-1.png';
-import { api } from '../../services/api';
+import { api, apiWithToken } from '../../services/api';
 import { registerComerce } from '../../redux/actions/CompaniesActions';
 import Terminos from '../../Components/Term&Conditions/Terminos';
 import AlertOng from '../../Components/Alertas/AlertEnviarSolicitud';
@@ -24,6 +24,7 @@ let time2 = null;
 const GOOGLE_API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
 
 export default function RegisterFormCompany({ type }) {
+  const {id : userId} = useSelector(state => state.auth)
   const [provincia, setprovincia] = useState([]);
   const [ciudad, setCiudad] = useState([]);
   const [termProvincia, setTermProvincia] = useState('');
@@ -63,6 +64,18 @@ export default function RegisterFormCompany({ type }) {
   const handleChangeZoom = (newZoom) => {
     setZoom(newZoom);
   };
+
+  useEffect(()=> {
+    if (!userId) {
+      window.location.href = '/'
+    } else {
+      apiWithToken.get(`/users/${userId}`).then(res => {
+        if (res.data.company_id) {
+          window.location.href = '/home'
+        }
+      })
+    }
+  },[])
 
   useEffect(() => {
     if (formValues.cityId) {
@@ -310,13 +323,13 @@ export default function RegisterFormCompany({ type }) {
       !errors.zipcode
       // eslint-disable-next-line no-empty
     ) {
-      dispatch(registerComerce(input, finalAddress));
+      dispatch(registerComerce(input, finalAddress)).then(() => {window.location.href = '/home';});
       /* Swal.fire({
         icon: 'success',
         title: 'Bien',
         text: 'El Comercio fue registrado Correctamente',
       }); */
-      window.location.href = '/home';
+      
     } else {
       // eslint-disable-next-line no-alert
 
