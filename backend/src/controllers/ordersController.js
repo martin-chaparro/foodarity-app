@@ -6,6 +6,7 @@ const User = require('../models/User');
 const Company = require('../models/Company');
 const PaymentMethod = require('../models/PaymentMethod');
 const Cart = require('../models/Cart');
+const {send} = require('./nodemailerController')
 
 const include = [
   {
@@ -205,7 +206,6 @@ const postOrder = async (req, res) => {
     await order.setCompany(company_id);
     await order.setBuyer(userId);
     await order.setPaymentMethod(paymentMethod);
-
     return res.status(200).json(order);
   } catch (error) {
     return res.status(500).send(error);
@@ -272,7 +272,17 @@ const concreteOrder = async (req, res) => {
         return res.status(500).json({ message: error });
       }
     });
-
+    const user = await User.findByPk(order.buyer_id)
+    const company = await Company.findByPk(order.company_id)
+    await send(user.email, 'Tu compra fue realizada con exito', `Tu compra a ${company.name} fue exitosa. Te dejamos sus datos para que se puedan ponen en contacto.\n
+    web: ${company.website}\n
+    email: ${company.email}\n
+    telefono: ${company.areaCode} ${company.phone}\n\n
+    Podes ver el detalle de tu compra en tu perfil de usuario.`)
+    await send(company.email, 'Realizaste una venta!', `Te dejamos los datos de ${user.name} para que se puedan ponen en contacto.\n
+    email: ${user.email}\n
+    telefono: ${user.phone}\n\n
+    Podes ver el detalle de tu venta en tu perfil de comercio.`)
     order.update({ status: 'pagado' });
     return res.status(200).json(order);
   } catch (error) {

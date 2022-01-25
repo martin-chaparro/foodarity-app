@@ -10,6 +10,7 @@ const State = require('../models/State');
 const User = require('../models/User');
 const Product = require('../models/Product');
 const Cart = require('../models/Cart');
+const {send} = require('./nodemailerController')
 
 cloudinary.config(process.env.CLOUDINARY_URL);
 
@@ -81,7 +82,14 @@ const createCompany = async (req, res) => {
     await newCompany.setAddress(newAddress);
     const owner = await User.findByPk(ownerId);
     await owner.setCompany(newCompany.id);
-
+    if (type === 1) {
+      send(user.email, 'Registraste un nuevo comercio', `Tu comercio se encuentra en revisión. Recibiras un mail en las siguientes 48 horas para saber si fue aprobado.`)
+      send(email, 'Registraste un nuevo comercio', `Tu comercio se encuentra en revisión. Recibiras un mail en las siguientes 48 horas para saber si fue aprobado.`)
+    } else {
+      send(user.email, 'Registraste una nueva ONG', `Tu ONG se encuentra en revisión. Recibiras un mail en las siguientes 48 horas para saber si fue aprobado.`)
+      send(email, 'Registraste un nuevo comercio', `Tu comercio se encuentra en revisión. Recibiras un mail en las siguientes 48 horas para saber si fue aprobado.`)
+    }
+    
     return res.status(200).json(newCompany);
   } catch (error) {
     return res.status(500).json(error);
