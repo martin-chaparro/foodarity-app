@@ -26,15 +26,15 @@ const columns = [
     minWidth: 170,
     align: 'center',
   },
-  // {
-  //   id: 'precio',
-  //   label: 'PRECIO UNITARIO',
-  //   minWidth: 170,
-  //   align: 'center',
-  // },
+  {
+    id: 'precio',
+    label: 'PRECIO UNITARIO',
+    minWidth: 170,
+    align: 'center',
+  },
   {
     id: 'total',
-    label: 'PRECIO POR UNIDAD',
+    label: 'PRECIO TOTAL',
     minWidth: 170,
     align: 'center',
   },
@@ -62,7 +62,6 @@ function createData(
   metodo,
   fecha
 ) {
-  // const total = precio * unidades;
   return {
     ordenid,
     vendedor,
@@ -76,7 +75,7 @@ function createData(
 }
 
 export default function Compras({ orders }) {
-  console.log(orders);
+
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 

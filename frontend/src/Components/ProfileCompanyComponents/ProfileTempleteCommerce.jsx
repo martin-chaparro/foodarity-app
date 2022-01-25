@@ -1,5 +1,6 @@
 /* eslint-disable no-undef */
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 // import DetailsIcon from '@mui/icons-material/Details';
 // import InventoryIcon from '@mui/icons-material/Inventory';
 import PropTypes from 'prop-types';
@@ -29,6 +30,7 @@ import PortalCompania from './PortalCompania';
 import Orders from './Orders';
 import Usuarios from './Usuarios';
 import Donations from './Donations';
+import Desvincular from './Desvincular';
 import MpTest from './MpTest';
 import styles from './ProfileTempleteCommerce.module.css';
 import Delete from './Delete';
@@ -39,6 +41,8 @@ const generalHeight = 58;
 
 function ProfileTempleteCommerce(props) {
   const navigate = useNavigate();
+
+  const { id } = useSelector((state) => state.auth);
 
   const [orders, setOrders] = useState([]);
 
@@ -149,7 +153,7 @@ function ProfileTempleteCommerce(props) {
         )}
       </List>
       <Divider />
-      <List>
+      {id === company.ownerId && <List>
         <ListItem
           button
           key="Eliminar cuenta"
@@ -157,7 +161,7 @@ function ProfileTempleteCommerce(props) {
         >
           <ListItemText primary="Eliminar cuenta" sx={{ color: 'red' }} />
         </ListItem>
-      </List>
+      </List>}
     </div>
   );
 
@@ -264,7 +268,7 @@ function ProfileTempleteCommerce(props) {
           )}
           {display === 6 && <PostNewBatch />}
           {display === 7 &&
-            (company.mp_credential_id ? 'desvicular Mercado pago' : <MpTest />)}
+            (company.mp_credential_id ? <Desvincular/> : <MpTest />)}
 
           {display === 99 && <Delete company={company} />}
         </Box>

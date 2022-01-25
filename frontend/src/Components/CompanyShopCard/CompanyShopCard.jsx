@@ -20,7 +20,7 @@ export default function CompanyShopCard({cart}) {
     <div className={styles.generalDiv}>
       <div className={styles.productShopCardDiv}>
         <div className={styles.titleCompanyDiv}>
-          <img className={styles.companyPhoto}src={cart[0].product.company.logo.url} alt="" />
+          {cart[0].product.company.logo && <img className={styles.companyPhoto}src={cart[0].product.company.logo?.url} alt="" />}
           <Link to={`/company/${cart[0].product.company_id}`}><p className={styles.titleCompany}>{cart[0].product.company.name}</p></Link>
         </div>
       </div>

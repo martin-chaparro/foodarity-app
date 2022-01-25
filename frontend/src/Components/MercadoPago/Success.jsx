@@ -1,6 +1,7 @@
 /* eslint-disable no-alert */
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import { apiWithToken } from '../../services/api';
 
 function Success() {
@@ -17,7 +18,11 @@ function Success() {
 
   useEffect(() => {
     if (redirect) {
-      alert('Compra realizada con exito');
+      Swal.fire({
+        icon: 'success',
+        title: 'Bien !',
+        text: 'Compra realizada con Exito !',
+      });
       navigate('/home');
     }
   }, [redirect]);

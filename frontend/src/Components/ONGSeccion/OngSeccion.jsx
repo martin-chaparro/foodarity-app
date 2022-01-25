@@ -5,35 +5,12 @@
 // function OngSeccion({ong}) {
 //   return <div>
 //     <Link to={`/company/${ong.id}`}>
-//    <img src={ong.logo.url} alt='' className={styles.imgOngs}/> 
+//    <img src={ong.logo.url} alt='' className={styles.imgOngs}/>
 //     </Link>
 //   </div>;
 // }
 
 // export default OngSeccion
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 import * as React from 'react';
 import { Link } from 'react-router-dom';
@@ -44,29 +21,31 @@ import ButtonBase from '@mui/material/ButtonBase';
 import Typography from '@mui/material/Typography';
 import styles from './OngSeccion.module.css';
 
-export default function OngSeccion({ong}) {
-
+export default function OngSeccion({ ong }) {
   const ImageButton = styled(ButtonBase)(({ theme }) => ({
-  position: 'relative',
-  height: 200,
-  margin: 8,
-  [theme.breakpoints.down('sm')]: {
-    width: '100% !important', 
-    height: 100,
-  },
-  '&:hover, &.Mui-focusVisible': {
-    zIndex: 1,
-    '& .MuiImageBackdrop-root': {
-      opacity: 0.15,
+    position: 'relative',
+    height: 200,
+    margin: 8,
+    [theme.breakpoints.down('sm')]: {
+      width: '100% !important',
+      height: 100,
     },
-    '& .MuiImageMarked-root': {
-      opacity: 0,
+    '&:hover, &.Mui-focusVisible': {
+      zIndex: 1,
+      '& .MuiImageBackdrop-root': {
+        opacity: 0.15,
+      },
+      '& .MuiImageMarked-root': {
+        opacity: 0,
+      },
+      '& .MuiTypography-root': {
+        border: '4px solid currentColor',
+      },
     },
     '& .MuiTypography-root': {
       border: '4px solid currentColor',
     },
-  },
-}));
+  }))
 
 const Image = styled('span')(({ theme }) => ({
   position: 'absolute',
@@ -77,6 +56,8 @@ const Image = styled('span')(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
+  width: '100%',
+  height: '100%',
   color: theme.palette.common.white,
 }));
 
@@ -94,7 +75,6 @@ const ImageBackdrop = styled('span')(({ theme }) => ({
 const ImageMarked = styled('span')(({ theme }) => ({
   height: 3,
   width: 18,
-  backgroundColor: theme.palette.common.white,
   position: 'absolute',
   bottom: -2,
   left: 'calc(50% - 9px)',
@@ -104,14 +84,22 @@ const ImageMarked = styled('span')(({ theme }) => ({
 
 
   return (
-    <Box sx={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', minWidth: 200, width: '100%', }}>
-     <Link to={`/company/${ong.id}`}>
-        <ImageButton
-          focusRipple
-          key={ong.id}
-          sx={{width:'100%'}}
-        >
-           <img src={ong.logo ? ong.logo.url : ''} alt='' className={styles.imgOngs}/>
+    <Box
+      sx={{
+        display: 'flex',
+        justifyContent: 'center',
+        flexWrap: 'wrap',
+        minWidth: 200,
+        width: '100%',
+      }}
+    >
+      <Link to={`/company/${ong.id}`}>
+        <ImageButton focusRipple key={ong.id} sx={{ width: '100%' }}>
+          <img
+            src={ong.logo ? ong.logo.url : ''}
+            alt=""
+            className={styles.imgOngs}
+          />
           <ImageBackdrop className="MuiImageBackdrop-root" />
           <Image>
             <Typography
@@ -130,9 +118,7 @@ const ImageMarked = styled('span')(({ theme }) => ({
             </Typography>
           </Image>
         </ImageButton>
-        </Link>
+      </Link>
     </Box>
-
   );
 }
-

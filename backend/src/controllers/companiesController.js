@@ -10,6 +10,7 @@ const State = require('../models/State');
 const User = require('../models/User');
 const Product = require('../models/Product');
 const Cart = require('../models/Cart');
+const {send} = require('./nodemailerController')
 
 cloudinary.config(process.env.CLOUDINARY_URL);
 
@@ -81,7 +82,14 @@ const createCompany = async (req, res) => {
     await newCompany.setAddress(newAddress);
     const owner = await User.findByPk(ownerId);
     await owner.setCompany(newCompany.id);
-
+    if (type === 1) {
+      send(user.email, 'Registraste un nuevo comercio', `Tu comercio se encuentra en revisión. Recibiras un mail en las siguientes 48 horas para saber si fue aprobado.`)
+      send(email, 'Registraste un nuevo comercio', `Tu comercio se encuentra en revisión. Recibiras un mail en las siguientes 48 horas para saber si fue aprobado.`)
+    } else {
+      send(user.email, 'Registraste una nueva ONG', `Tu ONG se encuentra en revisión. Recibiras un mail en las siguientes 48 horas para saber si fue aprobado.`)
+      send(email, 'Registraste un nuevo comercio', `Tu comercio se encuentra en revisión. Recibiras un mail en las siguientes 48 horas para saber si fue aprobado.`)
+    }
+    
     return res.status(200).json(newCompany);
   } catch (error) {
     return res.status(500).json(error);
@@ -420,28 +428,28 @@ const addUser = async (req, res) => {
     });
     if (!user || user.deleted) {
       return res.status(400).json({
-        message: 'El usuario no existe',
+        message: 'El usuario no existe.',
       });
     }
     if (!user.status) {
       return res.status(400).json({
-        message: 'El usuario no esta habilitado',
+        message: 'El usuario no existe.',
       });
     }
     if (user.company_id === owner.company_id) {
       return res.status(400).json({
-        message: 'El usuario ya pertenece a tu compania',
+        message: 'El usuario ya pertenece a tu compania.',
       });
     }
     if (user.company_id) {
       return res.status(400).json({
-        message: 'El usuario ya pertenece a otra compania',
+        message: 'El usuario ya pertenece a otra compania.',
       });
     }
     user.setCompany(owner.company_id);
     return res.status(200).send({ message: `${user.email} added` });
   } catch (error) {
-    return res.status(500).send(error);
+    return res.status(500).send({message: error});
   }
 };
 

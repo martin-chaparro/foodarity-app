@@ -135,7 +135,8 @@ export default function PublishedProduct() {
                   align={column.align}
                   style={{
                     minWidth: column.minWidth,
-                    backgroundColor: 'lightgray',
+                    backgroundColor: '#7ED957',
+                    color: '#3E2463',
                     fontWeight: '700',
                   }}
                   className={styles.titulos}
@@ -148,13 +149,22 @@ export default function PublishedProduct() {
           <TableBody>
             {rows
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row) => {
+              .map((row,index) => {
                 return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                  // eslint-disable-next-line react/no-array-index-key
+                  <TableRow hover role="checkbox" tabIndex={-1} key={index}>
                     {columns.map((column) => {
                       const value = row[column.id];
                       return (
-                        <TableCell key={column.id} align={column.align}>
+                        <TableCell
+                          key={column.id}
+                          style={{
+                            backgroundColor: 'white',
+                            color: '#3E2463',
+                            fontWeight: '700',
+                          }}
+                          align={column.align}
+                        >
                           {column.format && typeof value === 'number'
                             ? column.format(value)
                             : value}

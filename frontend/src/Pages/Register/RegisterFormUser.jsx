@@ -28,6 +28,8 @@ function Register() {
     validatePassword: '',
   });
 
+  window.scroll(0, 0);
+  
   const validateLetters = (e) => {
     const { name, value } = e.target;
     setInput({
@@ -130,6 +132,11 @@ function Register() {
           const { email } = input;
           api.post('users/validate', { id, email });
           dispatch(startCheking());
+          Swal.fire({
+            icon: 'success',
+            title: 'Bien!',
+            text: 'Te registraste con exito. Revisa tu casilla de correos para validar tu cuenta.',
+          });
           navigate('/');
         })
         .catch((error) => {

@@ -12,6 +12,7 @@ import TableRow from '@mui/material/TableRow';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import Swal from 'sweetalert2'
 import { useSelector } from 'react-redux';
 import styles from './Usuarios.module.css';
 import { apiWithToken } from '../../services/api';
@@ -71,7 +72,17 @@ export default function Usuarios({ company }) {
     apiWithToken.delete(`/companies/user/${ID}`).then(() => {
       apiWithToken.get('/companies/users').then((response) => {
         setUsers(response.data);
-      });
+        Swal.fire({
+          icon: 'success',
+          title: 'Bien',
+          text: 'Usuario desvinculado.'})
+        setInput('');
+      }).catch(()=> {
+        Swal.fire({
+          icon: 'error',
+          title: 'Ups...',
+          text: 'Algo fallo. Intente nuevamente.'})
+      })
     });
     if (id !== company.ownerId) {
       navigate('/home')
@@ -128,11 +139,20 @@ export default function Usuarios({ company }) {
     // eslint-disable-next-line no-alert
     if (window.confirm(`Agregar a ${input} a la compania?`))
       apiWithToken.post(`/companies/user?email=${input}`).then(() => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Bien',
+          text: 'El usuario fue agregado con exito.'})
         setInput('');
         apiWithToken.get('/companies/users').then((response) => {
           setUsers(response.data);
-        });
-      });
+        })
+      }).catch((error)=>{
+        Swal.fire({
+          icon: 'error',
+          title: 'Ups...',
+          text: error.response.data.message})
+    });
   }
 
   return (
@@ -181,7 +201,8 @@ export default function Usuarios({ company }) {
                   align={column.align}
                   style={{
                     minWidth: column.minWidth,
-                    backgroundColor: 'lightgray',
+                    backgroundColor: '#7ED957',
+                    color: '#3E2463',
                     fontWeight: '700',
                   }}
                 >
@@ -194,18 +215,32 @@ export default function Usuarios({ company }) {
             {rows &&
               rows
                 /* .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage) */
-                .map((row) => {
+                .map((row,index) => {
                   return (
                     <TableRow
                       hover
                       role="checkbox"
+                      style={{
+                        backgroundColor: 'white',
+                        color: '#3E2463',
+                        fontWeight: '700',
+                      }}
                       tabIndex={-1}
-                      key={row.code}
+                      // eslint-disable-next-line react/no-array-index-key
+                      key={index}
                     >
                       {columns.map((column) => {
                         const value = row[column.id];
                         return (
-                          <TableCell key={column.id} align={column.align}>
+                          <TableCell
+                            key={column.id}
+                            style={{
+                              backgroundColor: 'white',
+                              color: '#3E2463',
+                              fontWeight: '700',
+                            }}
+                            align={column.align}
+                          >
                             {column.format && typeof value === 'number'
                               ? column.format(value)
                               : value}

@@ -559,7 +559,7 @@ export const CompanyUpdate = () => {
                 </Button>
               </Grid>
               <Grid item ml={2}>
-                <Button variant="outlined" type="submit">
+                <Button variant="outlined" type="submit" disabled={!formik.isValid}>
                   Guardar
                 </Button>
               </Grid>

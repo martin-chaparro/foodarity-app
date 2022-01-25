@@ -10,6 +10,7 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import Swal from 'sweetalert2';
 import Paper from '@mui/material/Paper';
 import { getCart } from '../../redux/actions/cartActions';
 import { apiWithToken } from '../../services/api';
@@ -87,10 +88,16 @@ console.log("CONSOLE LOOOOG", initialCart)
         apiWithToken.post('/orders', finalOrder).then(res => {
           apiWithToken.put(`/orders/${res.data.id}`).then(response => {
             if (response.status === 200) {
-              alert('COMPRA REALIZADA CON EXITO')
+              Swal.fire({
+                icon: 'success',
+                title: 'Bien',
+                text: 'Compra realizada con exito. Te enviamos por email los datos del vendedor.'})
               navigate('/home')
             } else {
-              alert('ALGO FALLO...')
+              Swal.fire({
+                icon: 'error',
+                title: 'Ups...',
+                text: 'Algo fallo. Vuelva a intentar mas tarde.'})
             }
           })
         })

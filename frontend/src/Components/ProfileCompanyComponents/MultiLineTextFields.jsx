@@ -13,7 +13,7 @@ export default function Descipcion({ handleOnChange, input }) {
 
   return (
     <Box
-      component="form"
+      component="div"
       sx={{
         '& .MuiTextField-root': { m: 1, width: '464px' },
       }}

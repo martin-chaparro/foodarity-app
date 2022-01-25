@@ -9,14 +9,17 @@ const {
   updateUser,
   uploadPhotoUser,
   validate,
-  updatePassword
+  updatePassword,
 } = require('../../controllers/userController');
 const { confirmarMail } = require('../../controllers/nodemailerController');
 const ValidationsUser = require('../../middlewares/validations/validationUser');
 const validationFiles = require('../../middlewares/validations/validationFiles');
 const authMiddleware = require('../../middlewares/auth');
 
-const { enviarMail,resetPassword } = require('../../controllers/nodemailerController');
+const {
+  enviarMail,
+  resetPassword,
+} = require('../../controllers/nodemailerController');
 
 router.post('/nodemailer', enviarMail);
 router.post('/', ValidationsUser.withPassword, createUser);

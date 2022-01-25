@@ -11,7 +11,7 @@ import FormControl from '@mui/material/FormControl';
 export function NuevoLote({ handleOnChange, input }) {
   return (
     <Box
-      component="form"
+      component="div"
       sx={{
         '& .MuiTextField-root': { m: 1, width: '25ch' },
       }}
@@ -35,7 +35,7 @@ export function NuevoLote({ handleOnChange, input }) {
 export function Cantidad({ handleOnChange, input, ValidateQuantity }) {
   return (
     <Box
-      component="form"
+      component="div"
       sx={{
         '& .MuiTextField-root': { m: 1, width: '25ch' },
       }}
@@ -47,7 +47,6 @@ export function Cantidad({ handleOnChange, input, ValidateQuantity }) {
         type="number"
         name="quantity"
         id="filled-size-normal"
-        defaultValue=""
         value={input.quantity}
         variant="filled"
         onChange={(e) => {
@@ -62,7 +61,7 @@ export function Cantidad({ handleOnChange, input, ValidateQuantity }) {
 export function Fecha({ handleOnChange, input }) {
   return (
     <Box
-      component="form"
+      component="div"
       sx={{
         '& .MuiTextField-root': { m: 1, width: '25ch' },
       }}
@@ -94,7 +93,6 @@ export function Categoria({ categories, input, handleOnChange }) {
           id="demo-simple-select-filled"
           sx={{ width: 464 }}
           name="category"
-          defaultValue=""
           value={input.category}
           label="Categoria"
           onChange={handleOnChange}
@@ -121,7 +119,7 @@ export function Descripcion({ handleOnChange, input }) {
 
   return (
     <Box
-      component="form"
+      component="div"
       sx={{
         '& .MuiTextField-root': { m: 1, width: '464px' },
       }}

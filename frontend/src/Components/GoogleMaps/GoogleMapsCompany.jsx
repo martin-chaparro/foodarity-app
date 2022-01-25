@@ -14,8 +14,8 @@ function GoogleMapsCompany({ company }) {
           language: 'es',
           region: 'arg',
         }}
-        defaultCenter={company.address.city}
-        defaultZoom={10}
+        defaultCenter={company.address.location}
+        defaultZoom={7}
       >
         {company && (
           <Marker

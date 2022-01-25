@@ -50,7 +50,6 @@ function ProfileUserTemplate(props) {
       .get(`/orders/user/`)
       .then((response) => setOrders(response.data));
   }, []);
-  console.log(orders);
 
   const drawer = (
     <div>

@@ -18,7 +18,7 @@ export default function Donations({ donations, typeId }) {
     setPage(newPage);
   };
 
-  console.log(donations);
+
 
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value);
@@ -35,18 +35,16 @@ export default function Donations({ donations, typeId }) {
       format: (value) => value.toLocaleString('en-US'),
     },
     {
-      id: 'fecha',
-      label: 'FECHA DONACION',
+      id: 'category',
+      label: 'CATEGORIA',
       minWidth: 170,
       align: 'right',
       format: (value) => value.toFixed(2),
     },
   ];
 
-  function createData(lote, ong, cantidad, fecha) {
-    // const density = population / size;
-
-    return { lote, ong, cantidad, fecha };
+  function createData(lote, ong, cantidad, category) {
+    return { lote, ong, cantidad, category };
   }
 
   const rows = donations.map((donation) => {
@@ -54,7 +52,7 @@ export default function Donations({ donations, typeId }) {
       donation.lote,
       typeId === 1 ? donation.ong.name : donation.company.name,
       donation.quantity,
-      donation.fecha
+      donation.category.name
     );
   });
 
@@ -63,9 +61,8 @@ export default function Donations({ donations, typeId }) {
       className={styles.content}
       sx={{ width: '100%', overflow: 'hidden' }}
     >
-      {
-        typeId === 1 ? ( 
-          <Typography
+      {typeId === 1 ? (
+        <Typography
           variant="h4"
           gutterBottom
           component="div"
@@ -73,8 +70,8 @@ export default function Donations({ donations, typeId }) {
         >
           Donaciones Realizadas
         </Typography>
-        ) : (
-          <Typography
+      ) : (
+        <Typography
           variant="h4"
           gutterBottom
           component="div"
@@ -82,9 +79,7 @@ export default function Donations({ donations, typeId }) {
         >
           Donaciones Obtenidas
         </Typography>
-        )
-      }
-      
+      )}
 
       <TableContainer sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
@@ -94,7 +89,12 @@ export default function Donations({ donations, typeId }) {
                 <TableCell
                   key={column.id}
                   align={column.align}
-                  style={{ minWidth: column.minWidth }}
+                  style={{
+                    minWidth: column.minWidth,
+                    backgroundColor: '#7ED957',
+                    color: '#3E2463',
+                    fontWeight: '700',
+                  }}
                 >
                   {column.label}
                 </TableCell>
@@ -104,13 +104,23 @@ export default function Donations({ donations, typeId }) {
           <TableBody>
             {rows
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row) => {
+              .map((row,index) => {
                 return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                  
+                  // eslint-disable-next-line react/no-array-index-key
+                  <TableRow hover role="checkbox" tabIndex={-1} key={index}>
                     {columns.map((column) => {
                       const value = row[column.id];
                       return (
-                        <TableCell key={column.id} align={column.align}>
+                        <TableCell
+                          key={column.id}
+                          style={{
+                            backgroundColor: 'white',
+                            color: '#3E2463',
+                            fontWeight: '700',
+                          }}
+                          align={column.align}
+                        >
                           {column.format && typeof value === 'number'
                             ? column.format(value)
                             : value}

@@ -14,7 +14,7 @@ import FormControl from '@mui/material/FormControl';
 export function NuevoLote({ handleOnChange, input }) {
   return (
     <Box
-      component="form"
+      component="div"
       sx={{
         '& .MuiTextField-root': { m: 1, width: '25ch' },
       }}
@@ -38,7 +38,7 @@ export function NuevoLote({ handleOnChange, input }) {
 export function Cantidad({ handleOnChange, input, ValidateQuantity }) {
   return (
     <Box
-      component="form"
+      component="div"
       sx={{
         '& .MuiTextField-root': { m: 1, width: '25ch' },
       }}
@@ -91,7 +91,7 @@ export function Amount({ handleOnChange, input, validatePrice }) {
 export function Fecha({ handleOnChange, input }) {
   return (
     <Box
-      component="form"
+      component="div"
       sx={{
         '& .MuiTextField-root': { m: 1, width: '25ch' },
       }}

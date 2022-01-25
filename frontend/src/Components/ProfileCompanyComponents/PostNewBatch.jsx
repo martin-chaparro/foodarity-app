@@ -87,8 +87,7 @@ export default function PostNewBatch() {
       [e.target.name]: e.target.value,
     });
   }
-
-  console.log(Object.keys(validate(input)).length);
+  
 
   function handleSubmit(e) {
     e.preventDefault();
