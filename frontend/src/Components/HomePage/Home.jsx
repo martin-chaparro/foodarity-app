@@ -83,8 +83,15 @@ export default function Home() {
           sx={{ marginBottom: '1em', width: '100%' }}
           filtrado={filtrado}
         />
-        <Pagination paginado={paginado} />
       </div>
+      <div className={styles.ongAndTitleContainer}>
+        <h2 className={styles.titleOng}>¡Conoce nuestras ONGs!</h2>
+        <div className={styles.contOngs}>
+          {allOngs.length > 0 ?
+           ( allOngs.map((ong) => { return <OngSeccion key={ong.id} ong={ong} />;})): <h2>No hay ONGs</h2>}
+        </div>
+        </div>
+        <Pagination paginado={paginado} />
       <div className={styles.parent}>
         <div className={styles.filtroWeb}>
           <FiltroWeb filtrado={filtrado} />
@@ -94,11 +101,6 @@ export default function Home() {
             // eslint-disable-next-line react/no-array-index-key
             <ProductCard key={index} product={product} />
           ))): <NotFound />}
-        </div>
-        <div className={styles.contOngs}>
-        <h2 className={styles.titleOng}>¡Conoce nuestras ONGs!</h2>
-          {allOngs.length > 0 ?
-           ( allOngs.map((ong) => { return <OngSeccion key={ong.id} ong={ong} />;})): <h2>No hay ONGs</h2>}
         </div>
       </div>
     </div>
