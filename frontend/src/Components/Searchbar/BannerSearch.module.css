@@ -11,7 +11,8 @@ html {
   height: calc(100vh - 48px);
   overflow: hidden;
   /* background-image: url(../../assets/gif3.gif); */
-  background-image: url(../../assets/hero4.png);
+  /* background-image: url(../../assets/hero4.png); */
+  background-image: url(https://res.cloudinary.com/dxbtqclyu/image/upload/v1643070058/15_jidvgd.png);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

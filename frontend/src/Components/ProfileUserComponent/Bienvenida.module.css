@@ -10,13 +10,13 @@
   .imagen {
     display: none;
   }
+  .texto2 {
+    display: none;
+  }
 }
 
 @media screen and (min-width: 576px) {
   .texto {
     display: none;
-  }
-  .texto2 {
-    font-display: 100;
   }
 }
