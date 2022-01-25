@@ -72,18 +72,18 @@ export default function Usuarios({ company }) {
     apiWithToken.delete(`/companies/user/${ID}`).then(() => {
       apiWithToken.get('/companies/users').then((response) => {
         setUsers(response.data);
-        Swal.fire({
-          icon: 'success',
-          title: 'Bien',
-          text: 'Usuario desvinculado.'})
         setInput('');
-      }).catch(()=> {
-        Swal.fire({
-          icon: 'error',
-          title: 'Ups...',
-          text: 'Algo fallo. Intente nuevamente.'})
       })
-    });
+      Swal.fire({
+        icon: 'success',
+        title: 'Bien',
+        text: 'Usuario desvinculado.'})
+    }).catch(()=> {
+      Swal.fire({
+        icon: 'error',
+        title: 'Ups...',
+        text: 'Algo fallo. Intente nuevamente.'})
+    })
     if (id !== company.ownerId) {
       navigate('/home')
     }

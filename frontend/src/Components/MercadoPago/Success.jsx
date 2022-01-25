@@ -18,11 +18,10 @@ function Success() {
 
   useEffect(() => {
     if (redirect) {
-      Swal.fire({
-        icon: 'success',
-        title: 'Bien !',
-        text: 'Compra realizada con Exito !',
-      });
+     Swal.fire({
+                icon: 'success',
+                title: 'Bien',
+                text: 'Compra realizada con exito. Te enviamos por email los datos del vendedor.'})
       navigate('/home');
     }
   }, [redirect]);

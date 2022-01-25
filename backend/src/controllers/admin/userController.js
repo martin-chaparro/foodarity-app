@@ -7,7 +7,7 @@ const Company = require('../../models/Company');
 const City = require('../../models/City');
 const State = require('../../models/State');
 const Address = require('../../models/Address');
-const {send} = require('../nodemailerController')
+const { send } = require('../nodemailerController');
 
 cloudinary.config(process.env.CLOUDINARY_URL);
 
@@ -94,9 +94,13 @@ const getAllUsers = async (request, response) => {
       exclude: ['password', 'createdAt', 'updatedAt', 'RoleId', 'role_id'],
     },
     where: {
-      [Op.or]: [
-        { name: { [Op.iLike]: `%${search}%` } },
-        { email: { [Op.iLike]: `%${search}%` } },
+      [Op.and]: [
+        {
+          [Op.or]: [
+            { name: { [Op.iLike]: `%${search}%` } },
+            { email: { [Op.iLike]: `%${search}%` } },
+          ],
+        },
         { deleted: false },
       ],
     },
@@ -193,13 +197,15 @@ const deleteUser = async (request, response) => {
       .json({ message: 'No te puedes elimnar a ti mismo' });
   }
   try {
-    const user = User.findByPk(id)
-    await user.update(
-      {
-        deleted: true,
-      }
+    const user = User.findByPk(id);
+    await user.update({
+      deleted: true,
+    });
+    await send(
+      user.email,
+      'Tu usuario fue eliminado',
+      `Hola, ${user.name}. Tu cuenta fue eliminada por incumplir los reglamentos de Foodarity.`
     );
-   await send(user.email, 'Tu usuario fue eliminado', `Hola, ${user.name}. Tu cuenta fue eliminada por incumplir los reglamentos de Foodarity.`)
     return response.status(200).json({ message: 'Eliminado correctamente' });
   } catch (error) {
     console.log(error);
@@ -264,17 +270,16 @@ const updateUserPassword = async (request, response) => {
   const { password } = request.body;
 
   try {
-
     const user = await User.findByPk(id);
     if (!user) {
-      
-      return response.status(400).json({ message: 'No se encuentra el usuario' });
+      return response
+        .status(400)
+        .json({ message: 'No se encuentra el usuario' });
     }
 
     await user.update({
       password,
     });
-
 
     return response.status(200).json({ message: 'Actualizado correctamente' });
   } catch (error) {

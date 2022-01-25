@@ -6,7 +6,7 @@ import Button from '@mui/material/Button';
 import { api } from '../../services/api';
 import styles from './FiltroForm.module.css';
 
-function FiltroForm({ filtrado }) {
+function FiltroForm({ filtrado, search }) {
   // const dispatch = useDispatch()
   const [categories, setCategories] = useState();
   const [input, setInput] = useState({
@@ -46,6 +46,7 @@ function FiltroForm({ filtrado }) {
     };
     setInput(clearInput);
     filtrado(clearInput);
+    search('')
   };
 
   const handleSubmit = (e) => {

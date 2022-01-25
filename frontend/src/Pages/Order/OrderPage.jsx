@@ -125,7 +125,10 @@ console.log("CONSOLE LOOOOG", initialCart)
               window.location.href = url
             })
           } else {
-            alert('ALGO FALLO...')
+            Swal.fire({
+              icon: 'error',
+              title: 'Ups...',
+              text: 'Algo fallo. Vuelva a intentar mas tarde.'})
           }
         })
         break
