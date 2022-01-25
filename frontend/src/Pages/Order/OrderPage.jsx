@@ -30,7 +30,7 @@ function OrderPage() {
   const [select, setSelect] = React.useState();
   const [allowSubmit, setAllowSubmit] = React.useState(false)
 
-
+console.log("CONSOLE LOOOOG", initialCart)
   useEffect(() => {
     if (!params.id) {
       navigate('/home');
@@ -40,7 +40,7 @@ function OrderPage() {
 
   useEffect(() => {
     const data = initialCart.filter(
-      (item) => item.product.company_id !== params.id
+      (item) => item.product.company_id === Number(params.id)
     );
     setCart(data);
   }, [initialCart]);

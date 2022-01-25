@@ -3,10 +3,10 @@
 import React, { useState } from "react";
 // import { useDispatch, useSelector } from "react-redux";
 import Button from '@mui/material/Button';
+import Swal from 'sweetalert2';
 import { api } from "../../services/api";
 import style from "./RecuperarPassword.module.css"
 import logo from '../../assets/WEB-Full-Header-Logo.png';
-
 
 
 export default function RecuperarPassword () { 
@@ -26,9 +26,27 @@ export default function RecuperarPassword () {
         e.preventDefault();
         api.post('/users/reset',input)
         // eslint-disable-next-line no-alert
-        .then((response)=>alert('Se envio el correo'))
-        .catch((error)=>console.log(error))
-    }
+        // .then((response)=>alert('Se envio el correo'))
+        // .catch((error)=>console.log(error))
+        .then(() => {
+          Swal.fire({
+            icon: 'succes',
+            title: 'El correo se envio correctamente',
+            text: 'por favor revisa tu Mail',
+          });
+          
+        })
+        .catch((error) => {
+          console.log(error)
+          Swal.fire({
+            icon: 'errors',
+            title: 'oppss',
+            text: 'Algo salio mal',
+          });
+          
+        })
+    };
+    
 
     const validateEmail = (e) => {
         const { name, value } = e.target;
@@ -59,7 +77,7 @@ export default function RecuperarPassword () {
           </div>
             <form className={style.form} onSubmit={handleSubmit}>
                 <h1 className={style.h3}>Formulario para recuparar Contraseña</h1>
-            <div>
+            <div className={style.contener}>
                 <h4>Email</h4>
                 <input type="text"
                        name="email"
@@ -71,9 +89,10 @@ export default function RecuperarPassword () {
                       }} />
                       <p className={style.errors}>{errors.email}</p>
             </div>
-            <div>
+            <div className={style.btn}>
                 <br />
                 <Button
+                className={style.bt}
             variant="contained"
             sx={{
               backgroundColor: '#FDFFB6',

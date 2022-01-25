@@ -36,31 +36,54 @@ export const startCheking = () => {
 export const startLogin = (email, password) => {
   return async (dispatch) => {
     try {
-      const response = await api.post('/auth', { email, password });
-      const { id, name, token } = response.data;
-      localStorage.setItem('token', token);
-      localStorage.setItem('id', id);
-      localStorage.setItem('name', name);
-      dispatch(
-        login({
-          id,
-          name,
+      await api
+        .post('/auth', { email, password })
+        .then((response) => {
+          const { id, name, token } = response.data;
+          localStorage.setItem('token', token);
+          localStorage.setItem('id', id);
+          localStorage.setItem('name', name);
+          dispatch(
+            login({
+              id,
+              name,
+            })
+          );
+          if (response.data.isFirstLogin) {
+            window.location.replace('/rollselector');
+          } else {
+            window.location.replace('/home');
+          }
         })
-      );
-      if (response.data.firstLogin) {
-        window.location.replace('/rollselector');
-      } else {
-        window.location.replace('/home');
-      }
+        .catch((error) => {
+          if (error.response.status === 401) {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Revisa tu email para validar tu cuenta.',
+            });
+          } else if (error.response.status === 400) {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Lo sentimos, el email y/o contraseña no existen o son incorrectos.',
+            });
+          } else {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Lo sentimos, estamos teniendo problemas con el servidor.',
+            });
+          }
+        });
     } catch (error) {
-      console.log(error);
       // eslint-disable-next-line no-alert
       // alert('Lo siento, el email o contraseña son incorrectos, o no existen.');
       // window.location.reload(false);
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: 'Lo sentimos, el email y/o contraseña no existen o son incorrectos. Revisa tu email para validar tu cuenta.',
+        text: 'Lo sentimos, estamos teniendo problemas con el servidor.',
       });
     }
   };

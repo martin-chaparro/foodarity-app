@@ -33,7 +33,7 @@ export default function AlertDialog({ display }) {
   return (
     <div>
       <Button
-        type='submit'
+        type="submit"
         variant="contained"
         color="primary"
         onClick={handleClickOpen}
@@ -47,7 +47,6 @@ export default function AlertDialog({ display }) {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        
         <DialogTitle id="alert-dialog-title">Solicitud Enviada</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">

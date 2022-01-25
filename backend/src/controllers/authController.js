@@ -30,7 +30,7 @@ const userLogin = async (request, response) => {
       });
     }
     if (!user.validated) {
-      return response.status(400).json({
+      return response.status(401).json({
         message: 'El usuario aun no fue validado',
       });
     }
@@ -59,7 +59,7 @@ const userLogin = async (request, response) => {
         socialPhoto: user.socialPhoto,
         roleId: user.role_id,
         token,
-        firstLogin: true,
+        isFirstLogin : true
       });
     }
     return response.status(200).json({
@@ -69,6 +69,7 @@ const userLogin = async (request, response) => {
       socialPhoto: user.socialPhoto,
       roleId: user.role_id,
       token,
+      isFirstLogin : false
     });
   } catch (error) {
     console.log(error);

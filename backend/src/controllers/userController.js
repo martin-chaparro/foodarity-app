@@ -159,14 +159,36 @@ const deleteUser = async (request, response) => {
   }
 
   try {
-    await User.update(
-      {
-        deleted: true,
-      },
-      {
-        where: { id },
+    const user = await User.findByPk(id);
+    if (user.company) {
+      const company = await User.findByPk(user.company_id);
+      if (company.ownerId === id) {
+        await User.update(
+          {
+            company_id: null,
+          },
+          { where: { company_id: user.company_id } }
+        );
+        await company.update(
+          {deleted: true}
+        )
+        await user.update({
+          deleted: true,
+          company_id: true
+        })
+      } else {
+        await user.update({
+          deleted: true,
+          company_id: true
+        })
       }
-    );
+    } else {
+      await user.update(
+        {
+          deleted: true,
+        }
+      );
+    }
 
     return response.status(200).json({ message: 'Eliminado correctamente' });
   } catch (error) {
@@ -262,10 +284,9 @@ const updatePassword = async (request, response) => {
     if (password !== passwordDos) {
       return response.status(400).json({ message: 'Verifique los datos' });
     }
-    
-    user.update({password:passwordDos,mailCode:null})
-    return response.status(200).json({ message: 'Datos Actulizados' });
 
+    user.update({ password: passwordDos, mailCode: null });
+    return response.status(200).json({ message: 'Datos Actulizados' });
   } catch (error) {
     console.log(error);
     return response.status(500).json({ message: 'Server Error' });

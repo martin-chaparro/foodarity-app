@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 import Button from '@mui/material/Button';
+import Swal from 'sweetalert2';
 import { api } from '../../services/api';
 import style from "./ActualizarPassword.module.css"
 import logo from '../../assets/WEB-Full-Header-Logo.png';
@@ -54,7 +55,11 @@ function ActualizarPassword() {
       .post('/users/updatepassword', {input,emailCode:isValid})
       // eslint-disable-next-line no-alert
       .then(() => {
-        alert('Se actualizo la password')
+        Swal.fire({
+          icon: 'Succes',
+          title: 'Bien',
+          text: 'Tu contraseña se cambio correctamente',
+        });
         navigate('/login')
       })
       .catch((error) => {
@@ -110,7 +115,7 @@ function ActualizarPassword() {
         </div>
       <form className={style.form} onSubmit={handleSubmit}>
         <h1 className={style.h1}>Formulario para recuparar Contraseña</h1>
-
+        <div className={style.contener}>
         <div>
           <h4>Contraseña</h4>
           <input
@@ -139,7 +144,8 @@ function ActualizarPassword() {
           />
           <p className={style.errors}>{errors.passwordDos}</p>
         </div>
-        <div>
+        </div>
+        <div className={style.bt}>
           <br />
           <Button
             variant="contained"
