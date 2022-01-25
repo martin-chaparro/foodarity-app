@@ -75,7 +75,7 @@ function createData(
 }
 
 export default function Compras({ orders }) {
-  console.log(orders);
+
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 

@@ -93,7 +93,6 @@ export default function OngForm() {
     e.preventDefault();
 
     const errors = validate(input);
-    console.log(errors);
 
     if (Object.keys(errors).length) {
       Swal.fire({
