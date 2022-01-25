@@ -4,7 +4,7 @@
   width: 100%;
   min-height: 100vh;
   position: relative;
-  top: 4.7vw;
+  top: 64px;
 }
 
 .GeneralProfileImgs {
@@ -132,13 +132,14 @@
 .divh2 {
   position: relative;
   bottom: 1vh;
-  color: white;
+  color: rgb(255, 255, 255);
   display: flex;
   justify-content: center;
   align-items: center;
   border-bottom: 1px solid rgba(255, 255, 255, 0.7);
   margin-bottom: 2vw;
   user-select: none;
+  background: rgba(255, 255, 255, 0.2);
 }
 
 .h2 {
