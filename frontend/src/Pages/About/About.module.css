@@ -1,7 +1,17 @@
-.containerCard {
-  min-width: 275;
+.containerCardAbout {
+  width: 700px;
+  height: 500px;
+  margin-top: 50%;
+  margin-left: 50px;
+}
+.containerCardValores {
+  width: 90%;
+  margin-top: 15%;
+  margin-left: 5%;
 }
 .misionVision {
+  margin-top: 170%;
+  margin-bottom: 5%;
   min-width: 275;
 }
 

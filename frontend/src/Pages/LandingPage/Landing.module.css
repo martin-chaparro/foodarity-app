@@ -56,6 +56,9 @@
 .goDown {
   color: white;
 }
+/* .bkgAbout{
+  background-color: #FDFFB6;
+} */
 
 .aboutCards {
   display: flex;
@@ -69,6 +72,12 @@
   display: flex;
   justify-content: space-around;
   flex-direction: row;
+}
+
+/* imagen de about */
+.imgAbout {
+  margin-top: -40%;
+  margin-left: 55%;
 }
 
 @media screen and (max-width: 576px) {

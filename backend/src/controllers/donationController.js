@@ -130,6 +130,7 @@ const getDonationsByCommerce = async (req, res) => {
         msg: 'Solo las empresas pueden realizar esta accion',
       });
     }
+    
 
     const listDonations = await Donation.findAll({
       include: [

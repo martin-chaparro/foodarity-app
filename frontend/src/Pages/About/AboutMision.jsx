@@ -8,12 +8,12 @@ import styles from './About.module.css';
 
 export default function AboutMision() {
   return (
-    <Card sx={{ width: 400 , height: 250, background: '#6C698D',boxShadow: '4px 4px 10px rgba(0, 0, 0, 1)'}} className={styles.misionVision}>
+    <Card sx={{ width: 400 , height: 250, background: '#6C698D95',boxShadow: '4px 4px 10px rgba(0, 0, 0, 1)'}} className={styles.misionVision}>
       <CardContent>
-        <Typography sx={{ color: "black", background: 'white', borderRadius: 1, display: "flex", justifyContent: "center", alignItems: "center", }} variant="h5" component="div">
+        <Typography sx={{ color: '#FFFFFF',fontWeight: 700, fontSize:'25px', borderRadius: 1, display: "flex", justifyContent: "center", alignItems: "center", textShadow: '1px 3px 0 #969696, 1px 13px 5px #aba8a8'}} variant="h5" component="div">
         Mision
         </Typography>
-        <Typography sx={{ color: "white", marginTop: 5}} variant="body2">
+        <Typography sx={{ color: "#FFFFFF", marginTop: 2, fontSize:'15px', fontFamily: 'Tahoma'}} variant="body2">
         Evitar la pérdida de alimentos mientras contribuimos para reducir la
         producción de desperdicios y contaminación. Ayudamos a los comerciantes
         a minimizar perdidas mientras que damos oportunidad para que personas
