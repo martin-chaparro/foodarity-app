@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+/* eslint-disable no-unused-vars */
+import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import Swal from 'sweetalert2';
@@ -14,7 +15,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Button from '@mui/material/Button';
 
-import { useFormik } from 'formik';
+import { Formik, useFormik } from 'formik';
 import * as Yup from 'yup';
 
 import defaultAvatar from '../../../../assets/avatar_default.png';
@@ -23,25 +24,20 @@ import { Layout } from '../../../layout/Layout';
 import { apiWithToken } from '../../../../services/api';
 import { finishLoading, startLoading } from '../../../../redux/actions/ui';
 
-export const UserUpdate = () => {
+export const UserAdd = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const { id } = useParams();
-  const [user, setUser] = useState();
+  // const [user, setUser] = useState();
   const [file, setFile] = useState(null);
-
-  useEffect(async () => {
-    if (id) {
-      const response = await apiWithToken.get(`/admin/users/${id}`);
-      setUser(response.data);
-    }
-  }, []);
 
   const initialFormValues = {
     name: '',
     email: '',
     phone: '',
+    password: '',
+    confirmpass: '',
     status: false,
     role: 1,
   };
@@ -55,8 +51,16 @@ export const UserUpdate = () => {
         .max(255)
         .required('El email es requerido'),
       phone: Yup.string().max(255, 'El valor maximo es de 255 caracteres'),
+      password: Yup.string().required('El password es requerido'),
+      confirmpass: Yup.string()
+        .required('El password de confirmación es requerido')
+        .test(
+          'passwords-match',
+          'Las password deben ser iguales',
+          (value) => formik.values.password === value
+        ),
       status: Yup.boolean().required(),
-      role: Yup.number(),
+      role: Yup.number().required(),
     }),
     onSubmit: () => {
       // console.log(formik.values);
@@ -65,33 +69,33 @@ export const UserUpdate = () => {
         formdata.append('file', file, file.name);
         dispatch(startLoading());
         apiWithToken
-          .patch(`/admin/users/upload/${id}`, formdata)
-          .then(() => {
+          .post(`/admin/users`, formik.values)
+          .then((response) => {
             apiWithToken
-              .put(`/admin/users/${id}`, formik.values)
+              .patch(`/admin/users/upload/${response.data.id}`, formdata)          
               .then(() => {
-                dispatch(finishLoading());
+                dispatch(finishLoading())
                 Swal.fire({
                   icon: 'success',
-                  title: 'Actualizado',
-                  text: 'Usuario actualizado correctamente.',
+                  title: 'Creado',
+                  text: 'Usuario Creado correctamente.',
                 });
                 setFile(null);
               })
               .catch(() => {
                 Swal.fire({
                   icon: 'error',
-                  title: 'No se pudo actualizar!',
+                  title: 'No se pudo crear!',
                   text: 'Consulte al administrador.',
                 });
               });
             setFile(null);
           })
           .catch(() => {
-            dispatch(finishLoading());
+            dispatch(finishLoading())
             Swal.fire({
               icon: 'error',
-              title: 'No se pudo actualizar!',
+              title: 'No se pudo crear!',
               text: 'Consulte al administrador. Error al subir la imagen',
             });
             setFile(null);
@@ -99,20 +103,20 @@ export const UserUpdate = () => {
       } else {
         dispatch(startLoading());
         apiWithToken
-          .put(`/admin/users/${id}`, formik.values)
+          .post(`/admin/users`, formik.values)
           .then(() => {
-            dispatch(finishLoading());
+            dispatch(finishLoading())
             Swal.fire({
               icon: 'success',
-              title: 'Actualizado',
-              text: 'Usuario actualizado correctamente.',
+              title: 'Creado',
+              text: 'Usuario creado correctamente.',
             });
           })
           .catch(() => {
-            dispatch(finishLoading());
+            dispatch(finishLoading())
             Swal.fire({
               icon: 'error',
-              title: 'No se pudo actualizar!',
+              title: 'No se pudo crear!',
               text: 'Consulte al administrador.',
             });
           });
@@ -120,21 +124,7 @@ export const UserUpdate = () => {
     },
   });
 
-  let profilePhoto = defaultAvatar;
-  if (user) {
-    formik.initialValues.name = user.name;
-    formik.initialValues.email = user.email;
-    formik.initialValues.phone = user.phone || '';
-    formik.initialValues.status = user.status;
-    formik.initialValues.role = user.role.id;
-    if (user.photo) {
-      profilePhoto = user.photo.url;
-    } else if (user.socialPhoto) {
-      profilePhoto = user.socialPhoto;
-    } else {
-      profilePhoto = defaultAvatar;
-    }
-  }
+  const profilePhoto = defaultAvatar;
 
   const handleBack = () => {
     navigate('/users', { replace: true });
@@ -172,17 +162,14 @@ export const UserUpdate = () => {
     }
   };
 
-  const handleResetPassword = () =>{
-    navigate(`/users/resetpass/${user.id}`, { replace: true });
-  }
-
   return (
     <Layout>
       <Typography variant="h4" gutterBottom component="div">
-        Actualizar Usuario
+        Agregar Usuario
       </Typography>
       <Divider />
       <Grid container spacing={3} pt={2}>
+        {/* Chart */}
         <Grid item xs={12} lg={9}>
           <Paper
             component="form"
@@ -209,12 +196,6 @@ export const UserUpdate = () => {
                     sx={{ width: 200, height: 200, cursor: 'pointer' }}
                   />
                 </label>
-                <Button
-                  variant="outlined"
-                  onClick={handleResetPassword}
-                >
-                  Reset Password
-                </Button>
               </Grid>
               <Grid container item xs={6} pl={3}>
                 <TextField
@@ -256,6 +237,40 @@ export const UserUpdate = () => {
                   onChange={formik.handleChange}
                   type="text"
                   value={formik.values.phone}
+                  variant="standard"
+                  autoComplete="off"
+                />
+                <TextField
+                  error={Boolean(
+                    formik.touched.password && formik.errors.password
+                  )}
+                  fullWidth
+                  helperText={formik.touched.password && formik.errors.password}
+                  label="Password"
+                  margin="normal"
+                  name="password"
+                  onBlur={formik.handleBlur}
+                  onChange={formik.handleChange}
+                  type="password"
+                  value={formik.values.password}
+                  variant="standard"
+                  autoComplete="off"
+                />
+                <TextField
+                  error={Boolean(
+                    formik.touched.confirmpass && formik.errors.confirmpass
+                  )}
+                  fullWidth
+                  helperText={
+                    formik.touched.confirmpass && formik.errors.confirmpass
+                  }
+                  label="Confirm Password"
+                  margin="normal"
+                  name="confirmpass"
+                  onBlur={formik.handleBlur}
+                  onChange={formik.handleChange}
+                  type="password"
+                  value={formik.values.confirmpass}
                   variant="standard"
                   autoComplete="off"
                 />
@@ -314,11 +329,7 @@ export const UserUpdate = () => {
                 </Button>
               </Grid>
               <Grid item ml={2}>
-                <Button
-                  variant="outlined"
-                  type="submit"
-                  disabled={!formik.isValid}
-                >
+                <Button variant="outlined" type="submit" disabled={!formik.isValid}>
                   Guardar
                 </Button>
               </Grid>
