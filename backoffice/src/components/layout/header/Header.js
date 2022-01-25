@@ -5,10 +5,10 @@ import MuiAppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import NotificationsIcon from '@mui/icons-material/Notifications';
-import MailIcon from '@mui/icons-material/Mail';
+// import NotificationsIcon from '@mui/icons-material/Notifications';
+// import MailIcon from '@mui/icons-material/Mail';
 import MenuIcon from '@mui/icons-material/Menu';
-import Badge from '@mui/material/Badge';
+// import Badge from '@mui/material/Badge';
 import Box from '@mui/material/Box';
 import Tooltip from '@mui/material/Tooltip';
 import Menu from '@mui/material/Menu';
@@ -18,6 +18,7 @@ import Avatar from '@mui/material/Avatar';
 import { toggleAsideMenu } from '../../../redux/actions/ui';
 
 import defaultAvatar from '../../../assets/avatar_default.png';
+import fodarityLogo from '../../../assets/WEB-Logo-Combinado.png';
 import { startLogout } from '../../../redux/actions/authActions';
 
 const drawerWidth = 240;
@@ -100,16 +101,23 @@ export const Header = () => {
         >
           <MenuIcon />
         </IconButton>
-        <Typography
-          component="h1"
-          variant="h6"
-          color="inherit"
+        <Box
           noWrap
-          sx={{ flexGrow: 1 }}
+          sx={{
+            flexGrow: 1,
+            height: 40,
+            overflow: 'hidden',
+            position: 'relative',
+          }}
+          component="div"
         >
-          Foodarity Back Office
-        </Typography>
-        <Box sx={{ display: { xs: 'none', md: 'flex' }, marginRight: '1em' }}>
+          <img
+            src={fodarityLogo}
+            alt="Fodarity Logo"
+            style={{ width: 'auto', height: '40px' }}
+          />
+        </Box>
+        {/* <Box sx={{ display: { xs: 'none', md: 'flex' }, marginRight: '1em' }}>
           <IconButton
             size="large"
             aria-label="show 4 new mails"
@@ -128,7 +136,7 @@ export const Header = () => {
               <NotificationsIcon />
             </Badge>
           </IconButton>
-        </Box>
+        </Box> */}
         <Box sx={{ flexGrow: 0 }}>
           <Tooltip title="Cuenta">
             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
