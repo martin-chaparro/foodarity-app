@@ -202,7 +202,7 @@ const postOrder = async (req, res) => {
     }
 
     const order = await Order.create({ date, quantityByProduct });
-    await order.setCompany(1);
+    await order.setCompany(company_id);
     await order.setBuyer(userId);
     await order.setPaymentMethod(paymentMethod);
 
