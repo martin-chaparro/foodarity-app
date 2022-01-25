@@ -275,7 +275,7 @@ export default function OngForm() {
                         // eslint-disable-next-line react/jsx-no-bind
                         ValidateQuantity={ValidateQuantity}
                       />
-                      <div classsname={styles.quantityError}>
+                      <div classsName={styles.quantityError}>
                         <p className={styles.error}>
                           {error.quantity && error.quantity}
                         </p>
