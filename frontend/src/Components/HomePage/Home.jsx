@@ -81,7 +81,6 @@ export default function Home() {
 
   return (
     <div>
-      <div>
         <Navbar filtrado={filtrado} />
         <BannerSearch
           search={search}
@@ -89,18 +88,11 @@ export default function Home() {
           sx={{ marginBottom: '1em', width: '100%' }}
           filtrado={filtrado}
         />
-      <div className={styles.contOngs}>
-        <h2 className={styles.titleOng}>¡Conoce nuestras ONGs!</h2>
-          {filterOngs?
-           ( filterOngs.map((ong) => { return <OngSeccion key={ong.id} ong={ong} />;})): <h2>No hay ONGs</h2>}
-        </div>
-        <Pagination paginado={paginado} />
-      </div>
       <div className={styles.ongAndTitleContainer}>
         <h2 className={styles.titleOng}>¡Conoce nuestras ONGs!</h2>
         <div className={styles.contOngs}>
-          {allOngs.length > 0 ?
-           ( allOngs.map((ong) => { return <OngSeccion key={ong.id} ong={ong} />;})): <h2>No hay ONGs</h2>}
+          {filterOngs?
+           ( filterOngs.map((ong) => { return <OngSeccion key={ong.id} ong={ong} />;})): <h2>No hay ONGs</h2>}
         </div>
         </div>
         <Pagination paginado={paginado} />

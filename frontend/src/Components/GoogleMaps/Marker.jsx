@@ -10,12 +10,15 @@ function Marker({company}) {
   return(  
   <div >
     <Link to={`/company/${company.id}`} textDecoration="none">
-    <div className={styles.container}>
-    <div className={styles.title}>{company.name}</div>
-    </div>
+
+  
+      {company.company_type_id === 1?
+       (<div className={styles.nameCommerce}>{company.name}</div>)
+        : (<div className={styles.nameONG}>{company.name}</div>) }
+    
     {company.company_type_id === 1 ?
-    <LocationOnIcon color='primary'/> :
-    <LocationOnIcon color='secondary'/> 
+    <LocationOnIcon color='primary' sx={{fontSize:35}}/> :
+    <LocationOnIcon color='secondary'sx={{fontSize:35}}/> 
     }
     </Link>
   </div>

@@ -28,6 +28,8 @@ function Register() {
     validatePassword: '',
   });
 
+  window.scroll(0, 0);
+  
   const validateLetters = (e) => {
     const { name, value } = e.target;
     setInput({
