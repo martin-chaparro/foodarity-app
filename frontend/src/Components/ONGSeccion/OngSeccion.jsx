@@ -35,7 +35,7 @@ export default function OngSeccion({ ong }) {
     '&:hover, &.Mui-focusVisible': {
       zIndex: 1,
       '& .MuiImageBackdrop-root': {
-        opacity: 0.15,
+        opacity: 0.1,
       },
       '& .MuiImageMarked-root': {
         opacity: 0,
@@ -73,7 +73,7 @@ export default function OngSeccion({ ong }) {
     top: 0,
     bottom: 0,
     backgroundColor: theme.palette.common.black,
-    opacity: 0.4,
+    opacity: 0.2,
     transition: theme.transitions.create('opacity'),
     borderRadius: '5px 5px 5px 5px',
   }));

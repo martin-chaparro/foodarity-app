@@ -46,7 +46,7 @@ export default function SearchBar({ search, lote }) {
         // eslint-disable-next-line react/jsx-props-no-spreading
         renderInput={(params) => (
           // eslint-disable-next-line react/jsx-props-no-spreading
-          <TextField {...params} label="Buscar..." />
+          <TextField {...params} label="Buscar productos..." />
         )}
       />
     </div>
