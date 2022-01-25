@@ -28,7 +28,7 @@ export function getProducts(params = {}) {
     order,
   } = {
     lote: params.lote || '',
-    size: params.size || 5, // CANTIDAD de productos por pagina
+    size: params.size || 6, // CANTIDAD de productos por pagina
     page: params.page || '',
     categoryName: params.categoryName || '',
     categoryId: params.categoryId || '',

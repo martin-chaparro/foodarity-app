@@ -10,7 +10,7 @@ import Drawer from '../Drawer/Drawer';
 import OngSeccion from '../ONGSeccion/OngSeccion';
 
 function goDown() {
-  window.scrollTo({ top: window.innerHeight + 200, behavior: 'smooth' });
+  window.scrollTo({ top: window.innerHeight + 210, behavior: 'smooth' });
 }
 
 export default function BannerSearch({ search, lote, filtrado }) {

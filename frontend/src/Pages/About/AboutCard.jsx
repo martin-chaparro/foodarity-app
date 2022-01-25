@@ -18,10 +18,12 @@ export default function AboutCard() {
         Acerca de Nosotros
         </Typography>
         <Typography sx={{ color: "white", marginTop: 2}} variant="body2">
-        Foodarity es una app que te permite ubicar de manera sumamente simple
+        <p>Foodarity es una app que te permite ubicar de manera sumamente simple
         ofertas de alimentos en buen estado, pero que están cerca de llegar a su
         tiempo de vida media, lo cual representa un problema muy grande:
-        desperdicio de alimentos. Foodarity, más que una app, es una comunidad
+        desperdicio de alimentos.
+        <br/>
+         Foodarity, más que una app, es una comunidad
         donde comercios pueden poner ofertas de alimento que necesitan ser
         vendidos rápidamente al y usuarios comunes puedan aprovecharlas, a su
         vez, damos especial atención a las ONG, que a través de ofertas
@@ -29,7 +31,7 @@ export default function AboutCard() {
         benéficas. Nuestro nombre Nace de Food (comida) y Solidarity
         (solidaridad), dado nuestro objetivos de luchar contra el desperdicio de
         alimentos, disminuir la generación de desperdicios y brindar ayuda a los
-        sectores de la comunidad que más lo necesiten.
+        sectores de la comunidad que más lo necesiten.</p>
           <br />
         </Typography>
       </CardContent>

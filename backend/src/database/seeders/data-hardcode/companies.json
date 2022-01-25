@@ -121,8 +121,8 @@
 	"stateId" : "6" ,
 	"ownerId": 5,
 	"location": {
-		"lat":-34.5777348501661,
-		"lng":-58.40280749460438
+		"lat":-35.577840817496934,
+		"lng":-58.013770406178296
 	}
 },
 {
@@ -142,7 +142,7 @@
 	"street": "Luis de Sarro",
 	"number": "1226",
 	"zipcode": "1428",
-	"cityId": "60854",
+	"cityId": "60588",
 	"stateId" : "6" ,
 	"ownerId": 6,
 	"location": {
@@ -167,7 +167,7 @@
 	"street": "Av. San Martin ",
 	"number": "1850",
 	"zipcode": "6700",
-	"cityId": "60854",
+	"cityId": "60007",
 	"stateId" : "6" ,
 	"ownerId": 13,
 	"location": {
