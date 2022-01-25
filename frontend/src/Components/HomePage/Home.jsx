@@ -2,7 +2,7 @@
 import React from 'react';
 // eslint-disable-next-line import/no-duplicates
 import { useEffect, useState } from 'react';
-
+import Typography from '@mui/material/Typography';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProducts } from '../../redux/actions/productActions';
 import { getOngs } from '../../redux/actions/CompaniesActions';
@@ -89,7 +89,14 @@ export default function Home() {
           filtrado={filtrado}
         />
       <div className={styles.ongAndTitleContainer}>
-        <h2 className={styles.titleOng}>¡Conoce nuestras ONGs!</h2>
+      <Typography
+          variant="h5"
+          gutterBottom
+          component="div"
+          sx={{ color: '#7ED957', margin: 2 , fontWeight: '700'}}
+        >
+          Conoce nuestras ONGs
+        </Typography>
         <div className={styles.contOngs}>
           {filterOngs?
            ( filterOngs.map((ong) => { return <OngSeccion key={ong.id} ong={ong} />;})): <h2>No hay ONGs</h2>}
