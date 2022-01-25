@@ -91,7 +91,7 @@ export default function Home() {
       <Pagination paginado={paginado} />
       <div className={styles.parent}>
         <div className={styles.filtroWeb}>
-          <FiltroWeb filtrado={filtrado} />
+          <FiltroWeb filtrado={filtrado} search={search} />
         </div>
         <div className={styles.divContainerCards}>
           {allProducts.length > 0 ? (

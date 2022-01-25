@@ -40,7 +40,8 @@ export default function SearchBar({ search, lote }) {
           width: '99%',
           backgroundColor: 'white',
           textColor: 'white',
-          border: '2px solid #7ED957',
+          marginTop: '2em',
+          border: '3px solid #7ED957',
           borderRadius: '5px',
         }}
         // eslint-disable-next-line react/jsx-props-no-spreading
