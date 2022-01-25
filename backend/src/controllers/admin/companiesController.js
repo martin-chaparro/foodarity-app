@@ -183,13 +183,13 @@ const updateCompany = async (request, response) => {
         email,
         website,
         status,
-      });      
-      
+      });
+
       // const updatedType = await CompanyType.findByPk(type)
       // console.log(type);
       // console.log(updatedType);
       await company.setType(type);
-      
+
       const address = await Address.findByPk(company.id);
       if (address) {
         await address.update({
@@ -204,7 +204,6 @@ const updateCompany = async (request, response) => {
       await company.setAddress(address);
 
       response.status(200).json({ message: 'Compania Actualizada' });
-
     } else {
       response.status(404).json({ msg: 'Not found company' });
     }
@@ -216,7 +215,6 @@ const updateCompany = async (request, response) => {
 
 const uploadImageCompany = async (request, response) => {
   const { id, field } = request.params;
-
 
   try {
     const company = await Company.findByPk(id);
@@ -273,5 +271,5 @@ module.exports = {
   getCompanyById,
   deleteCompany,
   updateCompany,
-  uploadImageCompany
+  uploadImageCompany,
 };

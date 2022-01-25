@@ -322,7 +322,12 @@ export default function RegisterFormCompany({ type }) {
       /*       window.location.href = '/home'; */
     } else {
       // eslint-disable-next-line no-alert
-      alert('Complete el formulario');
+
+      Swal.fire({
+        icon: 'error',
+        title: 'Oppss!',
+        text: 'Favor complete todos los campos !',
+      });
     }
   };
   return (

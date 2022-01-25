@@ -63,9 +63,8 @@ export default function Donations({ donations, typeId }) {
       className={styles.content}
       sx={{ width: '100%', overflow: 'hidden' }}
     >
-      {
-        typeId === 1 ? ( 
-          <Typography
+      {typeId === 1 ? (
+        <Typography
           variant="h4"
           gutterBottom
           component="div"
@@ -73,8 +72,8 @@ export default function Donations({ donations, typeId }) {
         >
           Donaciones Realizadas
         </Typography>
-        ) : (
-          <Typography
+      ) : (
+        <Typography
           variant="h4"
           gutterBottom
           component="div"
@@ -82,9 +81,7 @@ export default function Donations({ donations, typeId }) {
         >
           Donaciones Obtenidas
         </Typography>
-        )
-      }
-      
+      )}
 
       <TableContainer sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
@@ -94,7 +91,12 @@ export default function Donations({ donations, typeId }) {
                 <TableCell
                   key={column.id}
                   align={column.align}
-                  style={{ minWidth: column.minWidth }}
+                  style={{
+                    minWidth: column.minWidth,
+                    backgroundColor: '#7ED957',
+                    color: '#3E2463',
+                    fontWeight: '700',
+                  }}
                 >
                   {column.label}
                 </TableCell>
@@ -110,7 +112,15 @@ export default function Donations({ donations, typeId }) {
                     {columns.map((column) => {
                       const value = row[column.id];
                       return (
-                        <TableCell key={column.id} align={column.align}>
+                        <TableCell
+                          key={column.id}
+                          style={{
+                            backgroundColor: 'white',
+                            color: '#3E2463',
+                            fontWeight: '700',
+                          }}
+                          align={column.align}
+                        >
                           {column.format && typeof value === 'number'
                             ? column.format(value)
                             : value}

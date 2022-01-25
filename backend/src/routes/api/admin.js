@@ -7,7 +7,7 @@ const {
   getUser,
   deleteUser,
   updateUser,
-  uploadPhotoUser
+  uploadPhotoUser,
 } = require('../../controllers/admin/userController');
 
 const {
@@ -15,7 +15,7 @@ const {
   getCompanyById,
   deleteCompany,
   updateCompany,
-  uploadImageCompany
+  uploadImageCompany,
 } = require('../../controllers/admin/companiesController');
 
 const {
@@ -52,18 +52,46 @@ router.patch(
 
 // Companies Routes
 
-router.get('/companies',authMiddleware, ValidationAuth.isAdmin, getCompanies);
-router.get('/companies/id/:id',authMiddleware, ValidationAuth.isAdmin, getCompanyById);
-router.delete('/companies/:id',authMiddleware, ValidationAuth.isAdmin, deleteCompany);
-router.put('/companies/:id',authMiddleware, ValidationAuth.isAdmin, updateCompany);
-router.patch('/companies/:id/upload/:field',authMiddleware, ValidationAuth.isAdmin,validationFiles.fileExists,uploadImageCompany );
+router.get('/companies', authMiddleware, ValidationAuth.isAdmin, getCompanies);
+router.get(
+  '/companies/id/:id',
+  authMiddleware,
+  ValidationAuth.isAdmin,
+  getCompanyById
+);
+router.delete(
+  '/companies/:id',
+  authMiddleware,
+  ValidationAuth.isAdmin,
+  deleteCompany
+);
+router.put(
+  '/companies/:id',
+  authMiddleware,
+  ValidationAuth.isAdmin,
+  updateCompany
+);
+router.patch(
+  '/companies/:id/upload/:field',
+  authMiddleware,
+  ValidationAuth.isAdmin,
+  validationFiles.fileExists,
+  uploadImageCompany
+);
 
 // Products Routes
-router.get('/products',authMiddleware, ValidationAuth.isAdmin, getProducts);
-router.get('/products/id/:id',authMiddleware, ValidationAuth.isAdmin, getProductById);
-router.get('/products/categories',authMiddleware, ValidationAuth.isAdmin,getCategories);
-
-
-
+router.get('/products', authMiddleware, ValidationAuth.isAdmin, getProducts);
+router.get(
+  '/products/id/:id',
+  authMiddleware,
+  ValidationAuth.isAdmin,
+  getProductById
+);
+router.get(
+  '/products/categories',
+  authMiddleware,
+  ValidationAuth.isAdmin,
+  getCategories
+);
 
 module.exports = router;
