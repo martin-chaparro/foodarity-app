@@ -19,6 +19,7 @@ export default function AboutMision() {
         a minimizar perdidas mientras que damos oportunidad para que personas
         comunes y ONG puedan adquirir alimentos en buen estado a excelentes
         precios.
+        
           <br />
         </Typography>
       </CardContent>

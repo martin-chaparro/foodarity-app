@@ -31,6 +31,7 @@ export default function AboutCard() {
         vez, damos especial atención a las ONG, que a través de donaciones
         especiales pueden obtener estos alimentos y aprovecharlos en obras
         benéficas. 
+        
         <br/>
         <br/>
         <br/>

@@ -16,6 +16,7 @@ export default function AboutVision() {
         <Typography sx={{ color: "#FFFFFF", marginTop: 3, fontSize:'15px', fontFamily: 'Tahoma'}} variant="body2">
         Crear conciencia sobre la delicada situación alimentaria mundial y ser
         fuente de inspiración para dirigirnos a un futuro sustentable.
+        
           <br />
         </Typography>
       </CardContent>

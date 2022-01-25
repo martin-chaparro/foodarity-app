@@ -31,8 +31,7 @@ export default function Landing() {
   const { ref, inView } = useInView({
     threshold: 0.4,
   });
-  /* eslint-disable react/jsx-props-no-spreading */
-  // const checked = useWindowPosition('header');
+
 
   const [check, setCheck] = useState(false);
 
