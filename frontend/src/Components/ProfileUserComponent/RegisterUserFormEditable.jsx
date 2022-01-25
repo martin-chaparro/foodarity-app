@@ -159,6 +159,7 @@ export default function RegisterUserFormEditable({ detail }) {
                 autoComplete="off"
                 onChange={(e) => handleChange(e)}
                 value={data.email}
+                disabled
               />
               <h5>Número Celular</h5>
               <input
