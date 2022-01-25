@@ -172,9 +172,9 @@ export const UserUpdate = () => {
     }
   };
 
-  const handleResetPassword = () =>{
+  const handleResetPassword = () => {
     navigate(`/users/resetpass/${user.id}`, { replace: true });
-  }
+  };
 
   return (
     <Layout>
@@ -209,12 +209,6 @@ export const UserUpdate = () => {
                     sx={{ width: 200, height: 200, cursor: 'pointer' }}
                   />
                 </label>
-                <Button
-                  variant="outlined"
-                  onClick={handleResetPassword}
-                >
-                  Reset Password
-                </Button>
               </Grid>
               <Grid container item xs={6} pl={3}>
                 <TextField
@@ -278,7 +272,10 @@ export const UserUpdate = () => {
                       <MenuItem value={false}>Inactivo</MenuItem>
                     </Select>
                   </FormControl>
-                  <FormControl variant="standard" sx={{ minWidth: 120 }}>
+                  <FormControl
+                    variant="standard"
+                    sx={{ minWidth: 120, marginBottom: '1em' }}
+                  >
                     <InputLabel id="role-label-id">Role</InputLabel>
                     <Select
                       labelId="role-label-id"
@@ -293,6 +290,9 @@ export const UserUpdate = () => {
                       <MenuItem value={2}>Admin</MenuItem>
                     </Select>
                   </FormControl>
+                  <Button variant="outlined" onClick={handleResetPassword}>
+                    Reset Password
+                  </Button>
                 </Grid>
               </Grid>
             </Grid>

@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 
@@ -9,40 +9,44 @@ export default function SearchBar({ search, lote }) {
   useEffect(() => {
     search(inputValue);
   }, [inputValue]);
-  
-  const goDown =  (e) => {
-    if (e.key=== 'Enter' || Number.isInteger(e.target.value) ) {
-    window.scrollTo({top: (window.innerHeight - 64), behavior: 'smooth'})
+
+  const goDown = (e) => {
+    if (e.key === 'Enter' || Number.isInteger(e.target.value)) {
+      window.scrollTo({ top: window.innerHeight - 64, behavior: 'smooth' });
     }
-  }
+  };
   return (
     <div>
       <Autocomplete
         // value={value}
-        ListboxProps={{style: {maxHeight: '20vh',}}}
+        ListboxProps={{ style: { maxHeight: '20vh' } }}
         onKeyPress={goDown}
         onChange={() => {
           search(inputValue);
           const elmnt = document.getElementById('card');
           elmnt.scrollIntoView();
-          
         }}
         inputValue={inputValue}
         onInputChange={(event, newInputValue) => {
           setInputValue(newInputValue);
           goDown(event);
-          
         }}
         id="free-solo-2-demo"
         disableClearable
         freeSolo
-        size='small'
+        size="small"
         options={options || 'not found'}
-        sx={{ width: '100%', backgroundColor: 'white', textColor: 'white' }}
+        sx={{
+          width: '99%',
+          backgroundColor: 'white',
+          textColor: 'white',
+          border: '2px solid #7ED957',
+          borderRadius: '5px',
+        }}
         // eslint-disable-next-line react/jsx-props-no-spreading
         renderInput={(params) => (
           // eslint-disable-next-line react/jsx-props-no-spreading
-          <TextField {...params} label="Buscar..." />
+          <TextField {...params} label="Buscar productos..." />
         )}
       />
     </div>

@@ -1,5 +1,8 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
+import { CategoriesScreen } from '../components/pages/home/categories/CategoriesScreen';
+import { CategoryAdd } from '../components/pages/home/categories/CategoryAdd';
+import { CategoryUpdate } from '../components/pages/home/categories/CategoryUpdate';
 import { CompaniesScreen } from '../components/pages/home/companies/CompaniesScreen';
 import { CompanyUpdate } from '../components/pages/home/companies/CompanyUpdate';
 import { DashboardScreen } from '../components/pages/home/dashboard/DashboardScreen';
@@ -19,6 +22,10 @@ export const HomeRoute = () => {
       <Route path="users/resetpass/:id" element={<UserResetPassword />} />
       <Route path="companies" element={<CompaniesScreen />} />
       <Route path="companies/:id" element={<CompanyUpdate />} />
+
+      <Route path="categories" element={<CategoriesScreen />} />
+      <Route path="categories/update/:id" element={<CategoryUpdate />} />
+      <Route path="categories/add" element={<CategoryAdd />} />
 
       <Route path="products" element={<ProductsScreen />} />
       <Route path="orders" element={<OrdersScreen />} />

@@ -17,7 +17,7 @@ import { PrivateRoute } from './PrivateRoute';
 import { RollSelectorRouter } from './RollSelectorRouter';
 import { startCheking } from '../redux/actions/authActions';
 import MpRedirect from '../Components/MercadoPago/MpRedirect';
-import EnviarMail from '../Pages/EnviarMail/EnviarMail';
+// import EnviarMail from '../Pages/EnviarMail/EnviarMail';
 import RecuperarPassword from '../Pages/RecuperarPassword/RecuperarPassword';
 import OrderPage from '../Pages/Order/OrderPage';
 import Success from '../Components/MercadoPago/Success';
@@ -45,7 +45,7 @@ export function AppRouter() {
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />
         <Route path="*" element={<Navbar />} />
-        <Route path="/enviarMail" element={<EnviarMail />} />
+        {/* <Route path="/enviarMail" element={<EnviarMail />} /> */}
         <Route path="/recuperarPassword" element={<RecuperarPassword />} />
         <Route
           path="/actualizarpassword/:id"

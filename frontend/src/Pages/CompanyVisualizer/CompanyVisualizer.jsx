@@ -115,7 +115,7 @@ export default function CompanyVisualizer() {
           </div>
         ) : (
           <div>
-            <OngInfo info={company}/>
+            <OngInfo info={company} user={user}/>
           </div>
         ))}
     </div>
