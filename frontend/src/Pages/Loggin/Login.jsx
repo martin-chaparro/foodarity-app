@@ -181,7 +181,7 @@ export default function Login() {
             <p>
               {' '}
               Olvidaste tu contraseña?{' '}
-              <Link to="/enviarMail">Cambiala ahora</Link>
+              <Link to="/recuperarpassword">Cambiala ahora</Link>
             </p>
           </div>
         </div>
