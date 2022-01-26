@@ -24,7 +24,9 @@ import styles from './OngSeccion.module.css';
 export default function OngSeccion({ ong }) {
   const ImageButton = styled(ButtonBase)(({ theme }) => ({
     position: 'relative',
-    height: 200,
+    height: '25vh',
+    maxWidth: '25vh',
+    maxHeight: 200,
     margin: 8,
 
     [theme.breakpoints.down('sm')]: {
@@ -95,7 +97,7 @@ export default function OngSeccion({ ong }) {
         flexWrap: 'wrap',
         minWidth: 200,
         width: '100%',
-        padding: '1em',
+        padding: '1vh',
       }}
     >
       <Link to={`/company/${ong.id}`}>
