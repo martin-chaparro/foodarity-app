@@ -8,6 +8,7 @@ import { CompanyUpdate } from '../components/pages/home/companies/CompanyUpdate'
 import { DashboardScreen } from '../components/pages/home/dashboard/DashboardScreen';
 import { OrdersScreen } from '../components/pages/home/orders/OrdersScreen';
 import { ProductsScreen } from '../components/pages/home/products/ProductsScreen';
+import { ProductUpdate } from '../components/pages/home/products/ProductUpdate';
 import { UserAdd } from '../components/pages/home/users/UserAdd';
 import { UserResetPassword } from '../components/pages/home/users/UserResetPassword';
 import { UsersScreen } from '../components/pages/home/users/UsersScreen';
@@ -28,6 +29,7 @@ export const HomeRoute = () => {
       <Route path="categories/add" element={<CategoryAdd />} />
 
       <Route path="products" element={<ProductsScreen />} />
+      <Route path="products/update/:id" element={<ProductUpdate />} />
       <Route path="orders" element={<OrdersScreen />} />
 
       <Route path="/" element={<DashboardScreen />} />

@@ -54,6 +54,20 @@ const getAllCategories = async (request, response) => {
   });
 };
 
+const showCategories = async (req, res) => {
+  try {
+    const allCategories = await Category.findAll({
+      attributes: ['id', 'name'],
+    });
+    if (!allCategories) {
+      return res.status(404).json({ message: 'Not found' });
+    }
+    return res.status(200).json(allCategories);
+  } catch (error) {
+    return res.status(500).send({ message: error });
+  }
+};
+
 const getCategory = async (request, response) => {
   const { id } = request.params;
 
@@ -146,6 +160,7 @@ const createCategory = async (request, response) => {
 
 module.exports = {
   getAllCategories,
+  showCategories,
   getCategory,
   updateCategory,
   deleteCategory,
