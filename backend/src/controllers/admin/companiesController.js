@@ -5,7 +5,7 @@ const CompanyType = require('../../models/CompanyType');
 const Address = require('../../models/Address');
 const City = require('../../models/City');
 const State = require('../../models/State');
-const {send} = require('../nodemailerController')
+const { send } = require('../nodemailerController');
 
 cloudinary.config(process.env.CLOUDINARY_URL);
 
@@ -18,14 +18,22 @@ const getCompanies = async (request, response) => {
     return { limit, offset };
   };
 
-  const { page, size, search } = request.query;
+  const { page, size, search, status } = request.query;
 
   const { limit, offset } = getPagination(page, size);
 
   if (!search) {
     try {
       const companies = await Company.findAndCountAll({
-        where: { deleted: false },
+        where: {
+          status: status || [
+            'Habilitada',
+            'Deshabilitada',
+            'Pendiente',
+            'Banneada',
+          ],
+          deleted: false,
+        },
         include: [
           { model: CompanyType, as: 'type', attributes: ['type'] },
           {
@@ -54,7 +62,13 @@ const getCompanies = async (request, response) => {
           totalPages: Math.ceil(companies.count / limit),
         });
       }
-      return response.status(404).json({ msg: 'No se encontraron compañias' });
+      return response.status(200).json({
+        companies: companies.rows,
+        totalCompanies: companies.count,
+        size: limit,
+        page: offset,
+        totalPages: Math.ceil(companies.count / limit),
+      });
     } catch (error) {
       return response.status(500);
     }
@@ -70,7 +84,15 @@ const getCompanies = async (request, response) => {
               { email: { [Op.iLike]: `%${search}%` } },
             ],
           },
-          { deleted: false },
+          {
+            status: status || [
+              'Habilitada',
+              'Deshabilitada',
+              'Pendiente',
+              'Banneada',
+            ], 
+            deleted:false,
+          },
         ],
       },
       include: [
@@ -101,7 +123,7 @@ const getCompanies = async (request, response) => {
         totalPages: Math.ceil(companies.count / limit),
       });
     }
-    return response.status(404).json({ msg: 'No se encontraron compañias' });
+    return response.status(200).json([]);
   } catch (error) {
     return response.status(500);
   }
@@ -143,7 +165,11 @@ const deleteCompany = async (request, response) => {
     if (company) {
       // TODO: Verificar demas temas de la compania para elimnar
       await company.update({ deleted: true });
-      await send(company.email, 'Tu compania fue eliminada', `Tu compania ${company.name} fue eliminada por incumplir los reglamentos de Foodarity.`)
+      await send(
+        company.email,
+        'Tu compania fue eliminada',
+        `Tu compania ${company.name} fue eliminada por incumplir los reglamentos de Foodarity.`
+      );
       response.status(200).json({ message: 'Compania Eliminada' });
     } else {
       response.status(404).json({ msg: 'Not found' });
@@ -204,16 +230,29 @@ const updateCompany = async (request, response) => {
       await address.setCity(cityId);
       await company.setAddress(address);
       switch (status) {
-        case 'Habilitada' :
-          await send(company.email, 'Tu compania fue habilitada!', `Tu compania ${company.name} fue aprobada para funcionar en Foodarity. Felicitaciones!`)
-          break
+        case 'Habilitada':
+          await send(
+            company.email,
+            'Tu compania fue habilitada!',
+            `Tu compania ${company.name} fue aprobada para funcionar en Foodarity. Felicitaciones!`
+          );
+          break;
         case 'Deshabilitada':
-          await send(company.email, 'Tu compania no fue aprobada', `Tu compania ${company.name} no aprobó los requisitos para funcionar en Foodarity. Por favor revisa tus datos ingresados. Para consultas envia un mail a help@foodarity.com`)
-          break
+          await send(
+            company.email,
+            'Tu compania no fue aprobada',
+            `Tu compania ${company.name} no aprobó los requisitos para funcionar en Foodarity. Por favor revisa tus datos ingresados. Para consultas envia un mail a help@foodarity.com`
+          );
+          break;
         case 'Banneada':
-          await send(company.email, 'Tu compania fue eliminada', `Tu compania ${company.name} fue eliminada por incumplir los reglamentos de Foodarity.`)
-          break
-        default: return
+          await send(
+            company.email,
+            'Tu compania fue eliminada',
+            `Tu compania ${company.name} fue eliminada por incumplir los reglamentos de Foodarity.`
+          );
+          break;
+        default:
+          return;
       }
       response.status(200).json({ message: 'Compania Actualizada' });
     } else {
