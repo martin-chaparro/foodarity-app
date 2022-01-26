@@ -19,7 +19,7 @@
   .containerCardAbout {
     width: 100vw;
     position: relative;
-    right: 5px;
+    left: 0px;
     height: 180vh;
   }
   .containerCardValores {
