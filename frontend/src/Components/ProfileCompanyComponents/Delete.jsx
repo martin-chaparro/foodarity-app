@@ -21,7 +21,7 @@ function Delete({ company }) {
       cancelButtonColor: 'gray',
       confirmButtonText: 'Continuar',
     }).then((result) => {
-      if (result.IsConfirmed) {
+      if (result.isConfirmed) {
         apiWithToken.delete(`/companies/disabled/${company.id}`);
         window.location.reload();
         window.location.href = '/profilecompany';
