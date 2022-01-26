@@ -4,7 +4,7 @@ import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import Swal from 'sweetalert2';
 import { api } from '../../services/api';
-import style from "./ActualizarPassword.module.css"
+import style from './ActualizarPassword.module.css';
 import logo from '../../assets/WEB-Full-Header-Logo.png';
 
 function ActualizarPassword() {
@@ -12,19 +12,17 @@ function ActualizarPassword() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const [isValid, setisValid] = useState(null);
-  const [errors, setErrors] = useState({})
+  const [errors, setErrors] = useState({});
   const [input, setInput] = useState({
     password: '',
-    passwordDos:''
+    passwordDos: '',
   });
 
   const confirm = () => {
     const emailCode = searchParams.get('emailcode');
     if (params.id > 0 && emailCode !== '') {
       api.post(`users/validate/${params.id}/${emailCode}`).then((res) => {
-        
         if (res.status === 200 || res.status === 201) {
-          
           setisValid(emailCode);
         } else {
           setisValid(false);
@@ -52,7 +50,7 @@ function ActualizarPassword() {
   const handleSubmit = (e) => {
     e.preventDefault();
     api
-      .post('/users/updatepassword', {input,emailCode:isValid})
+      .post('/users/updatepassword', { input, emailCode: isValid })
       // eslint-disable-next-line no-alert
       .then(() => {
         Swal.fire({
@@ -60,12 +58,12 @@ function ActualizarPassword() {
           title: 'Bien',
           text: 'Tu contraseña se cambio correctamente',
         });
-        navigate('/login')
+        navigate('/login');
       })
       .catch((error) => {
-        console.log(error)
-        alert('Algo Salio mal')
-        navigate('/')
+        console.log(error);
+        alert('Algo Salio mal');
+        navigate('/');
       });
   };
 
@@ -88,8 +86,6 @@ function ActualizarPassword() {
     }
   };
 
-
-
   const validatePassword2 = (e) => {
     const { name, value } = e.target;
     setInput({
@@ -108,42 +104,42 @@ function ActualizarPassword() {
       });
     }
   };
-  return ( isValid ?
-    (<div>
-       <div className={style.contLogo}>
-          <img className={style.logo}src={logo} alt="" />
-        </div>
+  return isValid ? (
+    <div>
+      <div className={style.contLogo}>
+        <img className={style.logo} src={logo} alt="" />
+      </div>
       <form className={style.form} onSubmit={handleSubmit}>
         <h1 className={style.h1}>Formulario para recuparar Contraseña</h1>
         <div className={style.contener}>
-        <div>
-          <h4>Contraseña</h4>
-          <input
-            type="password"
-            name="password"
-            required
-            value={input.password}
-            onChange={(e) => {
-              handleOnChange(e);
-              validatePassword(e);
-            }}
-          />
-          <p className={style.errors}>{errors.password}</p>
-        </div>
-        <div>
-          <h4>Vuelva a introducir su contraseña</h4>
-          <input
-            type="password"
-            name="passwordDos"
-            required
-            value={input.passwordDos}
-            onChange={(e) => {
-              handleOnChange(e);
-              validatePassword2(e);
-            }}
-          />
-          <p className={style.errors}>{errors.passwordDos}</p>
-        </div>
+          <div>
+            <h4>Contraseña</h4>
+            <input
+              type="password"
+              name="password"
+              required
+              value={input.password}
+              onChange={(e) => {
+                handleOnChange(e);
+                validatePassword(e);
+              }}
+            />
+            <p className={style.errors}>{errors.password}</p>
+          </div>
+          <div>
+            <h4>Vuelva a introducir su contraseña</h4>
+            <input
+              type="password"
+              name="passwordDos"
+              required
+              value={input.passwordDos}
+              onChange={(e) => {
+                handleOnChange(e);
+                validatePassword2(e);
+              }}
+            />
+            <p className={style.errors}>{errors.passwordDos}</p>
+          </div>
         </div>
         <div className={style.bt}>
           <br />
@@ -157,14 +153,13 @@ function ActualizarPassword() {
               margin: '3em 2em 2em',
             }}
             onClick={(e) => handleSubmit(e)}
-       
           >
             Restablecer Contraseña
           </Button>
         </div>
       </form>
-    </div>): null
-  );
+    </div>
+  ) : null;
 }
 
 export default ActualizarPassword;
