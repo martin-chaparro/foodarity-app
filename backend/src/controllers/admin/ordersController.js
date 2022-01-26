@@ -88,12 +88,13 @@ const getOrders = async (request, response) => {
           { email: { [Op.iLike]: `%${search}%` } },
         ],
       }}).then(res => res.map(company => company.id))
-      console.log(users, companies)
       orders = await Order.findAndCountAll({
         include,
         where: {
-          buyer_id: users,
-          company_id: users
+          [Op.or]: [
+            { buyer_id: users },
+            { company_id: companies },
+          ]
         },
         attributes,
         orderAttr,
