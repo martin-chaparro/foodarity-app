@@ -5,12 +5,12 @@
 }
 .containerCardValores {
   width: 90%;
-  margin-top: 30vh;
+  margin-top: 16vh;
   margin-right: 5vw;
 }
 .mision,
 .vision {
-  margin-top: 100vh;
+  margin-top: 120vh;
   margin-bottom: 5%;
   min-width: 275;
 }
@@ -26,17 +26,17 @@
   .containerCardValores {
     width: 100vw;
     position: relative;
-    top: 20vh;
+    top: 50vh;
   }
   .mision {
     position: relative;
-    top: 210vh;
+    top: 225vh;
     margin-left: 50vw;
   }
   .vision {
     position: relative;
-    top: 90vh;
+    top: 80vh;
     margin-left: 50vw;
-    bottom: 50vh;
+    margin-bottom: 40px;
   }
 }
