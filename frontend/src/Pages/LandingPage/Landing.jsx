@@ -50,6 +50,7 @@ export default function Landing() {
           <Collapse
             /* eslint-disable react/jsx-props-no-spreading */
             in={check}
+            // eslint-disable-next-line react/jsx-props-no-spreading
             {...(check ? { timeout: 1000 } : {})}
             collapsedheight={50}
           >

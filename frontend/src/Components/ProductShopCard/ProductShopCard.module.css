@@ -141,3 +141,48 @@
 .restButton:disabled {
   color: rgba(55, 6, 65, 0.274);
 }
+
+
+@media screen and (max-width: 576px) {
+  .generalContainerDiv {
+    width: 98%;
+    position: relative;
+    padding: 0;
+    left: 4px;
+  }
+
+
+  .divImg {
+    display: none;
+  }
+
+  .lote {
+    width: 100%;
+  }
+
+  .precio{
+    width: 100%;
+    position: relative;
+    left: 20px;
+  }
+
+  .icon {
+    position: relative;
+    left: 20px;
+  }
+
+  .inputContainer {
+    position: relative;
+    left: 10px;
+  }
+
+  .sumButton,
+.restButton {
+  position: relative;
+  right: 5px;
+}
+
+  .details {
+    display: none;
+  }
+}
