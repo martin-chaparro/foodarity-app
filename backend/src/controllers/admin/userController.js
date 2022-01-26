@@ -197,7 +197,7 @@ const deleteUser = async (request, response) => {
       .json({ message: 'No te puedes elimnar a ti mismo' });
   }
   try {
-    const user = User.findByPk(id);
+    const user = await User.findByPk(id);
     await user.update({
       deleted: true,
     });
