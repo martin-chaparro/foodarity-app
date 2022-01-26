@@ -15,10 +15,10 @@ export default function AboutCard() {
     
     <Card sx={{ boxShadow: '4px 4px 10px rgba(0, 0, 0, 1)'}} className={styles.containerCardAbout} >
       <CardContent>
-        <Typography sx={{ marginTop: 2, color: "#3E2463", background: 'white', borderRadius: 1, display: "flex", justifyContent: "center", alignItems: "center", fontWeight: 700, fontSize:'30px', textShadow: '1px 3px 0 #969696, 1px 7px 5px #aba8a8',}} variant="h5" component="div">
+        <Typography sx={{ marginTop: 2, color: "#3E2463", background: 'white', borderRadius: 1, display: "flex", justifyContent: "center", alignItems: "center", fontWeight: 700, fontSize:'35px', textShadow: '1px 3px 0 #969696, 1px 7px 5px #aba8a8',}} variant="h5" component="div">
         Acerca de Nosotros
         </Typography>
-        <Typography sx={{ color: "#533C74" , marginTop: 5, display: "flex", justifyContent: "center",alignItems: "center", fontFamily: 'Tahoma'}} variant="body2">
+        <Typography sx={{ color: "#533C74" , marginTop: 5, display: "flex", justifyContent: "center",alignItems: "center", fontFamily: 'Tahoma', fontSize:'20px'}} variant="body2">
         <p><big><b>Foodarity</b></big> es una app que te permite ubicar de manera sumamente simple
         ofertas de alimentos en buen estado, pero que están cerca de llegar a su
         tiempo de vida media, lo cual representa un problema muy grande: <u> desperdicio de alimentos.</u>

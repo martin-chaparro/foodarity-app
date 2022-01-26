@@ -1,43 +1,42 @@
 .containerCardAbout {
-  width: 700px;
-  height: 500px;
-  margin-top: 50%;
-  margin-left: 50px;
+  width: 800px;
+  height: 650px;
+  margin-top: 100vh;
 }
 .containerCardValores {
   width: 90%;
-  margin-top: 15%;
-  margin-left: 5%;
+  margin-top: 16vh;
+  margin-right: 5vw;
 }
 .mision,
 .vision {
-  margin-top: 200%;
+  margin-top: 120vh;
   margin-bottom: 5%;
   min-width: 275;
 }
 
 @media screen and (max-width: 576px) {
   .containerCardAbout {
-    width: 350px;
+    width: 100vw;
     position: relative;
-    margin-left: 85px;
-    height: 700px;
-    top: 450px;
+    margin-right: 10vw;
+    margin-top: 180vh;
+    height: 170vh;
   }
   .containerCardValores {
-    width: 330px;
+    width: 100vw;
     position: relative;
-    margin-left: 20px;
-    height: 800px;
-    top: 200px;
+    top: 50vh;
   }
-  .mision,
-  .vision {
+  .mision {
     position: relative;
-    top: 800px;
-    margin-left: 150px;
+    top: 225vh;
+    margin-left: 50vw;
   }
   .vision {
-    top: -300px;
+    position: relative;
+    top: 80vh;
+    margin-left: 50vw;
+    margin-bottom: 40px;
   }
 }
