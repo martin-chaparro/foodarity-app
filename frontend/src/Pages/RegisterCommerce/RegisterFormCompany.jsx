@@ -261,6 +261,27 @@ export default function RegisterFormCompany({ type }) {
     }
   };
 
+
+  const validateAreacode = (e) => {
+    const { name, value } = e.target;
+    setInput({
+      ...input,
+      [name]: value,
+    });
+    // eslint-disable-next-line no-useless-escape
+    if (!/^\D*\d{2}$/.test(value)) {
+      setErrors({
+        ...errors,
+        [name]: 'Solo numeros',
+      });
+    } else {
+      setErrors({
+        ...errors,
+        [name]: '',
+      });
+    }
+  };
+
   const validateNum = (e) => {
     const { name, value } = e.target;
     setInput({
@@ -268,7 +289,7 @@ export default function RegisterFormCompany({ type }) {
       [name]: value,
     });
     // eslint-disable-next-line no-useless-escape
-    if (!/^[+]?([0-9]+(?:[\.][0-9]*)?|\.[0-9]+)$/.test(value)) {
+    if (!/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,4}$/im.test(value)) {
       setErrors({
         ...errors,
         [name]: 'Solo numeros',
@@ -444,7 +465,7 @@ export default function RegisterFormCompany({ type }) {
                 placeholder="Cód. Área"
                 onChange={(e) => {
                   handleOnChange(e);
-                  validateNum(e);
+                  validateAreacode(e);
                 }}
               />
               <div className={styles.divErrorAreaCod}>
