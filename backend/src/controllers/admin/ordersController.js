@@ -5,7 +5,6 @@ const PaymentMethod = require('../../models/PaymentMethod');
 const User = require('../../models/User');
 const Company = require('../../models/Company');
 
-
 const include = [
   {
     model: Company,
@@ -50,7 +49,6 @@ const attributes = {
   ],
 };
 
-
 const getOrders = async (request, response) => {
   const getPagination = (page, size) => {
     const limit = size ? +size : 3;
@@ -66,7 +64,7 @@ const getOrders = async (request, response) => {
   const orderAttr = [['id', 'DESC']];
 
   try {
-    let orders = []
+    let orders = [];
     if (!search) {
       orders = await Order.findAndCountAll({
         include,
@@ -76,56 +74,56 @@ const getOrders = async (request, response) => {
         limit,
       });
     } else {
-      const users = await User.findAll({where: {
-        [Op.or]: [
-          { name: { [Op.iLike]: `%${search}%` } },
-          { email: { [Op.iLike]: `%${search}%` } },
-        ],
-      }}).then(res => res.map(user => user.id))
-      const companies = await Company.findAll({where: {
-        [Op.or]: [
-          { name: { [Op.iLike]: `%${search}%` } },
-          { email: { [Op.iLike]: `%${search}%` } },
-        ],
-      }}).then(res => res.map(company => company.id))
+      const users = await User.findAll({
+        where: {
+          [Op.or]: [
+            { name: { [Op.iLike]: `%${search}%` } },
+            { email: { [Op.iLike]: `%${search}%` } },
+          ],
+        },
+      }).then((res) => res.map((user) => user.id));
+      const companies = await Company.findAll({
+        where: {
+          [Op.or]: [
+            { name: { [Op.iLike]: `%${search}%` } },
+            { email: { [Op.iLike]: `%${search}%` } },
+          ],
+        },
+      }).then((res) => res.map((company) => company.id));
       orders = await Order.findAndCountAll({
         include,
         where: {
-          [Op.or]: [
-            { buyer_id: users },
-            { company_id: companies },
-          ]
+          [Op.or]: [{ buyer_id: users }, { company_id: companies }],
         },
         attributes,
         orderAttr,
         offset,
         limit,
       });
-      
     }
-     const ids = [];
-      orders.rows.forEach((order) => {
-        order.quantityByProduct.forEach((item) => {
-          if (!ids.includes(item.product_id)) {
-            ids.push(item.product_id);
-          }
-        });
+    const ids = [];
+    orders.rows.forEach((order) => {
+      order.quantityByProduct.forEach((item) => {
+        if (!ids.includes(item.product_id)) {
+          ids.push(item.product_id);
+        }
       });
-      const products = await Product.findAll({
-        where: { id: ids },
+    });
+    const products = await Product.findAll({
+      where: { id: ids },
+    });
+
+    const finalOrders = orders.rows.map((order) => {
+      const finalOrder = order;
+      finalOrder.quantityByProduct = order.quantityByProduct.map((item) => {
+        const finalItem = item;
+        finalItem.product = products.find(
+          (producto) => producto.id === item.product_id
+        );
+        return finalItem;
       });
-  
-      const finalOrders = orders.rows.map((order) => {
-        const finalOrder = order;
-        finalOrder.quantityByProduct = order.quantityByProduct.map((item) => {
-          const finalItem = item;
-          finalItem.product = products.find(
-            (producto) => producto.id === item.product_id
-          );
-          return finalItem;
-        });
-        return finalOrder;
-      });
+      return finalOrder;
+    });
     return response.status(200).json({
       orders: finalOrders,
       totalOrders: orders.count,
@@ -138,6 +136,52 @@ const getOrders = async (request, response) => {
   }
 };
 
+const getTotalPrice = async (req, res) => {
+  try {
+    const orders = await Order.findAll({
+      include,
+      attributes,
+      where: {status : 'pagado'}
+    });
+    const ids = [];
+    orders.rows.forEach((order) => {
+      order.quantityByProduct.forEach((item) => {
+        if (!ids.includes(item.product_id)) {
+          ids.push(item.product_id);
+        }
+      });
+    });
+    const products = await Product.findAll({
+      where: { id: ids },
+    });
+    if (orders.length) {
+
+      const finalOrders = orders.rows.map((order) => {
+        const finalOrder = order;
+        finalOrder.quantityByProduct = order.quantityByProduct.map((item) => {
+          const finalItem = item;
+          finalItem.product = products.find(
+            (producto) => producto.id === item.product_id
+            );
+            return finalItem;
+          });
+          return finalOrder;
+        });
+        const finalSum = finalOrders.map((order) =>
+        order.quantityByProduct
+        .map((item) => item.product.price)
+        .reduce((a, b) => a + b)
+        ).reduce((a,b) => a+b)
+        res.status(200).json(finalSum)
+      } else {
+        res.status(200).json(0)
+      }
+  } catch (error) {
+    res.status(500).json({ message: error });
+  }
+};
+
 module.exports = {
-  getOrders
-}
+  getOrders,
+  getTotalPrice
+};
