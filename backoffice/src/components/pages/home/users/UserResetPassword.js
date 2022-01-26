@@ -51,28 +51,27 @@ export const UserResetPassword = () => {
     }),
     onSubmit: () => {
       // console.log(formik.values);
-      
-        dispatch(startLoading());
-        apiWithToken
-          .patch(`/admin/users/password/${id}`, formik.values)
-          .then(() => {
-            dispatch(finishLoading());
-            Swal.fire({
-              icon: 'success',
-              title: 'Password Actualizada',
-              text: 'La password se actualizo correctamente.',
-            });
-            navigate('/users',{ replace: true })
-          })
-          .catch(() => {
-            dispatch(finishLoading());
-            Swal.fire({
-              icon: 'error',
-              title: 'No se pudo actualizar!',
-              text: 'Consulte al administrador.',
-            });
+
+      dispatch(startLoading());
+      apiWithToken
+        .patch(`/admin/users/password/${id}`, formik.values)
+        .then(() => {
+          dispatch(finishLoading());
+          Swal.fire({
+            icon: 'success',
+            title: 'Password Actualizada',
+            text: 'La password se actualizo correctamente.',
           });
-      
+          navigate('/users', { replace: true });
+        })
+        .catch(() => {
+          dispatch(finishLoading());
+          Swal.fire({
+            icon: 'error',
+            title: 'No se pudo actualizar!',
+            text: 'Consulte al administrador.',
+          });
+        });
     },
   });
 
@@ -120,12 +119,21 @@ export const UserResetPassword = () => {
                 </label>
               </Grid>
               <Grid container item xs={6} pl={3}>
-               
-                <Typography variant="h6" gutterBottom component="div" style={{width:'100%'}}>
+                <Typography
+                  variant="h6"
+                  gutterBottom
+                  component="div"
+                  style={{ width: '100%' }}
+                >
                   {`Nombre: ${user?.name}`}
                 </Typography>
-                <Typography variant="h7" gutterBottom component="div" style={{width:'100%'}}>
-                {`Email: ${user?.email}`}
+                <Typography
+                  variant="h7"
+                  gutterBottom
+                  component="div"
+                  style={{ width: '100%' }}
+                >
+                  {`Email: ${user?.email}`}
                 </Typography>
                 <TextField
                   error={Boolean(

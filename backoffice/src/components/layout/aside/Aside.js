@@ -85,12 +85,12 @@ export const Aside = () => {
             style={{ width: 'auto', height: '40px' }}
           />
         </Box>
-           <Typography
+        <Typography
           component="h1"
           variant="h6"
           color="inherit"
           noWrap
-          sx={{ flexGrow: 1, fontWeight:'bold' }}
+          sx={{ flexGrow: 1, fontWeight: 'bold' }}
         >
           Back Office
         </Typography>

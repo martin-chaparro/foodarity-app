@@ -29,7 +29,7 @@ function Register() {
   });
 
   window.scroll(0, 0);
-  
+
   const validateLetters = (e) => {
     const { name, value } = e.target;
     setInput({
@@ -265,11 +265,15 @@ function Register() {
             className={style.btn}
             type="submit"
             variant="contained"
-            style={{ marginBottom: '1em' }}
+            style={{
+              marginBottom: '1em',
+              backgroundColor: '#7ED957',
+              color: '#3e2463',
+            }}
             onClick={(e) => handleSubmit(e)}
             disabled={!isAllow}
           >
-            Ingresar
+            Crear Cuenta
           </Button>
 
           <GoogleLogin
@@ -280,6 +284,10 @@ function Register() {
             cookiePolicy="single_host_origin"
             style={{ width: '100%' }}
           />
+          <p>
+            {' '}
+            Ya tiene una cuenta? <Link to="/login">Iniciar Sesión</Link>
+          </p>
         </div>
       </form>
     </div>
