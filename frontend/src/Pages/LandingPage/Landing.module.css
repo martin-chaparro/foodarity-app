@@ -78,12 +78,15 @@
 }
 
 @media screen and (max-width: 576px) {
+  .content {
+    margin-top: 50px;
+  }
   .logo1 {
     display: none;
   }
-
-  .imglogolanding {
-    margin-left: 5px;
+  .logo {
+    top: 50px;
+    width: 250px;
   }
   .aboutCards {
     display: flex;
@@ -95,6 +98,7 @@
   .aboutCards {
     display: flex;
     flex-direction: column;
+    justify-content: space-around;
     height: 800px;
     width: 340px;
   }
@@ -108,7 +112,8 @@
   .containerAbouts {
     display: flex;
     flex-direction: column;
-    height: 700px;
+    margin-right: 120px;
+    height: 900px;
     align-items: center;
   }
 

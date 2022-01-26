@@ -34,9 +34,10 @@
   .mision,
   .vision {
     position: relative;
-    top: 850px;
+    top: 800px;
+    margin-left: 150px;
   }
   .vision {
-    margin-bottom: 90px;
+    top: -300px;
   }
 }
