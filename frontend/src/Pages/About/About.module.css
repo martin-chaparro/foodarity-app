@@ -16,14 +16,26 @@
 }
 
 @media screen and (max-width: 576px) {
-  .containerCard {
-    width: 300px;
+  .containerCardAbout {
+    width: 350px;
     position: relative;
-    right: 20px;
+    margin-left: 85px;
+    height: 700px;
+    top: 450px;
   }
-  .misionVision {
-    width: 200px;
+  .containerCardValores {
+    width: 330px;
     position: relative;
-    right: 20px;
+    margin-left: 20px;
+    height: 800px;
+    top: 200px;
+  }
+  .mision,
+  .vision {
+    position: relative;
+    top: 850px;
+  }
+  .vision {
+    margin-bottom: 90px;
   }
 }

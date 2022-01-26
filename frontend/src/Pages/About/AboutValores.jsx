@@ -26,6 +26,7 @@ export default function AboutValores() {
             <StarIcon/>     <b>Responsabilidad Social:</b> Nuestra comunidad es sumamente
             importante, por eso damos prioridades a las ONG para obtener
             beneficios y ayudar a los más necesitados.
+            
             <br />
             <br />
             <StarIcon/>    <b>Integridad:</b> Trabajamos de manera íntegra y transparente, con
