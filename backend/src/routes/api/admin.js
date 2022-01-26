@@ -23,10 +23,11 @@ const {
 const {
   getProducts,
   getProductById,
-  getCategories,
+  uploadImageProduct,
+  updateProduct,
 } = require('../../controllers/admin/productsController');
 
-const { getAllCategories, getCategory, updateCategory, deleteCategory, createCategory } = require('../../controllers/admin/categoriesController');
+const { getAllCategories, getCategory, updateCategory, deleteCategory, createCategory, showCategories } = require('../../controllers/admin/categoriesController');
 
 const ValidationsUser = require('../../middlewares/validations/validationUser');
 // const ValidationCompany = require('../../middlewares/validations/validationCompany');
@@ -93,22 +94,25 @@ router.patch(
 
 // Products Routes
 router.get('/products', authMiddleware, ValidationAuth.isAdmin, getProducts);
+router.put('/products/:id', authMiddleware, ValidationAuth.isAdmin, updateProduct);
 router.get(
   '/products/id/:id',
   authMiddleware,
   ValidationAuth.isAdmin,
   getProductById
 );
-router.get(
-  '/products/categories',
+router.patch(
+  '/products/upload/:id',
   authMiddleware,
   ValidationAuth.isAdmin,
-  getCategories
+  validationFiles.fileExists,
+  uploadImageProduct
 );
 
 
 // Categories Routes
 router.get('/categories', authMiddleware, ValidationAuth.isAdmin, getAllCategories);
+router.get('/categories/show', authMiddleware, ValidationAuth.isAdmin, showCategories);
 router.post('/categories', authMiddleware, ValidationAuth.isAdmin, createCategory);
 router.get('/category/:id', authMiddleware, ValidationAuth.isAdmin, getCategory);
 router.put('/category/:id', authMiddleware, ValidationAuth.isAdmin, updateCategory);
