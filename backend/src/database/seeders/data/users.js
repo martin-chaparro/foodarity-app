@@ -61,15 +61,17 @@ module.exports = [
     validated: true,
     firstLogin: true,
   },
-  // {
-  //   name: 'Martin Chaparro',
-  //   email: 'martin.a.chaparro@gmail.com',
-  //   password: '123456',
-  //   status: true,
-  //   roleId: 2,
-  //   validated: true,
-  //   firstLogin: true,
-  // },
+  {
+    name: 'Martin Chaparro',
+    email: 'martin.a.chaparro@gmail.com',
+    password: '123456',
+    status: true,
+    roleId: 2,
+    validated: true,
+    firstLogin: false,
+    registerMethod:'google',
+    socialPhoto:'https://lh3.googleusercontent.com/a-/AOh14GgAJKHg92A3JlkXrSe7XA8uAu7OBhvuaGYyH6s9=s96-c'
+  },
   {
     name: 'Karen Derkach',
     email: 'derkach.m.karen@gmail.com',
