@@ -39,8 +39,6 @@ a {
   overflow: hidden;
   margin-bottom: 0;
   margin-top: 0;
-  background-color: #ffffff;
-
   padding-top: 55px;
 }
 
@@ -53,7 +51,7 @@ a {
 
 .contener input {
   margin-top: 0.4em;
-  box-shadow: 1px 1px 5px #9c9b9b;
+  box-shadow: 1px 1px 5px #a5a4a4;
   border: none;
   border-radius: 4.5px;
   height: 2.2em;

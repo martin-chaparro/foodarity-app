@@ -1,6 +1,7 @@
 .register {
   height: calc(100vh - 75px);
   padding-top: 75px;
+  margin-bottom: 0;
 }
 .contLogo {
   position: relative;
@@ -15,6 +16,7 @@
   margin: 10px;
 }
 .form {
+  margin-top: -5em;
   background: #ffffff;
   height: 100vh;
 }
@@ -23,6 +25,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 4em;
 }
 
 .inputs {
@@ -42,7 +45,6 @@
   margin-bottom: 5px;
   position: relative;
   top: 10px;
-
   color: #3e2463;
 }
 
