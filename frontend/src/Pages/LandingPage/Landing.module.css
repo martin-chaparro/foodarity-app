@@ -71,6 +71,8 @@
 
 /* imagen de about */
 .imgAbout {
+  position: relative;
+  top: 200px;
   margin-top: -80vh;
   margin-left: 50vw;
   width: 40vw;
@@ -106,6 +108,8 @@
     justify-content: space-around;
     height: 800px;
     width: 340px;
+    position: relative;
+    right: 20px;
   }
   .imgAbout {
     visibility: hidden;
@@ -129,5 +133,12 @@
 @media screen and (min-width: 576px) {
   .logo {
     visibility: hidden;
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  .imgAbout {
+    position: relative;
+    right: 25px;
   }
 }

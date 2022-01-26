@@ -1,16 +1,16 @@
 .containerCardAbout {
   width: 800px;
   height: 650px;
-  margin-top: 100vh;
+  margin-top: 50vh;
 }
 .containerCardValores {
   width: 90%;
-  margin-top: 16vh;
+  margin-top: 20vh;
   margin-right: 5vw;
 }
 .mision,
 .vision {
-  margin-top: 120vh;
+  margin-top: 60vh;
   margin-bottom: 5%;
   min-width: 275;
 }
@@ -19,24 +19,44 @@
   .containerCardAbout {
     width: 100vw;
     position: relative;
-    margin-right: 10vw;
-    margin-top: 180vh;
-    height: 170vh;
+    right: 5px;
+    height: 180vh;
   }
   .containerCardValores {
-    width: 100vw;
+    width: 100%;
     position: relative;
+    right: 1vw;
     top: 50vh;
   }
   .mision {
     position: relative;
     top: 225vh;
-    margin-left: 50vw;
+    right: 10px;
+
   }
   .vision {
     position: relative;
-    top: 80vh;
-    margin-left: 50vw;
-    margin-bottom: 40px;
+    top: 50vh;
+    right: 10px;
+    
   }
+}
+
+
+@media screen and (max-width: 1400px ) {
+  .containerCardAbout {
+    margin-top: 100vh;
+    position: relative;
+    top: 300px;
+    right: 100px;
+  }
+
+  .containerCardValores {
+    margin-top: 60vh;
+  }
+
+  .mision,
+.vision {
+  margin-top: 150vh;
+}
 }
