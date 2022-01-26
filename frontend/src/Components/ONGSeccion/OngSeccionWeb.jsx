@@ -6,6 +6,7 @@ import ButtonBase from '@mui/material/ButtonBase';
 import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
 import styles from './OngSeccionWeb.module.css';
+import avatarDefault from '../../assets/avatar_default.png';
 
 export default function OngSeccion({ ong }) {
   const [open, setOpen] = React.useState(false);
@@ -109,7 +110,7 @@ export default function OngSeccion({ ong }) {
                 sx={{ width: '100%', backgroundColor: 'white' }}
               >
                 <img
-                  src={ong.logo ? ong.logo.url : ''}
+                  src={ong.logo ? ong.logo.url : avatarDefault}
                   alt=""
                   className={styles.imgOngs}
                 />

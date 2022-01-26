@@ -16,10 +16,10 @@ export default function SearchBar({ search, lote }) {
     }
   };
   return (
-    <div>
+    <div >
       <Autocomplete
         // value={value}
-        ListboxProps={{ style: { maxHeight: '20vh' } }}
+        ListboxProps={{ style: { maxHeight: '10vh' } }}
         onKeyPress={goDown}
         onChange={() => {
           search(inputValue);
@@ -40,7 +40,7 @@ export default function SearchBar({ search, lote }) {
           width: '99%',
           backgroundColor: 'white',
           textColor: 'white',
-          marginTop: '2em',
+          marginTop: '2vh',
           border: '3px solid #7ED957',
           borderRadius: '5px',
         }}

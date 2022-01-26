@@ -113,7 +113,13 @@ const getProducts = async (req, res) => {
         break;
     }
     if (lote) {
-      whereAttr.lote = { [Op.iLike]: `%${lote}%` };
+      const companies = await Company.findAll({where: {
+         name: { [Op.iLike]: `%${lote}%` } },
+         }).then(resp => resp.map(company => company.id))
+      whereAttr[Op.or] = [
+        { lote: { [Op.iLike]: `%${lote}%` } },
+        { company_id : companies },
+      ]
     }
     // TODO corroborar como buscar por relacion de entidades
     if (categoryName) {

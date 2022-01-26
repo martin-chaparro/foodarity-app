@@ -24,7 +24,7 @@ let time2 = null;
 const GOOGLE_API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
 
 export default function RegisterFormCompany({ type }) {
-  const {id : userId} = useSelector(state => state.auth)
+  const { id: userId } = useSelector((state) => state.auth);
   const [provincia, setprovincia] = useState([]);
   const [ciudad, setCiudad] = useState([]);
   const [termProvincia, setTermProvincia] = useState('');
@@ -65,17 +65,17 @@ export default function RegisterFormCompany({ type }) {
     setZoom(newZoom);
   };
 
-  useEffect(()=> {
+  useEffect(() => {
     if (!userId) {
-      window.location.href = '/'
+      window.location.href = '/';
     } else {
-      apiWithToken.get(`/users/${userId}`).then(res => {
+      apiWithToken.get(`/users/${userId}`).then((res) => {
         if (res.data.company_id) {
-          window.location.href = '/home'
+          window.location.href = '/home';
         }
-      })
+      });
     }
-  },[])
+  }, []);
 
   useEffect(() => {
     if (formValues.cityId) {
@@ -261,7 +261,6 @@ export default function RegisterFormCompany({ type }) {
     }
   };
 
-
   const validateAreacode = (e) => {
     const { name, value } = e.target;
     setInput({
@@ -269,7 +268,7 @@ export default function RegisterFormCompany({ type }) {
       [name]: value,
     });
     // eslint-disable-next-line no-useless-escape
-    if (!/^\D*\d{2}$/.test(value)) {
+    if (!/^[+]?([0-9]+(?:[\.][0-9]*)?|\.[0-9]+)$/.test(value)) {
       setErrors({
         ...errors,
         [name]: 'Solo numeros',
@@ -289,7 +288,10 @@ export default function RegisterFormCompany({ type }) {
       [name]: value,
     });
     // eslint-disable-next-line no-useless-escape
-    if (!/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,4}$/im.test(value)) {
+    if (
+      // eslint-disable-next-line no-useless-escape
+      !/^[+]?([0-9]+(?:[\.][0-9]*)?|\.[0-9]+)$/.test(value)
+    ) {
       setErrors({
         ...errors,
         [name]: 'Solo Numeros',
@@ -302,25 +304,25 @@ export default function RegisterFormCompany({ type }) {
     }
   };
 
-  const validateTextNum = (e) => {
-    const { name, value } = e.target;
-    setInput({
-      ...input,
-      [name]: value,
-    });
-    // eslint-disable-next-line no-useless-escape
-    if (!/^[aA-zZ0-9_-]{3,16}$/.test(value)) {
-      setErrors({
-        ...errors,
-        [name]: 'Solo numeros',
-      });
-    } else {
-      setErrors({
-        ...errors,
-        [name]: '',
-      });
-    }
-  };
+  // const validateTextNum = (e) => {
+  //   const { name, value } = e.target;
+  //   setInput({
+  //     ...input,
+  //     [name]: value,
+  //   });
+  //   // eslint-disable-next-line no-useless-escape
+  //   if (!/^[aA-zZ0-9_-]{3,16}$/.test(value)) {
+  //     setErrors({
+  //       ...errors,
+  //       [name]: 'Solo numeros',
+  //     });
+  //   } else {
+  //     setErrors({
+  //       ...errors,
+  //       [name]: '',
+  //     });
+  //   }
+  // };
 
   const handleOnChange = (e) => {
     e.preventDefault();
@@ -344,13 +346,14 @@ export default function RegisterFormCompany({ type }) {
       !errors.zipcode
       // eslint-disable-next-line no-empty
     ) {
-      dispatch(registerComerce(input, finalAddress)).then(() => {window.location.href = '/home';});
+      dispatch(registerComerce(input, finalAddress)).then(() => {
+        window.location.href = '/home';
+      });
       /* Swal.fire({
         icon: 'success',
         title: 'Bien',
         text: 'El Comercio fue registrado Correctamente',
       }); */
-      
     } else {
       // eslint-disable-next-line no-alert
 
@@ -537,7 +540,8 @@ export default function RegisterFormCompany({ type }) {
               placeholder="Cód. Postal"
               onChange={(e) => {
                 handleOnChange(e);
-                validateTextNum(e);
+                validateNum(e);
+                // validateTextNum(e);
               }}
             />
             <div className={styles.divErrorPostalCod}>

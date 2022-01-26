@@ -20,11 +20,14 @@ import Box from '@mui/material/Box';
 import ButtonBase from '@mui/material/ButtonBase';
 // import Typography from '@mui/material/Typography';
 import styles from './OngSeccion.module.css';
+import avatarDefault from '../../assets/avatar_default.png';
 
 export default function OngSeccion({ ong }) {
   const ImageButton = styled(ButtonBase)(({ theme }) => ({
     position: 'relative',
-    height: 200,
+    height: '25vh',
+    maxWidth: '25vh',
+    maxHeight: 200,
     margin: 8,
 
     [theme.breakpoints.down('sm')]: {
@@ -95,7 +98,7 @@ export default function OngSeccion({ ong }) {
         flexWrap: 'wrap',
         minWidth: 200,
         width: '100%',
-        padding: '1em',
+        padding: '1vh',
       }}
     >
       <Link to={`/company/${ong.id}`}>
@@ -105,7 +108,7 @@ export default function OngSeccion({ ong }) {
           sx={{ width: '100%', backgroundColor: 'white' }}
         >
           <img
-            src={ong.logo ? ong.logo.url : ''}
+            src={ong.logo ? ong.logo.url : avatarDefault}
             alt=""
             className={styles.imgOngs}
           />

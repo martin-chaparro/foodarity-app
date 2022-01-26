@@ -23,6 +23,7 @@ export default function Home() {
   useEffect(() => {
     dispatch(getProducts());
     dispatch(getOngs());
+    window.scroll(0,0)
   }, [dispatch]);
 
   // useEffect(() => {
