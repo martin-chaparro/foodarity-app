@@ -9,8 +9,9 @@
   margin-top: 15%;
   margin-left: 5%;
 }
-.misionVision {
-  margin-top: 170%;
+.mision,
+.vision {
+  margin-top: 200%;
   margin-bottom: 5%;
   min-width: 275;
 }
