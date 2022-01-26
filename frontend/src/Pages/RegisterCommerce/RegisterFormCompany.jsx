@@ -292,7 +292,7 @@ export default function RegisterFormCompany({ type }) {
     if (!/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,4}$/im.test(value)) {
       setErrors({
         ...errors,
-        [name]: 'Solo numeros',
+        [name]: 'Solo Numeros',
       });
     } else {
       setErrors({
