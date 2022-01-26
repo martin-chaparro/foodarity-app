@@ -369,6 +369,57 @@
 }
 
 @media screen and (max-width: 576px) {
+
+  .googleMap {
+   display: none;
+  }
+
+
+
+  .expDate {
+    height: 20px;
+    position: relative;
+    top: -50px;
+ 
+  }
+
+  .category{
+    height: 35px;
+    position: relative;
+    top: -45px;
+  }
+
+  .categoryName, .date {
+    position: relative;
+    bottom: 18px;
+  }
+
+  .priceCont {
+    position: relative;
+    top: -50px;
+    font-size: 10px;
+  }
+  
+  .price {
+    font-size:8px;
+  }
+
+  .cartOptionsCont {
+    position: relative;
+    right: 3px;
+    font-size: 12px;
+    top: 60px;
+  }
+  
+  .cartOptions {
+    height: 15px;
+    width: 30px;
+    position: relative;
+    right: 10px;
+    top: 2px;
+    font-size: 10px;
+  }
+
   .productcard {
     width: 340px;
     height: 140px;
@@ -448,25 +499,26 @@
   }
 
   .btnres {
-    width: 90px;
-    height: 25px;
+    width: 0px;
+    height: 0px;
     font-size: 12px;
   }
 
   .btnresdiv {
-    width: 100px;
+    width: 0px;
     left: 5px;
   }
   .btndet {
-    width: 90px;
+    position: relative;
+    left: 10px;
+    bottom: 4px;
+    width: 200px;
     height: 25px;
     font-size: 12px;
   }
 
   .btndetdiv {
-    width: 100px;
-    position: relative;
-    right: 5px;
+    width: 200px;
   }
 
   .BoxGeneral {
@@ -504,7 +556,7 @@
     font-size: 14px;
     position: relative;
     right: 20px;
-    top: 1px;
+    top: 2px;
   }
   .divStreet {
     position: relative;
@@ -512,9 +564,10 @@
   }
   .titleTypographyStreet {
     font-size: 8px;
-    width: 120px;
+    width: 130px;
     position: relative;
-    left: 10px;
+    left: 2px;
+    bottom: 5px;
   }
 
   .titleTypographyDesc {
@@ -522,7 +575,7 @@
     width: 100px;
     height: 100px;
     position: relative;
-    bottom: 15px;
+    bottom: 16px;
   }
 
   .DivPostData {
@@ -569,8 +622,8 @@
 
   .divFavButton {
     position: relative;
-    top: 80px;
-    left: 25px;
+    top: 70px;
+    left: 30px;
     width: 100px;
   }
 

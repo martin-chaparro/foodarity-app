@@ -13,12 +13,17 @@ code {
 }
 
 @media screen and (max-width: 576px) {
-  p.css-ix1f03-MuiTypography-root {
+    p.css-ix1f03-MuiTypography-root {
     font-size: 8px;
   }
 
   p.css-ahj2mt-MuiTypography-root {
     font-size: 15px;
+  }
+
+  svg.MuiSvgIcon-root.MuiSvgIcon-fontSizeMedium.css-198t10b-MuiSvgIcon-root {
+    font-size: 15px;
+    position: relative;
   }
 
   svg.MuiSvgIcon-root.ProductCard_heart__4tzd0.css-11admod-MuiSvgIcon-root {

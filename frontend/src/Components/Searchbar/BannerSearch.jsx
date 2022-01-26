@@ -10,7 +10,7 @@ import OngSeccion from '../ONGSeccion/OngSeccion';
 // import OngSeccionWeb from '../ONGSeccion/OngSeccionWeb';
 
 function goDown() {
-  window.scrollTo({ top: window.innerHeight + 210, behavior: 'smooth' });
+  window.scrollTo({ top: window.innerHeight - 64, behavior: 'smooth' });
 }
 
 export default function BannerSearch({ search, lote, filtrado }) {

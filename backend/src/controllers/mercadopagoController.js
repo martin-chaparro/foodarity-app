@@ -164,7 +164,6 @@ const createPreference = async (request, response) => {
         items,
         payer: {
           name: userPayer.name,
-          email: userPayer.email,
         },
         back_urls: {
           success: 'http://localhost:3000/mpsuccess',
