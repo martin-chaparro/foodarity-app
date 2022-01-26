@@ -12,4 +12,3 @@ export const startLoading = () => ({
 export const finishLoading = () => ({
   type: types.removeLoading,
 });
-

@@ -94,28 +94,35 @@ export default function Usuarios({ company }) {
       confirmButtonColor: '#e63946',
       cancelButtonColor: 'gray',
       confirmButtonText: 'Continuar',
-    })
-      .then((result) => {
-        if (result.isConfirmed) {
-          apiWithToken.delete(`/companies/user/${ID}`).then(() => {
+    }).then((result) => {
+      if (result.isConfirmed) {
+        apiWithToken
+          .delete(`/companies/user/${ID}`)
+          .then(() => {
+            Swal.fire({
+              icon: 'success',
+              title: 'Bien!',
+              text: 'Usuario eliminado con exito',
+            });
+            if (id !== company.ownerId) {
+              navigate('/home');
+            }
+          })
+          .then(() => {
+            setInput('');
             apiWithToken.get('/companies/users').then((response) => {
               setUsers(response.data);
-
-              setInput('');
+            });
+          })
+          .catch(() => {
+            Swal.fire({
+              icon: 'error',
+              title: 'Ups...',
+              text: 'Algo fallo. Intente nuevamente.',
             });
           });
-        }
-      })
-      .catch(() => {
-        Swal.fire({
-          icon: 'error',
-          title: 'Ups...',
-          text: 'Algo fallo. Intente nuevamente.',
-        });
-      });
-    if (id !== company.ownerId) {
-      navigate('/home');
-    }
+      }
+    });
   };
 
   const handleRows = () => {
@@ -175,27 +182,33 @@ export default function Usuarios({ company }) {
       confirmButtonColor: '#e63946',
       cancelButtonColor: 'gray',
       confirmButtonText: 'Continuar',
-    })
-      .then((result) => {
-        if (result.isConfirmed) {
-          apiWithToken.post(`/companies/user?email=${input}`);
-          handleRows();
-        }
-      })
-
-      .then(() => {
-        setInput('');
-        apiWithToken.get('/companies/users').then((response) => {
-          setUsers(response.data);
-        });
-      })
-      .catch((error) => {
-        Swal.fire({
-          icon: 'error',
-          title: 'Ups...',
-          text: error.response.data.message,
-        });
-      });
+    }).then((result) => {
+      if (result.isConfirmed) {
+        apiWithToken
+          .post(`/companies/user?email=${input}`)
+          .then(() => {
+            setInput('');
+            apiWithToken.get('/companies/users').then((response) => {
+              setUsers(response.data);
+            });
+          })
+          .then(() => {
+            handleRows();
+            Swal.fire({
+              icon: 'success',
+              title: 'Bien!',
+              text: 'Usuario agregago con exito',
+            });
+          })
+          .catch((error) => {
+            Swal.fire({
+              icon: 'error',
+              title: 'Ups...',
+              text: error.response.data.message,
+            });
+          });
+      }
+    });
   }
 
   return (

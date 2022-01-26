@@ -19,9 +19,6 @@ export default function Home() {
   // eslint-disable-next-line no-unused-vars
   const allProducts = useSelector((state) => state.product.products);
   const allProductsList = useSelector((state) => state.product.allProductsList);
-  // const allOngs = useSelector((state) => state.companies.ongs);
-
-  // const [filterOngs , setFilterOngs] = useState()
 
   useEffect(() => {
     dispatch(getProducts());
@@ -106,4 +103,4 @@ export default function Home() {
       </div>
     </div>
   );
-          }
+}

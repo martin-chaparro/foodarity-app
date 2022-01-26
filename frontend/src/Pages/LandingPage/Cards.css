@@ -6,3 +6,17 @@
   transform: scale(85%);
   transition: 2s;
 }
+
+/* @media screen and (max-width: 576px) {
+  .about {
+    transform: scale(80%);
+    transition: 2s;
+
+  }
+  .about--zoom {
+    transform: scale(70%);
+    transition: 2s;
+ 
+    
+  }
+} */

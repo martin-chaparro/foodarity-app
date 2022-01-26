@@ -84,7 +84,6 @@ export const UsersScreen = () => {
   };
 
   const handleDelete = (event, id) => {
-
     if (id !== idLogin) {
       Swal.fire({
         title: 'Esta seguro?',
@@ -116,7 +115,7 @@ export const UsersScreen = () => {
             });
         }
       });
-    }else{
+    } else {
       Swal.fire({
         icon: 'error',
         title: 'No puedes completar esta accion',
@@ -125,14 +124,13 @@ export const UsersScreen = () => {
     }
   };
 
-
   const handleInputSearch = ({ target }) => {
     setTerm(target.value);
   };
 
-  const handleAddUser = ()=>{
+  const handleAddUser = () => {
     navigate(`/users/add`, { replace: true });
-  }
+  };
 
   return (
     <Layout>
@@ -143,7 +141,9 @@ export const UsersScreen = () => {
       </Grid>
       <Divider />
       <Grid mt={2}>
-        <Button variant="outlined" onClick={handleAddUser}>Agregar Usuario</Button>
+        <Button variant="outlined" onClick={handleAddUser}>
+          Agregar Usuario
+        </Button>
       </Grid>
       <Grid container spacing={3} pt={2}>
         <Grid item xs={12} lg={12}>

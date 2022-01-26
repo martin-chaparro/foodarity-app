@@ -31,7 +31,8 @@ export default function Landing() {
   const { ref, inView } = useInView({
     threshold: 0.4,
   });
-
+  /* eslint-disable react/jsx-props-no-spreading */
+  // const checked = useWindowPosition('header');
 
   const [check, setCheck] = useState(false);
 
@@ -47,6 +48,7 @@ export default function Landing() {
         <img className={styles.logo} src={logo} alt="" />
         <div className={styles.content}>
           <Collapse
+            /* eslint-disable react/jsx-props-no-spreading */
             in={check}
             // eslint-disable-next-line react/jsx-props-no-spreading
             {...(check ? { timeout: 1000 } : {})}
