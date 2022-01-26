@@ -161,13 +161,13 @@ function FiltroForm({ filtrado }) {
             Reiniciar filtros
           </Button>
 
-          <button
+          {/* <button
             className={styles.resetButton}
             type="button"
             onClick={handleClear}
           >
             Reiniciar filtros
-          </button> 
+          </button>  */}
         </div>
       </form>
     </div>

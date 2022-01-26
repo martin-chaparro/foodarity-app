@@ -208,7 +208,7 @@ export default function RegisterCompanyFormEditable({ company, handleBack }) {
       [name]: value,
     });
     // eslint-disable-next-line no-useless-escape
-    if (!/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,4}$/im.test(value)) {
+    if (!/^[+]?([0-9]+(?:[\.][0-9]*)?|\.[0-9]+)$/.test(value)) {
       setErrors({
         ...errors,
         [name]: 'Solo numeros',
@@ -221,25 +221,25 @@ export default function RegisterCompanyFormEditable({ company, handleBack }) {
     }
   };
 
-  const validateAreacode = (e) => {
-    const { name, value } = e.target;
-    setInput({
-      ...input,
-      [name]: value,
-    });
-    // eslint-disable-next-line no-useless-escape
-    if (!/^\D*\d{2}$/.test(value)) {
-      setErrors({
-        ...errors,
-        [name]: 'Solo numeros',
-      });
-    } else {
-      setErrors({
-        ...errors,
-        [name]: '',
-      });
-    }
-  };
+  // const validateAreacode = (e) => {
+  //   const { name, value } = e.target;
+  //   setInput({
+  //     ...input,
+  //     [name]: value,
+  //   });
+  //   // eslint-disable-next-line no-useless-escape
+  //   if (!/^\D*\d{2}$/.test(value)) {
+  //     setErrors({
+  //       ...errors,
+  //       [name]: 'Solo numeros',
+  //     });
+  //   } else {
+  //     setErrors({
+  //       ...errors,
+  //       [name]: '',
+  //     });
+  //   }
+  // };
 
   const handleOnChange = (e) => {
     e.preventDefault();
@@ -261,34 +261,32 @@ export default function RegisterCompanyFormEditable({ company, handleBack }) {
       !errors.street &&
       !errors.number &&
       !errors.zipcode
-
-
     ) {
       apiWithToken
         .put(`/companies/${company.id}`, { ...input, ...formValues })
         .then(() => {
-            Swal.fire({
-              icon: 'success',
-              title: 'Bien!',
-              text: "Datos actualizados.",
-              buttons: ['ok']
-            }).then(() => {
-              window.location.reload();
-            })
-            
-        }).catch(() => {
+          Swal.fire({
+            icon: 'success',
+            title: 'Bien!',
+            text: 'Datos actualizados.',
+            buttons: ['ok'],
+          }).then(() => {
+            window.location.reload();
+          });
+        })
+        .catch(() => {
           Swal.fire({
             icon: 'error',
             title: 'Ups...',
-            text: "Hubo un error, intente nuevamente.",
+            text: 'Hubo un error, intente nuevamente.',
           });
-        })
+        });
     } else {
       // eslint-disable-next-line no-alert
       Swal.fire({
         icon: 'error',
         title: 'Ups...',
-        text: "Complete el formulario.",
+        text: 'Complete el formulario.',
       });
     }
   };
@@ -338,7 +336,7 @@ export default function RegisterCompanyFormEditable({ company, handleBack }) {
               Swal.fire({
                 icon: 'success',
                 title: 'Bien!',
-                text: "Logo actualizado con exito.",
+                text: 'Logo actualizado con exito.',
               });
             }
           });
@@ -346,7 +344,7 @@ export default function RegisterCompanyFormEditable({ company, handleBack }) {
         Swal.fire({
           icon: 'error',
           title: 'Ups...',
-          text: "Hubo un error con la imagen, intente nuevamente.",
+          text: 'Hubo un error con la imagen, intente nuevamente.',
         });
       }
     }
@@ -462,7 +460,7 @@ export default function RegisterCompanyFormEditable({ company, handleBack }) {
                 placeholder="Cód. Área"
                 onChange={(e) => {
                   handleOnChange(e);
-                  validateAreacode(e);
+                  validateNum(e);
                 }}
               />
               <div className={styles.divErrorAreaCod}>
