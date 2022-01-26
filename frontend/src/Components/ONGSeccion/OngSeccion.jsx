@@ -20,6 +20,7 @@ import Box from '@mui/material/Box';
 import ButtonBase from '@mui/material/ButtonBase';
 // import Typography from '@mui/material/Typography';
 import styles from './OngSeccion.module.css';
+import avatarDefault from '../../assets/avatar_default.png';
 
 export default function OngSeccion({ ong }) {
   const ImageButton = styled(ButtonBase)(({ theme }) => ({
@@ -107,7 +108,7 @@ export default function OngSeccion({ ong }) {
           sx={{ width: '100%', backgroundColor: 'white' }}
         >
           <img
-            src={ong.logo ? ong.logo.url : ''}
+            src={ong.logo ? ong.logo.url : avatarDefault}
             alt=""
             className={styles.imgOngs}
           />
