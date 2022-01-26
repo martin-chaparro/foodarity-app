@@ -88,7 +88,6 @@ const getOrders = async (request, response) => {
           { email: { [Op.iLike]: `%${search}%` } },
         ],
       }}).then(res => res.map(company => company.id))
-      console.log('ACA USERS!!!', users, companies)
       orders = await Order.findAndCountAll({
         include,
         where: {
