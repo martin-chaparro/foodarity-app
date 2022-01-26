@@ -42,7 +42,7 @@ export const CompaniesScreen = () => {
     );
     setCompanies(response.data.companies);
     setTotalCompanies(response.data.totalCompanies);
-  }, [page, size,update]);
+  }, [page, size, update]);
 
   useEffect(async () => {
     clearTimeout(time);
@@ -80,38 +80,36 @@ export const CompaniesScreen = () => {
     navigate(`/companies/${id}`, { replace: true });
   };
   const handleDelete = (event, id) => {
-    
-      Swal.fire({
-        title: 'Esta seguro?',
-        text: 'Quizas no se puedan revertir estos cambios!',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Si, eliminar!',
-      }).then((result) => {
-        if (result.isConfirmed) {
-          // TODO: Elminar companias y cosas que dependan del usuario
-          apiWithToken
-            .delete(`/admin/companies/${id}`)
-            .then(() => {
-              Swal.fire({
-                icon: 'success',
-                title: 'Eliminado',
-                text: 'La compania se elimino correctamente.',
-              });
-              setUpdate(!update);
-            })
-            .catch(() => {
-              Swal.fire({
-                icon: 'error',
-                title: 'No se pudo eliminar!',
-                text: 'consulte al administrador.',
-              });
+    Swal.fire({
+      title: 'Esta seguro?',
+      text: 'Quizas no se puedan revertir estos cambios!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, eliminar!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // TODO: Elminar companias y cosas que dependan del usuario
+        apiWithToken
+          .delete(`/admin/companies/${id}`)
+          .then(() => {
+            Swal.fire({
+              icon: 'success',
+              title: 'Eliminado',
+              text: 'La compania se elimino correctamente.',
             });
-        }
-      });
-    
+            setUpdate(!update);
+          })
+          .catch(() => {
+            Swal.fire({
+              icon: 'error',
+              title: 'No se pudo eliminar!',
+              text: 'consulte al administrador.',
+            });
+          });
+      }
+    });
   };
 
   const handleInputSearch = ({ target }) => {

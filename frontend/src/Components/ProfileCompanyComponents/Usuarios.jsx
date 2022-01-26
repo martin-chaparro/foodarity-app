@@ -98,24 +98,31 @@ export default function Usuarios({ company }) {
       .then((result) => {
         if (result.isConfirmed) {
           apiWithToken.delete(`/companies/user/${ID}`).then(() => {
-            apiWithToken.get('/companies/users').then((response) => {
-              setUsers(response.data);
-
+            Swal.fire({
+              icon: 'success',
+              title: 'Bien!',
+              text: "Usuario eliminado con exito",
+            });
+            if (id !== company.ownerId) {
+              navigate('/home');
+            }
+          }).then(() => {
               setInput('');
+              apiWithToken.get('/companies/users').then((response) => {
+                setUsers(response.data);
+              });
+          })
+          .catch(() => {
+            Swal.fire({
+              icon: 'error',
+              title: 'Ups...',
+              text: 'Algo fallo. Intente nuevamente.',
             });
           });
         }
       })
-      .catch(() => {
-        Swal.fire({
-          icon: 'error',
-          title: 'Ups...',
-          text: 'Algo fallo. Intente nuevamente.',
-        });
-      });
-    if (id !== company.ownerId) {
-      navigate('/home');
-    }
+      
+    
   };
 
   const handleRows = () => {
@@ -175,14 +182,17 @@ export default function Usuarios({ company }) {
       confirmButtonColor: '#e63946',
       cancelButtonColor: 'gray',
       confirmButtonText: 'Continuar',
-    })
-      .then((result) => {
+    }).then((result) => {
         if (result.isConfirmed) {
           apiWithToken.post(`/companies/user?email=${input}`);
           handleRows();
+          Swal.fire({
+            icon: 'success',
+            title: 'Bien!',
+            text: "Usuario agregago con exito",
+          });
         }
       })
-
       .then(() => {
         setInput('');
         apiWithToken.get('/companies/users').then((response) => {

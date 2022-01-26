@@ -25,10 +25,9 @@ import { Layout } from '../../../layout/Layout';
 import { api, apiWithToken } from '../../../../services/api';
 import { finishLoading, startLoading } from '../../../../redux/actions/ui';
 
-
 export const CompanyUpdate = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const { id } = useParams();
   const [company, setCompany] = useState();
@@ -52,7 +51,7 @@ export const CompanyUpdate = () => {
     provincia: null,
     city_id: null,
     cities: null,
-    description:''
+    description: '',
   };
 
   const formik = useFormik({
@@ -73,20 +72,20 @@ export const CompanyUpdate = () => {
     }),
     onSubmit: () => {
       const bodyRequest = {
-        name:formik.values.name,
-        description:formik.values.description,
-        areaCode:formik.values.areaCode,
-        phone:formik.values.phone,
-        email:formik.values.email,
-        website:formik.values.website,
-        type:formik.values.type,
-        street:formik.values.street,
-        number:formik.values.number,
-        zipcode:formik.values.zipcode,
-        cityId:formik.values.city_id,
-        stateId:formik.values.state_id,
-        status:formik.values.status,
-      }
+        name: formik.values.name,
+        description: formik.values.description,
+        areaCode: formik.values.areaCode,
+        phone: formik.values.phone,
+        email: formik.values.email,
+        website: formik.values.website,
+        type: formik.values.type,
+        street: formik.values.street,
+        number: formik.values.number,
+        zipcode: formik.values.zipcode,
+        cityId: formik.values.city_id,
+        stateId: formik.values.state_id,
+        status: formik.values.status,
+      };
       if (file) {
         const formdata = new FormData();
         formdata.append('file', file, file.name);
@@ -97,7 +96,7 @@ export const CompanyUpdate = () => {
             apiWithToken
               .put(`/admin/companies/${id}`, formik.values)
               .then(() => {
-                dispatch(finishLoading())
+                dispatch(finishLoading());
                 Swal.fire({
                   icon: 'success',
                   title: 'Actualizada',
@@ -115,7 +114,7 @@ export const CompanyUpdate = () => {
             setFile(null);
           })
           .catch(() => {
-            dispatch(finishLoading())
+            dispatch(finishLoading());
             Swal.fire({
               icon: 'error',
               title: 'No se pudo actualizar!',
@@ -128,7 +127,7 @@ export const CompanyUpdate = () => {
         apiWithToken
           .put(`/admin/companies/${id}`, bodyRequest)
           .then(() => {
-            dispatch(finishLoading())
+            dispatch(finishLoading());
             Swal.fire({
               icon: 'success',
               title: 'Actualizada',
@@ -136,7 +135,7 @@ export const CompanyUpdate = () => {
             });
           })
           .catch(() => {
-            dispatch(finishLoading())
+            dispatch(finishLoading());
             Swal.fire({
               icon: 'error',
               title: 'No se pudo actualizar!',
@@ -144,7 +143,6 @@ export const CompanyUpdate = () => {
             });
           });
       }
-    
     },
   });
 
@@ -254,7 +252,7 @@ export const CompanyUpdate = () => {
           >
             <Grid container direction="row">
               <Grid container item xs={4} p={2} justifyContent="center">
-              <label htmlFor="datosImagen">
+                <label htmlFor="datosImagen">
                   <input
                     type="file"
                     name="file"
@@ -300,7 +298,9 @@ export const CompanyUpdate = () => {
                   autoComplete="off"
                 />
                 <TextField
-                  error={Boolean(formik.touched.website && formik.errors.website)}
+                  error={Boolean(
+                    formik.touched.website && formik.errors.website
+                  )}
                   fullWidth
                   helperText={formik.touched.website && formik.errors.website}
                   label="Web Site"
@@ -559,7 +559,11 @@ export const CompanyUpdate = () => {
                 </Button>
               </Grid>
               <Grid item ml={2}>
-                <Button variant="outlined" type="submit" disabled={!formik.isValid}>
+                <Button
+                  variant="outlined"
+                  type="submit"
+                  disabled={!formik.isValid}
+                >
                   Guardar
                 </Button>
               </Grid>
