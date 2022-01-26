@@ -150,7 +150,7 @@ console.log("CONSOLE LOOOOG", initialCart)
           </div>
       )}
       <TableContainer className={styles.tableContainer}component={Paper}>
-        <Table aria-label="simple table">
+        <Table aria-label="simple table" className={styles.table}>
           <TableHead>
             <TableRow>
               <TableCell>LOTE</TableCell>

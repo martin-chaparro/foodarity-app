@@ -18,6 +18,9 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Avatar from '@mui/material/Avatar';
 import CircularProgress from '@mui/material/CircularProgress';
+import InputLabel from '@mui/material/InputLabel';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
 
 import perfil from '../../../../assets/avatar_default.png';
 
@@ -30,15 +33,21 @@ export const CompaniesScreen = () => {
   const [companies, setCompanies] = useState();
   const [page, setPage] = useState(0);
   const [size, setSize] = useState(5);
+  const [status, setStatus] = useState('');
   const [totalCompanies, setTotalCompanies] = useState(0);
   const [term, setTerm] = useState('');
   const [update, setUpdate] = useState(false);
 
   const navigate = useNavigate();
 
+  const handleStatusChange = (e) => {
+    e.preventDefault();
+    setStatus(e.target.value);
+  };
+
   useEffect(async () => {
     const response = await apiWithToken.get(
-      `/admin/companies?page=${page}&size=${size}`
+      `/admin/companies?page=${page}&size=${size}&status=${status}`
     );
     setCompanies(response.data.companies);
     setTotalCompanies(response.data.totalCompanies);
@@ -50,7 +59,7 @@ export const CompaniesScreen = () => {
       time = setTimeout(async () => {
         setPage(0);
         const response = await apiWithToken.get(
-          `/admin/companies?page=${page}&size=${size}&search=${term}`
+          `/admin/companies?page=${page}&size=${size}&search=${term}&status=${status}`
         );
         setCompanies(response.data.companies);
         setTotalCompanies(response.data.totalCompanies);
@@ -58,7 +67,7 @@ export const CompaniesScreen = () => {
     } else {
       setPage(0);
       const response = await apiWithToken.get(
-        `/admin/companies?page=${page}&size=${size}`
+        `/admin/companies?page=${page}&size=${size}&status=${status}`
       );
       setCompanies(response.data.companies);
       setTotalCompanies(response.data.totalCompanies);
@@ -66,7 +75,7 @@ export const CompaniesScreen = () => {
     return () => {
       setPage(0);
     };
-  }, [term]);
+  }, [term, status]);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -140,6 +149,23 @@ export const CompaniesScreen = () => {
                 style={{ backgroundColor: 'white', marginBottom: '2em' }}
                 onChange={handleInputSearch}
               />
+              <InputLabel id="demo-simple-select-label">Estado</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={status}
+                label="Status"
+                onChange={handleStatusChange}
+                sx={{ width: 200, height: 35 }}
+              >
+                <MenuItem value="">
+                  <em>Todas</em>
+                </MenuItem>
+                <MenuItem value="Habilitada">Habilitadas</MenuItem>
+                <MenuItem value="Deshabilitada">Deshabilitadas</MenuItem>
+                <MenuItem value="Pendiente">Pendientes</MenuItem>
+                <MenuItem value="Banneada">Banneadas</MenuItem>
+              </Select>
               <Table mt={20}>
                 <TableHead>
                   <TableRow>

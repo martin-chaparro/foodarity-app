@@ -62,7 +62,7 @@ function ModalProductDetails({ product, open, handleClose, item }) {
               {product.company.name}
             </Typography>
           </div>)}
-          <div className={styles.divStreet} style={currentPath.startsWith('/company')? {position: 'relative', bottom: 35, marginBottom: 35} : {}}>
+          <div className={styles.divStreet} style={currentPath.startsWith('/company')? {position: 'relative', top: 5, marginBottom: 20} : {}}>
             <Typography
               id="modal-modal-description"
               sx={{ mt: 2,}}

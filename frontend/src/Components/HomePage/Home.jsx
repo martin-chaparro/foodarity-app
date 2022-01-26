@@ -50,6 +50,7 @@ export default function Home() {
   };
 
   const filtrado = (params = {}) => {
+    
     const data = {
       categoryId: params.categoryId || null,
       categoryName: params.categoryName || null,
@@ -57,13 +58,14 @@ export default function Home() {
       minPrice: params.minPrice || null,
       maxPrice: params.maxPrice || null,
       expirationDate: params.expirationDate || null,
+      lote: params.lote || null
     };
+    
     Object.keys(data).forEach((key) => {
       if (!data[key]) {
         delete data[key];
       }
     });
-
     setAllProductValues({ ...allProductValues, ...data, page: 1 });
   };
 

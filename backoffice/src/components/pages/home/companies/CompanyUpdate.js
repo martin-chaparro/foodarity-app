@@ -370,7 +370,7 @@ export const CompanyUpdate = () => {
                     >
                       <MenuItem value="Habilitada">Habilitada</MenuItem>
                       <MenuItem value="Deshabilitada">Deshabilitada</MenuItem>
-                      <MenuItem value="Pendiente">Pendiente</MenuItem>
+                      {/* <MenuItem value="Pendiente">Pendiente</MenuItem> */}
                       <MenuItem value="Banneada">Banneada</MenuItem>
                     </Select>
                   </FormControl>
