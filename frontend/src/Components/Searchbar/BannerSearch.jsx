@@ -64,10 +64,10 @@ export default function BannerSearch({ search, lote, filtrado }) {
                 <KeyboardArrowDownIcon
                   className={estilo.goDown}
                   sx={{
-                    fontSize: 50,
+                    fontSize: 40,
                     position: 'relative',
                     bottom: 5,
-                    backgroundColor: '#7ED957',
+                    backgroundColor: '#7ED95790',
                     borderRadius: '100%',
                     '&:hover': { backgroundColor: '#7ED95790 !important' },
                   }}
