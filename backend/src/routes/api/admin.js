@@ -35,6 +35,7 @@ const ValidationAuth = require('../../middlewares/validations/validationAuth');
 const authMiddleware = require('../../middlewares/auth');
 const validationFiles = require('../../middlewares/validations/validationFiles');
 const { getOrders } = require('../../controllers/admin/ordersController');
+const { dasboardMetrics } = require('../../controllers/admin/dashboardController');
 
 // Users Routes
 
@@ -120,6 +121,9 @@ router.delete('/category/:id', authMiddleware, ValidationAuth.isAdmin, deleteCat
 
 // Orders Routes
 router.get('/orders', authMiddleware, ValidationAuth.isAdmin, getOrders)
+
+// Dashboard Routes
+router.get('/dashboard', dasboardMetrics)
 
 
 module.exports = router;
