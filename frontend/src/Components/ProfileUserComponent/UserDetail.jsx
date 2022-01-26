@@ -62,7 +62,7 @@ export default function UserDetail({ detail }) {
               </span>
             </Typography>
           </div>
-          <div>
+          {/* <div>
             <Typography
               variant="h6"
               gutterBottom
@@ -72,7 +72,7 @@ export default function UserDetail({ detail }) {
               Método de Pago:
               <span style={{ color: '#8865b9' }}> No registrado aún</span>
             </Typography>
-          </div>
+          </div> */}
 
           <RegisterUserFormEditable detail={detail} />
         </div>
