@@ -262,13 +262,15 @@ function Register() {
         </div>
         <div className={style.buttonsDiv}>
           <Button
-            className={style.btn}
             type="submit"
             variant="contained"
-            style={{
+            sx={{
               marginBottom: '1em',
               backgroundColor: '#7ED957',
-              color: '#3e2463',
+                '&:hover': { backgroundColor: '#7ED95790 !important' },
+                height: '2.5em',
+                color: '#3e2463',
+                fontStyle: 'bold',
             }}
             onClick={(e) => handleSubmit(e)}
             disabled={!isAllow}
