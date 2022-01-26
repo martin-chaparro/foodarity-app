@@ -353,7 +353,7 @@ export default function Navbar() {
           </Link>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            {id && currentPath === '/home' && (
+            {currentPath === '/home' && (
               <Link
                 to="/googlemaps"
                 style={{ color: 'white', position: 'relative', top: '1vh' }}

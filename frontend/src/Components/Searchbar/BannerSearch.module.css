@@ -52,6 +52,10 @@ html {
   background-color: #ab7ab990;
 }
 
+.titleBanner {
+  font-size:5vh;
+}
+
 .des {
   margin: 20px;
   display: block;
@@ -122,7 +126,7 @@ html {
 
 .titleOng {
   margin: 0;
-  font-size: 25px;
+  font-size: 5vh;
   color: rgb(99, 37, 180);
   font-weight: bold;
 }

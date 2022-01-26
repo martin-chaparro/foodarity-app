@@ -27,7 +27,7 @@ export default function BannerSearch({ search, lote, filtrado }) {
       <div className={estilo.heroimage}>
         <div className={estilo.container}>
           <h1>
-            <span>Ahorre, Ayude y contribuya al planeta</span>
+            <span className={estilo.titleBanner}>Ahorre, Ayude y contribuya al planeta</span>
           </h1>
           <div className={estilo.search}>
             <div className={estilo.ongAndTitleContainer}>
@@ -56,6 +56,7 @@ export default function BannerSearch({ search, lote, filtrado }) {
                   color: '#44b700 !important',
                   marginTop: 1,
                   textStyle: 'bold',
+                  fontSize: '3vh'
                 }}
               >
                 PRODUCTOS
@@ -64,11 +65,12 @@ export default function BannerSearch({ search, lote, filtrado }) {
                 <KeyboardArrowDownIcon
                   className={estilo.goDown}
                   sx={{
-                    fontSize: 40,
+                    fontSize: "6vh",
                     position: 'relative',
                     bottom: 5,
                     backgroundColor: '#7ED95790',
                     borderRadius: '100%',
+
                     '&:hover': { backgroundColor: '#7ED95790 !important' },
                   }}
                 />
