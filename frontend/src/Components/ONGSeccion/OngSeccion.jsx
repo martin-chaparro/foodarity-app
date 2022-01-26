@@ -93,7 +93,7 @@ export default function OngSeccion({ ong }) {
         display: 'flex',
         justifyContent: 'center',
         flexWrap: 'wrap',
-        minWidth: 200,
+        minWidth: '100%',
         width: '100%',
         padding: '1em',
       }}

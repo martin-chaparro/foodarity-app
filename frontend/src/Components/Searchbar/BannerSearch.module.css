@@ -108,6 +108,7 @@ html {
 }
 
 .ongAndTitleContainer {
+  width: 100%;
   margin-top: 2em;
   display: flex;
   flex-direction: column;
