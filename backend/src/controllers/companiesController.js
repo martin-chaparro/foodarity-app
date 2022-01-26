@@ -447,6 +447,8 @@ const addUser = async (req, res) => {
       });
     }
     user.setCompany(owner.company_id);
+    send(user.email, 'Te han agregado a una compania', `Ahora eres parte de la compania ${owner.company.name}.\n
+    Si deseas dejar de ser parte, puedes desvincularte en el perfil de compania.`)
     return res.status(200).send({ message: `${user.email} added` });
   } catch (error) {
     return res.status(500).send({message: error});
