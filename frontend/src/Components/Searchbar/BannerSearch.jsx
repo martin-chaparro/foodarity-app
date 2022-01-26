@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { IconButton } from '@mui/material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
@@ -15,6 +15,13 @@ function goDown() {
 
 export default function BannerSearch({ search, lote, filtrado }) {
   const allOngs = useSelector((state) => state.companies.ongs);
+  const [filterOngs , setFilterOngs] = useState()
+
+  useEffect(() => {
+    setFilterOngs(allOngs.filter(ongs=> ongs.deleted === false && ongs.status === "Habilitada"))
+  },[allOngs])
+
+
   return (
     <div className={estilo.body}>
       <div className={estilo.heroimage}>
@@ -26,7 +33,7 @@ export default function BannerSearch({ search, lote, filtrado }) {
             <div className={estilo.ongAndTitleContainer}>
               <h2 className={estilo.titleOng}>¡Conoce nuestras ONGs!</h2>
               <div className={estilo.contOngs}>
-                {allOngs.map((ong) => {
+                {filterOngs?.map((ong) => {
                   return <OngSeccion key={ong.id} ong={ong} />;
                 })}
               </div>
