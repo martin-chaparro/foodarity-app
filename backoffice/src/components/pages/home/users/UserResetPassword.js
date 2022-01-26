@@ -119,22 +119,31 @@ export const UserResetPassword = () => {
                 </label>
               </Grid>
               <Grid container item xs={6} pl={3}>
-                <Typography
-                  variant="h6"
-                  gutterBottom
-                  component="div"
-                  style={{ width: '100%' }}
-                >
-                  {`Nombre: ${user?.name}`}
-                </Typography>
-                <Typography
-                  variant="h7"
-                  gutterBottom
-                  component="div"
-                  style={{ width: '100%' }}
-                >
-                  {`Email: ${user?.email}`}
-                </Typography>
+                {user && (
+                  <>
+                    <TextField
+                      fullWidth
+                      label="Nombre"
+                      margin="normal"
+                      defaultValue={`${user.name}`}
+                      variant="standard"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
+                    <TextField
+                      fullWidth
+                      label="Email"
+                      margin="normal"
+                      defaultValue={`${user.email}`}
+                      variant="standard"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
+                  </>
+                )}
+
                 <TextField
                   error={Boolean(
                     formik.touched.password && formik.errors.password

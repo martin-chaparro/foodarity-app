@@ -122,9 +122,6 @@ export const CompaniesScreen = () => {
         Gestion de Comercios y ONG
       </Typography>
       <Divider />
-      <Grid mt={2}>
-        <Button variant="outlined">Agregar Comercio/ONG</Button>
-      </Grid>
       <Grid container spacing={3} pt={2}>
         <Grid item xs={12}>
           <Paper
