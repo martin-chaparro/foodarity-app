@@ -3,9 +3,7 @@
   align-items: center;
   flex-direction: column;
   justify-content: flex-start;
-  padding-left: 280px;
   padding-top: 50px;
-  padding-right: 280px;
   background-color: rgb(117, 82, 156);
   min-height:100vh;
   height: 100%;
@@ -39,19 +37,18 @@
 }
 
 .divCompanyName {
-  width: 250px;
+  width: 100%;
   color: white;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   position: relative;
-  left: 250px;
+
 }
 .companyName {
   position: relative;
   top: 5px;
-  left: 25px;
 }
 
 .agreementDiv {
@@ -61,7 +58,7 @@
   margin-top: 10px;
   background: white;
   width: 100%;
-  border-radius: 5px;
+
   padding-bottom: 20px;
   margin-bottom: 20px;
 }

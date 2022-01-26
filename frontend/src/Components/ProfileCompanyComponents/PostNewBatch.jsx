@@ -298,6 +298,7 @@ export default function PostNewBatch() {
                 setInput={setInput}
                 input={input}
                 categories={categories}
+                autoComplete='off'
                 // eslint-disable-next-line react/jsx-no-bind
                 handleOnChange={handleOnChange}
               />
@@ -310,6 +311,7 @@ export default function PostNewBatch() {
                 <NuevoLote
                   setInput={setInput}
                   input={input}
+                  autoComplete='off'
                   // eslint-disable-next-line react/jsx-no-bind
                   handleOnChange={handleOnChange}
                 />
@@ -318,6 +320,7 @@ export default function PostNewBatch() {
                 <Fecha
                   setInput={setInput}
                   input={input}
+                  autoComplete='off'
                   // eslint-disable-next-line react/jsx-no-bind
                   handleOnChange={handleOnChange}
                 />
@@ -330,6 +333,7 @@ export default function PostNewBatch() {
                   setInput={setInput}
                   input={input}
                   name="quantity"
+                  autoComplete='off'
                   // eslint-disable-next-line react/jsx-no-bind
                   handleOnChange={handleOnChange}
                   // eslint-disable-next-line react/jsx-no-bind
@@ -348,6 +352,7 @@ export default function PostNewBatch() {
                   setInput={setInput}
                   input={input}
                   name="price"
+                  autoComplete='off'
                   // eslint-disable-next-line react/jsx-no-bind
                   handleOnChange={handleOnChange}
                   // eslint-disable-next-line react/jsx-no-bind
@@ -366,6 +371,7 @@ export default function PostNewBatch() {
               className={styles.description}
               setInput={setInput}
               input={input}
+              autoComplete='off'
               // eslint-disable-next-line react/jsx-no-bind
               handleOnChange={handleOnChange}
             />

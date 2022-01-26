@@ -7,16 +7,11 @@
   transition: 2s;
 }
 
-/* @media screen and (max-width: 576px) {
+@media screen and (max-width: 576px) {
   .about {
-    transform: scale(80%);
-    transition: 2s;
-
+    width: 100%;
   }
   .about--zoom {
-    transform: scale(70%);
-    transition: 2s;
- 
-    
+    width: 100%;
   }
-} */
+}

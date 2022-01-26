@@ -109,7 +109,7 @@ function ActualizarPassword() {
       <div className={style.contLogo}>
         <img className={style.logo} src={logo} alt="" />
       </div>
-      <form className={style.form} onSubmit={handleSubmit}>
+      <form autoComplete='off' className={style.form} onSubmit={handleSubmit}>
         <h1 className={style.h1}>Formulario para recuparar Contraseña</h1>
         <div className={style.contener}>
           <div>
