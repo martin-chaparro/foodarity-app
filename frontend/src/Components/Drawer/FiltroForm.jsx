@@ -6,17 +6,20 @@ import Button from '@mui/material/Button';
 import { api } from '../../services/api';
 import styles from './FiltroForm.module.css';
 
-function FiltroForm({ filtrado, search }) {
+function FiltroForm({ filtrado }) {
   // const dispatch = useDispatch()
   const [categories, setCategories] = useState();
-  const [input, setInput] = useState({
-    categoryName: '',
+
+  const clearInput = {
+    categoryName: 'Todas',
     categoryId: '',
-    minPrice: 0,
-    maxPrice: 0,
+    minPrice: '0',
+    maxPrice: '0',
     expirationDate: 'clear',
     order: 'recents',
-  });
+  };
+
+  const [input, setInput] = useState(clearInput);
 
   useEffect(() => {
     if (!input.minPrice) setInput({ ...input, minPrice: '0' });
@@ -33,26 +36,20 @@ function FiltroForm({ filtrado, search }) {
         setCategories(res);
       });
   }, []);
-
-  const handleClear = (e) => {
-    e.preventDefault();
-    const clearInput = {
-      categoryName: 'Todas',
-      categoryId: '',
-      minPrice: '0',
-      maxPrice: '0',
-      expirationDate: 'clear',
-      order: 'recents',
-    };
-    setInput(clearInput);
-    filtrado(clearInput);
-    search('')
-  };
-
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     filtrado(input);
   };
+
+
+  const handleClear = (e) => {
+    e.preventDefault();
+    const finalInput = {...clearInput, lote: ' '}
+    setInput(clearInput);
+    filtrado(finalInput)
+  };
+
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -150,9 +147,9 @@ function FiltroForm({ filtrado, search }) {
           {/* <button className={styles.applyButton} type="submit">
             Aplicar filtros
           </button> */}
+
           <Button
             // type="submit"
-            type="button"
             onClick={handleClear}
             sx={{
               color: 'white',
@@ -160,16 +157,17 @@ function FiltroForm({ filtrado, search }) {
               '&:hover': { backgroundColor: '#7ED95790 !important' },
               marginTop: 1,
             }}
-          >
+            >
             Reiniciar filtros
           </Button>
-          {/* <button
+
+          <button
             className={styles.resetButton}
             type="button"
             onClick={handleClear}
           >
             Reiniciar filtros
-          </button> */}
+          </button> 
         </div>
       </form>
     </div>

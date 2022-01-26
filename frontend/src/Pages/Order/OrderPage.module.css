@@ -7,9 +7,14 @@
   padding-top: 50px;
   padding-right: 280px;
   background-color: rgb(117, 82, 156);
-  min-height: calc(100vh - 50px);
+  min-height:100vh;
   height: 100%;
+  width: 100%;
   position: relative;
+}
+
+.table {
+  width: 100%;
 }
 
 .generalHeader {
@@ -106,4 +111,30 @@
 .buyButton:disabled {
   background: rgba(44, 4, 63, 0.329);
   cursor: auto;
+}
+
+
+@media screen and (max-width: 576px) {
+
+  .divGenrelContainer {
+    padding: 0;
+    height: 100%;
+    padding-top: 15px;
+  }
+
+
+
+  .divCompanyName {
+    position: relative;
+    left: 35px;
+  }
+  .companyName {
+    position: relative;
+    top: 5px;
+    left: 25px;
+  }
+
+  .agreementDiv, .tableContainer {
+    border-radius: 0%;
+  }
 }

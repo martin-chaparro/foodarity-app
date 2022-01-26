@@ -43,7 +43,7 @@ export const ProductUpdate = () => {
     publicationDate: '',
     status: '',
     category_id: null,
-    category:null
+    category: null,
   };
 
   const formik = useFormik({

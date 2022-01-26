@@ -25,7 +25,7 @@ export default function OngSeccion({ ong }) {
   const ImageButton = styled(ButtonBase)(({ theme }) => ({
     position: 'relative',
     height: 200,
-    margin: 1,
+    margin: 8,
 
     [theme.breakpoints.down('sm')]: {
       width: '100% !important',
@@ -60,7 +60,7 @@ export default function OngSeccion({ ong }) {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    width: '50%',
+    width: '100%',
     height: '100%',
     color: theme.palette.common.white,
     borderRadius: '5px 5px 5px 5px',

@@ -121,7 +121,7 @@ export default function Compras({ orders }) {
             HISTORIAL DE COMPRAS
           </Typography>
         </div>
-        <Paper sx={{ width: '50%', overflow: 'hidden' }}>
+        <Paper sx={{ width: '100%', overflow: 'hidden' }}>
           <TableContainer sx={{ maxHeight: 440 }}>
             <Table stickyHeader aria-label="sticky table">
               <TableHead>
