@@ -76,3 +76,23 @@
   right: 0px;
   font-weight: 700;
 }
+
+
+@media screen and (max-width: 576px)  {
+
+  .generalDiv{
+    width: 100%;
+    left: 0;
+  }
+
+  .total {
+    position: relative;
+    right: 10px;
+  }
+
+  .buttonContainer {
+    position: relative;
+    right: 14px;
+  }
+
+}

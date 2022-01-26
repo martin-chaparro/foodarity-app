@@ -6,11 +6,11 @@ import Typography from '@mui/material/Typography';
 import estilo from './BannerSearch.module.css';
 import SearchBar from './Searchbar';
 import Drawer from '../Drawer/Drawer';
-// import hero1 from '../../assets/hero1.jpg';
 import OngSeccion from '../ONGSeccion/OngSeccion';
+// import OngSeccionWeb from '../ONGSeccion/OngSeccionWeb';
 
 function goDown() {
-  window.scrollTo({ top: window.innerHeight + 210, behavior: 'smooth' });
+  window.scrollTo({ top: window.innerHeight - 64, behavior: 'smooth' });
 }
 
 export default function BannerSearch({ search, lote, filtrado }) {
@@ -18,49 +18,27 @@ export default function BannerSearch({ search, lote, filtrado }) {
   return (
     <div className={estilo.body}>
       <div className={estilo.heroimage}>
-        <div className={estilo.arrowDiv}>
-          <Typography
-            variant="h6"
-            gutterBottom
-            component="div"
-            sx={{ color: 'white', marginTop: 1, textStyle: 'bold', userSelect: 'none', }}
-          >
-            PRODUCTOS
-          </Typography>
-          <IconButton onClick={goDown}>
-            <KeyboardArrowDownIcon
-              className={estilo.goDown}
-              sx={{
-                fontSize: 50,
-                position: 'relative',
-                bottom: 5,
-                backgroundColor: '#7ED957',
-                borderRadius: '100%',
-                '&:hover': { backgroundColor: '#7ED95790 !important' },
-              }}
-            />
-          </IconButton>
-        </div>
         <div className={estilo.container}>
           <h1>
             <span>Ahorre, Ayude y contribuya al planeta</span>
           </h1>
           <div className={estilo.search}>
-            <SearchBar sx={{ marginTop: '10em' }} search={search} lote={lote} />
             <div className={estilo.ongAndTitleContainer}>
               <h2 className={estilo.titleOng}>¡Conoce nuestras ONGs!</h2>
               <div className={estilo.contOngs}>
                 {allOngs.map((ong) => {
                   return <OngSeccion key={ong.id} ong={ong} />;
                 })}
-                {/* {allOngs.length > 0 ? (
-                  allOngs.map((ong) => {
-                    return <OngSeccion key={ong.id} ong={ong} />;
-                  })
-                ) : (
-                  <h2>No hay ONGs</h2>
-                )} */}
               </div>
+              {/* <div className={estilo.ongAndTitleContainer2}>
+                {allOngs.map((ong) => {
+                  return <OngSeccionWeb key={ong.id} ong={ong} />;
+                })}
+              </div> */}
+            </div>
+            <SearchBar sx={{ marginTop: '0' }} search={search} lote={lote} />
+            <div className={estilo.btn}>
+              <Drawer filtrado={filtrado} />
             </div>
             <div className={estilo.arrowDiv}>
               <Typography
@@ -88,9 +66,6 @@ export default function BannerSearch({ search, lote, filtrado }) {
                   }}
                 />
               </IconButton>
-            </div>
-            <div className={estilo.btn}>
-              <Drawer filtrado={filtrado} />
             </div>
           </div>
         </div>

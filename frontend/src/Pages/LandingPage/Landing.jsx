@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Link as Scroll } from 'react-scroll';
+// import { Link as Scroll } from 'react-scroll';
 import { IconButton, Collapse } from '@mui/material';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
@@ -18,22 +18,27 @@ import './Cards.css';
 import logoLanding from '../../assets/Mobil-background-landing.png';
 import logo from '../../assets/Mobil-Full-Header-Logo.png';
 import logo1 from '../../assets/WEB-Logo-Combinado.png';
-import useWindowPosition from '../About/hook/useWindowPosition';
+// import useWindowPosition from '../About/hook/useWindowPosition';
+// import valores from '../../assets/valores.jpg'
 
+function goDown() {
+  window.scrollTo({ top: window.innerHeight + 40, behavior: 'smooth' });
+}
 export default function Landing() {
+
   const { id } = useSelector((state) => state.auth);
 
   const { ref, inView } = useInView({
     threshold: 0.4,
   });
-  /* eslint-disable react/jsx-props-no-spreading */
-  const checked = useWindowPosition('header');
+
 
   const [check, setCheck] = useState(false);
 
   useEffect(() => {
     setCheck(true);
   }, []);
+
 
   return (
     <div>
@@ -43,6 +48,7 @@ export default function Landing() {
         <div className={styles.content}>
           <Collapse
             in={check}
+            // eslint-disable-next-line react/jsx-props-no-spreading
             {...(check ? { timeout: 1000 } : {})}
             collapsedheight={50}
           >
@@ -72,34 +78,32 @@ export default function Landing() {
                   </Link>
                 )}
                 <Link to="/home">
-                  <Button variant="contained" size="small" type="submit">
+                  <Button variant="contained" size="small" type="submit" >
                     Continuar
                   </Button>
                 </Link>
               </Stack>
             </div>
           </div>
-          <Scroll to="place-to-visit" smooth>
-            <IconButton>
+ 
+            <IconButton onClick={goDown}>
               <KeyboardArrowDownIcon
                 className={styles.goDown}
                 sx={{ fontSize: 50, position: 'relative', bottom: 5 }}
               />
             </IconButton>
-          </Scroll>
+  
         </div>
       </div>
-
-      <div className={styles.aboutCards} id="place-to-visit" ref={ref}>
+      <div className={styles.bkgAbout}>
+      <div className={styles.aboutCards}>
+        {/* <img src={valores} alt='fondo' className={styles.imgBkg}/> */}
         <div>
-          <Collapse in={checked} {...(checked ? { timeout: 1000 } : {})}>
             <AboutCard />
-          </Collapse>
+            <img src={logoLanding} alt='logo' className={styles.imgAbout}/>
         </div>
-        <div>
-          <Collapse in={checked} {...(checked ? { timeout: 1000 } : {})}>
+        <div className={inView ? 'about' : 'about--zoom'}>
             <AboutValores />
-          </Collapse>
         </div>
       </div>
       <div className={styles.containerAbouts} ref={ref}>
@@ -110,7 +114,8 @@ export default function Landing() {
           <AboutVision />
         </div>
       </div>
-      <div>
+      </div>
+      <div className={styles.footer}>
         <Footer />
       </div>
     </div>

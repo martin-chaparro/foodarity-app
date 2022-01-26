@@ -12,7 +12,7 @@ import TableRow from '@mui/material/TableRow';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
 import { useSelector } from 'react-redux';
 import styles from './Usuarios.module.css';
 import { apiWithToken } from '../../services/api';
@@ -55,8 +55,7 @@ function createData(nombre, email, telefono, rol, eliminar) {
 
 export default function Usuarios({ company }) {
   const { id } = useSelector((state) => state.auth);
-  const navigate = useNavigate()
-
+  const navigate = useNavigate();
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -68,24 +67,54 @@ export default function Usuarios({ company }) {
     setInput(e.target.value);
   }
 
+  // async function handleDelete(id) {
+  //   Swal.fire({
+  //     title: '¿Estás seguro de querer eliminar el producto?',
+  //     icon: 'warning',
+  //     showCancelButton: true,
+  //     confirmButtonColor: '#e63946',
+  //     cancelButtonColor: 'gray',
+  //     confirmButtonText: 'Continuar',
+  //   }).then((result) => {
+  //     if (result.isConfirmed) {
+  //       apiWithToken.delete(`/products/id/${id}`).then(() => {
+  //         apiWithToken.get('/products/byauth').then((response) => {
+  //           setProducts(response.data);
+  //         });
+  //       });
+  //     }
+  //   });
+  // }
+
   const handleDelete = (ID) => {
-    apiWithToken.delete(`/companies/user/${ID}`).then(() => {
-      apiWithToken.get('/companies/users').then((response) => {
-        setUsers(response.data);
-        setInput('');
-      })
-      Swal.fire({
-        icon: 'success',
-        title: 'Bien',
-        text: 'Usuario desvinculado.'})
-    }).catch(()=> {
-      Swal.fire({
-        icon: 'error',
-        title: 'Ups...',
-        text: 'Algo fallo. Intente nuevamente.'})
+    Swal.fire({
+      title: '¿Estás seguro de querer eliminar este usuario?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#e63946',
+      cancelButtonColor: 'gray',
+      confirmButtonText: 'Continuar',
     })
+      .then((result) => {
+        if (result.isConfirmed) {
+          apiWithToken.delete(`/companies/user/${ID}`).then(() => {
+            apiWithToken.get('/companies/users').then((response) => {
+              setUsers(response.data);
+
+              setInput('');
+            });
+          });
+        }
+      })
+      .catch(() => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Ups...',
+          text: 'Algo fallo. Intente nuevamente.',
+        });
+      });
     if (id !== company.ownerId) {
-      navigate('/home')
+      navigate('/home');
     }
   };
 
@@ -98,16 +127,17 @@ export default function Usuarios({ company }) {
           user.email,
           user.phone,
           user.id === company.ownerId ? 'Dueño' : 'Empleado',
-          (user.id !== company.ownerId && (id === company.ownerId || user.id === id && user.id)) &&(
-            <HighlightOffIcon
-              sx={{ color: 'red' }}
-              onClick={() => {
-                // eslint-disable-next-line no-alert
-                if (window.confirm('Queres eliminar este usuario?'))
+          user.id !== company.ownerId &&
+            (id === company.ownerId || (user.id === id && user.id)) && (
+              <HighlightOffIcon
+                sx={{ color: 'red' }}
+                onClick={() => {
+                  // eslint-disable-next-line no-alert
+                  // if (window.confirm('Queres eliminar este usuario?'))
                   handleDelete(user.id);
-              }}
-            />
-          )
+                }}
+              />
+            )
         )
       );
     });
@@ -137,59 +167,74 @@ export default function Usuarios({ company }) {
 
   function handleAddAcount() {
     // eslint-disable-next-line no-alert
-    if (window.confirm(`Agregar a ${input} a la compania?`))
-      apiWithToken.post(`/companies/user?email=${input}`).then(() => {
-        Swal.fire({
-          icon: 'success',
-          title: 'Bien',
-          text: 'El usuario fue agregado con exito.'})
+
+    Swal.fire({
+      title: '¿Estás seguro de querer agregar este usuario?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#e63946',
+      cancelButtonColor: 'gray',
+      confirmButtonText: 'Continuar',
+    })
+      .then((result) => {
+        if (result.isConfirmed) {
+          apiWithToken.post(`/companies/user?email=${input}`);
+          handleRows();
+        }
+      })
+
+      .then(() => {
         setInput('');
         apiWithToken.get('/companies/users').then((response) => {
           setUsers(response.data);
-        })
-      }).catch((error)=>{
+        });
+      })
+      .catch((error) => {
         Swal.fire({
           icon: 'error',
           title: 'Ups...',
-          text: error.response.data.message})
-    });
+          text: error.response.data.message,
+        });
+      });
   }
 
   return (
     <Paper className={styles.users} sx={{ width: '100%', overflow: 'hidden' }}>
-      {id === company.ownerId && <div className={styles.contagregar}>
-        <div>
-          <Typography
-            variant="h4"
-            gutterBottom
-            component="div"
-            sx={{ color: '#7ED957', marginBottom: 3 }}
-          >
-            Agregar nueva cuenta
-          </Typography>
+      {id === company.ownerId && (
+        <div className={styles.contagregar}>
+          <div>
+            <Typography
+              variant="h4"
+              gutterBottom
+              component="div"
+              sx={{ color: '#7ED957', marginBottom: 3 }}
+            >
+              Agregar nueva cuenta
+            </Typography>
+          </div>
+          <div>
+            <input
+              className={styles.input}
+              type="text"
+              name="email"
+              onChange={(e) => handleOnChange(e)}
+              value={input}
+            />
+            <Button
+              onClick={() => handleAddAcount()}
+              sx={{
+                backgroundColor: '#7ED957',
+                '&:hover': { backgroundColor: '#7ED95790 !important' },
+                marginLeft: 1,
+                paddingLeft: 5,
+                paddingRight: 5,
+              }}
+            >
+              AGREGAR
+            </Button>
+          </div>
         </div>
-        <div>
-          <input
-            className={styles.input}
-            type="text"
-            name="email"
-            onChange={(e) => handleOnChange(e)}
-            value={input}
-          />
-          <Button
-            onClick={() => handleAddAcount()}
-            sx={{
-              backgroundColor: '#7ED957',
-              '&:hover': { backgroundColor: '#7ED95790 !important' },
-              marginLeft: 1,
-              paddingLeft: 5,
-              paddingRight: 5,
-            }}
-          >
-            AGREGAR
-          </Button>
-        </div>
-      </div>}
+      )}
 
       <TableContainer sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
@@ -215,7 +260,7 @@ export default function Usuarios({ company }) {
             {rows &&
               rows
                 /* .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage) */
-                .map((row,index) => {
+                .map((row, index) => {
                   return (
                     <TableRow
                       hover
