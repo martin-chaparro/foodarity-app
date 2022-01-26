@@ -4,10 +4,10 @@
   flex-direction: column;
   align-items: center;
   position: absolute;
-  top: 100px;
-  margin-left: 80%;
-  width: 250px;
-  height: 300px;
+  margin-top: 4%;
+  margin-left: 60%;
+  width: 15vw;
+  height: 30vh;
   border-radius: 20px;
   border: 2px solid rgb(86, 211, 97);
   background-color: rgba(201, 236, 189, 0.541);
@@ -38,12 +38,14 @@
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 1);
   min-height: 100vh;
   height: 100%;
+  margin-top: 2%;
 }
 
 .map {
   border: 2px solid rgb(86, 211, 97);
   height: 100vh;
-  width: 1200px;
+  width: 62.5vw;
+  margin-right: 20vw;
 }
 
 .title {
@@ -53,8 +55,9 @@
   align-items: center;
   margin-top: 70px;
   margin-bottom: -3px;
+  margin-right: 20vw;
   color: rgb(86, 211, 97);
-  width: 1200px;
+  width: 62.5vw;
   height: 80px;
   border-radius: 20px 20px 0 0;
   background-color: rgba(201, 236, 189, 0.541);

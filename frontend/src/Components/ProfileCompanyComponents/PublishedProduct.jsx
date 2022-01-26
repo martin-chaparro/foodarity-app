@@ -65,50 +65,6 @@ export default function PublishedProduct() {
     return { lote, estado, cantidad, precio, fecha, eliminar };
   }
 
-  // Swal.fire({
-  //   incon: 'info',
-  //   title: 'ATENCION !! ',
-  //   text: 'Queres agregar este usuario a tu cuenta ?',
-  // })
-  //   .then(() => {
-  //     apiWithToken.post(`/companies/user?email=${input}`);
-  //     handleRows();
-  //   })
-
-  // Swal.fire({
-  //   title: '¿Estás seguro de querer eliminar la cuenta?',
-  //   text: 'No podrás revertir los cambios',
-  //   icon: 'warning',
-  //   showCancelButton: true,
-  //   confirmButtonColor: '#e63946',
-  //   cancelButtonColor: 'gray',
-  //   confirmButtonText: 'Continuar',
-  // })
-
-  // const handleDelete = () => {
-  //   Swal.fire({
-  //     title: '¿Estás seguro de querer eliminar la cuenta?',
-  //     text: 'No podrás revertir los cambios',
-  //     icon: 'warning',
-  //     showCancelButton: true,
-  //     confirmButtonColor: '#e63946',
-  //     cancelButtonColor: 'gray',
-  //     confirmButtonText: 'Continuar',
-  //   }).then((result) => {
-  //     if (result.isConfirmed) {
-  //       apiWithToken.delete(`/users/${detail.id}`).then((res) => {
-  //         if (res.status === 200) {
-  //           Swal.fire('Cuenta Eliminada');
-  //           dispatch(startLogout());
-  //           // navigate('/');
-  //         } else {
-  //           console.log('algo fallo');
-  //         }
-  //       });
-  //     }
-  //   });
-  // };
-
   async function handleDelete(id) {
     Swal.fire({
       title: '¿Estás seguro de querer eliminar el producto?',
