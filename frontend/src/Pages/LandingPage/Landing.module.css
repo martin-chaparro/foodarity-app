@@ -20,7 +20,7 @@
   justify-content: space-around;
 }
 .btncont {
-  margin-top: 5px;
+  margin-top: 100px;
   margin-right: 25px;
   margin-left: 25px;
   display: flex;
@@ -30,7 +30,7 @@
 
 .logo {
   position: relative;
-  top: 23px;
+  top: 5px;
   display: flex;
   flex-direction: center;
 }
@@ -47,14 +47,14 @@
 }
 
 .imglogolanding {
+  margin-top: 80px;
   width: 400px;
   height: 400px;
-  animation: fadeInDown;
-  animation-duration: 10s;
 }
 
 .goDown {
   color: white;
+  margin-top: 20px;
 }
 
 .aboutCards {
@@ -62,7 +62,7 @@
   flex-direction: column;
   justify-content: space-around;
   height: 500px;
-  margin-top: 25px;
+  margin-top: 50px;
 }
 
 .containerAbouts {
@@ -73,8 +73,9 @@
 
 /* imagen de about */
 .imgAbout {
-  margin-top: -40%;
+  margin-top: -35%;
   margin-left: 55%;
+  width: 700px;
 }
 
 @media screen and (max-width: 576px) {

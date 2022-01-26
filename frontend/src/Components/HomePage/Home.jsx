@@ -41,9 +41,9 @@ export default function Home() {
     order: '',
   });
 
-  const handleSearch = () => {
+   const handleSearch = () => {
     dispatch(getProducts(allProductValues));
-  };
+   };
 
   const paginado = (page) => {
     setAllProductValues({ ...allProductValues, page });
@@ -75,7 +75,7 @@ export default function Home() {
 
   useEffect(() => {
     handleSearch();
-  }, [allProductValues]);
+   }, [allProductValues]);
 
   return (
     <div>

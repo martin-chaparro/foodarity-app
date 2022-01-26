@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
-
 import {useSelector, useDispatch} from 'react-redux'
+import LocationOnIcon from '@mui/icons-material/LocationOn';
 import GoogleMapReact from 'google-map-react'
 import Marker from './Marker'
 import { getCompanies } from '../../redux/actions/CompaniesActions';
@@ -29,7 +29,13 @@ function GoogleMaps() {
     return (
     <div className={styles.container}>
       <h1 className={styles.title}>Estamos en todo el pais</h1>
-    
+      
+      <div className={styles.contRef}>
+          <h1 className={styles.titleRef}>Referencias</h1>
+         <LocationOnIcon color='secondary'sx={{fontSize:40}}/> <p className={styles.textRefOng}>ONG</p>
+          <LocationOnIcon color='primary' sx={{fontSize:40}}/><p className={styles.textRefCommers}>COMERCIOS</p>
+        </div>
+
     <div className={styles.map}>
         <GoogleMapReact
           bootstrapURLKeys={{ key: GOOGLE_API_KEY, language: 'es', region: 'arg'}}
@@ -51,6 +57,7 @@ function GoogleMaps() {
             transform: 'translate(-50%, -50%)'
           }}/>))}
         </GoogleMapReact>
+
     
       </div>
       
