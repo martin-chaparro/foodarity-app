@@ -21,10 +21,23 @@ function Delete({ company }) {
       cancelButtonColor: 'gray',
       confirmButtonText: 'Continuar',
     }).then((result) => {
-      if (result.IsConfirmed) {
-        apiWithToken.delete(`/companies/disabled/${company.id}`);
-        window.location.reload();
-        window.location.href = '/profilecompany';
+      if (result.isConfirmed) {
+        apiWithToken.delete(`/companies/disabled/${company.id}`).then(() => {
+          Swal.fire({
+            icon: 'success',
+            title: 'Bien!',
+            text: "Compania eliminada con exito.",
+            buttons: ['ok']
+          }).then(() => {
+            window.location.href = '/home';
+          })
+        }).catch(() => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Ups...',
+            text: "Hubo un error, intente nuevamente.",
+          });
+        })
       }
     });
 

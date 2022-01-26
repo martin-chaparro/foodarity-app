@@ -104,6 +104,7 @@ export const OrdersScreen = () => {
                     <TableCell>Precio xU</TableCell>
                     <TableCell>Precio</TableCell>
                     <TableCell>Total</TableCell>
+                    <TableCell>Metodo de pago</TableCell>
                     <TableCell>Fecha</TableCell>
                     <TableCell>Status</TableCell>
                   </TableRow>
@@ -155,6 +156,11 @@ export const OrdersScreen = () => {
                             {order.quantityByProduct
                               .map((item) => item.quantity * item.product.price)
                               .reduce((a, b) => a + b)}
+                          </Typography>
+                        </TableCell>
+                        <TableCell>
+                          <Typography noWrap>
+                            {order.paymentMethod?.method}
                           </Typography>
                         </TableCell>
                         <TableCell>

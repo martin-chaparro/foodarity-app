@@ -242,21 +242,34 @@ export default function RegisterCompanyFormEditable({ company, handleBack }) {
       !errors.number &&
       !errors.zipcode
 
-      // eslint-disable-next-line no-empty
+
     ) {
       apiWithToken
         .put(`/companies/${company.id}`, { ...input, ...formValues })
-        .then((res) => {
-          if (res.status === 200) {
-            window.location.reload();
-          } else {
-            // eslint-disable-next-line no-alert
-            alert(res.data);
-          }
-        });
+        .then(() => {
+            Swal.fire({
+              icon: 'success',
+              title: 'Bien!',
+              text: "Datos actualizados.",
+              buttons: ['ok']
+            }).then(() => {
+              window.location.reload();
+            })
+            
+        }).catch(() => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Ups...',
+            text: "Hubo un error, intente nuevamente.",
+          });
+        })
     } else {
       // eslint-disable-next-line no-alert
-      alert('Complete el formulario');
+      Swal.fire({
+        icon: 'error',
+        title: 'Ups...',
+        text: "Complete el formulario.",
+      });
     }
   };
 
@@ -302,12 +315,19 @@ export default function RegisterCompanyFormEditable({ company, handleBack }) {
           })
           .then((res) => {
             if (res.status === 200) {
-              // eslint-disable-next-line no-alert
-              alert('Logo actualizado con exito');
+              Swal.fire({
+                icon: 'success',
+                title: 'Bien!',
+                text: "Logo actualizado con exito.",
+              });
             }
           });
       } catch (err) {
-        console.log(err);
+        Swal.fire({
+          icon: 'error',
+          title: 'Ups...',
+          text: "Hubo un error con la imagen, intente nuevamente.",
+        });
       }
     }
   };
