@@ -303,9 +303,9 @@ export const CompanyUpdate = () => {
                   error={Boolean(formik.touched.website && formik.errors.website)}
                   fullWidth
                   helperText={formik.touched.website && formik.errors.website}
-                  label="Direccion de email"
+                  label="Web Site"
                   margin="normal"
-                  name="email"
+                  name="website"
                   onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
                   type="text"

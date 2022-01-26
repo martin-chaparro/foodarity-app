@@ -14,7 +14,6 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import TextField from '@mui/material/TextField';
 import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
 import Avatar from '@mui/material/Avatar';
 import CircularProgress from '@mui/material/CircularProgress';
 
@@ -75,10 +74,7 @@ export const ProductsScreen = () => {
   };
 
   const handleEdit = (event, id) => {
-    navigate(`/users/${id}`, { replace: true });
-  };
-  const handleDelete = (event, id) => {
-    console.log(id);
+    navigate(`/products/update/${id}`, { replace: true });
   };
 
   const handleInputSearch = ({ target }) => {
@@ -91,9 +87,9 @@ export const ProductsScreen = () => {
         Gestion de Productos
       </Typography>
       <Divider />
-      <Grid mt={2}>
+      {/* <Grid mt={2}>
         <Button variant="outlined">Agregar Producto</Button>
-      </Grid>
+      </Grid> */}
       <Grid container spacing={3} pt={2}>
         <Grid item xs={12}>
           <Paper
@@ -172,15 +168,6 @@ export const ProductsScreen = () => {
                               onClick={(e) => handleEdit(e, product.id)}
                             >
                               <EditIcon />
-                            </Button>
-                            <Button
-                              variant="outlined"
-                              style={{ marginLeft: '1em' }}
-                              color="error"
-                              dataid={product.id}
-                              onClick={(e) => handleDelete(e, product.id)}
-                            >
-                              <DeleteIcon />
                             </Button>
                           </Grid>
                         </TableCell>
