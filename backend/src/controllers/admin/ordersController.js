@@ -125,7 +125,6 @@ const getOrders = async (request, response) => {
         });
         return finalOrder;
       });
-      console.log(finalOrders)
     return response.status(200).json({
       orders: finalOrders,
       totalOrders: orders.count,
