@@ -41,9 +41,9 @@ export default function Home() {
     order: '',
   });
 
-  // const handleSearch = () => {
-  //   dispatch(getProducts(allProductValues));
-  // };
+  const handleSearch = () => {
+    dispatch(getProducts(allProductValues));
+  };
 
   const paginado = (page) => {
     setAllProductValues({ ...allProductValues, page });
@@ -73,9 +73,9 @@ export default function Home() {
     setAllProductValues({ ...allProductValues, lote, page: 1 });
   };
 
-  // useEffect(() => {
-  //   handleSearch();
-  // }, [allProductValues]);
+  useEffect(() => {
+    handleSearch();
+  }, [allProductValues]);
 
   return (
     <div>
