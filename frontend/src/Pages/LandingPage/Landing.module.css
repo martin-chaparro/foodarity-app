@@ -82,10 +82,12 @@
   .logo1 {
     display: none;
   }
+
   .logo {
     top: 10vh;
     width: 70vw;
   }
+
   .imglogolanding {
     width: 70vw;
     height: 70vw;
@@ -95,6 +97,7 @@
   .btncont {
     margin-top: 10vh;
   }
+
   .aboutCards {
     display: flex;
     flex-direction: column;
@@ -102,6 +105,7 @@
     width: 100vw;
     align-items: center;
   }
+
   .aboutCards {
     display: flex;
     flex-direction: column;
@@ -111,6 +115,7 @@
     position: relative;
     right: 20px;
   }
+  
   .imgAbout {
     visibility: hidden;
   }
