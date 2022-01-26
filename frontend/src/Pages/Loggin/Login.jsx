@@ -158,7 +158,8 @@ export default function Login() {
             <Button
               variant="contained"
               sx={{
-                backgroundColor: '#FDFFB6',
+                backgroundColor: '#7ED957',
+                '&:hover': { backgroundColor: '#7ED95790 !important' },
                 height: '2.5em',
                 color: '#3e2463',
                 fontStyle: 'bold',
@@ -182,6 +183,10 @@ export default function Login() {
               {' '}
               Olvidaste tu contraseña?{' '}
               <Link to="/recuperarpassword">Cambiala ahora</Link>
+            </p>
+            <p>
+              {' '}
+              No tiene una cuenta? <Link to="/register">Registrarse Aqui</Link>
             </p>
           </div>
         </div>
