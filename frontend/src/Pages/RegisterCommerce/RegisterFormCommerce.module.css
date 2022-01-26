@@ -1,11 +1,11 @@
 .RegisterFormCommerce {
   height: calc(100vh - 75px);
-  background: #ececec;
+  background:#ffffff;
   padding-top: 75px;
 }
 
 .form {
-  background: #ececec;
+  background: #ffffff;
 }
 
 .imgLogo {
@@ -108,7 +108,12 @@
 }
 .inputEmail {
   width: 325px;
-  border-radius: 4px;
+  height: 1.4375em;
+  background: #f0f0f0;
+  padding: 4px 0 5px;
+  padding-left: 12px;
+  position: relative;
+  left: 3px;
   border-color: transparent;
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
 }
@@ -157,7 +162,12 @@
 
 .inputNombre {
   width: 325px;
-  border-radius: 4px;
+  height: 1.4375em;
+  position: relative;
+  left: 3px;
+  padding: 4px 0 5px;
+  padding-left: 12px;
+  background: #f0f0f0;
   border-color: transparent;
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
 }
@@ -165,7 +175,11 @@
 .inputDescripcion {
   width: 325px;
   height: 50px;
-  border-radius: 4px;
+  position: relative;
+  left: 3px;
+  padding: 4px 0 5px;
+  padding-left: 12px;
+  background: #f0f0f0;
   border-color: transparent;
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
   resize: none;
@@ -225,18 +239,23 @@
   position: relative;
   left: 15px;
   width: 65px;
-  border-radius: 3px;
+  padding: 4px 0 5px;
+  padding-left: 12px;
   margin-right: 5px;
   border: transparent;
-
+  height: 1.4375em;
+  background: #f0f0f0;
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
 }
 
 .phonenumber {
   position: relative;
   left: 15px;
-  width: 234px;
-  border-radius: 3px;
+  width: 232px;
+  padding: 4px 0 5px;
+  padding-left: 12px;
+  height: 1.4375em;
+  background: #f0f0f0;
   border: transparent;
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
 }
@@ -254,6 +273,7 @@
   width: 210px;
   font-size: 14px;
   font-weight: 700;
+  
   font-family: Franklin Gothic Medium, Franklin Gothic, ITC Franklin Gothic,
     Arial, sans-serif;
   position: relative;
@@ -294,8 +314,11 @@
 .calle {
   position: relative;
   left: 15px;
-  width: 210px;
-  border-radius: 3px;
+  width: 200px;
+  padding: 4px 0 5px;
+  padding-left: 12px;
+  height: 1.4375em;
+  background: #f0f0f0;
   border: transparent;
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
   margin-right: 5px;
@@ -305,9 +328,12 @@
   position: relative;
   left: 15px;
   width: 107px;
+  padding: 4px 0 5px;
+  padding-left: 12px;
   margin-right: 5px;
   border: transparent;
-  border-radius: 3px;
+  height: 1.4375em;
+  background: #f0f0f0;
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
 }
 
@@ -321,17 +347,20 @@
 }
 .inputCodPostal {
   position: relative;
-  left: 233px;
-  width: 107px;
+  left: 242px;
+  width: 107px;  
+  padding: 4px 0 5px;
+  padding-left: 12px;
   margin-right: 5px;
   border: transparent;
-  border-radius: 3px;
+  height: 1.4375em;
+  background: #f0f0f0;
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
 }
 
 .divCiudadyProv {
   position: relative;
-  right: 15px;
+  right: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -340,10 +369,13 @@
 .inputCiudad {
   position: relative;
   left: 15px;
-  width: 152px;
+  width: 145px;
+  padding: 4px 0 5px;
   margin-right: 5px;
+  padding-left: 12px;
   border: transparent;
-  border-radius: 3px;
+  height: 1.4375em;
+  background: #f0f0f0;
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
 }
 
@@ -351,8 +383,11 @@
   position: relative;
   left: 15px;
   width: 165px;
+  padding: 4px 0 5px;
+  padding-left: 12px;
   border: transparent;
-  border-radius: 3px;
+  height: 1.4375em;
+  background: #f0f0f0;
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
   margin-right: 5px;
 }
@@ -555,5 +590,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: relative;
+  left: 10px;
   margin-top: 20px;
 }

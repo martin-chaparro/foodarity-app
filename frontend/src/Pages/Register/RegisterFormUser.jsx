@@ -195,7 +195,7 @@ function Register() {
           <img className={style.logo} src={logo} alt="" />
         </Link>
       </div>
-      <form className={style.form} onSubmit={handleSubmit}>
+      <form autoComplete='off' className={style.form} onSubmit={handleSubmit}>
         <div className={style.divInputs}>
           <div className={style.title}>
             <label>Ingrese Su Nombre</label>

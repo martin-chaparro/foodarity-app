@@ -250,6 +250,7 @@ export default function OngForm() {
                       input={input}
                       categories={categories} // eslint-disable-next-line react/jsx-no-bind
                       handleOnChange={handleOnChange}
+                      autoComplete='off'
                     />
                   </div>
                 </div>
@@ -258,6 +259,7 @@ export default function OngForm() {
                   <div className={styles.contname}>
                     <div className={styles.divnuevolote}>
                       <NuevoLote
+                      autoComplete='off'
                         setInput={setInput}
                         input={input} // eslint-disable-next-line react/jsx-no-bind
                         handleOnChange={handleOnChange} // />
@@ -267,6 +269,7 @@ export default function OngForm() {
                   <div className={styles.contamout}>
                     <div className={styles.divcantidad}>
                       <Cantidad
+                      autoComplete='off'
                         setInput={setInput}
                         input={input}
                         name="quantity"
@@ -285,6 +288,7 @@ export default function OngForm() {
                 </div>
                 <div>
                   <Descripcion
+                  autoComplete='off'
                     className={styles.description}
                     setInput={setInput}
                     input={input}

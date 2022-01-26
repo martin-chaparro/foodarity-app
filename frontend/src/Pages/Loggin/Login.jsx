@@ -117,7 +117,7 @@ export default function Login() {
           <img className={estilos.logo} src={logo} alt="" />
         </Link>
       </div>
-      <form onSubmit={handleSubmit}>
+      <form  autoComplete='off' onSubmit={handleSubmit}>
         <div>
           <div className={estilos.contener}>
             <h3>Ingrese su Email</h3>
