@@ -1,3 +1,36 @@
+.contRef {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  top: 100px;
+  margin-left: 80%;
+  width: 250px;
+  height: 300px;
+  border-radius: 20px;
+  border: 2px solid rgb(86, 211, 97);
+  background-color: rgba(201, 236, 189, 0.541);
+}
+.titleRef {
+  color: rgb(86, 211, 97);
+}
+
+.textRefOng,
+.textRefCommers {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: -10px;
+}
+
+.textRefOng {
+  color: rgb(4, 150, 16);
+}
+
+.textRefCommers {
+  color: rgb(170, 11, 170);
+}
+
 .container {
   display: flex;
   flex-direction: column;
@@ -9,7 +42,7 @@
 
 .map {
   border: 2px solid rgb(86, 211, 97);
-  height: 500px;
+  height: 100vh;
   width: 1200px;
 }
 

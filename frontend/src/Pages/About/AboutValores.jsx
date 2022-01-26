@@ -12,10 +12,10 @@ export default function AboutValores() {
   return (
     <Card sx={{ minwidth: 275, background: '#7ED95790',boxShadow: '4px 4px 10px rgba(0, 0, 0, 1)'}}className={styles.containerCardValores}>
       <CardContent>
-        <Typography sx={{ color: '#304543', borderRadius: 1, display: "flex", justifyContent: "center", alignItems: "center",  fontWeight: 700, fontSize:'30px',textShadow: '1px 2px 0 #969696, 1px 8px 5px #aba8a8'}} variant="h5" component="div">
+        <Typography sx={{ color: '#304543', borderRadius: 1, display: "flex", justifyContent: "center", alignItems: "center",  fontWeight: 700, fontSize:'35px',textShadow: '1px 2px 0 #969696, 1px 8px 5px #aba8a8'}} variant="h5" component="div">
         Valores
         </Typography>
-        <Typography sx={{ color: '#304543', fontFamily: 'Tahoma', fontSize: '15px'}} variant="body2" component="div">
+        <Typography sx={{ color: '#304543', fontFamily: 'Tahoma', fontSize: '20px'}} variant="body2" component="div">
         <br />
         <br />
             <StarIcon/>     <b>Diversidad e Inclusión:</b> Somos un espacio al que todos podemos
