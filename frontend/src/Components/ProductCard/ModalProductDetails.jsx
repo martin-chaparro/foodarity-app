@@ -4,7 +4,6 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { useNavigate, useLocation } from 'react-router-dom';
-// import FavoriteIcon from '@mui/icons-material/Favorite';
 import { useDispatch, useSelector } from 'react-redux';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
@@ -13,7 +12,6 @@ import { addToCart } from '../../redux/actions/cartActions';
 import GoogleMapsCompany from '../GoogleMaps/GoogleMapsCompany';
 
 function ModalProductDetails({ product, open, handleClose, item }) {
-  // const [input, setInput] = React.useState();
   const {id: userId} = useSelector(state=> state.auth)
   const navigate = useNavigate();
   const location = useLocation();
@@ -145,11 +143,6 @@ function ModalProductDetails({ product, open, handleClose, item }) {
               ,00
             </h2>
           </div>
-          {/*                   <div className={styles.divBtnReservar}>
-        <button className={styles.btnReservar} type="submit">
-          Reservar
-        </button>
-      </div> */}
         </Box>
       </Box>
     </Modal>

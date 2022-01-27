@@ -3,12 +3,12 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "private": true,
   "engines": {
     "node": "16.x"
   },
   "scripts": {
     "start": "node ./index.js",
-    "deploy": "cd .. && git subtree push --prefix deployfrontend heroku-foodarity-frontend master",
     "dev": "nodemon",
     "lint": "eslint .",
     "format": "prettier ./src/** --check",

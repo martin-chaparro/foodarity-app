@@ -3,9 +3,6 @@ import React from 'react';
 import styles from './ProductCard.module.css';
 import ModalProductDetails from './ModalProductDetails';
 
-
-
-
 export default function ProductCard({ product }) {
 
   const [open, setOpen] = React.useState(false);
@@ -21,7 +18,6 @@ export default function ProductCard({ product }) {
         <div className={styles.nameDiv}>
           <h3 className={styles.name}>{product.lote}</h3>
         </div>
-
         <p className={styles.description}>
           {product.description.slice(0, 70)}...
         </p>
@@ -30,11 +26,6 @@ export default function ProductCard({ product }) {
           <p className={styles.precio}>${product.price}</p>
         </div>
         <div className={styles.btnContainer}>
-          {/* <div className={styles.btnresdiv}>
-            <button className={styles.btnres} type="submit">
-              Reservar
-            </button>
-          </div> */}
           <div className={styles.btndetdiv}>
             <button
               onClick={handleOpen}

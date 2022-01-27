@@ -24,6 +24,7 @@ class Server {
 
     this.paths = {
       apiv1: '/api/v1',
+      frontend: '/',
     };
 
     // middlewares
@@ -70,6 +71,7 @@ class Server {
 
   routes() {
     this.app.use(this.paths.apiv1, require('./routes/api'));
+    this.app.use(this.paths.frontend, require('./routes/frontend'));
   }
 
   async connectDb() {

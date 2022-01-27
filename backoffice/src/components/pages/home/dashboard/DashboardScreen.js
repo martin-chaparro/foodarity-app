@@ -15,18 +15,20 @@ import ChartUserByRegister from './cards/ChartUserByRegister';
 import ChartCompanyByType from './cards/ChartCompanyByType';
 import ChartOrderByPayMethod from './cards/ChartOrderByPayMethod';
 import { finishLoading, startLoading } from '../../../../redux/actions/ui';
+import TotalSales from './cards/TotalSales';
 
 export const DashboardScreen = () => {
   const dispatch = useDispatch();
   const [totalUsers, setTotalUsers] = useState(null);
   const [totalCompanies, setTotalCompanies] = useState(null);
   const [totalOrders, setTotalOrders] = useState(null);
+  const [totalAmount, setTotalAmount] = useState(null);
   const [usersByRegisterMethod, setUsersByRegisterMethod] = useState(null);
   const [companiesByType, setCompaniesByType] = useState(null);
   const [ordersBypaymenthod, setOrdersBypaymenthod] = useState(null);
 
   useEffect(async () => {
-    dispatch(startLoading())
+    dispatch(startLoading());
     const response = await apiWithToken.get(`/admin/dashboard`);
     setTotalUsers(response.data.totalUsers);
     setTotalCompanies(response.data.totalCompanies);
@@ -34,9 +36,44 @@ export const DashboardScreen = () => {
     setUsersByRegisterMethod(response.data.usersByRegisterMethod);
     setCompaniesByType(response.data.companiesByType);
     setOrdersBypaymenthod(response.data.ordersBypaymenthod);
-    dispatch(finishLoading())
+    const responseTotal = await apiWithToken.get(`/admin/orders/total`);
+    setTotalAmount(responseTotal.data);
+    dispatch(finishLoading());
   }, []);
 
+  const userRegistered = {};
+  const companyTypeCant = {};
+  const orderByMethodCant = {};
+
+  if (usersByRegisterMethod) {
+    usersByRegisterMethod.forEach((element) => {
+      if (element.register_method === 'direct') {
+        userRegistered.direct = element.cant;
+      } else {
+        userRegistered.google = element.cant;
+      }
+    });
+  }
+
+  if (companiesByType) {
+    companiesByType.forEach((element) => {
+      if (element.company_type_id === 1) {
+        companyTypeCant.commmerce = element.cant;
+      } else {
+        companyTypeCant.ong = element.cant;
+      }
+    });
+  }
+
+  if (ordersBypaymenthod) {
+    ordersBypaymenthod.forEach((element) => {
+      if (element.payment_method_id === 1) {
+        orderByMethodCant.direct = element.cant;
+      } else {
+        orderByMethodCant.mercadoPago = element.cant;
+      }
+    });
+  }
 
   return (
     <Layout>
@@ -46,18 +83,23 @@ export const DashboardScreen = () => {
       <Divider />
       <Grid container spacing={3} mt={2}>
         {totalUsers && (
-          <Grid item xs={12} sm={6} md={4}>
+          <Grid item xs={12} sm={6} md={3}>
             <TotalUsers quantity={totalUsers} />
           </Grid>
         )}
         {totalCompanies && (
-          <Grid item xs={12} sm={6} md={4}>
+          <Grid item xs={12} sm={6} md={3}>
             <TotalCompanies quantity={totalCompanies} />
           </Grid>
         )}
-        {(totalOrders && totalOrders > 0) && (
-          <Grid item xs={12} sm={6} md={4}>
+        {totalOrders && totalOrders > 0 && (
+          <Grid item xs={12} sm={6} md={3}>
             <TotalOrders quantity={totalOrders} />
+          </Grid>
+        )}
+        {totalAmount && totalAmount > 0 && (
+          <Grid item xs={12} sm={6} md={3}>
+            <TotalSales quantity={totalAmount} />
           </Grid>
         )}
       </Grid>
@@ -65,22 +107,25 @@ export const DashboardScreen = () => {
         {usersByRegisterMethod && (
           <Grid item xs={12} md={6} lg={4}>
             <ChartUserByRegister
-              directo={usersByRegisterMethod[1]?.cant}
-              google={usersByRegisterMethod[0]?.cant}
+              directo={userRegistered.direct}
+              google={userRegistered.google}
             />
           </Grid>
         )}
         {companiesByType && (
           <Grid item xs={12} md={6} lg={4}>
             <ChartCompanyByType
-              ong={companiesByType[1]?.cant}
-              commerce={companiesByType[0]?.cant}
+              ong={companyTypeCant.ong}
+              commerce={companyTypeCant.commmerce}
             />
           </Grid>
         )}
-        {(ordersBypaymenthod && ordersBypaymenthod.lenght > 1) && (
+        {ordersBypaymenthod && (
           <Grid item xs={12} md={6} lg={4}>
-            <ChartOrderByPayMethod directo={ordersBypaymenthod[1]?.cant} mercadopago={ordersBypaymenthod[0]?.cant} />
+            <ChartOrderByPayMethod
+              directo={orderByMethodCant.direct}
+              mercadopago={orderByMethodCant.mercadoPago}
+            />
           </Grid>
         )}
       </Grid>
