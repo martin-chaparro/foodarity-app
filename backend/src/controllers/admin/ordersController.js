@@ -175,7 +175,7 @@ const getTotalPrice = async (req, res) => {
         ).reduce((a,b) => a+b)
        return  res.status(200).json(sum) 
   } catch (error) {
-    return res.status(500).json({ message: error });
+    return res.status(200).json(0);
   }
 };
 
