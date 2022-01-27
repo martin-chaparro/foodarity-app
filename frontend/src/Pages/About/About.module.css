@@ -60,3 +60,22 @@
   margin-top: 150vh;
 }
 }
+
+
+@media screen and (min-width: 1400px) {
+  .containerCardAbout {
+    margin-top: 90vh;
+    position: relative;
+    top: 300px;
+    right: 100px;
+  }
+
+  .containerCardValores {
+    margin-top: 60vh;
+  }
+
+  .mision,
+  .vision {
+    margin-top: 130vh;
+  }
+}
