@@ -8,7 +8,6 @@ import { fNumber } from '../../../../../helpers/formatNumber';
 import BaseOptionChart from '../chart/BaseOptionChart';
 //
 
-
 // ----------------------------------------------------------------------
 
 const CHART_HEIGHT = 372;
@@ -19,28 +18,24 @@ const ChartWrapperStyle = styled('div')(({ theme }) => ({
   marginTop: theme.spacing(5),
   '& .apexcharts-canvas svg': { height: CHART_HEIGHT },
   '& .apexcharts-canvas svg,.apexcharts-canvas foreignObject': {
-    overflow: 'visible'
+    overflow: 'visible',
   },
   '& .apexcharts-legend': {
     height: LEGEND_HEIGHT,
     alignContent: 'center',
     position: 'relative !important',
     borderTop: `solid 1px ${theme.palette.divider}`,
-    top: `calc(${CHART_HEIGHT - LEGEND_HEIGHT}px) !important`
-  }
+    top: `calc(${CHART_HEIGHT - LEGEND_HEIGHT}px) !important`,
+  },
 }));
 
 // ----------------------------------------------------------------------
 
-
-export default function ChartCompanyByType({ong,commerce}) {
+export default function ChartCompanyByType({ ong, commerce }) {
   const theme = useTheme();
 
   const chartOptions = merge(BaseOptionChart(), {
-    colors: [
-      '#00AB55',
-      '#826AF9',
-    ],
+    colors: ['#826AF9', '#00AB55'],
     labels: ['Comercio', 'ONG'],
     stroke: { colors: [theme.palette.background.paper] },
     legend: { floating: true, horizontalAlign: 'center' },
@@ -50,20 +45,25 @@ export default function ChartCompanyByType({ong,commerce}) {
       y: {
         formatter: (seriesName) => fNumber(seriesName),
         title: {
-          formatter: (seriesName) => `#${seriesName}`
-        }
-      }
+          formatter: (seriesName) => `#${seriesName}`,
+        },
+      },
     },
     plotOptions: {
-      pie: { donut: { labels: { show: false } } }
-    }
+      pie: { donut: { labels: { show: false } } },
+    },
   });
 
   return (
     <Card>
-      <CardHeader title="Tipo de compania" />
+      <CardHeader title="Tipos de companias registradas" />
       <ChartWrapperStyle dir="ltr">
-        <ReactApexChart type="pie" series={[Number(commerce),Number(ong)]} options={chartOptions} height={280} />
+        <ReactApexChart
+          type="pie"
+          series={[Number(commerce), Number(ong)]}
+          options={chartOptions}
+          height={280}
+        />
       </ChartWrapperStyle>
     </Card>
   );

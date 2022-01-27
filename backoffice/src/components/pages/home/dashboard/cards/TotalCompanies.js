@@ -1,20 +1,18 @@
-
-import {FaStore} from 'react-icons/fa'
+import { FaStore } from 'react-icons/fa';
 // material
 import { alpha, styled } from '@mui/material/styles';
 import { Card, Typography } from '@mui/material';
 // utils
 import { fShortenNumber } from '../../../../../helpers/formatNumber';
 
-
 const RootStyle = styled(Card)(({ theme }) => ({
   textAlign: 'center',
   padding: theme.spacing(5, 0),
-  borderRadius:'2em',
-  background: `linear-gradient(135deg, ${alpha(theme.palette.success.dark, 0)} 0%, ${alpha(
+  borderRadius: '2em',
+  background: `linear-gradient(135deg, ${alpha(
     theme.palette.success.dark,
-    0.24
-  )} 100%)`
+    0
+  )} 0%, ${alpha(theme.palette.success.dark, 0.24)} 100%)`,
 }));
 
 const IconWrapperStyle = styled('div')(({ theme }) => ({
@@ -27,16 +25,13 @@ const IconWrapperStyle = styled('div')(({ theme }) => ({
   justifyContent: 'center',
   marginBottom: theme.spacing(3),
   color: theme.palette.success.dark,
-  backgroundImage: `linear-gradient(135deg, ${alpha(theme.palette.success.dark, 0)} 0%, ${alpha(
+  backgroundImage: `linear-gradient(135deg, ${alpha(
     theme.palette.success.dark,
-    0.24
-  )} 100%)`
+    0
+  )} 0%, ${alpha(theme.palette.success.dark, 0.24)} 100%)`,
 }));
 
-
-
-
-export default function TotalCompanies({quantity}) {
+export default function TotalCompanies({ quantity }) {
   return (
     <RootStyle>
       <IconWrapperStyle>
@@ -44,7 +39,7 @@ export default function TotalCompanies({quantity}) {
       </IconWrapperStyle>
       <Typography variant="h3">{fShortenNumber(quantity)}</Typography>
       <Typography variant="subtitle2" sx={{ opacity: 0.72 }}>
-        Companias Totales
+        Companias Totales Registradas
       </Typography>
     </RootStyle>
   );

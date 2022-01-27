@@ -8,7 +8,6 @@ import { fNumber } from '../../../../../helpers/formatNumber';
 import BaseOptionChart from '../chart/BaseOptionChart';
 //
 
-
 // ----------------------------------------------------------------------
 
 const CHART_HEIGHT = 372;
@@ -19,28 +18,24 @@ const ChartWrapperStyle = styled('div')(({ theme }) => ({
   marginTop: theme.spacing(5),
   '& .apexcharts-canvas svg': { height: CHART_HEIGHT },
   '& .apexcharts-canvas svg,.apexcharts-canvas foreignObject': {
-    overflow: 'visible'
+    overflow: 'visible',
   },
   '& .apexcharts-legend': {
     height: LEGEND_HEIGHT,
     alignContent: 'center',
     position: 'relative !important',
     borderTop: `solid 1px ${theme.palette.divider}`,
-    top: `calc(${CHART_HEIGHT - LEGEND_HEIGHT}px) !important`
-  }
+    top: `calc(${CHART_HEIGHT - LEGEND_HEIGHT}px) !important`,
+  },
 }));
 
 // ----------------------------------------------------------------------
 
-
-export default function ChartUserByRegister({directo,google = '1'}) {
+export default function ChartUserByRegister({ directo, google = '1' }) {
   const theme = useTheme();
 
   const chartOptions = merge(BaseOptionChart(), {
-    colors: [
-      theme.palette.info.main,
-      theme.palette.error.main
-    ],
+    colors: [theme.palette.info.main, theme.palette.error.main],
     labels: ['Directo', 'Google'],
     stroke: { colors: [theme.palette.background.paper] },
     legend: { floating: true, horizontalAlign: 'center' },
@@ -50,20 +45,25 @@ export default function ChartUserByRegister({directo,google = '1'}) {
       y: {
         formatter: (seriesName) => fNumber(seriesName),
         title: {
-          formatter: (seriesName) => `#${seriesName}`
-        }
-      }
+          formatter: (seriesName) => `#${seriesName}`,
+        },
+      },
     },
     plotOptions: {
-      pie: { donut: { labels: { show: false } } }
-    }
+      pie: { donut: { labels: { show: false } } },
+    },
   });
 
   return (
     <Card>
-      <CardHeader title="Tipo de registro" />
+      <CardHeader title="Usuarios por tipo de registro" />
       <ChartWrapperStyle dir="ltr">
-        <ReactApexChart type="pie" series={[Number(directo),Number(google)]} options={chartOptions} height={280} />
+        <ReactApexChart
+          type="pie"
+          series={[Number(directo), Number(google)]}
+          options={chartOptions}
+          height={280}
+        />
       </ChartWrapperStyle>
     </Card>
   );

@@ -38,7 +38,7 @@ export default function ChartOrderByPayMethod({
   const theme = useTheme();
 
   const chartOptions = merge(BaseOptionChart(), {
-    colors: ['#FFE700', '#FF6C40'],
+    colors: ['#2D99FF', '#FF6C40'],
     labels: ['Mercado Pago', 'Pago Directo'],
     stroke: { colors: [theme.palette.background.paper] },
     legend: { floating: true, horizontalAlign: 'center' },
