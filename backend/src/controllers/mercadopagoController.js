@@ -12,6 +12,7 @@ const APP_ID = process.env.MP_CLIENT_ID;
 const SECRET_ID = process.env.MP_CLIENT_SECRET_ID;
 const REDIRECT_PAGE = process.env.MP_REDIRECT;
 const MARKETPLACE_FEE = process.env.MP_MARKETPLACE_FEE;
+const FRONT_BASE_URL = process.env.FRONT_URL;
 
 const getUrlRegister = async (req, res) => {
   try {
@@ -166,9 +167,9 @@ const createPreference = async (request, response) => {
           name: userPayer.name,
         },
         back_urls: {
-          success: 'http://localhost:3000/mpsuccess',
-          pending: 'http://localhost:3000/mppending',
-          failure: 'http://localhost:3000/mpfail',
+          success: `${FRONT_BASE_URL}/mpsuccess`,
+          pending: `${FRONT_BASE_URL}/mppending`,
+          failure: `${FRONT_BASE_URL}/mpfail`,
         },
         marketplace_fee: Number(MARKETPLACE_FEE),
         external_reference,
