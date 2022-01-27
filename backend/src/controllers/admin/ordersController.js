@@ -143,8 +143,9 @@ const getTotalPrice = async (req, res) => {
       attributes,
       where: {status : 'pagado'}
     });
+   
     const ids = [];
-    orders.rows.forEach((order) => {
+    orders.forEach((order) => {
       order.quantityByProduct.forEach((item) => {
         if (!ids.includes(item.product_id)) {
           ids.push(item.product_id);
@@ -154,30 +155,27 @@ const getTotalPrice = async (req, res) => {
     const products = await Product.findAll({
       where: { id: ids },
     });
-    if (orders.length) {
+    
+    const finalOrders = orders.map((order) => {
+      const finalOrder = order;
+      finalOrder.quantityByProduct = order.quantityByProduct.map((item) => {
+        const finalItem = item;
+        finalItem.product = products.find(
+          (producto) => producto.id === item.product_id
+        );
+        return finalItem;
+      });
+      return finalOrder;
+    });
 
-      const finalOrders = orders.rows.map((order) => {
-        const finalOrder = order;
-        finalOrder.quantityByProduct = order.quantityByProduct.map((item) => {
-          const finalItem = item;
-          finalItem.product = products.find(
-            (producto) => producto.id === item.product_id
-            );
-            return finalItem;
-          });
-          return finalOrder;
-        });
-        const finalSum = finalOrders.map((order) =>
+         const sum = finalOrders.map((order) =>
         order.quantityByProduct
-        .map((item) => item.product.price)
+        .map((item) => item.product.price * item.quantity)
         .reduce((a, b) => a + b)
         ).reduce((a,b) => a+b)
-        res.status(200).json(finalSum)
-      } else {
-        res.status(200).json(0)
-      }
+       return  res.status(200).json(sum) 
   } catch (error) {
-    res.status(500).json({ message: error });
+    return res.status(500).json({ message: error });
   }
 };
 
