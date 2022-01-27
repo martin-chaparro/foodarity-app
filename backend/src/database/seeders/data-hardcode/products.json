@@ -11,7 +11,7 @@
     "quantity":5,
     "category":4,
     "publisher":2,
-    "company":2
+    "company":"cafe"
 
   },
   {
@@ -26,7 +26,7 @@
     "quantity":3,
     "category":4,
     "publisher":2,
-    "company":2
+    "company":"cafe"
 
     
   },
@@ -40,7 +40,7 @@
     "quantity":5,
     "category":4,
     "publisher":2,
-    "company":2
+    "company":"cafe"
     
   },
   {
@@ -53,20 +53,20 @@
     "quantity":6,
     "category":4,
     "publisher":2,
-    "company":2
+    "company":"cafe"
     
   },
   {
     "lote":"Postres en Vaso Mix",
     "description":"En este paquete podrás encontrar deliciosos tipos de postres en vaso preparadas en el día: 1 porcion chocotorta , 1 porcion tiramisu , 1 porcion lemon pie",
-    "photo":{"url":"https://www.cocinavital.mx/wp-content/uploads/2018/02/postres_vasitos.jpg"},
+    "photo":{"url":"https://www.cuerpomente.com/medio/2020/01/23/vasito-panacotta-coco_cbdbc88a_1390x2000.jpg"},
     "price":800.00,
     "publicationDate": "01/27/2022",
     "expirationDate":"01/28/2022",
     "quantity":10,
     "category":5,
     "publisher":4,
-    "company":4
+    "company":"gusto"
     
   },
   {
@@ -79,7 +79,7 @@
     "quantity":6,
     "category":5,
     "publisher":4,
-    "company":4
+    "company":"gusto"
     
   },
   {
@@ -92,7 +92,7 @@
     "quantity":6,
     "category":6,
     "publisher":4,
-    "company":4
+    "company":"gusto"
 
   },
   {
@@ -105,7 +105,7 @@
     "quantity":15,
     "category":6,
     "publisher":4,
-    "company":4
+    "company":"gusto"
     
   },
   {
@@ -118,7 +118,7 @@
     "quantity":15,
     "category":1,
     "publisher":1,
-    "company":1
+    "company":"mackro"
     
   },
   {
@@ -131,7 +131,7 @@
     "quantity":10,
     "category":1,
     "publisher":1,
-    "company":1
+    "company":"mackro"
     
   },
   {
@@ -144,7 +144,7 @@
     "quantity":10,
     "category":1,
     "publisher":1,
-    "company":1
+    "company":"mackro"
     
   },
   {
@@ -157,7 +157,7 @@
     "quantity":10,
     "category":2,
     "publisher":1,
-    "company":1
+    "company":"mackro"
     
   },
   {
@@ -170,7 +170,7 @@
     "quantity":30,
     "category":2,
     "publisher":1,
-    "company":1
+    "company":"mackro"
     
   },
   {
@@ -183,7 +183,7 @@
     "quantity":50,
     "category":3,
     "publisher":3,
-    "company":3
+    "company":"natural"
 
     
   },
@@ -197,33 +197,33 @@
     "quantity":30,
     "category":3,
     "publisher":3,
-    "company":3
+    "company":"natural"
     
   },
   {
     "lote":"Combos saludable",
     "description":"En este paquete podrás encontrar diferentes tipos de frutas y verduras frescas: 500gr manzanas, 400gr bananas, 1kg ananá, 200gr lechuga, 200gr zanahoria, 200gr papa, 200gr tomates, 200gr cebolla, 200gr morron",
-    "photo":{"url":"https://d251vmpe15rvty.cloudfront.net/eyJidWNrZXQiOiJuaWR1eC1zdG9yZXMiLCJrZXkiOiIyMzYxXC84OTczNC1wcm9kdWN0LTVlODIzMjQzMDY0YWEtY2FwdHVyYS1kZS1wYW50YWxsYS0yMDIwLTAzLTMwLWEtbGEtcy0xMS40NS4xOC5wbmciLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjgwMCwiaGVpZ2h0Ijo4MDAsImZpdCI6ImNvbnRhaW4iLCJiYWNrZ3JvdW5kIjp7InIiOjI1NSwiZyI6MjU1LCJiIjoyNTUsImFscGhhIjowfX19fQ==--f178f2deaf1f2bdeeff28a7994b99b90eee0386b5fae34f8d210ac86c2e29073"},
+    "photo":{"url":"https://img.vixdata.io/pd/jpg-large/es/sites/default/files/f/frutas_y_verduras_para_una_buena_salud_mental.jpg"},
     "price":1000.00,
     "publicationDate": "01/15/2022",
     "expirationDate":"01/15/2022",
     "quantity":20,
     "category":3,
     "publisher":3,
-    "company":3
+    "company":"natural"
     
   },
   {
     "lote":"Combo verde almuerzo/cena",
     "description":"En este paquete podrás encontrar diferentes tipos de alimentos 100% vegetariano: 1 vianda haburguesa de soja, 1 vianda ensalada fresca, 1 vianda pastas salteadas",
-    "photo":{"url":"https://www.cocinavital.mx/wp-content/uploads/2019/02/menu-fesco-vegetariano.jpg"},
+    "photo":{"url":"https://media-cdn.tripadvisor.com/media/photo-s/1d/52/f4/da/combo-executivo.jpg"},
     "price":1200.00,
     "publicationDate": "01/03/2022",
     "expirationDate":"01/04/2022",
     "quantity":5,
     "category":7,
     "publisher":3,
-    "company":3
+    "company":"natural"
     
   },
   {
@@ -236,7 +236,7 @@
     "quantity":8,
     "category":7,
     "publisher":4,
-    "company":4
+    "company":"gusto"
 
     
   },
@@ -250,7 +250,7 @@
     "quantity":20,
     "category":8,
     "publisher":4,
-    "company":4
+    "company":"gusto"
 
     
   },
@@ -264,7 +264,7 @@
     "quantity":20,
     "category":8,
     "publisher":3,
-    "company":3
+    "company":"natural"
     
   },
   {
@@ -277,7 +277,7 @@
     "quantity":20,
     "category":9,
     "publisher":1,
-    "company":1
+    "company":"mackro"
     
   },
   {
@@ -290,7 +290,7 @@
     "quantity":25,
     "category":2,
     "publisher":4,
-    "company":4
+    "company":"gusto"
     
   },
   {
@@ -303,7 +303,7 @@
     "quantity":25,
     "category":9,
     "publisher":2,
-    "company":2
+    "company":"cafe"
 
     
   },
@@ -317,7 +317,7 @@
     "quantity":25,
     "category":2,
     "publisher":1,
-    "company":1
+    "company":"mackro"
     
   },
   {
@@ -330,7 +330,7 @@
     "quantity":30,
     "category":3,
     "publisher":4,
-    "company":4
+    "company":"gusto"
     
   },
   {
@@ -343,7 +343,7 @@
     "quantity":29,
     "category":2,
     "publisher":4,
-    "company":4
+    "company":"gusto"
     
   },
   {
@@ -356,7 +356,7 @@
     "quantity":10,
     "category":1,
     "publisher":1,
-    "company":1
+    "company":"mackro"
     
   }
  
