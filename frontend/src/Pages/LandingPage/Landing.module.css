@@ -148,3 +148,12 @@
     right: 25px;
   }
 }
+
+@media screen and (min-width: 1400px) {
+  .imgAbout {position: relative;
+    right: 25px;
+    top: 45vh;
+  }
+
+}
+
