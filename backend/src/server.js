@@ -1,3 +1,4 @@
+const { Op } = require('sequelize');
 const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
@@ -175,7 +176,6 @@ class Server {
           location,
         });
         const findType = await CompanyType.findByPk(type);
-
         await newCompany.setType(findType);
         await newCompany.setAddress(newAddress);
         await newAddress.setCity(cityId);
@@ -214,7 +214,8 @@ class Server {
           status: 'published',
         });
         await newProduct.setPublisher(publisher);
-        await newProduct.setCompany(company);
+        const finalCompany = await Company.findOne({ where: { name: { [Op.iLike]: `%${company}%` } }})
+        await newProduct.setCompany(finalCompany);
         await newProduct.setCategory(category);
       });
     } catch (error) {
