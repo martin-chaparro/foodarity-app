@@ -1,20 +1,19 @@
-<p align='left'>
-<img src='./logo1.png'></img>
-
-</p>
+<img src='./frontend/logo1.png' width='200'>
 
 # Welcome to Foodarity !
 
 # Who we are ?
 
 <p align='left'>
-<img src='./foodfrase.png'></img>
 </p>
 
 <p>
 Foodaritty is a MarketPlace that allows companies in the food sector to publish batches of products that are left over from the day and are in very good condition but soon to be out of circulation.
 In this way, users can access food at a very low price and in excellent conditions!
 </p>
+<img src='./frontend/foodfrase.png' width='900' heigth='300'>
+
+<br/>
 
 # Mission
 
@@ -28,11 +27,10 @@ Avoid food loss while contributing to reduce the production of waste and polluti
 Raise awareness of the delicate world food situation and be a source of inspiration to move towards a sustainable future.
 </p>
 
-<hr>
 # About the project
+
 <p>
 The Foodarity project was born as the final work of Henry's Bootcamp Career, for the project there was a deadline of three weeks for its delivery. Work was done using agile methodologies (SCRUM), with a one-week sprint and presentations to a product Owner belonging to the Staff.Git Flow was used for version control.
-
 </p>
 
 ## Stack of Technologies
