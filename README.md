@@ -33,6 +33,10 @@ Raise awareness of the delicate world food situation and be a source of inspirat
 The Foodarity project was born as the final work of Henry's Bootcamp Career, for the project there was a deadline of three weeks for its delivery. Work was done using agile methodologies (SCRUM), with a one-week sprint and presentations to a product Owner belonging to the Staff.Git Flow was used for version control.
 </p>
 
+# Visit Our Page 
+
+https://foodarity.herokuapp.com/
+
 ## Stack of Technologies
 
 <hr>
